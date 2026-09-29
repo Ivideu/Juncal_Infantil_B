@@ -20,6 +20,36 @@ button:hover{border-color:var(--ac)}button:focus-visible,input:focus-visible{out
 .on{background:var(--ac);border-color:var(--ac)}
 #hero{margin:18px 0;padding:26px;border-radius:22px;background:linear-gradient(135deg,#1e4fd8,#0b1b4d 70%);border:1px solid #3b66e0;position:relative;overflow:hidden}
 #hero:after{content:"⚽";position:absolute;right:-20px;bottom:-50px;font-size:200px;opacity:.08;animation:spin 40s linear infinite}
+/* Estilo para la fecha del próximo partido (tipo etiqueta) */
+.hero-date {
+    text-align: center;
+    margin: 12px 0 22px;
+}
+.hero-date span {
+    display: inline-block;
+    background: var(--ye);
+    color: #0a0f1e;
+    padding: 10px 18px;
+    border-radius: 12px;
+    font-size: clamp(1.2rem, 3vw, 1.6rem);
+    font-weight: 800;
+    text-transform: capitalize;
+    box-shadow: 0 4px 12px #0003;
+}
+
+/* Colores de fondo dinámicos para el contenedor del héroe (#hero) según el resultado */
+#hero.win {
+    background: linear-gradient(135deg, #166534, #052e16 70%) !important;
+    border-color: #22c55e !important;
+}
+#hero.draw {
+    background: linear-gradient(135deg, #b45309, #451a03 70%) !important;
+    border-color: #f59e0b !important;
+}
+#hero.loss {
+    background: linear-gradient(135deg, #991b1b, #450a0a 70%) !important;
+    border-color: #ef4444 !important;
+}
 @keyframes spin{to{transform:rotate(360deg)}}
 .hv{display:flex;align-items:center;justify-content:space-around;gap:10px;margin:14px 0;text-align:center}
 .hv .cn{font-size:clamp(1.1rem,3.5vw,1.8rem);font-weight:700;max-width:220px}
@@ -126,16 +156,40 @@ function table(){const t={};for(const id in T)t[id]={id,pj:0,g:0,e:0,p:0,gf:0,gc
  J.forEach(r=>r.p.forEach(([h,a])=>{if(!h||!a)return;const m=M(r.n,h);if(!done(m))return;const x=+m.h,y=+m.a,A=t[h],B=t[a];A.pj++;B.pj++;A.gf+=x;A.gc+=y;B.gf+=y;B.gc+=x;if(x>y){A.g++;B.p++}else if(x<y){B.g++;A.p++}else{A.e++;B.e++}}));
  return Object.values(t).map(o=>({...o,pts:o.g*3+o.e,dg:o.gf-o.gc})).sort((a,b)=>b.pts-a.pts||b.dg-a.dg||b.gf-a.gf||T[a.id][0].localeCompare(T[b.id][0]))}
 function scorers(){const s={};myM().forEach(x=>Object.entries(M(x.r.n,x.h).g||{}).forEach(([n,g])=>{if(n.startsWith("Propia"))return;(s[n]||(s[n]={n,g:0})).g+=g}));return Object.values(s).sort((a,b)=>b.g-a.g)}
-function hero(){const all=myM().filter(x=>x.h&&x.a),nx=all.find(x=>!done(M(x.r.n,x.h))&&when(x)>=new Date(Date.now()-864e5));
- if(!nx)return`<h2>Temporada finalizada 🏆</h2><p class="gap">No quedan partidos por jugar.</p>`;
- const m=M(nx.r.n,nx.h);
- return`<div class="cn" style="font-size:1.1rem;color:var(--ye)">PRÓXIMO PARTIDO · JORNADA ${nx.r.n}</div>
- <div class="hv"><div>${bd(nx.h)}<div class="cn">${nm(nx.h)}</div></div><div class="cn" style="font-size:2rem">VS</div><div>${bd(nx.a)}<div class="cn">${nm(nx.a)}</div></div></div>
- <p style="text-align:center;margin-bottom:12px">${fmt(m.d||nx.r.d)} · ${m.t?m.t+" h":"hora por confirmar"}</p>
- <div class="cd" id="cd" data-t="${when(nx).getTime()}"></div>`}
-function tick(){const e=document.getElementById("cd");if(!e)return;let s=Math.max(0,(+e.dataset.t-Date.now())/1e3|0);const v=[[86400,"días"],[3600,"horas"],[60,"min"],[1,"seg"]];e.innerHTML=v.map(([k,l])=>{const n=s/k|0;s%=k;return`<div><b>${String(n).padStart(2,"0")}</b><span>${l}</span></div>`}).join("")}
-function render(){
- document.getElementById("hero").innerHTML=hero();tick();
+function hero(){
+    const all = myM().filter(x => x.h && x.a);
+    const nx = all.find(x => !done(M(x.r.n, x.h)) && when(x) >= new Date(Date.now() - 864e5));
+    
+    const heroEl = document.getElementById("hero");
+    if(heroEl) heroEl.className = ""; // Limpiar clases anteriores
+
+    if(!nx) {
+        return `<h2>Temporada finalizada 🏆</h2><p class="gap">No quedan partidos por jugar.</p>`;
+    }
+
+    const m = M(nx.r.n, nx.h);
+    const isDone = done(m);
+
+    if (isDone) {
+        const g = nx.h === ME ? +m.h - +m.a : +m.a - +m.h;
+        if (g > 0) heroEl.classList.add("win");
+        else if (g < 0) heroEl.classList.add("loss");
+        else heroEl.classList.add("draw");
+    }
+
+    const fechaTexto = `${fmt(m.d || nx.r.d)} · ${m.t ? m.t + " h" : "hora por confirmar"}`;
+
+    return `
+        <div class="cn" style="font-size:1.1rem;color:var(--ye);text-align:center;">PRÓXIMO PARTIDO · JORNADA ${nx.r.n}</div>
+        <div class="hv">
+            <div>${bd(nx.h)}<div class="cn">${nm(nx.h)}</div></div>
+            <div class="cn" style="font-size:2rem">VS</div>
+            <div>${bd(nx.a)}<div class="cn">${nm(nx.a)}</div></div>
+        </div>
+        <div class="hero-date"><span>${fechaTexto}</span></div>
+        <div class="cd" id="cd" data-t="${when(nx).getTime()}"></div>
+    `;
+}
  const tabs=[["cal","📅 Mi calendario"],["jor","🗓 Jornadas"],["cla","🏆 Clasificación"],["gol","👟 Goleadores"]];if(E())tabs.push(["hor","🕒 Horarios"],["pla","👥 Plantilla"]);
  document.getElementById("nav").innerHTML=tabs.map(([k,l])=>`<button class="${tab==k?'on':''}" onclick="tab='${k}';render()">${l}</button>`).join("");
  let h="";

@@ -73,6 +73,8 @@ select{font:inherit;background:var(--bg);color:var(--tx);border:1px solid var(--
 .pb{display:flex;gap:8px;max-width:420px;margin:14px auto 0}.pb div{flex:1;height:8px;background:#0006;border-radius:9px;overflow:hidden}.pb i{display:block;height:100%;background:var(--ye);width:0;transition:width 1s linear}
 .lg{margin-top:14px}.ctl{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-top:12px}
 .g2 button{font-size:1.05rem;font-weight:700;padding:12px 16px;flex:1;min-width:140px}.g2 button:first-child{background:var(--ac);border-color:var(--ac)}
+.gl2{display:inline-flex;align-items:center;gap:8px}.gl2 .mi{font:800 1.2rem 'Barlow Condensed';color:var(--ye);min-width:36px;text-align:right}.gl2 .gn{color:var(--mu);font-size:.9rem}
+.gls{width:100%;display:flex;flex-direction:column;gap:6px;margin-top:4px}.lg>div{margin-top:6px}
 .dot{animation:bl 1.2s infinite}@keyframes bl{50%{opacity:.25}}
 @media(max-width:560px){.mt{grid-template-columns:1fr auto 1fr}.tm{flex-direction:column;text-align:center!important;gap:4px;font-size:.85rem}.sc{min-width:70px;font-size:1.5rem}.b{width:38px;height:38px}}
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
@@ -102,7 +104,7 @@ const T={2:["Aston C","P.M. San Blas, Madrid"],3:["Lope de Vega","P.M. Emperador
 const R=["03-10-2026|0-3,10-5,8-7,6-9,4-11,12-2","17-10-2026|3-12,5-0,7-10,9-8,11-6,2-4","24-10-2026|3-5,0-7,10-9,8-11,6-2,12-4","07-11-2026|5-12,7-3,9-0,11-10,2-8,4-6","14-11-2026|5-7,3-9,0-11,10-2,8-4,12-6","21-11-2026|7-12,9-5,11-3,2-0,4-10,6-8","28-11-2026|7-9,5-11,3-2,0-4,10-6,12-8","12-12-2026|9-12,11-7,2-5,4-3,6-0,8-10","19-12-2026|9-11,7-2,5-4,3-6,0-8,12-10","16-01-2027|12-11,2-9,4-7,6-5,8-3,10-0","23-01-2027|11-2,9-4,7-6,5-8,3-10,0-12","30-01-2027|3-0,5-10,7-8,9-6,11-4,2-12","06-02-2027|12-3,0-5,10-7,8-9,6-11,4-2","20-02-2027|5-3,7-0,9-10,11-8,2-6,4-12","27-02-2027|12-5,3-7,0-9,10-11,8-2,6-4","06-03-2027|7-5,9-3,11-0,2-10,4-8,6-12","13-03-2027|12-7,5-9,3-11,0-2,10-4,8-6","03-04-2027|9-7,11-5,2-3,4-0,6-10,8-12","10-04-2027|12-9,7-11,5-2,3-4,0-6,10-8","17-04-2027|11-9,2-7,4-5,6-3,8-0,10-12","08-05-2027|11-12,9-2,7-4,5-6,3-8,0-10","29-05-2027|2-11,4-9,6-7,8-5,10-3,12-0"];
 const J=R.map((s,i)=>{const[d,p]=s.split("|");return{n:i+1,d:d.split("-").reverse().join("-"),p:p.split(",").map(x=>x.split("-").map(Number))}});
 let S={u:0,m:{},pl:[]};
-const fix=()=>{S.m=S.m||{};S.pl=S.pl||[]};
+const fix=()=>{S.m=S.m||{};S.pl=S.pl||[];S.dn=S.dn||{}};
 try{S=JSON.parse(localStorage.getItem("juncalB"))||S}catch(e){}fix();
 const API="https://script.google.com/macros/s/AKfycbyvbG_xjz4rK71vzFs9w1cmroxRmMbL8EDWPoAUKbmVmWNJ0pajyhKoBQC_veUbHdgG/exec"; // ← pega aquí la URL de tu Apps Script (termina en /exec)
 let PW="",pt;const setSt=t=>{document.getElementById("st").textContent=t};
@@ -119,23 +121,24 @@ const bd=id=>{if(!id)return`<span class="b" style="background:#334">💤</span>`
 const nm=id=>id?T[id][0]:"Descansa";
 function save(){S.u=Date.now();try{localStorage.setItem("juncalB",JSON.stringify(S))}catch(e){}if(API&&PW)push();render()}
 function ed(j,h,f,v){const m=S.m[j+"_"+h]||(S.m[j+"_"+h]={});if(v==="")delete m[f];else m[f]=v;save()}
-function addG(j,h){const n=document.getElementById("sel"+j).value,m=S.m[j+"_"+h]||(S.m[j+"_"+h]={});m.g=m.g||{};m.g[n]=(m.g[n]||0)+1;save()}
-function remG(j,h,i){const m=S.m[j+"_"+h],k=Object.keys(m.g)[i];if(--m.g[k]<1)delete m.g[k];if(!Object.keys(m.g).length)delete m.g;save()}
-function addP(){const v=document.getElementById("np").value.split(/[,\n]/).map(x=>x.trim()).filter(Boolean);v.forEach(n=>{if(!S.pl.includes(n))S.pl.push(n)});S.pl.sort((a,b)=>a.localeCompare(b));save()}
-function delP(i){if(confirm("¿Eliminar a "+S.pl[i]+" de la plantilla?")){S.pl.splice(i,1);save()}}
+function addG(j,h){const n=document.getElementById("sel"+j).value,m=S.m[j+"_"+h]||(S.m[j+"_"+h]={});m.g=m.g||{};m.g[n]=(m.g[n]||0)+1;const mi=document.getElementById("min"+j).value;if(mi!=="")addMin(m,n,+mi);save()}
+function remG(j,h,i){const m=S.m[j+"_"+h],k=Object.keys(m.g)[i];if(--m.g[k]<1)delete m.g[k];if(!Object.keys(m.g).length)delete m.g;trimMin(m,k);save()}
+function addP(){document.getElementById("np").value.split(/[,\n]/).map(x=>x.trim()).filter(Boolean).forEach(x=>{const r=x.match(/^#?(\d{1,2})[\s.\-–]+(.+)$/),n=r?r[2].trim():x;if(!S.pl.includes(n))S.pl.push(n);if(r)S.dn[n]=r[1]});S.pl.sort((a,b)=>a.localeCompare(b));save()}
+function setDn(i,v){const n=S.pl[i];if(v==="")delete S.dn[n];else S.dn[n]=String(v);save()}
+function delP(i){if(confirm("¿Eliminar a "+S.pl[i]+" de la plantilla?")){delete S.dn[S.pl[i]];S.pl.splice(i,1);save()}}
 function card(r,h,a,i){
  const m=M(r.n,h),d=m.d||r.d,me=h==ME||a==ME,pl=done(m);
  if(!h||!a){const id=h||a;return`<div class="card rest ${id==ME?'me':''}" style="--i:${i}"><div class="top"><span>${id==ME?`<b>Jornada ${r.n}</b> · <span class="dt">${fmt(r.d)}</span>`:nm(id)}</span></div><div class="tm">${bd(0)} Descansa esta jornada</div></div>`}
  let pill="",rc="";
  if(me&&pl){const g=h==ME?m.h-m.a:m.a-m.h;rc=g>0?"rw":g<0?"rl":"rd";pill=g>0?`<span class="pill w">VICTORIA</span>`:g<0?`<span class="pill l">DERROTA</span>`:`<span class="pill d">EMPATE</span>`}
  const mid=pl?`${m.h} - ${m.a}`:(m.t||"–:–");
- const gs=Object.entries(m.g||{}),sc=gs.map(([n,g])=>`${esc(n)}${g>1?` ×${g}`:""}`).join(", ");
+ const gs=Object.entries(m.g||{}),sc=evs(m).map(gh).join("");
  let x=`<div class="card ${me?'me':''} ${rc}" style="--i:${i}"><div class="top"><span>${me?`<b>Jornada ${r.n}</b> · <span class="dt">${fmt(d)}${m.t?" · "+m.t+" h":""}</span>`:fmt(d)}</span>${pill}</div>
  <div class="mt"><div class="tm">${bd(h)}${nm(h)}</div><div class="sc ${pl?'':'t'}">${mid}</div><div class="tm r">${bd(a)}${nm(a)}</div></div>`;
- if(me){x+=`<div class="meta"><span>📍 <a target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(T[h][1])}">${T[h][1]}</a></span>${!m.t&&!pl?"<span>⏳ Hora por confirmar</span>":""}${sc?`<span>⚽ ${sc}</span>`:""}</div>`}
+ if(me){x+=`<div class="meta"><span>📍 <a target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(T[h][1])}">${T[h][1]}</a></span>${!m.t&&!pl?"<span>⏳ Hora por confirmar</span>":""}${sc?`<div class="gls">${sc}</div>`:""}</div>`}
  if(E())x+=`<div class="ed"><span>Resultado</span><input class="g" type="number" min="0" value="${esc(m.h)}" onchange="ed(${r.n},${h},'h',this.value)"> - <input class="g" type="number" min="0" value="${esc(m.a)}" onchange="ed(${r.n},${h},'a',this.value)">
  <input type="date" value="${m.d||r.d}" onchange="ed(${r.n},${h},'d',this.value)"><input type="time" value="${esc(m.t)}" onchange="ed(${r.n},${h},'t',this.value)">
- ${me?`<div style="width:100%"><span>Goleador:</span> <select id="sel${r.n}">${S.pl.map(p=>`<option>${esc(p)}</option>`).join("")}<option>Propia puerta (rival)</option></select> <button onclick="addG(${r.n},${h})">＋ Gol</button>${S.pl.length?"":' <small class="gap">Añade jugadores en la pestaña Plantilla</small>'}<div class="gc">${gs.map(([n,g],k)=>`<button onclick="remG(${r.n},${h},${k})" title="Quitar un gol">${esc(n)} ×${g} ✕</button>`).join("")}</div></div>`:""}</div>`;
+ ${me?`<div style="width:100%"><span>Goleador:</span> <select id="sel${r.n}">${S.pl.map(p=>`<option value="${esc(p)}">${S.dn[p]?S.dn[p]+" · ":""}${esc(p)}</option>`).join("")}<option>Propia puerta (rival)</option></select> <input class="g" id="min${r.n}" type="number" min="1" max="60" placeholder="Min"> <button onclick="addG(${r.n},${h})">＋ Gol</button>${S.pl.length?"":' <small class="gap">Añade jugadores en la pestaña Plantilla</small>'}<div class="gc">${gs.map(([n,g],k)=>`<button onclick="remG(${r.n},${h},${k})" title="Quitar un gol">${esc(n)} ${mn(m,n,g)} ✕</button>`).join("")}</div></div>`:""}</div>`;
  x+="</div>";
  return x}
 const myM=()=>J.map(r=>{const p=r.p.find(q=>q.includes(ME));return{r,h:p[0],a:p[1]}});
@@ -147,7 +150,14 @@ function table(){const t={};for(const id in T)t[id]={id,pj:0,g:0,e:0,p:0,gf:0,gc
  J.forEach(r=>r.p.forEach(([h,a])=>{if(!h||!a)return;const m=M(r.n,h);if(!done(m))return;const x=+m.h,y=+m.a,A=t[h],B=t[a];A.pj++;B.pj++;A.gf+=x;A.gc+=y;B.gf+=y;B.gc+=x;if(x>y){A.g++;B.p++}else if(x<y){B.g++;A.p++}else{A.e++;B.e++}}));
  return Object.values(t).map(o=>({...o,pts:o.g*3+o.e,dg:o.gf-o.gc})).sort((a,b)=>b.pts-a.pts||b.dg-a.dg||b.gf-a.gf||T[a.id][0].localeCompare(T[b.id][0]))}
 function scorers(){const s={};myM().forEach(x=>Object.entries(M(x.r.n,x.h).g||{}).forEach(([n,g])=>{if(n.startsWith("Propia"))return;(s[n]||(s[n]={n,g:0})).g+=g}));return Object.values(s).sort((a,b)=>b.g-a.g)}
-const HALF=25*60000;let lvOn=false,lastP="";
+const HALF=25*60000;
+function evs(m){const g=m.g||{},gm=m.gm||{},a=[];Object.keys(g).forEach(n=>{const t=(gm[n]||[]).slice(0,g[n]);t.forEach(x=>a.push([x,n]));for(let i=t.length;i<g[n];i++)a.push([999,n])});return a.sort((x,y)=>x[0]-y[0]).map(([t,n])=>({t:t<999?t:0,n}))}
+const shirt=(num,c)=>`<svg viewBox="0 0 48 44" width="32" height="29" aria-hidden="true"><path d="M14 3L4 9 1 20l9 3 2-5v23h24V18l2 5 9-3-3-11-10-6c-1 4-5 6-10 6S15 7 14 3z" fill="${c}" stroke="#0a1a4d" stroke-width="1.6" stroke-linejoin="round"/><text x="24" y="32" text-anchor="middle" font-size="17" font-weight="800" fill="#fff" font-family="Barlow Condensed,sans-serif">${esc(num)}</text></svg>`;
+const gh=e=>{const o=e.n.startsWith("Propia");return`<span class="gl2">${e.t?`<b class="mi">${e.t}'</b>`:""}${shirt(o?"":S.dn[e.n]||"",o?"#6b7280":"#2f7bff")}<b>Gol</b><span class="gn">${o?"En propia puerta":esc(e.n)}</span></span>`};
+function curMin(m){const c=m.c;if(!c||(c.ph!=1&&c.ph!=2))return null;return(c.ph==2?25:0)+Math.floor(((c.base||0)+(c.run?Date.now()-c.since:0))/6e4)+1}
+function addMin(m,n,t){m.gm=m.gm||{};(m.gm[n]=m.gm[n]||[]).push(t);m.gm[n].sort((a,b)=>a-b)}
+function trimMin(m,k){if(!m.gm||!m.gm[k])return;if(!m.g||!m.g[k])delete m.gm[k];else while(m.gm[k].length>m.g[k])m.gm[k].pop();if(!Object.keys(m.gm).length)delete m.gm}
+const mn=(m,n,g)=>{const t=(m.gm&&m.gm[n])||[];return t.length?t.map(x=>x+"'").join(", ")+(g>t.length?` +${g-t.length}`:""):"×"+g};let lvOn=false,lastP="";
 function liveM(){const now=Date.now(),all=myM().filter(x=>x.h&&x.a);return all.find((x,i)=>{const m=M(x.r.n,x.h),c=m.c,k=when(x).getTime(),st=c?Math.min(k-9e5,c.s||k):(m.t?k-9e5:1e18),en=c&&c.fin?c.fin+72e5:Math.max(k,c&&c.s||0)+144e5;if(c&&c.fin&&all.slice(i+1).some(y=>M(y.r.n,y.h).t))return false;return now>=st&&now<en})}
 function clk(j,h,a){const m=S.m[j+"_"+h]||(S.m[j+"_"+h]={}),now=Date.now();if(a=="reset"){if(!confirm("¿Reiniciar el cronómetro?"))return;delete m.c;return save()}
  const c=m.c||(m.c={ph:0,run:false,base:0,s:now}),el=(c.base||0)+(c.run?now-c.since:0);
@@ -159,21 +169,21 @@ function clk(j,h,a){const m=S.m[j+"_"+h]||(S.m[j+"_"+h]={}),now=Date.now();if(a=
  if(a=="ft"){c.ph="FT";c.base=el;c.run=false;c.fin=now}
  save()}
 function lg(j,h,side,d){const m=S.m[j+"_"+h]||(S.m[j+"_"+h]={}),me=h==ME?"h":"a",k=side=="me"?me:(me=="h"?"a":"h");m.h=+m.h||0;m.a=+m.a||0;if(m[k]+d<0)return;
- if(side=="me"){const sl=document.getElementById("lsel"),n=sl?sl.value:"";if(d>0){if(n){m.g=m.g||{};m.g[n]=(m.g[n]||0)+1}}else if(m.g&&m.g[n]){if(--m.g[n]<1)delete m.g[n];if(!Object.keys(m.g).length)delete m.g}}
+ if(side=="me"){const sl=document.getElementById("lsel"),n=sl?sl.value:"";if(d>0){if(n){m.g=m.g||{};m.g[n]=(m.g[n]||0)+1;const mi=curMin(m);if(mi!=null)addMin(m,n,mi)}}else if(m.g&&m.g[n]){if(--m.g[n]<1)delete m.g[n];if(!Object.keys(m.g).length)delete m.g;trimMin(m,n)}}
  m[k]+=d;save()}
 function startLive(j,h){const m=S.m[j+"_"+h]||(S.m[j+"_"+h]={});m.c={ph:0,run:false,base:0,s:Date.now()};save()}
-function liveHero(x){const m=M(x.r.n,x.h),c=m.c||{ph:0},ph=c.ph||0,ok=done(m),sc=Object.entries(m.g||{}).map(([n,g])=>`${esc(n)}${g>1?` ×${g}`:""}`).join(", ");
+function liveHero(x){const m=M(x.r.n,x.h),c=m.c||{ph:0},ph=c.ph||0,ok=done(m),ev=evs(m);
  const L={0:"A PUNTO DE EMPEZAR",1:'<span class="dot">🔴</span> EN DIRECTO · 1ª PARTE',HT:"☕ DESCANSO",2:'<span class="dot">🔴</span> EN DIRECTO · 2ª PARTE',FT:"🏁 FINAL DEL PARTIDO"}[ph];
  const B=(a,l)=>`<button onclick="clk(${x.r.n},${x.h},'${a}')">${l}</button>`,G=(s,d,l)=>`<button onclick="lg(${x.r.n},${x.h},'${s}',${d})">${l}</button>`;
  let ad="";if(E())ad=`<div class="ctl">${ph==0?B("go1","▶ Iniciar 1ª parte"):""}${(ph==1||ph==2)?(c.run?B("pause","⏸ Pausar"):B("resume","▶ Reanudar")):""}${ph==1?B("ht","🔔 Fin 1ª parte"):""}${ph=="HT"?B("go2","▶ Iniciar 2ª parte"):""}${ph==2?B("ft","🏁 Final"):""}${B("reset","↺ Reiniciar")}</div>
- <div class="ctl"><select id="lsel" onchange="lastP=this.value" style="width:100%;max-width:340px">${S.pl.concat(["Propia puerta (rival)"]).map(p=>`<option ${p==lastP?"selected":""}>${esc(p)}</option>`).join("")}</select></div><div class="ctl g2">${G("me",1,"＋ Gol "+T[ME][0])}${G("rv",1,"＋ Gol rival")}</div><div class="ctl">${G("me",-1,"− "+T[ME][0])}${G("rv",-1,"− rival")}</div>`;
+ <div class="ctl"><select id="lsel" onchange="lastP=this.value" style="width:100%;max-width:340px">${S.pl.concat(["Propia puerta (rival)"]).map(p=>`<option value="${esc(p)}" ${p==lastP?"selected":""}>${S.dn[p]?S.dn[p]+" · ":""}${esc(p)}</option>`).join("")}</select></div><div class="ctl g2">${G("me",1,"＋ Gol "+T[ME][0])}${G("rv",1,"＋ Gol rival")}</div><div class="ctl">${G("me",-1,"− "+T[ME][0])}${G("rv",-1,"− rival")}</div>`;
  return`<div class="live"><div class="lt">${L} · JORNADA ${x.r.n}</div>
  <div class="lb"><div>${bd(x.h)}<div class="cn">${nm(x.h)}</div></div><div class="big">${ok?m.h:0} - ${ok?m.a:0}</div><div>${bd(x.a)}<div class="cn">${nm(x.a)}</div></div></div>
  <div class="lclk" id="lc" data-ph="${ph}" data-run="${c.run?1:0}" data-base="${c.base||0}" data-since="${c.since||0}">00:00</div>
  <div class="pb"><div><i id="p1"></i></div><div><i id="p2"></i></div></div>
  <div class="pb" style="font-size:.75rem;color:var(--mu);margin-top:4px"><span style="flex:1">1ª parte · 25'</span><span style="flex:1">2ª parte · 25'</span></div>
  ${ph==0&&Date.now()<when(x)?`<div class="lt" style="margin:18px 0 8px">EMPIEZA EN</div><div class="cd" id="cd" data-t="${when(x).getTime()}"></div>`:""}
- ${sc?`<div class="lg">⚽ <b>Goles del ${T[ME][0]}:</b> ${sc}</div>`:""}${ad}</div>`}
+ ${ev.length?`<div class="lg"><b>⚽ Goles del ${T[ME][0]}</b>${ev.map(e=>`<div>${gh(e)}</div>`).join("")}</div>`:""}${ad}</div>`}
 function tickLive(){const l=!!liveM();if(l!==lvOn){render();return}
  const cd=document.getElementById("cd");if(cd&&document.getElementById("lc")&&+cd.dataset.t<=Date.now()){render();return}
  const e=document.getElementById("lc");if(!e)return;const d=e.dataset,el=Math.max(0,+d.base+(d.run=="1"?Date.now()-d.since:0)),s=el/1e3|0,pc=Math.min(100,el/HALF*100);
@@ -196,7 +206,7 @@ function render(){
  if(tab=="jor"){h=`<div class="ch">${J.map(r=>`<button class="${jn==r.n?'on':''}" onclick="jn=${r.n};render()">${r.n}</button>`).join("")}</div>`+J[jn-1].p.map((p,i)=>card(J[jn-1],p[0],p[1],i)).join("")}
  if(tab=="cla"){h=`<table><tr><th>#</th><th>Equipo</th><th>PJ</th><th>G</th><th>E</th><th>P</th><th>GF</th><th>GC</th><th>DG</th><th>Pts</th></tr>${table().map((t,i)=>`<tr class="${t.id==ME?'me':''}"><td>${i+1}</td><td>${nm(t.id)}</td><td>${t.pj}</td><td>${t.g}</td><td>${t.e}</td><td>${t.p}</td><td>${t.gf}</td><td>${t.gc}</td><td>${t.dg>0?"+":""}${t.dg}</td><td><b>${t.pts}</b></td></tr>`).join("")}</table>`}
  if(tab=="hor"&&E())h=`<div class="card"><small class="gap">Pon la fecha y la hora de cada partido del Juncal B. Si dejas la hora vacía, se muestra "hora por confirmar".</small></div>`+myM().filter(x=>x.h&&x.a).map(x=>{const m=M(x.r.n,x.h);return`<div class="card" style="display:flex;gap:10px;align-items:center;flex-wrap:wrap"><b class="cn" style="color:var(--ye);font-size:1.2rem;min-width:90px">Jornada ${x.r.n}</b><span style="flex:1;min-width:160px">${nm(x.h)} - ${nm(x.a)}</span><input type="date" value="${m.d||x.r.d}" onchange="ed(${x.r.n},${x.h},'d',this.value)"><input type="time" value="${esc(m.t)}" onchange="ed(${x.r.n},${x.h},'t',this.value)"></div>`}).join("");
- if(tab=="pla"&&E())h=`<div class="card"><div class="ed" style="display:flex"><input id="np" style="flex:1;min-width:200px" placeholder="Nombre Apellido (varios separados por coma)"><button onclick="addP()">＋ Añadir</button></div></div>`+(S.pl.map((p,i)=>`<div class="card" style="display:flex;justify-content:space-between;align-items:center"><span>${esc(p)}</span><button onclick="delP(${i})">Eliminar</button></div>`).join("")||'<div class="empty">Aún no hay jugadores.</div>');
+ if(tab=="pla"&&E())h=`<div class="card"><div class="ed" style="display:flex"><input id="np" style="flex:1;min-width:200px" placeholder="Nº y nombre, ej: 7 Ana Ruiz (varios separados por coma)"><button onclick="addP()">＋ Añadir</button></div></div>`+(S.pl.map((p,i)=>`<div class="card" style="display:flex;justify-content:space-between;align-items:center"><span style="display:flex;align-items:center;gap:10px">${shirt(S.dn[p]||"","#2f7bff")}${esc(p)}</span><span style="display:flex;gap:8px;align-items:center"><input class="g" type="number" min="0" max="99" placeholder="Nº" value="${esc(S.dn[p])}" onchange="setDn(${i},this.value)"><button onclick="delP(${i})">Eliminar</button></span></div>`).join("")||'<div class="empty">Aún no hay jugadores.</div>');
  if(tab=="gol"){const s=scorers(),mx=s[0]?.g||1;h=s.length?s.map((x,i)=>`<div class="gl card" style="--i:${i}"><b class="cn" style="font-size:1.4rem;color:var(--ye)">${i+1}</b><div><div>${esc(x.n)}</div><div class="bar" style="width:${x.g/mx*100}%"></div></div><b class="cn" style="font-size:1.6rem">${x.g}</b></div>`).join(""):`<div class="empty">⚽ Aún no hay goles registrados.</div>`}
  document.getElementById("app").innerHTML=h}
 async function sha(t){const b=await crypto.subtle.digest("SHA-256",new TextEncoder().encode(t));return[...new Uint8Array(b)].map(x=>x.toString(16).padStart(2,"0")).join("")}

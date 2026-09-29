@@ -95,7 +95,7 @@ const J=R.map((s,i)=>{const[d,p]=s.split("|");return{n:i+1,d:d.split("-").revers
 let S={u:0,m:{},pl:[]};
 const fix=()=>{S.m=S.m||{};S.pl=S.pl||[]};
 try{S=JSON.parse(localStorage.getItem("juncalB"))||S}catch(e){}fix();
-const API="https://script.google.com/macros/s/AKfycbwVXh92p3l4-c2YjtvYPYevLn29_UEBqYqjA4xUmC5GLaSYVzoSwTC2V2Eb2O8O4qSD/exec"; // ← pega aquí la URL de tu Apps Script (termina en /exec)
+const API="https://script.google.com/macros/s/AKfycbyvbG_xjz4rK71vzFs9w1cmroxRmMbL8EDWPoAUKbmVmWNJ0pajyhKoBQC_veUbHdgG/exec"; // ← pega aquí la URL de tu Apps Script (termina en /exec)
 let PW="",pt;const setSt=t=>{document.getElementById("st").textContent=t};
 fetch(API?API+"?v="+Date.now():"datos.json?v="+Date.now(),{cache:"no-store"}).then(r=>r.json()).then(d=>{if(API||(d.u||0)>S.u){S=d;fix();render()}}).catch(()=>{});
 function push(){clearTimeout(pt);setSt("Guardando…");pt=setTimeout(async()=>{try{const r=await(await fetch(API,{method:"POST",body:JSON.stringify({pw:PW,data:S})})).json();setSt(r.ok?"✓ Guardado en Google Sheets":"⚠ Contraseña incorrecta")}catch(e){setSt("⚠ Error al guardar")}},600)}

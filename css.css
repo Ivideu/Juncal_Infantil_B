@@ -10,22 +10,6 @@ button,.btn{font:inherit;cursor:pointer;border:1px solid var(--line);background:
 button:hover{border-color:var(--ac)}button:focus-visible,input:focus-visible{outline:2px solid var(--ye);outline-offset:2px}
 .on{background:var(--ac);border-color:var(--ac)}
 #hero{margin:18px 0;padding:26px;border-radius:22px;background:linear-gradient(135deg,#1e4fd8,#0b1b4d 70%);border:1px solid #3b66e0;position:relative;overflow:hidden}
-.hero-date{
-    text-align:center;
-    margin:12px 0 22px;
-}
-
-.hero-date span{
-    display:inline-block;
-    background:var(--ye);
-    color:#0a0f1e;
-    padding:10px 18px;
-    border-radius:12px;
-    font-size:clamp(1.2rem,3vw,1.6rem);
-    font-weight:800;
-    text-transform:capitalize;
-    box-shadow:0 4px 12px #0003;
-}
 #hero:after{content:"⚽";position:absolute;right:-20px;bottom:-50px;font-size:200px;opacity:.08;animation:spin 40s linear infinite}
 @keyframes spin{to{transform:rotate(360deg)}}
 .hv{display:flex;align-items:center;justify-content:space-around;gap:10px;margin:14px 0;text-align:center}
@@ -38,9 +22,13 @@ nav button{white-space:nowrap;font-weight:600}
 .card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px 16px;margin-bottom:12px;animation:in .5s both;animation-delay:calc(var(--i)*30ms)}
 @keyframes in{from{opacity:0;transform:translateY(10px)}}
 .card.me{border-color:var(--ac);box-shadow:0 0 0 1px var(--ac) inset,0 8px 30px #2f7bff22}
+.card.rw{background:linear-gradient(#22c55e40,#22c55e2a),var(--card);border-color:#22c55e;box-shadow:0 8px 30px #22c55e22}
+.card.rd{background:linear-gradient(#fde68a2e,#fde68a1c),var(--card);border-color:#e9d27a;box-shadow:0 8px 30px #fde68a1a}
+.card.rl{background:linear-gradient(#f871713a,#f8717124),var(--card);border-color:#f87171;box-shadow:0 8px 30px #f8717122}
 .card.rest{opacity:.6}
 .top{display:flex;justify-content:space-between;color:var(--mu);font-size:.85rem;margin-bottom:10px;gap:8px;flex-wrap:wrap}
 .dt{background:var(--ye);color:#0a0f1e;font-weight:800;padding:2px 10px;border-radius:6px;text-transform:capitalize}
+.dtb{display:inline-block;font-family:'Barlow Condensed',sans-serif;font-size:clamp(1.4rem,5.2vw,2.5rem);padding:6px 22px;border-radius:12px;line-height:1.2;box-shadow:0 6px 24px #ffd23f44}
 .top b{color:var(--ye);font-family:'Barlow Condensed';font-size:1.1rem}
 .mt{display:grid;grid-template-columns:1fr auto 1fr;gap:10px;align-items:center}
 .tm{display:flex;align-items:center;gap:10px;font-weight:600;line-height:1.2}

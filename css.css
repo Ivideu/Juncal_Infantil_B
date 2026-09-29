@@ -19,16 +19,10 @@ button:hover{border-color:var(--ac)}button:focus-visible,input:focus-visible{out
 nav{display:flex;gap:8px;overflow-x:auto;padding:6px 0 14px;position:sticky;top:0;background:linear-gradient(var(--bg) 80%,transparent);z-index:5}
 nav button{white-space:nowrap;font-weight:600}
 .b{display:inline-grid;place-items:center;width:44px;height:44px;border-radius:50%;font:800 1rem 'Barlow Condensed';color:#fff;flex:none;border:2px solid #fff3}
-.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px 16px;margin-bottom:12px;animation:in .5s both;animation-delay:calc(var(--i)*30ms);transition:background-color .3s, border-color .3s}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px 16px;margin-bottom:12px;animation:in .5s both;animation-delay:calc(var(--i)*30ms)}
 @keyframes in{from{opacity:0;transform:translateY(10px)}}
 .card.me{border-color:var(--ac);box-shadow:0 0 0 1px var(--ac) inset,0 8px 30px #2f7bff22}
 .card.rest{opacity:.6}
-
-/* Colores de fondo dinámicos y transparentes según el resultado */
-.card.res-win { background-color: rgba(34, 197, 94, 0.12); border-color: rgba(34, 197, 94, 0.4); }
-.card.res-lose { background-color: rgba(239, 68, 68, 0.12); border-color: rgba(239, 68, 68, 0.4); }
-.card.res-draw { background-color: rgba(245, 158, 11, 0.12); border-color: rgba(245, 158, 11, 0.4); }
-
 .top{display:flex;justify-content:space-between;color:var(--mu);font-size:.85rem;margin-bottom:10px;gap:8px;flex-wrap:wrap}
 .dt{background:var(--ye);color:#0a0f1e;font-weight:800;padding:2px 10px;border-radius:6px;text-transform:capitalize}
 .top b{color:var(--ye);font-family:'Barlow Condensed';font-size:1.1rem}

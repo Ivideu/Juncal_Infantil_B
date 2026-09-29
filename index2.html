@@ -51,19 +51,11 @@ function delP(i){if(confirm("¿Eliminar a "+S.pl[i]+" de la plantilla?")){S.pl.s
 function card(r,h,a,i){
  const m=M(r.n,h),d=m.d||r.d,me=h==ME||a==ME,pl=done(m);
  if(!h||!a){const id=h||a;return`<div class="card rest ${id==ME?'me':''}" style="--i:${i}"><div class="top"><span>${id==ME?`<b>Jornada ${r.n}</b> · <span class="dt">${fmt(r.d)}</span>`:nm(id)}</span></div><div class="tm">${bd(0)} Descansa esta jornada</div></div>`}
- 
- let pill="", resClass="";
- if(me&&pl){
-   const g=h==ME?m.h-m.a:m.a-m.h;
-   if(g>0){pill=`<span class="pill w">VICTORIA</span>`; resClass="res-win";}
-   else if(g<0){pill=`<span class="pill l">DERROTA</span>`; resClass="res-lose";}
-   else{pill=`<span class="pill d">EMPATE</span>`; resClass="res-draw";}
- }
- 
+ let pill="";
+ if(me&&pl){const g=h==ME?m.h-m.a:m.a-m.h;pill=g>0?`<span class="pill w">VICTORIA</span>`:g<0?`<span class="pill l">DERROTA</span>`:`<span class="pill d">EMPATE</span>`}
  const mid=pl?`${m.h} - ${m.a}`:(m.t||"–:–");
  const gs=Object.entries(m.g||{}),sc=gs.map(([n,g])=>`${esc(n)}${g>1?` ×${g}`:""}`).join(", ");
- 
- let x=`<div class="card ${me?'me':''} ${resClass}" style="--i:${i}"><div class="top"><span>${me?`<b>Jornada ${r.n}</b> · <span class="dt">${fmt(d)}${m.t?" · "+m.t+" h":""}</span>`:fmt(d)}</span>${pill}</div>
+ let x=`<div class="card ${me?'me':''}" style="--i:${i}"><div class="top"><span>${me?`<b>Jornada ${r.n}</b> · <span class="dt">${fmt(d)}${m.t?" · "+m.t+" h":""}</span>`:fmt(d)}</span>${pill}</div>
  <div class="mt"><div class="tm">${bd(h)}${nm(h)}</div><div class="sc ${pl?'':'t'}">${mid}</div><div class="tm r">${bd(a)}${nm(a)}</div></div>`;
  if(me){x+=`<div class="meta"><span>📍 <a target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(T[h][1])}">${T[h][1]}</a></span>${!m.t&&!pl?"<span>⏳ Hora por confirmar</span>":""}${sc?`<span>⚽ ${sc}</span>`:""}</div>`}
  if(E())x+=`<div class="ed"><span>Resultado</span><input class="g" type="number" min="0" value="${esc(m.h)}" onchange="ed(${r.n},${h},'h',this.value)"> - <input class="g" type="number" min="0" value="${esc(m.a)}" onchange="ed(${r.n},${h},'a',this.value)">

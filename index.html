@@ -19,8 +19,7 @@ button,.btn{font:inherit;cursor:pointer;border:1px solid var(--line);background:
 button:hover{border-color:var(--ac)}button:focus-visible,input:focus-visible{outline:2px solid var(--ye);outline-offset:2px}
 .on{background:var(--ac);border-color:var(--ac)}
 #hero{margin:18px 0;padding:26px;border-radius:22px;background:linear-gradient(135deg,#1e4fd8,#0b1b4d 70%);border:1px solid #3b66e0;position:relative;overflow:hidden}
-#hero>*{position:relative;z-index:1}
-#hero:after{pointer-events:none;content:"⚽";position:absolute;right:-20px;bottom:-50px;font-size:200px;opacity:.08;animation:spin 40s linear infinite}
+#hero:after{content:"⚽";position:absolute;right:-20px;bottom:-50px;font-size:200px;opacity:.08;animation:spin 40s linear infinite}
 @keyframes spin{to{transform:rotate(360deg)}}
 .hv{display:flex;align-items:center;justify-content:space-around;gap:10px;margin:14px 0;text-align:center}
 .hv .cn{font-size:clamp(1.1rem,3.5vw,1.8rem);font-weight:700;max-width:220px}
@@ -72,7 +71,6 @@ select{font:inherit;background:var(--bg);color:var(--tx);border:1px solid var(--
 .lclk{font:800 clamp(2.2rem,9vw,3.4rem)/1 'Barlow Condensed';background:var(--ye);color:#0a0f1e;display:inline-block;border-radius:12px;padding:4px 22px;box-shadow:0 6px 24px #ffd23f44}
 .pb{display:flex;gap:8px;max-width:420px;margin:14px auto 0}.pb div{flex:1;height:8px;background:#0006;border-radius:9px;overflow:hidden}.pb i{display:block;height:100%;background:var(--ye);width:0;transition:width 1s linear}
 .lg{margin-top:14px}.ctl{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-top:12px}
-.g2 button{font-size:1.05rem;font-weight:700;padding:12px 16px;flex:1;min-width:140px}.g2 button:first-child{background:var(--ac);border-color:var(--ac)}
 .dot{animation:bl 1.2s infinite}@keyframes bl{50%{opacity:.25}}
 @media(max-width:560px){.mt{grid-template-columns:1fr auto 1fr}.tm{flex-direction:column;text-align:center!important;gap:4px;font-size:.85rem}.sc{min-width:70px;font-size:1.5rem}.b{width:38px;height:38px}}
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
@@ -107,7 +105,7 @@ try{S=JSON.parse(localStorage.getItem("juncalB"))||S}catch(e){}fix();
 const API="https://script.google.com/macros/s/AKfycbyvbG_xjz4rK71vzFs9w1cmroxRmMbL8EDWPoAUKbmVmWNJ0pajyhKoBQC_veUbHdgG/exec"; // ← pega aquí la URL de tu Apps Script (termina en /exec)
 let PW="",pt;const setSt=t=>{document.getElementById("st").textContent=t};
 fetch(API?API+"?v="+Date.now():"datos.json?v="+Date.now(),{cache:"no-store"}).then(r=>r.json()).then(d=>{if(API||(d.u||0)>S.u){S=d;fix();render()}}).catch(()=>{});
-function push(){clearTimeout(pt);setSt("Guardando…");pt=setTimeout(async()=>{try{const r=await(await fetch(API,{method:"POST",body:JSON.stringify({pw:PW,data:S})})).json();setSt(r.ok?"✓ Guardado en Google Sheets":"⚠ Contraseña incorrecta")}catch(e){setSt("⚠ Error al guardar")}},300)}
+function push(){clearTimeout(pt);setSt("Guardando…");pt=setTimeout(async()=>{try{const r=await(await fetch(API,{method:"POST",body:JSON.stringify({pw:PW,data:S})})).json();setSt(r.ok?"✓ Guardado en Google Sheets":"⚠ Contraseña incorrecta")}catch(e){setSt("⚠ Error al guardar")}},600)}
 const PH="31e2d5c324500e055afa24eadccfae8b980ae1c8a18db59722f1e228bd092040";
 const E=()=>document.body.classList.contains("edit");
 let tab="cal",jn=1;
@@ -148,7 +146,7 @@ function table(){const t={};for(const id in T)t[id]={id,pj:0,g:0,e:0,p:0,gf:0,gc
  return Object.values(t).map(o=>({...o,pts:o.g*3+o.e,dg:o.gf-o.gc})).sort((a,b)=>b.pts-a.pts||b.dg-a.dg||b.gf-a.gf||T[a.id][0].localeCompare(T[b.id][0]))}
 function scorers(){const s={};myM().forEach(x=>Object.entries(M(x.r.n,x.h).g||{}).forEach(([n,g])=>{if(n.startsWith("Propia"))return;(s[n]||(s[n]={n,g:0})).g+=g}));return Object.values(s).sort((a,b)=>b.g-a.g)}
 const HALF=25*60000;let lvOn=false,lastP="";
-function liveM(){const now=Date.now();return myM().filter(x=>x.h&&x.a).find(x=>{const m=M(x.r.n,x.h),c=m.c,k=when(x).getTime(),st=c?Math.min(k-9e5,c.s||k):(m.t?k-9e5:1e18),en=c&&c.fin?c.fin+72e5:Math.max(k,c&&c.s||0)+144e5;return now>=st&&now<en})}
+function liveM(){const now=Date.now();return myM().filter(x=>x.h&&x.a).find(x=>{const m=M(x.r.n,x.h),c=m.c,k=when(x).getTime(),st=c?Math.min(k,c.s||k):(m.t?k:1e18),en=c&&c.fin?c.fin+72e5:st+144e5;return now>=st&&now<en})}
 function clk(j,h,a){const m=S.m[j+"_"+h]||(S.m[j+"_"+h]={}),now=Date.now();if(a=="reset"){if(!confirm("¿Reiniciar el cronómetro?"))return;delete m.c;return save()}
  const c=m.c||(m.c={ph:0,run:false,base:0,s:now}),el=(c.base||0)+(c.run?now-c.since:0);
  if(a=="go1"){c.ph=1;c.run=true;c.base=0;c.since=now}
@@ -159,23 +157,21 @@ function clk(j,h,a){const m=S.m[j+"_"+h]||(S.m[j+"_"+h]={}),now=Date.now();if(a=
  if(a=="ft"){c.ph="FT";c.base=el;c.run=false;c.fin=now}
  save()}
 function lg(j,h,side,d){const m=S.m[j+"_"+h]||(S.m[j+"_"+h]={}),me=h==ME?"h":"a",k=side=="me"?me:(me=="h"?"a":"h");m.h=+m.h||0;m.a=+m.a||0;if(m[k]+d<0)return;
- if(side=="me"){const sl=document.getElementById("lsel"),n=sl?sl.value:"";if(d>0){if(n){m.g=m.g||{};m.g[n]=(m.g[n]||0)+1}}else if(m.g&&m.g[n]){if(--m.g[n]<1)delete m.g[n];if(!Object.keys(m.g).length)delete m.g}}
+ if(side=="me"){const n=document.getElementById("lsel").value;if(d>0){if(n){m.g=m.g||{};m.g[n]=(m.g[n]||0)+1}}else if(m.g&&m.g[n]){if(--m.g[n]<1)delete m.g[n];if(!Object.keys(m.g).length)delete m.g}}
  m[k]+=d;save()}
 function startLive(j,h){const m=S.m[j+"_"+h]||(S.m[j+"_"+h]={});m.c={ph:0,run:false,base:0,s:Date.now()};save()}
 function liveHero(x){const m=M(x.r.n,x.h),c=m.c||{ph:0},ph=c.ph||0,ok=done(m),sc=Object.entries(m.g||{}).map(([n,g])=>`${esc(n)}${g>1?` ×${g}`:""}`).join(", ");
  const L={0:"A PUNTO DE EMPEZAR",1:'<span class="dot">🔴</span> EN DIRECTO · 1ª PARTE',HT:"☕ DESCANSO",2:'<span class="dot">🔴</span> EN DIRECTO · 2ª PARTE',FT:"🏁 FINAL DEL PARTIDO"}[ph];
  const B=(a,l)=>`<button onclick="clk(${x.r.n},${x.h},'${a}')">${l}</button>`,G=(s,d,l)=>`<button onclick="lg(${x.r.n},${x.h},'${s}',${d})">${l}</button>`;
  let ad="";if(E())ad=`<div class="ctl">${ph==0?B("go1","▶ Iniciar 1ª parte"):""}${(ph==1||ph==2)?(c.run?B("pause","⏸ Pausar"):B("resume","▶ Reanudar")):""}${ph==1?B("ht","🔔 Fin 1ª parte"):""}${ph=="HT"?B("go2","▶ Iniciar 2ª parte"):""}${ph==2?B("ft","🏁 Final"):""}${B("reset","↺ Reiniciar")}</div>
- <div class="ctl"><select id="lsel" onchange="lastP=this.value" style="width:100%;max-width:340px">${S.pl.concat(["Propia puerta (rival)"]).map(p=>`<option ${p==lastP?"selected":""}>${esc(p)}</option>`).join("")}</select></div><div class="ctl g2">${G("me",1,"＋ Gol "+T[ME][0])}${G("rv",1,"＋ Gol rival")}</div><div class="ctl">${G("me",-1,"− "+T[ME][0])}${G("rv",-1,"− rival")}</div>`;
+ <div class="ctl"><select id="lsel" onchange="lastP=this.value">${S.pl.concat(["Propia puerta (rival)"]).map(p=>`<option ${p==lastP?"selected":""}>${esc(p)}</option>`).join("")}</select>${G("me",1,"＋ Gol "+T[ME][0])}${G("me",-1,"−")}${G("rv",1,"＋ Gol rival")}${G("rv",-1,"−")}</div>`;
  return`<div class="live"><div class="lt">${L} · JORNADA ${x.r.n}</div>
  <div class="lb"><div>${bd(x.h)}<div class="cn">${nm(x.h)}</div></div><div class="big">${ok?m.h:0} - ${ok?m.a:0}</div><div>${bd(x.a)}<div class="cn">${nm(x.a)}</div></div></div>
  <div class="lclk" id="lc" data-ph="${ph}" data-run="${c.run?1:0}" data-base="${c.base||0}" data-since="${c.since||0}">00:00</div>
  <div class="pb"><div><i id="p1"></i></div><div><i id="p2"></i></div></div>
  <div class="pb" style="font-size:.75rem;color:var(--mu);margin-top:4px"><span style="flex:1">1ª parte · 25'</span><span style="flex:1">2ª parte · 25'</span></div>
- ${ph==0&&Date.now()<when(x)?`<div class="lt" style="margin:18px 0 8px">EMPIEZA EN</div><div class="cd" id="cd" data-t="${when(x).getTime()}"></div>`:""}
  ${sc?`<div class="lg">⚽ <b>Goles del ${T[ME][0]}:</b> ${sc}</div>`:""}${ad}</div>`}
 function tickLive(){const l=!!liveM();if(l!==lvOn){render();return}
- const cd=document.getElementById("cd");if(cd&&document.getElementById("lc")&&+cd.dataset.t<=Date.now()){render();return}
  const e=document.getElementById("lc");if(!e)return;const d=e.dataset,el=Math.max(0,+d.base+(d.run=="1"?Date.now()-d.since:0)),s=el/1e3|0,pc=Math.min(100,el/HALF*100);
  e.textContent=String(s/60|0).padStart(2,"0")+":"+String(s%60).padStart(2,"0");
  document.getElementById("p1").style.width=(d.ph=="1"?pc:d.ph=="0"?0:100)+"%";document.getElementById("p2").style.width=(d.ph=="2"?pc:d.ph=="FT"?100:0)+"%"}
@@ -215,3 +211,7 @@ function resetD(){if(confirm("¿Borrar los cambios guardados en este navegador?"
 if(location.hash=="#admin")unlock();try{if(sessionStorage.getItem("adm")){PW=sessionStorage.getItem("pw")||"";document.body.classList.add("edit")}}catch(e){}
 if(API)document.querySelector("#adm .on").remove();
 render();setInterval(tick,1000);
+setInterval(()=>{if(API&&!E()&&liveM())fetch(API+"?v="+Date.now(),{cache:"no-store"}).then(r=>r.json()).then(d=>{if(JSON.stringify(d)!==JSON.stringify(S)){S=d;fix();render()}}).catch(()=>{})},15000);
+</script>
+</body>
+</html>

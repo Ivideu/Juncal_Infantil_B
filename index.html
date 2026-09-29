@@ -130,7 +130,10 @@ function card(r,h,a,i){
  x+="</div>";
  return x}
 const myM=()=>J.map(r=>{const p=r.p.find(q=>q.includes(ME));return{r,h:p[0],a:p[1]}});
-const when=x=>{const m=M(x.r.n,x.h);return new Date((m.d||x.r.d)+"T"+(m.t||"23:59"))};
+function madrid(d,t){const[y,mo,da]=d.split("-").map(Number),[h,mi]=(t.split(":").map(Number)),g=Date.UTC(y,mo-1,da,h,mi||0);
+ const off=z=>{const p=new Intl.DateTimeFormat("en-US",{timeZone:"Europe/Madrid",hourCycle:"h23",year:"numeric",month:"numeric",day:"numeric",hour:"numeric",minute:"numeric"}).formatToParts(new Date(z)).reduce((o,x)=>(o[x.type]=+x.value,o),{});return Date.UTC(p.year,p.month-1,p.day,p.hour,p.minute)-z};
+ return g-off(g-off(g))}
+const when=x=>{const m=M(x.r.n,x.h);return new Date(madrid(m.d||x.r.d,m.t||"23:59"))};
 function table(){const t={};for(const id in T)t[id]={id,pj:0,g:0,e:0,p:0,gf:0,gc:0};
  J.forEach(r=>r.p.forEach(([h,a])=>{if(!h||!a)return;const m=M(r.n,h);if(!done(m))return;const x=+m.h,y=+m.a,A=t[h],B=t[a];A.pj++;B.pj++;A.gf+=x;A.gc+=y;B.gf+=y;B.gc+=x;if(x>y){A.g++;B.p++}else if(x<y){B.g++;A.p++}else{A.e++;B.e++}}));
  return Object.values(t).map(o=>({...o,pts:o.g*3+o.e,dg:o.gf-o.gc})).sort((a,b)=>b.pts-a.pts||b.dg-a.dg||b.gf-a.gf||T[a.id][0].localeCompare(T[b.id][0]))}
@@ -156,7 +159,7 @@ function render(){
  if(tab=="gol"){const s=scorers(),mx=s[0]?.g||1;h=s.length?s.map((x,i)=>`<div class="gl card" style="--i:${i}"><b class="cn" style="font-size:1.4rem;color:var(--ye)">${i+1}</b><div><div>${esc(x.n)}</div><div class="bar" style="width:${x.g/mx*100}%"></div></div><b class="cn" style="font-size:1.6rem">${x.g}</b></div>`).join(""):`<div class="empty">⚽ Aún no hay goles registrados.</div>`}
  document.getElementById("app").innerHTML=h}
 async function sha(t){const b=await crypto.subtle.digest("SHA-256",new TextEncoder().encode(t));return[...new Uint8Array(b)].map(x=>x.toString(16).padStart(2,"0")).join("")}
-async function unlock(){const p=prompt("Contraseña de entrenador");if(!p)return;let ok=false;try{ok=API?(await(await fetch(API,{method:"POST",body:JSON.stringify({pw:p})})).json()).ok:await sha(p)===PH}catch(e){}if(ok){PW=p;try{sessionStorage.setItem("adm","1");sessionStorage.setItem("pw",p)}catch(e){}setEdit(true)}else alert("Contraseña incorrecta")}
+async function unlock(){let p=prompt("Contraseña de entrenador");if(!p)return;p=p.trim();let ok=false,er=false;try{ok=API?(await(await fetch(API,{method:"POST",body:JSON.stringify({pw:p})})).json()).ok:await sha(p)===PH}catch(e){er=true}if(ok){PW=p;try{sessionStorage.setItem("adm","1");sessionStorage.setItem("pw",p)}catch(e){}setEdit(true)}else alert(er?"No se pudo conectar con Google Sheets. Revisa la URL de API y que la implementación tenga acceso «Cualquier usuario».":"Contraseña incorrecta")}
 function setEdit(on){document.body.classList.toggle("edit",on);if(!on){try{sessionStorage.removeItem("adm")}catch(e){}if(tab=="pla"||tab=="hor")tab="cal"}render()}
 let ck=0,ct;document.getElementById("tt").onclick=()=>{clearTimeout(ct);ct=setTimeout(()=>ck=0,900);if(++ck>=5){ck=0;unlock()}};
 async function publish(){const j=JSON.stringify(S,null,1);try{await navigator.clipboard.writeText(j)}catch(e){}

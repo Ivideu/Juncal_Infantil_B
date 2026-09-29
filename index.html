@@ -148,7 +148,7 @@ function table(){const t={};for(const id in T)t[id]={id,pj:0,g:0,e:0,p:0,gf:0,gc
  return Object.values(t).map(o=>({...o,pts:o.g*3+o.e,dg:o.gf-o.gc})).sort((a,b)=>b.pts-a.pts||b.dg-a.dg||b.gf-a.gf||T[a.id][0].localeCompare(T[b.id][0]))}
 function scorers(){const s={};myM().forEach(x=>Object.entries(M(x.r.n,x.h).g||{}).forEach(([n,g])=>{if(n.startsWith("Propia"))return;(s[n]||(s[n]={n,g:0})).g+=g}));return Object.values(s).sort((a,b)=>b.g-a.g)}
 const HALF=25*60000;let lvOn=false,lastP="";
-function liveM(){const now=Date.now();return myM().filter(x=>x.h&&x.a).find(x=>{const m=M(x.r.n,x.h),c=m.c,k=when(x).getTime(),st=c?Math.min(k-9e5,c.s||k):(m.t?k-9e5:1e18),en=c&&c.fin?c.fin+72e5:Math.max(k,c&&c.s||0)+144e5;return now>=st&&now<en})}
+function liveM(){const now=Date.now(),all=myM().filter(x=>x.h&&x.a);return all.find((x,i)=>{const m=M(x.r.n,x.h),c=m.c,k=when(x).getTime(),st=c?Math.min(k-9e5,c.s||k):(m.t?k-9e5:1e18),en=c&&c.fin?c.fin+72e5:Math.max(k,c&&c.s||0)+144e5;if(c&&c.fin&&all.slice(i+1).some(y=>M(y.r.n,y.h).t))return false;return now>=st&&now<en})}
 function clk(j,h,a){const m=S.m[j+"_"+h]||(S.m[j+"_"+h]={}),now=Date.now();if(a=="reset"){if(!confirm("¿Reiniciar el cronómetro?"))return;delete m.c;return save()}
  const c=m.c||(m.c={ph:0,run:false,base:0,s:now}),el=(c.base||0)+(c.run?now-c.since:0);
  if(a=="go1"){c.ph=1;c.run=true;c.base=0;c.since=now}
@@ -179,7 +179,7 @@ function tickLive(){const l=!!liveM();if(l!==lvOn){render();return}
  const e=document.getElementById("lc");if(!e)return;const d=e.dataset,el=Math.max(0,+d.base+(d.run=="1"?Date.now()-d.since:0)),s=el/1e3|0,pc=Math.min(100,el/HALF*100);
  e.textContent=String(s/60|0).padStart(2,"0")+":"+String(s%60).padStart(2,"0");
  document.getElementById("p1").style.width=(d.ph=="1"?pc:d.ph=="0"?0:100)+"%";document.getElementById("p2").style.width=(d.ph=="2"?pc:d.ph=="FT"?100:0)+"%"}
-function hero(){const lv=liveM();lvOn=!!lv;if(lv)return liveHero(lv);const all=myM().filter(x=>x.h&&x.a),nx=all.find(x=>!done(M(x.r.n,x.h))&&when(x)>=new Date(Date.now()-864e5));
+function hero(){const lv=liveM();lvOn=!!lv;if(lv)return liveHero(lv);const all=myM().filter(x=>x.h&&x.a),nx=all.find(x=>{const m=M(x.r.n,x.h);return!done(m)&&!(m.c&&m.c.fin)&&when(x)>=new Date(Date.now()-864e5)});
  if(!nx)return`<h2>Temporada finalizada 🏆</h2><p class="gap">No quedan partidos por jugar.</p>`;
  const m=M(nx.r.n,nx.h);
  return`<div class="cn" style="font-size:1.1rem;color:var(--ye)">PRÓXIMO PARTIDO · JORNADA ${nx.r.n}</div>
@@ -215,7 +215,7 @@ function resetD(){if(confirm("¿Borrar los cambios guardados en este navegador?"
 if(location.hash=="#admin")unlock();try{if(sessionStorage.getItem("adm")){PW=sessionStorage.getItem("pw")||"";document.body.classList.add("edit")}}catch(e){}
 if(API)document.querySelector("#adm .on").remove();
 render();setInterval(tick,1000);
-setInterval(()=>{if(API&&!E()&&liveM())fetch(API+"?v="+Date.now(),{cache:"no-store"}).then(r=>r.json()).then(d=>{if(JSON.stringify(d)!==JSON.stringify(S)){S=d;fix();render()}}).catch(()=>{})},5000);
+let pc=0;setInterval(()=>{pc++;if(API&&!E()&&(liveM()||pc%12==0))fetch(API+"?v="+Date.now(),{cache:"no-store"}).then(r=>r.json()).then(d=>{if(JSON.stringify(d)!==JSON.stringify(S)){S=d;fix();render()}}).catch(()=>{})},5000);
 </script>
 </body>
 </html>

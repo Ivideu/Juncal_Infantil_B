@@ -1,0 +1,168 @@
+Para darle a la fecha superior (la del próximo partido) el mismo estilo de etiqueta amarilla (`<span class="dt">...</span>`) que tiene la fecha inferior de las tarjetas, solo necesitamos envolver el texto de la fecha dentro de ese elemento en la función que genera el héroe.
+
+Aquí tienes el código HTML completo con la modificación aplicada para que luzca exactamente como pides:
+
+```html
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Juncal B · Primera Infantil FS G2 · 2026-27</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚽</text></svg>">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0a0f1e;--bg2:#121a33;--card:#172041;--line:#26315a;--tx:#eef2ff;--mu:#93a0c8;--ac:#2f7bff;--ye:#ffd23f;--ok:#22c55e;--ko:#ef4444;--dr:#f59e0b}
+*{box-sizing:border-box;margin:0}
+body{font:16px/1.5 Barlow,system-ui,sans-serif;background:radial-gradient(1200px 600px at 80% -10%,#1d3a8a55,transparent),var(--bg);color:var(--tx);min-height:100vh;padding-bottom:80px}
+h1,h2,.cn{font-family:'Barlow Condensed',sans-serif;letter-spacing:.02em}
+.wrap{max-width:980px;margin:auto;padding:0 16px}
+header{padding:28px 0 8px;display:flex;justify-content:space-between;gap:12px;align-items:center;flex-wrap:wrap}
+header h1{font-size:clamp(2rem,6vw,3.4rem);font-weight:800;line-height:1}
+header small{color:var(--mu);display:block;margin-top:6px}
+button,.btn{font:inherit;cursor:pointer;border:1px solid var(--line);background:var(--bg2);color:var(--tx);padding:8px 14px;border-radius:10px;transition:.2s}
+button:hover{border-color:var(--ac)}button:focus-visible,input:focus-visible{outline:2px solid var(--ye);outline-offset:2px}
+.on{background:var(--ac);border-color:var(--ac)}
+#hero{margin:18px 0;padding:26px;border-radius:22px;background:linear-gradient(135deg,#1e4fd8,#0b1b4d 70%);border:1px solid #3b66e0;position:relative;overflow:hidden}
+#hero:after{content:"⚽";position:absolute;right:-20px;bottom:-50px;font-size:200px;opacity:.08;animation:spin 40s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.hv{display:flex;align-items:center;justify-content:space-around;gap:10px;margin:14px 0;text-align:center}
+.hv .cn{font-size:clamp(1.1rem,3.5vw,1.8rem);font-weight:700;max-width:220px}
+.cd{display:flex;gap:10px;justify-content:center}.cd div{background:#0006;border-radius:12px;padding:8px 14px;min-width:64px;text-align:center}
+.cd b{font:800 2rem 'Barlow Condensed';display:block;line-height:1}.cd span{font-size:.75rem;color:var(--mu)}
+nav{display:flex;gap:8px;overflow-x:auto;padding:6px 0 14px;position:sticky;top:0;background:linear-gradient(var(--bg) 80%,transparent);z-index:5}
+nav button{white-space:nowrap;font-weight:600}
+.b{display:inline-grid;place-items:center;width:44px;height:44px;border-radius:50%;font:800 1rem 'Barlow Condensed';color:#fff;flex:none;border:2px solid #fff3}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px 16px;margin-bottom:12px;animation:in .5s both;animation-delay:calc(var(--i)*30ms)}
+@keyframes in{from{opacity:0;transform:translateY(10px)}}
+.card.me{border-color:var(--ac);box-shadow:0 0 0 1px var(--ac) inset,0 8px 30px #2f7bff22}
+.card.rest{opacity:.6}
+.top{display:flex;justify-content:space-between;color:var(--mu);font-size:.85rem;margin-bottom:10px;gap:8px;flex-wrap:wrap}
+.dt{background:var(--ye);color:#0a0f1e;font-weight:800;padding:2px 10px;border-radius:6px;text-transform:capitalize}
+.top b{color:var(--ye);font-family:'Barlow Condensed';font-size:1.1rem}
+.mt{display:grid;grid-template-columns:1fr auto 1fr;gap:10px;align-items:center}
+.tm{display:flex;align-items:center;gap:10px;font-weight:600;line-height:1.2}
+.tm.r{flex-direction:row-reverse;text-align:right}
+.sc{font:800 1.8rem 'Barlow Condensed';background:#0005;border-radius:10px;padding:2px 14px;min-width:88px;text-align:center}
+.sc.t{font-size:1.3rem;color:var(--ye)}
+.w{background:#22c55e33;color:#4ade80}.l{background:#ef444433;color:#f87171}.d{background:#f59e0b33;color:#fbbf24}
+.pill{font:700 .8rem 'Barlow Condensed';padding:1px 10px;border-radius:99px;letter-spacing:.05em}
+.meta{margin-top:10px;font-size:.88rem;color:var(--mu);display:flex;gap:14px;flex-wrap:wrap}
+.meta a{color:var(--ac)}
+.ed{display:none;margin-top:12px;padding-top:12px;border-top:1px dashed var(--line);gap:8px;flex-wrap:wrap;align-items:center}
+body.edit .ed{display:flex}
+input{font:inherit;background:var(--bg);border:1px solid var(--line);color:var(--tx);border-radius:8px;padding:6px 8px}
+input.g{width:52px;text-align:center}
+table{width:100%;border-collapse:collapse;background:var(--card);border-radius:16px;overflow:hidden}
+th,td{padding:10px 8px;text-align:center;border-bottom:1px solid var(--line)}
+th{color:var(--mu);font-weight:500;font-size:.8rem;background:var(--bg2)}
+td:nth-child(2),th:nth-child(2){text-align:left}
+tr.me td{background:#2f7bff2a;font-weight:700}
+.gap{color:var(--mu)}
+.ch{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px}.ch button{padding:6px 11px;min-width:42px}
+.bar{height:10px;border-radius:9px;background:linear-gradient(90deg,var(--ac),var(--ye));transition:width 1s}
+.gl{display:grid;grid-template-columns:30px 1fr 40px;gap:12px;align-items:center;margin-bottom:12px}
+.empty{text-align:center;color:var(--mu);padding:40px 0}
+#adm{display:none;position:fixed;bottom:0;left:0;right:0;background:var(--bg2);border-top:1px solid var(--ac);padding:10px;justify-content:center;gap:8px;flex-wrap:wrap;z-index:9}
+body.edit #adm{display:flex}
+select{font:inherit;background:var(--bg);color:var(--tx);border:1px solid var(--line);border-radius:8px;padding:6px 8px}.gc{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px;width:100%}.gc button{padding:3px 10px;font-size:.85rem}
+@media(max-width:560px){.mt{grid-template-columns:1fr auto 1fr}.tm{flex-direction:column;text-align:center!important;gap:4px;font-size:.85rem}.sc{min-width:70px;font-size:1.5rem}.b{width:38px;height:38px}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+ <div><h1 id="tt">Escuela Torrejón Juncal B</h1><small>Primera Infantil FS · Grupo 2 · Temporada 2026-27</small></div>
+</header>
+<section id="hero"></section>
+<nav id="nav"></nav>
+<main id="app"></main>
+</div>
+<div id="adm">
+ <button onclick="setEdit(false)">🔓 Salir</button>
+ <button onclick="exportD()">⬇ Descargar datos.json</button>
+ <button onclick="document.getElementById('imp').click()">⬆ Importar</button>
+ <button onclick="resetD()">🗑 Borrar cambios locales</button>
+ <input type="file" id="imp" accept=".json" hidden onchange="importD(this)">
+</div>
+<script>
+const ME=10;
+const T={2:["Aston C","P.M. San Blas, Madrid"],3:["Lope de Vega","P.M. Emperador Fernando, Alcalá de Henares"],4:["Torrejón Five Play","Pab. Jorge Garbajosa, Torrejón de Ardoz"],5:["Rivas Atlantis B","Polideportivo Parque Sureste, Rivas"],6:["Rivas Futsal B","Polideportivo Parque Sureste, Rivas"],7:["Malvar","P.M. Luis Amado, Arganda del Rey"],8:["Fusión San Fernando","P.M. Justo Gómez Salto, San Fernando de Henares"],9:["Diagonal C","P.M. El Nido, Parla"],10:["Juncal B","P.M. Nuria Fernández, Torrejón de Ardoz"],11:["Sporting Morata","P.M. Morata de Tajuña"],12:["Limones 5 B","P.M. Joaquín Blume, Torrejón de Ardoz"]};
+const R=["03-10-2026|0-3,10-5,8-7,6-9,4-11,12-2","17-10-2026|3-12,5-0,7-10,9-8,11-6,2-4","24-10-2026|3-5,0-7,10-9,8-11,6-2,12-4","07-11-2026|5-12,7-3,9-0,11-10,2-8,4-6","14-11-2026|5-7,3-9,0-11,10-2,8-4,12-6","21-11-2026|7-12,9-5,11-3,2-0,4-10,6-8","28-11-2026|7-9,5-11,3-2,0-4,10-6,12-8","12-12-2026|9-12,11-7,2-5,4-3,6-0,8-10","19-12-2026|9-11,7-2,5-4,3-6,0-8,12-10","16-01-2027|12-11,2-9,4-7,6-5,8-3,10-0","23-01-2027|11-2,9-4,7-6,5-8,3-10,0-12","30-01-2027|3-0,5-10,7-8,9-6,11-4,2-12","06-02-2027|12-3,0-5,10-7,8-9,6-11,4-2","20-02-2027|5-3,7-0,9-10,11-8,2-6,4-12","27-02-2027|12-5,3-7,0-9,10-11,8-2,6-4","06-03-2027|7-5,9-3,11-0,2-10,4-8,6-12","13-03-2027|12-7,5-9,3-11,0-2,10-4,8-6","03-04-2027|9-7,11-5,2-3,4-0,6-10,8-12","10-04-2027|12-9,7-11,5-2,3-4,0-6,10-8","17-04-2027|11-9,2-7,4-5,6-3,8-0,10-12","08-05-2027|11-12,9-2,7-4,5-6,3-8,0-10","29-05-2027|2-11,4-9,6-7,8-5,10-3,12-0"];
+const J=R.map((s,i)=>{const[d,p]=s.split("|");return{n:i+1,d:d.split("-").reverse().join("-"),p:p.split(",").map(x=>x.split("-").map(Number))}});
+let S={u:0,m:{},pl:[]};
+const fix=()=>{S.m=S.m||{};S.pl=S.pl||[]};
+try{S=JSON.parse(localStorage.getItem("juncalB"))||S}catch(e){}fix();
+fetch("datos.json",{cache:"no-store"}).then(r=>r.json()).then(d=>{if((d.u||0)>S.u){S=d;fix();render()}}).catch(()=>{});
+const PH="31e2d5c324500e055afa24eadccfae8b980ae1c8a18db59722f1e228bd092040";
+const E=()=>document.body.classList.contains("edit");
+let tab="cal",jn=1;
+const esc=s=>String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const fmt=d=>new Date(d+"T12:00").toLocaleDateString("es-ES",{weekday:"long",day:"numeric",month:"long"});
+const M=(j,h)=>S.m[j+"_"+h]||{};
+const done=m=>m.h!==undefined&&m.h!==""&&m.a!==undefined&&m.a!=="";
+const bd=id=>{if(!id)return`<span class="b" style="background:#334">💤</span>`;const n=T[id][0].split(" ").map(w=>w[0]).join("").slice(0,2).toUpperCase();return`<span class="b" style="background:${id==ME?'#2f7bff':`hsl(${id*47%360} 55% 38%)`}">${n}</span>`};
+const nm=id=>id?T[id][0]:"Descansa";
+function save(){S.u=Date.now();try{localStorage.setItem("juncalB",JSON.stringify(S))}catch(e){}render()}
+function ed(j,h,f,v){const m=S.m[j+"_"+h]||(S.m[j+"_"+h]={});if(v==="")delete m[f];else m[f]=v;save()}
+function addG(j,h){const n=document.getElementById("sel"+j).value,m=S.m[j+"_"+h]||(S.m[j+"_"+h]={});m.g=m.g||{};m.g[n]=(m.g[n]||0)+1;save()}
+function remG(j,h,i){const m=S.m[j+"_"+h],k=Object.keys(m.g)[i];if(--m.g[k]<1)delete m.g[k];if(!Object.keys(m.g).length)delete m.g;save()}
+function addP(){const v=document.getElementById("np").value.split(/[,\n]/).map(x=>x.trim()).filter(Boolean);v.forEach(n=>{if(!S.pl.includes(n))S.pl.push(n)});S.pl.sort((a,b)=>a.localeCompare(b));save()}
+function delP(i){if(confirm("¿Eliminar a "+S.pl[i]+" de la plantilla?")){S.pl.splice(i,1);save()}}
+function card(r,h,a,i){
+ const m=M(r.n,h),d=m.d||r.d,me=h==ME||a==ME,pl=done(m);
+ if(!h||!a){const id=h||a;return`<div class="card rest ${id==ME?'me':''}" style="--i:${i}"><div class="top"><span>${id==ME?`<b>Jornada ${r.n}</b> · <span class="dt">${fmt(r.d)}</span>`:nm(id)}</span></div><div class="tm">${bd(0)} Descansa esta jornada</div></div>`}
+ let pill="";
+ if(me&&pl){const g=h==ME?m.h-m.a:m.a-m.h;pill=g>0?`<span class="pill w">VICTORIA</span>`:g<0?`<span class="pill l">DERROTA</span>`:`<span class="pill d">EMPATE</span>`}
+ const mid=pl?`${m.h} - ${m.a}`:(m.t||"–:–");
+ const gs=Object.entries(m.g||{}),sc=gs.map(([n,g])=>`${esc(n)}${g>1?` ×${g}`:""}`).join(", ");
+ let x=`<div class="card ${me?'me':''}" style="--i:${i}"><div class="top"><span>${me?`<b>Jornada ${r.n}</b> · <span class="dt">${fmt(d)}${m.t?" · "+m.t+" h":""}</span>`:fmt(d)}</span>${pill}</div>
+ <div class="mt"><div class="tm">${bd(h)}${nm(h)}</div><div class="sc ${pl?'':'t'}">${mid}</div><div class="tm r">${bd(a)}${nm(a)}</div></div>`;
+ if(me){x+=`<div class="meta"><span>📍 <a target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(T[h][1])}">${T[h][1]}</a></span>${!m.t&&!pl?"<span>⏳ Hora por confirmar</span>":""}${sc?`<span>⚽ ${sc}</span>`:""}</div>`}
+ if(E())x+=`<div class="ed"><span>Resultado</span><input class="g" type="number" min="0" value="${esc(m.h)}" onchange="ed(${r.n},${h},'h',this.value)"> - <input class="g" type="number" min="0" value="${esc(m.a)}" onchange="ed(${r.n},${h},'a',this.value)">
+ <input type="date" value="${m.d||r.d}" onchange="ed(${r.n},${h},'d',this.value)"><input type="time" value="${esc(m.t)}" onchange="ed(${r.n},${h},'t',this.value)">
+ ${me?`<div style="width:100%"><span>Goleador:</span> <select id="sel${r.n}">${S.pl.map(p=>`<option>${esc(p)}</option>`).join("")}<option>Propia puerta (rival)</option></select> <button onclick="addG(${r.n},${h})">＋ Gol</button>${S.pl.length?"":' <small class="gap">Añade jugadores en la pestaña Plantilla</small>'}<div class="gc">${gs.map(([n,g],k)=>`<button onclick="remG(${r.n},${h},${k})" title="Quitar un gol">${esc(n)} ×${g} ✕</button>`).join("")}</div></div>`:""}</div>`;
+ x+="</div>";
+ return x}
+const myM=()=>J.map(r=>{const p=r.p.find(q=>q.includes(ME));return{r,h:p[0],a:p[1]}});
+const when=x=>{const m=M(x.r.n,x.h);return new Date((m.d||x.r.d)+"T"+(m.t||"23:59"))};
+function table(){const t={};for(const id in T)t[id]={id,pj:0,g:0,e:0,p:0,gf:0,gc:0};
+ J.forEach(r=>r.p.forEach(([h,a])=>{if(!h||!a)return;const m=M(r.n,h);if(!done(m))return;const x=+m.h,y=+m.a,A=t[h],B=t[a];A.pj++;B.pj++;A.gf+=x;A.gc+=y;B.gf+=y;B.gc+=x;if(x>y){A.g++;B.p++}else if(x<y){B.g++;A.p++}else{A.e++;B.e++}}));
+ return Object.values(t).map(o=>({...o,pts:o.g*3+o.e,dg:o.gf-o.gc})).sort((a,b)=>b.pts-a.pts||b.dg-a.dg||b.gf-a.gf||T[a.id][0].localeCompare(T[b.id][0]))}
+function scorers(){const s={};myM().forEach(x=>Object.entries(M(x.r.n,x.h).g||{}).forEach(([n,g])=>{if(n.startsWith("Propia"))return;(s[n]||(s[n]={n,g:0})).g+=g}));return Object.values(s).sort((a,b)=>b.g-a.g)}
+function hero(){const all=myM().filter(x=>x.h&&x.a),nx=all.find(x=>!done(M(x.r.n,x.h))&&when(x)>=new Date(Date.now()-864e5));
+ if(!nx)return`<h2>Temporada finalizada 🏆</h2><p class="gap">No quedan partidos por jugar.</p>`;
+ const m=M(nx.r.n,nx.h);
+ const fechaTexto = fmt(m.d||nx.r.d) + (m.t ? " · " + m.t + " h" : "");
+ return`<div class="cn" style="font-size:1.1rem;color:var(--ye)">PRÓXIMO PARTIDO · JORNADA ${nx.r.n}</div>
+ <div class="hv"><div>${bd(nx.h)}<div class="cn">${nm(nx.h)}</div></div><div class="cn" style="font-size:2rem">VS</div><div>${bd(nx.a)}<div class="cn">${nm(nx.a)}</div></div></div>
+ <p style="text-align:center;margin-bottom:12px"><span class="dt">${fechaTexto}</span></p>
+ <div class="cd" id="cd" data-t="${when(nx).getTime()}"></div>`}
+function tick(){const e=document.getElementById("cd");if(!e)return;let s=Math.max(0,(+e.dataset.t-Date.now())/1e3|0);const v=[[86400,"días"],[3600,"horas"],[60,"min"],[1,"seg"]];e.innerHTML=v.map(([k,l])=>{const n=s/k|0;s%=k;return`<div><b>${String(n).padStart(2,"0")}</b><span>${l}</span></div>`}).join("")}
+function render(){
+ document.getElementById("hero").innerHTML=hero();tick();
+ const tabs=[["cal","📅 Mi calendario"],["jor","🗓 Jornadas"],["cla","🏆 Clasificación"],["gol","👟 Goleadores"]];if(E())tabs.push(["hor","🕒 Horarios"],["pla","👥 Plantilla"]);
+ document.getElementById("nav").innerHTML=tabs.map(([k,l])=>`<button class="${tab==k?'on':''}" onclick="tab='${k}';render()">${l}</button>`).join("");
+ let h="";
+ if(tab=="cal")h=myM().map((x,i)=>card(x.r,x.h,x.a,i)).join("");
+ if(tab=="jor"){h=`<div class="ch">${J.map(r=>`<button class="${jn==r.n?'on':''}" onclick="jn=${r.n};render()">${r.n}</button>`).join("")}</div>`+J[jn-1].p.map((p,i)=>card(J[jn-1],p[0],p[1],i)).join("")}
+ if(tab=="cla"){h=`<table><tr><th>#</th><th>Equipo</th><th>PJ</th><th>G</th><th>E</th><th>P</th><th>GF</th><th>GC</th><th>DG</th><th>Pts</th></tr>${table().map((t,i)=>`<tr class="${t.id==ME?'me':''}"><td>${i+1}</td><td>${nm(t.id)}</td><td>${t.pj}</td><td>${t.g}</td><td>${t.e}</td><td>${t.p}</td><td>${t.gf}</td><td>${t.gc}</td><td>${t.dg>0?"+":""}${t.dg}</td><td><b>${t.pts}</b></td></tr>`).join("")}</table>`}
+ if(tab=="hor"&&E())h=`<div class="card"><small class="gap">Pon la fecha y la hora de cada partido del Juncal B. Si dejas la hora vacía, se muestra "hora por confirmar".</small></div>`+myM().filter(x=>x.h&&x.a).map(x=>{const m=M(x.r.n,x.h);return`<div class="card" style="display:flex;gap:10px;align-items:center;flex-wrap:wrap"><b class="cn" style="color:var(--ye);font-size:1.2rem;min-width:90px">Jornada ${x.r.n}</b><span style="flex:1;min-width:160px">${nm(x.h)}<br>${nm(x.a)}</span><input type="date" value="${m.d||x.r.d}" onchange="ed(${x.r.n},${x.h},'d',this.value)"><input type="time" value="${esc(m.t)}" onchange="ed(${x.r.n},${x.h},'t',this.value)"></div>`}).join("");
+ if(tab=="pla"&&E())h=`<div class="card"><div class="ed" style="display:flex"><input id="np" style="flex:1;min-width:200px" placeholder="Nombre Apellido (varios separados por coma)"><button onclick="addP()">＋ Añadir</button></div></div>`+(S.pl.map((p,i)=>`<div class="card" style="display:flex;justify-content:space-between;align-items:center"><span>${esc(p)}</span><button onclick="delP(${i})">Eliminar</button></div>`).join("")||'<div class="empty">Aún no hay jugadores.</div>');
+ if(tab=="gol"){const s=scorers(),mx=s[0]?.g||1;h=s.length?s.map((x,i)=>`<div class="gl card" style="--i:${i}"><b class="cn" style="font-size:1.4rem;color:var(--ye)">${i+1}</b><div><div>${esc(x.n)}</div><div class="bar" style="width:${x.g/mx*100}%"></div></div><b class="cn" style="font-size:1.6rem">${x.g}</b></div>`).join(""):`<div class="empty">⚽ Aún no hay goles registrados.</div>`}
+ document.getElementById("app").innerHTML=h}
+async function sha(t){const b=await crypto.subtle.digest("SHA-256",new TextEncoder().encode(t));return[...new Uint8Array(b)].map(x=>x.toString(16).padStart(2,"0")).join("")}
+async function unlock(){const p=prompt("Contraseña de entrenador");if(!p)return;let ok=false;try{ok=await sha(p)===PH}catch(e){}if(ok){try{sessionStorage.setItem("adm","1")}catch(e){}setEdit(true)}else alert("Contraseña incorrecta")}
+function setEdit(on){document.body.classList.toggle("edit",on);if(!on){try{sessionStorage.removeItem("adm")}catch(e){}if(tab=="pla"||tab=="hor")tab="cal"}render()}
+let ck=0,ct;document.getElementById("tt").onclick=()=>{clearTimeout(ct);ct=setTimeout(()=>ck=0,900);if(++ck>=5){ck=0;unlock()}};
+function exportD(){const a=document.createElement("a");a.href=URL.createObjectURL(new Blob([JSON.stringify(S,null,1)],{type:"application/json"}));a.download="datos.json";a.click()}
+function importD(i){const f=i.files[0];if(!f)return;f.text().then(t=>{S=JSON.parse(t);fix();S.u=Date.now();try{localStorage.setItem("juncalB",JSON.stringify(S))}catch(e){}render()})}
+function resetD(){if(confirm("¿Borrar los cambios guardados en este navegador?")){try{localStorage.removeItem("juncalB")}catch(e){}S={u:0,m:{}};location.reload()}}
+if(location.hash=="#admin")unlock();try{if(sessionStorage.getItem("adm"))document.body.classList.add("edit")}catch(e){}
+render();setInterval(tick,1000);
+</script>
+</body>
+</html>
+
+```

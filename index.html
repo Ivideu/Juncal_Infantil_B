@@ -75,6 +75,7 @@ select{font:inherit;background:var(--bg);color:var(--tx);border:1px solid var(--
 .g2 button{font-size:1.05rem;font-weight:700;padding:12px 16px;flex:1;min-width:140px}.g2 button:first-child{background:var(--ac);border-color:var(--ac)}
 .gl2{display:inline-flex;align-items:center;gap:8px}.gl2 .mi{font:800 1.2rem 'Barlow Condensed';color:var(--ye);min-width:36px;text-align:right}.gl2 .gn{color:var(--tx);font-weight:600;font-size:1.05rem}
 .gls{width:100%;display:flex;flex-direction:column;gap:6px;margin-top:4px}.lg>div{margin-top:6px}
+.loc{text-align:center;margin:0 0 16px}.loc a{color:#fff;font-weight:600;text-decoration:underline;text-underline-offset:3px}.loc a:hover{color:var(--ye)}
 .dot{animation:bl 1.2s infinite}@keyframes bl{50%{opacity:.25}}
 @media(max-width:560px){.mt{grid-template-columns:1fr auto 1fr}.tm{flex-direction:column;text-align:center!important;gap:4px;font-size:.85rem}.sc{min-width:70px;font-size:1.5rem}.b{width:38px;height:38px}}
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
@@ -154,6 +155,7 @@ function table(){const t={};for(const id in T)t[id]={id,pj:0,g:0,e:0,p:0,gf:0,gc
  J.forEach(r=>r.p.forEach(([h,a])=>{if(!h||!a)return;const m=M(r.n,h);if(!done(m))return;const x=+m.h,y=+m.a,A=t[h],B=t[a];A.pj++;B.pj++;A.gf+=x;A.gc+=y;B.gf+=y;B.gc+=x;if(x>y){A.g++;B.p++}else if(x<y){B.g++;A.p++}else{A.e++;B.e++}}));
  return Object.values(t).map(o=>({...o,pts:o.g*3+o.e,dg:o.gf-o.gc})).sort((a,b)=>b.pts-a.pts||b.dg-a.dg||b.gf-a.gf||T[a.id][0].localeCompare(T[b.id][0]))}
 function scorers(){const s={};myM().forEach(x=>Object.entries(M(x.r.n,x.h).g||{}).forEach(([n,g])=>{if(n.startsWith("Propia"))return;(s[n]||(s[n]={n,g:0})).g+=g}));return Object.values(s).sort((a,b)=>b.g-a.g)}
+const loc=h=>`📍 <a target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(T[h][1])}">${T[h][1]}</a>`;
 const HALF=25*60000;
 function evs(m){const g=m.g||{},gm=m.gm||{},a=[];Object.keys(g).forEach(n=>{const t=(gm[n]||[]).slice(0,g[n]);t.forEach(x=>a.push([x,n]));for(let i=t.length;i<g[n];i++)a.push([999,n])});return a.sort((x,y)=>x[0]-y[0]).map(([t,n])=>({t:t<999?t:0,n}))}
 const shirt=(num,c)=>`<svg viewBox="0 0 48 44" width="32" height="29" aria-hidden="true"><path d="M14 3L4 9 1 20l9 3 2-5v23h24V18l2 5 9-3-3-11-10-6c-1 4-5 6-10 6S15 7 14 3z" fill="${c}" stroke="#0a1a4d" stroke-width="1.6" stroke-linejoin="round"/><text x="24" y="32" text-anchor="middle" font-size="17" font-weight="800" fill="#fff" font-family="Barlow Condensed,sans-serif">${esc(num)}</text></svg>`;
@@ -182,7 +184,7 @@ function liveHero(x){const m=M(x.r.n,x.h),c=m.c||{ph:0},ph=c.ph||0,ok=done(m),ev
  const B=(a,l)=>`<button onclick="clk(${x.r.n},${x.h},'${a}')">${l}</button>`,G=(s,d,l)=>`<button onclick="lg(${x.r.n},${x.h},'${s}',${d})">${l}</button>`;
  let ad="";if(E())ad=`<div class="ctl">${ph==0?B("go1","▶ Iniciar 1ª parte"):""}${(ph==1||ph==2)?(c.run?B("pause","⏸ Pausar"):B("resume","▶ Reanudar")):""}${ph==1?B("ht","🔔 Fin 1ª parte"):""}${ph=="HT"?B("go2","▶ Iniciar 2ª parte"):""}${ph==2?B("ft","🏁 Final"):""}${B("reset","↺ Reiniciar")}</div>
  <div class="ctl"><select id="lsel" onchange="lastP=this.value" style="width:100%;max-width:340px">${S.pl.concat(["Propia puerta (rival)"]).map(p=>`<option value="${esc(p)}" ${p==lastP?"selected":""}>${pn(p).num?pn(p).num+" · ":""}${esc(pn(p).name)}</option>`).join("")}</select></div><div class="ctl g2">${G("me",1,"＋ Gol "+T[ME][0])}${G("rv",1,"＋ Gol rival")}</div><div class="ctl">${G("me",-1,"− "+T[ME][0])}${G("rv",-1,"− rival")}</div>`;
- return`<div class="live"><div class="lt">${L} · JORNADA ${x.r.n}</div>
+ return`<div class="live"><div class="lt">${L} · JORNADA ${x.r.n}</div><p class="loc" style="margin:8px 0 0">${loc(x.h)}</p>
  <div class="lb"><div>${bd(x.h)}<div class="cn">${nm(x.h)}</div></div><div class="big">${ok?m.h:0} - ${ok?m.a:0}</div><div>${bd(x.a)}<div class="cn">${nm(x.a)}</div></div></div>
  <div class="lclk" id="lc" data-ph="${ph}" data-run="${c.run?1:0}" data-base="${c.base||0}" data-since="${c.since||0}">00:00</div>
  <div class="pb"><div><i id="p1"></i></div><div><i id="p2"></i></div></div>
@@ -200,6 +202,7 @@ function hero(){const lv=liveM();lvOn=!!lv;if(lv)return liveHero(lv);const all=m
  return`<div class="cn" style="font-size:1.1rem;color:var(--ye)">PRÓXIMO PARTIDO · JORNADA ${nx.r.n}</div>
  <div class="hv"><div>${bd(nx.h)}<div class="cn">${nm(nx.h)}</div></div><div class="cn" style="font-size:2rem">VS</div><div>${bd(nx.a)}<div class="cn">${nm(nx.a)}</div></div></div>
  <p style="text-align:center;margin-bottom:18px"><span class="dt dtb">${fmt(m.d||nx.r.d)} · ${m.t?m.t+" h":"hora por confirmar"}</span></p>
+ <p class="loc">${loc(nx.h)}</p>
  <div class="cd" id="cd" data-t="${when(nx).getTime()}"></div>${E()?`<p style="text-align:center;margin-top:14px"><button onclick="startLive(${nx.r.n},${nx.h})">📡 Iniciar directo ahora</button></p>`:""}`}
 function tick(){tickLive();const e=document.getElementById("cd");if(!e)return;let s=Math.max(0,(+e.dataset.t-Date.now())/1e3|0);const v=[[86400,"días"],[3600,"horas"],[60,"min"],[1,"seg"]];e.innerHTML=v.map(([k,l])=>{const n=s/k|0;s%=k;return`<div><b>${String(n).padStart(2,"0")}</b><span>${l}</span></div>`}).join("")}
 function render(){

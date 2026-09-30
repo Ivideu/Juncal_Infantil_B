@@ -26,8 +26,16 @@ button:hover{border-color:var(--ac)}button:focus-visible,input:focus-visible{out
 .hv .cn{font-size:clamp(1.1rem,3.5vw,1.8rem);font-weight:700;max-width:220px}
 .cd{display:flex;gap:10px;justify-content:center}.cd div{background:#0006;border-radius:12px;padding:8px 14px;min-width:64px;text-align:center}
 .cd b{font:800 2rem 'Barlow Condensed';display:block;line-height:1}.cd span{font-size:.75rem;color:var(--mu)}
-nav{display:flex;gap:8px;overflow-x:auto;padding:6px 0 14px;position:sticky;top:0;background:linear-gradient(var(--bg) 80%,transparent);z-index:5}
+nav{display:flex;flex-wrap:wrap;gap:8px;padding:6px 0 14px;position:sticky;top:0;background:linear-gradient(var(--bg) 80%,transparent);z-index:5}
 nav button{white-space:nowrap;font-weight:600}
+nav button span:first-child{margin-right:6px}
+@media(max-width:640px){
+ nav{display:grid;grid-template-columns:repeat(var(--n,4),1fr);gap:6px}
+ nav.x{position:static}
+ nav button{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;padding:8px 2px;min-width:0;white-space:normal;text-align:center;line-height:1.15;font-size:clamp(.62rem,3vw,.8rem)}
+ nav button span:first-child{margin:0;font-size:1.3rem}
+}
+@media(max-width:340px){nav{grid-template-columns:repeat(2,1fr)}}
 .b{display:inline-grid;place-items:center;width:44px;height:44px;border-radius:50%;font:800 1rem 'Barlow Condensed';color:#fff;flex:none;border:2px solid #fff3}
 .card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px 16px;margin-bottom:12px;animation:in .5s both;animation-delay:calc(var(--i)*30ms)}
 @keyframes in{from{opacity:0;transform:translateY(10px)}}
@@ -208,7 +216,8 @@ function tick(){tickLive();const e=document.getElementById("cd");if(!e)return;le
 function render(){
  document.getElementById("hero").innerHTML=hero();tick();
  const tabs=[["cal","📅 Mi calendario"],["jor","🗓 Jornadas"],["cla","🏆 Clasificación"],["gol","👟 Goleadores"]];if(E())tabs.push(["hor","🕒 Horarios"],["pla","👥 Plantilla"]);
- document.getElementById("nav").innerHTML=tabs.map(([k,l])=>`<button class="${tab==k?'on':''}" onclick="tab='${k}';render()">${l}</button>`).join("");
+ const nv=document.getElementById("nav"),big=tabs.length>4;nv.style.setProperty("--n",big?3:4);nv.className=big?"x":"";
+ nv.innerHTML=tabs.map(([k,l])=>{const[ic,...tx]=l.split(" ");return`<button class="${tab==k?'on':''}" onclick="tab='${k}';render()"><span>${ic}</span><span>${tx.join(" ")}</span></button>`}).join("");
  let h="";
  if(tab=="cal")h=myM().map((x,i)=>card(x.r,x.h,x.a,i)).join("");
  if(tab=="jor"){h=`<div class="ch">${J.map(r=>`<button class="${jn==r.n?'on':''}" onclick="jn=${r.n};render()">${r.n}</button>`).join("")}</div>`+J[jn-1].p.map((p,i)=>card(J[jn-1],p[0],p[1],i)).join("")}

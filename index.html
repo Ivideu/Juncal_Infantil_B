@@ -271,7 +271,27 @@ function render(){
  if(tab=="gol"){const s=scorers(),mx=s[0]?.g||1;h=s.length?s.map((x,i)=>`<div class="gl card" style="--i:${i}"><b class="cn" style="font-size:1.4rem;color:var(--ye)">${i+1}</b><div><div>${esc(pn(x.n).name)}</div><div class="bar" style="width:${x.g/mx*100}%"></div></div><b class="cn" style="font-size:1.6rem">${x.g}</b></div>`).join(""):`<div class="empty">⚽ Aún no hay goles registrados.</div>`}
  document.getElementById("app").innerHTML=h}
 async function sha(t){const b=await crypto.subtle.digest("SHA-256",new TextEncoder().encode(t));return[...new Uint8Array(b)].map(x=>x.toString(16).padStart(2,"0")).join("")}
-async function unlock(){let p=prompt("Contraseña de entrenador");if(!p)return;p=p.trim();let ok=false,er=false;try{ok=FB?!!(await fbLogin(p)):API?(await(await fetch(API,{method:"POST",body:JSON.stringify({pw:p})})).json()).ok:await sha(p)===PH}catch(e){er=true}if(ok){PW=p;try{sessionStorage.setItem("adm","1");sessionStorage.setItem("pw",p)}catch(e){}setEdit(true)}else alert(er?(FB?"No se pudo conectar con Firebase. Revisa tu conexión.":"No se pudo conectar con Google Sheets. Revisa la URL de API y que la implementación tenga acceso «Cualquier usuario»."):"Contraseña incorrecta")}
+/*async function unlock(){let p=prompt("Contraseña de entrenador");if(!p)return;p=p.trim();let ok=false,er=false;try{ok=FB?!!(await fbLogin(p)):API?(await(await fetch(API,{method:"POST",body:JSON.stringify({pw:p})})).json()).ok:await sha(p)===PH}catch(e){er=true}if(ok){PW=p;try{sessionStorage.setItem("adm","1");sessionStorage.setItem("pw",p)}catch(e){}setEdit(true)}else alert(er?(FB?"No se pudo conectar con Firebase. Revisa tu conexión.":"No se pudo conectar con Google Sheets. Revisa la URL de API y que la implementación tenga acceso «Cualquier usuario»."):"Contraseña incorrecta")}*/API
+
+async function unlock(){
+  let p=prompt("Contraseña de entrenador");
+  if(!p)return;
+  p=p.trim();
+  let ok=false, er=false;
+  try{
+    ok = FB ? !!(await fbLogin(p)) : API ? (await(await fetch(API,{method:"POST",body:JSON.stringify({pw:p})})).json()).ok : await sha(p) === PH;
+  }catch(e){
+    er = true;
+  }
+  if(ok){
+    PW=p;
+    try{sessionStorage.setItem("adm","1");sessionStorage.setItem("pw",p)}catch(e){}
+    setEdit(true);
+  }else{
+    alert(er ? "Error de conexión con Firebase." : "Contraseña incorrecta o usuario no registrado en Firebase Authentication.");
+  }
+}
+
 function setEdit(on){document.body.classList.contains("edit",on);if(!on){try{sessionStorage.removeItem("adm")}catch(e){}if(tab=="pla"||tab=="hor")tab="cal"}render()}
 let ck=0,ct;document.getElementById("tt").onclick=()=>{clearTimeout(ct);ct=setTimeout(()=>ck=0,900);if(++ck>=5){ck=0;unlock()}};
 async function publish(){const j=JSON.stringify(S,null,1);try{await navigator.clipboard.writeText(j)}catch(e){}

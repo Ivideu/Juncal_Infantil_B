@@ -136,7 +136,7 @@ const T={2:["Aston C","P.M. San Blas, Madrid"],3:["Lope de Vega","P.M. Emperador
 const R=["03-10-2026|0-3,10-5,8-7,6-9,4-11,12-2","17-10-2026|3-12,5-0,7-10,9-8,11-6,2-4","24-10-2026|3-5,0-7,10-9,8-11,6-2,12-4","07-11-2026|5-12,7-3,9-0,11-10,2-8,4-6","14-11-2026|5-7,3-9,0-11,10-2,8-4,12-6","21-11-2026|7-12,9-5,11-3,2-0,4-10,6-8","28-11-2026|7-9,5-11,3-2,0-4,10-6,12-8","12-12-2026|9-12,11-7,2-5,4-3,6-0,8-10","19-12-2026|9-11,7-2,5-4,3-6,0-8,12-10","16-01-2027|12-11,2-9,4-7,6-5,8-3,10-0","23-01-2027|11-2,9-4,7-6,5-8,3-10,0-12","30-01-2027|3-0,5-10,7-8,9-6,11-4,2-12","06-02-2027|12-3,0-5,10-7,8-9,6-11,4-2","20-02-2027|5-3,7-0,9-10,11-8,2-6,4-12","27-02-2027|12-5,3-7,0-9,10-11,8-2,6-4","06-03-2027|7-5,9-3,11-0,2-10,4-8,6-12","13-03-2027|12-7,5-9,3-11,0-2,10-4,8-6","03-04-2027|9-7,11-5,2-3,4-0,6-10,8-12","10-04-2027|12-9,7-11,5-2,3-4,0-6,10-8","17-04-2027|11-9,2-7,4-5,6-3,8-0,10-12","08-05-2027|11-12,9-2,7-4,5-6,3-8,0-10","29-05-2027|2-11,4-9,6-7,8-5,10-3,12-0"];
 const J=R.map((s,i)=>{const[d,p]=s.split("|");return{n:i+1,d:d.split("-").reverse().join("-"),p:p.split(",").map(x=>x.split("-").map(Number))}});
 const API=""; // 
-const FB="https://juncal-f0b64-default-rtdb.europe-west1.firebasedatabase.app",FBKEY="AIzaSyDXqBUkie30z_Cmyj__ayhzGYyYxZMrB3Q",FBMAIL="ivanprofeinfantil@gmail.com"; // Firebase en tiempo real configurado
+const FB="https://juncal-f0b64-default-rtdb.europe-west1.firebasedatabase.app",FBKEY="AIzaSyDXqBUkie30z_Cmyj__ayhzGYyYxZMrB3Q",FBMAIL="ivanblasco81@hotmail.com"; // Firebase en tiempo real configurado
 let S={u:0,m:{},pl:[]};
 const fix=()=>{S.m=S.m||{};S.pl=S.pl||[];S.dn=S.dn||{}};
 let CACHE=null;try{CACHE=JSON.parse(localStorage.getItem("juncalB"))}catch(e){}

@@ -274,20 +274,28 @@ async function sha(t){const b=await crypto.subtle.digest("SHA-256",new TextEncod
 /*async function unlock(){let p=prompt("Contraseña de entrenador");if(!p)return;p=p.trim();let ok=false,er=false;try{ok=FB?!!(await fbLogin(p)):API?(await(await fetch(API,{method:"POST",body:JSON.stringify({pw:p})})).json()).ok:await sha(p)===PH}catch(e){er=true}if(ok){PW=p;try{sessionStorage.setItem("adm","1");sessionStorage.setItem("pw",p)}catch(e){}setEdit(true)}else alert(er?(FB?"No se pudo conectar con Firebase. Revisa tu conexión.":"No se pudo conectar con Google Sheets. Revisa la URL de API y que la implementación tenga acceso «Cualquier usuario»."):"Contraseña incorrecta")}*/API
 
 async function unlock(){
-  let p=prompt("Contraseña de entrenador");
-  if(!p)return;
-  p=p.trim();
-  let ok=false, er=false;
-  try{
+  let p = prompt("Contraseña de entrenador");
+  if (!p) return;
+  p = p.trim();
+  let ok = false, er = false;
+  try {
     ok = FB ? !!(await fbLogin(p)) : API ? (await(await fetch(API,{method:"POST",body:JSON.stringify({pw:p})})).json()).ok : await sha(p) === PH;
-  }catch(e){
+  } catch(e) {
     er = true;
   }
-  if(ok){
-    PW=p;
-    try{sessionStorage.setItem("adm","1");sessionStorage.setItem("pw",p)}catch(e){}
-    setEdit(true);
-  }else{
+  if (ok) {
+    PW = p;
+    try { 
+      sessionStorage.setItem("adm", "1"); 
+      sessionStorage.setItem("pw", p); 
+    } catch(e) {}
+    
+    // Activa la clase edit en el body inmediatamente
+    document.body.classList.add("edit");
+    
+    // Fuerza la recarga completa de la interfaz para mostrar herramientas de admin
+    render();
+  } else {
     alert(er ? "Error de conexión con Firebase." : "Contraseña incorrecta o usuario no registrado en Firebase Authentication.");
   }
 }

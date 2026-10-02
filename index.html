@@ -300,7 +300,18 @@ async function unlock(){
   }
 }
 
-function setEdit(on){document.body.classList.contains("edit",on);if(!on){try{sessionStorage.removeItem("adm")}catch(e){}if(tab=="pla"||tab=="hor")tab="cal"}render()}
+/*function setEdit(on){document.body.classList.contains("edit",on);if(!on){try{sessionStorage.removeItem("adm")}catch(e){}if(tab=="pla"||tab=="hor")tab="cal"}render()}*/
+function setEdit(on){
+  if(on){ 
+    document.body.classList.add("edit"); 
+  } else { 
+    document.body.classList.remove("edit"); 
+    try{ sessionStorage.removeItem("adm"); sessionStorage.removeItem("pw"); }catch(e){} 
+    PW = "";
+    if(tab=="pla"||tab=="hor") tab="cal"; 
+  }
+  render();
+}
 let ck=0,ct;document.getElementById("tt").onclick=()=>{clearTimeout(ct);ct=setTimeout(()=>ck=0,900);if(++ck>=5){ck=0;unlock()}};
 async function publish(){const j=JSON.stringify(S,null,1);try{await navigator.clipboard.writeText(j)}catch(e){}
  if(!location.hostname.endsWith("github.io")){exportD();return alert("Se ha descargado datos.json. Súbelo a la raíz de tu repositorio de GitHub.")}

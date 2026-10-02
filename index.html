@@ -87,7 +87,6 @@ select{font:inherit;background:var(--bg);color:var(--tx);border:1px solid var(--
 .fsb{font-weight:600}
 #hero.fs{--k:1;position:fixed;inset:0;z-index:100;margin:0;border:0;border-radius:0;padding:calc(env(safe-area-inset-top,0px) + 6px) 18px 6px;background:radial-gradient(900px 500px at 50% 0,#1d3a8a,#050b1f);overflow:hidden;display:flex}
 #hero.fs.adm{--k:.74}
-#hero.fs:after{display:none}
 #hero.fs.rot{inset:auto;top:0;left:100%;width:100vh;width:100dvh;height:100vw;transform-origin:0 0;transform:rotate(90deg)}
 #hero.fs .live{height:100%;width:100%;min-height:0;display:flex;flex-direction:column;justify-content:center;align-items:center}
 #hero.fs .lt{font-size:calc(var(--u)*6*var(--k))}
@@ -136,14 +135,26 @@ const ME=10;
 const T={2:["Aston C","P.M. San Blas, Madrid"],3:["Lope de Vega","P.M. Emperador Fernando, Alcalá de Henares"],4:["Torrejón Five Play","Pab. Jorge Garbajosa, Torrejón de Ardoz"],5:["Rivas Atlantis B","Polideportivo Parque Sureste, Rivas"],6:["Rivas Futsal B","Polideportivo Parque Sureste, Rivas"],7:["Malvar","P.M. Luis Amado, Arganda del Rey"],8:["Fusión San Fernando","P.M. Justo Gómez Salto, San Fernando de Henares"],9:["Diagonal C","P.M. El Nido, Parla"],10:["Juncal B","P.M. Nuria Fernández, Torrejón de Ardoz"],11:["Sporting Morata","P.M. Morata de Tajuña"],12:["Limones 5 B","P.M. Joaquín Blume, Torrejón de Ardoz"]};
 const R=["03-10-2026|0-3,10-5,8-7,6-9,4-11,12-2","17-10-2026|3-12,5-0,7-10,9-8,11-6,2-4","24-10-2026|3-5,0-7,10-9,8-11,6-2,12-4","07-11-2026|5-12,7-3,9-0,11-10,2-8,4-6","14-11-2026|5-7,3-9,0-11,10-2,8-4,12-6","21-11-2026|7-12,9-5,11-3,2-0,4-10,6-8","28-11-2026|7-9,5-11,3-2,0-4,10-6,12-8","12-12-2026|9-12,11-7,2-5,4-3,6-0,8-10","19-12-2026|9-11,7-2,5-4,3-6,0-8,12-10","16-01-2027|12-11,2-9,4-7,6-5,8-3,10-0","23-01-2027|11-2,9-4,7-6,5-8,3-10,0-12","30-01-2027|3-0,5-10,7-8,9-6,11-4,2-12","06-02-2027|12-3,0-5,10-7,8-9,6-11,4-2","20-02-2027|5-3,7-0,9-10,11-8,2-6,4-12","27-02-2027|12-5,3-7,0-9,10-11,8-2,6-4","06-03-2027|7-5,9-3,11-0,2-10,4-8,6-12","13-03-2027|12-7,5-9,3-11,0-2,10-4,8-6","03-04-2027|9-7,11-5,2-3,4-0,6-10,8-12","10-04-2027|12-9,7-11,5-2,3-4,0-6,10-8","17-04-2027|11-9,2-7,4-5,6-3,8-0,10-12","08-05-2027|11-12,9-2,7-4,5-6,3-8,0-10","29-05-2027|2-11,4-9,6-7,8-5,10-3,12-0"];
 const J=R.map((s,i)=>{const[d,p]=s.split("|");return{n:i+1,d:d.split("-").reverse().join("-"),p:p.split(",").map(x=>x.split("-").map(Number))}});
-const API="https://script.google.com/macros/s/AKfycbyvbG_xjz4rK71vzFs9w1cmroxRmMbL8EDWPoAUKbmVmWNJ0pajyhKoBQC_veUbHdgG/exec"; // ← pega aquí la URL de tu Apps Script (termina en /exec)
+const API=""; // 
+const FB="https://juncal-f0b64-default-rtdb.europe-west1.firebasedatabase.app",FBKEY="AIzaSyDXqBUkie30z_Cmyj__ayhzGYyYxZMrB3Q",FBMAIL="ivanprofeinfantil@gmail.com"; // Firebase en tiempo real configurado
 let S={u:0,m:{},pl:[]};
 const fix=()=>{S.m=S.m||{};S.pl=S.pl||[];S.dn=S.dn||{}};
 let CACHE=null;try{CACHE=JSON.parse(localStorage.getItem("juncalB"))}catch(e){}
-if(!API&&CACHE)S=CACHE;fix();let loading=!!API;
+if(!API&&CACHE)S=CACHE;fix();let loading=!!(API||FB);
 let PW="",pt;const setSt=t=>{document.getElementById("st").textContent=t};
-fetch(API?API+"?v="+Date.now():"datos.json?v="+Date.now(),{cache:"no-store"}).then(r=>r.json()).then(d=>{if(API||(d.u||0)>S.u){S=d;fix()}loading=false;render()}).catch(()=>{if(API&&CACHE){S=CACHE;fix()}loading=false;render()});
-function push(){clearTimeout(pt);setSt("Guardando…");pt=setTimeout(async()=>{try{const r=await(await fetch(API,{method:"POST",body:JSON.stringify({pw:PW,data:S})})).json();setSt(r.ok?"✓ Guardado en Google Sheets":"⚠ Contraseña incorrecta")}catch(e){setSt("⚠ Error al guardar")}},300)}
+if(!FB)fetch(API?API+"?v="+Date.now():"datos.json?v="+Date.now(),{cache:"no-store"}).then(r=>r.json()).then(d=>{if(API||(d.u||0)>S.u){S=d;fix()}loading=false;render()}).catch(()=>{if(API&&CACHE){S=CACHE;fix()}loading=false;render()});
+let idt="",exp=0,lastRaw="";
+async function fbLogin(pw){const r=await fetch("https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key="+FBKEY,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({email:FBMAIL,password:pw,returnSecureToken:true})}),d=await r.json();if(!d.idToken)return false;idt=d.idToken;exp=Date.now()+(d.expiresIn-120)*1000;return true}
+async function fbTok(){if(idt&&Date.now()<exp)return idt;if(!await fbLogin(PW))throw 0;return idt}
+if(FB){const l=document.createElement("link");l.rel="preconnect";l.href=FB;document.head.appendChild(l);
+ const es=new EventSource(FB+"/juncal.json");
+ es.addEventListener("put",ev=>{let m,n;try{m=JSON.parse(ev.data);if(m.path!=="/"||m.data===lastRaw)return;n=m.data==null?{u:0,m:{},pl:[]}:JSON.parse(m.data)}catch(e){return}
+  if(!loading&&E()&&(n.u||0)<S.u)return;
+  S=n;fix();loading=false;render()});
+ setTimeout(()=>{if(loading){const h=document.getElementById("hero");h.style.display="";h.innerHTML='<div class="empty">Sin conexión con la base de datos…</div>'}},8000)}
+function push(){clearTimeout(pt);setSt("Guardando…");pt=setTimeout(async()=>{try{
+ if(FB){const t=await fbTok(),raw=JSON.stringify(S);lastRaw=raw;const r=await fetch(FB+"/juncal.json?auth="+t,{method:"PUT",body:JSON.stringify(raw)});setSt(r.ok?"✓ Guardado":"⚠ Sin permiso para guardar")}
+ else{const r=await(await fetch(API,{method:"POST",body:JSON.stringify({pw:PW,data:S})})).json();setSt(r.ok?"✓ Guardado en Google Sheets":"⚠ Contraseña incorrecta")}}catch(e){setSt("⚠ Error al guardar. Sal y vuelve a entrar con tu contraseña")}},FB?150:300)}
 const PH="31e2d5c324500e055afa24eadccfae8b980ae1c8a18db59722f1e228bd092040";
 const E=()=>document.body.classList.contains("edit");
 let tab="cal",jn=1;
@@ -153,7 +164,7 @@ const M=(j,h)=>S.m[j+"_"+h]||{};
 const done=m=>m.h!==undefined&&m.h!==""&&m.a!==undefined&&m.a!=="";
 const bd=id=>{if(!id)return`<span class="b" style="background:#334">💤</span>`;const n=T[id][0].split(" ").map(w=>w[0]).join("").slice(0,2).toUpperCase();return`<span class="b" style="background:${id==ME?'#2f7bff':`hsl(${id*47%360} 55% 38%)`}">${n}</span>`};
 const nm=id=>id?T[id][0]:"Descansa";
-function save(){S.u=Date.now();try{localStorage.setItem("juncalB",JSON.stringify(S))}catch(e){}if(API&&PW)push();render()}
+function save(){S.u=Date.now();try{localStorage.setItem("juncalB",JSON.stringify(S))}catch(e){}if((API||FB)&&PW)push();render()}
 function ed(j,h,f,v){const m=S.m[j+"_"+h]||(S.m[j+"_"+h]={});if(v==="")delete m[f];else m[f]=v;save()}
 function addG(j,h){const n=document.getElementById("sel"+j).value,m=S.m[j+"_"+h]||(S.m[j+"_"+h]={});m.g=m.g||{};m.g[n]=(m.g[n]||0)+1;const mi=document.getElementById("min"+j).value;if(mi!=="")addMin(m,n,+mi);save()}
 function eg(j,h,k){const m=S.m[j+"_"+h],e=evs(m)[k];if(!e)return;const q=prompt("Minuto del gol de "+pn(e.n).name+" (número). Escribe 0 para borrar el gol:",e.t||"");if(q===null||q.trim()==="")return;const t=Math.floor(+q);if(isNaN(t)||t<0)return;const a=(m.gm&&m.gm[e.n])||[];
@@ -161,7 +172,7 @@ function eg(j,h,k){const m=S.m[j+"_"+h],e=evs(m)[k];if(!e)return;const q=prompt(
  else{if(e.t){const i=a.indexOf(e.t);if(i>-1)a[i]=t}else addMin(m,e.n,t);if(m.gm&&m.gm[e.n])m.gm[e.n].sort((x,y)=>x-y)}
  save()}
 function remG(j,h,i){const m=S.m[j+"_"+h],k=Object.keys(m.g)[i];if(--m.g[k]<1)delete m.g[k];if(!Object.keys(m.g).length)delete m.g;trimMin(m,k);save()}
-function addP(){document.getElementById("np").value.split(/[,\n]/).map(x=>x.trim()).filter(Boolean).forEach(x=>{const r=x.match(/^#?(\d{1,2})[\s.\-–]+(.+)$/),n=r?r[2].trim():x;if(!S.pl.includes(n))S.pl.push(n);if(r)S.dn[n]=r[1]});S.pl.sort((a,b)=>a.localeCompare(b));save()}
+function addP(){document.getElementById("np").value.split(/[,\n]/).map(x=>x.trim()).filter(Boolean).forEach(x=>{const r=x.match(/^#?(\d{1,2})[\s.\-–]+(.+)$/),n=(r?r[2]:x).trim().replace(/[.$#\[\]\/]/g,"");if(!S.pl.includes(n))S.pl.push(n);if(r)S.dn[n]=r[1]});S.pl.sort((a,b)=>a.localeCompare(b));save()}
 function setDn(i,v){const n=S.pl[i];if(v==="")delete S.dn[n];else S.dn[n]=String(v);save()}
 function delP(i){if(confirm("¿Eliminar a "+S.pl[i]+" de la plantilla?")){delete S.dn[S.pl[i]];S.pl.splice(i,1);save()}}
 function card(r,h,a,i){
@@ -245,7 +256,8 @@ function hero(){const lv=liveM();lvOn=!!lv;if(lv)return liveHero(lv);const all=m
  <div class="cd" id="cd" data-t="${when(nx).getTime()}"></div>${E()?`<p style="text-align:center;margin-top:14px"><button onclick="startLive(${nx.r.n},${nx.h})">📡 Iniciar directo ahora</button></p>`:""}`}
 function tick(){tickLive();const e=document.getElementById("cd");if(!e)return;let s=Math.max(0,(+e.dataset.t-Date.now())/1e3|0);const v=[[86400,"días"],[3600,"horas"],[60,"min"],[1,"seg"]];e.innerHTML=v.map(([k,l])=>{const n=s/k|0;s%=k;return`<div><b>${String(n).padStart(2,"0")}</b><span>${l}</span></div>`}).join("")}
 function render(){
- if(loading){document.getElementById("hero").innerHTML='<div class="empty">⏳ Cargando datos…</div>';document.getElementById("nav").innerHTML="";document.getElementById("app").innerHTML="";return}
+ if(loading){document.getElementById("hero").style.display="none";document.getElementById("nav").innerHTML="";document.getElementById("app").innerHTML="";return}
+ document.getElementById("hero").style.display="";
  document.getElementById("hero").innerHTML=hero();fit();tick();
  const tabs=[["cal","📅 Mi calendario"],["jor","🗓 Jornadas"],["cla","🏆 Clasificación"],["gol","👟 Goleadores"]];if(E())tabs.push(["hor","🕒 Horarios"],["pla","👥 Plantilla"]);
  const nv=document.getElementById("nav"),big=tabs.length>4;nv.style.setProperty("--n",big?3:4);nv.className=big?"x":"";
@@ -259,8 +271,8 @@ function render(){
  if(tab=="gol"){const s=scorers(),mx=s[0]?.g||1;h=s.length?s.map((x,i)=>`<div class="gl card" style="--i:${i}"><b class="cn" style="font-size:1.4rem;color:var(--ye)">${i+1}</b><div><div>${esc(pn(x.n).name)}</div><div class="bar" style="width:${x.g/mx*100}%"></div></div><b class="cn" style="font-size:1.6rem">${x.g}</b></div>`).join(""):`<div class="empty">⚽ Aún no hay goles registrados.</div>`}
  document.getElementById("app").innerHTML=h}
 async function sha(t){const b=await crypto.subtle.digest("SHA-256",new TextEncoder().encode(t));return[...new Uint8Array(b)].map(x=>x.toString(16).padStart(2,"0")).join("")}
-async function unlock(){let p=prompt("Contraseña de entrenador");if(!p)return;p=p.trim();let ok=false,er=false;try{ok=API?(await(await fetch(API,{method:"POST",body:JSON.stringify({pw:p})})).json()).ok:await sha(p)===PH}catch(e){er=true}if(ok){PW=p;try{sessionStorage.setItem("adm","1");sessionStorage.setItem("pw",p)}catch(e){}setEdit(true)}else alert(er?"No se pudo conectar con Google Sheets. Revisa la URL de API y que la implementación tenga acceso «Cualquier usuario».":"Contraseña incorrecta")}
-function setEdit(on){document.body.classList.toggle("edit",on);if(!on){try{sessionStorage.removeItem("adm")}catch(e){}if(tab=="pla"||tab=="hor")tab="cal"}render()}
+async function unlock(){let p=prompt("Contraseña de entrenador");if(!p)return;p=p.trim();let ok=false,er=false;try{ok=FB?!!(await fbLogin(p)):API?(await(await fetch(API,{method:"POST",body:JSON.stringify({pw:p})})).json()).ok:await sha(p)===PH}catch(e){er=true}if(ok){PW=p;try{sessionStorage.setItem("adm","1");sessionStorage.setItem("pw",p)}catch(e){}setEdit(true)}else alert(er?(FB?"No se pudo conectar con Firebase. Revisa tu conexión.":"No se pudo conectar con Google Sheets. Revisa la URL de API y que la implementación tenga acceso «Cualquier usuario»."):"Contraseña incorrecta")}
+function setEdit(on){document.body.classList.contains("edit",on);if(!on){try{sessionStorage.removeItem("adm")}catch(e){}if(tab=="pla"||tab=="hor")tab="cal"}render()}
 let ck=0,ct;document.getElementById("tt").onclick=()=>{clearTimeout(ct);ct=setTimeout(()=>ck=0,900);if(++ck>=5){ck=0;unlock()}};
 async function publish(){const j=JSON.stringify(S,null,1);try{await navigator.clipboard.writeText(j)}catch(e){}
  if(!location.hostname.endsWith("github.io")){exportD();return alert("Se ha descargado datos.json. Súbelo a la raíz de tu repositorio de GitHub.")}
@@ -272,9 +284,9 @@ function exportD(){const a=document.createElement("a");a.href=URL.createObjectUR
 function importD(i){const f=i.files[0];if(!f)return;f.text().then(t=>{S=JSON.parse(t);fix();save()})}
 function resetD(){if(confirm("¿Borrar los cambios guardados en este navegador?")){try{localStorage.removeItem("juncalB")}catch(e){}S={u:0,m:{}};location.reload()}}
 if(location.hash=="#admin")unlock();try{if(sessionStorage.getItem("adm")){PW=sessionStorage.getItem("pw")||"";document.body.classList.add("edit")}}catch(e){}
-if(API)document.querySelector("#adm .on").remove();
+if(API||FB)document.querySelector("#adm .on").remove();
 render();setInterval(tick,1000);
-let pc=0;setInterval(()=>{pc++;if(API&&!E()&&(liveM()||pc%12==0))fetch(API+"?v="+Date.now(),{cache:"no-store"}).then(r=>r.json()).then(d=>{if(JSON.stringify(d)!==JSON.stringify(S)){S=d;fix();render()}}).catch(()=>{})},5000);
+let pc=0;setInterval(()=>{pc++;if(API&&!FB&&!E()&&(liveM()||pc%12==0))fetch(API+"?v="+Date.now(),{cache:"no-store"}).then(r=>r.json()).then(d=>{if(JSON.stringify(d)!==JSON.stringify(S)){S=d;fix();render()}}).catch(()=>{})},5000);
 </script>
 </body>
 </html>

@@ -41,7 +41,7 @@ button:hover{border-color:var(--ac);transform:translateY(-1px)}button:focus-visi
 .hv .cn{font-size:clamp(1.1rem,3.5vw,1.8rem);font-weight:700;max-width:220px}
 .cd{display:flex;gap:10px;justify-content:center}.cd div{background:#0a1f5a66;border-radius:12px;padding:8px 14px;min-width:64px;text-align:center}
 .cd b{font:800 2rem 'Barlow Condensed';display:block;line-height:1}.cd span{font-size:.75rem;color:var(--mu)}
-nav{display:flex;flex-wrap:wrap;gap:8px;padding:6px 0 14px;position:sticky;top:0;/**background:linear-gradient(#eef4ffee 80%,transparent)**/;z-index:5}
+nav{display:flex;flex-wrap:wrap;gap:8px;padding:6px 0 14px;position:sticky;top:0;background:linear-gradient(#eef4ffee 80%,transparent);z-index:5}
 nav button{white-space:nowrap;font-weight:600}
 nav button span:first-child{margin-right:6px}
 @media(max-width:640px){
@@ -175,7 +175,7 @@ function push(){clearTimeout(pt);setSt("Guardando…");pt=setTimeout(async()=>{t
  else{const r=await(await fetch(API,{method:"POST",body:JSON.stringify({pw:PW,data:S})})).json();setSt(r.ok?"✓ Guardado en Google Sheets":"⚠ Contraseña incorrecta")}}catch(e){setSt("⚠ Error al guardar. Sal y vuelve a entrar con tu contraseña")}},FB?150:300)}
 const PH="31e2d5c324500e055afa24eadccfae8b980ae1c8a18db59722f1e228bd092040";
 const E=()=>document.body.classList.contains("edit");
-let tab="cal",jn=1;
+let tab="cal",jn=1,jnAuto=true;
 const esc=s=>String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 const fmt=d=>{const s=new Date(d+"T12:00").toLocaleDateString("es-ES",{weekday:"long",day:"numeric",month:"long"});return s[0].toUpperCase()+s.slice(1)};
 const M=(j,h)=>S.m[j+"_"+h]||{};
@@ -264,7 +264,8 @@ function tickLive(){const l=!!liveM();if(l!==lvOn){render();return}
  const e=document.getElementById("lc");if(!e)return;const d=e.dataset,el=Math.max(0,+d.base+(d.run=="1"?Date.now()-d.since:0)),s=el/1e3|0,pc=Math.min(100,el/HALF*100);
  e.textContent=String(s/60|0).padStart(2,"0")+":"+String(s%60).padStart(2,"0");
  document.getElementById("p1").style.width=(d.ph=="1"?pc:d.ph=="0"?0:100)+"%";document.getElementById("p2").style.width=(d.ph=="2"?pc:d.ph=="FT"?100:0)+"%"}
-function hero(){const lv=liveM();lvOn=!!lv;if(lv)return liveHero(lv);const all=myM().filter(x=>x.h&&x.a),nx=all.find(x=>{const m=M(x.r.n,x.h);return!done(m)&&!(m.c&&m.c.fin)&&when(x)>=new Date(Date.now()-864e5)});
+function nextM(){const lv=liveM();if(lv)return lv;return myM().filter(x=>x.h&&x.a).find(x=>{const m=M(x.r.n,x.h);return!done(m)&&!(m.c&&m.c.fin)&&when(x)>=new Date(Date.now()-864e5)})}
+function hero(){const lv=liveM();lvOn=!!lv;if(lv)return liveHero(lv);const nx=nextM();
  if(!nx)return`<h2>Temporada finalizada 🏆</h2><p class="gap">No quedan partidos por jugar.</p>`;
  const m=M(nx.r.n,nx.h);
  return`<div class="cn" style="font-size:1.1rem;color:var(--ye)">PRÓXIMO PARTIDO · JORNADA ${nx.r.n}</div>
@@ -277,12 +278,13 @@ function render(){
  if(loading){document.getElementById("hero").style.display="none";document.getElementById("nav").innerHTML="";document.getElementById("app").innerHTML="";return}
  document.getElementById("hero").style.display="";
  document.getElementById("hero").innerHTML=hero();fit();tick();
+ if(jnAuto){const nx=nextM();jn=nx?nx.r.n:J.length}
  const tabs=[["cal","📅 Mi calendario"],["jor","🗓 Jornadas"],["cla","🏆 Clasificación"],["gol","👟 Goleadores"]];if(E())tabs.push(["hor","🕒 Horarios"],["pla","👥 Plantilla"]);
  const nv=document.getElementById("nav"),big=tabs.length>4;nv.style.setProperty("--n",big?3:4);nv.className=big?"x":"";
- nv.innerHTML=tabs.map(([k,l])=>{const[ic,...tx]=l.split(" ");return`<button class="${tab==k?'on':''}" onclick="tab='${k}';render()"><span>${ic}</span><span>${tx.join(" ")}</span></button>`}).join("");
+ nv.innerHTML=tabs.map(([k,l])=>{const[ic,...tx]=l.split(" ");return`<button class="${tab==k?'on':''}" onclick="tab='${k}';if(tab=='jor')jnAuto=true;render()"><span>${ic}</span><span>${tx.join(" ")}</span></button>`}).join("");
  let h="";
  if(tab=="cal")h=myM().map((x,i)=>card(x.r,x.h,x.a,i)).join("");
- if(tab=="jor"){h=`<div class="ch">${J.map(r=>`<button class="${jn==r.n?'on':''}" onclick="jn=${r.n};render()">${r.n}</button>`).join("")}</div>`+J[jn-1].p.map((p,i)=>card(J[jn-1],p[0],p[1],i)).join("")}
+ if(tab=="jor"){h=`<div class="ch">${J.map(r=>`<button class="${jn==r.n?'on':''}" onclick="jn=${r.n};jnAuto=false;render()">${r.n}</button>`).join("")}</div>`+J[jn-1].p.map((p,i)=>card(J[jn-1],p[0],p[1],i)).join("")}
  if(tab=="cla"){h=`<table><tr><th>#</th><th>Equipo</th><th>PJ</th><th>G</th><th>E</th><th>P</th><th>GF</th><th>GC</th><th>DG</th><th>Pts</th></tr>${table().map((t,i)=>`<tr class="${t.id==ME?'me':''}"><td>${i+1}</td><td>${nm(t.id)}</td><td>${t.pj}</td><td>${t.g}</td><td>${t.e}</td><td>${t.p}</td><td>${t.gf}</td><td>${t.gc}</td><td>${t.dg>0?"+":""}${t.dg}</td><td><b>${t.pts}</b></td></tr>`).join("")}</table>`}
  if(tab=="hor"&&E())h=`<div class="card"><small class="gap">Pon la fecha y la hora de cada partido del Juncal B. Si dejas la hora vacía, se muestra "hora por confirmar".</small></div>`+myM().filter(x=>x.h&&x.a).map(x=>{const m=M(x.r.n,x.h);return`<div class="card" style="display:flex;gap:10px;align-items:center;flex-wrap:wrap"><b class="cn" style="color:var(--ye2);font-size:1.2rem;min-width:90px">Jornada ${x.r.n}</b><span style="flex:1;min-width:160px">${nm(x.h)} - ${nm(x.a)}</span><input type="date" value="${m.d||x.r.d}" onchange="ed(${x.r.n},${x.h},'d',this.value)"><input type="time" value="${esc(m.t)}" onchange="ed(${x.r.n},${x.h},'t',this.value)"></div>`}).join("");
  if(tab=="pla"&&E())h=`<div class="card"><div class="ed" style="display:flex"><input id="np" style="flex:1;min-width:200px" placeholder="Nº y nombre, ej: 7 Ana Ruiz (varios separados por coma)"><button onclick="addP()">＋ Añadir</button></div></div>`+(S.pl.map((p,i)=>`<div class="card" style="display:flex;justify-content:space-between;align-items:center"><span style="display:flex;align-items:center;gap:10px">${shirt(pn(p).num,"#2f7bff")}${esc(pn(p).name)}</span><span style="display:flex;gap:8px;align-items:center"><input class="g" type="number" min="0" max="99" placeholder="Nº" value="${esc(pn(p).num)}" onchange="setDn(${i},this.value)"><button onclick="delP(${i})">Eliminar</button></span></div>`).join("")||'<div class="empty">Aún no hay jugadores.</div>');

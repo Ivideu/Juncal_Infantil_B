@@ -1,7 +1,7 @@
 {
-  "name": "Tu Quiniela",
-  "short_name": "Quiniela",
-  "description": "Pronósticos, clasificación y escrutinio de la quiniela",
+  "name": "Juncal_Inf.B",
+  "short_name": "Juncal_Inf.B",
+  "description": "Juncal_Infantil.B",
   "lang": "es",
   "start_url": "/",
   "scope": "/",

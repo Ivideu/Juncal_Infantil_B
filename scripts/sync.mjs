@@ -45,9 +45,13 @@ async function rffm(n) {
   const url = `https://www.rffm.es/api/results?idGroup=${GRUPO}&round=${n}`;
   for (let i = 0; i < 3; i++) {
     try {
-      const r = await fetch(url, { headers: { "User-Agent": "Mozilla/5.0", Accept: "application/json" },
+      const r = await fetch(url, { headers: {
+          "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0 Safari/537.36",
+          Accept: "application/json, text/plain, */*", "Accept-Language": "es-ES,es;q=0.9",
+          Referer: `https://www.rffm.es/competicion/resultados-y-jornadas?grupo=${GRUPO}&jornada=${n}` },
                                    signal: AbortSignal.timeout(15000) });
-      if (r.ok) { const d = await r.json(); if (Array.isArray(d.partidos)) return d; }
+      if (r.ok) { const d = await r.json(); if (d && Array.isArray(d.partidos)) return d;
+        if (d == null) { console.warn("RFFM jornada", n, "respuesta vacía, reintento…"); } }
       else console.warn("RFFM jornada", n, "HTTP", r.status);
     } catch (e) { console.warn("RFFM jornada", n, String(e)); }
     await sleep(2000 * (i + 1));
@@ -85,6 +89,7 @@ async function leerRFFM() {
     console.error("No se pudo leer ninguna jornada de la RFFM (¿cambió la API?)");
     process.exit(1);
   }
+  console.log("Jornadas leídas:", rondas.length - fallos, "de", rondas.length, "· partidos:", out.length);
   return out;
 }
 

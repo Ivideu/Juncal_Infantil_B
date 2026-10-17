@@ -23,4 +23,4 @@ jobs:
           FBKEY: ${{ secrets.FBKEY }}
           FBMAIL: ${{ secrets.FBMAIL }}
           FBPASS: ${{ secrets.FBPASS }}
-          SOLO_CERRADAS: "0"     # cambia a "1" para guardar resultados solo cuando el acta esté cerrada
+          SOLO_CERRADAS: "1"     # "1" = solo guarda resultados con el acta cerrada; "0" = en cuanto aparezcan

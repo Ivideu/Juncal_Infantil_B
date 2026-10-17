@@ -157,7 +157,7 @@ select{font:inherit;background:var(--bg);color:var(--tx);border:1px solid var(--
 <script>
 (function(){const b=document.getElementById("bg");for(let i=0;i<9;i++){const e=document.createElement("b");e.textContent="⚽";e.style.cssText="left:"+((i*11+Math.random()*8)%100)+"%;font-size:"+(22+Math.random()*34)+"px;animation-duration:"+(18+Math.random()*20)+"s;animation-delay:-"+(Math.random()*30)+"s";b.appendChild(e)}})();
 const ME=10;
-const T={2:["Aston C","P.M. San Blas, Madrid"],3:["Lope de Vega","P.M. Emperador Fernando, Alcalá de Henares"],4:["Torrejón Five Play","Pab. Jorge Garbajosa, Torrejón de Ardoz"],5:["Rivas Atlantis B","Polideportivo Parque Sureste, Rivas"],6:["Rivas Futsal B","Polideportivo Parque Sureste, Rivas"],7:["Malvar","P.M. Luis Amado, Arganda del Rey"],8:["Fusión San Fernando","P.M. Justo Gómez Salto, San Fernando de Henares"],9:["Diagonal C","P.M. El Nido, Parla"],10:["Juncal B","P.M. Nuria Fernández, Torrejón de Ardoz"],11:["Sporting Morata","P.M. Morata de Tajuña"],12:["Limones 5 B","P.M. Joaquín Blume, Torrejón de Ardoz"]};
+const T={2:["Aston C","P.M. San Blas, Madrid"],3:["Lope de Vega","P.M. Emperador Fernando, Alcalá de Henares"],4:["Torrejón Five Play","Pab. Jorge Garbajosa, Torrejón de Ardoz"],5:["Rivas Atlantis B","Polideportivo Parque Sureste, Rivas"],6:["Rivas Futsal B","Polideportivo Parque Sureste, Rivas"],7:["Malvar","C.D. Príncipe Felipe, C/ San Sebastián, 6 y 8, Arganda del Rey"],8:["Fusión San Fernando","P.M. Justo Gómez Salto, San Fernando de Henares"],9:["Diagonal C","P.M. El Nido, Parla"],10:["Juncal B","P.M. Nuria Fernández, Torrejón de Ardoz"],11:["Sporting Morata","P.M. Morata de Tajuña"],12:["Limones 5 B","P.M. Joaquín Blume, Torrejón de Ardoz"]};
 const R=["03-10-2026|0-3,10-5,8-7,6-9,4-11,12-2","17-10-2026|3-12,5-0,7-10,9-8,11-6,2-4","24-10-2026|3-5,0-7,10-9,8-11,6-2,12-4","07-11-2026|5-12,7-3,9-0,11-10,2-8,4-6","14-11-2026|5-7,3-9,0-11,10-2,8-4,12-6","21-11-2026|7-12,9-5,11-3,2-0,4-10,6-8","28-11-2026|7-9,5-11,3-2,0-4,10-6,12-8","12-12-2026|9-12,11-7,2-5,4-3,6-0,8-10","19-12-2026|9-11,7-2,5-4,3-6,0-8,12-10","16-01-2027|12-11,2-9,4-7,6-5,8-3,10-0","23-01-2027|11-2,9-4,7-6,5-8,3-10,0-12","30-01-2027|3-0,5-10,7-8,9-6,11-4,2-12","06-02-2027|12-3,0-5,10-7,8-9,6-11,4-2","20-02-2027|5-3,7-0,9-10,11-8,2-6,4-12","27-02-2027|12-5,3-7,0-9,10-11,8-2,6-4","06-03-2027|7-5,9-3,11-0,2-10,4-8,6-12","13-03-2027|12-7,5-9,3-11,0-2,10-4,8-6","03-04-2027|9-7,11-5,2-3,4-0,6-10,8-12","10-04-2027|12-9,7-11,5-2,3-4,0-6,10-8","17-04-2027|11-9,2-7,4-5,6-3,8-0,10-12","08-05-2027|11-12,9-2,7-4,5-6,3-8,0-10","29-05-2027|2-11,4-9,6-7,8-5,10-3,12-0"];
 const J=R.map((s,i)=>{const[d,p]=s.split("|");return{n:i+1,d:d.split("-").reverse().join("-"),p:p.split(",").map(x=>x.split("-").map(Number))}});
 const API=""; // 
@@ -209,7 +209,7 @@ function card(r,h,a,i){
  const gs=Object.entries(m.g||{}),sc=evs(m).map(gh).join("");
  let x=`<div class="card ${me?'me':''} ${rc}" style="--i:${i}"><div class="top"><span>${me?`<b>Jornada ${r.n}</b> · <span class="dt">${fmt(d)}${m.t?" · "+m.t+" h":""}</span>`:fmt(d)}</span>${pill}</div>
  <div class="mt"><div class="tm">${bd(h)}${nm(h)}</div><div class="sc ${pl?'':'t'}">${mid}</div><div class="tm r">${bd(a)}${nm(a)}</div></div>`;
- if(me){x+=`<div class="meta"><span>📍 <a target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(T[h][1])}">${T[h][1]}</a></span>${!m.t&&!pl?"<span>⏳ Hora por confirmar</span>":""}${sc?`<div class="gls">${sc}</div>`:""}</div>`}
+ if(me){x+=`<div class="meta"><span>${loc(h,m)}</span>${!m.t&&!pl?"<span>⏳ Hora por confirmar</span>":""}${sc?`<div class="gls">${sc}</div>`:""}</div>`}
  if(E())x+=`<div class="ed"><span>Resultado</span><input class="g" type="number" min="0" value="${esc(m.h)}" onchange="ed(${r.n},${h},'h',this.value)"> - <input class="g" type="number" min="0" value="${esc(m.a)}" onchange="ed(${r.n},${h},'a',this.value)">
  <input type="date" value="${m.d||r.d}" onchange="ed(${r.n},${h},'d',this.value)"><input type="time" value="${esc(m.t)}" onchange="ed(${r.n},${h},'t',this.value)">
  ${me?`<div style="width:100%"><span>Goleador:</span> <select id="sel${r.n}">${S.pl.map(p=>`<option value="${esc(p)}">${pn(p).num?pn(p).num+" · ":""}${esc(pn(p).name)}</option>`).join("")}<option>Propia puerta (rival)</option></select> <input class="g" id="min${r.n}" type="number" min="1" max="60" placeholder="Min"> <button onclick="addG(${r.n},${h})">＋ Gol</button>${S.pl.length?"":' <small class="gap">Añade jugadores en la pestaña Plantilla</small>'}<div class="gc">${evs(m).map((e,k)=>`<button onclick="eg(${r.n},${h},${k})" title="Cambiar el minuto o borrar el gol">${e.t?e.t+"' ":"–' "}${esc(pn(e.n).name)} ✎</button>`).join("")}</div></div>`:""}</div>`;
@@ -224,7 +224,10 @@ function table(){const t={};for(const id in T)t[id]={id,pj:0,g:0,e:0,p:0,gf:0,gc
  J.forEach(r=>r.p.forEach(([h,a])=>{if(!h||!a)return;const m=M(r.n,h);if(!done(m))return;const x=+m.h,y=+m.a,A=t[h],B=t[a];A.pj++;B.pj++;A.gf+=x;A.gc+=y;B.gf+=y;B.gc+=x;if(x>y){A.g++;B.p++}else if(x<y){B.g++;A.p++}else{A.e++;B.e++}}));
  return Object.values(t).map(o=>({...o,pts:o.g*3+o.e,dg:o.gf-o.gc})).sort((a,b)=>b.pts-a.pts||b.dg-a.dg||b.gf-a.gf||T[a.id][0].localeCompare(T[b.id][0]))}
 function scorers(){const s={};myM().forEach(x=>Object.entries(M(x.r.n,x.h).g||{}).forEach(([n,g])=>{if(n.startsWith("Propia"))return;(s[n]||(s[n]={n,g:0})).g+=g}));return Object.values(s).sort((a,b)=>b.g-a.g)}
-const loc=h=>`📍 <a target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(T[h][1])}">${T[h][1]}</a>`;
+const PAV={"PRINCIPE FELIPE":"C.D. Príncipe Felipe, C/ San Sebastián, 6 y 8, Arganda del Rey"};
+const noacc=s=>s.normalize("NFD").replace(/[\u0300-\u036f]/g,"").toUpperCase();
+const ven=(h,m)=>{const p=m&&m.p;if(!p)return T[h][1];const k=Object.keys(PAV).find(k=>noacc(p).includes(k));return k?PAV[k]:p.toLowerCase().replace(/(^|[\s.\-(])([a-zñ])/g,(_,a,b)=>a+b.toUpperCase())};
+const loc=(h,m)=>{const v=ven(h,m);return`📍 <a target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(v)}">${esc(v)}</a>`};
 let FS=false,wl=null;
 function leaveFS(){FS=false;try{screen.orientation.unlock()}catch(e){}try{if(document.fullscreenElement)document.exitFullscreen()}catch(e){}if(wl){try{wl.release()}catch(e){}wl=null}}
 function fit(){const h=document.getElementById("hero");if(FS&&!lvOn)leaveFS();h.classList.toggle("fs",FS);h.classList.toggle("adm",FS&&E());h.classList.toggle("rot",FS&&innerHeight>innerWidth);document.body.style.overflow=FS?"hidden":"";h.style.setProperty("--u",h.clientHeight/100+"px")}
@@ -259,7 +262,7 @@ function liveHero(x){const m=M(x.r.n,x.h),c=m.c||{ph:0},ph=c.ph||0,ok=done(m),ev
  const B=(a,l)=>`<button onclick="clk(${x.r.n},${x.h},'${a}')">${l}</button>`,G=(s,d,l)=>`<button onclick="lg(${x.r.n},${x.h},'${s}',${d})">${l}</button>`;
  let ad="";if(E())ad=`<div class="ctl">${ph==0?B("go1","▶ Iniciar 1ª parte"):""}${(ph==1||ph==2)?(c.run?B("pause","⏸ Pausar"):B("resume","▶ Reanudar")):""}${ph==1?B("ht","🔔 Fin 1ª parte"):""}${ph=="HT"?B("go2","▶ Iniciar 2ª parte"):""}${ph==2?B("ft","🏁 Final"):""}${B("reset","↺ Reiniciar")}</div>
  <div class="ctl"><select id="lsel" onchange="lastP=this.value" style="width:100%;max-width:340px">${S.pl.concat(["Propia puerta (rival)"]).map(p=>`<option value="${esc(p)}" ${p==lastP?"selected":""}>${pn(p).num?pn(p).num+" · ":""}${esc(pn(p).name)}</option>`).join("")}</select></div><div class="ctl g2">${G("me",1,"＋ Gol "+T[ME][0])}${G("rv",1,"＋ Gol rival")}</div><div class="ctl">${G("me",-1,"− "+T[ME][0])}${G("rv",-1,"− rival")}</div>`;
- return`<div class="live"><div class="lt">${L} · JORNADA ${x.r.n}</div><p class="loc" style="margin:8px 0 0">${loc(x.h)}</p>
+ return`<div class="live"><div class="lt">${L} · JORNADA ${x.r.n}</div><p class="loc" style="margin:8px 0 0">${loc(x.h,m)}</p>
  <div class="lb"><div>${bd(x.h)}<div class="cn">${nm(x.h)}</div></div><div class="big">${ok?m.h:0} - ${ok?m.a:0}</div><div>${bd(x.a)}<div class="cn">${nm(x.a)}</div></div></div>
  <div class="lclk" id="lc" data-ph="${ph}" data-run="${c.run?1:0}" data-base="${c.base||0}" data-since="${c.since||0}">00:00</div>
  <div class="pb"><div><i id="p1"></i></div><div><i id="p2"></i></div></div>
@@ -278,7 +281,7 @@ function hero(){const lv=liveM();lvOn=!!lv;if(lv)return liveHero(lv);const nx=ne
  return`<div class="cn" style="font-size:1.1rem;color:var(--ye)">PRÓXIMO PARTIDO · JORNADA ${nx.r.n}</div>
  <div class="hv"><div>${bd(nx.h)}<div class="cn">${nm(nx.h)}</div></div><div class="cn" style="font-size:2rem">VS</div><div>${bd(nx.a)}<div class="cn">${nm(nx.a)}</div></div></div>
  <p style="text-align:center;margin-bottom:18px"><span class="dt dtb">${fmt(m.d||nx.r.d)} · ${m.t?m.t+" h":"hora por confirmar"}</span></p>
- <p class="loc">${loc(nx.h)}</p>
+ <p class="loc">${loc(nx.h,m)}</p>
  <div class="cd" id="cd" data-t="${when(nx).getTime()}"></div>${E()?`<p style="text-align:center;margin-top:14px"><button onclick="startLive(${nx.r.n},${nx.h})">📡 Iniciar directo ahora</button></p>`:""}`}
 function tick(){tickLive();const e=document.getElementById("cd");if(!e)return;let s=Math.max(0,(+e.dataset.t-Date.now())/1e3|0);const v=[[86400,"días"],[3600,"horas"],[60,"min"],[1,"seg"]];e.innerHTML=v.map(([k,l])=>{const n=s/k|0;s%=k;return`<div><b>${String(n).padStart(2,"0")}</b><span>${l}</span></div>`}).join("")}
 function render(){

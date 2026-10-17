@@ -1,0 +1,26 @@
+name: Sync resultados RFFM
+on:
+  schedule:
+    - cron: "15 6-22 * * 1-5"    # entre semana: cada hora, al minuto 15
+    - cron: "15,45 6-22 * * 0,6" # sábados y domingos: cada 30 minutos (:15 y :45)
+    # El script solo actúa de 8:00 a 23:59 hora de Madrid (la hora de las cron es UTC)
+  workflow_dispatch:           # ejecución manual = revisión completa de las 22 jornadas
+concurrency:
+  group: sync-rffm
+  cancel-in-progress: false
+permissions:
+  contents: read
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 20 }
+      - run: node scripts/sync.mjs
+        env:
+          FBKEY: ${{ secrets.FBKEY }}
+          FBMAIL: ${{ secrets.FBMAIL }}
+          FBPASS: ${{ secrets.FBPASS }}
+          SOLO_CERRADAS: "0"     # cambia a "1" para guardar resultados solo cuando el acta esté cerrada

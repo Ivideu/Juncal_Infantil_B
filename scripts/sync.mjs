@@ -79,6 +79,10 @@ async function leerRFFM() {
       }
       const fecha = iso(p.fecha), hora = (p.hora || "").slice(0, 5);
       const jugado = p.partido_en_juego !== "1" && fecha && fecha <= hoyISO && (!SOLO_CERRADAS || p.acta_cerrada === "1");
+      if (fecha && hora && fecha === hoyISO && new Date(`${fecha}T${hora}:00Z`) < hoy - 90 * 6e4 &&
+          (!jugado || num(p.Goles_casa) === null))
+        console.log("Sin resultado aún:", p.Nombre_equipo_local, "-", p.Nombre_equipo_visitante,
+          "| acta_cerrada=" + p.acta_cerrada, "| goles=" + p.Goles_casa + "-" + p.Goles_visitante, "| en_juego=" + p.partido_en_juego);
       out.push({ h, a, fecha, hora, campo: limpiaCampo(p.campojuego),
                  gl: jugado ? num(p.Goles_casa) : null,
                  gv: jugado ? num(p.Goles_visitante) : null });

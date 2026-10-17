@@ -91,6 +91,11 @@ td:nth-child(2),th:nth-child(2){text-align:left}
 tr.me td{background:#2f7bff26;font-weight:700}
 .gap{color:var(--mu)}
 .ch{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px}.ch button{padding:6px 11px;min-width:42px}
+.jsel{display:flex;align-items:center;justify-content:center;gap:8px;margin:0 auto 16px;max-width:420px}
+.jsel select{flex:1;min-width:0;appearance:none;-webkit-appearance:none;font:700 1rem Barlow,system-ui,sans-serif;color:var(--tx);background:#fff url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'><path d='M1 1l5 5 5-5' fill='none' stroke='%232f7bff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/></svg>") no-repeat right 14px center/12px;border:2px solid var(--ac);border-radius:12px;padding:10px 38px 10px 16px;text-align:center;text-align-last:center;cursor:pointer;box-shadow:0 4px 18px #2f7bff29}
+.jsel button{flex:none;width:44px;height:44px;padding:0;font-size:1.5rem;line-height:1;font-weight:700;border-radius:12px}
+.jsel button:disabled{opacity:.35;cursor:default;transform:none}
+.jsel select:focus-visible{outline:2px solid var(--ac);outline-offset:2px}
 .bar{height:10px;border-radius:9px;background:linear-gradient(90deg,var(--ac),var(--ye));transition:width 1s}
 .gl{display:grid;grid-template-columns:30px 1fr 40px;gap:12px;align-items:center;margin-bottom:12px}
 .empty{text-align:center;color:var(--mu);padding:40px 0}
@@ -285,6 +290,8 @@ function hero(){const lv=liveM();lvOn=!!lv;if(lv)return liveHero(lv);const nx=ne
  <p class="loc">${loc(nx.h,m)}</p>
  <div class="cd" id="cd" data-t="${when(nx).getTime()}"></div>${E()?`<p style="text-align:center;margin-top:14px"><button onclick="startLive(${nx.r.n},${nx.h})">📡 Iniciar directo ahora</button></p>`:""}`}
 function tick(){tickLive();const e=document.getElementById("cd");if(!e)return;let s=Math.max(0,(+e.dataset.t-Date.now())/1e3|0);const v=[[86400,"días"],[3600,"horas"],[60,"min"],[1,"seg"]];e.innerHTML=v.map(([k,l])=>{const n=s/k|0;s%=k;return`<div><b>${String(n).padStart(2,"0")}</b><span>${l}</span></div>`}).join("")}
+function jsel(){const c=(nextM()||{r:{n:0}}).r.n;
+ return`<div class="jsel"><button aria-label="Jornada anterior" ${jn<=1?"disabled":""} onclick="jn=${jn-1};jnAuto=false;render()">‹</button><select aria-label="Elegir jornada" onchange="jn=+this.value;jnAuto=false;render()">${J.map(r=>`<option value="${r.n}" ${jn==r.n?"selected":""}>Jornada ${r.n} · ${r.d.slice(8)}/${r.d.slice(5,7)}${r.n==c?" · actual":""}</option>`).join("")}</select><button aria-label="Jornada siguiente" ${jn>=J.length?"disabled":""} onclick="jn=${jn+1};jnAuto=false;render()">›</button></div>`}
 function render(){
  if(loading){document.getElementById("hero").style.display="none";document.getElementById("nav").innerHTML="";document.getElementById("app").innerHTML="";return}
  document.getElementById("hero").style.display="";
@@ -295,7 +302,7 @@ function render(){
  nv.innerHTML=tabs.map(([k,l])=>{const[ic,...tx]=l.split(" ");return`<button class="${tab==k?'on':''}" onclick="tab='${k}';if(tab=='jor')jnAuto=true;render()"><span>${ic}</span><span>${tx.join(" ")}</span></button>`}).join("");
  let h="";
  if(tab=="cal")h=myM().map((x,i)=>card(x.r,x.h,x.a,i)).join("");
- if(tab=="jor"){h=`<div class="ch">${J.map(r=>`<button class="${jn==r.n?'on':''}" onclick="jn=${r.n};jnAuto=false;render()">${r.n}</button>`).join("")}</div>`+[...J[jn-1].p].sort((x,y)=>y.includes(ME)-x.includes(ME)).map((p,i)=>card(J[jn-1],p[0],p[1],i)).join("")}
+ if(tab=="jor"){h=jsel()+[...J[jn-1].p].sort((x,y)=>y.includes(ME)-x.includes(ME)).map((p,i)=>card(J[jn-1],p[0],p[1],i)).join("")}
  if(tab=="cla"){h=`<table><tr><th>#</th><th>Equipo</th><th>PJ</th><th>G</th><th>E</th><th>P</th><th>GF</th><th>GC</th><th>DG</th><th>Pts</th></tr>${table().map((t,i)=>`<tr class="${t.id==ME?'me':''}"><td>${i+1}</td><td>${nm(t.id)}</td><td>${t.pj}</td><td>${t.g}</td><td>${t.e}</td><td>${t.p}</td><td>${t.gf}</td><td>${t.gc}</td><td>${t.dg>0?"+":""}${t.dg}</td><td><b>${t.pts}</b></td></tr>`).join("")}</table>`}
  if(tab=="hor"&&E())h=`<div class="card"><small class="gap">Pon la fecha y la hora de cada partido del Juncal B. Si dejas la hora vacía, se muestra "hora por confirmar".</small></div>`+myM().filter(x=>x.h&&x.a).map(x=>{const m=M(x.r.n,x.h);return`<div class="card" style="display:flex;gap:10px;align-items:center;flex-wrap:wrap"><b class="cn" style="color:var(--ye2);font-size:1.2rem;min-width:90px">Jornada ${x.r.n}</b><span style="flex:1;min-width:160px">${nm(x.h)} - ${nm(x.a)}</span><input type="date" value="${m.d||x.r.d}" onchange="ed(${x.r.n},${x.h},'d',this.value)"><input type="time" value="${esc(m.t)}" onchange="ed(${x.r.n},${x.h},'t',this.value)"></div>`}).join("");
  if(tab=="pla"&&E())h=`<div class="card"><div class="ed" style="display:flex"><input id="np" style="flex:1;min-width:200px" placeholder="Nº y nombre, ej: 7 Ana Ruiz (varios separados por coma)"><button onclick="addP()">＋ Añadir</button></div></div>`+(S.pl.map((p,i)=>`<div class="card" style="display:flex;justify-content:space-between;align-items:center"><span style="display:flex;align-items:center;gap:10px">${shirt(pn(p).num,"#2f7bff")}${esc(pn(p).name)}</span><span style="display:flex;gap:8px;align-items:center"><input class="g" type="number" min="0" max="99" placeholder="Nº" value="${esc(pn(p).num)}" onchange="setDn(${i},this.value)"><button onclick="delP(${i})">Eliminar</button></span></div>`).join("")||'<div class="empty">Aún no hay jugadores.</div>');

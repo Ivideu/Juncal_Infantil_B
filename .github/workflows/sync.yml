@@ -2,7 +2,7 @@ name: Sync resultados RFFM
 on:
   schedule:
     - cron: "15 6-22 * * 1-5"    # entre semana: cada hora, al minuto 15
-    - cron: "15,45 6-22 * * 0,6" # sábados y domingos: cada 30 minutos (:15 y :45)
+    - cron: "*/15 6-22 * * 0,6"  # sábados y domingos: cada 15 minutos
     # El script solo actúa de 8:00 a 23:59 hora de Madrid (la hora de las cron es UTC)
   workflow_dispatch:           # ejecución manual = revisión completa de las 22 jornadas
 concurrency:

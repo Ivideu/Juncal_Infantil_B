@@ -149,6 +149,7 @@ select{font:inherit;background:var(--bg);color:var(--tx);border:1px solid var(--
  <span id="st" class="gap"></span>
  <button onclick="setEdit(false)">🔓 Salir</button>
  <button class="on" onclick="publish()">🚀 Publicar en GitHub</button>
+<button onclick="syncNow()">🔄 Actualizar ahora</button>
  <button onclick="exportD()">⬇ Descargar datos.json</button>
  <button onclick="document.getElementById('imp').click()">⬆ Importar</button>
  <button onclick="resetD()">🗑 Borrar todo</button>
@@ -347,6 +348,19 @@ async function publish(){const j=JSON.stringify(S,null,1);try{await navigator.cl
  let ex=true;try{ex=(await fetch("datos.json?v="+Date.now(),{cache:"no-store"})).ok}catch(e){}
  window.open(`https://github.com/${u}/${r}/${ex?"edit/main/datos.json":"new/main?filename=datos.json"}`,"_blank");
  alert("Datos copiados. En la página de GitHub: selecciona todo (Ctrl+A), pega (Ctrl+V) y pulsa «Commit changes».")}
+async function syncNow(){
+ if(!location.hostname.endsWith("github.io"))return alert("Esta función solo funciona desde la web publicada en github.io");
+ const u=location.hostname.replace(".github.io",""),sg=location.pathname.split("/")[1]||"",r=sg&&!sg.includes(".")?sg:u+".github.io";
+ let tk="";try{tk=localStorage.getItem("ghtk")||""}catch(e){}
+ if(!tk){tk=(prompt("Pega tu token de GitHub (solo se guarda en este navegador):")||"").trim();if(!tk)return}
+ setSt("Lanzando actualización…");
+ try{
+  const x=await fetch(`https://api.github.com/repos/${u}/${r}/actions/workflows/sync.yml/dispatches`,{method:"POST",headers:{Authorization:"Bearer "+tk,Accept:"application/vnd.github+json","X-GitHub-Api-Version":"2022-11-28"},body:JSON.stringify({ref:"main"})});
+  if(x.status===204){try{localStorage.setItem("ghtk",tk)}catch(e){}setSt("✓ Actualización lanzada. Los resultados llegarán en 1-2 minutos");setTimeout(()=>setSt(""),20000);return}
+  if([401,403,404].includes(x.status)){try{localStorage.removeItem("ghtk")}catch(e){}}
+  setSt("⚠ GitHub respondió "+x.status+(x.status==401?" (token no válido)":x.status==404||x.status==403?" (token sin permiso o falta sync.yml en main)":""))
+ }catch(e){setSt("⚠ No se pudo contactar con GitHub")}
+}
 function exportD(){const a=document.createElement("a");a.href=URL.createObjectURL(new Blob([JSON.stringify(S,null,1)],{type:"application/json"}));a.download="datos.json";a.click()}
 function importD(i){const f=i.files[0];if(!f)return;f.text().then(t=>{S=JSON.parse(t);fix();save()})}
 function resetD(){

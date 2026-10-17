@@ -10,7 +10,7 @@ const MANUAL = process.env.GITHUB_EVENT_NAME === "workflow_dispatch";
 // GitHub programa en UTC; aquí filtramos por hora de Madrid (8:00–23:59), también con cambio de hora
 const horaMadrid = +new Intl.DateTimeFormat("es-ES", { timeZone: "Europe/Madrid", hour: "numeric", hourCycle: "h23" }).format(new Date());
 if (!MANUAL && (horaMadrid < 8 || horaMadrid > 23)) { console.log("Fuera de horario:", horaMadrid, "h en Madrid"); process.exit(0); }
-const FULLRUN = MANUAL || horaMadrid <= 9;                 // primeras ejecuciones del día y las manuales: las 22 jornadas
+const FULLRUN = MANUAL || horaMadrid === 8;                 // primeras ejecuciones del día y las manuales: las 22 jornadas
 const ME = 10, GRUPO = "28125503";
 const sleep = ms => new Promise(r => setTimeout(r, ms));
 

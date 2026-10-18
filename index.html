@@ -225,6 +225,58 @@ select{font:inherit;background:var(--bg);color:var(--tx);border:1px solid var(--
   font-size:calc(var(--u)*4.4*var(--k));
   padding:calc(var(--u)*1.3*var(--k)) calc(var(--u)*2.8*var(--k));
 }
+
+/* ===== Escudos más grandes y pegados a los laterales (pantalla completa) ===== */
+#hero.fs .lb{justify-content:space-between;padding:0 calc(var(--u)*2)}
+#hero.fs .ts{width:calc(var(--u)*36*var(--k))}
+#hero.fs .b{
+  width:calc(var(--u)*20*var(--k));
+  height:calc(var(--u)*20*var(--k));
+  font-size:calc(var(--u)*7*var(--k));
+}
+
+/* ===== Aviso de GOL: más ajustado, con margen arriba/abajo y zona segura ===== */
+#golOv{
+  height:100vh;height:100dvh;
+  gap:1.5vmin;
+  padding:
+    calc(env(safe-area-inset-top,0px) + 5vmin)
+    calc(env(safe-area-inset-right,0px) + 4vmin)
+    calc(env(safe-area-inset-bottom,0px) + 5vmin)
+    calc(env(safe-area-inset-left,0px) + 4vmin);
+}
+#golOv.rot{
+  height:100vw;
+  padding:
+    calc(env(safe-area-inset-right,0px) + 5vmin)
+    calc(env(safe-area-inset-bottom,0px) + 4vmin)
+    calc(env(safe-area-inset-left,0px) + 5vmin)
+    calc(env(safe-area-inset-top,0px) + 4vmin);
+}
+/* vmin sirve en horizontal y también con la pantalla girada */
+#golOv .go-t{font-size:clamp(2.6rem,15vmin,9rem)}
+#golOv .go-c img{max-height:40vmin;max-width:70vmax}
+#golOv .go-c svg{width:28vmin}
+#golOv .go-n{font-size:clamp(1.3rem,6vmin,3rem)}
+#golOv .go-s{font-size:clamp(.85rem,3.2vmin,1.4rem)}
+
+/* ===== Selector de goleador: zona segura ===== */
+#pickOv{
+  height:100vh;height:100dvh;
+  padding:
+    calc(env(safe-area-inset-top,0px) + 2vmin)
+    calc(env(safe-area-inset-right,0px) + 2vmin)
+    calc(env(safe-area-inset-bottom,0px) + 2vmin)
+    calc(env(safe-area-inset-left,0px) + 2vmin);
+}
+#pickOv.rot{
+  height:100vw;
+  padding:
+    calc(env(safe-area-inset-right,0px) + 2vmin)
+    calc(env(safe-area-inset-bottom,0px) + 2vmin)
+    calc(env(safe-area-inset-left,0px) + 2vmin)
+    calc(env(safe-area-inset-top,0px) + 2vmin);
+}
 </style>
 </head>
 <body>
@@ -512,7 +564,7 @@ function celebrate(n,m,lv){
  const own=String(n).startsWith("Propia"),c=cromoFor(n),p=pn(n),mins=(m.gm&&m.gm[n])||[],mi=mins.length?Math.max(...mins):0;
  const ov=document.createElement("div");ov.id="golOv";
  if(FS&&innerHeight>innerWidth)ov.classList.add("rot");
- const face=c?`<img src="${cSrc(c)}" alt="Cromo de ${esc(c.name)}">`:own?`<span style="font-size:26vmin;line-height:1;position:relative">⚽</span>`:shirt(p.num,"#2f7bff");
+ const face=c?`<img src="${cSrc(c)}" alt="Cromo de ${esc(c.name)}">`:own?`<span style="font-size:20vmin;line-height:1;position:relative">⚽</span>`:shirt(p.num,"#2f7bff");
  const nom=own?"¡Gol en propia puerta del rival!":esc(p.name)+(p.num?" · "+esc(p.num):"");
  ov.innerHTML=`<div class="go-t">¡GOL!</div><div class="go-c">${face}</div><div class="go-n">${nom}</div><div class="go-s">${mi?"Minuto "+mi+"' · ":""}${esc(nm(lv.h))} ${m.h||0} - ${m.a||0} ${esc(nm(lv.a))}</div>`;
  const E_=["⚽","🎉","⭐","🥅","✨"],cols=["#ffd23f","#2f7bff","#22c55e","#fff","#f472b6"];

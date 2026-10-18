@@ -382,7 +382,6 @@ async function makeAvatar(i){
  if(!E())return alert('Entra en administración para crear avatares.');
  const name=S.pl[i],role=(S.pos&&S.pos[name])||'campo',fileEl=document.getElementById('avfile'+i),file=fileEl&&fileEl.files&&fileEl.files[0];
  if(file&&file.size>8*1024*1024)return alert('La foto supera 8 MB. Elige una imagen más pequeña.');
- if(file&&!confirm('¿Deseas procesar esta foto para generar el cromo 3D del Torrejón Juncal B?'))return;
  
  const dorsal=pn(name).num||S.dn[name]||'';
  const btn=document.querySelectorAll('.admin-avatar .on')[i];
@@ -391,6 +390,7 @@ async function makeAvatar(i){
  try {
   let imgDataUrl = null;
   if(file){
+   if(!/^image\/(jpeg|png|webp)$/.test(file.type))return alert('Formato no admitido. Usa JPG, PNG o WebP.');
    imgDataUrl = await new Promise((resolve,reject)=>{const fr=new FileReader();fr.onload=()=>resolve(fr.result);fr.onerror=reject;fr.readAsDataURL(file)});
   }
 
@@ -408,13 +408,12 @@ async function makeAvatar(i){
   ctx.fillStyle = bgGrad;
   ctx.fillRect(0, 0, 800, 1200);
 
-  // Si hay foto del jugador, dibujarla recortada en la parte superior/central
   if(imgDataUrl) {
+   // Si hay foto subida, se procesa
    await new Promise((resolve)=>{
     const img = new Image();
     img.onload = () => {
      ctx.save();
-     // Recorte y ajuste estilo cromo
      ctx.drawImage(img, 0, 0, img.width, img.height, 0, 0, 800, 1200);
      ctx.restore();
      resolve();
@@ -423,11 +422,136 @@ async function makeAvatar(i){
     img.src = imgDataUrl;
    });
   } else {
-   // Silueta corporativa por defecto si no hay foto
-   ctx.fillStyle = '#10224a';
+   // --- GENERADOR AUTOMÁTICO DE AVATAR FICTICIO CON OPCIONES VARIADAS ---
+   // Usamos el nombre del jugador como semilla para que el avatar ficticio sea siempre el mismo para cada jugador, o aleatorio si se prefiere.
+   let seed = 0;
+   for (let c = 0; c < name.length; c++) seed += name.charCodeAt(c);
+   
+   const randomChoice = (arr) => arr[seed % arr.length];
+   const randomInt = (min, max) => min + (seed % (max - min + 1));
+
+   // Opciones de personalización ficticia
+   const tonosPiel = ['#f5d0b1', '#e8b996', '#c68b59', '#8d5524', '#ffdbac'];
+   const estilosPelo = ['revuelto', 'media_melena', 'corto', 'rizado', 'rapado'];
+   const coloresPelo = ['#2c1608', '#4a3018', '#b55239', '#d4af37', '#111111'];
+
+   const skinColor = randomChoice(tonosPiel);
+   const hairStyle = randomChoice(estilosPelo);
+   const hairColor = randomChoice(coloresPelo);
+
+   ctx.save();
+   // Centrar la ilustración del avatar en la parte superior/central del cromo
+   ctx.translate(400, 420);
+
+   // Sombra delbusto
+   ctx.fillStyle = 'rgba(0,0,50,0.3)';
    ctx.beginPath();
-   ctx.arc(400, 480, 220, 0, Math.PI * 2);
+   ctx.ellipse(0, 160, 140, 70, 0, 0, Math.PI * 2);
    ctx.fill();
+
+   // Cuerpo / Camiseta (Azul Torrejón o Blanco Portero)
+   ctx.fillStyle = role === 'portero' ? '#f8fafc' : '#1d4ed8';
+   ctx.beginPath();
+   ctx.moveTo(-130, 220);
+   ctx.lineTo(130, 220);
+   ctx.lineTo(110, 110);
+   ctx.lineTo(50, 90);
+   ctx.lineTo(-50, 90);
+   ctx.lineTo(-110, 110);
+   ctx.closePath();
+   ctx.fill();
+
+   // Cuello de la camiseta
+   ctx.strokeStyle = role === 'portero' ? '#94a3b8' : '#93c5fd';
+   ctx.lineWidth = 8;
+   ctx.beginPath();
+   ctx.arc(0, 95, 35, Math.PI, 0, false);
+   ctx.stroke();
+
+   // Cabeza y Piel
+   ctx.fillStyle = skinColor;
+   ctx.beginPath();
+   ctx.arc(0, 0, 85, 0, Math.PI * 2);
+   ctx.fill();
+
+   // Orejas
+   ctx.beginPath();
+   ctx.arc(-82, 0, 15, 0, Math.PI * 2);
+   ctx.arc(82, 0, 15, 0, Math.PI * 2);
+   ctx.fill();
+
+   // Ojos y Cejas
+   ctx.fillStyle = '#1e293b';
+   ctx.beginPath();
+   ctx.arc(-28, -8, 7, 0, Math.PI * 2);
+   ctx.arc(28, -8, 7, 0, Math.PI * 2);
+   ctx.fill();
+
+   // Cejas deportista concentrado
+   ctx.strokeStyle = hairColor;
+   ctx.lineWidth = 5;
+   ctx.beginPath();
+   ctx.moveTo(-42, -22); ctx.lineTo(-14, -16);
+   ctx.moveTo(14, -16); ctx.lineTo(42, -22);
+   ctx.stroke();
+
+   // Nariz y Sonrisa de concentración
+   ctx.strokeStyle = 'rgba(0,0,0,0.2)';
+   ctx.lineWidth = 4;
+   ctx.beginPath();
+   ctx.arc(0, 8, 12, 0.1 * Math.PI, 0.9 * Math.PI, false);
+   ctx.stroke();
+
+   // PEINADOS VARIADOS (Pelo revuelto, media melena, rizado, etc.)
+   ctx.fillStyle = hairColor;
+   if (hairStyle === 'revuelto') {
+    // Pelo revuelto con puntas dinámicas
+    ctx.beginPath();
+    ctx.moveTo(-90, -10);
+    ctx.lineTo(-100, -60);
+    ctx.lineTo(-60, -95);
+    ctx.lineTo(-20, -110);
+    ctx.lineTo(20, -115);
+    ctx.lineTo(65, -95);
+    ctx.lineTo(95, -60);
+    ctx.lineTo(90, -10);
+    ctx.lineTo(75, -75);
+    ctx.lineTo(0, -90);
+    ctx.lineTo(-75, -75);
+    ctx.closePath();
+    ctx.fill();
+   } else if (hairStyle === 'media_melena') {
+    // Pelo media melena fluido
+    ctx.beginPath();
+    ctx.arc(0, -20, 92, Math.PI * 0.8, Math.PI * 2.2, false);
+    ctx.lineTo(95, 40);
+    ctx.lineTo(-95, 40);
+    ctx.closePath();
+    ctx.fill();
+   } else if (hairStyle === 'rizado') {
+    // Pelo con textura rizada/volumen
+    for(let angle = 0; angle < Math.PI; angle += 0.3) {
+     const bx = Math.cos(angle) * 75;
+     const by = Math.sin(angle) * -75 - 20;
+     ctx.beginPath();
+     ctx.arc(bx, by, 22, 0, Math.PI * 2);
+     ctx.fill();
+    }
+   } else if (hairStyle === 'corto') {
+    // Estilo militar / corto limpio
+    ctx.beginPath();
+    ctx.arc(0, -10, 87, Math.PI * 0.82, Math.PI * 2.18, false);
+    ctx.closePath();
+    ctx.fill();
+   } else {
+    // Rapado / Degradado moderno
+    ctx.beginPath();
+    ctx.arc(0, -25, 84, Math.PI * 0.88, Math.PI * 2.12, false);
+    ctx.closePath();
+    ctx.fill();
+   }
+
+   ctx.restore();
   }
 
   // 2. Superponer marco, iluminación y elementos gráficos del cromo
@@ -438,7 +562,7 @@ async function makeAvatar(i){
   ctx.fillStyle = frameGrad;
   ctx.fillRect(0, 0, 800, 1200);
 
-  // 3. Cabecera (Escudo y Temporada)
+  // 3. Cabecera (Temporada)
   ctx.fillStyle = '#ffffff';
   ctx.font = '800 22px "Barlow Condensed", sans-serif';
   ctx.textAlign = 'right';
@@ -486,15 +610,7 @@ async function makeAvatar(i){
   S.av[name] = { url: finalDataUrl, role, source: file ? 'photo' : 'fictional', updatedAt: Date.now() };
   save();
 
-  // Opcional: ofrecer descarga automática para guardar en la carpeta /avatares/ del repositorio
-  if(confirm('¡Cromo generado con éxito!\n\n¿Quieres descargar el archivo PNG para guardarlo en la carpeta "avatares/" de tu repositorio?')){
-   const a = document.createElement('a');
-   a.href = finalDataUrl;
-   a.download = name.toLowerCase().replace(/\s+/g, '_') + '.png';
-   a.click();
-  }
-
-  alert('¡Avatar creado y aplicado correctamente en la web!');
+  alert('¡Avatar ficticio generado con éxito y aplicado al cromo!');
  } catch(e) {
   alert('No se pudo generar el cromo: ' + e.message);
  } finally {

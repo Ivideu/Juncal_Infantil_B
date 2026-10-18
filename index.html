@@ -249,7 +249,7 @@ function curMin(m){const c=m.c;if(!c||(c.ph!=1&&c.ph!=2))return null;return(c.ph
 function addMin(m,n,t){m.gm=m.gm||{};(m.gm[n]=m.gm[n]||[]).push(t);m.gm[n].sort((a,b)=>a-b)}
 function trimMin(m,k){if(!m.gm||!m.gm[k])return;if(!m.g||!m.g[k])delete m.gm[k];else while(m.gm[k].length>m.g[k])m.gm[k].pop();if(!Object.keys(m.gm).length)delete m.gm}
 const mn=(m,n,g)=>{const t=(m.gm&&m.gm[n])||[];return t.length?t.map(x=>x+"'").join(", ")+(g>t.length?` +${g-t.length}`:""):"×"+g};let lvOn=false,lastP="";
-function liveM(){const now=Date.now(),all=myM().filter(x=>x.h&&x.a);return all.find((x,i)=>{const m=M(x.r.n,x.h),c=m.c,k=when(x).getTime(),st=c?Math.min(k-9e5,c.s||k):(m.t?k-9e5:1e18),en=c&&c.fin?c.fin+72e5:Math.max(k,c&&c.s||0)+144e5;if(c&&c.fin&&all.slice(i+1).some(y=>M(y.r.n,y.h).t))return false;return now>=st&&now<en})}
+function liveM(){const now=Date.now(),hoyM=new Date().toLocaleDateString("sv-SE",{timeZone:"Europe/Madrid"}),all=myM().filter(x=>x.h&&x.a);return all.find((x,i)=>{const m=M(x.r.n,x.h),c=m.c,k=when(x).getTime(),st=c?Math.min(k-9e5,c.s||k):(m.t?k-9e5:1e18),en=c&&c.fin?c.fin+72e5:(m.t?Math.max(k,c&&c.s||0):(c&&c.s)||k)+144e5;if(!m.t&&(m.d||x.r.d)>hoyM)return false;if(c&&c.fin&&all.slice(i+1).some(y=>M(y.r.n,y.h).t))return false;return now>=st&&now<en})}
 function clk(j,h,a){const m=S.m[j+"_"+h]||(S.m[j+"_"+h]={}),now=Date.now();if(a=="reset"){if(!confirm("¿Reiniciar el cronómetro?"))return;delete m.c;return save()}
  const c=m.c||(m.c={ph:0,run:false,base:0,s:now}),el=(c.base||0)+(c.run?now-c.since:0);
  if(a=="go1"){c.ph=1;c.run=true;c.base=0;c.since=now}
@@ -288,7 +288,7 @@ function hero(){const lv=liveM();lvOn=!!lv;if(lv)return liveHero(lv);const nx=ne
  <div class="hv"><div>${bd(nx.h)}<div class="cn">${nm(nx.h)}</div></div><div class="cn" style="font-size:2rem">VS</div><div>${bd(nx.a)}<div class="cn">${nm(nx.a)}</div></div></div>
  <p style="text-align:center;margin-bottom:18px"><span class="dt dtb">${fmt(m.d||nx.r.d)} · ${m.t?m.t+" h":"hora por confirmar"}</span></p>
  <p class="loc">${loc(nx.h,m)}</p>
- <div class="cd" id="cd" data-t="${when(nx).getTime()}"></div>${E()?`<p style="text-align:center;margin-top:14px"><button onclick="startLive(${nx.r.n},${nx.h})">📡 Iniciar directo ahora</button></p>`:""}`}
+ ${m.t?`<div class="cd" id="cd" data-t="${when(nx).getTime()}"></div>`:""}${E()?`<p style="text-align:center;margin-top:14px"><button onclick="startLive(${nx.r.n},${nx.h})">📡 Iniciar directo ahora</button></p>`:""}`}
 function tick(){tickLive();const e=document.getElementById("cd");if(!e)return;let s=Math.max(0,(+e.dataset.t-Date.now())/1e3|0);const v=[[86400,"días"],[3600,"horas"],[60,"min"],[1,"seg"]];e.innerHTML=v.map(([k,l])=>{const n=s/k|0;s%=k;return`<div><b>${String(n).padStart(2,"0")}</b><span>${l}</span></div>`}).join("")}
 function jsel(){const c=(nextM()||{r:{n:0}}).r.n;
  return`<div class="jsel"><button aria-label="Jornada anterior" ${jn<=1?"disabled":""} onclick="jn=${jn-1};jnAuto=false;render()">‹</button><select aria-label="Elegir jornada" onchange="jn=+this.value;jnAuto=false;render()">${J.map(r=>`<option value="${r.n}" ${jn==r.n?"selected":""}>Jornada ${r.n} · ${r.d.slice(8)}/${r.d.slice(5,7)}${r.n==c?" · actual":""}</option>`).join("")}</select><button aria-label="Jornada siguiente" ${jn>=J.length?"disabled":""} onclick="jn=${jn+1};jnAuto=false;render()">›</button></div>`}

@@ -277,6 +277,27 @@ select{font:inherit;background:var(--bg);color:var(--tx);border:1px solid var(--
     calc(env(safe-area-inset-left,0px) + 2vmin)
     calc(env(safe-area-inset-top,0px) + 2vmin);
 }
+
+/* ===== Convocatoria: cuadrícula con botones SÍ / NO ===== */
+.cvsum{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+.cvs{font:800 1.05rem 'Barlow Condensed',sans-serif;letter-spacing:.04em;padding:3px 12px;border-radius:99px;background:#22c55e2e;color:#15803d}
+.cvs.x{background:#ef44442e;color:#b91c1c}
+.cvg{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-bottom:12px}
+@media(min-width:600px){.cvg{grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:14px}}
+.cvc{display:flex;flex-direction:column;align-items:center;gap:8px;padding:10px;border:2px solid var(--line);border-radius:16px;background:var(--card);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);box-shadow:0 4px 18px #1e4fd814;min-width:0}
+.cvc.si{border-color:#22c55e;background:linear-gradient(#22c55e30,#22c55e14),var(--card)}
+.cvc.no{border-color:#ef4444;background:linear-gradient(#ef444430,#ef444414),var(--card)}
+.cvc img{display:block;width:100%;max-width:130px;height:auto;border-radius:10px;transition:opacity .2s,filter .2s}
+.cvc.no img{opacity:.55;filter:grayscale(.7)}
+.cvname{display:flex;flex-direction:column;align-items:center;text-align:center;line-height:1.25;min-width:0}
+.cvname span{font-size:.85rem}
+.cvb{display:grid;grid-template-columns:1fr 1fr;gap:8px;width:100%}
+.cvb button{min-height:48px;padding:0;border-radius:12px;border:2px solid;background:#fff;font:800 1.25rem 'Barlow Condensed',sans-serif;letter-spacing:.08em;opacity:.55;-webkit-tap-highlight-color:transparent}
+.cvb .s{border-color:#22c55e;color:#15803d}
+.cvb .n{border-color:#ef4444;color:#b91c1c}
+.cvc.si .cvb .s{background:#22c55e;color:#fff;opacity:1;box-shadow:0 4px 14px #22c55e66}
+.cvc.no .cvb .n{background:#ef4444;color:#fff;opacity:1;box-shadow:0 4px 14px #ef444466}
+.cvb button:active{transform:scale(.96)}
 </style>
 </head>
 <body>
@@ -534,8 +555,9 @@ function renderCromos(){
   +sec("No convocados",desc,"descartados","–",desc.length===1?"jugador":"jugadores","No hay jugadores no convocados.")
   +sec("Cuerpo técnico",tec,"tecnico","★",tec.length===1?"entrenador":"entrenadores","Sin entrenadores.")}
 function renderConv(){
- return`<div class="card"><small class="gap">Elige el estado de cada jugador. Los no convocados aparecen en su apartado de la pestaña Jugadores.</small></div>`
-  +CROMOS.filter(c=>!c.coach).map(c=>{const st=cEst(c);return`<div class="card cv"><img src="${cSrc(c)}" alt=""><div class="cvn"><b>${esc(c.name)}</b><span class="gap">${c.num?"#"+esc(c.num)+" · ":""}${POSN[c.pos]||esc(c.pos)}</span></div><select aria-label="Convocatoria de ${esc(c.name)}" onchange="setCon('${c.key}',this.value)"><option value="convocado" ${st=="convocado"?"selected":""}>Convocado</option><option value="descartado" ${st=="descartado"?"selected":""}>No convocado</option></select></div>`}).join("")}
+ const jug=CROMOS.filter(c=>!c.coach),n=jug.filter(c=>cEst(c)==="convocado").length;
+ return`<div class="card"><small class="gap">Pulsa SÍ o NO en cada jugador. Los no convocados aparecen en su apartado de la pestaña Jugadores.</small><div class="cvsum"><span class="cvs">✓ ${n} convocados</span><span class="cvs x">✕ ${jug.length-n} no convocados</span></div></div>`
+  +`<div class="cvg">${jug.map(c=>{const st=cEst(c)==="convocado";return`<div class="cvc ${st?"si":"no"}"><img src="${cSrc(c)}" alt="Cromo de ${esc(c.name)}"><div class="cvname"><b>${esc(c.name)}</b><span class="gap">${c.num?"#"+esc(c.num)+" · ":""}${POSN[c.pos]||esc(c.pos)}</span></div><div class="cvb"><button class="s" aria-pressed="${st}" aria-label="${esc(c.name)} convocado" onclick="setCon('${c.key}','convocado')">SÍ</button><button class="n" aria-pressed="${!st}" aria-label="${esc(c.name)} no convocado" onclick="setCon('${c.key}','descartado')">NO</button></div></div>`}).join("")}</div>`}
 function openCromo(f){
  const c=CROMOS.find(x=>x.file===f);if(!c)return;
  closeCromo();

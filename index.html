@@ -167,6 +167,12 @@ select{font:inherit;background:var(--bg);color:var(--tx);border:1px solid var(--
 .gl{grid-template-columns:30px 44px 1fr 40px}
 .gmini{width:44px;height:auto;max-height:62px;object-fit:contain;border-radius:6px;box-shadow:0 2px 8px #0f1b3d40;cursor:pointer;display:block}
 .gmini.no{display:grid;place-items:center;width:44px;height:44px;box-shadow:none}
+/* ===== Escudos y partido de prueba ===== */
+.b{position:relative}
+.b img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;opacity:0;filter:drop-shadow(0 2px 4px #0f1b3d55)}
+.b.ok{background:transparent!important;border-color:transparent;box-shadow:none;color:transparent}
+.b.ok img{opacity:1}
+.tbanner{background:#f59e0b;color:#0a0f1e;font:800 .95rem 'Barlow Condensed',sans-serif;letter-spacing:.06em;padding:4px 12px;border-radius:8px;display:inline-block;margin-bottom:8px}
 </style>
 </head>
 <body>
@@ -182,6 +188,7 @@ select{font:inherit;background:var(--bg);color:var(--tx);border:1px solid var(--
 <div id="adm">
  <span id="st" class="gap"></span>
  <button onclick="setEdit(false)">🔓 Salir</button>
+ <button onclick="toggleTest()">🧪 Partido de prueba</button>
  <button class="on" onclick="publish()">🚀 Publicar en GitHub</button>
 <button onclick="syncNow()">🔄 Actualizar ahora</button>
  <button onclick="exportD()">⬇ Descargar datos.json</button>
@@ -193,6 +200,8 @@ select{font:inherit;background:var(--bg);color:var(--tx);border:1px solid var(--
 (function(){const b=document.getElementById("bg");for(let i=0;i<9;i++){const e=document.createElement("b");e.textContent="⚽";e.style.cssText="left:"+((i*11+Math.random()*8)%100)+"%;font-size:"+(22+Math.random()*34)+"px;animation-duration:"+(18+Math.random()*20)+"s;animation-delay:-"+(Math.random()*30)+"s";b.appendChild(e)}})();
 const ME=10;
 const T={2:["Aston C","P.M. San Blas, Madrid"],3:["Lope de Vega","P.M. Emperador Fernando, Alcalá de Henares"],4:["Torrejón Five Play","Pab. Jorge Garbajosa, Torrejón de Ardoz"],5:["Rivas Atlantis B","Polideportivo Parque Sureste, Rivas"],6:["Rivas Futsal B","Polideportivo Parque Sureste, Rivas"],7:["Malvar","C.D. Príncipe Felipe, C/ San Sebastián, 6 y 8, Arganda del Rey"],8:["Fusión San Fernando","P.M. Justo Gómez Salto, San Fernando de Henares"],9:["Diagonal C","P.M. El Nido, Parla"],10:["Juncal B","P.M. Nuria Fernández, Torrejón de Ardoz"],11:["Sporting Morata","P.M. Morata de Tajuña"],12:["Limones 5 B","P.M. Joaquín Blume, Torrejón de Ardoz"]};
+T[99]=["Equipo de prueba","P.M. Nuria Fernández, Torrejón de Ardoz"];
+const COD={2:24116776,3:27916794,4:17175596,5:18925059,6:17155533,7:18753107,8:26753258,9:27111405,10:24193914,11:26750489,12:21455532};
 const R=["03-10-2026|0-3,10-5,8-7,6-9,4-11,12-2","17-10-2026|3-12,5-0,7-10,9-8,11-6,2-4","24-10-2026|3-5,0-7,10-9,8-11,6-2,12-4","07-11-2026|5-12,7-3,9-0,11-10,2-8,4-6","14-11-2026|5-7,3-9,0-11,10-2,8-4,12-6","21-11-2026|7-12,9-5,11-3,2-0,4-10,6-8","28-11-2026|7-9,5-11,3-2,0-4,10-6,12-8","12-12-2026|9-12,11-7,2-5,4-3,6-0,8-10","19-12-2026|9-11,7-2,5-4,3-6,0-8,12-10","16-01-2027|12-11,2-9,4-7,6-5,8-3,10-0","23-01-2027|11-2,9-4,7-6,5-8,3-10,0-12","30-01-2027|3-0,5-10,7-8,9-6,11-4,2-12","06-02-2027|12-3,0-5,10-7,8-9,6-11,4-2","20-02-2027|5-3,7-0,9-10,11-8,2-6,4-12","27-02-2027|12-5,3-7,0-9,10-11,8-2,6-4","06-03-2027|7-5,9-3,11-0,2-10,4-8,6-12","13-03-2027|12-7,5-9,3-11,0-2,10-4,8-6","03-04-2027|9-7,11-5,2-3,4-0,6-10,8-12","10-04-2027|12-9,7-11,5-2,3-4,0-6,10-8","17-04-2027|11-9,2-7,4-5,6-3,8-0,10-12","08-05-2027|11-12,9-2,7-4,5-6,3-8,0-10","29-05-2027|2-11,4-9,6-7,8-5,10-3,12-0"];
 const J=R.map((s,i)=>{const[d,p]=s.split("|");return{n:i+1,d:d.split("-").reverse().join("-"),p:p.split(",").map(x=>x.split("-").map(Number))}});
 const API=""; // 
@@ -220,11 +229,18 @@ const E=()=>document.body.classList.contains("edit");
 let tab="jor",jn=1,jnAuto=true;
 const esc=s=>String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 const fmt=d=>{const s=new Date(d+"T12:00").toLocaleDateString("es-ES",{weekday:"long",day:"numeric",month:"long"});return s[0].toUpperCase()+s.slice(1)};
-const M=(j,h)=>S.m[j+"_"+h]||{};
+/* Partido de prueba: vive solo en memoria (TS), nunca se guarda en Firebase ni en localStorage */
+const TS={on:false,m:{}};
+const MS=j=>j===0?TS.m:S.m;
+const M=(j,h)=>MS(j)[j+"_"+h]||{};
+const TX=()=>({r:{n:0,d:new Date().toLocaleDateString("sv-SE",{timeZone:"Europe/Madrid"}),p:[[ME,99]]},h:ME,a:99});
+const newTest=()=>({c:{ph:0,run:false,base:0,s:Date.now()}});
+function toggleTest(){if(!E())return;TS.on=!TS.on;if(TS.on&&!TS.m["0_"+ME])TS.m["0_"+ME]=newTest();render()}
+function resetTest(){if(!confirm("¿Vaciar el partido de prueba?"))return;TS.m={};TS.m["0_"+ME]=newTest();render()}
 const done=m=>m.h!==undefined&&m.h!==""&&m.a!==undefined&&m.a!=="";
-const bd=id=>{if(!id)return`<span class="b" style="background:#334">💤</span>`;const n=T[id][0].split(" ").map(w=>w[0]).join("").slice(0,2).toUpperCase();return`<span class="b" style="background:${id==ME?'#2f7bff':`hsl(${id*47%360} 55% 38%)`}">${n}</span>`};
+const bd=id=>{if(!id)return`<span class="b" style="background:#334">💤</span>`;const n=T[id][0].split(" ").map(w=>w[0]).join("").slice(0,2).toUpperCase();return`<span class="b" style="background:${id==ME?'#2f7bff':`hsl(${id*47%360} 55% 38%)`}">${n}${COD[id]?`<img src="Escudos/${COD[id]}.png" alt="" onload="this.parentNode.classList.add('ok')" onerror="this.remove()">`:""}</span>`};
 const nm=id=>id?T[id][0]:"Descansa";
-function save(){S.u=Date.now();try{localStorage.setItem("juncalB",JSON.stringify(S))}catch(e){}if((API||FB)&&PW)push();render()}
+function save(t){if(t){render();return}S.u=Date.now();try{localStorage.setItem("juncalB",JSON.stringify(S))}catch(e){}if((API||FB)&&PW)push();render()}
 function ed(j,h,f,v){const m=S.m[j+"_"+h]||(S.m[j+"_"+h]={});if(v==="")delete m[f];else m[f]=v;save()}
 function addG(j,h){const n=document.getElementById("sel"+j).value,m=S.m[j+"_"+h]||(S.m[j+"_"+h]={});m.g=m.g||{};m.g[n]=(m.g[n]||0)+1;const mi=document.getElementById("min"+j).value;if(mi!=="")addMin(m,n,+mi);save()}
 function eg(j,h,k){const m=S.m[j+"_"+h],e=evs(m)[k];if(!e)return;const q=prompt("Minuto del gol de "+pn(e.n).name+" (número). Escribe 0 para borrar el gol:",e.t||"");if(q===null||q.trim()==="")return;const t=Math.floor(+q);if(isNaN(t)||t<0)return;const a=(m.gm&&m.gm[e.n])||[];
@@ -255,7 +271,7 @@ function madrid(d,t){const[y,mo,da]=d.split("-").map(Number),[h,mi]=(t.split(":"
  const off=z=>{const p=new Intl.DateTimeFormat("en-US",{timeZone:"Europe/Madrid",hourCycle:"h23",year:"numeric",month:"numeric",day:"numeric",hour:"numeric",minute:"numeric"}).formatToParts(new Date(z)).reduce((o,x)=>(o[x.type]=+x.value,o),{});return Date.UTC(p.year,p.month-1,p.day,p.hour,p.minute)-z};
  return g-off(g-off(g))}
 const when=x=>{const m=M(x.r.n,x.h);return new Date(madrid(m.d||x.r.d,m.t||"23:59"))};
-function table(){const t={};for(const id in T)t[id]={id,pj:0,g:0,e:0,p:0,gf:0,gc:0};
+function table(){const t={};for(const id in T)if(id!=99)t[id]={id,pj:0,g:0,e:0,p:0,gf:0,gc:0};
  J.forEach(r=>r.p.forEach(([h,a])=>{if(!h||!a)return;const m=M(r.n,h);if(!done(m))return;const x=+m.h,y=+m.a,A=t[h],B=t[a];A.pj++;B.pj++;A.gf+=x;A.gc+=y;B.gf+=y;B.gc+=x;if(x>y){A.g++;B.p++}else if(x<y){B.g++;A.p++}else{A.e++;B.e++}}));
  return Object.values(t).map(o=>({...o,pts:o.g*3+o.e,dg:o.gf-o.gc})).sort((a,b)=>b.pts-a.pts||b.dg-a.dg||b.gf-a.gf||T[a.id][0].localeCompare(T[b.id][0]))}
 function scorers(){const s={};myM().forEach(x=>Object.entries(M(x.r.n,x.h).g||{}).forEach(([n,g])=>{if(n.startsWith("Propia"))return;(s[n]||(s[n]={n,g:0})).g+=g}));return Object.values(s).sort((a,b)=>b.g-a.g)}
@@ -278,8 +294,8 @@ function curMin(m){const c=m.c;if(!c||(c.ph!=1&&c.ph!=2))return null;return(c.ph
 function addMin(m,n,t){m.gm=m.gm||{};(m.gm[n]=m.gm[n]||[]).push(t);m.gm[n].sort((a,b)=>a-b)}
 function trimMin(m,k){if(!m.gm||!m.gm[k])return;if(!m.g||!m.g[k])delete m.gm[k];else while(m.gm[k].length>m.g[k])m.gm[k].pop();if(!Object.keys(m.gm).length)delete m.gm}
 const mn=(m,n,g)=>{const t=(m.gm&&m.gm[n])||[];return t.length?t.map(x=>x+"'").join(", ")+(g>t.length?` +${g-t.length}`:""):"×"+g};let lvOn=false,lastP="";
-function liveM(){const now=Date.now(),hoyM=new Date().toLocaleDateString("sv-SE",{timeZone:"Europe/Madrid"}),all=myM().filter(x=>x.h&&x.a);return all.find((x,i)=>{const m=M(x.r.n,x.h),c=m.c,k=when(x).getTime(),st=c?Math.min(k-9e5,c.s||k):(m.t?k-9e5:1e18),en=c&&c.fin?c.fin+72e5:(m.t?Math.max(k,c&&c.s||0):(c&&c.s)||k)+144e5;if(!m.t&&(m.d||x.r.d)>hoyM)return false;if(c&&c.fin&&all.slice(i+1).some(y=>M(y.r.n,y.h).t))return false;return now>=st&&now<en})}
-function clk(j,h,a){const m=S.m[j+"_"+h]||(S.m[j+"_"+h]={}),now=Date.now();if(a=="reset"){if(!confirm("¿Reiniciar el cronómetro?"))return;delete m.c;return save()}
+function liveM(real){if(!real&&TS.on)return TX();const now=Date.now(),hoyM=new Date().toLocaleDateString("sv-SE",{timeZone:"Europe/Madrid"}),all=myM().filter(x=>x.h&&x.a);return all.find((x,i)=>{const m=M(x.r.n,x.h),c=m.c,k=when(x).getTime(),st=c?Math.min(k-9e5,c.s||k):(m.t?k-9e5:1e18),en=c&&c.fin?c.fin+72e5:(m.t?Math.max(k,c&&c.s||0):(c&&c.s)||k)+144e5;if(!m.t&&(m.d||x.r.d)>hoyM)return false;if(c&&c.fin&&all.slice(i+1).some(y=>M(y.r.n,y.h).t))return false;return now>=st&&now<en})}
+function clk(j,h,a){const m=MS(j)[j+"_"+h]||(MS(j)[j+"_"+h]={}),now=Date.now();if(a=="reset"){if(!confirm("¿Reiniciar el cronómetro?"))return;delete m.c;return save(j===0)}
  const c=m.c||(m.c={ph:0,run:false,base:0,s:now}),el=(c.base||0)+(c.run?now-c.since:0);
  if(a=="go1"){c.ph=1;c.run=true;c.base=0;c.since=now}
  if(a=="pause"){c.base=el;c.run=false}
@@ -287,29 +303,29 @@ function clk(j,h,a){const m=S.m[j+"_"+h]||(S.m[j+"_"+h]={}),now=Date.now();if(a=
  if(a=="ht"){c.ph="HT";c.base=el;c.run=false}
  if(a=="go2"){c.ph=2;c.run=true;c.base=0;c.since=now}
  if(a=="ft"){c.ph="FT";c.base=el;c.run=false;c.fin=now}
- save()}
-function lg(j,h,side,d){const m=S.m[j+"_"+h]||(S.m[j+"_"+h]={}),me=h==ME?"h":"a",k=side=="me"?me:(me=="h"?"a":"h");m.h=+m.h||0;m.a=+m.a||0;if(m[k]+d<0)return;
+ save(j===0)}
+function lg(j,h,side,d){const m=MS(j)[j+"_"+h]||(MS(j)[j+"_"+h]={}),me=h==ME?"h":"a",k=side=="me"?me:(me=="h"?"a":"h");m.h=+m.h||0;m.a=+m.a||0;if(m[k]+d<0)return;
  if(side=="me"){const sl=document.getElementById("lsel"),n=sl?sl.value:"";if(d>0){if(n){m.g=m.g||{};m.g[n]=(m.g[n]||0)+1;let mi=curMin(m);if(mi==null){const q=prompt("Minuto del gol (número). Déjalo vacío si no lo sabes:");if(q&&Math.floor(+q)>0)mi=Math.floor(+q)}if(mi!=null)addMin(m,n,mi)}}else if(m.g&&m.g[n]){if(--m.g[n]<1)delete m.g[n];if(!Object.keys(m.g).length)delete m.g;trimMin(m,n)}}
- m[k]+=d;save()}
-function startLive(j,h){const m=S.m[j+"_"+h]||(S.m[j+"_"+h]={});m.c={ph:0,run:false,base:0,s:Date.now()};save()}
+ m[k]+=d;save(j===0)}
+function startLive(j,h){const m=MS(j)[j+"_"+h]||(MS(j)[j+"_"+h]={});m.c={ph:0,run:false,base:0,s:Date.now()};save(j===0)}
 function liveHero(x){const m=M(x.r.n,x.h),c=m.c||{ph:0},ph=c.ph||0,ok=done(m),ev=evs(m),gr=ev.length<=6?[2,1]:ev.length<=12?[3,.75]:ev.length<=20?[4,.6]:[5,.5];
  const L={0:"A PUNTO DE EMPEZAR",1:'<span class="dot">🔴</span> EN DIRECTO · 1ª PARTE',HT:"☕ DESCANSO",2:'<span class="dot">🔴</span> EN DIRECTO · 2ª PARTE',FT:"🏁 FINAL DEL PARTIDO"}[ph];
  const B=(a,l)=>`<button onclick="clk(${x.r.n},${x.h},'${a}')">${l}</button>`,G=(s,d,l)=>`<button onclick="lg(${x.r.n},${x.h},'${s}',${d})">${l}</button>`;
- let ad="";if(E())ad=`<div class="ctl">${ph==0?B("go1","▶ Iniciar 1ª parte"):""}${(ph==1||ph==2)?(c.run?B("pause","⏸ Pausar"):B("resume","▶ Reanudar")):""}${ph==1?B("ht","🔔 Fin 1ª parte"):""}${ph=="HT"?B("go2","▶ Iniciar 2ª parte"):""}${ph==2?B("ft","🏁 Final"):""}${B("reset","↺ Reiniciar")}</div>
+ let ad="";if(E())ad=`<div class="ctl">${ph==0?B("go1","▶ Iniciar 1ª parte"):""}${(ph==1||ph==2)?(c.run?B("pause","⏸ Pausar"):B("resume","▶ Reanudar")):""}${ph==1?B("ht","🔔 Fin 1ª parte"):""}${ph=="HT"?B("go2","▶ Iniciar 2ª parte"):""}${ph==2?B("ft","🏁 Final"):""}${B("reset","↺ Reiniciar")}${x.r.n===0?'<button onclick="toggleTest()">✕ Salir de la prueba</button><button onclick="resetTest()">🧹 Vaciar prueba</button>':""}</div>
  <div class="ctl"><select id="lsel" onchange="lastP=this.value" style="width:100%;max-width:340px">${S.pl.concat(["Propia puerta (rival)"]).map(p=>`<option value="${esc(p)}" ${p==lastP?"selected":""}>${pn(p).num?pn(p).num+" · ":""}${esc(pn(p).name)}</option>`).join("")}</select></div><div class="ctl g2">${G("me",1,"＋ Gol "+T[ME][0])}${G("rv",1,"＋ Gol rival")}</div><div class="ctl">${G("me",-1,"− "+T[ME][0])}${G("rv",-1,"− rival")}</div>`;
- return`<div class="live"><div class="lt">${L} · JORNADA ${x.r.n}</div><p class="loc" style="margin:8px 0 0">${loc(x.h,m)}</p>
+ return`<div class="live">${x.r.n===0?'<div class="tbanner">🧪 PARTIDO DE PRUEBA · no se guarda nada</div><br>':""}<div class="lt">${L} · ${x.r.n===0?"PRUEBA":"JORNADA "+x.r.n}</div><p class="loc" style="margin:8px 0 0">${loc(x.h,m)}</p>
  <div class="lb"><div>${bd(x.h)}<div class="cn">${nm(x.h)}</div></div><div class="big">${ok?m.h:0} - ${ok?m.a:0}</div><div>${bd(x.a)}<div class="cn">${nm(x.a)}</div></div></div>
  <div class="lclk" id="lc" data-ph="${ph}" data-run="${c.run?1:0}" data-base="${c.base||0}" data-since="${c.since||0}">00:00</div>
  <div class="pb"><div><i id="p1"></i></div><div><i id="p2"></i></div></div>
  <div class="pb" style="font-size:.75rem;color:var(--mu);margin-top:4px"><span style="flex:1">1ª parte · 25'</span><span style="flex:1">2ª parte · 25'</span></div>
- ${ph==0&&Date.now()<when(x)?`<div class="lt" style="margin:18px 0 8px">EMPIEZA EN</div><div class="cd" id="cd" data-t="${when(x).getTime()}"></div>`:""}
+ ${ph==0&&x.r.n&&Date.now()<when(x)?`<div class="lt" style="margin:18px 0 8px">EMPIEZA EN</div><div class="cd" id="cd" data-t="${when(x).getTime()}"></div>`:""}
  ${ev.length?`<div class="lg" style="--gr:${gr[0]};--gs:${gr[1]}"><b>⚽ Goles del ${T[ME][0]}</b>${ev.map(e=>`<div>${gh(e)}</div>`).join("")}</div>`:""}${FS?`<button class="xb" onclick="setFS(false)">✕ Salir</button>`:`<div class="ctl"><button class="fsb" onclick="setFS(true)">⛶ Pantalla completa</button></div>`}${ad?`<div class="admw">${ad}</div>`:""}</div>`}
 function tickLive(){const l=!!liveM();if(l!==lvOn){render();return}
  const cd=document.getElementById("cd");if(cd&&document.getElementById("lc")&&+cd.dataset.t<=Date.now()){render();return}
  const e=document.getElementById("lc");if(!e)return;const d=e.dataset,el=Math.max(0,+d.base+(d.run=="1"?Date.now()-d.since:0)),s=el/1e3|0,pc=Math.min(100,el/HALF*100);
  e.textContent=String(s/60|0).padStart(2,"0")+":"+String(s%60).padStart(2,"0");
  document.getElementById("p1").style.width=(d.ph=="1"?pc:d.ph=="0"?0:100)+"%";document.getElementById("p2").style.width=(d.ph=="2"?pc:d.ph=="FT"?100:0)+"%"}
-function nextM(){const lv=liveM();if(lv)return lv;return myM().filter(x=>x.h&&x.a).find(x=>{const m=M(x.r.n,x.h);return!done(m)&&!(m.c&&m.c.fin)&&when(x)>=new Date(Date.now()-864e5)})}
+function nextM(){const lv=liveM(1);if(lv)return lv;return myM().filter(x=>x.h&&x.a).find(x=>{const m=M(x.r.n,x.h);return!done(m)&&!(m.c&&m.c.fin)&&when(x)>=new Date(Date.now()-864e5)})}
 function hero(){const lv=liveM();lvOn=!!lv;if(lv)return liveHero(lv);const nx=nextM();
  if(!nx)return`<h2>Temporada finalizada 🏆</h2><p class="gap">No quedan partidos por jugar.</p>`;
  const m=M(nx.r.n,nx.h);
@@ -442,6 +458,7 @@ function setEdit(on){
     document.body.classList.remove("edit"); 
     try{ sessionStorage.removeItem("adm"); sessionStorage.removeItem("pw"); }catch(e){} 
     PW = "";
+    TS.on=false;
     if(tab=="pla"||tab=="hor"||tab=="con") tab="jor"; 
   }
   render();

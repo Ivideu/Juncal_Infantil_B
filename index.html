@@ -124,17 +124,16 @@ select{font:inherit;background:var(--bg);color:var(--tx);border:1px solid var(--
 #hero.fs .lb{display:flex;justify-content:center;align-items:center;gap:calc(var(--u)*2);width:100%;max-width:none;margin:calc(var(--u)*1.5*var(--k)) 0}
 #hero.fs .big{flex:none}
 #hero.fs .big.s{font-size:calc(var(--u)*24*var(--k))}
-#hero.fs .ts{flex-direction:row;gap:calc(var(--u)*1.2*var(--k))}
-#hero.fs .ts.r{flex-direction:row-reverse}
-#hero.fs .ti{max-width:calc(var(--u)*22*var(--k))}
+#hero.fs .ts{flex-direction:column;gap:calc(var(--u)*1*var(--k));width:calc(var(--u)*30*var(--k))}
+#hero.fs .ti{max-width:100%}
 #hero.fs .gb{width:auto}
-#hero.fs .gbtn{width:calc(var(--u)*22*var(--k));font-size:calc(var(--u)*3.6*var(--k));padding:calc(var(--u)*.5)}
+#hero.fs .gbtn{width:calc(var(--u)*20*var(--k));font-size:calc(var(--u)*3.4*var(--k));padding:calc(var(--u)*.5)}
 #hero.fs .gmn{font-size:calc(var(--u)*3*var(--k));padding:calc(var(--u)*.4) calc(var(--u)*1.6)}
 #hero.fs .pbl{display:none}
-#hero.fs .lb .cn{font-size:calc(var(--u)*7*var(--k))}
-#hero.fs .b{width:calc(var(--u)*16*var(--k));height:calc(var(--u)*16*var(--k));font-size:calc(var(--u)*6*var(--k))}
+#hero.fs .lb .cn{font-size:calc(var(--u)*5.5*var(--k))}
+#hero.fs .b{width:calc(var(--u)*13*var(--k));height:calc(var(--u)*13*var(--k));font-size:calc(var(--u)*5*var(--k))}
 #hero.fs .big{font-size:calc(var(--u)*32*var(--k));padding:0 calc(var(--u)*6);border-radius:calc(var(--u)*4)}
-#hero.fs .lclk{font-size:calc(var(--u)*22*var(--k));padding:calc(var(--u)*.5) calc(var(--u)*6)}
+#hero.fs .lclk{font-size:calc(var(--u)*20*var(--k));padding:calc(var(--u)*.5) calc(var(--u)*6)}
 #hero.fs .pb{width:70%;max-width:none;margin-top:calc(var(--u)*2*var(--k))}
 #hero.fs .lg{display:grid;grid-auto-flow:column;grid-template-rows:repeat(var(--gr,2),auto);justify-content:center;column-gap:calc(var(--u)*4);row-gap:calc(var(--u)*.8);width:100%;margin-top:calc(var(--u)*2*var(--k));font-size:calc(var(--u)*5*var(--gs,1)*var(--k))}
 #hero.fs .lg>b,#hero.fs .loc{display:none}
@@ -186,10 +185,10 @@ select{font:inherit;background:var(--bg);color:var(--tx);border:1px solid var(--
 #pickOv{position:fixed;inset:0;z-index:9997;display:flex;flex-direction:column;align-items:center;gap:1.4vmin;padding:2vmin;color:#fff;background:rgba(2,8,23,.95);overflow:hidden}
 #pickOv.rot{inset:auto;top:0;left:100%;width:100vh;width:100dvh;height:100vw;transform-origin:0 0;transform:rotate(90deg)}
 #pickOv .pk-h{font:800 clamp(1.4rem,6vmin,3rem)/1 'Barlow Condensed',sans-serif;letter-spacing:.05em;color:var(--ye)}
-#pickOv .pk-g{flex:1;min-height:0;width:100%;overflow:auto;display:grid;grid-template-columns:repeat(auto-fill,minmax(17vmin,1fr));gap:1.6vmin;align-content:start;justify-items:center;padding:4px}
-#pickOv .pk-c{padding:0;border:0;background:none;cursor:pointer;border-radius:14px;width:100%;max-width:22vmin;display:block}
-#pickOv .pk-c img{display:block;width:100%;height:auto;border-radius:14px;box-shadow:0 8px 24px #0009}
-#pickOv .pk-o{aspect-ratio:3/4;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1vmin;background:#122a66;border:2px solid #7aa9ff;color:#fff;font-size:clamp(.75rem,2.4vmin,1.1rem);padding:6px}
+#pickOv .pk-g{flex:1;min-height:0;width:100%;overflow:hidden;display:grid;justify-content:center;align-content:center}
+#pickOv .pk-c{padding:0;border:0;background:none;cursor:pointer;border-radius:14px;width:100%;display:block}
+#pickOv .pk-c img{display:block;width:100%;height:100%;object-fit:cover;border-radius:14px;box-shadow:0 8px 24px #0009}
+#pickOv .pk-o{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1vmin;background:#122a66;border:2px solid #7aa9ff;color:#fff;font-size:clamp(.75rem,2.4vmin,1.1rem);padding:6px}
 #pickOv .pk-o span{font-size:7vmin;line-height:1}
 #pickOv .pk-x{flex:none;font-weight:700;padding:1.2vmin 4vmin}
 /* ===== Escudos y partido de prueba ===== */
@@ -347,7 +346,14 @@ function pickGol(j,h){
   if(b&&b.dataset.f)goalBy(j,h,b.dataset.f);
   else if(b&&b.dataset.o)goalBy(j,h,"");
   else if((b&&b.classList.contains("pk-x"))||e.target===ov)closePick()};
- document.body.appendChild(ov)}
+ document.body.appendChild(ov);fitPick();ov.querySelectorAll("img").forEach(i=>{if(!i.complete)i.onload=fitPick})}
+function fitPick(){const ov=document.getElementById("pickOv");if(!ov)return;ov.classList.toggle("rot",FS&&innerHeight>innerWidth);
+ const g=ov.querySelector(".pk-g"),im=ov.querySelector(".pk-c img"),ar=im&&im.naturalWidth?im.naturalWidth/im.naturalHeight:.72,n=g.children.length,W=g.clientWidth,H=g.clientHeight,gap=Math.max(6,Math.min(W,H)*.025);
+ let best=0,bc=1;for(let c=1;c<=n;c++){const r=Math.ceil(n/c),w=(W-gap*(c-1))/c,h=(H-gap*(r-1))/r,z=Math.min(w,h*ar);if(z>best){best=z;bc=c}}
+ best=Math.floor(best);g.style.gap=gap+"px";g.style.gridTemplateColumns=`repeat(${bc},${best}px)`;
+ g.querySelectorAll(".pk-c").forEach(b=>{b.style.width=best+"px";b.style.height=Math.floor(best/ar)+"px"});
+ const o=ov.querySelector(".pk-o");if(o)o.style.fontSize=Math.max(11,best/9)+"px"}
+addEventListener("resize",()=>fitPick());
 function closePick(){const o=document.getElementById("pickOv");if(o)o.remove()}
 function goalBy(j,h,f){
  closePick();

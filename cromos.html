@@ -138,63 +138,6 @@ select{font:inherit;background:var(--bg);color:var(--tx);border:1px solid var(--
 .dot{animation:bl 1.2s infinite}@keyframes bl{50%{opacity:.25}}
 @media(max-width:560px){.mt{grid-template-columns:1fr auto 1fr}.tm{flex-direction:column;text-align:center!important;gap:4px;font-size:.85rem}.sc{min-width:70px;font-size:1.5rem}.b{width:38px;height:38px}}
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
-
-/* ===== Jugadores ===== */
-.cards-head{display:flex;justify-content:space-between;align-items:end;gap:12px;flex-wrap:wrap;margin:10px 0 16px}
-.cards-head h2{font-size:2rem;color:#0f2a6b}
-.cards-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:16px;margin-bottom:24px}
-.player-card{position:relative;isolation:isolate;overflow:hidden;min-height:340px;aspect-ratio:2/3;border-radius:18px;background:linear-gradient(145deg,#0b1735,#1748a4 52%,#071126);border:1px solid #8ab5ff;box-shadow:0 12px 28px #071b4b38;color:white;cursor:pointer;transition:transform .2s,box-shadow .2s}
-.player-card:hover{transform:translateY(-4px);box-shadow:0 18px 34px #071b4b55}
-.player-card:before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 50% 25%,#69b6ff66,transparent 42%),linear-gradient(0deg,#030817 0%,transparent 55%);z-index:-1}
-.player-card .avatar-art{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center top;z-index:-2}
-.player-card .pc-top{display:flex;justify-content:space-between;align-items:start;padding:12px;gap:8px}
-.pc-crest{width:42px;height:42px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(145deg,#fff,#dbe8ff);border:2px solid #ffd23f;color:#12336f;font:800 12px 'Barlow Condensed';text-align:center;box-shadow:0 2px 10px #0005}
-.pc-season{font:700 .7rem 'Barlow Condensed';letter-spacing:.08em;text-align:right;color:#dbeafe}
-.pc-dorsal{position:absolute;right:12px;top:64px;font:800 3.4rem/.9 'Barlow Condensed';color:#fff;text-shadow:0 3px 0 #1748a4,0 5px 18px #000b;-webkit-text-stroke:1px #d8e7ff}
-.pc-bottom{position:absolute;left:0;right:0;bottom:0;padding:42px 14px 15px;background:linear-gradient(0deg,#040916f5,#040916bd 70%,transparent)}
-.pc-name{font:800 1.65rem/.95 'Barlow Condensed';text-transform:uppercase;overflow-wrap:anywhere;text-shadow:0 2px 6px #000}
-.pc-role{display:inline-block;margin-top:8px;padding:3px 8px;border-radius:5px;background:#ffd23f;color:#101a35;font:800 .72rem 'Barlow Condensed';letter-spacing:.08em}
-.pc-empty{display:flex;align-items:center;justify-content:center;text-align:center;padding:20px;color:#dbeafe;background:linear-gradient(145deg,#101c39,#0b2c69);height:100%;font:700 1.1rem 'Barlow Condensed'}
-/* Placeholder premium para jugadores sin avatar */
-.pc-placeholder{position:absolute;inset:16% 0 15%;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:14px;pointer-events:none;overflow:hidden}
-.pc-placeholder:before{content:"";position:absolute;width:68%;aspect-ratio:1;border-radius:50%;background:radial-gradient(circle,#55a6ff55 0%,#2563eb1c 48%,transparent 72%);filter:blur(3px)}
-.pc-placeholder .silhouette{position:relative;width:38%;height:58%;max-height:270px;opacity:.8;filter:drop-shadow(0 12px 22px #0007)}
-.pc-placeholder .silhouette:before{content:"";position:absolute;left:34%;top:3%;width:32%;aspect-ratio:1;border-radius:50%;background:linear-gradient(145deg,#e9f4ff,#7da9e8)}
-.pc-placeholder .silhouette:after{content:"";position:absolute;left:12%;right:12%;top:29%;bottom:0;border-radius:45% 45% 16% 16%;background:linear-gradient(110deg,#e8f3ff,#719de0 48%,#244b8c);clip-path:polygon(24% 0,76% 0,100% 24%,83% 42%,73% 31%,78% 100%,22% 100%,27% 31%,17% 42%,0 24%)}
-.pc-placeholder span{position:relative;color:#dceaff;font:700 .68rem 'Barlow Condensed';letter-spacing:.22em;text-transform:uppercase;opacity:.75}
-.pc-modal{position:fixed;inset:0;z-index:200;background:linear-gradient(135deg,#020817f2,#071b3bf2);backdrop-filter:blur(12px);display:none;align-items:center;justify-content:center;padding:clamp(12px,3vw,28px)}
-.pc-modal.open{display:flex;animation:modalFade .2s ease-out}
-@keyframes modalFade{from{opacity:0}to{opacity:1}}
-.pc-modal-inner{position:relative;height:min(86vh,780px);width:auto;max-width:88vw;aspect-ratio:2/3;overflow:visible;flex:0 1 auto;filter:drop-shadow(0 28px 55px #0009)}
-.pc-modal-inner #cromoModalCard{height:100%;width:100%}
-.pc-modal-inner .player-card{min-height:0;height:100%;width:100%;aspect-ratio:auto;border-radius:22px;border:1px solid #a8d0ff;box-shadow:inset 0 0 0 1px #ffffff20,0 0 0 6px #ffffff08;cursor:default}
-.pc-modal-inner .player-card:hover{transform:none}
-.pc-modal-inner .pc-top{padding:clamp(14px,3vh,24px);}
-.pc-modal-inner .pc-crest{width:clamp(38px,7vh,56px);height:clamp(38px,7vh,56px);font-size:clamp(9px,1.5vh,12px)}
-.pc-modal-inner .pc-season{font-size:clamp(.68rem,1.5vh,.9rem)}
-.pc-modal-inner .pc-dorsal{top:clamp(68px,12vh,108px);right:clamp(14px,3vh,24px);font-size:clamp(3.2rem,10vh,6.8rem)}
-.pc-modal-inner .pc-bottom{padding:clamp(48px,10vh,92px) clamp(18px,3vh,28px) clamp(18px,3vh,28px)}
-.pc-modal-inner .pc-name{font-size:clamp(1.8rem,5vh,3.2rem)}
-.pc-modal-inner .pc-role{font-size:clamp(.72rem,1.7vh,.95rem);padding:5px 11px}
-.pc-close{position:absolute;right:-15px;top:-15px;z-index:3;display:grid;place-items:center;border-radius:50%;width:44px;height:44px;font-size:1.4rem;background:#fff;color:#10234b;border:2px solid #dbeafe;box-shadow:0 6px 22px #0008;cursor:pointer;transition:transform .18s,background .18s}
-.pc-close:hover{transform:rotate(90deg);background:#ffd23f}
-.squad-section{margin:24px 0 34px}
-.squad-heading{position:relative;display:flex;align-items:center;gap:13px;margin:0 0 18px;padding:14px 16px;border-radius:15px;overflow:hidden;background:linear-gradient(110deg,#fff,#f1f6ff);border:1px solid #d9e5f7;box-shadow:0 8px 24px #17376b0d}
-.squad-heading:after{content:"";position:absolute;left:0;top:0;bottom:0;width:5px;background:linear-gradient(180deg,#ffd23f,#2f7bff)}
-.squad-title-mark{display:grid;place-items:center;flex:0 0 42px;width:42px;height:42px;border-radius:13px;background:linear-gradient(145deg,#164b9b,#2879e9);color:white;font-size:1.35rem;font-weight:900;box-shadow:0 5px 14px #1c57a53b}
-.squad-section.descartados .squad-title-mark{background:linear-gradient(145deg,#46536b,#7b879c)}
-.squad-heading h2{margin:0;color:#102b60;font-size:clamp(1.45rem,3vw,2rem);letter-spacing:-.025em}
-.squad-heading p{margin:3px 0 0;color:#65738b;font-size:.92rem}
-.squad-count{margin-left:auto;display:grid;place-items:center;min-width:42px;height:36px;padding:0 12px;border-radius:999px;background:#e1ecff;color:#164b9b;font-weight:850;font-variant-numeric:tabular-nums}
-@media(max-width:600px){.pc-modal{padding:14px}.pc-modal-inner{height:min(82vh,720px);max-width:90vw}.pc-close{right:-9px;top:-9px;width:38px;height:38px}.squad-heading{padding:12px;gap:10px}.squad-title-mark{flex-basis:38px;width:38px;height:38px}.squad-count{min-width:34px;height:32px;padding:0 9px}}
-.admin-avatar{display:grid;grid-template-columns:1fr;gap:9px;width:100%;margin-top:10px;padding-top:10px;border-top:1px dashed var(--line)}
-.admin-avatar label{font-size:.84rem;color:var(--mu);font-weight:600}
-.admin-avatar .avatar-actions{display:flex;gap:7px;flex-wrap:wrap;align-items:center}
-.admin-avatar input[type=file]{max-width:100%;font-size:.8rem}
-.admin-avatar .avatar-status{font-size:.82rem;color:var(--mu)}
-.avatar-preview{width:64px;height:84px;object-fit:cover;border-radius:8px;border:1px solid var(--line)}
-@media(max-width:430px){.cards-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.player-card{min-height:280px}.pc-dorsal{font-size:2.7rem}.pc-name{font-size:1.35rem}.pc-crest{width:34px;height:34px;font-size:10px}}
-
 </style>
 </head>
 <body>
@@ -207,7 +150,6 @@ select{font:inherit;background:var(--bg);color:var(--tx);border:1px solid var(--
 <nav id="nav"></nav>
 <main id="app"></main>
 </div>
-<div id="cromoModal" class="pc-modal" role="dialog" aria-modal="true" aria-label="Cromo del jugador" onclick="if(event.target===this)closeCromo()"><div class="pc-modal-inner"><button class="pc-close" onclick="closeCromo()" aria-label="Cerrar">×</button><div id="cromoModalCard"></div></div></div>
 <div id="adm">
  <span id="st" class="gap"></span>
  <button onclick="setEdit(false)">🔓 Salir</button>
@@ -226,10 +168,8 @@ const R=["03-10-2026|0-3,10-5,8-7,6-9,4-11,12-2","17-10-2026|3-12,5-0,7-10,9-8,1
 const J=R.map((s,i)=>{const[d,p]=s.split("|");return{n:i+1,d:d.split("-").reverse().join("-"),p:p.split(",").map(x=>x.split("-").map(Number))}});
 const API=""; // 
 const FB="https://juncal-f0b64-default-rtdb.europe-west1.firebasedatabase.app",FBKEY="AIzaSyDXqBUkie30z_Cmyj__ayhzGYyYxZMrB3Q",FBMAIL="ivanblasco81@hotmail.com"; // Firebase en tiempo real configurado
-// Endpoint privado de generación (desplegar backend/avatar-api y pegar aquí su URL). Nunca pongas OPENAI_API_KEY en este HTML.
-const AVATAR_API="https://PON-AQUI-TU-SERVICIO-AVATAR.run.app/api/avatar";
 let S={u:0,m:{},pl:[]};
-const fix=()=>{S.m=S.m||{};S.pl=S.pl||[];S.dn=S.dn||{};S.av=S.av||{};S.pos=S.pos||{};S.estado=S.estado||{}};
+const fix=()=>{S.m=S.m||{};S.pl=S.pl||[];S.dn=S.dn||{}};
 let CACHE=null;try{CACHE=JSON.parse(localStorage.getItem("juncalB"))}catch(e){}
 if(!API&&CACHE)S=CACHE;fix();let loading=!!(API||FB);
 let PW="",pt;const setSt=t=>{document.getElementById("st").textContent=t};
@@ -265,7 +205,7 @@ function eg(j,h,k){const m=S.m[j+"_"+h],e=evs(m)[k];if(!e)return;const q=prompt(
 function remG(j,h,i){const m=S.m[j+"_"+h],k=Object.keys(m.g)[i];if(--m.g[k]<1)delete m.g[k];if(!Object.keys(m.g).length)delete m.g;trimMin(m,k);save()}
 function addP(){document.getElementById("np").value.split(/[,\n]/).map(x=>x.trim()).filter(Boolean).forEach(x=>{const r=x.match(/^#?(\d{1,2})[\s.\-–]+(.+)$/),n=(r?r[2]:x).trim().replace(/[.$#\[\]\/]/g,"");if(!S.pl.includes(n))S.pl.push(n);if(r)S.dn[n]=r[1]});S.pl.sort((a,b)=>a.localeCompare(b));save()}
 function setDn(i,v){const n=S.pl[i];if(v==="")delete S.dn[n];else S.dn[n]=String(v);save()}
-function delP(i){if(confirm("¿Eliminar a "+S.pl[i]+" de la plantilla?")){delete S.dn[S.pl[i]];delete S.pos[S.pl[i]];delete S.av[S.pl[i]];S.pl.splice(i,1);save()}}
+function delP(i){if(confirm("¿Eliminar a "+S.pl[i]+" de la plantilla?")){delete S.dn[S.pl[i]];S.pl.splice(i,1);save()}}
 function card(r,h,a,i){
  const m=M(r.n,h),d=m.d||r.d,me=h==ME||a==ME,pl=done(m);
  if(!h||!a){const id=h||a;return`<div class="card rest ${id==ME?'me':''}" style="--i:${i}"><div class="top"><span>${id==ME?`<b>Jornada ${r.n}</b> · <span class="dt">${fmt(r.d)}</span>`:nm(id)}</span></div><div class="tm">${bd(0)} Descansa esta jornada</div></div>`}
@@ -298,7 +238,6 @@ let FS=false,wl=null;
 function leaveFS(){FS=false;try{screen.orientation.unlock()}catch(e){}try{if(document.fullscreenElement)document.exitFullscreen()}catch(e){}if(wl){try{wl.release()}catch(e){}wl=null}}
 function fit(){const h=document.getElementById("hero");if(FS&&!lvOn)leaveFS();h.classList.toggle("fs",FS);h.classList.toggle("adm",FS&&E());h.classList.toggle("rot",FS&&innerHeight>innerWidth);document.body.style.overflow=FS?"hidden":"";h.style.setProperty("--u",h.clientHeight/100+"px")}
 async function setFS(on){if(!on){leaveFS()}else{FS=true;try{await document.documentElement.requestFullscreen({navigationUI:"hide"})}catch(e){}try{await screen.orientation.lock("landscape")}catch(e){}try{wl=await navigator.wakeLock.request("screen")}catch(e){}}render()}
-document.addEventListener("keydown",e=>{if(e.key==="Escape")closeCromo()});
 document.addEventListener("fullscreenchange",()=>{if(!document.fullscreenElement&&FS){leaveFS();render()}});
 addEventListener("resize",()=>{fit()});
 const HALF=25*60000;
@@ -358,7 +297,7 @@ function render(){
  document.getElementById("hero").style.display="";
  document.getElementById("hero").innerHTML=hero();fit();tick();
  if(jnAuto){const nx=nextM();jn=nx?nx.r.n:J.length}
- const tabs=[["jor","🗓 Jornadas"],["cal","📅 Mi calendario"],["cla","🏆 Clasificación"],["gol","👟 Goleadores"],["cro","👥 Jugadores"]];if(E())tabs.push(["hor","🕒 Horarios"],["pla","👥 Plantilla"]);
+ const tabs=[["jor","🗓 Jornadas"],["cal","📅 Mi calendario"],["cla","🏆 Clasificación"],["gol","👟 Goleadores"],["cro","🎽 Jugadores"]];if(E())tabs.push(["con","✅ Convocatoria"],["hor","🕒 Horarios"],["pla","👥 Plantilla"]);
  const nv=document.getElementById("nav"),big=tabs.length>4;nv.style.setProperty("--n",big?3:4);nv.className=big?"x":"";
  nv.innerHTML=tabs.map(([k,l])=>{const[ic,...tx]=l.split(" ");return`<button class="${tab==k?'on':''}" onclick="tab='${k}';if(tab=='jor')jnAuto=true;render()"><span>${ic}</span><span>${tx.join(" ")}</span></button>`}).join("");
  let h="";
@@ -366,31 +305,38 @@ function render(){
  if(tab=="jor"){h=jsel()+[...J[jn-1].p].sort((x,y)=>y.includes(ME)-x.includes(ME)).map((p,i)=>card(J[jn-1],p[0],p[1],i)).join("")}
  if(tab=="cla"){h=`<table><tr><th>#</th><th>Equipo</th><th>PJ</th><th>G</th><th>E</th><th>P</th><th>GF</th><th>GC</th><th>DG</th><th>Pts</th></tr>${table().map((t,i)=>`<tr class="${t.id==ME?'me':''}"><td>${i+1}</td><td>${nm(t.id)}</td><td>${t.pj}</td><td>${t.g}</td><td>${t.e}</td><td>${t.p}</td><td>${t.gf}</td><td>${t.gc}</td><td>${t.dg>0?"+":""}${t.dg}</td><td><b>${t.pts}</b></td></tr>`).join("")}</table>`}
  if(tab=="hor"&&E())h=`<div class="card"><small class="gap">Pon la fecha y la hora de cada partido del Juncal B. Si dejas la hora vacía, se muestra "hora por confirmar".</small></div>`+myM().filter(x=>x.h&&x.a).map(x=>{const m=M(x.r.n,x.h);return`<div class="card" style="display:flex;gap:10px;align-items:center;flex-wrap:wrap"><b class="cn" style="color:var(--ye2);font-size:1.2rem;min-width:90px">Jornada ${x.r.n}</b><span style="flex:1;min-width:160px">${nm(x.h)} - ${nm(x.a)}</span><input type="date" value="${m.d||x.r.d}" onchange="ed(${x.r.n},${x.h},'d',this.value)"><input type="time" value="${esc(m.t)}" onchange="ed(${x.r.n},${x.h},'t',this.value)"></div>`}).join("");
- if(tab=="pla"&&E())h=`<div class="card"><div class="ed" style="display:flex"><input id="np" style="flex:1;min-width:200px" placeholder="Nº y nombre, ej: 7 Ana Ruiz (varios separados por coma)"><button onclick="addP()">＋ Añadir</button></div><p class="gap" style="margin-top:8px">Avatares: sube una foto autorizada para transformarla en personaje 3D, o deja el archivo vacío para crear un jugador ficticio. Las fotos no se guardan en Firebase.</p></div>`+(S.pl.map((p,i)=>{const role=S.pos[p]||"campo",av=S.av[p];return `<div class="card"><div style="display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap"><span style="display:flex;align-items:center;gap:10px">${shirt(pn(p).num,role=="portero"?"#fff":"#2f7bff")}${esc(pn(p).name)}</span><span style="display:flex;gap:8px;align-items:center"><input class="g" type="number" min="0" max="99" placeholder="Nº" value="${esc(pn(p).num)}" onchange="setDn(${i},this.value)"><button onclick="delP(${i})">Eliminar</button></span></div><div class="admin-avatar"><label for="role${i}">Tipo de jugador</label><select id="role${i}" onchange="setRole(${i},this.value)"><option value="campo" ${role=="campo"?"selected":""}>Jugador de campo · azul</option><option value="portero" ${role=="portero"?"selected":""}>Portero · blanco</option></select><label for="estado${i}">Convocatoria</label><select id="estado${i}" onchange="setEstado(${i},this.value)"><option value="convocado" ${(S.estado[p]||"convocado")=="convocado"?"selected":""}>Convocado</option><option value="descartado" ${S.estado[p]=="descartado"?"selected":""}>Descartado</option></select><label for="avfile${i}">Foto de referencia (opcional; JPG, PNG o WebP, máx. 8 MB)</label><input id="avfile${i}" type="file" accept="image/jpeg,image/png,image/webp"><div class="avatar-actions"><button class="on" onclick="makeAvatar(${i})">✨ ${av?"Regenerar avatar":"Crear avatar 3D"}</button>${av?`<button onclick="deleteAvatar(${i})">Eliminar avatar</button><img class="avatar-preview" src="${esc(av.url)}" alt="Vista previa del cromo">`:""}</div><span class="avatar-status">${av?`Avatar guardado · ${av.source=="photo"?"transformado desde foto":"personaje ficticio"}`:"Sin avatar publicado"}</span></div></div>`}).join("")||'<div class="empty">Aún no hay jugadores.</div>');
- if(tab=="cro")h=renderCromos();
+ if(tab=="pla"&&E())h=`<div class="card"><div class="ed" style="display:flex"><input id="np" style="flex:1;min-width:200px" placeholder="Nº y nombre, ej: 7 Ana Ruiz (varios separados por coma)"><button onclick="addP()">＋ Añadir</button></div></div>`+(S.pl.map((p,i)=>`<div class="card" style="display:flex;justify-content:space-between;align-items:center"><span style="display:flex;align-items:center;gap:10px">${shirt(pn(p).num,"#2f7bff")}${esc(pn(p).name)}</span><span style="display:flex;gap:8px;align-items:center"><input class="g" type="number" min="0" max="99" placeholder="Nº" value="${esc(pn(p).num)}" onchange="setDn(${i},this.value)"><button onclick="delP(${i})">Eliminar</button></span></div>`).join("")||'<div class="empty">Aún no hay jugadores.</div>');
  if(tab=="gol"){const s=scorers(),mx=s[0]?.g||1;h=s.length?s.map((x,i)=>`<div class="gl card" style="--i:${i}"><b class="cn" style="font-size:1.4rem;color:var(--ye2)">${i+1}</b><div><div>${esc(pn(x.n).name)}</div><div class="bar" style="width:${x.g/mx*100}%"></div></div><b class="cn" style="font-size:1.6rem">${x.g}</b></div>`).join(""):`<div class="empty">⚽ Aún no hay goles registrados.</div>`}
+ if(tab=="cro")h=renderCromos();
+ if(tab=="con"&&E())h=renderConv();
  document.getElementById("app").innerHTML=h}
+
+/* ===== Cromos y convocatoria ===== */
+const CROMOS_DIR="Cromos/";
+const CROMOS_FILES=["Alex_10_ala.png","Edu_11_ala.png","Erik_5_pivot.png","Gabriel_15_ala.png","Hector_18_ala.png","Ivan_entrenador.png","Izan_7_pivot.png","Javi_entrenador.png","Joel_8_ala.png","Manu_2_cierre.png","Marcos_13_portero.png","Nico_6_cierre.png","Pablo_89_portero.png","Pedro_28_ala.png","Ruben_1_portero.png"];
+const POSN={ala:"Ala",pivot:"Pívot",cierre:"Cierre",portero:"Portero"};
+// Nombre_dorsal_posicion.png  ·  Nombre_entrenador.png
+const CROMOS=CROMOS_FILES.map(f=>{const k=f.replace(/\.png$/i,""),p=k.split("_"),co=p[p.length-1]==="entrenador";return{file:f,key:k,name:p[0],num:co?"":p[1],pos:co?"entrenador":p[2],coach:co}}).sort((a,b)=>(+a.num||0)-(+b.num||0));
+const cSrc=c=>CROMOS_DIR+encodeURIComponent(c.file);
+const cEst=c=>(S.estado&&S.estado[c.key])||"convocado";
+function setCon(k,v){S.estado=S.estado||{};S.estado[k]=v;save()}
+function cromoCard(c){return`<div class="cromo" data-f="${esc(c.file)}" tabindex="0" role="button" aria-label="Ver cromo de ${esc(c.name)}" onclick="openCromo(this.dataset.f)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openCromo(this.dataset.f)}"><img src="${cSrc(c)}" alt="Cromo de ${esc(c.name)}${c.num?" (dorsal "+esc(c.num)+")":""}" loading="lazy"></div>`}
+function renderCromos(){
+ const jug=CROMOS.filter(c=>!c.coach),conv=jug.filter(c=>cEst(c)==="convocado"),desc=jug.filter(c=>cEst(c)==="descartado"),tec=CROMOS.filter(c=>c.coach);
+ const sec=(t,l,cls,mk,u,em)=>`<section class="squad-section ${cls}"><div class="squad-heading"><div class="squad-title-mark">${mk}</div><div><h2>${t}</h2><p>${l.length} ${u}</p></div><span class="squad-count">${l.length}</span></div>${l.length?`<div class="cards-grid">${l.map(cromoCard).join("")}</div>`:`<div class="empty">${em}</div>`}</section>`;
+ return`<section class="cards-head"><div><h2>Jugadores · Torrejón Juncal B</h2><p class="gap">Temporada 2026/27</p></div><span class="dt">${jug.length} jugadores · ${tec.length} entrenadores</span></section>`
+  +sec("Convocados",conv,"convocados","✓",conv.length===1?"jugador":"jugadores","No hay jugadores convocados.")
+  +sec("No convocados",desc,"descartados","–",desc.length===1?"jugador":"jugadores","No hay jugadores no convocados.")
+  +sec("Cuerpo técnico",tec,"tecnico","★",tec.length===1?"entrenador":"entrenadores","Sin entrenadores.")}
+function renderConv(){
+ return`<div class="card"><small class="gap">Elige el estado de cada jugador. Los no convocados aparecen en su apartado de la pestaña Jugadores.</small></div>`
+  +CROMOS.filter(c=>!c.coach).map(c=>{const st=cEst(c);return`<div class="card cv"><img src="${cSrc(c)}" alt=""><div class="cvn"><b>${esc(c.name)}</b><span class="gap">${c.num?"#"+esc(c.num)+" · ":""}${POSN[c.pos]||esc(c.pos)}</span></div><select aria-label="Convocatoria de ${esc(c.name)}" onchange="setCon('${c.key}',this.value)"><option value="convocado" ${st=="convocado"?"selected":""}>Convocado</option><option value="descartado" ${st=="descartado"?"selected":""}>No convocado</option></select></div>`}).join("")}
+function openCromo(f){const c=CROMOS.find(x=>x.file===f);if(!c)return;document.getElementById("cromoModalCard").innerHTML=`<img src="${cSrc(c)}" alt="Cromo de ${esc(c.name)}">`;document.getElementById("cromoModal").classList.add("open");document.body.style.overflow="hidden"}
+function closeCromo(){document.getElementById("cromoModal").classList.remove("open");document.body.style.overflow=""}
+document.addEventListener("keydown",e=>{if(e.key==="Escape")closeCromo()});
+
 async function sha(t){const b=await crypto.subtle.digest("SHA-256",new TextEncoder().encode(t));return[...new Uint8Array(b)].map(x=>x.toString(16).padStart(2,"0")).join("")}
 
-function setRole(i,role){const n=S.pl[i];S.pos[n]=role;save()}
-function setEstado(i,estado){const n=S.pl[i];S.estado=S.estado||{};S.estado[n]=estado;save()}
-function cardMarkup(name,large=false){const p=pn(name),av=S.av&&S.av[name],role=(S.pos&&S.pos[name])||"campo",isG=role==="portero",kit=isG?"PORTERO · BLANCO":"JUGADOR · AZUL";const url=av&&av.url;return `<article class="player-card" ${large?'':'tabindex="0" role="button"'} aria-label="Ficha de ${esc(p.name)}" onclick="${large?'':'openCromo('+JSON.stringify(name).replace(/"/g,'&quot;')+')'}">${url?`<img class="avatar-art" src="${esc(url)}" alt="" loading="lazy">`:`<div class="pc-placeholder" aria-hidden="true"><div class="silhouette"></div><span>Jugador · Torrejón Juncal</span></div>`}<div class="pc-top"><div class="pc-crest">TORREJÓN<br>JUNCAL</div><div class="pc-season">TEMPORADA<br>2026 / 27</div></div><div class="pc-dorsal">${esc(p.num||'—')}</div><div class="pc-bottom"><div class="pc-name">${esc(p.name)}</div><span class="pc-role">${kit}</span>${!url?'<div style="font-size:.78rem;color:#dbeafe;margin-top:8px">Avatar pendiente</div>':''}</div></article>`}
-function renderCromos(){const names=S.pl||[],convocados=names.filter(n=>(S.estado&&S.estado[n]||"convocado")==="convocado"),descartados=names.filter(n=>S.estado&&S.estado[n]==="descartado"),made=names.filter(n=>S.av&&S.av[n]&&S.av[n].url).length;const section=(title,list,cls)=>`<section class="squad-section ${cls}"><div class="squad-heading"><div class="squad-title-mark">${cls==="convocados"?"✓":"–"}</div><div><h2>${title}</h2><p>${list.length} ${list.length===1?"jugador":"jugadores"} en la lista</p></div><span class="squad-count">${list.length}</span></div>${list.length?`<div class="cards-grid">${list.map(n=>cardMarkup(n)).join("")}</div>`:`<div class="empty">${cls==="convocados"?"No hay jugadores convocados.":"No hay jugadores no convocados."}</div>`}</section>`;return `<section class="cards-head"><div><h2>Jugadores · Torrejón Juncal B</h2><p class="gap">Temporada 2026/27</p></div><span class="dt">${made} / ${names.length} avatares creados</span></section>${names.length?section("Convocados",convocados,"convocados")+section("No convocados",descartados,"descartados"):'<div class="empty">La plantilla todavía no está cargada. Entra en Administración → Plantilla para añadir jugadores.</div>'}`}
-function openCromo(name){const el=document.getElementById('cromoModal');document.getElementById('cromoModalCard').innerHTML=cardMarkup(name,true);el.classList.add('open');document.body.style.overflow='hidden'}
-function closeCromo(){document.getElementById('cromoModal').classList.remove('open');document.body.style.overflow=''}
-async function makeAvatar(i){
- if(!E())return alert('Entra en administración para crear avatares.');
- if(!AVATAR_API||AVATAR_API.includes('PON-AQUI'))return alert('Falta configurar AVATAR_API. Sigue el README del paquete y pega la URL del backend desplegado.');
- const name=S.pl[i],role=(S.pos&&S.pos[name])||'campo',fileEl=document.getElementById('avfile'+i),file=fileEl&&fileEl.files&&fileEl.files[0];
- if(file&&file.size>8*1024*1024)return alert('La foto supera 8 MB. Elige una imagen más pequeña.');
- if(file&&!confirm('Confirma que tienes autorización del tutor legal para utilizar esta foto y generar una ilustración. La foto se enviará al servicio de IA para procesarla y no se guardará en Firebase. ¿Continuar?'))return;
- const dorsal=pn(name).num||S.dn[name]||'';
- let imageData=null;
- if(file){if(!/^image\/(jpeg|png|webp)$/.test(file.type))return alert('Formato no admitido. Usa JPG, PNG o WebP.');imageData=await new Promise((resolve,reject)=>{const fr=new FileReader();fr.onload=()=>resolve(fr.result);fr.onerror=reject;fr.readAsDataURL(file)})}
- const btn=document.querySelectorAll('.admin-avatar .on')[i];if(btn){btn.disabled=true;btn.textContent='Generando…'}
- try{const token=await fbTok();const res=await fetch(AVATAR_API,{method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer '+token},body:JSON.stringify({name,dorsal,role,mode:imageData?'photo':'fictional',imageData})});const data=await res.json().catch(()=>({}));if(!res.ok)throw new Error(data.error||('Error HTTP '+res.status));if(!data.url)throw new Error('El servicio no devolvió la URL del cromo.');S.av=S.av||{};S.av[name]={url:data.url,role,source:imageData?'photo':'fictional',updatedAt:Date.now()};save();alert('Avatar generado y guardado.');}catch(e){alert('No se pudo generar el cromo: '+(e.message||'error de conexión'));}finally{render()}
-}
-function deleteAvatar(i){const name=S.pl[i];if(!confirm('¿Eliminar el avatar de '+name+'?'))return;delete S.av[name];save()}
 async function unlock(){
   let p = prompt("Contraseña de entrenador");
   if (!p) return;
@@ -425,7 +371,7 @@ function setEdit(on){
     document.body.classList.remove("edit"); 
     try{ sessionStorage.removeItem("adm"); sessionStorage.removeItem("pw"); }catch(e){} 
     PW = "";
-    if(tab=="pla"||tab=="hor") tab="jor"; 
+    if(tab=="pla"||tab=="hor"||tab=="con") tab="jor"; 
   }
   render();
 }

@@ -305,6 +305,9 @@ select{font:inherit;background:var(--bg);color:var(--tx);border:1px solid var(--
 .cvc img{cursor:pointer}
 .cvl{font:700 .8rem 'Barlow Condensed',sans-serif;letter-spacing:.14em;color:var(--mu);margin-top:-2px}
 .cvb.ro span{display:grid;place-items:center;min-height:44px;border-radius:12px;border-width:2px;border-style:solid;background:#fff;font:800 1.2rem 'Barlow Condensed',sans-serif;letter-spacing:.08em;opacity:.45;user-select:none;-webkit-user-select:none}
+
+/* Todos los cromos con el mismo tamaño */
+.cvc img{width:100%;max-width:130px;height:auto;aspect-ratio:11/20;object-fit:contain}
 </style>
 </head>
 <body>
@@ -553,13 +556,15 @@ const cSrc=c=>CROMOS_DIR+encodeURIComponent(c.file);
 const cEst=c=>(S.estado&&S.estado[c.key])||"convocado";
 function setCon(k,v){if(!E())return;S.estado=S.estado||{};S.estado[k]=v;save()}
 function renderJug(){
- const ed=E(),jug=CROMOS.filter(c=>!c.coach),tec=CROMOS.filter(c=>c.coach);
+ const ed=E(),jug=CROMOS.filter(c=>!c.coach),tec=CROMOS.filter(c=>c.coach),nx=nextM(),nm_=nx?M(nx.r.n,nx.h):{};
+ const tit=nx?`Jugadores convocados para la Jornada ${nx.r.n}`:"Jugadores convocados",
+  sub=nx?`${esc(nm(nx.h))} vs ${esc(nm(nx.a))} · ${fmt(nm_.d||nx.r.d)}`:"Temporada 2026/27";
  const tile=c=>{const st=cEst(c)==="convocado",f=esc(c.file),
   sw=ed?`<div class="cvb"><button class="s" aria-pressed="${st}" aria-label="${esc(c.name)} convocado" onclick="setCon('${c.key}','convocado')">SÍ</button><button class="n" aria-pressed="${!st}" aria-label="${esc(c.name)} no convocado" onclick="setCon('${c.key}','descartado')">NO</button></div>`
    :`<div class="cvb ro" role="img" aria-label="${esc(c.name)}: ${st?"convocado":"no convocado"}"><span class="s">SÍ</span><span class="n">NO</span></div>`;
   return`<div class="cvc ${st?"si":"no"}"><img src="${cSrc(c)}" alt="Cromo de ${esc(c.name)}" loading="lazy" onclick="openCromo('${f}')"><div class="cvname"><b>${esc(c.name)}</b><span class="gap">${c.num?"#"+esc(c.num)+" · ":""}${POSN[c.pos]||esc(c.pos)}</span></div><div class="cvl">CONVOCADO</div>${sw}</div>`};
  const sec=(t,l)=>{const n=l.filter(c=>cEst(c)==="convocado").length;return`<div class="cvhd"><h2>${t}</h2><span class="cvs">✓ ${n}</span><span class="cvs x">✕ ${l.length-n}</span></div><div class="cvg">${l.map(tile).join("")}</div>`};
- return`<div class="card"><h2 style="font-size:1.6rem;color:#0f2a6b;line-height:1.1">Jugadores · Torrejón Juncal B</h2><small class="gap">${ed?"Pulsa SÍ o NO en cada persona para cambiar la convocatoria.":"Temporada 2026/27"}</small></div>`
+ return`<div class="card"><h2 style="font-size:1.6rem;color:#0f2a6b;line-height:1.1">${tit}</h2><small class="gap">${sub}${ed?" · Pulsa SÍ o NO en cada persona para cambiar la convocatoria.":""}</small></div>`
   +sec("Jugadores",jug)+sec("Cuerpo técnico",tec)}
 function openCromo(f){
  const c=CROMOS.find(x=>x.file===f);if(!c)return;

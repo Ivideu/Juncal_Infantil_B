@@ -188,7 +188,9 @@ select{font:inherit;background:var(--bg);color:var(--tx);border:1px solid var(--
 <div id="adm">
  <span id="st" class="gap"></span>
  <button onclick="setEdit(false)">🔓 Salir</button>
- <button onclick="toggleTest()">🧪 Partido de prueba</button>
+ <button id="tbtn" onclick="toggleTest()">🧪 Partido de prueba</button>
+ <button id="tout" onclick="toggleTest()" style="display:none">✕ Salir de la prueba</button>
+ <button id="trst" onclick="resetTest()" style="display:none">🧹 Vaciar prueba</button>
  <button class="on" onclick="publish()">🚀 Publicar en GitHub</button>
 <button onclick="syncNow()">🔄 Actualizar ahora</button>
  <button onclick="exportD()">⬇ Descargar datos.json</button>
@@ -311,9 +313,9 @@ function startLive(j,h){const m=MS(j)[j+"_"+h]||(MS(j)[j+"_"+h]={});m.c={ph:0,ru
 function liveHero(x){const m=M(x.r.n,x.h),c=m.c||{ph:0},ph=c.ph||0,ok=done(m),ev=evs(m),gr=ev.length<=6?[2,1]:ev.length<=12?[3,.75]:ev.length<=20?[4,.6]:[5,.5];
  const L={0:"A PUNTO DE EMPEZAR",1:'<span class="dot">🔴</span> EN DIRECTO · 1ª PARTE',HT:"☕ DESCANSO",2:'<span class="dot">🔴</span> EN DIRECTO · 2ª PARTE',FT:"🏁 FINAL DEL PARTIDO"}[ph];
  const B=(a,l)=>`<button onclick="clk(${x.r.n},${x.h},'${a}')">${l}</button>`,G=(s,d,l)=>`<button onclick="lg(${x.r.n},${x.h},'${s}',${d})">${l}</button>`;
- let ad="";if(E())ad=`<div class="ctl">${ph==0?B("go1","▶ Iniciar 1ª parte"):""}${(ph==1||ph==2)?(c.run?B("pause","⏸ Pausar"):B("resume","▶ Reanudar")):""}${ph==1?B("ht","🔔 Fin 1ª parte"):""}${ph=="HT"?B("go2","▶ Iniciar 2ª parte"):""}${ph==2?B("ft","🏁 Final"):""}${B("reset","↺ Reiniciar")}${x.r.n===0?'<button onclick="toggleTest()">✕ Salir de la prueba</button><button onclick="resetTest()">🧹 Vaciar prueba</button>':""}</div>
+ let ad="";if(E())ad=`<div class="ctl">${ph==0?B("go1","▶ Iniciar 1ª parte"):""}${(ph==1||ph==2)?(c.run?B("pause","⏸ Pausar"):B("resume","▶ Reanudar")):""}${ph==1?B("ht","🔔 Fin 1ª parte"):""}${ph=="HT"?B("go2","▶ Iniciar 2ª parte"):""}${ph==2?B("ft","🏁 Final"):""}${B("reset","↺ Reiniciar")}</div>
  <div class="ctl"><select id="lsel" onchange="lastP=this.value" style="width:100%;max-width:340px">${S.pl.concat(["Propia puerta (rival)"]).map(p=>`<option value="${esc(p)}" ${p==lastP?"selected":""}>${pn(p).num?pn(p).num+" · ":""}${esc(pn(p).name)}</option>`).join("")}</select></div><div class="ctl g2">${G("me",1,"＋ Gol "+T[ME][0])}${G("rv",1,"＋ Gol rival")}</div><div class="ctl">${G("me",-1,"− "+T[ME][0])}${G("rv",-1,"− rival")}</div>`;
- return`<div class="live">${x.r.n===0?'<div class="tbanner">🧪 PARTIDO DE PRUEBA · no se guarda nada</div><br>':""}<div class="lt">${L} · ${x.r.n===0?"PRUEBA":"JORNADA "+x.r.n}</div><p class="loc" style="margin:8px 0 0">${loc(x.h,m)}</p>
+ return`<div class="live"><div class="lt">${L} · JORNADA ${x.r.n===0?(nextM(1)||{r:{n:J.length}}).r.n:x.r.n}</div><p class="loc" style="margin:8px 0 0">${loc(x.h,m)}</p>
  <div class="lb"><div>${bd(x.h)}<div class="cn">${nm(x.h)}</div></div><div class="big">${ok?m.h:0} - ${ok?m.a:0}</div><div>${bd(x.a)}<div class="cn">${nm(x.a)}</div></div></div>
  <div class="lclk" id="lc" data-ph="${ph}" data-run="${c.run?1:0}" data-base="${c.base||0}" data-since="${c.since||0}">00:00</div>
  <div class="pb"><div><i id="p1"></i></div><div><i id="p2"></i></div></div>
@@ -341,6 +343,7 @@ function render(){
  if(loading){document.getElementById("hero").style.display="none";document.getElementById("nav").innerHTML="";document.getElementById("app").innerHTML="";return}
  document.getElementById("hero").style.display="";
  document.getElementById("hero").innerHTML=hero();fit();tick();goalWatch();
+ document.getElementById("tbtn").classList.toggle("on",TS.on);document.getElementById("tout").style.display=document.getElementById("trst").style.display=TS.on?"":"none";
  if(jnAuto){const nx=nextM();jn=nx?nx.r.n:J.length}
  const tabs=[["jor","🗓 Jornadas"],["cal","📅 Mi calendario"],["cla","🏆 Clasificación"],["gol","👟 Goleadores"],["cro","🎽 Jugadores"]];if(E())tabs.push(["con","✅ Convocatoria"],["hor","🕒 Horarios"],["pla","👥 Plantilla"]);
  const nv=document.getElementById("nav"),big=tabs.length>4;nv.style.setProperty("--n",big?3:4);nv.className=big?"x":"";

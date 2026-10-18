@@ -298,6 +298,13 @@ select{font:inherit;background:var(--bg);color:var(--tx);border:1px solid var(--
 .cvc.si .cvb .s{background:#22c55e;color:#fff;opacity:1;box-shadow:0 4px 14px #22c55e66}
 .cvc.no .cvb .n{background:#ef4444;color:#fff;opacity:1;box-shadow:0 4px 14px #ef444466}
 .cvb button:active{transform:scale(.96)}
+
+/* ===== Pestaña Jugadores: cabeceras, etiqueta y modo solo lectura ===== */
+.cvhd{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:18px 0 10px}
+.cvhd h2{font-size:1.7rem;font-weight:800;color:#0f2a6b;line-height:1;margin-right:4px}
+.cvc img{cursor:pointer}
+.cvl{font:700 .8rem 'Barlow Condensed',sans-serif;letter-spacing:.14em;color:var(--mu);margin-top:-2px}
+.cvb.ro span{display:grid;place-items:center;min-height:44px;border-radius:12px;border-width:2px;border-style:solid;background:#fff;font:800 1.2rem 'Barlow Condensed',sans-serif;letter-spacing:.08em;opacity:.45;user-select:none;-webkit-user-select:none}
 </style>
 </head>
 <body>
@@ -522,7 +529,7 @@ function render(){
  document.getElementById("hero").innerHTML=hero();fit();tick();goalWatch();
  document.getElementById("tbtn").classList.toggle("on",TS.on);document.getElementById("tout").style.display=document.getElementById("trst").style.display=TS.on?"":"none";
  if(jnAuto){const nx=nextM();jn=nx?nx.r.n:J.length}
- const tabs=[["jor","🗓 Jornadas"],["cal","📅 Mi calendario"],["cla","🏆 Clasificación"],["gol","👟 Goleadores"],["cro","🎽 Jugadores"]];if(E())tabs.push(["con","✅ Convocatoria"],["hor","🕒 Horarios"],["pla","👥 Plantilla"]);
+ const tabs=[["jor","🗓 Jornadas"],["cal","📅 Mi calendario"],["cla","🏆 Clasificación"],["gol","👟 Goleadores"],["cro","🎽 Jugadores"]];if(E())tabs.push(["hor","🕒 Horarios"],["pla","👥 Plantilla"]);
  const nv=document.getElementById("nav"),big=tabs.length>4;nv.style.setProperty("--n",big?3:4);nv.className=big?"x":"";
  nv.innerHTML=tabs.map(([k,l])=>{const[ic,...tx]=l.split(" ");return`<button class="${tab==k?'on':''}" onclick="tab='${k}';if(tab=='jor')jnAuto=true;render()"><span>${ic}</span><span>${tx.join(" ")}</span></button>`}).join("");
  let h="";
@@ -532,32 +539,28 @@ function render(){
  if(tab=="hor"&&E())h=`<div class="card"><small class="gap">Pon la fecha y la hora de cada partido del Juncal B. Si dejas la hora vacía, se muestra "hora por confirmar".</small></div>`+myM().filter(x=>x.h&&x.a).map(x=>{const m=M(x.r.n,x.h);return`<div class="card" style="display:flex;gap:10px;align-items:center;flex-wrap:wrap"><b class="cn" style="color:var(--ye2);font-size:1.2rem;min-width:90px">Jornada ${x.r.n}</b><span style="flex:1;min-width:160px">${nm(x.h)} - ${nm(x.a)}</span><input type="date" value="${m.d||x.r.d}" onchange="ed(${x.r.n},${x.h},'d',this.value)"><input type="time" value="${esc(m.t)}" onchange="ed(${x.r.n},${x.h},'t',this.value)"></div>`}).join("");
  if(tab=="pla"&&E())h=`<div class="card"><div class="ed" style="display:flex"><input id="np" style="flex:1;min-width:200px" placeholder="Nº y nombre, ej: 7 Ana Ruiz (varios separados por coma)"><button onclick="addP()">＋ Añadir</button></div></div>`+(S.pl.map((p,i)=>`<div class="card" style="display:flex;justify-content:space-between;align-items:center"><span style="display:flex;align-items:center;gap:10px">${shirt(pn(p).num,"#2f7bff")}${esc(pn(p).name)}</span><span style="display:flex;gap:8px;align-items:center"><input class="g" type="number" min="0" max="99" placeholder="Nº" value="${esc(pn(p).num)}" onchange="setDn(${i},this.value)"><button onclick="delP(${i})">Eliminar</button></span></div>`).join("")||'<div class="empty">Aún no hay jugadores.</div>');
  if(tab=="gol"){const s=scorers(),mx=s[0]?.g||1;h=s.length?s.map((x,i)=>`<div class="gl card" style="--i:${i}"><b class="cn" style="font-size:1.4rem;color:var(--ye2)">${i+1}</b>${gMini(x.n)}<div><div>${esc(pn(x.n).name)}</div><div class="bar" style="width:${x.g/mx*100}%"></div></div><b class="cn" style="font-size:1.6rem">${x.g}</b></div>`).join(""):`<div class="empty">⚽ Aún no hay goles registrados.</div>`}
- if(tab=="cro")h=renderCromos();
- if(tab=="con"&&E())h=renderConv();
+ if(tab=="cro")h=renderJug();
  document.getElementById("app").innerHTML=h}
 
 /* ===== Cromos y convocatoria ===== */
 const CROMOS_DIR="Cromos/";
 const CROMOS_FILES=["Alex_10_ala.png","Edu_11_ala.png","Erik_5_pivot.png","Gabriel_15_ala.png","Hector_18_ala.png","Ivan_entrenador.png","Izan_7_pivot.png","Javi_entrenador.png","Joel_8_ala.png","Manu_2_cierre.png","Marcos_13_portero.png","Nico_6_cierre.png","Pablo_89_portero.png","Pedro_28_ala.png","Ruben_1_portero.png"];
-const POSN={ala:"Ala",pivot:"Pívot",cierre:"Cierre",portero:"Portero"};
+const POSN={ala:"Ala",pivot:"Pívot",cierre:"Cierre",portero:"Portero",entrenador:"Entrenador"};
 // Nombre_dorsal_posicion.png  ·  Nombre_entrenador.png
 const ORDC=c=>c.coach?(c.name==="Javi"?0:1):(c.pos==="portero"?0:1);
 const CROMOS=CROMOS_FILES.map(f=>{const k=f.replace(/\.png$/i,""),p=k.split("_"),co=p[p.length-1]==="entrenador";return{file:f,key:k,name:p[0],num:co?"":p[1],pos:co?"entrenador":p[2],coach:co}}).sort((a,b)=>ORDC(a)-ORDC(b)||(+a.num||0)-(+b.num||0));
 const cSrc=c=>CROMOS_DIR+encodeURIComponent(c.file);
 const cEst=c=>(S.estado&&S.estado[c.key])||"convocado";
-function setCon(k,v){S.estado=S.estado||{};S.estado[k]=v;save()}
-function cromoCard(c){return`<div class="cromo" data-f="${esc(c.file)}" tabindex="0" role="button" aria-label="Ver cromo de ${esc(c.name)}" onclick="openCromo(this.dataset.f)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openCromo(this.dataset.f)}"><img src="${cSrc(c)}" alt="Cromo de ${esc(c.name)}${c.num?" (dorsal "+esc(c.num)+")":""}" loading="lazy"></div>`}
-function renderCromos(){
- const jug=CROMOS.filter(c=>!c.coach),conv=jug.filter(c=>cEst(c)==="convocado"),desc=jug.filter(c=>cEst(c)==="descartado"),tec=CROMOS.filter(c=>c.coach);
- const sec=(t,l,cls,mk,u,em)=>`<section class="squad-section ${cls}"><div class="squad-heading"><div class="squad-title-mark">${mk}</div><div><h2>${t}</h2><p>${l.length} ${u}</p></div><span class="squad-count">${l.length}</span></div>${l.length?`<div class="cards-grid">${l.map(cromoCard).join("")}</div>`:`<div class="empty">${em}</div>`}</section>`;
- return`<section class="cards-head"><div><h2>Jugadores · Torrejón Juncal B</h2><p class="gap">Temporada 2026/27</p></div><span class="dt">${jug.length} jugadores · ${tec.length} entrenadores</span></section>`
-  +sec("Convocados",conv,"convocados","✓",conv.length===1?"jugador":"jugadores","No hay jugadores convocados.")
-  +sec("No convocados",desc,"descartados","–",desc.length===1?"jugador":"jugadores","No hay jugadores no convocados.")
-  +sec("Cuerpo técnico",tec,"tecnico","★",tec.length===1?"entrenador":"entrenadores","Sin entrenadores.")}
-function renderConv(){
- const jug=CROMOS.filter(c=>!c.coach),n=jug.filter(c=>cEst(c)==="convocado").length;
- return`<div class="card"><small class="gap">Pulsa SÍ o NO en cada jugador. Los no convocados aparecen en su apartado de la pestaña Jugadores.</small><div class="cvsum"><span class="cvs">✓ ${n} convocados</span><span class="cvs x">✕ ${jug.length-n} no convocados</span></div></div>`
-  +`<div class="cvg">${jug.map(c=>{const st=cEst(c)==="convocado";return`<div class="cvc ${st?"si":"no"}"><img src="${cSrc(c)}" alt="Cromo de ${esc(c.name)}"><div class="cvname"><b>${esc(c.name)}</b><span class="gap">${c.num?"#"+esc(c.num)+" · ":""}${POSN[c.pos]||esc(c.pos)}</span></div><div class="cvb"><button class="s" aria-pressed="${st}" aria-label="${esc(c.name)} convocado" onclick="setCon('${c.key}','convocado')">SÍ</button><button class="n" aria-pressed="${!st}" aria-label="${esc(c.name)} no convocado" onclick="setCon('${c.key}','descartado')">NO</button></div></div>`}).join("")}</div>`}
+function setCon(k,v){if(!E())return;S.estado=S.estado||{};S.estado[k]=v;save()}
+function renderJug(){
+ const ed=E(),jug=CROMOS.filter(c=>!c.coach),tec=CROMOS.filter(c=>c.coach);
+ const tile=c=>{const st=cEst(c)==="convocado",f=esc(c.file),
+  sw=ed?`<div class="cvb"><button class="s" aria-pressed="${st}" aria-label="${esc(c.name)} convocado" onclick="setCon('${c.key}','convocado')">SÍ</button><button class="n" aria-pressed="${!st}" aria-label="${esc(c.name)} no convocado" onclick="setCon('${c.key}','descartado')">NO</button></div>`
+   :`<div class="cvb ro" role="img" aria-label="${esc(c.name)}: ${st?"convocado":"no convocado"}"><span class="s">SÍ</span><span class="n">NO</span></div>`;
+  return`<div class="cvc ${st?"si":"no"}"><img src="${cSrc(c)}" alt="Cromo de ${esc(c.name)}" loading="lazy" onclick="openCromo('${f}')"><div class="cvname"><b>${esc(c.name)}</b><span class="gap">${c.num?"#"+esc(c.num)+" · ":""}${POSN[c.pos]||esc(c.pos)}</span></div><div class="cvl">CONVOCADO</div>${sw}</div>`};
+ const sec=(t,l)=>{const n=l.filter(c=>cEst(c)==="convocado").length;return`<div class="cvhd"><h2>${t}</h2><span class="cvs">✓ ${n}</span><span class="cvs x">✕ ${l.length-n}</span></div><div class="cvg">${l.map(tile).join("")}</div>`};
+ return`<div class="card"><h2 style="font-size:1.6rem;color:#0f2a6b;line-height:1.1">Jugadores · Torrejón Juncal B</h2><small class="gap">${ed?"Pulsa SÍ o NO en cada persona para cambiar la convocatoria.":"Temporada 2026/27"}</small></div>`
+  +sec("Jugadores",jug)+sec("Cuerpo técnico",tec)}
 function openCromo(f){
  const c=CROMOS.find(x=>x.file===f);if(!c)return;
  closeCromo();
@@ -640,7 +643,7 @@ function setEdit(on){
     try{ sessionStorage.removeItem("adm"); sessionStorage.removeItem("pw"); }catch(e){} 
     PW = "";
     TS.on=false;
-    if(tab=="pla"||tab=="hor"||tab=="con") tab="jor"; 
+    if(tab=="pla"||tab=="hor") tab="jor"; 
   }
   render();
 }

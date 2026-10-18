@@ -141,6 +141,32 @@ select{font:inherit;background:var(--bg);color:var(--tx);border:1px solid var(--
 .dot{animation:bl 1.2s infinite}@keyframes bl{50%{opacity:.25}}
 @media(max-width:560px){.mt{grid-template-columns:1fr auto 1fr}.tm{flex-direction:column;text-align:center!important;gap:4px;font-size:.85rem}.sc{min-width:70px;font-size:1.5rem}.b{width:38px;height:38px}}
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
+/* ===== Celebración de gol ===== */
+#golOv{position:fixed;inset:0;z-index:9998;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1.2vmin;padding:10px;text-align:center;cursor:pointer;overflow:hidden;color:#fff;background:radial-gradient(circle at 50% 42%,#3d8bff,#1e4fd8 40%,#0f2a78 72%,#050b1f);animation:goBg .3s both}
+#golOv.rot{inset:auto;top:0;left:100%;width:100vh;width:100dvh;height:100vw;transform-origin:0 0;transform:rotate(90deg)}
+#golOv.out{animation:goOut .35s both}
+@keyframes goBg{from{opacity:0}}
+@keyframes goOut{to{opacity:0}}
+#golOv .go-t{font:800 clamp(3.4rem,19vmin,11rem)/1 'Barlow Condensed',sans-serif;letter-spacing:.05em;color:var(--ye);text-shadow:0 0 34px #ffd23fcc,0 5px 0 #b45309;animation:goPop .85s cubic-bezier(.2,1.7,.4,1) both,goPulse 1s .85s ease-in-out infinite;position:relative;z-index:2}
+@keyframes goPop{from{transform:scale(0) rotate(-14deg);opacity:0}}
+@keyframes goPulse{50%{transform:scale(1.09) rotate(-2deg)}}
+#golOv .go-c{position:relative;z-index:2;display:flex;align-items:center;justify-content:center;animation:goCard .9s .1s cubic-bezier(.2,1.5,.4,1) both}
+#golOv .go-c:before{content:"";position:absolute;inset:-9%;border-radius:50%;background:radial-gradient(circle,#ffd23fcc,transparent 66%);animation:goGlow 1.2s ease-in-out infinite}
+#golOv .go-c img{position:relative;display:block;max-height:52vh;max-width:78vw;width:auto;height:auto;border-radius:18px;box-shadow:0 14px 50px #000a;animation:goWig 1.6s 1s ease-in-out infinite}
+#golOv .go-c svg{position:relative;width:34vmin;height:auto;filter:drop-shadow(0 10px 24px #000a)}
+@keyframes goCard{from{transform:scale(0) rotate(-28deg);opacity:0}60%{transform:scale(1.14) rotate(6deg)}}
+@keyframes goGlow{50%{transform:scale(1.14);opacity:.65}}
+@keyframes goWig{0%,100%{transform:rotate(-3deg) translateY(0)}50%{transform:rotate(3deg) translateY(-1.4vmin)}}
+#golOv .go-n{font:800 clamp(1.5rem,7vmin,3.4rem)/1.1 'Barlow Condensed',sans-serif;letter-spacing:.04em;position:relative;z-index:2;animation:goUp .6s .5s both}
+#golOv .go-s{font:600 clamp(.9rem,3.6vmin,1.5rem)/1.2 Barlow,sans-serif;color:#dbe7ff;position:relative;z-index:2;animation:goUp .6s .7s both}
+@keyframes goUp{from{transform:translateY(16px);opacity:0}}
+#golOv .go-k{position:absolute;top:-8vh;pointer-events:none;z-index:1;will-change:transform;animation:goFall linear infinite}
+@keyframes goFall{to{transform:translateY(118vh) rotate(720deg)}}
+/* miniatura en goleadores */
+.gl{grid-template-columns:30px 44px 1fr 40px}
+.gmini{width:44px;height:auto;max-height:62px;object-fit:contain;border-radius:6px;box-shadow:0 2px 8px #0f1b3d40;cursor:pointer;display:block}
+.gmini.no{display:grid;place-items:center;width:44px;height:44px;box-shadow:none}
 </style>
 </head>
 <body>
@@ -298,7 +324,7 @@ function jsel(){const c=(nextM()||{r:{n:0}}).r.n;
 function render(){
  if(loading){document.getElementById("hero").style.display="none";document.getElementById("nav").innerHTML="";document.getElementById("app").innerHTML="";return}
  document.getElementById("hero").style.display="";
- document.getElementById("hero").innerHTML=hero();fit();tick();
+ document.getElementById("hero").innerHTML=hero();fit();tick();goalWatch();
  if(jnAuto){const nx=nextM();jn=nx?nx.r.n:J.length}
  const tabs=[["jor","🗓 Jornadas"],["cal","📅 Mi calendario"],["cla","🏆 Clasificación"],["gol","👟 Goleadores"],["cro","🎽 Jugadores"]];if(E())tabs.push(["con","✅ Convocatoria"],["hor","🕒 Horarios"],["pla","👥 Plantilla"]);
  const nv=document.getElementById("nav"),big=tabs.length>4;nv.style.setProperty("--n",big?3:4);nv.className=big?"x":"";
@@ -309,7 +335,7 @@ function render(){
  if(tab=="cla"){h=`<table><tr><th>#</th><th>Equipo</th><th>PJ</th><th>G</th><th>E</th><th>P</th><th>GF</th><th>GC</th><th>DG</th><th>Pts</th></tr>${table().map((t,i)=>`<tr class="${t.id==ME?'me':''}"><td>${i+1}</td><td>${nm(t.id)}</td><td>${t.pj}</td><td>${t.g}</td><td>${t.e}</td><td>${t.p}</td><td>${t.gf}</td><td>${t.gc}</td><td>${t.dg>0?"+":""}${t.dg}</td><td><b>${t.pts}</b></td></tr>`).join("")}</table>`}
  if(tab=="hor"&&E())h=`<div class="card"><small class="gap">Pon la fecha y la hora de cada partido del Juncal B. Si dejas la hora vacía, se muestra "hora por confirmar".</small></div>`+myM().filter(x=>x.h&&x.a).map(x=>{const m=M(x.r.n,x.h);return`<div class="card" style="display:flex;gap:10px;align-items:center;flex-wrap:wrap"><b class="cn" style="color:var(--ye2);font-size:1.2rem;min-width:90px">Jornada ${x.r.n}</b><span style="flex:1;min-width:160px">${nm(x.h)} - ${nm(x.a)}</span><input type="date" value="${m.d||x.r.d}" onchange="ed(${x.r.n},${x.h},'d',this.value)"><input type="time" value="${esc(m.t)}" onchange="ed(${x.r.n},${x.h},'t',this.value)"></div>`}).join("");
  if(tab=="pla"&&E())h=`<div class="card"><div class="ed" style="display:flex"><input id="np" style="flex:1;min-width:200px" placeholder="Nº y nombre, ej: 7 Ana Ruiz (varios separados por coma)"><button onclick="addP()">＋ Añadir</button></div></div>`+(S.pl.map((p,i)=>`<div class="card" style="display:flex;justify-content:space-between;align-items:center"><span style="display:flex;align-items:center;gap:10px">${shirt(pn(p).num,"#2f7bff")}${esc(pn(p).name)}</span><span style="display:flex;gap:8px;align-items:center"><input class="g" type="number" min="0" max="99" placeholder="Nº" value="${esc(pn(p).num)}" onchange="setDn(${i},this.value)"><button onclick="delP(${i})">Eliminar</button></span></div>`).join("")||'<div class="empty">Aún no hay jugadores.</div>');
- if(tab=="gol"){const s=scorers(),mx=s[0]?.g||1;h=s.length?s.map((x,i)=>`<div class="gl card" style="--i:${i}"><b class="cn" style="font-size:1.4rem;color:var(--ye2)">${i+1}</b><div><div>${esc(pn(x.n).name)}</div><div class="bar" style="width:${x.g/mx*100}%"></div></div><b class="cn" style="font-size:1.6rem">${x.g}</b></div>`).join(""):`<div class="empty">⚽ Aún no hay goles registrados.</div>`}
+ if(tab=="gol"){const s=scorers(),mx=s[0]?.g||1;h=s.length?s.map((x,i)=>`<div class="gl card" style="--i:${i}"><b class="cn" style="font-size:1.4rem;color:var(--ye2)">${i+1}</b>${gMini(x.n)}<div><div>${esc(pn(x.n).name)}</div><div class="bar" style="width:${x.g/mx*100}%"></div></div><b class="cn" style="font-size:1.6rem">${x.g}</b></div>`).join(""):`<div class="empty">⚽ Aún no hay goles registrados.</div>`}
  if(tab=="cro")h=renderCromos();
  if(tab=="con"&&E())h=renderConv();
  document.getElementById("app").innerHTML=h}
@@ -343,6 +369,38 @@ function openCromo(f){
  ov.innerHTML=`<div style="position:relative;line-height:0"><div class="cromo mod"><img src="${cSrc(c)}" alt="Cromo de ${esc(c.name)}" style="display:block;max-height:86vh;max-width:90vw;width:auto;height:auto;border-radius:20px"></div><button aria-label="Cerrar" style="position:absolute;top:-12px;right:-12px;width:42px;height:42px;padding:0;border-radius:50%;font-size:1.4rem;line-height:1;background:#fff;color:#10234b;border:2px solid #dbeafe;cursor:pointer">×</button></div>`;
  ov.onclick=e=>{if(e.target===ov||e.target.tagName==="BUTTON")closeCromo()};
  document.body.appendChild(ov);document.body.style.overflow="hidden"}
+
+/* ===== Cromo del goleador + celebración de gol ===== */
+function cromoFor(n){
+ if(!n||String(n).startsWith("Propia"))return null;
+ const p=pn(n),t=noacc(p.name.split(/\s+/)[0]),j=CROMOS.filter(c=>!c.coach),m=j.filter(c=>noacc(c.name)===t);
+ return m.length>1?(m.find(c=>c.num==p.num)||m[0]):m[0]||(p.num&&j.find(c=>c.num==p.num))||null}
+function gMini(n){const c=cromoFor(n);
+ return c?`<img class="gmini" src="${cSrc(c)}" alt="Cromo de ${esc(c.name)}" loading="lazy" onclick="openCromo('${esc(c.file)}')">`:`<span class="gmini no">${shirt(pn(n).num,"#2f7bff")}</span>`}
+let GW=null;
+function goalWatch(){
+ const lv=liveM();if(!lv){GW=null;return}
+ const m=M(lv.r.n,lv.h),k=lv.r.n+"_"+lv.h,g=Object.assign({},m.g||{});
+ if(!GW||GW.k!==k){GW={k,g};try{CROMOS.forEach(c=>{new Image().src=cSrc(c)})}catch(e){}return}
+ let n=null;for(const q in g)if((g[q]||0)>(GW.g[q]||0))n=q;
+ GW={k,g};if(n)celebrate(n,m,lv)}
+function celebrate(n,m,lv){
+ closeGol();
+ const own=String(n).startsWith("Propia"),c=cromoFor(n),p=pn(n),mins=(m.gm&&m.gm[n])||[],mi=mins.length?Math.max(...mins):0;
+ const ov=document.createElement("div");ov.id="golOv";
+ if(FS&&innerHeight>innerWidth)ov.classList.add("rot");
+ const face=c?`<img src="${cSrc(c)}" alt="Cromo de ${esc(c.name)}">`:own?`<span style="font-size:26vmin;line-height:1;position:relative">⚽</span>`:shirt(p.num,"#2f7bff");
+ const nom=own?"¡Gol en propia puerta del rival!":esc(p.name)+(p.num?" · "+esc(p.num):"");
+ ov.innerHTML=`<div class="go-t">¡GOL!</div><div class="go-c">${face}</div><div class="go-n">${nom}</div><div class="go-s">${mi?"Minuto "+mi+"' · ":""}${esc(nm(lv.h))} ${m.h||0} - ${m.a||0} ${esc(nm(lv.a))}</div>`;
+ const E_=["⚽","🎉","⭐","🥅","✨"],cols=["#ffd23f","#2f7bff","#22c55e","#fff","#f472b6"];
+ for(let i=0;i<46;i++){const e=document.createElement("span");e.className="go-k";const em=Math.random()<.4;
+  e.textContent=em?E_[i%E_.length]:"";
+  e.style.cssText=`left:${Math.random()*100}%;animation-duration:${2.6+Math.random()*3}s;animation-delay:-${Math.random()*4}s;`+(em?`font-size:${18+Math.random()*22}px`:`width:${7+Math.random()*7}px;height:${12+Math.random()*10}px;background:${cols[i%cols.length]};border-radius:2px`);
+  ov.appendChild(e)}
+ ov.onclick=closeGol;document.body.appendChild(ov);
+ try{if(navigator.vibrate)navigator.vibrate([120,60,120])}catch(e){}
+ clearTimeout(celebrate.t);celebrate.t=setTimeout(closeGol,6500)}
+function closeGol(){clearTimeout(celebrate.t);const o=document.getElementById("golOv");if(o)o.remove()}
 function closeCromo(){const o=document.getElementById("cromoOv");if(o)o.remove();document.body.style.overflow=""}
 document.addEventListener("click",e=>{const c=e.target.closest&&e.target.closest(".cromo[data-f]");if(c)openCromo(c.dataset.f)});
 

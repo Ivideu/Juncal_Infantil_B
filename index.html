@@ -315,6 +315,14 @@ select{font:inherit;background:var(--bg);color:var(--tx);border:1px solid var(--
 .cvst.n{background:#ef4444;box-shadow:0 4px 14px #ef444466}
 
 .cvsub{margin-top:6px;font:600 1.05rem/1.45 Barlow,system-ui,sans-serif;color:var(--tx)}
+
+/* Plantilla: botón activo/inactivo y jugadores sin cromo */
+.plt{font-weight:700;background:#e5e9f5;color:#5a6a93}
+.plt.act{background:#22c55e;border-color:#22c55e;color:#fff}
+.cvph{width:100%;max-width:130px;aspect-ratio:11/20;display:grid;place-items:center;border-radius:10px;background:linear-gradient(160deg,#1d3a8a,#0a1a4d);border:2px solid #7aa9ff;transition:opacity .2s,filter .2s}
+.cvph svg{width:72%;height:auto}
+.cvc.no .cvph{opacity:.55;filter:grayscale(.7)}
+#pickOv .pk-o svg{width:46%;height:auto}
 </style>
 </head>
 <body>
@@ -351,7 +359,8 @@ const J=R.map((s,i)=>{const[d,p]=s.split("|");return{n:i+1,d:d.split("-").revers
 const API=""; // 
 const FB="https://juncal-f0b64-default-rtdb.europe-west1.firebasedatabase.app",FBKEY="AIzaSyDXqBUkie30z_Cmyj__ayhzGYyYxZMrB3Q",FBMAIL="ivanblasco81@hotmail.com"; // Firebase en tiempo real configurado
 let S={u:0,m:{},pl:[]};
-const fix=()=>{S.m=S.m||{};S.pl=S.pl||[];S.dn=S.dn||{}};
+const fix=()=>{S.m=S.m||{};S.pl=S.pl||[];S.dn=S.dn||{};S.off=S.off||{}};
+const isOff=p=>!!(S.off&&S.off[p]);
 let CACHE=null;try{CACHE=JSON.parse(localStorage.getItem("juncalB"))}catch(e){}
 if(!API&&CACHE)S=CACHE;fix();let loading=!!(API||FB);
 let PW="",pt;const setSt=t=>{document.getElementById("st").textContent=t};
@@ -394,7 +403,8 @@ function eg(j,h,k){const m=S.m[j+"_"+h],e=evs(m)[k];if(!e)return;const q=prompt(
 function remG(j,h,i){const m=S.m[j+"_"+h],k=Object.keys(m.g)[i];if(--m.g[k]<1)delete m.g[k];if(!Object.keys(m.g).length)delete m.g;trimMin(m,k);save()}
 function addP(){document.getElementById("np").value.split(/[,\n]/).map(x=>x.trim()).filter(Boolean).forEach(x=>{const r=x.match(/^#?(\d{1,2})[\s.\-–]+(.+)$/),n=(r?r[2]:x).trim().replace(/[.$#\[\]\/]/g,"");if(!S.pl.includes(n))S.pl.push(n);if(r)S.dn[n]=r[1]});S.pl.sort((a,b)=>a.localeCompare(b));save()}
 function setDn(i,v){const n=S.pl[i];if(v==="")delete S.dn[n];else S.dn[n]=String(v);save()}
-function delP(i){if(confirm("¿Eliminar a "+S.pl[i]+" de la plantilla?")){delete S.dn[S.pl[i]];S.pl.splice(i,1);save()}}
+function togP(i){const n=S.pl[i];if(!n)return;S.off=S.off||{};if(S.off[n])delete S.off[n];else S.off[n]=1;save()}
+function delP(i){const n=S.pl[i];if(confirm("¿Eliminar a "+n+" de la plantilla?")){delete S.dn[n];if(S.off)delete S.off[n];if(S.estado)delete S.estado["p_"+n];S.pl.splice(i,1);save()}}
 function card(r,h,a,i){
  const m=M(r.n,h),d=m.d||r.d,me=h==ME||a==ME,pl=done(m);
  if(!h||!a){const id=h||a;return`<div class="card rest ${id==ME?'me':''}" style="--i:${i}"><div class="top"><span>${id==ME?`<b>Jornada ${r.n}</b> · <span class="dt">${fmt(r.d)}</span>`:nm(id)}</span></div><div class="tm">${bd(0)} Descansa esta jornada</div></div>`}
@@ -407,7 +417,7 @@ function card(r,h,a,i){
  if(me){x+=`<div class="meta"><span>${loc(h,m)}</span>${!m.t&&!pl?"<span>⏳ Hora por confirmar</span>":""}${sc?`<div class="gls">${sc}</div>`:""}</div>`}
  if(E())x+=`<div class="ed"><span>Resultado</span><input class="g" type="number" min="0" value="${esc(m.h)}" onchange="ed(${r.n},${h},'h',this.value)"> - <input class="g" type="number" min="0" value="${esc(m.a)}" onchange="ed(${r.n},${h},'a',this.value)">
  <input type="date" value="${m.d||r.d}" onchange="ed(${r.n},${h},'d',this.value)"><input type="time" value="${esc(m.t)}" onchange="ed(${r.n},${h},'t',this.value)">
- ${me?`<div style="width:100%"><span>Goleador:</span> <select id="sel${r.n}">${S.pl.map(p=>`<option value="${esc(p)}">${pn(p).num?pn(p).num+" · ":""}${esc(pn(p).name)}</option>`).join("")}<option>Propia puerta (rival)</option></select> <input class="g" id="min${r.n}" type="number" min="1" max="60" placeholder="Min"> <button onclick="addG(${r.n},${h})">＋ Gol</button>${S.pl.length?"":' <small class="gap">Añade jugadores en la pestaña Plantilla</small>'}<div class="gc">${evs(m).map((e,k)=>`<button onclick="eg(${r.n},${h},${k})" title="Cambiar el minuto o borrar el gol">${e.t?e.t+"' ":"–' "}${esc(pn(e.n).name)} ✎</button>`).join("")}</div></div>`:""}</div>`;
+ ${me?`<div style="width:100%"><span>Goleador:</span> <select id="sel${r.n}">${S.pl.filter(p=>!isOff(p)).map(p=>`<option value="${esc(p)}">${pn(p).num?pn(p).num+" · ":""}${esc(pn(p).name)}</option>`).join("")}<option>Propia puerta (rival)</option></select> <input class="g" id="min${r.n}" type="number" min="1" max="60" placeholder="Min"> <button onclick="addG(${r.n},${h})">＋ Gol</button>${S.pl.length?"":' <small class="gap">Añade jugadores en la pestaña Plantilla</small>'}<div class="gc">${evs(m).map((e,k)=>`<button onclick="eg(${r.n},${h},${k})" title="Cambiar el minuto o borrar el gol">${e.t?e.t+"' ":"–' "}${esc(pn(e.n).name)} ✎</button>`).join("")}</div></div>`:""}</div>`;
  x+="</div>";
  return x}
 const myM=()=>J.map(r=>{const p=r.p.find(q=>q.includes(ME));return{r,h:p[0],a:p[1]}});
@@ -478,12 +488,13 @@ function lg(j,h,side,d,who){const m=MS(j)[j+"_"+h]||(MS(j)[j+"_"+h]={}),me=h==ME
  m[k]+=d;save(j===0)}
 function pickGol(j,h){
  closePick();
- const jug=CROMOS.filter(c=>!c.coach&&cEst(c)==="convocado");
+ const jug=jugList().filter(c=>cEst(c)==="convocado");
  const ov=document.createElement("div");ov.id="pickOv";
  if(FS&&innerHeight>innerWidth)ov.classList.add("rot");
- ov.innerHTML=`<div class="pk-h">¿QUIÉN HA MARCADO?</div><div class="pk-g">${jug.map(c=>`<button class="pk-c" data-f="${esc(c.file)}" aria-label="${esc(c.name)}"><img src="${cSrc(c)}" alt="${esc(c.name)}"></button>`).join("")}<button class="pk-c pk-o" data-o="1"><span>⚽</span><b>En propia puerta del rival</b></button></div><button class="pk-x">Cancelar</button>`;
+ ov.innerHTML=`<div class="pk-h">¿QUIÉN HA MARCADO?</div><div class="pk-g">${jug.map(c=>c.extra?`<button class="pk-c pk-o" data-p="${esc(c.pl)}" aria-label="${esc(c.name)}">${shirt(c.num,"#2f7bff")}<b>${esc(c.name)}</b></button>`:`<button class="pk-c" data-f="${esc(c.file)}" aria-label="${esc(c.name)}"><img src="${cSrc(c)}" alt="${esc(c.name)}"></button>`).join("")}<button class="pk-c pk-o" data-o="1"><span>⚽</span><b>En propia puerta del rival</b></button></div><button class="pk-x">Cancelar</button>`;
  ov.onclick=e=>{const b=e.target.closest("button");
   if(b&&b.dataset.f)goalBy(j,h,b.dataset.f);
+  else if(b&&b.dataset.p!==undefined)goalBy(j,h,"",b.dataset.p);
   else if(b&&b.dataset.o)goalBy(j,h,"");
   else if((b&&b.classList.contains("pk-x"))||e.target===ov)closePick()};
  document.body.appendChild(ov);fitPick();ov.querySelectorAll("img").forEach(i=>{if(!i.complete)i.onload=fitPick})}
@@ -492,12 +503,12 @@ function fitPick(){const ov=document.getElementById("pickOv");if(!ov)return;ov.c
  let best=0,bc=1;for(let c=1;c<=n;c++){const r=Math.ceil(n/c),w=(W-gap*(c-1))/c,h=(H-gap*(r-1))/r,z=Math.min(w,h*ar);if(z>best){best=z;bc=c}}
  best=Math.floor(best);g.style.gap=gap+"px";g.style.gridTemplateColumns=`repeat(${bc},${best}px)`;
  g.querySelectorAll(".pk-c").forEach(b=>{b.style.width=best+"px";b.style.height=Math.floor(best/ar)+"px"});
- const o=ov.querySelector(".pk-o");if(o)o.style.fontSize=Math.max(11,best/9)+"px"}
+ ov.querySelectorAll(".pk-o").forEach(o=>o.style.fontSize=Math.max(11,best/9)+"px")}
 addEventListener("resize",()=>fitPick());
 function closePick(){const o=document.getElementById("pickOv");if(o)o.remove()}
-function goalBy(j,h,f){
+function goalBy(j,h,f,pl){
  closePick();
- let n="Propia puerta (rival)";
+ let n=pl||"Propia puerta (rival)";
  if(f){const c=CROMOS.find(x=>x.file===f);if(!c)return;
   n=S.pl.find(p=>cromoFor(p)===c)||c.name;
   if(j!==0&&!S.pl.includes(n)){S.pl.push(n);S.pl.sort((a,b)=>a.localeCompare(b));S.dn[n]=c.num}}
@@ -547,7 +558,7 @@ function render(){
  if(tab=="jor"){h=jsel()+[...J[jn-1].p].sort((x,y)=>y.includes(ME)-x.includes(ME)).map((p,i)=>card(J[jn-1],p[0],p[1],i)).join("")}
  if(tab=="cla"){h=`<table><tr><th>#</th><th>Equipo</th><th>PJ</th><th>G</th><th>E</th><th>P</th><th>GF</th><th>GC</th><th>DG</th><th>Pts</th></tr>${table().map((t,i)=>`<tr class="${t.id==ME?'me':''}"><td>${i+1}</td><td>${nm(t.id)}</td><td>${t.pj}</td><td>${t.g}</td><td>${t.e}</td><td>${t.p}</td><td>${t.gf}</td><td>${t.gc}</td><td>${t.dg>0?"+":""}${t.dg}</td><td><b>${t.pts}</b></td></tr>`).join("")}</table>`}
  if(tab=="hor"&&E())h=`<div class="card"><small class="gap">Pon la fecha y la hora de cada partido del Juncal B. Si dejas la hora vacía, se muestra "hora por confirmar".</small></div>`+myM().filter(x=>x.h&&x.a).map(x=>{const m=M(x.r.n,x.h);return`<div class="card" style="display:flex;gap:10px;align-items:center;flex-wrap:wrap"><b class="cn" style="color:var(--ye2);font-size:1.2rem;min-width:90px">Jornada ${x.r.n}</b><span style="flex:1;min-width:160px">${nm(x.h)} - ${nm(x.a)}</span><input type="date" value="${m.d||x.r.d}" onchange="ed(${x.r.n},${x.h},'d',this.value)"><input type="time" value="${esc(m.t)}" onchange="ed(${x.r.n},${x.h},'t',this.value)"></div>`}).join("");
- if(tab=="pla"&&E())h=`<div class="card"><div class="ed" style="display:flex"><input id="np" style="flex:1;min-width:200px" placeholder="Nº y nombre, ej: 7 Ana Ruiz (varios separados por coma)"><button onclick="addP()">＋ Añadir</button></div></div>`+(S.pl.map((p,i)=>`<div class="card" style="display:flex;justify-content:space-between;align-items:center"><span style="display:flex;align-items:center;gap:10px">${shirt(pn(p).num,"#2f7bff")}${esc(pn(p).name)}</span><span style="display:flex;gap:8px;align-items:center"><input class="g" type="number" min="0" max="99" placeholder="Nº" value="${esc(pn(p).num)}" onchange="setDn(${i},this.value)"><button onclick="delP(${i})">Eliminar</button></span></div>`).join("")||'<div class="empty">Aún no hay jugadores.</div>');
+ if(tab=="pla"&&E())h=`<div class="card"><div class="ed" style="display:flex"><input id="np" style="flex:1;min-width:200px" placeholder="Nº y nombre, ej: 7 Ana Ruiz (varios separados por coma)"><button onclick="addP()">＋ Añadir</button></div><small class="gap" style="display:block;margin-top:8px">Activo: aparece en la convocatoria y en el selector de goleadores. Inactivo: se oculta pero se conserva. Eliminar lo borra del todo.</small></div>`+(S.pl.map((p,i)=>{const off=isOff(p);return`<div class="card" style="display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap"><span style="display:flex;align-items:center;gap:10px;${off?"opacity:.5":""}">${shirt(pn(p).num,off?"#9aa5c4":"#2f7bff")}${esc(pn(p).name)}</span><span style="display:flex;gap:8px;align-items:center;flex-wrap:wrap"><input class="g" type="number" min="0" max="99" placeholder="Nº" value="${esc(pn(p).num)}" onchange="setDn(${i},this.value)"><button class="plt ${off?"":"act"}" aria-pressed="${!off}" onclick="togP(${i})">${off?"⏸ Inactivo":"✔ Activo"}</button><button onclick="delP(${i})">Eliminar</button></span></div>`}).join("")||'<div class="empty">Aún no hay jugadores.</div>');
  if(tab=="gol"){const s=scorers(),mx=s[0]?.g||1;h=s.length?s.map((x,i)=>`<div class="gl card" style="--i:${i}"><b class="cn" style="font-size:1.4rem;color:var(--ye2)">${i+1}</b>${gMini(x.n)}<div><div>${esc(pn(x.n).name)}</div><div class="bar" style="width:${x.g/mx*100}%"></div></div><b class="cn" style="font-size:1.6rem">${x.g}</b></div>`).join(""):`<div class="empty">⚽ Aún no hay goles registrados.</div>`}
  if(tab=="cro")h=renderJug();
  document.getElementById("app").innerHTML=h}
@@ -563,13 +574,15 @@ const cSrc=c=>CROMOS_DIR+encodeURIComponent(c.file);
 const cEst=c=>(S.estado&&S.estado[c.key])||"convocado";
 function setCon(k,v){if(!E())return;S.estado=S.estado||{};S.estado[k]=v;save()}
 function renderJug(){
- const ed=E(),jug=CROMOS.filter(c=>!c.coach),tec=CROMOS.filter(c=>c.coach),nx=nextM(),nm_=nx?M(nx.r.n,nx.h):{};
+ const ed=E(),jug=jugList(),tec=CROMOS.filter(c=>c.coach),nx=nextM(),nm_=nx?M(nx.r.n,nx.h):{};
  const tit=nx?`Jugadores convocados para la Jornada ${nx.r.n}`:"Jugadores convocados",
   sub=nx?`📅 ${fmt(nm_.d||nx.r.d)}${nm_.t?" · "+esc(nm_.t)+" h":""}<br>⚽ ${esc(nm(nx.h))} vs ${esc(nm(nx.a))}`:"Temporada 2026/27";
- const tile=c=>{const st=cEst(c)==="convocado",f=esc(c.file),
-  sw=ed?`<div class="cvb"><button class="s" aria-pressed="${st}" aria-label="${esc(c.name)} convocado" onclick="setCon('${c.key}','convocado')">SÍ</button><button class="n" aria-pressed="${!st}" aria-label="${esc(c.name)} no convocado" onclick="setCon('${c.key}','descartado')">NO</button></div>`
-   :`<div class="cvst ${st?"s":"n"}" role="img" aria-label="${esc(c.name)}: ${st?"convocado":"no convocado"}">${st?"SÍ CONVOCADO":"NO CONVOCADO"}</div>`;
-  return`<div class="cvc ${st?"si":"no"}"><img src="${cSrc(c)}" alt="Cromo de ${esc(c.name)}" loading="lazy" onclick="openCromo('${f}')"><div class="cvname"><b>${esc(c.name)}</b><span class="gap">${c.num?"#"+esc(c.num)+" · ":""}${POSN[c.pos]||esc(c.pos)}</span></div>${ed?`<div class="cvl">CONVOCADO</div>`:""}${sw}</div>`};
+ const tile=c=>{const st=cEst(c)==="convocado",k=esc(c.key),
+  lab=[c.num?"#"+c.num:"",POSN[c.pos]||c.pos||""].filter(Boolean).map(esc).join(" · "),
+  sw=ed?`<div class="cvb"><button class="s" aria-pressed="${st}" aria-label="${esc(c.name)} convocado" data-k="${k}" onclick="setCon(this.dataset.k,'convocado')">SÍ</button><button class="n" aria-pressed="${!st}" aria-label="${esc(c.name)} no convocado" data-k="${k}" onclick="setCon(this.dataset.k,'descartado')">NO</button></div>`
+   :`<div class="cvst ${st?"s":"n"}" role="img" aria-label="${esc(c.name)}: ${st?"convocado":"no convocado"}">${st?"SÍ CONVOCADO":"NO CONVOCADO"}</div>`,
+  im=c.extra?`<div class="cvph" aria-hidden="true">${shirt(c.num,"#2f7bff")}</div>`:`<img src="${cSrc(c)}" alt="Cromo de ${esc(c.name)}" loading="lazy" onclick="openCromo('${esc(c.file)}')">`;
+  return`<div class="cvc ${st?"si":"no"}">${im}<div class="cvname"><b>${esc(c.name)}</b><span class="gap">${lab}</span></div>${ed?`<div class="cvl">CONVOCADO</div>`:""}${sw}</div>`};
  const sec=(t,l)=>{const n=l.filter(c=>cEst(c)==="convocado").length;return`<div class="cvhd"><h2>${t}</h2><span class="cvs">✓ ${n}</span><span class="cvs x">✕ ${l.length-n}</span></div><div class="cvg">${l.map(tile).join("")}</div>`};
  return`<div class="card"><h2 style="font-size:1.6rem;color:#0f2a6b;line-height:1.1">${tit}</h2><div class="cvsub">${sub}</div>${ed?'<small class="gap">Pulsa SÍ o NO en cada persona para cambiar la convocatoria.</small>':""}</div>`
   +sec("Jugadores",jug)+sec("Cuerpo técnico",tec)}
@@ -585,8 +598,14 @@ function openCromo(f){
 /* ===== Cromo del goleador + celebración de gol ===== */
 function cromoFor(n){
  if(!n||String(n).startsWith("Propia"))return null;
- const p=pn(n),t=noacc(p.name.split(/\s+/)[0]),j=CROMOS.filter(c=>!c.coach),m=j.filter(c=>noacc(c.name)===t);
- return m.length>1?(m.find(c=>c.num==p.num)||m[0]):m[0]||(p.num&&j.find(c=>c.num==p.num))||null}
+ const p=pn(n),t=noacc(p.name.split(/\s+/)[0]),j=CROMOS.filter(c=>!c.coach),m=j.filter(c=>noacc(c.name)===t&&(!p.num||!c.num||c.num==p.num));
+ return m[0]||null}
+/* Jugadores visibles en convocatoria: cromos no desactivados + jugadores de la plantilla sin cromo (otros niveles) */
+function jugList(){
+ const hid=new Set(),ext=[];
+ S.pl.forEach(p=>{const c=cromoFor(p);if(isOff(p)){if(c)hid.add(c)}else if(!c){const q=pn(p);ext.push({file:"",key:"p_"+p,name:q.name,num:q.num,pos:"",coach:false,extra:true,pl:p})}});
+ ext.sort((a,b)=>(+a.num||999)-(+b.num||999)||a.name.localeCompare(b.name));
+ return CROMOS.filter(c=>!c.coach&&!hid.has(c)).concat(ext)}
 function gMini(n){const c=cromoFor(n);
  return c?`<img class="gmini" src="${cSrc(c)}" alt="Cromo de ${esc(c.name)}" loading="lazy" onclick="openCromo('${esc(c.file)}')">`:`<span class="gmini no">${shirt(pn(n).num,"#2f7bff")}</span>`}
 let GW=null;
@@ -683,7 +702,7 @@ function exportD(){const a=document.createElement("a");a.href=URL.createObjectUR
 function importD(i){const f=i.files[0];if(!f)return;f.text().then(t=>{S=JSON.parse(t);fix();save()})}
 function resetD(){
   if(confirm("¿Seguro que quieres borrar todos los datos (partidos, plantilla, goles) para dejarlo a cero e importar tu JSON?")){
-    S = { u: Date.now(), m: {}, pl: [], dn: {} };
+    S = { u: Date.now(), m: {}, pl: [], dn: {}, off: {} };
     save();
     render();
     alert("Datos borrados correctamente. Ya puedes utilizar el botón 'Importar' para cargar tu archivo JSON.");

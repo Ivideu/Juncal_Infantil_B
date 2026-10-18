@@ -319,7 +319,8 @@ const CROMOS_DIR="Cromos/";
 const CROMOS_FILES=["Alex_10_ala.png","Edu_11_ala.png","Erik_5_pivot.png","Gabriel_15_ala.png","Hector_18_ala.png","Ivan_entrenador.png","Izan_7_pivot.png","Javi_entrenador.png","Joel_8_ala.png","Manu_2_cierre.png","Marcos_13_portero.png","Nico_6_cierre.png","Pablo_89_portero.png","Pedro_28_ala.png","Ruben_1_portero.png"];
 const POSN={ala:"Ala",pivot:"Pívot",cierre:"Cierre",portero:"Portero"};
 // Nombre_dorsal_posicion.png  ·  Nombre_entrenador.png
-const CROMOS=CROMOS_FILES.map(f=>{const k=f.replace(/\.png$/i,""),p=k.split("_"),co=p[p.length-1]==="entrenador";return{file:f,key:k,name:p[0],num:co?"":p[1],pos:co?"entrenador":p[2],coach:co}}).sort((a,b)=>(+a.num||0)-(+b.num||0));
+const ORDC=c=>c.coach?(c.name==="Javi"?0:1):(c.pos==="portero"?0:1);
+const CROMOS=CROMOS_FILES.map(f=>{const k=f.replace(/\.png$/i,""),p=k.split("_"),co=p[p.length-1]==="entrenador";return{file:f,key:k,name:p[0],num:co?"":p[1],pos:co?"entrenador":p[2],coach:co}}).sort((a,b)=>ORDC(a)-ORDC(b)||(+a.num||0)-(+b.num||0));
 const cSrc=c=>CROMOS_DIR+encodeURIComponent(c.file);
 const cEst=c=>(S.estado&&S.estado[c.key])||"convocado";
 function setCon(k,v){S.estado=S.estado||{};S.estado[k]=v;save()}
@@ -334,8 +335,17 @@ function renderCromos(){
 function renderConv(){
  return`<div class="card"><small class="gap">Elige el estado de cada jugador. Los no convocados aparecen en su apartado de la pestaña Jugadores.</small></div>`
   +CROMOS.filter(c=>!c.coach).map(c=>{const st=cEst(c);return`<div class="card cv"><img src="${cSrc(c)}" alt=""><div class="cvn"><b>${esc(c.name)}</b><span class="gap">${c.num?"#"+esc(c.num)+" · ":""}${POSN[c.pos]||esc(c.pos)}</span></div><select aria-label="Convocatoria de ${esc(c.name)}" onchange="setCon('${c.key}',this.value)"><option value="convocado" ${st=="convocado"?"selected":""}>Convocado</option><option value="descartado" ${st=="descartado"?"selected":""}>No convocado</option></select></div>`}).join("")}
-function openCromo(f){const c=CROMOS.find(x=>x.file===f);if(!c)return;document.getElementById("cromoModalCard").innerHTML=`<img src="${cSrc(c)}" alt="Cromo de ${esc(c.name)}">`;document.getElementById("cromoModal").classList.add("open");document.body.style.overflow="hidden"}
-function closeCromo(){document.getElementById("cromoModal").classList.remove("open");document.body.style.overflow=""}
+function openCromo(f){
+ const c=CROMOS.find(x=>x.file===f);if(!c)return;
+ closeCromo();
+ const ov=document.createElement("div");ov.id="cromoOv";
+ ov.style.cssText="position:fixed;inset:0;z-index:9999;background:rgba(2,8,23,.93);display:flex;align-items:center;justify-content:center;padding:16px";
+ ov.innerHTML=`<div style="position:relative;line-height:0"><div class="cromo mod"><img src="${cSrc(c)}" alt="Cromo de ${esc(c.name)}" style="display:block;max-height:86vh;max-width:90vw;width:auto;height:auto;border-radius:20px"></div><button aria-label="Cerrar" style="position:absolute;top:-12px;right:-12px;width:42px;height:42px;padding:0;border-radius:50%;font-size:1.4rem;line-height:1;background:#fff;color:#10234b;border:2px solid #dbeafe;cursor:pointer">×</button></div>`;
+ ov.onclick=e=>{if(e.target===ov||e.target.tagName==="BUTTON")closeCromo()};
+ document.body.appendChild(ov);document.body.style.overflow="hidden"}
+function closeCromo(){const o=document.getElementById("cromoOv");if(o)o.remove();document.body.style.overflow=""}
+document.addEventListener("click",e=>{const c=e.target.closest&&e.target.closest(".cromo[data-f]");if(c)openCromo(c.dataset.f)});
+
 document.addEventListener("keydown",e=>{if(e.key==="Escape")closeCromo()});
 
 async function sha(t){const b=await crypto.subtle.digest("SHA-256",new TextEncoder().encode(t));return[...new Uint8Array(b)].map(x=>x.toString(16).padStart(2,"0")).join("")}

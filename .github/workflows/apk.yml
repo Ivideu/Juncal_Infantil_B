@@ -1,0 +1,67 @@
+name: Compilar APK Android
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - ".github/workflows/apk.yml"
+      - "icon-192.png"
+
+permissions:
+  contents: write
+
+jobs:
+  apk:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 17
+
+      - name: Crear proyecto Capacitor (la app carga tu web publicada)
+        run: |
+          mkdir -p /tmp/app/www && cd /tmp/app
+          echo '<!doctype html><title>Juncal B</title>' > www/index.html
+          npm init -y >/dev/null
+          npm i @capacitor/core@6 @capacitor/cli@6 @capacitor/android@6
+          cat > capacitor.config.json <<'JSON'
+          {
+            "appId": "es.juncalb.app",
+            "appName": "Juncal B",
+            "webDir": "www",
+            "server": { "url": "https://ivideu.github.io/Juncal_Infantil_B/", "cleartext": false },
+            "android": { "allowMixedContent": false }
+          }
+          JSON
+          npx cap add android
+
+      - name: Icono de la app
+        run: |
+          cd /tmp/app/android/app/src/main/res
+          rm -rf mipmap-anydpi-v26
+          for d in mipmap-*; do
+            for f in ic_launcher.png ic_launcher_round.png ic_launcher_foreground.png; do
+              [ -f "$d/$f" ] && cp "$GITHUB_WORKSPACE/icon-192.png" "$d/$f" || true
+            done
+          done
+
+      - name: Compilar APK
+        run: |
+          cd /tmp/app/android
+          chmod +x gradlew
+          ./gradlew assembleDebug --no-daemon
+
+      - name: Publicar APK en Releases
+        run: |
+          cp /tmp/app/android/app/build/outputs/apk/debug/app-debug.apk Juncal-B.apk
+          gh release delete apk --yes --cleanup-tag 2>/dev/null || true
+          gh release create apk Juncal-B.apk --title "App Android Juncal B" --notes "Descarga Juncal-B.apk e instálalo en tu móvil Android."
+        env:
+          GH_TOKEN: ${{ github.token }}

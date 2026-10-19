@@ -4,7 +4,7 @@
 //   · Partidos del Juncal B: además el pabellón (m.p). NUNCA resultado ni goleadores (los pones tú en el admin)
 //   · Partidos de otros equipos: resultado (nunca goleadores)
 const FB = "https://juncal-f0b64-default-rtdb.europe-west1.firebasedatabase.app";
-const { FBKEY, FBMAIL, FBPASS } = process.env;
+const { FBKEY, FBMAIL, FBPASS, FCM_SERVICE_ACCOUNT } = process.env;
 const SOLO_CERRADAS = process.env.SOLO_CERRADAS === "1";   // 1 = solo guardar resultados con acta cerrada
 const MANUAL = process.env.GITHUB_EVENT_NAME === "workflow_dispatch";
 // GitHub programa en UTC; aquí filtramos por hora de Madrid (8:00–23:59), también con cambio de hora
@@ -28,6 +28,9 @@ const ID = {
   26750489: 11,  // Sporting Morata
   21455532: 12,  // Limones 5 B
 };
+
+const NOM = { 2: "Aston C", 3: "Lope de Vega", 4: "Torrejón Five Play", 5: "Rivas Atlantis B", 6: "Rivas Futsal B", 7: "Malvar",
+  8: "Fusión San Fernando", 9: "Diagonal C", 10: "Juncal B", 11: "Sporting Morata", 12: "Limones 5 B" };
 
 // Mismo calendario que tu web
 const R = ["03-10-2026|0-3,10-5,8-7,6-9,4-11,12-2","17-10-2026|3-12,5-0,7-10,9-8,11-6,2-4","24-10-2026|3-5,0-7,10-9,8-11,6-2,12-4","07-11-2026|5-12,7-3,9-0,11-10,2-8,4-6","14-11-2026|5-7,3-9,0-11,10-2,8-4,12-6","21-11-2026|7-12,9-5,11-3,2-0,4-10,6-8","28-11-2026|7-9,5-11,3-2,0-4,10-6,12-8","12-12-2026|9-12,11-7,2-5,4-3,6-0,8-10","19-12-2026|9-11,7-2,5-4,3-6,0-8,12-10","16-01-2027|12-11,2-9,4-7,6-5,8-3,10-0","23-01-2027|11-2,9-4,7-6,5-8,3-10,0-12","30-01-2027|3-0,5-10,7-8,9-6,11-4,2-12","06-02-2027|12-3,0-5,10-7,8-9,6-11,4-2","20-02-2027|5-3,7-0,9-10,11-8,2-6,4-12","27-02-2027|12-5,3-7,0-9,10-11,8-2,6-4","06-03-2027|7-5,9-3,11-0,2-10,4-8,6-12","13-03-2027|12-7,5-9,3-11,0-2,10-4,8-6","03-04-2027|9-7,11-5,2-3,4-0,6-10,8-12","10-04-2027|12-9,7-11,5-2,3-4,0-6,10-8","17-04-2027|11-9,2-7,4-5,6-3,8-0,10-12","08-05-2027|11-12,9-2,7-4,5-6,3-8,0-10","29-05-2027|2-11,4-9,6-7,8-5,10-3,12-0"];
@@ -107,8 +110,11 @@ async function login() {
   return d.idToken;
 }
 
+let avisos = [];
 function aplicar(S, partidos) {
   S.m ||= {};
+  avisos = [];
+  const hoyISO = new Date().toISOString().slice(0, 10);
   let total = 0;
   for (const r of partidos) {
     const jor = J.find(j => j.p.some(([x, y]) => x === r.h && y === r.a));
@@ -117,9 +123,14 @@ function aplicar(S, partidos) {
     const mio = r.h === ME || r.a === ME;
     if (mio && m.c && !m.c.fin) continue;           // directo en curso: no tocar
     let ch = 0;
+    const prevT = m.t, prevD = m.d || jor.d;
     if (r.fecha && r.fecha !== (m.d || jor.d)) { m.d = r.fecha; ch++; }
     if (r.hora && r.hora !== m.t)              { m.t = r.hora;  ch++; }
     if (mio && r.campo && r.campo !== m.p)     { m.p = r.campo; ch++; }
+    if (mio && r.hora && r.fecha && r.fecha >= hoyISO) {
+      if (!prevT) avisos.push({ tipo: "hora", jor: jor.n, h: r.h, a: r.a, fecha: r.fecha, hora: r.hora });
+      else if (r.hora !== prevT || r.fecha !== prevD) avisos.push({ tipo: "cambio", jor: jor.n, h: r.h, a: r.a, fecha: r.fecha, hora: r.hora });
+    }
     if (!mio && Number.isInteger(r.gl) && Number.isInteger(r.gv)) {
       const igual = m.h !== undefined && m.h !== "" && +m.h === r.gl &&
                     m.a !== undefined && m.a !== "" && +m.a === r.gv;
@@ -128,6 +139,42 @@ function aplicar(S, partidos) {
     if (ch) { S.m[k] = m; total += ch; }
   }
   return total;
+}
+
+// ---------- Avisos push (Firebase Cloud Messaging) ----------
+const b64u = b => Buffer.from(b).toString("base64url");
+async function tokenFCM(sa) {
+  const { createSign } = await import("node:crypto");
+  const now = Math.floor(Date.now() / 1000);
+  const head = b64u(JSON.stringify({ alg: "RS256", typ: "JWT" }));
+  const body = b64u(JSON.stringify({ iss: sa.client_email, scope: "https://www.googleapis.com/auth/firebase.messaging",
+    aud: "https://oauth2.googleapis.com/token", iat: now, exp: now + 3600 }));
+  const sig = createSign("RSA-SHA256").update(`${head}.${body}`).sign(sa.private_key, "base64url");
+  const r = await fetch("https://oauth2.googleapis.com/token", { method: "POST",
+    headers: { "Content-Type": "application/x-www-form-urlencoded" },
+    body: new URLSearchParams({ grant_type: "urn:ietf:params:oauth:grant-type:jwt-bearer", assertion: `${head}.${body}.${sig}` }) });
+  const d = await r.json();
+  if (!d.access_token) throw new Error("OAuth FCM: " + JSON.stringify(d));
+  return d.access_token;
+}
+const diaES = f => { const t = new Date(f + "T12:00:00Z").toLocaleDateString("es-ES", { weekday: "long", day: "numeric", month: "long", timeZone: "UTC" });
+  return t[0].toUpperCase() + t.slice(1); };
+async function avisar() {
+  if (!avisos.length) return;
+  if (!FCM_SERVICE_ACCOUNT) { console.log("Aviso pendiente, pero falta el secret FCM_SERVICE_ACCOUNT:", JSON.stringify(avisos)); return; }
+  // Solo el próximo partido (evita avisos en bloque si se rellena toda la temporada de golpe)
+  const x = avisos.sort((p, q) => p.jor - q.jor)[0];
+  try {
+    const sa = JSON.parse(FCM_SERVICE_ACCOUNT), tk = await tokenFCM(sa);
+    const rival = NOM[x.h === ME ? x.a : x.h];
+    const title = x.tipo === "hora" ? "⚽ ¡Ya hay hora para el partido!" : "⚠️ Cambio de día/hora del partido";
+    const text = `${NOM[x.h]} vs ${NOM[x.a]} · ${diaES(x.fecha)} · ${x.hora} h`;
+    const r = await fetch(`https://fcm.googleapis.com/v1/projects/${sa.project_id}/messages:send`, { method: "POST",
+      headers: { Authorization: `Bearer ${tk}`, "Content-Type": "application/json" },
+      body: JSON.stringify({ message: { topic: "juncal", notification: { title, body: text },
+        data: { jornada: String(x.jor), rival }, android: { priority: "HIGH", notification: { channel_id: "default" } } } }) });
+    console.log("Aviso push", r.ok ? "enviado:" : "ERROR " + r.status + " " + await r.text(), title, "|", text);
+  } catch (e) { console.error("No se pudo enviar el aviso push:", String(e)); }
 }
 
 // ---------- Main ----------
@@ -148,7 +195,7 @@ for (let intento = 0; intento < 4; intento++) {
   // PUT condicional: si alguien (tú desde el admin) escribió mientras tanto, Firebase responde 412 y reintentamos
   const p = await fetch(`${FB}/juncal.json?auth=${tok}`, {
     method: "PUT", headers: etag ? { "if-match": etag } : {}, body: JSON.stringify(JSON.stringify(S)) });
-  if (p.ok) { console.log("Cambios guardados:", cambios); break; }
+  if (p.ok) { console.log("Cambios guardados:", cambios); await avisar(); break; }
   if (p.status === 412) { console.warn("Conflicto de escritura, reintentando…"); await sleep(1000); continue; }
   console.error("Error al guardar:", p.status); process.exit(1);
 }

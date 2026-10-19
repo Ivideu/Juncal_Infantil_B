@@ -336,6 +336,9 @@ select{font:inherit;background:var(--bg);color:var(--tx);border:1px solid var(--
  <a class="dl" id="dl" href="descarga.html">📲 Descargar app</a>
 </header>
 <script>if(window.Capacitor||navigator.standalone)document.getElementById("dl").style.display="none"</script>
+<script>/* Avisos push: solo dentro de la app Android */
+(async()=>{try{const FM=window.Capacitor&&Capacitor.Plugins&&Capacitor.Plugins.FirebaseMessaging;if(!FM)return;
+ const p=await FM.requestPermissions();if(p.receive==="granted")await FM.subscribeToTopic({topic:"juncal"})}catch(e){}})();</script>
 <section id="hero"></section>
 <nav id="nav"></nav>
 <main id="app"></main>
@@ -719,4 +722,4 @@ render();setInterval(tick,1000);
 let pc=0;setInterval(()=>{pc++;if(API&&!FB&&!E()&&(liveM()||pc%12==0))fetch(API+"?v="+Date.now(),{cache:"no-store"}).then(r=>r.json()).then(d=>{if(JSON.stringify(d)!==JSON.stringify(S)){S=d;fix();render()}}).catch(()=>{})},5000);
 </script>
 </body>
-</html> 
+</html>

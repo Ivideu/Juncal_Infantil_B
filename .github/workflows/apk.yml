@@ -30,7 +30,7 @@ jobs:
           mkdir -p /tmp/app/www && cd /tmp/app
           echo '<!doctype html><title>Juncal B</title>' > www/index.html
           npm init -y >/dev/null
-          npm i @capacitor/core@6 @capacitor/cli@6 @capacitor/android@6
+          npm i @capacitor/core@6 @capacitor/cli@6 @capacitor/android@6 @capacitor-firebase/messaging@6 firebase
           cat > capacitor.config.json <<'JSON'
           {
             "appId": "es.juncalb.app",
@@ -41,6 +41,17 @@ jobs:
           }
           JSON
           npx cap add android
+
+      - name: Avisos push (google-services.json de Firebase)
+        run: |
+          if [ -n "$GOOGLE_SERVICES_JSON" ]; then
+            printf '%s' "$GOOGLE_SERVICES_JSON" > /tmp/app/android/app/google-services.json
+            echo "google-services.json añadido"
+          else
+            echo "::warning::Falta el secret GOOGLE_SERVICES_JSON: la app se compila sin avisos push"
+          fi
+        env:
+          GOOGLE_SERVICES_JSON: ${{ secrets.GOOGLE_SERVICES_JSON }}
 
       - name: Icono de la app
         run: |

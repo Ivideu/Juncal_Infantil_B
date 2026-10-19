@@ -2,7 +2,7 @@
    Sustituye en tu index.html las funciones cardMarkup, renderCromos y openCromo
    por TODO este bloque. Deja closeCromo tal cual. */
 const CROMOS_DIR="Cromos/";
-const CROMOS_FILES=["Alex_10_ala.png","Edu_11_ala.png","Erik_5_pivot.png","Gabriel_15_ala.png","Hector_18_ala.png","Ivan_entrenador.png","Izan_7_pivot.png","Javi_entrenador.png","Joel_8_ala.png","Manu_2_cierre.png","Marcos_13_portero.png","Nico_6_cierre.png","Pablo_89_portero.png","Pedro_28_ala.png","Ruben_1_portero.png"];
+const CROMOS_FILES=["Alex_10_ala.png","Edu_11_ala.png","Diego_3_ala.png","Erik_5_pivot.png","Gabriel_15_ala.png","Hector_18_ala.png","Ivan_entrenador.png","Izan_7_pivot.png","Javi_entrenador.png","Joel_8_ala.png","Manu_2_cierre.png","Marcos_13_portero.png","Nico_6_cierre.png","Pablo_89_portero.png","Pedro_28_ala.png","Ruben_1_portero.png"];
 const POSN={ala:"Ala",pivot:"Pívot",cierre:"Cierre",portero:"Portero"};
 // Nombre_dorsal_posicion.png  ·  Nombre_entrenador.png
 const CROMOS=CROMOS_FILES.map(f=>{const p=f.replace(/\.png$/i,"").split("_"),co=p[p.length-1]==="entrenador";return{file:f,name:p[0],num:co?"":p[1],pos:co?"entrenador":p[2],coach:co}}).sort((a,b)=>(+a.num||0)-(+b.num||0));

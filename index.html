@@ -323,6 +323,9 @@ select{font:inherit;background:var(--bg);color:var(--tx);border:1px solid var(--
 .cvph svg{width:72%;height:auto}
 .cvc.no .cvph{opacity:.55;filter:grayscale(.7)}
 #pickOv .pk-o svg{width:46%;height:auto}
+.dl{display:inline-flex;align-items:center;gap:6px;background:#2f7bff;color:#fff;font-weight:700;text-decoration:none;padding:10px 16px;border-radius:12px;box-shadow:0 4px 14px #2f7bff40}
+.dl:hover{background:#1d5fe0}
+@media(display-mode:standalone){.dl{display:none}}
 </style>
 </head>
 <body>
@@ -330,7 +333,9 @@ select{font:inherit;background:var(--bg);color:var(--tx);border:1px solid var(--
 <div class="wrap">
 <header>
  <div><h1 id="tt">Escuela Torrejón Juncal B</h1><small>Primera Infantil FS · Grupo 2 · Temporada 2026-27</small></div>
+ <a class="dl" id="dl" href="descarga.html">📲 Descargar app</a>
 </header>
+<script>if(window.Capacitor||navigator.standalone)document.getElementById("dl").style.display="none"</script>
 <section id="hero"></section>
 <nav id="nav"></nav>
 <main id="app"></main>

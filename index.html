@@ -326,13 +326,72 @@ select{font:inherit;background:var(--bg);color:var(--tx);border:1px solid var(--
 .dl{display:inline-flex;align-items:center;gap:6px;background:#2f7bff;color:#fff;font-weight:700;text-decoration:none;padding:10px 16px;border-radius:12px;box-shadow:0 4px 14px #2f7bff40}
 .dl:hover{background:#1d5fe0}
 @media(display-mode:standalone){.dl{display:none}}
+
+/* ===== Cabecera panorámica Torrejón Juncal ===== */
+header.site-banner {
+  position: relative;
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+  height: clamp(145px, 27.85vw, 375px);
+  min-height: 125px;
+  padding: 0;
+  display: block;
+  overflow: hidden;
+  background-color: #050b1f;
+  background-image: linear-gradient(180deg, transparent 65%, rgba(5, 11, 31, .45) 100%), url('./cabecera-juncal.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  border-bottom: 2px solid #2f7bff;
+  box-shadow: 0 8px 28px rgba(0, 40, 120, .35);
+}
+header.site-banner > div { position: static; }
+header.site-banner #tt {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  margin: 0;
+  font-size: 0;
+  line-height: 0;
+  color: transparent;
+  cursor: pointer;
+  user-select: none;
+  -webkit-user-select: none;
+}
+header.site-banner small { display: none; }
+header.site-banner .dl {
+  position: absolute;
+  z-index: 2;
+  top: 12px;
+  right: 16px;
+}
+@media (max-width: 600px) {
+  header.site-banner {
+    height: 28vw;
+    min-height: 125px;
+    background-position: center;
+  }
+  header.site-banner .dl {
+    top: 6px;
+    right: 8px;
+    font-size: 12px;
+    padding: 6px 9px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  header.site-banner { scroll-behavior: auto; }
+}
+
 </style>
 </head>
 <body>
 <div id="bg" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
 <div class="wrap">
-<header>
- <div><h1 id="tt">Escuela Torrejón Juncal B</h1><small>Primera Infantil FS · Grupo 2 · Temporada 2026-27</small></div>
+<header class="site-banner">
+ <div><h1 id="tt" aria-label="Torrejón Juncal B. Haz cinco clics para abrir el acceso de administración">Escuela Torrejón Juncal B</h1><small>Primera Infantil FS · Grupo 2 · Temporada 2026-27</small></div>
  <a class="dl" id="dl" href="descarga.html">📲 Descargar app</a>
 </header>
 <script>if(window.Capacitor||navigator.standalone)document.getElementById("dl").style.display="none"</script>

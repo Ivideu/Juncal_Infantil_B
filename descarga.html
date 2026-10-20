@@ -2,18 +2,78 @@
 <html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Descargar app · Juncal B</title><link rel="icon" href="./icon-192.png">
 <style>
-body{margin:0;font:16px/1.5 system-ui,sans-serif;background:linear-gradient(160deg,#f4f8ff,#e6efff);color:#0f1b3d;padding:24px 16px}
-main{max-width:560px;margin:auto}h1{font-size:2rem;margin:.2em 0}
-.c{background:#fff;border:1px solid #d5def5;border-radius:16px;padding:18px;margin:14px 0;box-shadow:0 4px 18px #1e4fd814}
-a.b{display:block;text-align:center;background:#2f7bff;color:#fff;font-weight:700;text-decoration:none;padding:14px;border-radius:12px;margin-top:10px}
-ol{padding-left:20px;margin:8px 0}small{color:#5a6a93}
+:root{--bg:#eef4ff;--card:#fff;--line:#d5def5;--tx:#0f1b3d;--mu:#5a6a93;--ac:#2f7bff;--ok:#16a34a;--wa:#fff7e0;--wl:#f5c451}
+*{box-sizing:border-box}
+body{margin:0;font:16px/1.55 system-ui,-apple-system,sans-serif;background:linear-gradient(160deg,#f4f8ff,#e6efff 55%,#fff7e0);color:var(--tx);padding:24px 16px 60px;min-height:100vh}
+main{max-width:600px;margin:auto}
+h1{font-size:1.9rem;line-height:1.15;margin:.4em 0 .1em}
+h2{font-size:1.25rem;margin:0 0 6px}
+.sub{color:var(--mu);margin:0 0 6px}
+.c{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px;margin:16px 0;box-shadow:0 4px 18px #1e4fd814}
+a.b{display:block;text-align:center;background:var(--ac);color:#fff;font-weight:700;font-size:1.1rem;text-decoration:none;padding:15px;border-radius:12px;margin:12px 0 4px}
+a.b:active{transform:scale(.98)}
+ol.s{list-style:none;counter-reset:n;padding:0;margin:14px 0 0}
+ol.s li{counter-increment:n;position:relative;padding:0 0 14px 44px}
+ol.s li:before{content:counter(n);position:absolute;left:0;top:0;width:30px;height:30px;border-radius:50%;background:var(--ac);color:#fff;font-weight:700;display:grid;place-items:center}
+ol.s li b{color:var(--tx)}
+.tip{background:var(--wa);border:1px solid var(--wl);border-radius:12px;padding:12px 14px;margin:12px 0 4px;font-size:.95rem}
+.ok{color:var(--ok);font-weight:700}
+figure{margin:12px 0;text-align:center}
+figure img{width:100%;max-width:300px;border-radius:14px;border:1px solid var(--line);box-shadow:0 4px 18px #0f1b3d22}
+figcaption{font-size:.85rem;color:var(--mu);margin-top:6px}
+details{border-top:1px solid var(--line);padding:10px 0}
+details:first-of-type{border-top:0}
+summary{cursor:pointer;font-weight:600}
+details p{margin:8px 0 2px;color:var(--mu)}
+small{color:var(--mu)}
 </style></head><body><main>
 <img src="icon-192.png" width="72" height="72" alt="" style="border-radius:16px">
 <h1>App Escuela Torrejón Juncal B</h1>
-<div class="c"><h2>🤖 Android</h2>
-<a class="b" href="https://github.com/Ivideu/Juncal_Infantil_B/releases/download/apk/Juncal-B.apk">⬇ Descargar APK</a>
-<ol><li>Descarga el archivo.</li><li>Ábrelo y, si el móvil lo pide, permite «instalar apps de orígenes desconocidos».</li><li>Instala y abre «Juncal B».</li></ol></div>
-<div class="c"><h2>🍎 iPhone</h2>
-<ol><li>Abre esta web en <b>Safari</b>.</li><li>Pulsa el botón <b>Compartir</b> (cuadrado con flecha).</li><li>Elige <b>Añadir a pantalla de inicio</b>.</li></ol>
-<small>Apple no permite instalar archivos IPA sin la App Store o TestFlight; así se instala igual, con icono y a pantalla completa.</small></div>
-</main></body></html> 
+<p class="sub">Calendario, clasificación, goleadores y el directo del partido, con avisos al móvil.</p>
+
+<div class="c">
+<h2>🤖 Android</h2>
+<a class="b" href="https://github.com/Ivideu/Juncal_Infantil_B/releases/download/apk/Juncal-B.apk">⬇ Descargar la app (APK)</a>
+<small>Archivo oficial de la escuela · se instala en menos de un minuto</small>
+
+<ol class="s">
+<li><b>Pulsa el botón azul</b> de arriba. Si el navegador dice que «este tipo de archivo puede dañar tu dispositivo», pulsa <b>Descargar de todos modos</b>.</li>
+<li><b>Abre el archivo descargado</b> (<i>Juncal-B.apk</i>) desde el aviso de descarga o desde la carpeta <i>Descargas</i>.</li>
+<li>Si el móvil lo pide, activa <b>«Permitir desde esta fuente»</b> para tu navegador y vuelve atrás.</li>
+<li>Puede salir el aviso de <b>Google Play Protect</b>: «Aplicación bloqueada para proteger tu dispositivo». Es normal en apps que no están en Play Store. Pulsa <b>«Instalar de todas formas»</b>, el texto que está <u>encima</u> del botón azul. <b>No pulses «Entendido»</b>, porque cancela la instalación.</li>
+<li>Abre <b>Juncal B</b> y, cuando te pregunte por las notificaciones, pulsa <b>Permitir</b>: así te avisaremos de la hora del partido, del descanso y del resultado final.</li>
+</ol>
+
+<figure>
+<img src="ayuda-playprotect.png" alt="Aviso de Google Play Protect con «Instalar de todas formas» marcado en rojo">
+<figcaption>Así es el aviso. Pulsa «Instalar de todas formas».</figcaption>
+</figure>
+
+<div class="tip">🔒 <b>¿Es seguro?</b> Sí. Es la app de la escuela y solo muestra la información de la web del equipo. Play Protect avisa porque la app no se descarga de Play Store y porque es de un desarrollador nuevo para Google; no ha detectado ningún problema.</div>
+</div>
+
+<div class="c">
+<h2>❓ Preguntas frecuentes</h2>
+<details><summary>No me deja instalar / dice «app no instalada»</summary>
+<p>Si ya tenías una versión anterior instalada, <b>desinstálala primero</b> (mantén pulsado el icono → Desinstalar) y vuelve a instalar la nueva. No pierdes nada: los datos están en la web.</p></details>
+<details><summary>No veo el texto «Instalar de todas formas»</summary>
+<p>Entra en <b>Play Store → tu foto de perfil → Play Protect → ⚙ → desactiva «Analizar aplicaciones con Play Protect»</b>, instala la app y vuelve a activarlo.</p></details>
+<details><summary>No me llegan los avisos</summary>
+<p>Comprueba en <b>Ajustes → Aplicaciones → Juncal B → Notificaciones</b> que estén activadas. Los avisos llegan con la app cerrada o en segundo plano.</p></details>
+<details><summary>¿Hay que actualizarla?</summary>
+<p>No. La app se actualiza sola cada vez que la abres, siempre que tengas conexión.</p></details>
+</div>
+
+<div class="c">
+<h2>🍎 iPhone</h2>
+<p class="sub">Apple no permite instalar apps fuera de la App Store, pero la web se puede añadir como si fuera una app:</p>
+<ol class="s">
+<li>Abre esta web en <b>Safari</b>o <b>Google Chrome</b>.</li>
+<li>Pulsa el botón <b>Compartir</b> (el cuadrado con una flecha hacia arriba).</li>
+<li>Elige <b>Añadir a pantalla de inicio</b> y confirma.</li>
+</ol>
+<small>Se abre a pantalla completa y con el icono del equipo. En iPhone no llegan los avisos del partido.</small>
+</div>
+
+<p style="text-align:center"><a href="./" style="color:var(--ac);font-weight:600">← Volver a la web del equipo</a></p>
+</main></body></html>

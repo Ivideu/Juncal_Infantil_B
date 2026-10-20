@@ -480,14 +480,30 @@ function trimMin(m,k){if(!m.gm||!m.gm[k])return;if(!m.g||!m.g[k])delete m.gm[k];
 const mn=(m,n,g)=>{const t=(m.gm&&m.gm[n])||[];return t.length?t.map(x=>x+"'").join(", ")+(g>t.length?` +${g-t.length}`:""):"×"+g};let lvOn=false,lastP="";
 function liveM(real){if(!real&&TS.on)return TX();const now=Date.now(),hoyM=new Date().toLocaleDateString("sv-SE",{timeZone:"Europe/Madrid"}),all=myM().filter(x=>x.h&&x.a);return all.find((x,i)=>{const m=M(x.r.n,x.h),c=m.c,k=when(x).getTime(),st=c?Math.min(k-9e5,c.s||k):(m.t?k-9e5:1e18),en=c&&c.fin?c.fin+72e5:(m.t?Math.max(k,c&&c.s||0):(c&&c.s)||k)+144e5;if(!m.t&&(m.d||x.r.d)>hoyM)return false;if(c&&c.fin&&all.slice(i+1).some(y=>M(y.r.n,y.h).t))return false;return now>=st&&now<en})}
 function clk(j,h,a){const m=MS(j)[j+"_"+h]||(MS(j)[j+"_"+h]={}),now=Date.now();if(a=="reset"){if(!confirm("¿Reiniciar el cronómetro?"))return;delete m.c;return save(j===0)}
- const c=m.c||(m.c={ph:0,run:false,base:0,s:now}),el=(c.base||0)+(c.run?now-c.since:0);
+ const c=m.c||(m.c={ph:0,run:false,base:0,s:now}),el=(c.base||0)+(c.run?now-c.since:0),ph0=c.ph;
  if(a=="go1"){c.ph=1;c.run=true;c.base=0;c.since=now}
  if(a=="pause"){c.base=el;c.run=false}
  if(a=="resume"){c.run=true;c.since=now}
  if(a=="ht"){c.ph="HT";c.base=el;c.run=false}
  if(a=="go2"){c.ph=2;c.run=true;c.base=0;c.since=now}
  if(a=="ft"){c.ph="FT";c.base=el;c.run=false;c.fin=now}
- save(j===0)}
+ save(j===0);
+ if(j!==0&&((a=="go1"&&ph0==0)||(a=="ht"&&ph0==1)||(a=="ft"&&ph0==2)))avisoPush(j,h,a)}
+/* Avisos de descanso y final: se piden a GitHub Actions (envía la notificación a todos los móviles) */
+async function avisoPush(j,h,a){
+ try{
+  const m=M(j,h),as=J[j-1].p.find(q=>q[0]==h)[1],rv=nm(h==ME?as:h),us=(h==ME?m.h:m.a)||0,th=(h==ME?m.a:m.h)||0,
+   est=us>th?"ganando":us<th?"perdiendo":"empatando",
+   titulo=a=="go1"?"⚽ Empieza el partido":a=="ht"?"🔔 Descanso":"🏁 Final del partido",
+   sc=a=="go1"?`Empieza el partido contra ${rv}, ¡VAMOS JUNCAL!!!`:a=="ht"?`Vamos ${est} contra ${rv}, ${us}-${th}. ¡ÁNIMO JUNCAL!!`:`Hemos quedado ${us}-${th} contra un gran rival. ¡GRAN PARTIDO JUNCAL!!!`;
+  if(!location.hostname.endsWith("github.io"))return;
+  const u=location.hostname.replace(".github.io",""),sg=location.pathname.split("/")[1]||"",r=sg&&!sg.includes(".")?sg:u+".github.io";
+  let tk="";try{tk=localStorage.getItem("ghtk")||""}catch(e){}
+  if(!tk){tk=(prompt("Para enviar los avisos de descanso y final, pega tu token de GitHub (solo se guarda en este dispositivo):")||"").trim();if(!tk){setSt("⚠ Aviso no enviado: falta el token de GitHub");return}}
+  const x=await fetch(`https://api.github.com/repos/${u}/${r}/actions/workflows/aviso.yml/dispatches`,{method:"POST",headers:{Authorization:"Bearer "+tk,Accept:"application/vnd.github+json","X-GitHub-Api-Version":"2022-11-28"},body:JSON.stringify({ref:"main",inputs:{titulo,texto:sc}})});
+  if(x.status===204){try{localStorage.setItem("ghtk",tk)}catch(e){}setSt("✓ Aviso enviado: "+titulo);setTimeout(()=>setSt(""),15000)}
+  else{if([401,403,404].includes(x.status)){try{localStorage.removeItem("ghtk")}catch(e){}}setSt("⚠ Aviso no enviado (GitHub "+x.status+")")}
+ }catch(e){setSt("⚠ Aviso no enviado")}}
 function lg(j,h,side,d,who){const m=MS(j)[j+"_"+h]||(MS(j)[j+"_"+h]={}),me=h==ME?"h":"a",k=side=="me"?me:(me=="h"?"a":"h");m.h=+m.h||0;m.a=+m.a||0;if(m[k]+d<0)return;
  if(side=="me"){
   if(d>0){if(who){m.g=m.g||{};m.g[who]=(m.g[who]||0)+1;let mi=curMin(m);if(mi==null){const q=prompt("Minuto del gol (número). Déjalo vacío si no lo sabes:");if(q&&Math.floor(+q)>0)mi=Math.floor(+q)}if(mi!=null)addMin(m,who,mi)}}

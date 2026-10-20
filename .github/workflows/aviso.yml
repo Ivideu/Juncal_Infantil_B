@@ -1,0 +1,25 @@
+name: Aviso push
+on:
+  workflow_dispatch:
+    inputs:
+      titulo:
+        description: "Título de la notificación"
+        required: true
+      texto:
+        description: "Texto de la notificación"
+        required: false
+permissions:
+  contents: read
+jobs:
+  aviso:
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 20 }
+      - run: node scripts/aviso.mjs
+        env:
+          FCM_SERVICE_ACCOUNT: ${{ secrets.FCM_SERVICE_ACCOUNT }}
+          TITULO: ${{ inputs.titulo }}
+          TEXTO: ${{ inputs.texto }}

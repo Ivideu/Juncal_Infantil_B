@@ -1,6 +1,7 @@
 // scripts/aviso.mjs — envía una notificación push a todos los móviles con la app (tema "juncal")
 // Lo lanza el workflow aviso.yml cuando pulsas "Fin 1ª parte" o "Final" en el directo.
 const { FCM_SERVICE_ACCOUNT, TITULO, TEXTO } = process.env;
+const TEMA = ["juncal", "pruebas"].includes(process.env.TEMA) ? process.env.TEMA : "juncal";   // "pruebas" = solo dispositivos del entrenador
 if (!FCM_SERVICE_ACCOUNT || !TITULO) { console.error("Falta FCM_SERVICE_ACCOUNT o TITULO"); process.exit(1); }
 const b64u = b => Buffer.from(b).toString("base64url");
 const { createSign } = await import("node:crypto");
@@ -17,7 +18,7 @@ const d = await o.json();
 if (!d.access_token) { console.error("OAuth FCM:", JSON.stringify(d)); process.exit(1); }
 const r = await fetch(`https://fcm.googleapis.com/v1/projects/${sa.project_id}/messages:send`, { method: "POST",
   headers: { Authorization: `Bearer ${d.access_token}`, "Content-Type": "application/json" },
-  body: JSON.stringify({ message: { topic: "juncal", notification: { title: TITULO, body: TEXTO || "" },
+  body: JSON.stringify({ message: { topic: TEMA, notification: { title: TITULO, body: TEXTO || "" },
     android: { priority: "HIGH", notification: { channel_id: "default" } } } }) });
-console.log(r.ok ? "Aviso enviado:" : "ERROR " + r.status + " " + await r.text(), TITULO, "|", TEXTO);
+console.log(r.ok ? "Aviso enviado a «" + TEMA + "»:" : "ERROR " + r.status + " " + await r.text(), TITULO, "|", TEXTO);
 if (!r.ok) process.exit(1);

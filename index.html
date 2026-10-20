@@ -488,19 +488,20 @@ function clk(j,h,a){const m=MS(j)[j+"_"+h]||(MS(j)[j+"_"+h]={}),now=Date.now();i
  if(a=="go2"){c.ph=2;c.run=true;c.base=0;c.since=now}
  if(a=="ft"){c.ph="FT";c.base=el;c.run=false;c.fin=now}
  save(j===0);
- if(j!==0&&((a=="go1"&&ph0==0)||(a=="ht"&&ph0==1)||(a=="ft"&&ph0==2)))avisoPush(j,h,a)}
+ if(((a=="go1"&&ph0==0)||(a=="ht"&&ph0==1)||(a=="ft"&&ph0==2)))avisoPush(j,h,a)}
 /* Avisos de descanso y final: se piden a GitHub Actions (envía la notificación a todos los móviles) */
 async function avisoPush(j,h,a){
  try{
-  const m=M(j,h),as=J[j-1].p.find(q=>q[0]==h)[1],rv=nm(h==ME?as:h),us=(h==ME?m.h:m.a)||0,th=(h==ME?m.a:m.h)||0,
+  const m=M(j,h),as=j===0?99:J[j-1].p.find(q=>q[0]==h)[1],rv=nm(h==ME?as:h),us=(h==ME?m.h:m.a)||0,th=(h==ME?m.a:m.h)||0,
    est=us>th?"ganando":us<th?"perdiendo":"empatando",
-   titulo=a=="go1"?"⚽ Empieza el partido":a=="ht"?"🔔 Descanso":"🏁 Final del partido",
+   tema=j===0?"pruebas":"juncal",pre=j===0?"🧪 PRUEBA · ":"",
+   titulo=pre+(a=="go1"?"⚽ Empieza el partido":a=="ht"?"🔔 Descanso":"🏁 Final del partido"),
    sc=a=="go1"?`Empieza el partido contra ${rv}, ¡VAMOS JUNCAL!!!`:a=="ht"?`Vamos ${est} contra ${rv}, ${us}-${th}. ¡ÁNIMO JUNCAL!!`:`Hemos quedado ${us}-${th} contra un gran rival. ¡GRAN PARTIDO JUNCAL!!!`;
   if(!location.hostname.endsWith("github.io"))return;
   const u=location.hostname.replace(".github.io",""),sg=location.pathname.split("/")[1]||"",r=sg&&!sg.includes(".")?sg:u+".github.io";
   let tk="";try{tk=localStorage.getItem("ghtk")||""}catch(e){}
   if(!tk){tk=(prompt("Para enviar los avisos de descanso y final, pega tu token de GitHub (solo se guarda en este dispositivo):")||"").trim();if(!tk){setSt("⚠ Aviso no enviado: falta el token de GitHub");return}}
-  const x=await fetch(`https://api.github.com/repos/${u}/${r}/actions/workflows/aviso.yml/dispatches`,{method:"POST",headers:{Authorization:"Bearer "+tk,Accept:"application/vnd.github+json","X-GitHub-Api-Version":"2022-11-28"},body:JSON.stringify({ref:"main",inputs:{titulo,texto:sc}})});
+  const x=await fetch(`https://api.github.com/repos/${u}/${r}/actions/workflows/aviso.yml/dispatches`,{method:"POST",headers:{Authorization:"Bearer "+tk,Accept:"application/vnd.github+json","X-GitHub-Api-Version":"2022-11-28"},body:JSON.stringify({ref:"main",inputs:{titulo,texto:sc,tema}})});
   if(x.status===204){try{localStorage.setItem("ghtk",tk)}catch(e){}setSt("✓ Aviso enviado: "+titulo);setTimeout(()=>setSt(""),15000)}
   else{if([401,403,404].includes(x.status)){try{localStorage.removeItem("ghtk")}catch(e){}}setSt("⚠ Aviso no enviado (GitHub "+x.status+")")}
  }catch(e){setSt("⚠ Aviso no enviado")}}
@@ -568,7 +569,11 @@ function hero(){const lv=liveM();lvOn=!!lv;if(lv)return liveHero(lv);const nx=ne
 function tick(){tickLive();const e=document.getElementById("cd");if(!e)return;let s=Math.max(0,(+e.dataset.t-Date.now())/1e3|0);const v=[[86400,"días"],[3600,"horas"],[60,"min"],[1,"seg"]];e.innerHTML=v.map(([k,l])=>{const n=s/k|0;s%=k;return`<div><b>${String(n).padStart(2,"0")}</b><span>${l}</span></div>`}).join("")}
 function jsel(){const c=(nextM()||{r:{n:0}}).r.n;
  return`<div class="jsel"><button aria-label="Jornada anterior" ${jn<=1?"disabled":""} onclick="jn=${jn-1};jnAuto=false;render()">‹</button><select aria-label="Elegir jornada" onchange="jn=+this.value;jnAuto=false;render()">${J.map(r=>`<option value="${r.n}" ${jn==r.n?"selected":""}>Jornada ${r.n} · ${r.d.slice(8)}/${r.d.slice(5,7)}${r.n==c?" · actual":""}</option>`).join("")}</select><button aria-label="Jornada siguiente" ${jn>=J.length?"disabled":""} onclick="jn=${jn+1};jnAuto=false;render()">›</button></div>`}
+let subA=false;
+async function subAdmin(on){try{const FM=window.Capacitor&&Capacitor.Plugins&&Capacitor.Plugins.FirebaseMessaging;if(!FM)return;
+ if(on&&!subA){await FM.subscribeToTopic({topic:"pruebas"});subA=true}else if(!on&&subA){await FM.unsubscribeFromTopic({topic:"pruebas"});subA=false}}catch(e){}}
 function render(){
+ subAdmin(E());
  if(loading){document.getElementById("hero").style.display="none";document.getElementById("nav").innerHTML="";document.getElementById("app").innerHTML="";return}
  document.getElementById("hero").style.display="";
  document.getElementById("hero").innerHTML=hero();fit();tick();goalWatch();

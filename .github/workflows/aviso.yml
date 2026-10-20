@@ -8,6 +8,10 @@ on:
       texto:
         description: "Texto de la notificación"
         required: false
+      tema:
+        description: "juncal = todas las familias · pruebas = solo dispositivos del entrenador"
+        required: false
+        default: "pruebas"
 permissions:
   contents: read
 jobs:
@@ -23,3 +27,4 @@ jobs:
           FCM_SERVICE_ACCOUNT: ${{ secrets.FCM_SERVICE_ACCOUNT }}
           TITULO: ${{ inputs.titulo }}
           TEXTO: ${{ inputs.texto }}
+          TEMA: ${{ inputs.tema }}

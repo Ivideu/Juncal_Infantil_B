@@ -330,13 +330,16 @@ select{font:inherit;background:var(--bg);color:var(--tx);border:1px solid var(--
 /* ===== Cabecera panorámica Torrejón Juncal ===== */
 header.site-banner {
   position: relative;
-  width: 100vw;
-  margin-left: calc(50% - 50vw);
-  height: clamp(145px, 27.85vw, 375px);
-  min-height: 125px;
+  width: 100%;
+  max-width: 100%;
+  margin: 0 auto 18px;
+  aspect-ratio: 1347 / 375;
+  height: auto;
+  min-height: 0;
   padding: 0;
   display: block;
   overflow: hidden;
+  border-radius: 16px;
   background-color: #050b1f;
   background-image: linear-gradient(180deg, transparent 65%, rgba(5, 11, 31, .45) 100%), url('./cabecera-juncal.jpg');
   background-size: cover;
@@ -370,9 +373,11 @@ header.site-banner .dl {
 }
 @media (max-width: 600px) {
   header.site-banner {
-    height: 28vw;
-    min-height: 125px;
+    width: 100%;
+    aspect-ratio: 1347 / 375;
+    min-height: 0;
     background-position: center;
+    border-radius: 12px;
   }
   header.site-banner .dl {
     top: 6px;

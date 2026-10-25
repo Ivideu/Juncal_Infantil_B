@@ -27,6 +27,7 @@ const ID = {
   24193914: 10,  // Juncal B
   26750489: 11,  // Sporting Morata
   21455532: 12,  // Limones 5 B
+  27275377: 13,  // CDE SPORT LATINA - EM ALUCHE FS
 };
 
 const NOM = { 2: "Aston C", 3: "Lope de Vega", 4: "Torrejón Five Play", 5: "Rivas Atlantis B", 6: "Rivas Futsal B", 7: "Malvar",

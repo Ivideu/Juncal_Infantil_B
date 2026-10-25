@@ -407,6 +407,17 @@ header.site-banner .dl {
 .bkc .meta{margin-top:16px;font-size:.98rem;justify-content:center}
 @media(max-width:560px){.bkc .tm{flex-direction:column;text-align:center!important;gap:6px}.bkc .b{width:56px;height:56px}}
 
+/* ===== Hero "Próximo partido" cuando es de copa ===== */
+#hero.copa{--tx:#0f1b3d;--mu:#7a4a00;--ye:#b45309;--ye2:#b45309;color:#0f1b3d;background:linear-gradient(135deg,#fff8dc,#fffdf5 55%,#fff3c4);border:2px solid #e9b949;box-shadow:0 14px 40px #d9770640,0 0 0 1px #fff inset}
+#hero.copa:after{content:"🏆";opacity:.1;right:-10px;bottom:-30px;font-size:230px;animation:none;transform:rotate(-12deg)}
+#hero.copa .cpb{display:flex;align-items:center;justify-content:center;gap:10px;margin:-6px -10px 14px;padding:8px 14px;border-radius:12px;font:800 clamp(1.3rem,5vw,2rem) 'Barlow Condensed',sans-serif;letter-spacing:.08em;text-transform:uppercase;color:#7a4a00;background:linear-gradient(90deg,#ffd23f55,#ffd23f 20%,#ffe48a 50%,#ffd23f 80%,#ffd23f55)}
+#hero.copa .hv .cn{color:#0f1b3d}
+#hero.copa .loc a{color:#1d5fe0}
+#hero.copa .loc a:hover{color:#b45309}
+#hero.copa .cd div{background:#ffe9a8;border:2px solid #e9b949}
+#hero.copa .cd b{color:#7a4a00}
+#hero.copa .cd span{color:#7a4a00}
+#hero.copa button{background:#fff;color:#0f1b3d;border-color:#e9b949}
 </style>
 </head>
 <body>
@@ -565,7 +576,7 @@ const gh=e=>{const o=e.n.startsWith("Propia"),p=pn(e.n);return`<span class="gl2"
 function curMin(m){const c=m.c;if(!c||(c.ph!=1&&c.ph!=2))return null;return(c.ph==2?25:0)+Math.floor(((c.base||0)+(c.run?Date.now()-c.since:0))/6e4)+1}
 function addMin(m,n,t){m.gm=m.gm||{};(m.gm[n]=m.gm[n]||[]).push(t);m.gm[n].sort((a,b)=>a-b)}
 function trimMin(m,k){if(!m.gm||!m.gm[k])return;if(!m.g||!m.g[k])delete m.gm[k];else while(m.gm[k].length>m.g[k])m.gm[k].pop();if(!Object.keys(m.gm).length)delete m.gm}
-const mn=(m,n,g)=>{const t=(m.gm&&m.gm[n])||[];return t.length?t.map(x=>x+"'").join(", ")+(g>t.length?` +${g-t.length}`:""):"×"+g};let lvOn=false,lastP="";
+const mn=(m,n,g)=>{const t=(m.gm&&m.gm[n])||[];return t.length?t.map(x=>x+"'").join(", ")+(g>t.length?` +${g-t.length}`:""):"×"+g};let lvOn=false,lastP="",heroCopa=false;
 function liveM(real){if(!real&&TS.on)return TX();const now=Date.now(),hoyM=new Date().toLocaleDateString("sv-SE",{timeZone:"Europe/Madrid"}),all=myM().filter(x=>x.h&&x.a);return all.find((x,i)=>{const m=M(x.r.n,x.h),c=m.c,k=when(x).getTime(),st=c?Math.min(k-9e5,c.s||k):(m.t?k-9e5:1e18),en=c&&c.fin?c.fin+72e5:(m.t?Math.max(k,c&&c.s||0):(c&&c.s)||k)+144e5;if(!m.t&&(m.d||x.r.d)>hoyM)return false;if(c&&c.fin&&all.slice(i+1).some(y=>M(y.r.n,y.h).t))return false;return now>=st&&now<en})}
 function clk(j,h,a){const m=MS(j)[j+"_"+h]||(MS(j)[j+"_"+h]={}),now=Date.now();if(a=="reset"){if(!confirm("¿Reiniciar el cronómetro?"))return;delete m.c;return save(j===0)}
  const c=m.c||(m.c={ph:0,run:false,base:0,s:now}),el=(c.base||0)+(c.run?now-c.since:0),ph0=c.ph;
@@ -646,10 +657,10 @@ function tickLive(){const l=!!liveM();if(l!==lvOn){render();return}
  e.textContent=String(s/60|0).padStart(2,"0")+":"+String(s%60).padStart(2,"0");
  document.getElementById("p1").style.width=(d.ph=="1"?pc:d.ph=="0"?0:100)+"%";document.getElementById("p2").style.width=(d.ph=="2"?pc:d.ph=="FT"?100:0)+"%"}
 function nextM(){const lv=liveM(1);if(lv)return lv;return myM().filter(x=>x.h&&x.a).find(x=>{const m=M(x.r.n,x.h);return!done(m)&&!(m.c&&m.c.fin)&&when(x)>=new Date(Date.now()-864e5)})}
-function hero(){const lv=liveM();lvOn=!!lv;if(lv)return liveHero(lv);const nx=nextM();
+function hero(){const lv=liveM();lvOn=!!lv;heroCopa=false;if(lv)return liveHero(lv);const nx=nextM();heroCopa=!!(nx&&nx.r.copa);
  if(!nx)return`<h2>Temporada finalizada 🏆</h2><p class="gap">No quedan partidos por jugar.</p>`;
  const m=M(nx.r.n,nx.h);
- return`<div class="cn" style="font-size:1.1rem;color:var(--ye)">PRÓXIMO PARTIDO · ${lab(nx.r).toUpperCase()}</div>
+ return`${heroCopa?`<div class="cpb">🏆 Partido de copa · ${esc(nx.r.rd)} 🏆</div>`:""}<div class="cn" style="font-size:1.1rem;color:var(--ye)">PRÓXIMO PARTIDO · ${lab(nx.r).toUpperCase()}</div>
  <div class="hv"><div>${bd(nx.h)}<div class="cn">${nm(nx.h)}</div></div><div class="cn" style="font-size:2rem">VS</div><div>${bd(nx.a)}<div class="cn">${nm(nx.a)}</div></div></div>
  <p style="text-align:center;margin-bottom:18px"><span class="dt dtb">${fmt(m.d||nx.r.d)} · ${m.t?m.t+" h":"hora por confirmar"}</span></p>
  <p class="loc">${loc(nx.h,m)}</p>
@@ -664,7 +675,7 @@ function render(){
  subAdmin(E());
  if(loading){document.getElementById("hero").style.display="none";document.getElementById("nav").innerHTML="";document.getElementById("app").innerHTML="";return}
  document.getElementById("hero").style.display="";
- document.getElementById("hero").innerHTML=hero();fit();tick();goalWatch();
+ document.getElementById("hero").innerHTML=hero();document.getElementById("hero").classList.toggle("copa",heroCopa);fit();tick();goalWatch();
  document.getElementById("tbtn").classList.toggle("on",TS.on);document.getElementById("tout").style.display=document.getElementById("trst").style.display=TS.on?"":"none";
  if(jnAuto){const nx=nextL();jn=nx?nx.r.n:J.length}
  const tabs=[["jor","🗓 Jornadas"],["cal","📅 Mi calendario"],["cla","🏆 Clasificación"],["cop","🥇 Copa"],["gol","👟 Goleadores"],["cro","🎽 Jugadores"]];if(E())tabs.push(["hor","🕒 Horarios"],["pla","👥 Plantilla"]);

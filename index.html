@@ -443,12 +443,14 @@ const ME=10;
 const T={2:["Aston C","P.M. San Blas, Madrid"],3:["Lope de Vega","P.M. Emperador Fernando, Alcalá de Henares"],4:["Torrejón Five Play","Pab. Jorge Garbajosa, Torrejón de Ardoz"],5:["Rivas Atlantis B","Polideportivo Parque Sureste, Rivas"],6:["Rivas Futsal B","Polideportivo Parque Sureste, Rivas"],7:["Malvar","C.D. Príncipe Felipe, C/ San Sebastián, 6 y 8, Arganda del Rey"],8:["Fusión San Fernando","P.M. Justo Gómez Salto, San Fernando de Henares"],9:["Diagonal C","P.M. El Nido, Parla"],10:["Juncal B","P.M. Nuria Fernández, Torrejón de Ardoz"],11:["Sporting Morata","P.M. Morata de Tajuña"],12:["Limones 5 B","P.M. Joaquín Blume, Torrejón de Ardoz"]};
 T[99]=["Equipo de prueba","P.M. Nuria Fernández, Torrejón de Ardoz"];
 const COD={2:24116776,3:27916794,4:17175596,5:18925059,6:17155533,7:18753107,8:26753258,9:27111405,10:24193914,11:26750489,12:21455532};
+/* Escudos de rivales que solo salen en copa (nombre en mayúsculas y sin tildes -> código RFFM; el PNG va en Escudos/<código>.png) */
+const COD_RV={"CDE SPORT LATINA - EM ALUCHE FS":27275377};
 const R=["03-10-2026|0-3,10-5,8-7,6-9,4-11,12-2","17-10-2026|3-12,5-0,7-10,9-8,11-6,2-4","24-10-2026|3-5,0-7,10-9,8-11,6-2,12-4","07-11-2026|5-12,7-3,9-0,11-10,2-8,4-6","14-11-2026|5-7,3-9,0-11,10-2,8-4,12-6","21-11-2026|7-12,9-5,11-3,2-0,4-10,6-8","28-11-2026|7-9,5-11,3-2,0-4,10-6,12-8","12-12-2026|9-12,11-7,2-5,4-3,6-0,8-10","19-12-2026|9-11,7-2,5-4,3-6,0-8,12-10","16-01-2027|12-11,2-9,4-7,6-5,8-3,10-0","23-01-2027|11-2,9-4,7-6,5-8,3-10,0-12","30-01-2027|3-0,5-10,7-8,9-6,11-4,2-12","06-02-2027|12-3,0-5,10-7,8-9,6-11,4-2","20-02-2027|5-3,7-0,9-10,11-8,2-6,4-12","27-02-2027|12-5,3-7,0-9,10-11,8-2,6-4","06-03-2027|7-5,9-3,11-0,2-10,4-8,6-12","13-03-2027|12-7,5-9,3-11,0-2,10-4,8-6","03-04-2027|9-7,11-5,2-3,4-0,6-10,8-12","10-04-2027|12-9,7-11,5-2,3-4,0-6,10-8","17-04-2027|11-9,2-7,4-5,6-3,8-0,10-12","08-05-2027|11-12,9-2,7-4,5-6,3-8,0-10","29-05-2027|2-11,4-9,6-7,8-5,10-3,12-0"];
 const J=R.map((s,i)=>{const[d,p]=s.split("|");return{n:i+1,d:d.split("-").reverse().join("-"),p:p.split(",").map(x=>x.split("-").map(Number))}});
 const API=""; // 
 const FB="https://juncal-f0b64-default-rtdb.europe-west1.firebasedatabase.app",FBKEY="AIzaSyDXqBUkie30z_Cmyj__ayhzGYyYxZMrB3Q",FBMAIL="ivanblasco81@hotmail.com"; // Firebase en tiempo real configurado
 let S={u:0,m:{},pl:[]};
-const fix=()=>{S.m=S.m||{};S.pl=S.pl||[];S.dn=S.dn||{};S.off=S.off||{};S.cp=S.cp||[];S.cp.forEach(c=>{T[100+c.id]=[c.rv,c.pav||c.rv]})};
+const fix=()=>{S.m=S.m||{};S.pl=S.pl||[];S.dn=S.dn||{};S.off=S.off||{};S.cp=S.cp||[];S.cp.forEach(c=>{T[100+c.id]=[c.rv,c.pav||c.rv];const nk=x=>String(x||"").normalize("NFD").replace(/[\u0300-\u036f]/g,"").toUpperCase().trim().replace(/\s+/g," "),k=nk(c.rv),li=Object.keys(T).find(i=>i<100&&nk(T[i][0])===k),cod=c.cod||COD_RV[k]||(li&&COD[li]);if(cod)COD[100+c.id]=+cod})};
 const isOff=p=>!!(S.off&&S.off[p]);
 let CACHE=null;try{CACHE=JSON.parse(localStorage.getItem("juncalB"))}catch(e){}
 if(!API&&CACHE)S=CACHE;fix();let loading=!!(API||FB);
@@ -683,7 +685,7 @@ function render(){
 function addC(){const g=i=>document.getElementById(i).value.trim(),rv=g("cr_rv"),d=g("cr_d");
  if(!rv||!d)return alert("Pon al menos el rival y la fecha");
  S.cp=S.cp||[];const id=Math.max(0,...S.cp.map(c=>c.id))+1,home=g("cr_h")=="1",n=100+id;
- S.cp.push({id,rd:g("cr_rd")||"Copa",rv,home,d,pav:g("cr_p")});
+ S.cp.push({id,rd:g("cr_rd")||"Copa",rv,home,d,pav:g("cr_p"),cod:g("cr_c")});
  const t=g("cr_t");if(t)S.m[n+"_"+(home?ME:n)]={t};
  fix();save()}
 function delC(id){if(!confirm("¿Eliminar este partido de copa y sus goles?"))return;
@@ -692,7 +694,7 @@ function renderCopa(){
  const l=myM().filter(x=>x.r.copa),rs=[];
  l.forEach(x=>{let g=rs.find(r=>r.rd==x.r.rd);if(!g)rs.push(g={rd:x.r.rd,l:[]});g.l.push(x)});
  let h=`<section class="cards-head"><div><h2>🥇 Copa</h2><p class="gap">Torneo aparte: no puntúa en la clasificación de liga, pero sus goles cuentan en Goleadores.</p></div></section>`;
- if(E())h+=`<div class="card"><div class="ed" style="display:flex"><input id="cr_rd" list="cr_l" placeholder="Ronda (ej: Cuartos de final)"><datalist id="cr_l"><option>Dieciseisavos de final</option><option>Octavos de final</option><option>Cuartos de final</option><option>Semifinal</option><option>Final</option></datalist><input id="cr_rv" placeholder="Rival"><select id="cr_h"><option value="1">Juncal B local</option><option value="0">Juncal B visitante</option></select><input id="cr_d" type="date"><input id="cr_t" type="time"><input id="cr_p" placeholder="Pabellón (opcional)"><button onclick="addC()">＋ Añadir partido</button></div></div>`;
+ if(E())h+=`<div class="card"><div class="ed" style="display:flex"><input id="cr_rd" list="cr_l" placeholder="Ronda (ej: Cuartos de final)"><datalist id="cr_l"><option>Dieciseisavos de final</option><option>Octavos de final</option><option>Cuartos de final</option><option>Semifinal</option><option>Final</option></datalist><input id="cr_rv" placeholder="Rival"><select id="cr_h"><option value="1">Juncal B local</option><option value="0">Juncal B visitante</option></select><input id="cr_d" type="date"><input id="cr_t" type="time"><input id="cr_p" placeholder="Pabellón (opcional)"><input id="cr_c" type="number" placeholder="Código escudo (opcional)"><button onclick="addC()">＋ Añadir partido</button></div></div>`;
  if(!rs.length)return h+`<div class="empty">🥇 Aún no hay partidos de copa.</div>`;
  return h+`<div class="bkt">`+rs.map(g=>`<div class="bkc"><h3>🏆 ${esc(g.rd)} 🏆</h3>${g.l.map((x,i)=>card(x.r,x.h,x.a,i)+(E()?`<p style="text-align:center;margin:-6px 0 12px"><button onclick="delC(${x.r.n-100})">Eliminar partido</button></p>`:"")).join("")}</div>`).join("")+`</div>`}
 

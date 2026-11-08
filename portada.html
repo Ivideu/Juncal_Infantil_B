@@ -152,7 +152,7 @@ footer{border-top:1px solid var(--line);padding:40px 0;color:var(--mut);text-ali
 
   <section id="noticias" style="background:#0b1a45"><div class="wrap">
     <h2 class="rv">Últimas <span>noticias</span></h2>
-    <p class="sub rv">Directamente desde nuestro Instagram · últimas 2 semanas.</p>
+    <p class="sub rv">Nuestras últimas publicaciones, directamente desde Instagram.</p>
     <div class="grid news" id="news"></div>
     <p style="margin-top:28px"><a class="btn o" href="https://www.instagram.com/torrejonjuncal/" target="_blank" rel="noopener">Ver todo en Instagram →</a></p>
   </div></section>
@@ -191,17 +191,18 @@ const CONFIG = {
   ESCUELA_IMG: "",    // foto de la sección "La escuela"
   ESCUELA_TXT: "Somos una escuela de fútbol sala donde cada niño y niña aprende, compite y disfruta. Trabajamos valores como el compañerismo, el esfuerzo y el respeto, con entrenadores formados y un ambiente de familia.",
 
+  CATS_PORTADA: 4,                       // cuántas categorías se ven en la portada
+  CATS_PAGE: "portada.html#categorias",   // destino de "Más categorías"
+
   /* NOTICIAS AUTOMÁTICAS DE INSTAGRAM (elige UNA opción):
      A) FEED_URL: URL JSON de un servicio como Behold.so o similar (recomendado, sin exponer claves).
      B) IG_TOKEN: token de la API de Instagram (cuenta profesional). Es visible en el código:
         lo ideal es ponerlo detrás de un pequeño proxy/función serverless.
-     Si ambos están vacíos se muestran noticias de ejemplo. */
-  CATS_PORTADA: 4,                       // cuántas categorías se ven en la portada
-  CATS_PAGE: "portada.html#categorias",   // destino de "Más categorías"
-
+     Si ambos están vacíos se muestra una tarjeta que lleva a vuestro Instagram. */
   FEED_URL: "",
   IG_TOKEN: "",
-  NEWS_DAYS: 14,
+  NEWS_DAYS: 0,   // 0 = las últimas publicaciones sin límite de fecha; 14 = solo las de las últimas 2 semanas
+  NEWS_COUNT: 6,
 
   STAFF: [
     {name:"Nombre Apellido", role:"Coordinador", img:""},
@@ -262,13 +263,17 @@ addEventListener("hashchange",route);route();
 
 // noticias de Instagram (últimas 2 semanas)
 function renderNews(items){
-  const lim=Date.now()-CONFIG.NEWS_DAYS*864e5;
-  items=items.filter(i=>new Date(i.timestamp).getTime()>=lim).slice(0,6);
-  $("#news").innerHTML=items.length?items.map(i=>{
+  items.sort((x,y)=>new Date(y.timestamp)-new Date(x.timestamp));
+  if(CONFIG.NEWS_DAYS>0){const lim=Date.now()-CONFIG.NEWS_DAYS*864e5;items=items.filter(i=>new Date(i.timestamp).getTime()>=lim)}
+  items=items.slice(0,CONFIG.NEWS_COUNT);
+  if(!items.length)return igCard("Todavía no hay publicaciones recientes. ¡Síguenos en Instagram!");
+  $("#news").innerHTML=items.map(i=>{
     const img=i.thumbnail_url||i.media_url||"";
-    const d=new Date(i.timestamp).toLocaleDateString("es-ES",{day:"numeric",month:"long"});
-    return `<a class="card rv in" href="${i.permalink}" target="_blank" rel="noopener"><div class="ph" ${bg(img)}></div><div class="cb"><time>${d}</time><p>${esc(i.caption)||"Ver publicación"}</p></div></a>`}).join("")
-  :`<p style="color:var(--mut)">No hay publicaciones en las últimas 2 semanas. ¡Síguenos en Instagram!</p>`;
+    const d=new Date(i.timestamp).toLocaleDateString("es-ES",{day:"numeric",month:"long",year:"numeric"});
+    return `<a class="card rv in" href="${i.permalink}" target="_blank" rel="noopener"><div class="ph" ${bg(img)}></div><div class="cb"><time>${d}</time><p>${esc(i.caption)||"Ver publicación"}</p></div></a>`}).join("");
+}
+function igCard(t){
+  $("#news").innerHTML=`<a class="card rv in" href="https://www.instagram.com/torrejonjuncal/" target="_blank" rel="noopener" style="grid-column:1/-1"><div class="cb" style="padding:30px"><h3>@torrejonjuncal</h3><p style="display:block">${t}</p></div></a>`;
 }
 async function loadNews(){
   try{
@@ -278,10 +283,7 @@ async function loadNews(){
     else if(CONFIG.IG_TOKEN){const r=await fetch(`https://graph.instagram.com/me/media?fields=id,caption,media_type,media_url,thumbnail_url,permalink,timestamp&limit=20&access_token=${CONFIG.IG_TOKEN}`);data=(await r.json()).data;}
     else throw 0;
     renderNews(data);
-  }catch(e){
-    const now=Date.now(),ex=["Victoria en casa con una gran segunda parte","Entrenamiento de puertas abiertas este sábado","Nuevo equipamiento para toda la cantera"];
-    renderNews(ex.map((t,i)=>({timestamp:new Date(now-i*3*864e5).toISOString(),caption:t+" (ejemplo)",permalink:"https://www.instagram.com/torrejonjuncal/"})));
-  }
+  }catch(e){igCard("Consulta aquí nuestras últimas publicaciones y novedades del club.")}
 }
 loadNews();
 

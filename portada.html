@@ -10,8 +10,8 @@
 <style>
 :root{--bg:#081235;--card:#10204f;--line:#233c7d;--txt:#f3f6ff;--mut:#a3b1dc;--acc:#ffd400;--acc2:#1c3fa8}
 *{box-sizing:border-box;margin:0}
-html{scroll-behavior:smooth;scroll-padding-top:76px;background:#081235}
-body{font-family:Inter,system-ui,sans-serif;background:transparent;color:var(--txt);line-height:1.6}
+html{scroll-behavior:smooth;scroll-padding-top:76px}
+body{font-family:Inter,system-ui,sans-serif;background:var(--bg);color:var(--txt);line-height:1.6}
 h1,h2,h3{font-family:'Barlow Condensed',sans-serif;text-transform:uppercase;line-height:1}
 a{color:inherit;text-decoration:none}
 .wrap{max-width:1120px;margin:auto;padding:0 20px}
@@ -23,21 +23,6 @@ h2 span{color:var(--acc)}
 .btn:hover{transform:translateY(-2px);box-shadow:0 8px 24px #ffd40044}
 .btn.o{background:transparent;color:var(--txt);border:2px solid var(--line)}
 .btn.o:hover{border-color:var(--acc);box-shadow:none}
-
-/* ===== Fondo animado (de index.html, adaptado a oscuro, sin balones) ===== */
-#bg{position:fixed;inset:0;z-index:-1;overflow:hidden;pointer-events:none;
-  background:linear-gradient(160deg,#081235 0%,#0c1e55 55%,#10286b 100%)}
-#bg i{position:absolute;border-radius:50%;filter:blur(70px);opacity:.3;will-change:transform;animation:drift 24s ease-in-out infinite alternate}
-#bg i:nth-child(1){width:55vmax;height:55vmax;left:-15vmax;top:-18vmax;background:#8bbcff}
-#bg i:nth-child(2){width:45vmax;height:45vmax;right:-14vmax;top:8vh;background:#ffe48a;opacity:.18;animation-duration:30s;animation-delay:-8s}
-#bg i:nth-child(3){width:50vmax;height:50vmax;left:10vw;bottom:-24vmax;background:#a6f1c8;opacity:.2;animation-duration:27s;animation-delay:-14s}
-#bg i:nth-child(4){width:34vmax;height:34vmax;right:12vw;bottom:-10vmax;background:#c7b8ff;opacity:.25;animation-duration:34s;animation-delay:-4s}
-@keyframes drift{0%{transform:translate(0,0) scale(1)}50%{transform:translate(9vw,7vh) scale(1.15)}100%{transform:translate(-6vw,12vh) scale(.95)}}
-#bg:before{content:"";position:absolute;left:50%;top:50%;width:78vmin;height:78vmin;margin:-39vmin 0 0 -39vmin;border-radius:50%;border:3px solid #8bbcff22;animation:pulse 9s ease-in-out infinite}
-#bg:after{content:"";position:absolute;left:0;right:0;top:50%;height:3px;background:#8bbcff14}
-@keyframes pulse{50%{transform:scale(1.12);border-color:#8bbcff10}}
-@media(prefers-reduced-motion:reduce){#bg i,#bg:before{animation:none!important}}
-
 /* nav */
 header{position:fixed;inset:0 0 auto;z-index:50;background:linear-gradient(#081235f5,#081235e0);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--line);box-shadow:0 8px 30px #0006}
 nav{display:flex;align-items:center;justify-content:space-between;height:68px}
@@ -53,11 +38,9 @@ nav{display:flex;align-items:center;justify-content:space-between;height:68px}
 .menu .btn{padding:11px 22px}
 #burger{display:none;background:none;border:0;color:var(--txt);font-size:1.8rem;cursor:pointer}
 /* hero */
-.hero{min-height:100vh;display:flex;align-items:center;position:relative;overflow:hidden;background:transparent;padding-top:68px}
+.hero{min-height:100vh;display:flex;align-items:center;position:relative;overflow:hidden;background:var(--bg);padding-top:68px}
 .hero::before{content:"";position:absolute;top:68px;left:0;right:0;bottom:0;z-index:0;
-background:linear-gradient(95deg,#081235dd 6%,#08123555 40%,#08123500 62%),var(--hero,url('fondo-hero.jpg')) 85% 0/cover no-repeat;
--webkit-mask-image:linear-gradient(180deg,#000 55%,transparent 100%);
-mask-image:linear-gradient(180deg,#000 55%,transparent 100%)}
+background:linear-gradient(95deg,#081235ee 6%,#08123566 40%,#08123500 62%),linear-gradient(180deg,transparent 70%,#081235 100%),var(--hero,url('fondo-hero.jpg')) 85% 0/cover no-repeat}
 .hero .wrap{position:relative;z-index:2}
 .hero::after{content:"";position:absolute;width:520px;height:520px;border-radius:50%;right:-120px;bottom:-160px;border:60px solid #ffd40026;animation:spin 20s linear infinite}
 @keyframes spin{to{transform:rotate(360deg) scale(1.1)}}
@@ -69,11 +52,9 @@ mask-image:linear-gradient(180deg,#000 55%,transparent 100%)}
 .stats{display:flex;gap:40px;margin-top:56px;flex-wrap:wrap}
 .stats b{font-family:'Barlow Condensed';font-size:3rem;color:var(--acc);display:block;line-height:1}
 .stats small{color:var(--mut)}
-/* secciones con degradado arriba y abajo (en lugar de bloque azul plano) */
-section.alt{background:linear-gradient(180deg,transparent,#0b1a4599 14%,#0b1a4599 86%,transparent)}
 /* cards */
 .grid{display:grid;gap:20px;grid-template-columns:repeat(auto-fill,minmax(240px,1fr))}
-.card{background:#10204fcc;-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);border:1px solid var(--line);border-radius:20px;overflow:hidden;transition:.25s}
+.card{background:var(--card);border:1px solid var(--line);border-radius:20px;overflow:hidden;transition:.25s}
 .card:hover{transform:translateY(-6px);border-color:var(--acc)}
 .ph{aspect-ratio:4/3;background:linear-gradient(135deg,#1c3fa8,#0b1a45) center/cover;display:grid;place-items:center;color:#ffffff55;font-size:.8rem}
 .cb{padding:18px}
@@ -117,8 +98,6 @@ footer{border-top:1px solid var(--line);padding:40px 0;color:var(--mut);text-ali
 </head>
 <body>
 
-<div id="bg" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
-
 <header id="hd"><div class="wrap"><nav>
   <a href="#" class="logo"><img class="lg" src="escudo.png" alt="Escudo Torrejón Juncal">Torrejón <b>Juncal</b></a>
   <button id="burger" aria-label="Menú">☰</button>
@@ -157,7 +136,7 @@ footer{border-top:1px solid var(--line);padding:40px 0;color:var(--mut);text-ali
     <div class="ph rv" id="escuelaImg">Foto de la escuela</div>
   </div></section>
 
-  <section id="equipos" class="alt"><div class="wrap">
+  <section id="equipos" style="background:#0b1a45"><div class="wrap">
     <h2 class="rv">Nuestras <span>categorías</span></h2>
     <p class="sub rv">Pulsa en tu categoría para ver resultados, clasificaciones y calendario.</p>
     <div class="grid" id="catHome"></div>
@@ -171,7 +150,7 @@ footer{border-top:1px solid var(--line);padding:40px 0;color:var(--mut);text-ali
   </div></section>
 
 
-  <section id="noticias" class="alt"><div class="wrap">
+  <section id="noticias" style="background:#0b1a45"><div class="wrap">
     <h2 class="rv">Últimas <span>noticias</span></h2>
     <p class="sub rv">Nuestras últimas publicaciones, directamente desde Instagram.</p>
     <div class="grid news" id="news"></div>

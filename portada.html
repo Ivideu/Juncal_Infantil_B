@@ -24,17 +24,18 @@ h2 span{color:var(--acc)}
 .btn.o{background:transparent;color:var(--txt);border:2px solid var(--line)}
 .btn.o:hover{border-color:var(--acc);box-shadow:none}
 /* nav */
-header{position:fixed;inset:0 0 auto;z-index:20;transition:.3s}
-header.s{background:#081235e6;backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+header{position:fixed;inset:0 0 auto;z-index:50;background:linear-gradient(#081235f5,#081235e0);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--line);box-shadow:0 8px 30px #0006}
 nav{display:flex;align-items:center;justify-content:space-between;height:68px}
 .logo{font-family:'Barlow Condensed';font-weight:800;font-size:1.5rem;text-transform:uppercase}
 .logo b{color:var(--acc)}
 .logo{display:flex;align-items:center;gap:10px}.lg{width:44px;height:44px;border-radius:50%}
 .pgb{height:300px;margin-bottom:-30px;background:linear-gradient(180deg,#0812358c,transparent 40%,var(--bg) 100%),url('cabecera.jpg') center/cover}
 .fl{width:64px;height:64px;border-radius:50%;margin-bottom:12px}
-.menu{display:flex;gap:28px;align-items:center;font-weight:600;font-size:.95rem}
-.menu a:not(.btn):hover{color:var(--acc)}
-.menu .btn{padding:9px 18px}
+.menu{display:flex;gap:6px;align-items:center;font-weight:600;font-size:.95rem}
+.menu a:not(.btn){padding:10px 16px;border-radius:99px;font-size:1rem;color:#fff;transition:.2s}
+.menu a:not(.btn):hover{color:#081235;background:var(--acc)}
+.menu .btn{margin-left:10px}
+.menu .btn{padding:11px 22px}
 #burger{display:none;background:none;border:0;color:var(--txt);font-size:1.8rem;cursor:pointer}
 /* hero */
 .hero{min-height:100vh;display:flex;align-items:center;position:relative;overflow:hidden;background:var(--bg)}

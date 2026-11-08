@@ -262,8 +262,6 @@ const CONFIG = {
     {name:"Nombre Apellido", role:"Cargo", img:""},
     {name:"Nombre Apellido", role:"Cargo", img:""},
     {name:"Nombre Apellido", role:"Cargo", img:""},
-    {name:"Nombre Apellido", role:"Cargo", img:""},
-    {name:"Nombre Apellido", role:"Cargo", img:""},
     {name:"Nombre Apellido", role:"Cargo", img:""}
   ],
 
@@ -324,7 +322,7 @@ addEventListener("keydown",e=>{if(e.key==="Escape")closeStaff()});
 
 // categorías: una sola fila al principio; "Más categorías" despliega el resto en la misma página
 const catCard=c=>{
-  const inner=`<div class="cph" ${bg(c.img)}></div><span class="age">${esc(c.age)}</span><h3>${esc(c.name)}</h3><span class="go">${c.url?"Resultados y clasificaciones →":"Próximamente"}</span>`;
+  const inner=`<span class="age">${esc(c.age)}</span><h3>${esc(c.name)}</h3><span class="go">${c.url?"Resultados y clasificaciones →":"Próximamente"}</span>`;
   return c.url?`<a class="card cat" href="${esc(c.url)}" target="_blank" rel="noopener">${inner}</a>`:`<div class="card cat sin">${inner}</div>`};
 $("#catHome").innerHTML=CONFIG.CATEGORIES.map(catCard).join("");
 $("#catGrid").innerHTML=CONFIG.CATEGORIES.map(catCard).join("");

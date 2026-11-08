@@ -6,83 +6,108 @@
 <link rel="icon" href="escudo.png">
 <title>Torrejón Juncal · Escuela de Fútbol Sala</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;800&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#081235;--card:#10204f;--line:#233c7d;--txt:#f3f6ff;--mut:#a3b1dc;--acc:#ffd400;--acc2:#1c3fa8}
+/* Mismas variables que index.html */
+:root{--bg:#eef4ff;--bg2:#ffffff;--card:rgba(255,255,255,.86);--line:#d5def5;--tx:#0f1b3d;--mu:#5a6a93;--ac:#2f7bff;--ye:#ffd23f;--ye2:#d97706;--navy:#0f2a6b}
 *{box-sizing:border-box;margin:0}
-html{scroll-behavior:smooth;scroll-padding-top:76px}
-body{font-family:Inter,system-ui,sans-serif;background:var(--bg);color:var(--txt);line-height:1.6}
-h1,h2,h3{font-family:'Barlow Condensed',sans-serif;text-transform:uppercase;line-height:1}
+html{scroll-behavior:smooth;scroll-padding-top:76px;background:var(--bg)}
+body{font:16px/1.5 Barlow,system-ui,sans-serif;color:var(--tx);background:transparent;min-height:100vh}
+h1,h2,h3{font-family:'Barlow Condensed',sans-serif;letter-spacing:.02em;text-transform:uppercase;line-height:1}
 a{color:inherit;text-decoration:none}
-.wrap{max-width:1120px;margin:auto;padding:0 20px}
-section{padding:80px 0}
-h2{font-size:clamp(2.2rem,5vw,3.4rem);margin-bottom:10px}
-h2 span{color:var(--acc)}
-.sub{color:var(--mut);max-width:620px;margin-bottom:36px}
-.btn{display:inline-block;padding:14px 26px;border-radius:99px;font-weight:600;background:var(--acc);color:#081235;transition:.2s}
-.btn:hover{transform:translateY(-2px);box-shadow:0 8px 24px #ffd40044}
-.btn.o{background:transparent;color:var(--txt);border:2px solid var(--line)}
-.btn.o:hover{border-color:var(--acc);box-shadow:none}
+.wrap{max-width:980px;margin:auto;padding:0 16px}
+section{padding:70px 0}
+h2{font-size:clamp(2.2rem,5vw,3.4rem);font-weight:800;color:var(--navy);margin-bottom:10px}
+h2 span{color:var(--ye2)}
+.sub{color:var(--mu);max-width:620px;margin-bottom:36px}
+.btn{display:inline-block;padding:12px 24px;border-radius:12px;font-weight:700;background:var(--ye);color:#0a0f1e;transition:.2s;box-shadow:0 4px 14px #ffd23f66}
+.btn:hover{transform:translateY(-2px);box-shadow:0 8px 24px #ffd23f88}
+.btn.o{background:var(--bg2);color:var(--tx);border:1px solid var(--line);box-shadow:none}
+.btn.o:hover{border-color:var(--ac);box-shadow:none}
+
+/* ===== Fondo animado (idéntico al de index.html, sin balones) ===== */
+#bg{position:fixed;inset:0;z-index:-1;overflow:hidden;pointer-events:none;background:linear-gradient(160deg,#f4f8ff,#e6efff 55%,#fff7e0)}
+#bg i{position:absolute;border-radius:50%;filter:blur(55px);opacity:.6;will-change:transform;animation:drift 24s ease-in-out infinite alternate}
+#bg i:nth-child(1){width:55vmax;height:55vmax;left:-15vmax;top:-18vmax;background:#8bbcff}
+#bg i:nth-child(2){width:45vmax;height:45vmax;right:-14vmax;top:8vh;background:#ffe48a;animation-duration:30s;animation-delay:-8s}
+#bg i:nth-child(3){width:50vmax;height:50vmax;left:10vw;bottom:-24vmax;background:#a6f1c8;animation-duration:27s;animation-delay:-14s}
+#bg i:nth-child(4){width:34vmax;height:34vmax;right:12vw;bottom:-10vmax;background:#c7b8ff;animation-duration:34s;animation-delay:-4s;opacity:.45}
+@keyframes drift{0%{transform:translate(0,0) scale(1)}50%{transform:translate(9vw,7vh) scale(1.15)}100%{transform:translate(-6vw,12vh) scale(.95)}}
+#bg:before{content:"";position:absolute;left:50%;top:50%;width:78vmin;height:78vmin;margin:-39vmin 0 0 -39vmin;border-radius:50%;border:3px solid #2f7bff22;animation:pulse 9s ease-in-out infinite}
+#bg:after{content:"";position:absolute;left:0;right:0;top:50%;height:3px;background:#2f7bff14}
+@keyframes pulse{50%{transform:scale(1.12);border-color:#2f7bff12}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
 /* nav */
-header{position:fixed;inset:0 0 auto;z-index:50;background:linear-gradient(#081235f5,#081235e0);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--line);box-shadow:0 8px 30px #0006}
+header{position:fixed;inset:0 0 auto;z-index:50;background:rgba(255,255,255,.78);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--line);box-shadow:0 4px 18px #1e4fd81a}
 nav{display:flex;align-items:center;justify-content:space-between;height:68px}
-.logo{font-family:'Barlow Condensed';font-weight:800;font-size:1.5rem;text-transform:uppercase}
-.logo b{color:var(--acc)}
-.logo{display:flex;align-items:center;gap:10px}.lg{width:44px;height:44px;border-radius:50%}
-.pgb{aspect-ratio:848/190;width:100%;margin-bottom:40px;background:url('cabecera.jpg') center/100% 100% no-repeat}
+.logo{font-family:'Barlow Condensed';font-weight:800;font-size:1.5rem;text-transform:uppercase;color:var(--navy);display:flex;align-items:center;gap:10px}
+.logo b{color:var(--ye2)}
+.lg{width:44px;height:44px;border-radius:50%}
+.pgb{aspect-ratio:848/190;width:100%;margin-bottom:40px;border-radius:16px;border-bottom:2px solid var(--ac);box-shadow:0 8px 28px rgba(0,40,120,.35);background:url('cabecera.jpg') center/100% 100% no-repeat}
 .fl{width:64px;height:64px;border-radius:50%;margin-bottom:12px}
 .menu{display:flex;gap:6px;align-items:center;font-weight:600;font-size:.95rem}
-.menu a:not(.btn){padding:10px 16px;border-radius:99px;font-size:1rem;color:#fff;transition:.2s}
-.menu a:not(.btn):hover{color:#081235;background:var(--acc)}
-.menu .btn{margin-left:10px}
-.menu .btn{padding:11px 22px}
-#burger{display:none;background:none;border:0;color:var(--txt);font-size:1.8rem;cursor:pointer}
+.menu a:not(.btn){padding:10px 16px;border-radius:10px;font-size:1rem;color:var(--tx);transition:.2s}
+.menu a:not(.btn):hover{color:#0a0f1e;background:var(--ye)}
+#burger{display:none;background:none;border:0;color:var(--navy);font-size:1.8rem;cursor:pointer}
+
 /* hero */
-.hero{min-height:100vh;display:flex;align-items:center;position:relative;overflow:hidden;background:var(--bg);padding-top:68px}
+.hero{min-height:100vh;display:flex;align-items:center;position:relative;overflow:hidden;background:transparent;padding-top:68px}
 .hero::before{content:"";position:absolute;top:68px;left:0;right:0;bottom:0;z-index:0;
-background:linear-gradient(95deg,#081235ee 6%,#08123566 40%,#08123500 62%),linear-gradient(180deg,transparent 70%,#081235 100%),var(--hero,url('fondo-hero.jpg')) 85% 0/cover no-repeat}
+background:linear-gradient(95deg,#eef4ffee 6%,#eef4ff88 40%,#eef4ff00 62%),var(--hero,url('fondo-hero.jpg')) 85% 0/cover no-repeat;
+-webkit-mask-image:linear-gradient(180deg,#000 55%,transparent 100%);
+mask-image:linear-gradient(180deg,#000 55%,transparent 100%)}
 .hero .wrap{position:relative;z-index:2}
-.hero::after{content:"";position:absolute;width:520px;height:520px;border-radius:50%;right:-120px;bottom:-160px;border:60px solid #ffd40026;animation:spin 20s linear infinite}
+.hero::after{content:"";position:absolute;width:520px;height:520px;border-radius:50%;right:-120px;bottom:-160px;border:60px solid #ffd23f33;animation:spin 20s linear infinite}
 @keyframes spin{to{transform:rotate(360deg) scale(1.1)}}
-.hero h1{font-size:clamp(3rem,8vw,6.5rem);font-weight:800;margin:14px 0 20px}
-.hero h1 em{font-style:normal;color:var(--acc)}
-.tag{display:inline-block;border:1px solid var(--acc);color:var(--acc);padding:4px 14px;border-radius:99px;font-size:.8rem;letter-spacing:.1em;text-transform:uppercase}
-.hero p{max-width:520px;color:var(--mut);font-size:1.1rem;margin-bottom:30px}
+.hero h1{font-size:clamp(3rem,8vw,6.5rem);font-weight:800;margin:14px 0 20px;color:var(--navy)}
+.hero h1 em{font-style:normal;color:var(--ye2)}
+.tag{display:inline-block;background:var(--ye);color:#0a0f1e;font-weight:800;padding:4px 14px;border-radius:6px;font-size:.8rem;letter-spacing:.1em;text-transform:uppercase}
+.hero p{max-width:520px;color:var(--mu);font-size:1.1rem;margin-bottom:30px}
 .hero .btns{display:flex;gap:14px;flex-wrap:wrap}
 .stats{display:flex;gap:40px;margin-top:56px;flex-wrap:wrap}
-.stats b{font-family:'Barlow Condensed';font-size:3rem;color:var(--acc);display:block;line-height:1}
-.stats small{color:var(--mut)}
-/* cards */
+.stats b{font-family:'Barlow Condensed';font-size:3rem;color:var(--ac);display:block;line-height:1}
+.stats small{color:var(--mu)}
+
+/* secciones con degradado arriba y abajo (en lugar de bloque plano) */
+section.alt{background:linear-gradient(180deg,transparent,#ffffff80 14%,#ffffff80 86%,transparent)}
+
+/* cards (mismo estilo que index.html) */
 .grid{display:grid;gap:20px;grid-template-columns:repeat(auto-fill,minmax(240px,1fr))}
-.card{background:var(--card);border:1px solid var(--line);border-radius:20px;overflow:hidden;transition:.25s}
-.card:hover{transform:translateY(-6px);border-color:var(--acc)}
-.ph{aspect-ratio:4/3;background:linear-gradient(135deg,#1c3fa8,#0b1a45) center/cover;display:grid;place-items:center;color:#ffffff55;font-size:.8rem}
+.card{background:var(--card);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);border:1px solid var(--line);border-radius:16px;overflow:hidden;transition:.25s;box-shadow:0 4px 18px #1e4fd814}
+.card:hover{transform:translateY(-6px);border-color:var(--ac)}
+.ph{aspect-ratio:4/3;background:linear-gradient(135deg,#bcd6ff,#e6efff) center/cover;display:grid;place-items:center;color:var(--mu);font-size:.8rem}
 .cb{padding:18px}
-.cb h3{font-size:1.5rem;margin-bottom:4px}
-.cb p{color:var(--mut);font-size:.9rem}
-.cb .l{color:var(--acc);font-weight:600;font-size:.9rem;display:inline-block;margin-top:10px}
+.cb h3{font-size:1.5rem;margin-bottom:4px;color:var(--navy)}
+.cb p{color:var(--mu);font-size:.9rem}
+.cb .l{color:var(--ye2);font-weight:600;font-size:.9rem;display:inline-block;margin-top:10px}
+
 /* escuela */
 .two{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center}
-.two .ph{aspect-ratio:1;border-radius:28px}
+.two .ph{aspect-ratio:1;border-radius:22px}
 
 /* donde */
-.nuria{display:block;width:100%;height:auto;border-radius:24px;background:var(--card)}
+.nuria{display:block;width:100%;height:auto;border-radius:22px;background:var(--card);box-shadow:0 4px 18px #1e4fd814}
 .info{display:flex;gap:16px;flex-wrap:wrap;margin-top:28px;align-items:center}
-iframe{width:100%;height:320px;border:0;border-radius:20px;margin-top:28px;filter:grayscale(.3) invert(.92) hue-rotate(180deg)}
+iframe{width:100%;height:320px;border:1px solid var(--line);border-radius:16px;margin-top:28px;box-shadow:0 4px 18px #1e4fd814}
+
 /* categorías */
 #cats{display:none;padding-top:68px}
 body.pg #home{display:none}
 body.pg #cats{display:block}
 .cat{padding:22px;display:flex;flex-direction:column;gap:6px}
-.cph{aspect-ratio:16/9;border-radius:12px;margin-bottom:8px;background:linear-gradient(135deg,#1c3fa8,#0b1a45) center/cover}
-.cat .age{color:var(--acc);font-size:.8rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase}
-.cat .go{color:var(--mut);font-size:.88rem;margin-top:6px;transition:.2s}
-.cat:hover .go{color:var(--acc)}
+.cph{aspect-ratio:16/9;border-radius:12px;margin-bottom:8px;background:linear-gradient(135deg,#bcd6ff,#e6efff) center/cover}
+.cat .age{color:var(--ye2);font-size:.8rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase}
+.cat .go{color:var(--mu);font-size:.88rem;margin-top:6px;transition:.2s}
+.cat:hover .go{color:var(--ac)}
+
 /* noticias */
 .news .ph{aspect-ratio:1}
-.news time{color:var(--acc);font-size:.8rem;font-weight:600}
+.news time{color:var(--ye2);font-size:.8rem;font-weight:700}
 .news p{display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
-footer{border-top:1px solid var(--line);padding:40px 0;color:var(--mut);text-align:center;font-size:.9rem}
+
+footer{border-top:1px solid var(--line);padding:40px 0;color:var(--mu);text-align:center;font-size:.9rem}
+footer a{color:#1d5fe0;font-weight:600}
 .rv{opacity:0;transform:translateY(30px);transition:.7s}
 .rv.in{opacity:1;transform:none}
 @media(max-width:800px){
@@ -90,13 +115,15 @@ footer{border-top:1px solid var(--line);padding:40px 0;color:var(--mut);text-ali
  .hero::before{bottom:auto;height:420px;background-position:100% 0}
  .two{grid-template-columns:1fr}
  #burger{display:block}
- .menu{position:fixed;inset:68px 0 auto;background:#081235;flex-direction:column;padding:24px;display:none;border-bottom:1px solid var(--line)}
+ .menu{position:fixed;inset:68px 0 auto;background:#fff;flex-direction:column;padding:24px;display:none;border-bottom:1px solid var(--line)}
  .menu.o{display:flex}
  section{padding:56px 0}
 }
 </style>
 </head>
 <body>
+
+<div id="bg" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
 
 <header id="hd"><div class="wrap"><nav>
   <a href="#" class="logo"><img class="lg" src="escudo.png" alt="Escudo Torrejón Juncal">Torrejón <b>Juncal</b></a>
@@ -136,7 +163,7 @@ footer{border-top:1px solid var(--line);padding:40px 0;color:var(--mut);text-ali
     <div class="ph rv" id="escuelaImg">Foto de la escuela</div>
   </div></section>
 
-  <section id="equipos" style="background:#0b1a45"><div class="wrap">
+  <section id="equipos" class="alt"><div class="wrap">
     <h2 class="rv">Nuestras <span>categorías</span></h2>
     <p class="sub rv">Pulsa en tu categoría para ver resultados, clasificaciones y calendario.</p>
     <div class="grid" id="catHome"></div>
@@ -150,7 +177,7 @@ footer{border-top:1px solid var(--line);padding:40px 0;color:var(--mut);text-ali
   </div></section>
 
 
-  <section id="noticias" style="background:#0b1a45"><div class="wrap">
+  <section id="noticias" class="alt"><div class="wrap">
     <h2 class="rv">Últimas <span>noticias</span></h2>
     <p class="sub rv">Nuestras últimas publicaciones, directamente desde Instagram.</p>
     <div class="grid news" id="news"></div>
@@ -163,22 +190,22 @@ footer{border-top:1px solid var(--line);padding:40px 0;color:var(--mut);text-ali
     <img class="nuria rv" src="Images/Nuria.jpg" alt="Pabellón Nuria Fernández">
     <div class="info">
       <a class="btn" id="mapsBtn" href="#" target="_blank" rel="noopener">📍 Abrir en Google Maps</a>
-      <span style="color:var(--mut)">Pabellón Nuria Fernández</span>
+      <span style="color:var(--mu)">Pabellón Nuria Fernández</span>
     </div>
     <iframe id="mapFrame" loading="lazy" title="Mapa del pabellón"></iframe>
   </div></section>
 </main>
 
 <!-- ============ PÁGINA CATEGORÍAS ============ -->
-<main id="cats"><div class="pgb"></div><div class="wrap">
-  <p><a href="#" style="color:var(--acc);font-weight:600">← Volver al inicio</a></p><br>
+<main id="cats"><div class="wrap"><div class="pgb"></div>
+  <p><a href="#" style="color:#1d5fe0;font-weight:600">← Volver al inicio</a></p><br>
   <h2>Nuestras <span>categorías</span></h2>
   <p class="sub">Pulsa sobre tu categoría para ver resultados, clasificaciones y calendario.</p>
   <div class="grid" id="catGrid"></div>
 </div></main>
 
 <footer><div class="wrap"><img class="fl" src="escudo.png" alt=""><br>© <span id="yr"></span> Torrejón Juncal · Fútbol Sala ·
-  <a href="https://www.instagram.com/torrejonjuncal/" target="_blank" rel="noopener" style="color:var(--acc)">@torrejonjuncal</a></div></footer>
+  <a href="https://www.instagram.com/torrejonjuncal/" target="_blank" rel="noopener">@torrejonjuncal</a></div></footer>
 
 <script>
 /* =====================================================================

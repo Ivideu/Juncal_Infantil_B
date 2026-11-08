@@ -29,7 +29,7 @@ nav{display:flex;align-items:center;justify-content:space-between;height:68px}
 .logo{font-family:'Barlow Condensed';font-weight:800;font-size:1.5rem;text-transform:uppercase}
 .logo b{color:var(--acc)}
 .logo{display:flex;align-items:center;gap:10px}.lg{width:44px;height:44px;border-radius:50%}
-.pgb{height:300px;margin-bottom:-30px;background:linear-gradient(180deg,#0812358c,transparent 40%,var(--bg) 100%),url('cabecera.jpg') center/cover}
+.pgb{aspect-ratio:848/190;width:100%;margin-bottom:40px;background:url('cabecera.jpg') center/100% 100% no-repeat}
 .fl{width:64px;height:64px;border-radius:50%;margin-bottom:12px}
 .menu{display:flex;gap:6px;align-items:center;font-weight:600;font-size:.95rem}
 .menu a:not(.btn){padding:10px 16px;border-radius:99px;font-size:1rem;color:#fff;transition:.2s}
@@ -66,10 +66,7 @@ animation:drift 26s ease-in-out infinite alternate}
 /* escuela */
 .two{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center}
 .two .ph{aspect-ratio:1;border-radius:28px}
-/* app */
-.app{background:linear-gradient(120deg,var(--acc),#ffe766);color:#081235;border-radius:28px;padding:48px;display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap}
-.app h2{margin:0}
-.app .btn{background:#081235;color:var(--acc)}
+
 /* donde */
 .slider{position:relative;border-radius:24px;overflow:hidden;aspect-ratio:16/8;background:var(--card)}
 .slide{position:absolute;inset:0;opacity:0;transition:opacity .8s;background:linear-gradient(135deg,#1c3fa8,#0b1a45) center/cover;display:flex;align-items:flex-end}
@@ -81,17 +78,14 @@ animation:drift 26s ease-in-out infinite alternate}
 .info{display:flex;gap:16px;flex-wrap:wrap;margin-top:28px;align-items:center}
 iframe{width:100%;height:320px;border:0;border-radius:20px;margin-top:28px;filter:grayscale(.3) invert(.92) hue-rotate(180deg)}
 /* categorías */
-#cats{display:none;padding-top:0}
+#cats{display:none;padding-top:68px}
 body.pg #home{display:none}
 body.pg #cats{display:block}
-.chips{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:30px}
-.chip{padding:8px 18px;border-radius:99px;border:1px solid var(--line);background:var(--card);color:var(--txt);cursor:pointer;font:600 .9rem Inter}
-.chip.on{background:var(--acc);color:#081235;border-color:var(--acc)}
 .cat{padding:22px;display:flex;flex-direction:column;gap:6px}
+.cph{aspect-ratio:16/9;border-radius:12px;margin-bottom:8px;background:linear-gradient(135deg,#1c3fa8,#0b1a45) center/cover}
 .cat .age{color:var(--acc);font-size:.8rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase}
-.cat label{display:flex;align-items:center;gap:8px;color:var(--mut);font-size:.85rem;margin-top:6px;cursor:pointer}
-.cat input{accent-color:var(--acc);width:18px;height:18px}
-.cat.sel{border-color:var(--acc)}
+.cat .go{color:var(--mut);font-size:.88rem;margin-top:6px;transition:.2s}
+.cat:hover .go{color:var(--acc)}
 /* noticias */
 .news .ph{aspect-ratio:1}
 .news time{color:var(--acc);font-size:.8rem;font-weight:600}
@@ -105,7 +99,6 @@ footer{border-top:1px solid var(--line);padding:40px 0;color:var(--mut);text-ali
  .menu{position:fixed;inset:68px 0 auto;background:#081235;flex-direction:column;padding:24px;display:none;border-bottom:1px solid var(--line)}
  .menu.o{display:flex}
  section{padding:56px 0}
- .app{padding:30px}
 }
 </style>
 </head>
@@ -119,7 +112,6 @@ footer{border-top:1px solid var(--line);padding:40px 0;color:var(--mut);text-ali
     <a href="#categorias">Categorías</a>
     <a href="#donde">Dónde jugamos</a>
     <a href="https://www.instagram.com/torrejonjuncal/" target="_blank" rel="noopener">Instagram</a>
-    <a class="btn" id="appTop" href="#" target="_blank" rel="noopener">Abrir la app</a>
   </div>
 </nav></div></header>
 
@@ -155,12 +147,6 @@ footer{border-top:1px solid var(--line);padding:40px 0;color:var(--mut);text-ali
     <div class="grid" id="staff"></div>
   </div></section>
 
-  <section><div class="wrap">
-    <div class="app rv">
-      <div><h2>Todo en la app</h2><p>Calendarios, convocatorias, resultados y comunicaciones del club.</p></div>
-      <a class="btn" id="appMid" href="#" target="_blank" rel="noopener">Descargar / abrir app</a>
-    </div>
-  </div></section>
 
   <section id="noticias"><div class="wrap">
     <h2 class="rv">Últimas <span>noticias</span></h2>
@@ -186,10 +172,8 @@ footer{border-top:1px solid var(--line);padding:40px 0;color:var(--mut);text-ali
 <main id="cats"><div class="pgb"></div><div class="wrap">
   <p><a href="#" style="color:var(--acc);font-weight:600">← Volver al inicio</a></p><br>
   <h2>Nuestras <span>categorías</span></h2>
-  <p class="sub">Marca las casillas de los equipos que te interesen y accede a su ficha en la app.</p>
-  <div class="chips" id="chips"></div>
+  <p class="sub">Pulsa sobre tu categoría para ver resultados, clasificaciones y calendario.</p>
   <div class="grid" id="catGrid"></div>
-  <p style="margin-top:26px;color:var(--mut)" id="selInfo"></p>
 </div></main>
 
 <footer><div class="wrap"><img class="fl" src="escudo.png" alt=""><br>© <span id="yr"></span> Torrejón Juncal · Fútbol Sala ·
@@ -200,7 +184,6 @@ footer{border-top:1px solid var(--line);padding:40px 0;color:var(--mut);text-ali
    CONFIGURACIÓN — edita solo esta parte
    ===================================================================== */
 const CONFIG = {
-  APP_URL: "https://TU-ENLACE-A-LA-APP",          // enlace general a la app
   MAPS_URL: "https://www.google.com/maps/search/?api=1&query=Pabell%C3%B3n+Nuria+Fern%C3%A1ndez",
   MAP_EMBED: "https://www.google.com/maps?q=Pabell%C3%B3n+Nuria+Fern%C3%A1ndez&output=embed",
   HERO_IMG: "",       // URL de foto de portada (opcional)
@@ -229,16 +212,16 @@ const CONFIG = {
     {name:"Nombre Apellido", role:"Preparador físico", img:""}
   ],
 
-  /* Cada categoría puede tener su propio enlace a la app (app:""  → usa APP_URL) */
+  /* url: enlace de esa categoría (resultados, clasificaciones...) */
   CATEGORIES: [
-    {name:"Prebenjamín", age:"6-7 años",   app:"", img:""},
-    {name:"Benjamín",    age:"8-9 años",   app:"", img:""},
-    {name:"Alevín",      age:"10-11 años", app:"", img:""},
-    {name:"Infantil",    age:"12-13 años", app:"", img:""},
-    {name:"Cadete",      age:"14-15 años", app:"", img:""},
-    {name:"Juvenil",     age:"16-18 años", app:"", img:""},
-    {name:"Senior",      age:"+18 años",   app:"", img:""},
-    {name:"Femenino",    age:"Todas las edades", app:"", img:""}
+    {name:"Prebenjamín", age:"6-7 años",   url:"", img:""},
+    {name:"Benjamín",    age:"8-9 años",   url:"", img:""},
+    {name:"Alevín",      age:"10-11 años", url:"", img:""},
+    {name:"Infantil",    age:"12-13 años", url:"", img:""},
+    {name:"Cadete",      age:"14-15 años", url:"", img:""},
+    {name:"Juvenil",     age:"16-18 años", url:"", img:""},
+    {name:"Senior",      age:"+18 años",   url:"", img:""},
+    {name:"Femenino",    age:"Todas las edades", url:"", img:""}
   ]
 };
 
@@ -249,7 +232,6 @@ const esc=t=>(t||"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"
 
 // básicos
 $("#yr").textContent=new Date().getFullYear();
-$("#appTop").href=$("#appMid").href=CONFIG.APP_URL;
 $("#mapsBtn").href=CONFIG.MAPS_URL; $("#mapFrame").src=CONFIG.MAP_EMBED;
 $("#escuelaTxt").textContent=CONFIG.ESCUELA_TXT;
 if(CONFIG.HERO_IMG)$("#heroBox").style.setProperty("--hero",`url('${CONFIG.HERO_IMG}')`);
@@ -276,20 +258,12 @@ function auto(){clearInterval(timer);timer=setInterval(()=>go(cur+1),4500)}
 $("#dots").onclick=e=>{if(e.target.dataset.i){go(+e.target.dataset.i);auto()}};
 auto();
 
-// categorías (página)
-const C=CONFIG.CATEGORIES, sel=new Set();
-$("#catGrid").innerHTML=C.map((c,i)=>`
- <div class="card cat" id="c${i}"><div class="ph" ${bg(c.img)} style="border-radius:12px;aspect-ratio:16/9;${c.img?`background-image:url('${c.img}')`:""}"></div>
+// categorías (página): cada tarjeta es un enlace
+$("#catGrid").innerHTML=CONFIG.CATEGORIES.map(c=>`
+ <a class="card cat" href="${c.url||'#categorias'}" target="_blank" rel="noopener">
+  <div class="cph" ${bg(c.img)}></div>
   <span class="age">${esc(c.age)}</span><h3>${esc(c.name)}</h3>
-  <label><input type="checkbox" data-i="${i}"> Marcar equipo</label>
-  <a class="l" style="color:var(--acc);font-weight:600" href="${c.app||CONFIG.APP_URL}" target="_blank" rel="noopener">Ir a la app →</a></div>`).join("");
-$("#chips").innerHTML=`<button class="chip on" data-f="all">Todas</button>`+C.map((c,i)=>`<button class="chip" data-f="${i}">${esc(c.name)}</button>`).join("");
-$("#chips").onclick=e=>{const f=e.target.dataset.f;if(f===undefined)return;
-  document.querySelectorAll(".chip").forEach(x=>x.classList.toggle("on",x===e.target));
-  C.forEach((_,i)=>$("#c"+i).style.display=(f==="all"||+f===i)?"":"none");};
-$("#catGrid").onchange=e=>{const i=e.target.dataset.i;if(i===undefined)return;
-  e.target.checked?sel.add(+i):sel.delete(+i);$("#c"+i).classList.toggle("sel",e.target.checked);
-  $("#selInfo").textContent=sel.size?"Equipos marcados: "+[...sel].map(k=>C[k].name).join(", "):"";};
+  <span class="go">Resultados y clasificaciones →</span></a>`).join("");
 
 // rutas: #categorias = página aparte
 function route(){const pg=location.hash==="#categorias";document.body.classList.toggle("pg",pg);

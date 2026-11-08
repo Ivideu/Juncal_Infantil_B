@@ -1,13 +1,22 @@
 /* ===== Fondo Torrejón Juncal para la app (se carga DESPUÉS del <style> de la página) ===== */
 html:root{--card:rgba(255,255,255,.92)}
-html{background:#081235}
+html{background:#0f2a78}
 
-/* Capa fija de fondo: escudo + cristales, fundido a azul marino */
+/* Capa fija de fondo: degradado del escudo (amarillo → azul, izquierda a derecha) */
 html body #bg{
   background:
-    linear-gradient(180deg,rgba(8,18,53,.10) 0%,rgba(8,18,53,.45) 40%,#081235 100%),
-    url('./fondo-app.jpg') 85% 0/cover no-repeat,
-    #081235;
+    /* velo suave para dar profundidad abajo sin apagar el degradado */
+    linear-gradient(180deg,rgba(8,18,53,0) 0%,rgba(8,18,53,.10) 45%,rgba(8,18,53,.55) 100%),
+    /* degradado horizontal del escudo */
+    linear-gradient(90deg,
+      #f2b705 0%,
+      #ffd23f 18%,
+      #ffe98f 30%,
+      #dbe8ff 42%,
+      #5b9bff 58%,
+      #1e4fd8 78%,
+      #0f2a78 100%),
+    #0f2a78;
 }
 /* Quitamos las manchas de color y el círculo de campo del fondo anterior (los balones suben igual) */
 html body #bg i,
@@ -15,11 +24,11 @@ html body #bg:before,
 html body #bg:after{display:none}
 html body #bg b{opacity:.14}
 
-/* Textos que quedan directamente sobre el fondo oscuro */
-html body .empty{color:#c3d0ff}
-html body .cards-head h2{color:#fff}
-html body .cards-head .gap{color:#c3d0ff}
-html body .cvhd h2{color:#fff}
+/* Textos que quedan directamente sobre el fondo (blancos con sombra para leerse sobre amarillo y azul) */
+html body .empty,
+html body .cards-head h2,
+html body .cards-head .gap,
+html body .cvhd h2,
+html body .bkc>h3{color:#fff;text-shadow:0 1px 4px rgba(8,18,53,.75),0 0 14px rgba(8,18,53,.45)}
 html body .cvs{background:#22c55e;color:#fff}
 html body .cvs.x{background:#ef4444;color:#fff}
-html body .bkc>h3{color:#ffd23f}

@@ -10,7 +10,7 @@
 <style>
 :root{--bg:#081235;--card:#10204f;--line:#233c7d;--txt:#f3f6ff;--mut:#a3b1dc;--acc:#ffd400;--acc2:#1c3fa8}
 *{box-sizing:border-box;margin:0}
-html{scroll-behavior:smooth}
+html{scroll-behavior:smooth;scroll-padding-top:76px}
 body{font-family:Inter,system-ui,sans-serif;background:var(--bg);color:var(--txt);line-height:1.6}
 h1,h2,h3{font-family:'Barlow Condensed',sans-serif;text-transform:uppercase;line-height:1}
 a{color:inherit;text-decoration:none}
@@ -103,9 +103,10 @@ footer{border-top:1px solid var(--line);padding:40px 0;color:var(--mut);text-ali
   <button id="burger" aria-label="Menú">☰</button>
   <div class="menu" id="menu">
     <a href="#escuela">La escuela</a>
-    <a href="#categorias">Categorías</a>
+    <a href="#equipos">Categorías</a>
+    <a href="#tecnico">Cuerpo técnico</a>
+    <a href="#noticias">Noticias</a>
     <a href="#donde">Dónde jugamos</a>
-    <a href="https://www.instagram.com/torrejonjuncal/" target="_blank" rel="noopener">Instagram</a>
   </div>
 </nav></div></header>
 
@@ -116,7 +117,7 @@ footer{border-top:1px solid var(--line);padding:40px 0;color:var(--mut);text-ali
     <h1>Pasión por<br><em>el juego</em></h1>
     <p>Formamos jugadores y personas. Entrenamos, competimos y disfrutamos juntos desde los más pequeños hasta el primer equipo.</p>
     <div class="btns">
-      <a class="btn" href="#categorias">Ver categorías</a>
+      <a class="btn" href="#equipos">Ver categorías</a>
       <a class="btn o" href="#donde">Dónde jugamos</a>
     </div>
     <div class="stats">
@@ -130,26 +131,33 @@ footer{border-top:1px solid var(--line);padding:40px 0;color:var(--mut);text-ali
     <div class="rv">
       <h2>La <span>escuela</span></h2>
       <p class="sub" style="margin:0 0 24px" id="escuelaTxt"></p>
-      <a class="btn" href="#categorias">Conoce nuestros equipos</a>
+      <a class="btn" href="#equipos">Conoce nuestros equipos</a>
     </div>
     <div class="ph rv" id="escuelaImg">Foto de la escuela</div>
   </div></section>
 
-  <section id="tecnico" style="background:#0b1a45"><div class="wrap">
+  <section id="equipos" style="background:#0b1a45"><div class="wrap">
+    <h2 class="rv">Nuestras <span>categorías</span></h2>
+    <p class="sub rv">Pulsa en tu categoría para ver resultados, clasificaciones y calendario.</p>
+    <div class="grid" id="catHome"></div>
+    <p style="margin-top:28px"><a class="btn" id="moreCats" href="portada.html#categorias">Más categorías →</a></p>
+  </div></section>
+
+  <section id="tecnico"><div class="wrap">
     <h2 class="rv">Cuerpo <span>técnico</span></h2>
     <p class="sub rv">Las personas que hacen crecer a nuestros jugadores cada semana.</p>
     <div class="grid" id="staff"></div>
   </div></section>
 
 
-  <section id="noticias"><div class="wrap">
+  <section id="noticias" style="background:#0b1a45"><div class="wrap">
     <h2 class="rv">Últimas <span>noticias</span></h2>
     <p class="sub rv">Directamente desde nuestro Instagram · últimas 2 semanas.</p>
     <div class="grid news" id="news"></div>
     <p style="margin-top:28px"><a class="btn o" href="https://www.instagram.com/torrejonjuncal/" target="_blank" rel="noopener">Ver todo en Instagram →</a></p>
   </div></section>
 
-  <section id="donde" style="background:#0b1a45"><div class="wrap">
+  <section id="donde"><div class="wrap">
     <h2 class="rv">Dónde <span>jugamos</span></h2>
     <p class="sub rv">Pabellón Nuria Fernández, nuestra casa. Ven a animar al equipo.</p>
     <img class="nuria rv" src="Images/Nuria.jpg" alt="Pabellón Nuria Fernández">
@@ -188,6 +196,9 @@ const CONFIG = {
      B) IG_TOKEN: token de la API de Instagram (cuenta profesional). Es visible en el código:
         lo ideal es ponerlo detrás de un pequeño proxy/función serverless.
      Si ambos están vacíos se muestran noticias de ejemplo. */
+  CATS_PORTADA: 4,                       // cuántas categorías se ven en la portada
+  CATS_PAGE: "portada.html#categorias",   // destino de "Más categorías"
+
   FEED_URL: "",
   IG_TOKEN: "",
   NEWS_DAYS: 14,
@@ -234,12 +245,15 @@ $("#menu").onclick=()=>$("#menu").classList.remove("o");
 $("#staff").innerHTML=CONFIG.STAFF.map(s=>`<div class="card rv"><div class="ph" ${bg(s.img)}>${s.img?"":"Foto"}</div><div class="cb"><h3>${esc(s.name)}</h3><p>${esc(s.role)}</p></div></div>`).join("");
 
 
-// categorías (página): cada tarjeta es un enlace
-$("#catGrid").innerHTML=CONFIG.CATEGORIES.map(c=>`
+// categorías: cada tarjeta es un enlace (portada = primeras N, página = todas)
+const catCard=c=>`
  <a class="card cat" href="${c.url||'#categorias'}" target="_blank" rel="noopener">
   <div class="cph" ${bg(c.img)}></div>
   <span class="age">${esc(c.age)}</span><h3>${esc(c.name)}</h3>
-  <span class="go">Resultados y clasificaciones →</span></a>`).join("");
+  <span class="go">Resultados y clasificaciones →</span></a>`;
+$("#catHome").innerHTML=CONFIG.CATEGORIES.slice(0,CONFIG.CATS_PORTADA).map(catCard).join("");
+$("#catGrid").innerHTML=CONFIG.CATEGORIES.map(catCard).join("");
+$("#moreCats").href=CONFIG.CATS_PAGE;
 
 // rutas: #categorias = página aparte
 function route(){const pg=location.hash==="#categorias";document.body.classList.toggle("pg",pg);

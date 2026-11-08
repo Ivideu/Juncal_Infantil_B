@@ -3,6 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="escudo.png">
 <title>Torrejón Juncal · Escuela de Fútbol Sala</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;800&family=Inter:wght@400;600&display=swap" rel="stylesheet">
@@ -28,6 +29,9 @@ header.s{background:#081235e6;backdrop-filter:blur(12px);border-bottom:1px solid
 nav{display:flex;align-items:center;justify-content:space-between;height:68px}
 .logo{font-family:'Barlow Condensed';font-weight:800;font-size:1.5rem;text-transform:uppercase}
 .logo b{color:var(--acc)}
+.logo{display:flex;align-items:center;gap:10px}.lg{width:44px;height:44px;border-radius:50%}
+.pgb{height:300px;margin-bottom:-30px;background:linear-gradient(180deg,#0812358c,transparent 40%,var(--bg) 100%),url('cabecera.jpg') center/cover}
+.fl{width:64px;height:64px;border-radius:50%;margin-bottom:12px}
 .menu{display:flex;gap:28px;align-items:center;font-weight:600;font-size:.95rem}
 .menu a:not(.btn):hover{color:var(--acc)}
 .menu .btn{padding:9px 18px}
@@ -76,7 +80,7 @@ animation:drift 26s ease-in-out infinite alternate}
 .info{display:flex;gap:16px;flex-wrap:wrap;margin-top:28px;align-items:center}
 iframe{width:100%;height:320px;border:0;border-radius:20px;margin-top:28px;filter:grayscale(.3) invert(.92) hue-rotate(180deg)}
 /* categorías */
-#cats{display:none;padding-top:120px}
+#cats{display:none;padding-top:0}
 body.pg #home{display:none}
 body.pg #cats{display:block}
 .chips{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:30px}
@@ -107,7 +111,7 @@ footer{border-top:1px solid var(--line);padding:40px 0;color:var(--mut);text-ali
 <body>
 
 <header id="hd"><div class="wrap"><nav>
-  <a href="#" class="logo">Torrejón <b>Juncal</b></a>
+  <a href="#" class="logo"><img class="lg" src="escudo.png" alt="Escudo Torrejón Juncal">Torrejón <b>Juncal</b></a>
   <button id="burger" aria-label="Menú">☰</button>
   <div class="menu" id="menu">
     <a href="#escuela">La escuela</a>
@@ -178,7 +182,7 @@ footer{border-top:1px solid var(--line);padding:40px 0;color:var(--mut);text-ali
 </main>
 
 <!-- ============ PÁGINA CATEGORÍAS ============ -->
-<main id="cats"><div class="wrap">
+<main id="cats"><div class="pgb"></div><div class="wrap">
   <p><a href="#" style="color:var(--acc);font-weight:600">← Volver al inicio</a></p><br>
   <h2>Nuestras <span>categorías</span></h2>
   <p class="sub">Marca las casillas de los equipos que te interesen y accede a su ficha en la app.</p>
@@ -187,7 +191,7 @@ footer{border-top:1px solid var(--line);padding:40px 0;color:var(--mut);text-ali
   <p style="margin-top:26px;color:var(--mut)" id="selInfo"></p>
 </div></main>
 
-<footer><div class="wrap">© <span id="yr"></span> Torrejón Juncal · Fútbol Sala ·
+<footer><div class="wrap"><img class="fl" src="escudo.png" alt=""><br>© <span id="yr"></span> Torrejón Juncal · Fútbol Sala ·
   <a href="https://www.instagram.com/torrejonjuncal/" target="_blank" rel="noopener" style="color:var(--acc)">@torrejonjuncal</a></div></footer>
 
 <script>

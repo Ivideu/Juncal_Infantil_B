@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Torrejón Juncal · Escuela de Fútbol Sala</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;800&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#081235;--card:#10204f;--line:#233c7d;--txt:#f3f6ff;--mut:#a3b1dc;--acc:#ffd400;--acc2:#1c3fa8}
+*{box-sizing:border-box;margin:0}
+html{scroll-behavior:smooth}
+body{font-family:Inter,system-ui,sans-serif;background:var(--bg);color:var(--txt);line-height:1.6}
+h1,h2,h3{font-family:'Barlow Condensed',sans-serif;text-transform:uppercase;line-height:1}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:1120px;margin:auto;padding:0 20px}
+section{padding:80px 0}
+h2{font-size:clamp(2.2rem,5vw,3.4rem);margin-bottom:10px}
+h2 span{color:var(--acc)}
+.sub{color:var(--mut);max-width:620px;margin-bottom:36px}
+.btn{display:inline-block;padding:14px 26px;border-radius:99px;font-weight:600;background:var(--acc);color:#081235;transition:.2s}
+.btn:hover{transform:translateY(-2px);box-shadow:0 8px 24px #ffd40044}
+.btn.o{background:transparent;color:var(--txt);border:2px solid var(--line)}
+.btn.o:hover{border-color:var(--acc);box-shadow:none}
+/* nav */
+header{position:fixed;inset:0 0 auto;z-index:20;transition:.3s}
+header.s{background:#081235e6;backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+nav{display:flex;align-items:center;justify-content:space-between;height:68px}
+.logo{font-family:'Barlow Condensed';font-weight:800;font-size:1.5rem;text-transform:uppercase}
+.logo b{color:var(--acc)}
+.menu{display:flex;gap:28px;align-items:center;font-weight:600;font-size:.95rem}
+.menu a:not(.btn):hover{color:var(--acc)}
+.menu .btn{padding:9px 18px}
+#burger{display:none;background:none;border:0;color:var(--txt);font-size:1.8rem;cursor:pointer}
+/* hero */
+.hero{min-height:100vh;display:flex;align-items:center;position:relative;overflow:hidden;background:var(--bg)}
+.hero::before{content:"";position:absolute;inset:-30px;z-index:0;
+background:linear-gradient(95deg,#081235ee 8%,#08123577 42%,#08123511 70%),linear-gradient(180deg,transparent 65%,#081235 100%),var(--hero,url('fondo-hero.jpg')) 70% 0/cover no-repeat;
+animation:drift 26s ease-in-out infinite alternate}
+@keyframes drift{from{transform:scale(1) translate(0,0)}to{transform:scale(1.08) translate(-1.5%,1%)}}
+.hero .wrap{position:relative;z-index:2}
+.hero::after{content:"";position:absolute;width:520px;height:520px;border-radius:50%;right:-120px;bottom:-160px;border:60px solid #ffd40026;animation:spin 20s linear infinite}
+@keyframes spin{to{transform:rotate(360deg) scale(1.1)}}
+.hero h1{font-size:clamp(3.4rem,11vw,8rem);font-weight:800;margin:14px 0 20px}
+.hero h1 em{font-style:normal;color:var(--acc)}
+.tag{display:inline-block;border:1px solid var(--acc);color:var(--acc);padding:4px 14px;border-radius:99px;font-size:.8rem;letter-spacing:.1em;text-transform:uppercase}
+.hero p{max-width:520px;color:var(--mut);font-size:1.1rem;margin-bottom:30px}
+.hero .btns{display:flex;gap:14px;flex-wrap:wrap}
+.stats{display:flex;gap:40px;margin-top:56px;flex-wrap:wrap}
+.stats b{font-family:'Barlow Condensed';font-size:3rem;color:var(--acc);display:block;line-height:1}
+.stats small{color:var(--mut)}
+/* cards */
+.grid{display:grid;gap:20px;grid-template-columns:repeat(auto-fill,minmax(240px,1fr))}
+.card{background:var(--card);border:1px solid var(--line);border-radius:20px;overflow:hidden;transition:.25s}
+.card:hover{transform:translateY(-6px);border-color:var(--acc)}
+.ph{aspect-ratio:4/3;background:linear-gradient(135deg,#1c3fa8,#0b1a45) center/cover;display:grid;place-items:center;color:#ffffff55;font-size:.8rem}
+.cb{padding:18px}
+.cb h3{font-size:1.5rem;margin-bottom:4px}
+.cb p{color:var(--mut);font-size:.9rem}
+.cb .l{color:var(--acc);font-weight:600;font-size:.9rem;display:inline-block;margin-top:10px}
+/* escuela */
+.two{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center}
+.two .ph{aspect-ratio:1;border-radius:28px}
+/* app */
+.app{background:linear-gradient(120deg,var(--acc),#ffe766);color:#081235;border-radius:28px;padding:48px;display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap}
+.app h2{margin:0}
+.app .btn{background:#081235;color:var(--acc)}
+/* donde */
+.slider{position:relative;border-radius:24px;overflow:hidden;aspect-ratio:16/8;background:var(--card)}
+.slide{position:absolute;inset:0;opacity:0;transition:opacity .8s;background:linear-gradient(135deg,#1c3fa8,#0b1a45) center/cover;display:flex;align-items:flex-end}
+.slide.on{opacity:1}
+.slide span{padding:20px 26px;background:linear-gradient(transparent,#000a);width:100%;font-weight:600}
+.dots{display:flex;gap:8px;justify-content:center;margin-top:14px}
+.dots i{width:10px;height:10px;border-radius:50%;background:var(--line);cursor:pointer}
+.dots i.on{background:var(--acc)}
+.info{display:flex;gap:16px;flex-wrap:wrap;margin-top:28px;align-items:center}
+iframe{width:100%;height:320px;border:0;border-radius:20px;margin-top:28px;filter:grayscale(.3) invert(.92) hue-rotate(180deg)}
+/* categorías */
+#cats{display:none;padding-top:120px}
+body.pg #home{display:none}
+body.pg #cats{display:block}
+.chips{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:30px}
+.chip{padding:8px 18px;border-radius:99px;border:1px solid var(--line);background:var(--card);color:var(--txt);cursor:pointer;font:600 .9rem Inter}
+.chip.on{background:var(--acc);color:#081235;border-color:var(--acc)}
+.cat{padding:22px;display:flex;flex-direction:column;gap:6px}
+.cat .age{color:var(--acc);font-size:.8rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase}
+.cat label{display:flex;align-items:center;gap:8px;color:var(--mut);font-size:.85rem;margin-top:6px;cursor:pointer}
+.cat input{accent-color:var(--acc);width:18px;height:18px}
+.cat.sel{border-color:var(--acc)}
+/* noticias */
+.news .ph{aspect-ratio:1}
+.news time{color:var(--acc);font-size:.8rem;font-weight:600}
+.news p{display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+footer{border-top:1px solid var(--line);padding:40px 0;color:var(--mut);text-align:center;font-size:.9rem}
+.rv{opacity:0;transform:translateY(30px);transition:.7s}
+.rv.in{opacity:1;transform:none}
+@media(max-width:800px){
+ .two{grid-template-columns:1fr}
+ #burger{display:block}
+ .menu{position:fixed;inset:68px 0 auto;background:#081235;flex-direction:column;padding:24px;display:none;border-bottom:1px solid var(--line)}
+ .menu.o{display:flex}
+ section{padding:56px 0}
+ .app{padding:30px}
+}
+</style>
+</head>
+<body>
+
+<header id="hd"><div class="wrap"><nav>
+  <a href="#" class="logo">Torrejón <b>Juncal</b></a>
+  <button id="burger" aria-label="Menú">☰</button>
+  <div class="menu" id="menu">
+    <a href="#escuela">La escuela</a>
+    <a href="#categorias">Categorías</a>
+    <a href="#donde">Dónde jugamos</a>
+    <a href="https://www.instagram.com/torrejonjuncal/" target="_blank" rel="noopener">Instagram</a>
+    <a class="btn" id="appTop" href="#" target="_blank" rel="noopener">Abrir la app</a>
+  </div>
+</nav></div></header>
+
+<!-- ============ INICIO ============ -->
+<main id="home">
+  <div class="hero" id="heroBox"><div class="wrap">
+    <span class="tag">Escuela de fútbol sala</span>
+    <h1>Pasión por <em>el juego</em></h1>
+    <p>Formamos jugadores y personas. Entrenamos, competimos y disfrutamos juntos desde los más pequeños hasta el primer equipo.</p>
+    <div class="btns">
+      <a class="btn" href="#categorias">Ver categorías</a>
+      <a class="btn o" href="#donde">Dónde jugamos</a>
+    </div>
+    <div class="stats">
+      <div><b data-n="8">0</b><small>categorías</small></div>
+      <div><b data-n="150">0</b><small>jugadores</small></div>
+      <div><b data-n="20">0</b><small>entrenadores</small></div>
+    </div>
+  </div></div>
+
+  <section id="escuela"><div class="wrap two">
+    <div class="rv">
+      <h2>La <span>escuela</span></h2>
+      <p class="sub" style="margin:0 0 24px" id="escuelaTxt"></p>
+      <a class="btn" href="#categorias">Conoce nuestros equipos</a>
+    </div>
+    <div class="ph rv" id="escuelaImg">Foto de la escuela</div>
+  </div></section>
+
+  <section id="tecnico" style="background:#0b1a45"><div class="wrap">
+    <h2 class="rv">Cuerpo <span>técnico</span></h2>
+    <p class="sub rv">Las personas que hacen crecer a nuestros jugadores cada semana.</p>
+    <div class="grid" id="staff"></div>
+  </div></section>
+
+  <section><div class="wrap">
+    <div class="app rv">
+      <div><h2>Todo en la app</h2><p>Calendarios, convocatorias, resultados y comunicaciones del club.</p></div>
+      <a class="btn" id="appMid" href="#" target="_blank" rel="noopener">Descargar / abrir app</a>
+    </div>
+  </div></section>
+
+  <section id="noticias"><div class="wrap">
+    <h2 class="rv">Últimas <span>noticias</span></h2>
+    <p class="sub rv">Directamente desde nuestro Instagram · últimas 2 semanas.</p>
+    <div class="grid news" id="news"></div>
+    <p style="margin-top:28px"><a class="btn o" href="https://www.instagram.com/torrejonjuncal/" target="_blank" rel="noopener">Ver todo en Instagram →</a></p>
+  </div></section>
+
+  <section id="donde" style="background:#0b1a45"><div class="wrap">
+    <h2 class="rv">Dónde <span>jugamos</span></h2>
+    <p class="sub rv">Pabellón Nuria Fernández, nuestra casa. Ven a animar al equipo.</p>
+    <div class="slider rv" id="slider"></div>
+    <div class="dots" id="dots"></div>
+    <div class="info">
+      <a class="btn" id="mapsBtn" href="#" target="_blank" rel="noopener">📍 Abrir en Google Maps</a>
+      <span style="color:var(--mut)">Pabellón Nuria Fernández</span>
+    </div>
+    <iframe id="mapFrame" loading="lazy" title="Mapa del pabellón"></iframe>
+  </div></section>
+</main>
+
+<!-- ============ PÁGINA CATEGORÍAS ============ -->
+<main id="cats"><div class="wrap">
+  <p><a href="#" style="color:var(--acc);font-weight:600">← Volver al inicio</a></p><br>
+  <h2>Nuestras <span>categorías</span></h2>
+  <p class="sub">Marca las casillas de los equipos que te interesen y accede a su ficha en la app.</p>
+  <div class="chips" id="chips"></div>
+  <div class="grid" id="catGrid"></div>
+  <p style="margin-top:26px;color:var(--mut)" id="selInfo"></p>
+</div></main>
+
+<footer><div class="wrap">© <span id="yr"></span> Torrejón Juncal · Fútbol Sala ·
+  <a href="https://www.instagram.com/torrejonjuncal/" target="_blank" rel="noopener" style="color:var(--acc)">@torrejonjuncal</a></div></footer>
+
+<script>
+/* =====================================================================
+   CONFIGURACIÓN — edita solo esta parte
+   ===================================================================== */
+const CONFIG = {
+  APP_URL: "https://TU-ENLACE-A-LA-APP",          // enlace general a la app
+  MAPS_URL: "https://www.google.com/maps/search/?api=1&query=Pabell%C3%B3n+Nuria+Fern%C3%A1ndez",
+  MAP_EMBED: "https://www.google.com/maps?q=Pabell%C3%B3n+Nuria+Fern%C3%A1ndez&output=embed",
+  HERO_IMG: "",       // URL de foto de portada (opcional)
+  ESCUELA_IMG: "",    // foto de la sección "La escuela"
+  ESCUELA_TXT: "Somos una escuela de fútbol sala donde cada niño y niña aprende, compite y disfruta. Trabajamos valores como el compañerismo, el esfuerzo y el respeto, con entrenadores formados y un ambiente de familia.",
+
+  /* NOTICIAS AUTOMÁTICAS DE INSTAGRAM (elige UNA opción):
+     A) FEED_URL: URL JSON de un servicio como Behold.so o similar (recomendado, sin exponer claves).
+     B) IG_TOKEN: token de la API de Instagram (cuenta profesional). Es visible en el código:
+        lo ideal es ponerlo detrás de un pequeño proxy/función serverless.
+     Si ambos están vacíos se muestran noticias de ejemplo. */
+  FEED_URL: "",
+  IG_TOKEN: "",
+  NEWS_DAYS: 14,
+
+  PAVILION_PHOTOS: [  // fotos del pabellón (URLs). Si están vacías se ve un degradado.
+    {img:"", cap:"Pabellón Nuria Fernández"},
+    {img:"", cap:"La pista"},
+    {img:"", cap:"Ambiente de partido"}
+  ],
+
+  STAFF: [
+    {name:"Nombre Apellido", role:"Coordinador", img:""},
+    {name:"Nombre Apellido", role:"Entrenador primer equipo", img:""},
+    {name:"Nombre Apellido", role:"Entrenador cantera", img:""},
+    {name:"Nombre Apellido", role:"Preparador físico", img:""}
+  ],
+
+  /* Cada categoría puede tener su propio enlace a la app (app:""  → usa APP_URL) */
+  CATEGORIES: [
+    {name:"Prebenjamín", age:"6-7 años",   app:"", img:""},
+    {name:"Benjamín",    age:"8-9 años",   app:"", img:""},
+    {name:"Alevín",      age:"10-11 años", app:"", img:""},
+    {name:"Infantil",    age:"12-13 años", app:"", img:""},
+    {name:"Cadete",      age:"14-15 años", app:"", img:""},
+    {name:"Juvenil",     age:"16-18 años", app:"", img:""},
+    {name:"Senior",      age:"+18 años",   app:"", img:""},
+    {name:"Femenino",    age:"Todas las edades", app:"", img:""}
+  ]
+};
+
+/* ===================================================================== */
+const $=s=>document.querySelector(s);
+const bg=u=>u?`style="background-image:url('${u}')"`:"";
+const esc=t=>(t||"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+
+// básicos
+$("#yr").textContent=new Date().getFullYear();
+$("#appTop").href=$("#appMid").href=CONFIG.APP_URL;
+$("#mapsBtn").href=CONFIG.MAPS_URL; $("#mapFrame").src=CONFIG.MAP_EMBED;
+$("#escuelaTxt").textContent=CONFIG.ESCUELA_TXT;
+if(CONFIG.HERO_IMG)$("#heroBox").style.setProperty("--hero",`url('${CONFIG.HERO_IMG}')`);
+if(CONFIG.ESCUELA_IMG){$("#escuelaImg").style.backgroundImage=`url('${CONFIG.ESCUELA_IMG}')`;$("#escuelaImg").textContent=""}
+$("#heroBox").className="hero";
+
+// cabecera + menú móvil
+addEventListener("scroll",()=>$("#hd").classList.toggle("s",scrollY>30));
+$("#burger").onclick=()=>$("#menu").classList.toggle("o");
+$("#menu").onclick=()=>$("#menu").classList.remove("o");
+
+// cuerpo técnico
+$("#staff").innerHTML=CONFIG.STAFF.map(s=>`<div class="card rv"><div class="ph" ${bg(s.img)}>${s.img?"":"Foto"}</div><div class="cb"><h3>${esc(s.name)}</h3><p>${esc(s.role)}</p></div></div>`).join("");
+
+// slider pabellón
+const P=CONFIG.PAVILION_PHOTOS;
+$("#slider").innerHTML=P.map((p,i)=>`<div class="slide${i?"":" on"}" ${bg(p.img)}><span>${esc(p.cap)}</span></div>`).join("");
+$("#dots").innerHTML=P.map((_,i)=>`<i class="${i?"":"on"}" data-i="${i}"></i>`).join("");
+let cur=0,timer;
+function go(i){cur=(i+P.length)%P.length;
+  document.querySelectorAll(".slide").forEach((e,k)=>e.classList.toggle("on",k==cur));
+  document.querySelectorAll(".dots i").forEach((e,k)=>e.classList.toggle("on",k==cur));}
+function auto(){clearInterval(timer);timer=setInterval(()=>go(cur+1),4500)}
+$("#dots").onclick=e=>{if(e.target.dataset.i){go(+e.target.dataset.i);auto()}};
+auto();
+
+// categorías (página)
+const C=CONFIG.CATEGORIES, sel=new Set();
+$("#catGrid").innerHTML=C.map((c,i)=>`
+ <div class="card cat" id="c${i}"><div class="ph" ${bg(c.img)} style="border-radius:12px;aspect-ratio:16/9;${c.img?`background-image:url('${c.img}')`:""}"></div>
+  <span class="age">${esc(c.age)}</span><h3>${esc(c.name)}</h3>
+  <label><input type="checkbox" data-i="${i}"> Marcar equipo</label>
+  <a class="l" style="color:var(--acc);font-weight:600" href="${c.app||CONFIG.APP_URL}" target="_blank" rel="noopener">Ir a la app →</a></div>`).join("");
+$("#chips").innerHTML=`<button class="chip on" data-f="all">Todas</button>`+C.map((c,i)=>`<button class="chip" data-f="${i}">${esc(c.name)}</button>`).join("");
+$("#chips").onclick=e=>{const f=e.target.dataset.f;if(f===undefined)return;
+  document.querySelectorAll(".chip").forEach(x=>x.classList.toggle("on",x===e.target));
+  C.forEach((_,i)=>$("#c"+i).style.display=(f==="all"||+f===i)?"":"none");};
+$("#catGrid").onchange=e=>{const i=e.target.dataset.i;if(i===undefined)return;
+  e.target.checked?sel.add(+i):sel.delete(+i);$("#c"+i).classList.toggle("sel",e.target.checked);
+  $("#selInfo").textContent=sel.size?"Equipos marcados: "+[...sel].map(k=>C[k].name).join(", "):"";};
+
+// rutas: #categorias = página aparte
+function route(){const pg=location.hash==="#categorias";document.body.classList.toggle("pg",pg);
+  if(pg)scrollTo(0,0);else if(location.hash.length>1)setTimeout(()=>{const t=document.querySelector(location.hash);t&&t.scrollIntoView()},30);}
+addEventListener("hashchange",route);route();
+
+// noticias de Instagram (últimas 2 semanas)
+function renderNews(items){
+  const lim=Date.now()-CONFIG.NEWS_DAYS*864e5;
+  items=items.filter(i=>new Date(i.timestamp).getTime()>=lim).slice(0,6);
+  $("#news").innerHTML=items.length?items.map(i=>{
+    const img=i.thumbnail_url||i.media_url||"";
+    const d=new Date(i.timestamp).toLocaleDateString("es-ES",{day:"numeric",month:"long"});
+    return `<a class="card rv in" href="${i.permalink}" target="_blank" rel="noopener"><div class="ph" ${bg(img)}></div><div class="cb"><time>${d}</time><p>${esc(i.caption)||"Ver publicación"}</p></div></a>`}).join("")
+  :`<p style="color:var(--mut)">No hay publicaciones en las últimas 2 semanas. ¡Síguenos en Instagram!</p>`;
+}
+async function loadNews(){
+  try{
+    let data;
+    if(CONFIG.FEED_URL){const j=await (await fetch(CONFIG.FEED_URL)).json();data=j.posts||j.data||j;
+      data=data.map(p=>({timestamp:p.timestamp,caption:p.caption||p.prunedCaption,permalink:p.permalink,media_url:p.mediaUrl||p.media_url,thumbnail_url:p.thumbnailUrl||p.thumbnail_url}));}
+    else if(CONFIG.IG_TOKEN){const r=await fetch(`https://graph.instagram.com/me/media?fields=id,caption,media_type,media_url,thumbnail_url,permalink,timestamp&limit=20&access_token=${CONFIG.IG_TOKEN}`);data=(await r.json()).data;}
+    else throw 0;
+    renderNews(data);
+  }catch(e){
+    const now=Date.now(),ex=["Victoria en casa con una gran segunda parte","Entrenamiento de puertas abiertas este sábado","Nuevo equipamiento para toda la cantera"];
+    renderNews(ex.map((t,i)=>({timestamp:new Date(now-i*3*864e5).toISOString(),caption:t+" (ejemplo)",permalink:"https://www.instagram.com/torrejonjuncal/"})));
+  }
+}
+loadNews();
+
+// contadores + reveal
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(!e.isIntersecting)return;e.target.classList.add("in");io.unobserve(e.target)}),{threshold:.15});
+const mo=()=>document.querySelectorAll(".rv:not(.in)").forEach(el=>io.observe(el));mo();
+document.querySelectorAll("[data-n]").forEach(el=>{const n=+el.dataset.n;let v=0;const t=setInterval(()=>{v+=Math.ceil(n/40);if(v>=n){v=n;clearInterval(t)}el.textContent=v+(n>50?"+":"")},40)});
+</script>
+</body>
+</html>

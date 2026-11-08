@@ -7,10 +7,11 @@ const FB = "https://juncal-f0b64-default-rtdb.europe-west1.firebasedatabase.app"
 const { FBKEY, FBMAIL, FBPASS, FCM_SERVICE_ACCOUNT } = process.env;
 const SOLO_CERRADAS = process.env.SOLO_CERRADAS === "1";   // 1 = solo guardar resultados con acta cerrada
 const MANUAL = process.env.GITHUB_EVENT_NAME === "workflow_dispatch";
-// GitHub programa en UTC; aquí filtramos por hora de Madrid (8:00–23:59), también con cambio de hora
-const horaMadrid = +new Intl.DateTimeFormat("es-ES", { timeZone: "Europe/Madrid", hour: "numeric", hourCycle: "h23" }).format(new Date());
-if (!MANUAL && (horaMadrid < 8 || horaMadrid > 23)) { console.log("Fuera de horario:", horaMadrid, "h en Madrid"); process.exit(0); }
-const FULLRUN = MANUAL || horaMadrid === 8;                 // primeras ejecuciones del día y las manuales: las 22 jornadas
+// GitHub programa en UTC; aquí filtramos por hora de Madrid (9:00–22:00), también con cambio de hora
+const ahoraMadrid = new Intl.DateTimeFormat("es-ES", { timeZone: "Europe/Madrid", hour: "numeric", minute: "numeric", hourCycle: "h23" }).formatToParts(new Date());
+const horaMadrid = +ahoraMadrid.find(x => x.type === "hour").value, minMadrid = +ahoraMadrid.find(x => x.type === "minute").value;
+if (!MANUAL && (horaMadrid < 9 || horaMadrid > 22 || (horaMadrid === 22 && minMadrid > 5))) { console.log("Fuera de horario:", horaMadrid + ":" + minMadrid, "en Madrid"); process.exit(0); }
+const FULLRUN = MANUAL || (horaMadrid === 9 && minMadrid < 10);   // primera ejecución del día y las manuales: las 22 jornadas
 const ME = 10, GRUPO = "28125503";
 const sleep = ms => new Promise(r => setTimeout(r, ms));
 

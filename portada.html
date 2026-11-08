@@ -38,15 +38,13 @@ nav{display:flex;align-items:center;justify-content:space-between;height:68px}
 .menu .btn{padding:11px 22px}
 #burger{display:none;background:none;border:0;color:var(--txt);font-size:1.8rem;cursor:pointer}
 /* hero */
-.hero{min-height:100vh;display:flex;align-items:center;position:relative;overflow:hidden;background:var(--bg)}
-.hero::before{content:"";position:absolute;inset:-30px;z-index:0;
-background:linear-gradient(95deg,#081235ee 8%,#08123577 42%,#08123511 70%),linear-gradient(180deg,transparent 65%,#081235 100%),var(--hero,url('fondo-hero.jpg')) 70% 0/cover no-repeat;
-animation:drift 26s ease-in-out infinite alternate}
-@keyframes drift{from{transform:scale(1) translate(0,0)}to{transform:scale(1.08) translate(-1.5%,1%)}}
+.hero{min-height:100vh;display:flex;align-items:center;position:relative;overflow:hidden;background:var(--bg);padding-top:68px}
+.hero::before{content:"";position:absolute;top:68px;left:0;right:0;bottom:0;z-index:0;
+background:linear-gradient(95deg,#081235ee 6%,#08123566 40%,#08123500 62%),linear-gradient(180deg,transparent 70%,#081235 100%),var(--hero,url('fondo-hero.jpg')) 85% 0/cover no-repeat}
 .hero .wrap{position:relative;z-index:2}
 .hero::after{content:"";position:absolute;width:520px;height:520px;border-radius:50%;right:-120px;bottom:-160px;border:60px solid #ffd40026;animation:spin 20s linear infinite}
 @keyframes spin{to{transform:rotate(360deg) scale(1.1)}}
-.hero h1{font-size:clamp(3.4rem,11vw,8rem);font-weight:800;margin:14px 0 20px}
+.hero h1{font-size:clamp(3rem,8vw,6.5rem);font-weight:800;margin:14px 0 20px}
 .hero h1 em{font-style:normal;color:var(--acc)}
 .tag{display:inline-block;border:1px solid var(--acc);color:var(--acc);padding:4px 14px;border-radius:99px;font-size:.8rem;letter-spacing:.1em;text-transform:uppercase}
 .hero p{max-width:520px;color:var(--mut);font-size:1.1rem;margin-bottom:30px}
@@ -94,6 +92,8 @@ footer{border-top:1px solid var(--line);padding:40px 0;color:var(--mut);text-ali
 .rv{opacity:0;transform:translateY(30px);transition:.7s}
 .rv.in{opacity:1;transform:none}
 @media(max-width:800px){
+ .hero{align-items:flex-end;padding-top:400px}
+ .hero::before{bottom:auto;height:420px;background-position:100% 0}
  .two{grid-template-columns:1fr}
  #burger{display:block}
  .menu{position:fixed;inset:68px 0 auto;background:#081235;flex-direction:column;padding:24px;display:none;border-bottom:1px solid var(--line)}
@@ -119,7 +119,7 @@ footer{border-top:1px solid var(--line);padding:40px 0;color:var(--mut);text-ali
 <main id="home">
   <div class="hero" id="heroBox"><div class="wrap">
     <span class="tag">Escuela de fútbol sala</span>
-    <h1>Pasión por <em>el juego</em></h1>
+    <h1>Pasión por<br><em>el juego</em></h1>
     <p>Formamos jugadores y personas. Entrenamos, competimos y disfrutamos juntos desde los más pequeños hasta el primer equipo.</p>
     <div class="btns">
       <a class="btn" href="#categorias">Ver categorías</a>

@@ -20,7 +20,7 @@ h2{font-size:clamp(2.2rem,5vw,3.4rem);font-weight:800;color:#fff;text-shadow:var
 /* amarillo con contorno azul marino: se lee sobre amarillo y sobre azul */
 h2 span{color:var(--ye);text-shadow:0 2px 0 #0f2a78,0 0 3px #0f2a78,0 0 14px rgba(8,18,53,.5)}
 .sub{color:#fff;text-shadow:var(--sh);max-width:620px;margin-bottom:36px}
-.btn{display:inline-block;padding:12px 24px;border-radius:12px;font-weight:700;background:var(--ye);color:#0a0f1e;transition:.2s;box-shadow:0 4px 14px rgba(8,18,53,.35);}
+.btn{display:inline-block;padding:12px 24px;border-radius:12px;font-weight:700;background:var(--ye);color:#0a0f1e;transition:.2s;box-shadow:0 4px 14px rgba(8,18,53,.35);border:2px solid #0f2a78}
 .btn:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(8,18,53,.45)}
 .btn.o{background:var(--bg2);color:var(--tx);border:2px solid #0f2a78}
 .btn.o:hover{border-color:var(--ac)}
@@ -69,6 +69,7 @@ mask-image:linear-gradient(180deg,#000 55%,transparent 100%)}
 .card{background:var(--card);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);border:1px solid var(--line);border-radius:16px;overflow:hidden;transition:.25s;box-shadow:0 4px 18px rgba(8,18,53,.25)}
 .card:hover{transform:translateY(-6px);border-color:var(--ac)}
 .ph{aspect-ratio:4/3;background:linear-gradient(135deg,#bcd6ff,#e6efff) center/cover;display:grid;place-items:center;color:var(--mu);font-size:.8rem}
+#staff .ph{aspect-ratio:3/4;background-position:center top}
 .cb{padding:18px}
 .cb h3{font-size:1.5rem;margin-bottom:4px;color:var(--navy)}
 .cb p{color:var(--mu);font-size:.9rem}
@@ -89,7 +90,12 @@ iframe{width:100%;height:320px;border:1px solid var(--line);border-radius:16px;m
 body.pg #home{display:none}
 body.pg #cats{display:block}
 .back{color:#fff;font-weight:700;text-shadow:var(--sh)}
+button.btn{font:inherit;font-weight:700;cursor:pointer}
+.cats{grid-template-columns:repeat(4,minmax(0,1fr))}
 .cat{padding:22px;display:flex;flex-direction:column;gap:6px}
+.cat.x{display:none}
+.cat.sin{cursor:default}
+.cat.sin .go{color:var(--mu);opacity:.7}
 .cph{aspect-ratio:16/9;border-radius:12px;margin-bottom:8px;background:linear-gradient(135deg,#bcd6ff,#e6efff) center/cover}
 .cat .age{color:var(--ye2);font-size:.8rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase}
 .cat .go{color:var(--mu);font-size:.88rem;margin-top:6px;transition:.2s}
@@ -105,6 +111,8 @@ footer a{color:var(--ye);font-weight:700}
 .rv{opacity:0;transform:translateY(30px);transition:.7s}
 .rv.in{opacity:1;transform:none}
 @media(max-width:800px){
+ .cats{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .cat{padding:16px}
  .hero{align-items:flex-end;padding-top:400px}
  .hero::before{bottom:auto;height:420px;background-position:100% 0}
  .two{grid-template-columns:1fr}
@@ -113,6 +121,7 @@ footer a{color:var(--ye);font-weight:700}
  .menu.o{display:flex}
  section{padding:56px 0}
 }
+@media(max-width:420px){.cats{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -160,8 +169,8 @@ footer a{color:var(--ye);font-weight:700}
   <section id="equipos" class="alt"><div class="wrap">
     <h2 class="rv">Nuestras <span>categorías</span></h2>
     <p class="sub rv">Pulsa en tu categoría para ver resultados, clasificaciones y calendario.</p>
-    <div class="grid" id="catHome"></div>
-    <p style="margin-top:28px"><a class="btn" id="moreCats" href="portada.html#categorias">Más categorías →</a></p>
+    <div class="grid cats" id="catHome"></div>
+    <p style="margin-top:28px"><button class="btn" id="moreCats" type="button" aria-expanded="false" aria-controls="catHome">Más categorías ↓</button></p>
   </div></section>
 
   <section id="tecnico"><div class="wrap">
@@ -212,8 +221,6 @@ const CONFIG = {
   ESCUELA_IMG: "",    // foto de la sección "La escuela"
   ESCUELA_TXT: "Somos una escuela de fútbol sala donde cada niño y niña aprende, compite y disfruta. Trabajamos valores como el compañerismo, el esfuerzo y el respeto, con entrenadores formados y un ambiente de familia.",
 
-  CATS_PORTADA: 4,                       // cuántas categorías se ven en la portada
-  CATS_PAGE: "portada.html#categorias",   // destino de "Más categorías"
 
   /* NOTICIAS AUTOMÁTICAS DE INSTAGRAM (elige UNA opción):
      A) FEED_URL: URL JSON de un servicio como Behold.so o similar (recomendado, sin exponer claves).
@@ -226,7 +233,7 @@ const CONFIG = {
   NEWS_COUNT: 6,
 
   STAFF: [
-    {name:"Nombre Apellido", role:"Coordinador", img:""},
+    {name:"Nombre Apellido", role:"Presidente", img:"presidente.png"},
     {name:"Nombre Apellido", role:"Entrenador primer equipo", img:""},
     {name:"Nombre Apellido", role:"Entrenador cantera", img:""},
     {name:"Nombre Apellido", role:"Preparador físico", img:""}
@@ -269,15 +276,20 @@ $("#menu").onclick=()=>$("#menu").classList.remove("o");
 $("#staff").innerHTML=CONFIG.STAFF.map(s=>`<div class="card rv"><div class="ph" ${bg(s.img)}>${s.img?"":"Foto"}</div><div class="cb"><h3>${esc(s.name)}</h3><p>${esc(s.role)}</p></div></div>`).join("");
 
 
-// categorías: cada tarjeta es un enlace (portada = primeras N, página = todas)
-const catCard=c=>`
- <a class="card cat" href="${c.url||'#categorias'}" target="_blank" rel="noopener">
-  <div class="cph" ${bg(c.img)}></div>
-  <span class="age">${esc(c.age)}</span><h3>${esc(c.name)}</h3>
-  <span class="go">Resultados y clasificaciones →</span></a>`;
-$("#catHome").innerHTML=CONFIG.CATEGORIES.slice(0,CONFIG.CATS_PORTADA).map(catCard).join("");
+// categorías: una sola fila al principio; "Más categorías" despliega el resto en la misma página
+const catCard=c=>{
+  const inner=`<div class="cph" ${bg(c.img)}></div><span class="age">${esc(c.age)}</span><h3>${esc(c.name)}</h3><span class="go">${c.url?"Resultados y clasificaciones →":"Próximamente"}</span>`;
+  return c.url?`<a class="card cat" href="${esc(c.url)}" target="_blank" rel="noopener">${inner}</a>`:`<div class="card cat sin">${inner}</div>`};
+$("#catHome").innerHTML=CONFIG.CATEGORIES.map(catCard).join("");
 $("#catGrid").innerHTML=CONFIG.CATEGORIES.map(catCard).join("");
-$("#moreCats").href=CONFIG.CATS_PAGE;
+let catsOpen=false;
+function updateCats(){
+  const g=$("#catHome"),cols=getComputedStyle(g).gridTemplateColumns.split(" ").length,cs=[...g.children];
+  cs.forEach((c,i)=>c.classList.toggle("x",!catsOpen&&i>=cols));
+  const b=$("#moreCats");b.style.display=cs.length>cols?"":"none";
+  b.textContent=catsOpen?"Ver menos ↑":"Más categorías ↓";b.setAttribute("aria-expanded",catsOpen)}
+$("#moreCats").onclick=()=>{catsOpen=!catsOpen;updateCats()};
+addEventListener("resize",updateCats);updateCats();
 
 // rutas: #categorias = página aparte
 function route(){const pg=location.hash==="#categorias";document.body.classList.toggle("pg",pg);

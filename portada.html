@@ -69,7 +69,7 @@ mask-image:linear-gradient(180deg,#000 55%,transparent 100%)}
 .card:hover{transform:translateY(-6px);border-color:var(--ac)}
 .ph{aspect-ratio:4/3;background:linear-gradient(135deg,#bcd6ff,#e6efff) center/cover;display:grid;place-items:center;color:var(--mu);font-size:.8rem}
 /* Cuerpo técnico: casillas pequeñas con formato de cromo (11:20, como los de index.html) */
-#staff{grid-template-columns:repeat(auto-fill,minmax(96px,1fr));gap:10px}
+#staff{grid-template-columns:repeat(5,minmax(0,1fr));gap:10px}
 button.card{font:inherit;color:inherit;text-align:center;padding:0;cursor:pointer;display:block;width:100%}
 .stf.x{display:none}
 .stf:focus-visible{outline:3px solid var(--ye);outline-offset:2px}
@@ -139,6 +139,7 @@ footer a{color:var(--ye);font-weight:700}
  section{padding:56px 0}
 }
 @media(max-width:420px){.cats{grid-template-columns:1fr}}
+@media(max-width:600px){#staff{grid-template-columns:repeat(3,minmax(0,1fr))}}
 </style>
 </head>
 <body>
@@ -250,11 +251,20 @@ const CONFIG = {
   NEWS_DAYS: 0,   // 0 = las últimas publicaciones sin límite de fecha; 14 = solo las de las últimas 2 semanas
   NEWS_COUNT: 6,
 
+  STAFF_VISIBLE: 5,   // cuántas casillas se ven antes de pulsar "Todo nuestro cuerpo técnico"
   STAFF: [
     {name:"Nombre Apellido", role:"Presidente", img:"presidente.png"},
     {name:"Nombre Apellido", role:"Entrenador primer equipo", img:""},
     {name:"Nombre Apellido", role:"Entrenador cantera", img:""},
-    {name:"Nombre Apellido", role:"Preparador físico", img:""}
+    {name:"Nombre Apellido", role:"Preparador físico", img:""},
+    {name:"Nombre Apellido", role:"Cargo", img:""},
+    {name:"Nombre Apellido", role:"Cargo", img:""},
+    {name:"Nombre Apellido", role:"Cargo", img:""},
+    {name:"Nombre Apellido", role:"Cargo", img:""},
+    {name:"Nombre Apellido", role:"Cargo", img:""},
+    {name:"Nombre Apellido", role:"Cargo", img:""},
+    {name:"Nombre Apellido", role:"Cargo", img:""},
+    {name:"Nombre Apellido", role:"Cargo", img:""}
   ],
 
   /* url: enlace de esa categoría (resultados, clasificaciones...) */
@@ -290,14 +300,14 @@ addEventListener("scroll",()=>$("#hd").classList.toggle("s",scrollY>30));
 $("#burger").onclick=()=>$("#menu").classList.toggle("o");
 $("#menu").onclick=()=>$("#menu").classList.remove("o");
 
-// cuerpo técnico: una fila a todo el ancho; el botón despliega todas las casillas; al pulsar una se amplía
+// cuerpo técnico: se ven las primeras STAFF_VISIBLE; el botón despliega todas las casillas; al pulsar una se amplía
 const stfCard=(s,i)=>`<button type="button" class="card stf" data-i="${i}" aria-label="${esc(s.name)}, ${esc(s.role)}: ver ampliado"><div class="ph" ${bg(s.img)}>${s.img?"":"Foto"}</div><div class="cb"><h3>${esc(s.name)}</h3><p>${esc(s.role)}</p></div></button>`;
 $("#staff").innerHTML=CONFIG.STAFF.map(stfCard).join("");
 let staffOpen=false;
 function updateStaff(){
-  const g=$("#staff"),cols=getComputedStyle(g).gridTemplateColumns.split(" ").length,cs=[...g.children];
-  cs.forEach((c,i)=>c.classList.toggle("x",!staffOpen&&i>=cols));
-  const b=$("#moreStaff");b.style.display=cs.length>cols?"":"none";
+  const g=$("#staff"),n=CONFIG.STAFF_VISIBLE,cs=[...g.children];
+  cs.forEach((c,i)=>c.classList.toggle("x",!staffOpen&&i>=n));
+  const b=$("#moreStaff");b.style.display=cs.length>n?"":"none";
   b.textContent=staffOpen?"Ver menos ↑":"Todo nuestro cuerpo técnico ↓";b.setAttribute("aria-expanded",staffOpen)}
 $("#moreStaff").onclick=()=>{staffOpen=!staffOpen;updateStaff()};
 addEventListener("resize",updateStaff);updateStaff();

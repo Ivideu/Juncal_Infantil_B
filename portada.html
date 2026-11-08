@@ -15,8 +15,7 @@ body{font:16px/1.5 Barlow,system-ui,sans-serif;color:var(--tx);background:transp
 h1,h2,h3{font-family:'Barlow Condensed',sans-serif;letter-spacing:.02em;text-transform:uppercase;line-height:1}
 a{color:inherit;text-decoration:none}
 .wrap{max-width:980px;margin:auto;padding:0 16px}
-section{padding:70px 0;background:linear-gradient(180deg,transparent,rgba(8,18,53,.26) 14%,rgba(8,18,53,.26) 86%,transparent)}
-section.alt{background:linear-gradient(180deg,transparent,rgba(8,18,53,.42) 14%,rgba(8,18,53,.42) 86%,transparent)}
+section{padding:70px 0}
 h2{font-size:clamp(2.2rem,5vw,3.4rem);font-weight:800;color:#fff;text-shadow:var(--sh);margin-bottom:10px}
 /* amarillo con contorno azul marino: se lee sobre amarillo y sobre azul */
 h2 span{color:var(--ye);text-shadow:0 2px 0 #0f2a78,0 0 3px #0f2a78,0 0 14px rgba(8,18,53,.5)}
@@ -29,7 +28,7 @@ h2 span{color:var(--ye);text-shadow:0 2px 0 #0f2a78,0 0 3px #0f2a78,0 0 14px rgb
 /* ===== Fondo: degradado del escudo (amarillo → azul, de izquierda a derecha) ===== */
 #bg{position:fixed;inset:0;z-index:-1;overflow:hidden;pointer-events:none;
   background:
-    linear-gradient(180deg,rgba(8,18,53,0) 0%,rgba(8,18,53,.10) 45%,rgba(8,18,53,.55) 100%),
+    linear-gradient(rgba(8,18,53,.22),rgba(8,18,53,.22)),
     linear-gradient(90deg,#f2b705 0%,#ffd23f 18%,#ffe98f 30%,#dbe8ff 42%,#5b9bff 58%,#1e4fd8 78%,#0f2a78 100%),
     #0f2a78}
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}

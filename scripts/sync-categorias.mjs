@@ -19,6 +19,34 @@ if (!MANUAL && (horaMadrid < 9 || horaMadrid > 22 || (horaMadrid === 22 && minMa
 const FULLRUN = MANUAL || (horaMadrid === 9 && minMadrid < 10);   // primera ejecución del día y manuales: todas las jornadas
 const sleep = ms => new Promise(r => setTimeout(r, ms));
 
+
+// Búsqueda exhaustiva y segura de categorias.json en múltiples rutas posibles
+function cargarConfig() {
+  const rutasCandidatas = [
+    path.join(__dirname, "categorias.json"),                 // scripts/categorias.json
+    path.join(__dirname, "..", "categorias.json"),             // /categorias.json (raíz)
+    path.resolve(process.cwd(), "scripts", "categorias.json"), // cwd/scripts/categorias.json
+    path.resolve(process.cwd(), "categorias.json")             // cwd/categorias.json
+  ];
+
+  for (const r of rutasCandidatas) {
+    try {
+      if (fs.existsSync(r)) {
+        console.log(`Configuración cargada correctamente desde: ${r}`);
+        return JSON.parse(fs.readFileSync(r, "utf8"));
+      }
+    } catch (e) {
+      // Ignorar error de lectura individual y probar la siguiente
+    }
+  }
+
+  console.error("Error crítico: No se encuentra categorias.json en ninguna de estas rutas probadas:");
+  rutasCandidatas.forEach(r => console.error(` - ${r}`));
+  process.exit(1);
+}
+
+const conf = cargarConfig();
+
 const iso = f => { const k = String(f || "").match(/^(\d{2})[-/](\d{2})[-/](\d{4})/); return k ? `${k[3]}-${k[2]}-${k[1]}` : ""; };
 const num = v => (v === "" || v == null || isNaN(+v)) ? null : +v;
 const limpiaCampo = s => String(s || "").replace(/\s*\(futbol sala\)\s*$/i, "").trim();

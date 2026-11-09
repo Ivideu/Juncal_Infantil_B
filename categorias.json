@@ -2,15 +2,15 @@
   "temporada": "2026/27",
   "_ayuda": "Para activar una categoría rellena 'grupo' con el número que aparece tras 'grupo=' en su enlace de la RFFM (como 28125503). 'equipo' (CodEquipo de la RFFM) es opcional: si lo dejas vacío se busca el equipo cuyo nombre contenga JUNCAL. 'liga' es el texto que sale en la ficha. 'nombreEquipo' sustituye al nombre de la RFFM en la ficha.",
   "categorias": [
-    { "id": "aficionado-a", "nombre": "Aficionado A", "liga": "Preferente Aficionado FS · Grupo ?", "grupo": "", "equipo": "", "nombreEquipo": "Torrejón Juncal A" },
-    { "id": "aficionado-b", "nombre": "Aficionado B", "liga": "Primera Aficionado FS · Grupo ?", "grupo": "", "equipo": "", "nombreEquipo": "Torrejón Juncal B" },
-    { "id": "juvenil-a", "nombre": "Juvenil A", "liga": "Preferente Juvenil FS · Grupo 2", "grupo": "", "equipo": "", "nombreEquipo": "Torrejón Juncal A" },
-    { "id": "juvenil-b", "nombre": "Juvenil B", "liga": "Primera Juvenil FS · Grupo ?", "grupo": "", "equipo": "", "nombreEquipo": "Torrejón Juncal B" },
-    { "id": "cadete-a", "nombre": "Cadete A", "liga": "Primera Cadete FS · Grupo ?", "grupo": "", "equipo": "", "nombreEquipo": "Torrejón Juncal A" },
-    { "id": "cadete-b", "nombre": "Cadete B", "liga": "Primera Cadete FS · Grupo ?", "grupo": "", "equipo": "", "nombreEquipo": "Torrejón Juncal B" },
-    { "id": "infantil-a", "nombre": "Infantil A", "liga": "Preferente Infantil FS · Grupo ?", "grupo": "", "equipo": "", "nombreEquipo": "Torrejón Juncal A" },
+    { "id": "aficionado-a", "nombre": "Aficionado A", "liga": "Preferente Aficionado FS · Grupo 2", "grupo": "26738248", "equipo": "18377727", "nombreEquipo": "Torrejón Juncal A" },
+    { "id": "aficionado-b", "nombre": "Aficionado B", "liga": "Primera Aficionado FS · Grupo 2", "grupo": "28153964", "equipo": "26753966", "nombreEquipo": "Torrejón Juncal B" },
+    { "id": "juvenil-a", "nombre": "Juvenil A", "liga": "Preferente Juvenil FS · Grupo 2", "grupo": "26878012", "equipo": "17156865", "nombreEquipo": "Torrejón Juncal A" },
+    { "id": "juvenil-b", "nombre": "Juvenil B", "liga": "Primera Juvenil FS · Grupo 2", "grupo": "28122269", "equipo": "19691247", "nombreEquipo": "Torrejón Juncal B" },
+    { "id": "cadete-a", "nombre": "Cadete A", "liga": "Primera Cadete FS · Grupo 2", "grupo": "27435112", "equipo": "19691126", "nombreEquipo": "Torrejón Juncal A" },
+    { "id": "cadete-b", "nombre": "Cadete B", "liga": "Primera Cadete FS · Grupo 4", "grupo": "27435140", "equipo": "26753965", "nombreEquipo": "Torrejón Juncal B" },
+    { "id": "infantil-a", "nombre": "Infantil A", "liga": "Preferente Infantil FS · Grupo 2", "grupo": "26738251", "equipo": "18377726", "nombreEquipo": "Torrejón Juncal A" },
     { "id": "infantil-b", "nombre": "Infantil B", "liga": "Primera Infantil FS · Grupo 2", "grupo": "28125503", "equipo": "24193914", "nombreEquipo": "Torrejón Juncal B" },
-    { "id": "alevin-a", "nombre": "Alevín A", "liga": "Alevín FS · Grupo ?", "grupo": "", "equipo": "", "nombreEquipo": "Torrejón Juncal A" },
-    { "id": "alevin-b", "nombre": "Alevín B", "liga": "Alevín FS · Grupo ?", "grupo": "", "equipo": "", "nombreEquipo": "Torrejón Juncal B" }
+    { "id": "alevin-a", "nombre": "Alevín A", "liga": "Alevín FS · Grupo 3", "grupo": "28105877", "equipo": "19691198", "nombreEquipo": "Torrejón Juncal A" },
+    { "id": "alevin-b", "nombre": "Alevín B", "liga": "Alevín FS · Grupo 2", "grupo": "27597476", "equipo": "26753964", "nombreEquipo": "Torrejón Juncal B" }
   ]
 }

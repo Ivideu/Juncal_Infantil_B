@@ -1,19 +1,19 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<link rel="stylesheet" href="../../css/fondojuncal.css">
+<link rel="stylesheet" href="../css/fondojuncal.css">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Juncal A · Preferente Aficionado FS · Grupo 2 · 2026-27</title>
-<link rel="icon" type="image/png" sizes="192x192" href="../../Images/icon-192.png">
-<link rel="apple-touch-icon" href="../../Images/apple-touch-icon.png">
-<link rel="manifest" href="../../manifest.webmanifest">
+<link rel="icon" type="image/png" sizes="192x192" href="../Images/icon-192.png">
+<link rel="apple-touch-icon" href="../Images/apple-touch-icon.png">
+<link rel="manifest" href="../manifest.webmanifest">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Juncal_Afic.A">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
-<link rel="stylesheet" href="../../css/bloque.css">
-<link rel="stylesheet" href="../../css/efecto3d.css">
+<link rel="stylesheet" href="../css/bloque.css">
+<link rel="stylesheet" href="../css/efecto3d.css">
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
 :root{--bg:#eef4ff;--bg2:#ffffff;--card:rgba(255,255,255,.86);--line:#d5def5;--tx:#0f1b3d;--mu:#5a6a93;--ac:#2f7bff;--ye:#ffd23f;--ye2:#d97706}
@@ -33,7 +33,7 @@ h1,h2,.cn{font-family:'Barlow Condensed',sans-serif;letter-spacing:.02em}
 #bg b{position:absolute;bottom:-70px;font-weight:400;opacity:.2;will-change:transform;animation:rise linear infinite}
 @keyframes rise{to{transform:translateY(-120vh) rotate(720deg)}}
 /* Cabecera panorámica */
-header.site-banner{position:relative;width:100%;margin:0 auto 18px;aspect-ratio:1347/375;overflow:hidden;border-radius:16px;background-color:#050b1f;background-image:linear-gradient(180deg,transparent 65%,rgba(5,11,31,.45) 100%),url('../../Images/cabecera-juncal.jpg');background-size:cover;background-position:center;background-repeat:no-repeat;border-bottom:2px solid #2f7bff;box-shadow:0 8px 28px rgba(0,40,120,.35)}
+header.site-banner{position:relative;width:100%;margin:0 auto 18px;aspect-ratio:1347/375;overflow:hidden;border-radius:16px;background-color:#050b1f;background-image:linear-gradient(180deg,transparent 65%,rgba(5,11,31,.45) 100%),url('../Images/cabecera-juncal.jpg');background-size:cover;background-position:center;background-repeat:no-repeat;border-bottom:2px solid #2f7bff;box-shadow:0 8px 28px rgba(0,40,120,.35)}
 header.site-banner h1{position:absolute;inset:0;font-size:0;line-height:0;color:transparent}
 @media(max-width:600px){header.site-banner{border-radius:12px}}
 button{font:inherit;cursor:pointer;border:1px solid var(--line);background:var(--bg2);color:var(--tx);padding:8px 14px;border-radius:10px;transition:.2s}
@@ -141,7 +141,7 @@ const esc=s=>String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&g
 const fmt=d=>{const s=new Date(d+"T12:00").toLocaleDateString("es-ES",{weekday:"long",day:"numeric",month:"long"});return s[0].toUpperCase()+s.slice(1)};
 const M=(j,h)=>(S.m&&S.m[j+"_"+h])||{};
 const done=m=>m.h!==undefined&&m.h!==""&&m.a!==undefined&&m.a!=="";
-const bd=id=>{if(!id||!T[id])return`<span class="b" style="background:#334">💤</span>`;const n=T[id][0].split(" ").map(w=>w[0]).join("").slice(0,2).toUpperCase();return`<span class="b" style="background:${id==ME?'#2f7bff':`hsl(${id*47%360} 55% 38%)`}">${n}${COD[id]?`<img src="../../Escudos/${COD[id]}.png" alt="" onload="this.parentNode.classList.add('ok')" onerror="this.remove()">`:""}</span>`};
+const bd=id=>{if(!id||!T[id])return`<span class="b" style="background:#334">💤</span>`;const n=T[id][0].split(" ").map(w=>w[0]).join("").slice(0,2).toUpperCase();return`<span class="b" style="background:${id==ME?'#2f7bff':`hsl(${id*47%360} 55% 38%)`}">${n}${COD[id]?`<img src="../Escudos/${COD[id]}.png" alt="" onload="this.parentNode.classList.add('ok')" onerror="this.remove()">`:""}</span>`};
 const nm=id=>!id||!T[id]?"Descansa":id==ME?CAT.nombre:T[id][0];
 const ven=(h,m)=>{const p=m&&m.p;if(!p)return(T[h]&&T[h][1])||"";return p.toLowerCase().replace(/(^|[\s.\-(])([a-zñ])/g,(_,a,b)=>a+b.toUpperCase())};
 const loc=(h,m)=>{const v=ven(h,m);return v?`📍 <a target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(v)}">${esc(v)}</a>`:""};
@@ -191,7 +191,7 @@ function render(){
  if(tab=="cla")h=`<table><tr><th>#</th><th>Equipo</th><th>PJ</th><th>G</th><th>E</th><th>P</th><th>GF</th><th>GC</th><th>DG</th><th>Pts</th></tr>${table().map((t,i)=>`<tr class="${t.id==ME?'me':''}"><td>${i+1}</td><td>${esc(nm(t.id))}</td><td>${t.pj}</td><td>${t.g}</td><td>${t.e}</td><td>${t.p}</td><td>${t.gf}</td><td>${t.gc}</td><td>${t.dg>0?"+":""}${t.dg}</td><td><b>${t.pts}</b></td></tr>`).join("")}</table>`;
  ap.innerHTML=h}
 /* Volver a la página anterior (si se abrió esta página directamente, va al inicio) */
-function volver(){if(history.length>1)history.back();else location.href="../../index.html#equipos"}
+function volver(){if(history.length>1)history.back();else location.href="../index.html#equipos"}
 render();setInterval(tick,1000);
 </script>
 </body>

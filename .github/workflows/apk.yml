@@ -25,7 +25,7 @@ jobs:
           distribution: temurin
           java-version: 17
 
-- name: Crear proyecto Capacitor y configurar app
+      - name: Crear proyecto Capacitor y configurar app
         run: |
           mkdir -p /tmp/app/www && cd /tmp/app
           npm init -y >/dev/null
@@ -61,7 +61,7 @@ jobs:
           rm -rf mipmap-anydpi-v26
           for d in mipmap-*; do
             for f in ic_launcher.png ic_launcher_round.png ic_launcher_foreground.png; do
-              [ -f "$d/$f" ] && cp "$GITHUB_WORKSPACE/icon-192.png" "$d/$f" || true
+              [ -f "$d/$f" ] && cp "$GITHUB_WORKSPACE/Images/icon-192.png" "$d/$f" || true
             done
           done
 

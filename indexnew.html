@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="icon" href="Images/escudo.png">
+<link rel="icon" href="escudo.png">
 <title>Torrejón Juncal · Escuela de Fútbol Sala</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,600;0,700;0,800;1,700;1,800&family=Barlow:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -38,20 +38,22 @@ nav{display:flex;align-items:center;justify-content:space-between;height:68px}
 .logo{font-family:'Barlow Condensed';font-weight:800;font-size:1.5rem;text-transform:uppercase;color:var(--navy);display:flex;align-items:center;gap:10px}
 .logo b{color:var(--ye2)}
 .lg{width:44px;height:44px;border-radius:50%}
-.pgb{aspect-ratio:848/190;width:100%;margin-bottom:40px;border-radius:16px;border-bottom:2px solid var(--ac);box-shadow:0 8px 28px rgba(0,40,120,.35);background:url('Images/cabecera.jpg') center/100% 100% no-repeat}
+.pgb{aspect-ratio:848/190;width:100%;margin-bottom:40px;border-radius:16px;border-bottom:2px solid var(--ac);box-shadow:0 8px 28px rgba(0,40,120,.35);background:url('cabecera.jpg') center/100% 100% no-repeat}
 .fl{width:64px;height:64px;border-radius:50%;margin-bottom:12px}
-.menu{display:flex;flex-wrap:nowrap;gap:2px;align-items:center;font-weight:600;font-size:.95rem;margin-left:auto}
-.menu a:not(.btn){padding:10px 11px;border-radius:10px;font-size:.95rem;color:var(--tx);transition:.2s;white-space:nowrap}
-header .wrap{max-width:1180px}
+.menu{display:flex;gap:6px;align-items:center;font-weight:600;font-size:.95rem}
+.menu a:not(.btn){padding:10px 16px;border-radius:10px;font-size:1rem;color:var(--tx);transition:.2s}
 .menu a:not(.btn):hover{color:#0a0f1e;background:var(--ye)}
-a.ig{display:flex;align-items:center;flex:none;margin-left:8px;padding:10px;border-radius:10px;color:var(--navy);transition:.2s}
-a.ig:hover{color:#0a0f1e;background:var(--ye)}
+.menu a{white-space:nowrap}
+header .wrap{max-width:1280px}
+.menu a.ig{flex:none;display:flex;align-items:center;justify-content:center;gap:8px;width:42px;height:42px;padding:0!important;margin-left:8px;border-radius:50%;color:#fff;background:linear-gradient(45deg,#f2b705,#e1306c 55%,#7b3fe4);box-shadow:0 3px 10px rgba(8,18,53,.35)}
+.menu a.ig:hover{color:#fff;background:linear-gradient(45deg,#ffd23f,#e1306c 55%,#7b3fe4);transform:translateY(-2px)}
+.menu a.ig span{display:none}
 #burger{display:none;background:none;border:0;color:var(--navy);font-size:1.8rem;cursor:pointer}
 
 /* hero */
 .hero{min-height:100vh;display:flex;align-items:center;position:relative;overflow:hidden;background:transparent;padding-top:68px}
 .hero::before{content:"";position:absolute;top:68px;left:0;right:0;bottom:0;z-index:0;
-background:linear-gradient(95deg,rgba(8,18,53,.55) 6%,rgba(8,18,53,.22) 40%,rgba(8,18,53,0) 62%),var(--hero,url('Images/fondo-hero.jpg')) 85% 0/cover no-repeat;
+background:linear-gradient(95deg,rgba(8,18,53,.55) 6%,rgba(8,18,53,.22) 40%,rgba(8,18,53,0) 62%),var(--hero,url('fondo-hero.jpg')) 85% 0/cover no-repeat;
 -webkit-mask-image:linear-gradient(180deg,#000 55%,transparent 100%);
 mask-image:linear-gradient(180deg,#000 55%,transparent 100%)}
 .hero .wrap{position:relative;z-index:2}
@@ -96,8 +98,35 @@ button.card{font:inherit;color:inherit;text-align:center;padding:0;cursor:pointe
 .cb .l{color:var(--ye2);font-weight:600;font-size:.9rem;display:inline-block;margin-top:10px}
 
 /* escuela */
-.two{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center}
-.two .ph{aspect-ratio:1;border-radius:22px}
+.wrap.xl{max-width:1280px}
+#escuela{overflow-x:clip;padding-bottom:0}
+.esc{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));grid-auto-rows:minmax(0,auto);gap:16px}
+.et{grid-column:1/6;grid-row:1/3;align-self:stretch;display:flex;flex-direction:column;justify-content:center;gap:18px;padding:34px;border-radius:26px;background:rgba(8,18,53,.62);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);border:1px solid rgba(255,255,255,.22);box-shadow:0 14px 40px rgba(8,18,53,.45)}
+.et h2{font-size:clamp(2.6rem,5.4vw,4.4rem);margin:0}
+.et p{color:#fff;font-size:1.08rem;max-width:520px;text-shadow:none}
+.et .tag{align-self:flex-start}
+.et .btn{align-self:flex-start}
+.vals{list-style:none;padding:0;display:flex;gap:10px;flex-wrap:wrap}
+.vals li{font:800 1.05rem 'Barlow Condensed';text-transform:uppercase;letter-spacing:.06em;color:#fff;padding:8px 14px 8px 10px;border-radius:999px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.28);display:flex;align-items:center;gap:8px}
+.vals b{color:#0a0f1e;background:var(--ye);border-radius:50%;width:26px;height:26px;display:grid;place-items:center;font-size:.8rem}
+.ef{position:relative;overflow:hidden;border-radius:26px;box-shadow:0 14px 40px rgba(8,18,53,.5);border:3px solid #fff;background:#0a0f1e;min-height:230px}
+.ef img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .8s cubic-bezier(.2,.7,.2,1)}
+.ef:hover img{transform:scale(1.06)}
+.ef::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 55%,rgba(8,18,53,.88));pointer-events:none}
+.ef figcaption{position:absolute;left:18px;right:18px;bottom:14px;z-index:2;color:#fff;font-size:.9rem;text-shadow:0 1px 6px rgba(0,0,0,.6);display:flex;flex-direction:column}
+.ef figcaption b{font:800 1.5rem/1.05 'Barlow Condensed';text-transform:uppercase;letter-spacing:.03em;color:var(--ye)}
+.e1::after{display:none}
+.e1{grid-column:6/13;grid-row:1;aspect-ratio:830/520}
+.e2{grid-column:6/10;grid-row:2;aspect-ratio:4/3}
+.e3{grid-column:10/13;grid-row:2;aspect-ratio:auto}
+.e3 img{object-position:60% 50%}
+.fam{position:relative;margin:16px 0 0;width:100vw;margin-left:calc(50% - 50vw);height:clamp(220px,26vw,380px);overflow:hidden;background:#000;border-top:4px solid var(--ye)}
+.fam img{width:100%;height:100%;object-fit:cover;object-position:50% 100%;opacity:.95}
+.fam::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(15,42,120,.55),rgba(242,183,5,.25) 60%,rgba(15,42,120,.55)),linear-gradient(180deg,rgba(0,0,0,.2),rgba(8,18,53,.75));mix-blend-mode:multiply;pointer-events:none}
+.fam figcaption{position:absolute;inset:0;z-index:2;display:flex;align-items:center}
+.fam figcaption .wrap{color:#fff;display:flex;flex-direction:column;gap:6px}
+.fam b{font:800 clamp(2rem,5vw,4rem)/1 'Barlow Condensed';text-transform:uppercase;color:var(--ye);text-shadow:0 2px 0 #0f2a78,0 0 18px rgba(8,18,53,.7)}
+.fam span{max-width:520px;text-shadow:0 1px 8px rgba(0,0,0,.8)}
 
 /* donde */
 .nuria{display:block;width:100%;height:auto;border-radius:22px;background:var(--card);box-shadow:0 4px 18px rgba(8,18,53,.3)}
@@ -123,12 +152,13 @@ button.btn{font:inherit;font-weight:700;cursor:pointer}
 .cat .go{color:var(--mu);font-size:.88rem;margin-top:6px;transition:.2s}
 .cat:hover .go{color:var(--ac)}
 
+
 /* ===== Próximos partidos: fichas tipo cartel =====
    El texto se escala con el ancho de la ficha (cqw), así la ficha ampliada es idéntica a la pequeña. */
-#matches{grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+#matches{grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
 .mx{display:none!important}
-button.fch{display:block;width:100%;padding:0;border:0;background:none;cursor:pointer;border-radius:10px;overflow:hidden;box-shadow:0 4px 14px rgba(8,18,53,.4);transition:.25s}
-button.fch:hover{transform:translateY(-4px)}
+button.fch{display:block;width:100%;padding:0;border:0;background:none;cursor:pointer;border-radius:18px;overflow:hidden;box-shadow:0 8px 28px rgba(8,18,53,.4);transition:.25s}
+button.fch:hover{transform:translateY(-6px)}
 button.fch:focus-visible{outline:3px solid var(--ye);outline-offset:3px}
 .cartel{position:relative;container-type:inline-size;aspect-ratio:842/857;width:100%;background:#0f2a78 url('Images/ficha-base.jpg') center/100% 100% no-repeat;color:#fff;text-align:center;user-select:none;-webkit-user-select:none}
 .cartel>*{position:absolute;margin:0}
@@ -156,7 +186,7 @@ button.fch:focus-visible{outline:3px solid var(--ye);outline-offset:3px}
 .fm{position:relative;width:min(92vw,calc(86vh*.982),680px);animation:stfPop .25s cubic-bezier(.2,1.3,.4,1) both}
 .fm .cartel{border-radius:20px;box-shadow:0 20px 60px rgba(0,0,0,.5);overflow:hidden}
 .fm .x{position:absolute;top:-14px;right:-14px;z-index:2;width:40px;height:40px;border-radius:50%;border:0;background:var(--ye);color:#0a0f1e;font-size:1.4rem;line-height:1;cursor:pointer}
-@media(max-width:600px){#matches{grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}}
+@media(max-width:600px){#matches{grid-template-columns:minmax(0,1fr)}}
 
 footer{border-top:1px solid rgba(255,255,255,.35);padding:40px 0;color:#fff;text-shadow:var(--sh);text-align:center;font-size:.9rem}
 footer a{color:var(--ye);font-weight:700}
@@ -167,9 +197,17 @@ footer a{color:var(--ye);font-weight:700}
  .cat{padding:16px}
  .hero{align-items:flex-end;padding-top:400px}
  .hero::before{bottom:auto;height:420px;background-position:100% 0}
- .two{grid-template-columns:1fr}
- #burger{display:block;margin-left:auto}
- .menu{margin-left:0}
+ .esc{grid-template-columns:1fr 1fr}
+ .et{grid-column:1/3;grid-row:auto;padding:24px}
+ .e1{grid-column:1/3;grid-row:auto}
+ .ef{min-height:0}
+ .e2{grid-column:1/2;grid-row:auto;aspect-ratio:3/4}
+ .e3{grid-column:2/3;grid-row:auto;aspect-ratio:3/4}
+ .ef figcaption b{font-size:1.15rem}
+ .ef figcaption{font-size:.78rem}
+ .menu a.ig{width:auto;height:auto;border-radius:10px;padding:10px 16px!important;margin:6px 0 0;justify-content:flex-start}
+ .menu a.ig span{display:inline}
+ #burger{display:block}
  .menu{position:fixed;inset:68px 0 auto;background:#fff;flex-direction:column;padding:24px;display:none;border-bottom:1px solid var(--line)}
  .menu.o{display:flex}
  section{padding:56px 0}
@@ -183,7 +221,7 @@ footer a{color:var(--ye);font-weight:700}
 <div id="bg" aria-hidden="true"></div>
 
 <header id="hd"><div class="wrap"><nav>
-  <a href="#" class="logo"><img class="lg" src="Images/escudo.png" alt="Escudo Torrejón Juncal">Torrejón <b>Juncal</b></a>
+  <a href="#" class="logo"><img class="lg" src="escudo.png" alt="Escudo Torrejón Juncal">Torrejón <b>Juncal</b></a>
   <button id="burger" aria-label="Menú">☰</button>
   <div class="menu" id="menu">
     <a href="#escuela">La escuela</a>
@@ -192,10 +230,8 @@ footer a{color:var(--ye);font-weight:700}
     <a href="#tecnico">Cuerpo técnico</a>
     <a href="#donde">Dónde jugamos</a>
     <a href="#contacto">Contacto</a>
+    <a class="ig" href="https://www.instagram.com/torrejonjuncal/" target="_blank" rel="noopener" aria-label="Instagram de Torrejón Juncal" title="Instagram"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg><span>Instagram</span></a>
   </div>
-  <a class="ig" href="https://www.instagram.com/torrejonjuncal/" target="_blank" rel="noopener" aria-label="Instagram de Torrejón Juncal">
-    <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
-  </a>
 </nav></div></header>
 
 <!-- ============ INICIO ============ -->
@@ -216,14 +252,27 @@ footer a{color:var(--ye);font-weight:700}
   </div></div>
 
 
-  <section id="escuela"><div class="wrap two">
-    <div class="rv">
-      <h2>La <span>escuela</span></h2>
-      <p class="sub" style="margin:0 0 24px" id="escuelaTxt"></p>
-      <a class="btn" href="#equipos">Conoce nuestros equipos</a>
+  <section id="escuela"><div class="wrap xl">
+    <div class="esc">
+      <div class="et rv">
+        <span class="tag">Temporada 26/27</span>
+        <h2>La <span>escuela</span></h2>
+        <p id="escuelaTxt"></p>
+        <ul class="vals">
+          <li><b>01</b>Compañerismo</li>
+          <li><b>02</b>Esfuerzo</li>
+          <li><b>03</b>Respeto</li>
+        </ul>
+        <a class="btn" href="#equipos">Conoce nuestros equipos</a>
+      </div>
+      <figure class="ef e1 rv"><img src="Images/escuela-equipaciones.jpg" alt="Equipaciones de la temporada 26/27" loading="lazy"></figure>
+      <figure class="ef e2 rv"><img src="Images/escuela-equipo.jpg" alt="Equipo celebrando una victoria" loading="lazy"><figcaption><b>Se compite, se celebra</b>Cada partido cuenta</figcaption></figure>
+      <figure class="ef e3 rv"><img src="Images/escuela-porteria.jpg" alt="Plantilla posando bajo la portería" loading="lazy"><figcaption><b>Un solo equipo</b>De los más pequeños al primer equipo</figcaption></figure>
     </div>
-    <div class="ph rv" id="escuelaImg">Foto de la escuela</div>
-  </div></section>
+  </div>
+  <figure class="fam rv"><img src="Images/escuela-familia.jpg" alt="La familia del club reunida" loading="lazy">
+    <figcaption><div class="wrap xl"><b>Una gran familia</b><span>Cientos de jugadores, familias y entrenadores bajo un mismo escudo.</span></div></figcaption></figure>
+  </section>
 
   <section id="equipos" class="alt"><div class="wrap">
     <h2 class="rv">Nuestras <span>categorías</span></h2>
@@ -263,6 +312,7 @@ footer a{color:var(--ye);font-weight:700}
     <p class="sub rv">¿Quieres apuntarte, resolver una duda o colaborar con el club? Escríbenos y te respondemos lo antes posible.</p>
     <div class="info">
       <a class="btn" href="mailto:emtjfs@gmail.com?subject=Contacto%20desde%20la%20web">✉️ Escríbenos un email</a>
+      <a class="mail" href="mailto:emtjfs@gmail.com">emtjfs@gmail.com</a>
     </div>
   </div></section>
 </main>
@@ -275,8 +325,8 @@ footer a{color:var(--ye);font-weight:700}
   <div class="grid" id="catGrid"></div>
 </div></main>
 
-<footer><div class="wrap"><img class="fl" src="Images/escudo.png" alt=""><br>© <span id="yr"></span> Torrejón Juncal · Fútbol Sala ·
-
+<footer><div class="wrap"><img class="fl" src="escudo.png" alt=""><br>© <span id="yr"></span> Torrejón Juncal · Fútbol Sala ·
+  <a href="mailto:emtjfs@gmail.com">emtjfs@gmail.com</a> ·
   <a href="https://www.instagram.com/torrejonjuncal/" target="_blank" rel="noopener">@torrejonjuncal</a></div></footer>
 
 <script>
@@ -287,8 +337,8 @@ const CONFIG = {
   MAPS_URL: "https://www.google.com/maps/search/?api=1&query=Pabell%C3%B3n+Nuria+Fern%C3%A1ndez",
   MAP_EMBED: "https://www.google.com/maps?q=Pabell%C3%B3n+Nuria+Fern%C3%A1ndez&output=embed",
   HERO_IMG: "",       // URL de foto de portada (opcional)
-  ESCUELA_IMG: "",    // foto de la sección "La escuela"
   ESCUELA_TXT: "Somos una escuela de fútbol sala donde cada niño y niña aprende, compite y disfruta. Trabajamos valores como el compañerismo, el esfuerzo y el respeto, con entrenadores formados y un ambiente de familia.",
+
 
 
   /* PRÓXIMOS PARTIDOS: los guarda la sincronización de la RFFM en Firebase (campo "px"); aquí solo se leen */
@@ -298,12 +348,12 @@ const CONFIG = {
 
   STAFF_VISIBLE: 5,   // cuántas casillas se ven antes de pulsar "Todo nuestro cuerpo técnico"
   STAFF: [
-    {name:"Antonio", role:"Presidente", img:""},
-    {name:"Javier", role:"Director deportivo", img:""},
-    {name:"Jose", role:"Entrenador", img:""},
-    {name:"Alberto", role:"Entrenador", img:""},
-    {name:"Daniel", role:"Entrenador", img:""},
-    {name:"Iván", role:"Entrenador", img:""},
+    {name:"Nombre Apellido", role:"Presidente", img:"presidente.png"},
+    {name:"Nombre Apellido", role:"Entrenador primer equipo", img:""},
+    {name:"Nombre Apellido", role:"Entrenador cantera", img:""},
+    {name:"Nombre Apellido", role:"Preparador físico", img:""},
+    {name:"Nombre Apellido", role:"Cargo", img:""},
+    {name:"Nombre Apellido", role:"Cargo", img:""},
     {name:"Nombre Apellido", role:"Cargo", img:""},
     {name:"Nombre Apellido", role:"Cargo", img:""},
     {name:"Nombre Apellido", role:"Cargo", img:""},
@@ -312,16 +362,16 @@ const CONFIG = {
 
   /* url: enlace de esa categoría (resultados, clasificaciones...) */
   CATEGORIES: [
-    {name:"Aficionado A", age:"Preferente Aficionado", url:"Categorias/AficionadoA.html", img:"", target:"_self"},
-    {name:"Aficionado B", age:"Primera Aficionado", url:"Categorias/AficionadoB.html", img:"", target:"_self"},
-    {name:"Juvenil A", age:"Preferente Juvenil", url:"Categorias/JuvenilA.html", img:"", target:"_self"},
-    {name:"Juvenil B", age:"Primera Juvenil", url:"Categorias/JuvenilB.html", img:"", target:"_self"},
-    {name:"Cadete A", age:"Primera Cadete", url:"Categorias/CadeteA.html", img:"", target:"_self"},
-    {name:"Cadete B", age:"Primera Cadete", url:"Categorias/CadeteB.html", img:"", target:"_self"},
-    {name:"Infantil A", age:"Preferente Infantil", url:"Categorias/InfantilA.html", img:"", target:"_self"},
-    {name:"Infantil B", age:"Primera Infantil", url:"Categorias/InfantilB.html", img:"", target:"_self"},
-    {name:"Alevín A", age:"Alevín", url:"Categorias/AlevinA.html", img:"", target:"_self"},
-    {name:"Alevín B", age:"Alevín", url:"Categorias/AlevinB.html", img:"", target:"_self"}
+    {name:"Aficionado A", age:"Preferente Aficionado", url:"", img:""},
+    {name:"Aficionado B", age:"Primera Aficionado", url:"", img:""},
+    {name:"Juvenil A", age:"Preferente Juvenil", url:"", img:""},
+    {name:"Juvenil B", age:"Primera Juvenil", url:"", img:""},
+    {name:"Cadete A", age:"Primera Cadete", url:"", img:""},
+    {name:"Cadete B", age:"Primera Cadete", url:"", img:""},
+    {name:"Infantil A", age:"Preferente Infantil", url:"", img:""},
+    {name:"Infantil B", age:"Primera Infantil", url:"index.html", img:""},
+    {name:"Alevín A", age:"Alevín", url:"", img:""},
+    {name:"Alevín B", age:"Alevín", url:"", img:""}
   ]
 };
 
@@ -335,7 +385,6 @@ $("#yr").textContent=new Date().getFullYear();
 $("#mapsBtn").href=CONFIG.MAPS_URL; $("#mapFrame").src=CONFIG.MAP_EMBED;
 $("#escuelaTxt").textContent=CONFIG.ESCUELA_TXT;
 if(CONFIG.HERO_IMG)$("#heroBox").style.setProperty("--hero",`url('${CONFIG.HERO_IMG}')`);
-if(CONFIG.ESCUELA_IMG){$("#escuelaImg").style.backgroundImage=`url('${CONFIG.ESCUELA_IMG}')`;$("#escuelaImg").textContent=""}
 $("#heroBox").className="hero";
 
 // cabecera + menú móvil
@@ -370,7 +419,7 @@ addEventListener("keydown",e=>{if(e.key==="Escape")closeStaff()});
 const DIAS=["Domingo","Lunes","Martes","Miércoles","Jueves","Viernes","Sábado"],MESES=["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"];
 let MATCHES=[],matchesOpen=false;
 const iniciales=n=>String(n||"").split(/\s+/).filter(w=>w.length>1&&/^[A-Za-zÁÉÍÓÚÜÑáéíóúüñ]/.test(w)).map(w=>w[0]).join("").slice(0,2).toUpperCase();
-const escudoEq=(nombre,cod,mio)=>{const src=mio?"Images/escudo.png":cod?`Escudos/${encodeURIComponent(cod)}.png`:"";return `<i>${esc(iniciales(nombre))}</i>${src?`<img src="${src}" alt="" onerror="this.remove()">`:""}`};
+const escudoEq=(nombre,cod,mio)=>{const src=mio?"escudo.png":cod?`Escudos/${encodeURIComponent(cod)}.png`:"";return `<i>${esc(iniciales(nombre))}</i>${src?`<img src="${src}" alt="" onerror="this.remove()">`:""}`};
 function cartel(p){
   const d=new Date(p.fecha+"T12:00"),dia=DIAS[d.getDay()],fecha=`${String(d.getDate()).padStart(2,"0")} ${MESES[d.getMonth()]} ${d.getFullYear()}`,
     cat=String(p.categoria||"").toUpperCase(),liga=String(p.liga||"").toUpperCase(),loc=String(p.local||""),vis=String(p.visitante||""),
@@ -389,12 +438,11 @@ function renderMatches(){
   g.innerHTML=MATCHES.map((p,i)=>`<button type="button" class="fch" data-i="${i}" aria-label="${esc(p.categoria)}: ver la ficha ampliada">${cartel(p)}</button>`).join("");
   updateMatches()}
 function updateMatches(){
-  const cs=[...$("#matches").querySelectorAll(".fch")],n=innerWidth<=600?3:CONFIG.MATCH_VISIBLE,b=$("#moreMatches");
+  const cs=[...$("#matches").querySelectorAll(".fch")],n=CONFIG.MATCH_VISIBLE,b=$("#moreMatches");
   cs.forEach((c,i)=>c.classList.toggle("mx",!matchesOpen&&i>=n));
   b.style.display=cs.length>n?"":"none";
   b.textContent=matchesOpen?"Ver menos ↑":"Todos los partidos ↓";b.setAttribute("aria-expanded",matchesOpen)}
 $("#moreMatches").onclick=()=>{matchesOpen=!matchesOpen;updateMatches()};
-addEventListener("resize",updateMatches);
 function closeMatch(){const o=$("#fOv");if(o)o.remove();document.body.style.overflow=""}
 function openMatch(i){
   const p=MATCHES[i];if(!p)return;closeMatch();
@@ -422,8 +470,8 @@ document.addEventListener("visibilitychange",()=>{if(!document.hidden)loadMatche
 
 // categorías: una sola fila al principio; "Más categorías" despliega el resto en la misma página
 const catCard=c=>{
-  const inner=`<span class="age">${esc(c.age)}</span><h3>${esc(c.name)}</h3><span class="go">${c.url?"Resultados y clasificaciones":"Próximamente"}</span>`;
-  return c.url?`<a class="card cat" href="${esc(c.url)}" target="${esc(c.target||'_self')}">${inner}</a>`:`<div class="card cat sin">${inner}</div>`};
+  const inner=`<span class="age">${esc(c.age)}</span><h3>${esc(c.name)}</h3><span class="go">${c.url?"Resultados y clasificaciones →":"Próximamente"}</span>`;
+  return c.url?`<a class="card cat" href="${esc(c.url)}" target="_blank" rel="noopener">${inner}</a>`:`<div class="card cat sin">${inner}</div>`};
 $("#catHome").innerHTML=CONFIG.CATEGORIES.map(catCard).join("");
 $("#catGrid").innerHTML=CONFIG.CATEGORIES.map(catCard).join("");
 let catsOpen=false;

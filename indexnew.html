@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="icon" href="./Images/escudo.png">
+<link rel="icon" href="escudo.png">
 <title>Torrejón Juncal · Escuela de Fútbol Sala</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,600;0,700;0,800;1,700;1,800&family=Barlow:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -51,19 +51,25 @@ header .wrap{max-width:1280px}
 #burger{display:none;background:none;border:0;color:var(--navy);font-size:1.8rem;cursor:pointer}
 
 /* hero */
-.hero{min-height:100vh;display:flex;align-items:center;position:relative;overflow:hidden;background:transparent;padding-top:68px}
+.hero{min-height:100vh;display:flex;align-items:center;position:relative;overflow:hidden;background:transparent;padding:104px 0 44px}
 .hero::before{content:"";position:absolute;top:68px;left:0;right:0;bottom:0;z-index:0;
 background:linear-gradient(95deg,rgba(8,18,53,.55) 6%,rgba(8,18,53,.22) 40%,rgba(8,18,53,0) 62%),var(--hero,url('fondo-hero.jpg')) 85% 0/cover no-repeat;
 -webkit-mask-image:linear-gradient(180deg,#000 55%,transparent 100%);
 mask-image:linear-gradient(180deg,#000 55%,transparent 100%)}
-.hero .wrap{position:relative;z-index:2}
+.hero .wrap{position:relative;z-index:2;width:100%}
+#escuela{padding:0}
+.eh{display:flex;justify-content:space-between;align-items:flex-end;gap:24px 40px;flex-wrap:wrap;margin-bottom:34px}
+.eh .stats{margin-top:0}
+.eh h1{margin:12px 0 0}
+.eh{margin-bottom:26px!important}
 .hero::after{content:"";position:absolute;width:520px;height:520px;border-radius:50%;right:-120px;bottom:-160px;border:60px solid rgba(255,210,63,.2);animation:spin 20s linear infinite}
 @keyframes spin{to{transform:rotate(360deg) scale(1.1)}}
-.hero h1{font-size:clamp(3rem,8vw,6.5rem);font-weight:800;margin:14px 0 20px;color:#fff;text-shadow:var(--sh)}
+.hero h1{font-size:clamp(2.6rem,5vw,4.2rem);font-weight:800;margin:14px 0 20px;color:#fff;text-shadow:var(--sh)}
 .hero h1 em{font-style:normal;color:var(--ye);text-shadow:0 3px 0 #0f2a78,0 0 4px #0f2a78,0 0 18px rgba(8,18,53,.5)}
 .tag{display:inline-block;background:var(--ye);color:#0a0f1e;font-weight:800;padding:4px 14px;border-radius:6px;font-size:.8rem;letter-spacing:.1em;text-transform:uppercase;border:2px solid #0f2a78}
 .hero p{max-width:520px;color:#fff;text-shadow:var(--sh);font-size:1.1rem;margin-bottom:30px}
 .hero .btns{display:flex;gap:14px;flex-wrap:wrap}
+.hero .btn{text-shadow:none}
 .stats{display:flex;gap:40px;margin-top:56px;flex-wrap:wrap}
 .stats b{font-family:'Barlow Condensed';font-size:3rem;color:#fff;text-shadow:var(--sh);display:block;line-height:1}
 .stats small{color:#fff;text-shadow:var(--sh)}
@@ -98,13 +104,17 @@ button.card{font:inherit;color:inherit;text-align:center;padding:0;cursor:pointe
 .cb .l{color:var(--ye2);font-weight:600;font-size:.9rem;display:inline-block;margin-top:10px}
 
 /* escuela */
-.two{display:grid;grid-template-columns:1.05fr 1fr;gap:44px;align-items:stretch}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:36px;align-items:center}
+.kit.sq{aspect-ratio:1;min-height:0}
 .pil{display:grid;gap:12px}
-.pil .card{display:flex;gap:14px;align-items:center;padding:14px 16px}
+.pil .card{display:flex;gap:14px;align-items:center;padding:12px 16px}
 .pil .card:hover{transform:translateX(6px)}
+.cnt{display:flex;gap:6px 26px;margin-top:4px;color:var(--mu);font-size:.82rem}
+.cnt span{display:flex;flex-direction:column;line-height:1.1}
+.cnt b{font:800 1.7rem/1 'Barlow Condensed',sans-serif;color:var(--navy)}
 .pil i{flex:none;width:46px;height:46px;border-radius:14px;display:grid;place-items:center;background:var(--navy);color:var(--ye)}
 .pil h3{font-size:1.25rem;color:var(--navy);margin-bottom:2px}
-.pil p{color:var(--mu);font-size:.92rem;line-height:1.35}
+.pil p,.hero .pil p{color:var(--mu);font-size:.92rem;line-height:1.35;margin:0;max-width:none;text-shadow:none}
 .kit{position:relative;border-radius:22px;overflow:hidden;border:3px solid #fff;box-shadow:0 14px 40px rgba(8,18,53,.5);background:#03071a;min-height:340px}
 .kit img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 50%}
 
@@ -135,7 +145,7 @@ button.btn{font:inherit;font-weight:700;cursor:pointer}
 
 /* ===== Próximos partidos: fichas tipo cartel =====
    El texto se escala con el ancho de la ficha (cqw), así la ficha ampliada es idéntica a la pequeña. */
-#matches{grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+#matches{grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
 .mx{display:none!important}
 button.fch{display:block;width:100%;padding:0;border:0;background:none;cursor:pointer;border-radius:18px;overflow:hidden;box-shadow:0 8px 28px rgba(8,18,53,.4);transition:.25s}
 button.fch:hover{transform:translateY(-6px)}
@@ -166,7 +176,7 @@ button.fch:focus-visible{outline:3px solid var(--ye);outline-offset:3px}
 .fm{position:relative;width:min(92vw,calc(86vh*.982),680px);animation:stfPop .25s cubic-bezier(.2,1.3,.4,1) both}
 .fm .cartel{border-radius:20px;box-shadow:0 20px 60px rgba(0,0,0,.5);overflow:hidden}
 .fm .x{position:absolute;top:-14px;right:-14px;z-index:2;width:40px;height:40px;border-radius:50%;border:0;background:var(--ye);color:#0a0f1e;font-size:1.4rem;line-height:1;cursor:pointer}
-@media(max-width:600px){#matches{grid-template-columns:minmax(0,1fr)}}
+@media(max-width:600px){#matches{grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}button.fch{border-radius:10px}}
 
 footer{border-top:1px solid rgba(255,255,255,.35);padding:40px 0;color:#fff;text-shadow:var(--sh);text-align:center;font-size:.9rem}
 footer a{color:var(--ye);font-weight:700}
@@ -180,7 +190,7 @@ footer a{color:var(--ye);font-weight:700}
  .menu a.ig{width:auto;height:auto;border-radius:10px;padding:10px 16px!important;margin:6px 0 0;justify-content:flex-start}
  .menu a.ig span{display:inline}
  .two{grid-template-columns:1fr}
- .kit{min-height:0;aspect-ratio:4/5}
+ .kit{min-height:0;aspect-ratio:1}
  #burger{display:block}
  .menu{position:fixed;inset:68px 0 auto;background:#fff;flex-direction:column;padding:24px;display:none;border-bottom:1px solid var(--line)}
  .menu.o{display:flex}
@@ -195,7 +205,7 @@ footer a{color:var(--ye);font-weight:700}
 <div id="bg" aria-hidden="true"></div>
 
 <header id="hd"><div class="wrap"><nav>
-  <a href="#" class="logo"><img class="lg" src="./Images/escudo.png" alt="Escudo Torrejón Juncal">Torrejón <b>Juncal</b></a>
+  <a href="#" class="logo"><img class="lg" src="escudo.png" alt="Escudo Torrejón Juncal">Torrejón <b>Juncal</b></a>
   <button id="burger" aria-label="Menú">☰</button>
   <div class="menu" id="menu">
     <a href="#escuela">La escuela</a>
@@ -210,35 +220,24 @@ footer a{color:var(--ye);font-weight:700}
 
 <!-- ============ INICIO ============ -->
 <main id="home">
+  <section id="escuela">
   <div class="hero" id="heroBox"><div class="wrap">
-    <span class="tag">Escuela de fútbol sala</span>
-    <h1>Pasión por<br><em>el juego</em></h1>
-    <p>Formamos jugadores y personas. Entrenamos, competimos y disfrutamos juntos desde los más pequeños hasta el primer equipo.</p>
-    <div class="btns">
-      <a class="btn" href="#equipos">Ver categorías</a>
-      <a class="btn o" href="#donde">Dónde jugamos</a>
-    </div>
-    <div class="stats">
-      <div><b data-n="10">0</b><small>equipos</small></div>
-      <div><b data-n="150">0</b><small>jugadores</small></div>
-      <div><b data-n="20">0</b><small>entrenadores</small></div>
-    </div>
-  </div></div>
-
-
-  <section id="escuela"><div class="wrap two">
-    <div class="rv">
-      <h2>La <span>escuela</span></h2>
-      <p class="sub" style="margin:0 0 22px" id="escuelaTxt"></p>
+    <div class="two">
+      <div class="rv">
+        <h2>La <span>escuela</span></h2>
+        <p class="sub" style="margin:0 0 22px" id="escuelaTxt"></p>
       <div class="pil">
+        <div class="card pas"><i><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 2 4 14h7l-1 8 9-12h-7z"/></svg></i><div><h3>Pasión por el juego</h3><div class="cnt" id="stats"><span><b data-n="10">0</b>equipos</span><span><b data-n="150">0</b>jugadores</span><span><b data-n="20">0</b>entrenadores</span></div></div></div>
         <div class="card"><i><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8"/></svg></i><div><h3>Formamos personas</h3><p>Compañerismo, esfuerzo y respeto dentro y fuera de la pista.</p></div></div>
-        <div class="card"><i><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 21h8M12 17v4M7 4h10v5a5 5 0 0 1-10 0z"/><path d="M17 5h3v2a3 3 0 0 1-3 3M7 5H4v2a3 3 0 0 0 3 3"/></svg></i><div><h3>Competimos juntos</h3><p>Equipos desde los más pequeños hasta el primer equipo.</p></div></div>
+        <div class="card"><i><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 21h8M12 17v4M7 4h10v5a5 5 0 0 1-10 0z"/><path d="M17 5h3v2a3 3 0 0 1-3 3M7 5H4v2a3 3 0 0 0 3 3"/></svg></i><div><h3>Competimos juntos</h3><p>Ligas federadas desde Alevín hasta Aficionado.</p></div></div>
         <div class="card"><i><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-4.5-9-9.2C1.8 8.2 4 5 7.2 5c2 0 3.4 1 4.8 2.8C13.400 6 14.800 5 16.800 5 20 5 22.200 8.200 21 11.800 19 16.500 12 21 12 21z"/></svg></i><div><h3>Una gran familia</h3><p>Entrenadores formados y un ambiente en el que todos suman.</p></div></div>
       </div>
-      <p style="margin-top:22px"><a class="btn" href="#equipos">Conoce nuestros equipos</a></p>
+        <p style="margin-top:22px"><a class="btn" href="#equipos">Conoce nuestros equipos</a></p>
+      </div>
+      <div class="kit sq rv" id="kit"><img src="Images/escuela-equipaciones.jpg" alt="Equipaciones del Torrejón Juncal, temporada 26/27"></div>
     </div>
-    <div class="kit rv" id="kit"><img src="Images/escuela-equipaciones.jpg" alt="Equipaciones del Torrejón Juncal, temporada 26/27"></div>
-  </div></section>
+  </div></div>
+  </section>
 
   <section id="equipos" class="alt"><div class="wrap">
     <h2 class="rv">Nuestras <span>categorías</span></h2>
@@ -278,7 +277,6 @@ footer a{color:var(--ye);font-weight:700}
     <p class="sub rv">¿Quieres apuntarte, resolver una duda o colaborar con el club? Escríbenos y te respondemos lo antes posible.</p>
     <div class="info">
       <a class="btn" href="mailto:emtjfs@gmail.com?subject=Contacto%20desde%20la%20web">✉️ Escríbenos un email</a>
-      <a class="mail" href="mailto:emtjfs@gmail.com">emtjfs@gmail.com</a>
     </div>
   </div></section>
 </main>
@@ -292,7 +290,6 @@ footer a{color:var(--ye);font-weight:700}
 </div></main>
 
 <footer><div class="wrap"><img class="fl" src="escudo.png" alt=""><br>© <span id="yr"></span> Torrejón Juncal · Fútbol Sala ·
-  <a href="mailto:emtjfs@gmail.com">emtjfs@gmail.com</a> ·
   <a href="https://www.instagram.com/torrejonjuncal/" target="_blank" rel="noopener">@torrejonjuncal</a></div></footer>
 
 <script>
@@ -303,14 +300,13 @@ const CONFIG = {
   MAPS_URL: "https://www.google.com/maps/search/?api=1&query=Pabell%C3%B3n+Nuria+Fern%C3%A1ndez",
   MAP_EMBED: "https://www.google.com/maps?q=Pabell%C3%B3n+Nuria+Fern%C3%A1ndez&output=embed",
   HERO_IMG: "",       // URL de foto de portada (opcional)
-  ESCUELA_TXT: "Somos una escuela de fútbol sala donde cada niño y niña aprende, compite y disfruta. Trabajamos valores como el compañerismo, el esfuerzo y el respeto, con entrenadores formados y un ambiente de familia.",
+  ESCUELA_TXT: "Formamos jugadores y personas. Entrenamos, competimos y disfrutamos juntos desde los más pequeños hasta el primer equipo.",
 
 
 
   /* PRÓXIMOS PARTIDOS: los guarda la sincronización de la RFFM en Firebase (campo "px"); aquí solo se leen */
   FB_URL: "https://juncal-f0b64-default-rtdb.europe-west1.firebasedatabase.app",
   SEASON: "2026/27",
-  MATCH_VISIBLE: 4,   // fichas visibles antes de pulsar "Todos los partidos"
 
   STAFF_VISIBLE: 5,   // cuántas casillas se ven antes de pulsar "Todo nuestro cuerpo técnico"
   STAFF: [
@@ -328,16 +324,16 @@ const CONFIG = {
 
   /* url: enlace de esa categoría (resultados, clasificaciones...) */
   CATEGORIES: [
-    {name:"Aficionado A", age:"Preferente Aficionado", url:"", img:""},
-    {name:"Aficionado B", age:"Primera Aficionado", url:"", img:""},
-    {name:"Juvenil A", age:"Preferente Juvenil", url:"", img:""},
-    {name:"Juvenil B", age:"Primera Juvenil", url:"", img:""},
-    {name:"Cadete A", age:"Primera Cadete", url:"", img:""},
-    {name:"Cadete B", age:"Primera Cadete", url:"", img:""},
-    {name:"Infantil A", age:"Preferente Infantil", url:"", img:""},
-    {name:"Infantil B", age:"Primera Infantil", url:"index.html", img:""},
-    {name:"Alevín A", age:"Alevín", url:"", img:""},
-    {name:"Alevín B", age:"Alevín", url:"", img:""}
+    {name:"Aficionado A", age:"Preferente Aficionado", url:"Categorias/AficionadoA.html", img:""},
+    {name:"Aficionado B", age:"Primera Aficionado", url:"Categorias/AficionadoB.html", img:""},
+    {name:"Juvenil A", age:"Preferente Juvenil", url:"Categorias/JuvenilA.html", img:""},
+    {name:"Juvenil B", age:"Primera Juvenil", url:"Categorias/JuvenilB.html", img:""},
+    {name:"Cadete A", age:"Primera Cadete", url:"Categorias/CadeteA.html", img:""},
+    {name:"Cadete B", age:"Primera Cadete", url:"Categorias/CadeteB.html", img:""},
+    {name:"Infantil A", age:"Preferente Infantil", url:"Categorias/InfantilA.html", img:""},
+    {name:"Infantil B", age:"Primera Infantil", url:"Categorias/InfantilB.html", img:""},
+    {name:"Alevín A", age:"Alevín", url:"Categorias/AlevinA.html", img:""},
+    {name:"Alevín B", age:"Alevín", url:"Categorias/AlevinB.html", img:""}
   ]
 };
 
@@ -404,7 +400,7 @@ function renderMatches(){
   g.innerHTML=MATCHES.map((p,i)=>`<button type="button" class="fch" data-i="${i}" aria-label="${esc(p.categoria)}: ver la ficha ampliada">${cartel(p)}</button>`).join("");
   updateMatches()}
 function updateMatches(){
-  const cs=[...$("#matches").querySelectorAll(".fch")],n=CONFIG.MATCH_VISIBLE,b=$("#moreMatches");
+  const g=$("#matches"),cs=[...g.querySelectorAll(".fch")],n=getComputedStyle(g).gridTemplateColumns.split(" ").length,b=$("#moreMatches");
   cs.forEach((c,i)=>c.classList.toggle("mx",!matchesOpen&&i>=n));
   b.style.display=cs.length>n?"":"none";
   b.textContent=matchesOpen?"Ver menos ↑":"Todos los partidos ↓";b.setAttribute("aria-expanded",matchesOpen)}
@@ -431,13 +427,14 @@ async function loadMatches(){
   }catch(e){lista=MATCHES}
   const igual=JSON.stringify(lista)===JSON.stringify(MATCHES);
   MATCHES=lista;if(!igual||!$("#matches").children.length)renderMatches()}
+addEventListener("resize",()=>{if($("#matches").children.length&&MATCHES.length)updateMatches()});
 loadMatches();setInterval(loadMatches,5*60*1000);
 document.addEventListener("visibilitychange",()=>{if(!document.hidden)loadMatches()});
 
 // categorías: una sola fila al principio; "Más categorías" despliega el resto en la misma página
 const catCard=c=>{
-  const inner=`<span class="age">${esc(c.age)}</span><h3>${esc(c.name)}</h3><span class="go">${c.url?"Resultados y clasificaciones →":"Próximamente"}</span>`;
-  return c.url?`<a class="card cat" href="${esc(c.url)}" target="_blank" rel="noopener">${inner}</a>`:`<div class="card cat sin">${inner}</div>`};
+  const inner=`<span class="age">${esc(c.age)}</span><h3>${esc(c.name)}</h3>`;
+  return c.url?`<a class="card cat" href="${esc(c.url)}">${inner}</a>`:`<div class="card cat sin">${inner}</div>`};
 $("#catHome").innerHTML=CONFIG.CATEGORIES.map(catCard).join("");
 $("#catGrid").innerHTML=CONFIG.CATEGORIES.map(catCard).join("");
 let catsOpen=false;
@@ -457,7 +454,9 @@ addEventListener("hashchange",route);route();
 // contadores + reveal
 const io=new IntersectionObserver(es=>es.forEach(e=>{if(!e.isIntersecting)return;e.target.classList.add("in");io.unobserve(e.target)}),{threshold:.15});
 const mo=()=>document.querySelectorAll(".rv:not(.in)").forEach(el=>io.observe(el));mo();
-document.querySelectorAll("[data-n]").forEach(el=>{const n=+el.dataset.n;let v=0;const t=setInterval(()=>{v+=Math.ceil(n/40);if(v>=n){v=n;clearInterval(t)}el.textContent=v+(n>50?"+":"")},40)});
+const contar=el=>{const n=+el.dataset.n,t0=performance.now(),D=1800;(function f(t){const p=Math.min(1,(t-t0)/D),e=1-Math.pow(1-p,3);el.textContent=Math.round(n*e)+(p===1&&n>50?"+":"");if(p<1)requestAnimationFrame(f)})(t0)};
+const so=new IntersectionObserver(es=>es.forEach(e=>{if(!e.isIntersecting)return;e.target.querySelectorAll("[data-n]").forEach(contar);so.unobserve(e.target)}),{threshold:.3});
+document.querySelectorAll("#stats").forEach(el=>so.observe(el));
 </script>
 </body>
 </html>

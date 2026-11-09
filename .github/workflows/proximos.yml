@@ -1,0 +1,24 @@
+name: Próximos partidos
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "*/30 6-20 * * 1,2"    # lunes y martes: cada 30 min (salen los horarios)
+    - cron: "10 6-20 * * 0,3-6"    # resto de días: cada hora
+concurrency:
+  group: proximos-rffm
+  cancel-in-progress: false
+permissions:
+  contents: read
+jobs:
+  proximos:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 20 }
+      - run: node scripts/proximos.mjs
+        env:
+          FBKEY: ${{ secrets.FBKEY }}
+          FBMAIL: ${{ secrets.FBMAIL }}
+          FBPASS: ${{ secrets.FBPASS }}

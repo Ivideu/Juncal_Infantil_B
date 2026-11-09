@@ -849,6 +849,9 @@ if(location.hash=="#admin")unlock();try{if(sessionStorage.getItem("adm")){PW=ses
 if(API||FB)document.querySelector("#adm .on").remove();
 render();setInterval(tick,1000);
 let pc=0;setInterval(()=>{pc++;if(API&&!FB&&!E()&&(liveM()||pc%12==0))fetch(API+"?v="+Date.now(),{cache:"no-store"}).then(r=>r.json()).then(d=>{if(JSON.stringify(d)!==JSON.stringify(S)){S=d;fix();render()}}).catch(()=>{})},5000);
+/* Volver a la página anterior (si se abrió esta página directamente, va al inicio) */
+function volver(){if(history.length>1)history.back();else location.href="../../index.html#equipos"}
+render();setInterval(tick,1000);
 </script>
 </body>
 </html>

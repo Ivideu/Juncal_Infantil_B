@@ -6,7 +6,7 @@
 <link rel="icon" href="escudo.png">
 <title>Torrejón Juncal · Escuela de Fútbol Sala</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,600;0,700;0,800;1,700;1,800&family=Barlow:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
 :root{--bg:#0f2a78;--bg2:#ffffff;--card:rgba(255,255,255,.92);--line:#d5def5;--tx:#0f1b3d;--mu:#5a6a93;--ac:#2f7bff;--ye:#ffd23f;--ye2:#d97706;--navy:#0f2a6b;--sh:0 1px 4px rgba(8,18,53,.75),0 0 14px rgba(8,18,53,.45)}
 *{box-sizing:border-box;margin:0}
@@ -43,6 +43,8 @@ nav{display:flex;align-items:center;justify-content:space-between;height:68px}
 .menu{display:flex;gap:6px;align-items:center;font-weight:600;font-size:.95rem}
 .menu a:not(.btn){padding:10px 16px;border-radius:10px;font-size:1rem;color:var(--tx);transition:.2s}
 .menu a:not(.btn):hover{color:#0a0f1e;background:var(--ye)}
+.menu a.ig{display:flex;align-items:center;padding:10px 12px;color:var(--navy)}
+.menu a.ig:hover{color:#0a0f1e;background:var(--ye)}
 #burger{display:none;background:none;border:0;color:var(--navy);font-size:1.8rem;cursor:pointer}
 
 /* hero */
@@ -125,6 +127,42 @@ button.btn{font:inherit;font-weight:700;cursor:pointer}
 .news time{color:var(--ye2);font-size:.8rem;font-weight:700}
 .news p{display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
 
+
+/* ===== Próximos partidos: fichas tipo cartel =====
+   El texto se escala con el ancho de la ficha (cqw), así la ficha ampliada es idéntica a la pequeña. */
+#matches{grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+.mx{display:none!important}
+button.fch{display:block;width:100%;padding:0;border:0;background:none;cursor:pointer;border-radius:18px;overflow:hidden;box-shadow:0 8px 28px rgba(8,18,53,.4);transition:.25s}
+button.fch:hover{transform:translateY(-6px)}
+button.fch:focus-visible{outline:3px solid var(--ye);outline-offset:3px}
+.cartel{position:relative;container-type:inline-size;aspect-ratio:842/857;width:100%;background:#0f2a78 url('Images/ficha-base.jpg') center/100% 100% no-repeat;color:#fff;text-align:center;user-select:none;-webkit-user-select:none}
+.cartel>*{position:absolute;margin:0}
+.cartel .c-t,.cartel .c-l,.cartel .nm,.cartel .jor{font-family:'Barlow Condensed',sans-serif;font-style:italic;font-weight:800;text-transform:uppercase;line-height:1;paint-order:stroke fill}
+.cartel .c-t{left:15%;width:70%;top:21.5%;height:11%;display:flex;align-items:center;justify-content:center;white-space:nowrap;font-size:min(10cqw,calc(120cqw/var(--n)));color:var(--ye);-webkit-text-stroke:1.1cqw #0f2a78}
+.cartel .c-l{left:8%;width:84%;top:32.3%;height:5.4%;display:flex;align-items:center;justify-content:center;white-space:nowrap;font-weight:700;font-size:min(4.6cqw,calc(145cqw/var(--m)));color:var(--ye);-webkit-text-stroke:.7cqw #0f2a78}
+.cartel .eq{width:24.4%;aspect-ratio:1/1;border-radius:50%;background:#fff;border:1.2cqw solid #fff;box-shadow:0 0 0 .9cqw var(--ye),0 1cqw 3cqw rgba(0,0,0,.45);overflow:hidden;box-sizing:border-box;display:grid;place-items:center}
+.cartel .eq1{left:8.6%;top:38.2%}
+.cartel .eq2{left:67.1%;top:37.9%}
+.cartel .eq i{font:italic 800 8cqw/1 'Barlow Condensed',sans-serif;color:#0f2a78;font-style:normal}
+.cartel .eq img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;background:#fff}
+.cartel .nm{width:31%;top:62%;height:6.2%;display:flex;align-items:flex-start;justify-content:center;font-size:min(3.7cqw,calc(130cqw/var(--k)));color:#fff;-webkit-text-stroke:.7cqw #0f2a78;text-shadow:0 .3cqw .8cqw rgba(0,0,0,.6);overflow:hidden}
+.cartel .nm1{left:5.3%}
+.cartel .nm2{left:63.8%}
+.cartel .dia,.cartel .fec,.cartel .hor,.cartel .lug,.cartel .cf{font-family:Barlow,sans-serif;text-align:left;line-height:1;text-shadow:0 .3cqw .8cqw rgba(0,0,0,.55);white-space:nowrap}
+.cartel .dia{left:21.7%;top:66.6%;font-size:4.7cqw;font-weight:700}
+.cartel .fec{left:21.7%;top:71.6%;font-size:2.9cqw;font-weight:700}
+.cartel .hor{left:21.7%;top:74.3%;font-size:5cqw;font-weight:800;color:var(--ye)}
+.cartel .hor.s{font-size:3.3cqw;top:75%}
+.cartel .lug{left:61.2%;top:69%;width:35%;font-size:2.4cqw;font-weight:700;text-transform:uppercase;white-space:normal;line-height:1.15;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.cartel .cf{left:61.2%;top:74.4%;font-size:3.4cqw;font-weight:800;text-transform:uppercase;color:var(--ye)}
+.cartel .jor{left:5%;width:90%;top:80.6%;font-size:3.3cqw;font-weight:700;color:#fff;-webkit-text-stroke:.8cqw #0f2a78}
+/* ficha ampliada */
+#fOv{position:fixed;inset:0;z-index:100;display:flex;align-items:center;justify-content:center;padding:16px;background:rgba(8,18,53,.82);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);animation:stfIn .2s both}
+.fm{position:relative;width:min(92vw,calc(86vh*.982),680px);animation:stfPop .25s cubic-bezier(.2,1.3,.4,1) both}
+.fm .cartel{border-radius:20px;box-shadow:0 20px 60px rgba(0,0,0,.5);overflow:hidden}
+.fm .x{position:absolute;top:-14px;right:-14px;z-index:2;width:40px;height:40px;border-radius:50%;border:0;background:var(--ye);color:#0a0f1e;font-size:1.4rem;line-height:1;cursor:pointer}
+@media(max-width:600px){#matches{grid-template-columns:minmax(0,1fr)}}
+
 footer{border-top:1px solid rgba(255,255,255,.35);padding:40px 0;color:#fff;text-shadow:var(--sh);text-align:center;font-size:.9rem}
 footer a{color:var(--ye);font-weight:700}
 .rv{opacity:0;transform:translateY(30px);transition:.7s}
@@ -154,10 +192,13 @@ footer a{color:var(--ye);font-weight:700}
   <div class="menu" id="menu">
     <a href="#escuela">La escuela</a>
     <a href="#equipos">Categorías</a>
+    <a href="#partidos">Partidos</a>
     <a href="#tecnico">Cuerpo técnico</a>
-    <a href="#noticias">Noticias</a>
     <a href="#donde">Dónde jugamos</a>
     <a href="#contacto">Contacto</a>
+    <a class="ig" href="https://www.instagram.com/torrejonjuncal/" target="_blank" rel="noopener" aria-label="Instagram de Torrejón Juncal">
+      <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+    </a>
   </div>
 </nav></div></header>
 
@@ -177,6 +218,14 @@ footer a{color:var(--ye);font-weight:700}
       <div><b data-n="20">0</b><small>entrenadores</small></div>
     </div>
   </div></div>
+
+
+  <section id="partidos"><div class="wrap">
+    <h2 class="rv">Próximos <span>partidos</span></h2>
+    <p class="sub rv">El siguiente partido de cada categoría, con día, hora y pabellón. Se actualiza solo con los datos de la Federación.</p>
+    <div class="grid" id="matches"></div>
+    <p style="margin-top:22px"><button class="btn" id="moreMatches" type="button" aria-expanded="false" aria-controls="matches">Todos los partidos ↓</button></p>
+  </div></section>
 
   <section id="escuela"><div class="wrap two">
     <div class="rv">
@@ -264,6 +313,11 @@ const CONFIG = {
   NEWS_DAYS: 0,   // 0 = las últimas publicaciones sin límite de fecha; 14 = solo las de las últimas 2 semanas
   NEWS_COUNT: 6,
 
+  /* PRÓXIMOS PARTIDOS: los guarda la sincronización de la RFFM en Firebase (campo "px"); aquí solo se leen */
+  FB_URL: "https://juncal-f0b64-default-rtdb.europe-west1.firebasedatabase.app",
+  SEASON: "2026/27",
+  MATCH_VISIBLE: 4,   // fichas visibles antes de pulsar "Todos los partidos"
+
   STAFF_VISIBLE: 5,   // cuántas casillas se ven antes de pulsar "Todo nuestro cuerpo técnico"
   STAFF: [
     {name:"Nombre Apellido", role:"Presidente", img:"presidente.png"},
@@ -332,6 +386,60 @@ function openStaff(i){
 $("#staff").addEventListener("click",e=>{const c=e.target.closest(".stf");if(c)openStaff(+c.dataset.i)});
 addEventListener("keydown",e=>{if(e.key==="Escape")closeStaff()});
 
+
+
+// próximos partidos: una ficha tipo cartel por categoría con su siguiente partido
+const DIAS=["Domingo","Lunes","Martes","Miércoles","Jueves","Viernes","Sábado"],MESES=["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"];
+let MATCHES=[],matchesOpen=false;
+const iniciales=n=>String(n||"").split(/\s+/).filter(w=>w.length>1&&/^[A-Za-zÁÉÍÓÚÜÑáéíóúüñ]/.test(w)).map(w=>w[0]).join("").slice(0,2).toUpperCase();
+const escudoEq=(nombre,cod,mio)=>{const src=mio?"escudo.png":cod?`Escudos/${encodeURIComponent(cod)}.png`:"";return `<i>${esc(iniciales(nombre))}</i>${src?`<img src="${src}" alt="" onerror="this.remove()">`:""}`};
+function cartel(p){
+  const d=new Date(p.fecha+"T12:00"),dia=DIAS[d.getDay()],fecha=`${String(d.getDate()).padStart(2,"0")} ${MESES[d.getMonth()]} ${d.getFullYear()}`,
+    cat=String(p.categoria||"").toUpperCase(),liga=String(p.liga||"").toUpperCase(),loc=String(p.local||""),vis=String(p.visitante||""),
+    hora=p.hora||"Por confirmar",lug=p.campo||"Pabellón por confirmar";
+  return `<div class="cartel" role="img" aria-label="${esc(`${p.categoria}, ${dia} ${fecha}: ${loc} contra ${vis}, ${hora}, ${lug}`)}">
+    <div class="c-t" style="--n:${Math.max(cat.length,1)}">${esc(cat)}</div>
+    <div class="c-l" style="--m:${Math.max(liga.length,1)}">${esc(liga)}</div>
+    <span class="eq eq1">${escudoEq(loc,p.codLocal,p.casa)}</span><span class="eq eq2">${escudoEq(vis,p.codVisitante,!p.casa)}</span>
+    <div class="nm nm1" style="--k:${Math.max(loc.length,1)}">${esc(loc)}</div><div class="nm nm2" style="--k:${Math.max(vis.length,1)}">${esc(vis)}</div>
+    <div class="dia">${dia}</div><div class="fec">${fecha}</div><div class="hor${p.hora?"":" s"}">${esc(hora)}</div>
+    <div class="lug">${esc(lug)}</div><div class="cf">${p.casa?"Casa":"Fuera"}</div>
+    <div class="jor">Jornada ${esc(String(p.jornada))} • Temporada ${esc(p.temporada||CONFIG.SEASON)}</div></div>`}
+function renderMatches(){
+  const g=$("#matches"),b=$("#moreMatches");
+  if(!MATCHES.length){g.innerHTML=`<p class="sub" style="grid-column:1/-1;margin:0">Los próximos partidos aparecerán aquí en cuanto se publiquen las jornadas.</p>`;b.style.display="none";return}
+  g.innerHTML=MATCHES.map((p,i)=>`<button type="button" class="fch" data-i="${i}" aria-label="${esc(p.categoria)}: ver la ficha ampliada">${cartel(p)}</button>`).join("");
+  updateMatches()}
+function updateMatches(){
+  const cs=[...$("#matches").querySelectorAll(".fch")],n=CONFIG.MATCH_VISIBLE,b=$("#moreMatches");
+  cs.forEach((c,i)=>c.classList.toggle("mx",!matchesOpen&&i>=n));
+  b.style.display=cs.length>n?"":"none";
+  b.textContent=matchesOpen?"Ver menos ↑":"Todos los partidos ↓";b.setAttribute("aria-expanded",matchesOpen)}
+$("#moreMatches").onclick=()=>{matchesOpen=!matchesOpen;updateMatches()};
+function closeMatch(){const o=$("#fOv");if(o)o.remove();document.body.style.overflow=""}
+function openMatch(i){
+  const p=MATCHES[i];if(!p)return;closeMatch();
+  const o=document.createElement("div");o.id="fOv";o.setAttribute("role","dialog");o.setAttribute("aria-modal","true");o.setAttribute("aria-label",p.categoria);
+  o.innerHTML=`<div class="fm"><button class="x" type="button" aria-label="Cerrar">×</button>${cartel(p)}</div>`;
+  o.onclick=e=>{if(e.target===o||e.target.classList.contains("x"))closeMatch()};
+  document.body.appendChild(o);document.body.style.overflow="hidden";o.querySelector(".x").focus()}
+$("#matches").addEventListener("click",e=>{const c=e.target.closest(".fch");if(c)openMatch(+c.dataset.i)});
+addEventListener("keydown",e=>{if(e.key==="Escape")closeMatch()});
+async function loadMatches(){
+  let lista=[];
+  try{
+    const raw=await (await fetch(CONFIG.FB_URL+"/juncal.json",{cache:"no-store"})).json();
+    const S=typeof raw==="string"?JSON.parse(raw):(raw||{}),px=S.px||{};
+    // se ocultan los partidos que terminaron hace más de 3 horas (por si la sincronización va con retraso)
+    const ahora=Date.now();
+    lista=(px.partidos||[]).filter(p=>p&&p.fecha&&Date.parse(p.fecha+"T"+(p.hora||"23:59"))+3*36e5>ahora)
+      .map(p=>({...p,temporada:p.temporada||px.temporada}))
+      .sort((a,b)=>(a.fecha+(a.hora||"99:99")).localeCompare(b.fecha+(b.hora||"99:99")));
+  }catch(e){lista=MATCHES}
+  const igual=JSON.stringify(lista)===JSON.stringify(MATCHES);
+  MATCHES=lista;if(!igual||!$("#matches").children.length)renderMatches()}
+loadMatches();setInterval(loadMatches,5*60*1000);
+document.addEventListener("visibilitychange",()=>{if(!document.hidden)loadMatches()});
 
 // categorías: una sola fila al principio; "Más categorías" despliega el resto en la misma página
 const catCard=c=>{

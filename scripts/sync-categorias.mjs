@@ -4,7 +4,10 @@
 //   · cfg: equipos (T), CodEquipo (COD), calendario (R), equipo propio (equipo), nombre y liga. Se construye solo desde la RFFM
 //   · m:   fecha, hora, pabellón y resultado de TODOS los partidos
 // Lo lee Categorias/<Categoria>/<Categoria>.html (formato de InfantilA.html)
-import { readFileSync } from "node:fs";
+import fs from "node:fs";
+import path from "node:path";
+import { fileURLToPath } from "node:url";
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const FB = "https://juncal-f0b64-default-rtdb.europe-west1.firebasedatabase.app";
 const SALTAR = ["infantil-b"];            // categorías con su propia sincronización (admin + directo)
 const MAXJOR = 60;
@@ -179,7 +182,7 @@ function aplicar(S, lectura, cat) {
 }
 
 // ---------- Main ----------
-const cats = JSON.parse(readFileSync(process.env.CATEGORIAS || "categorias.json", "utf8")).categorias
+const cats = conf.categorias
   .filter(c => c.grupo && !SALTAR.includes(c.id) && c.activa !== false && (!SOLO || c.id === SOLO));
 if (!cats.length) { console.log("No hay categorías activas para sincronizar"); process.exit(0); }
 console.log("Categorías:", cats.map(c => c.id).join(", "));

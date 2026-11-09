@@ -13,8 +13,8 @@
 <meta name="apple-mobile-web-app-title" content="Juncal_Inf.B">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <link rel="icon" type="image/png" href="../../Images/icon-192.png">
-   <link rel="stylesheet" href="../../bloque.css">
-   <link rel="stylesheet" href="../../efecto3d.css">
+   <link rel="stylesheet" href="../../css/bloque.css">
+   <link rel="stylesheet" href="../../css/efecto3d.css">
  <!--  <script src="efecto3d.js"></script>-->
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
@@ -342,7 +342,7 @@ header.site-banner {
   overflow: hidden;
   border-radius: 16px;
   background-color: #050b1f;
-  background-image: linear-gradient(180deg, transparent 65%, rgba(5, 11, 31, .45) 100%), url('./cabecera-juncal.jpg');
+  background-image: linear-gradient(180deg, transparent 65%, rgba(5, 11, 31, .45) 100%), url('../../Images/cabecera-juncal.jpg');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -407,7 +407,7 @@ header.site-banner .dl {
 <div class="wrap">
 <header class="site-banner">
  <div><h1 id="tt" aria-label="Torrejón Juncal B. Haz cinco clics para abrir el acceso de administración">Escuela Torrejón Juncal B</h1><small>Primera Infantil FS · Grupo 2 · Temporada 2026-27</small></div>
- <!--<a class="dl" id="dl" href="descarga.html">📲 Descargar app</a>-->
+ <!--<a class="dl" id="dl" href="../../descarga.html">📲 Descargar app</a>-->
 </header>
 <script>if(window.Capacitor||navigator.standalone)document.getElementById("dl").style.display="none"</script>
 <script>/* Avisos push: solo dentro de la app Android */
@@ -446,7 +446,7 @@ const isOff=p=>!!(S.off&&S.off[p]);
 let CACHE=null;try{CACHE=JSON.parse(localStorage.getItem("juncalB"))}catch(e){}
 if(!API&&CACHE)S=CACHE;fix();let loading=!!(API||FB);
 let PW="",pt;const setSt=t=>{document.getElementById("st").textContent=t};
-if(!FB)fetch(API?API+"?v="+Date.now():"datos.json?v="+Date.now(),{cache:"no-store"}).then(r=>r.json()).then(d=>{if(API||(d.u||0)>S.u){S=d;fix()}loading=false;render()}).catch(()=>{if(API&&CACHE){S=CACHE;fix()}loading=false;render()});
+if(!FB)fetch(API?API+"?v="+Date.now():"../../datos.json?v="+Date.now(),{cache:"no-store"}).then(r=>r.json()).then(d=>{if(API||(d.u||0)>S.u){S=d;fix()}loading=false;render()}).catch(()=>{if(API&&CACHE){S=CACHE;fix()}loading=false;render()});
 let idt="",exp=0,lastRaw="";
 async function fbLogin(pw){const r=await fetch("https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key="+FBKEY,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({email:FBMAIL,password:pw,returnSecureToken:true})}),d=await r.json();if(!d.idToken)return false;idt=d.idToken;exp=Date.now()+(d.expiresIn-120)*1000;return true}
 async function fbTok(){if(idt&&Date.now()<exp)return idt;if(!await fbLogin(PW))throw 0;return idt}
@@ -473,7 +473,7 @@ const newTest=()=>({c:{ph:0,run:false,base:0,s:Date.now()}});
 function toggleTest(){if(!E())return;TS.on=!TS.on;if(TS.on&&!TS.m["0_"+ME])TS.m["0_"+ME]=newTest();render()}
 function resetTest(){if(!confirm("¿Vaciar el partido de prueba?"))return;TS.m={};TS.m["0_"+ME]=newTest();render()}
 const done=m=>m.h!==undefined&&m.h!==""&&m.a!==undefined&&m.a!=="";
-const bd=id=>{if(!id)return`<span class="b" style="background:#334">💤</span>`;const n=T[id][0].split(" ").map(w=>w[0]).join("").slice(0,2).toUpperCase();return`<span class="b" style="background:${id==ME?'#2f7bff':`hsl(${id*47%360} 55% 38%)`}">${n}${COD[id]?`<img src="Escudos/${COD[id]}.png" alt="" onload="this.parentNode.classList.add('ok')" onerror="this.remove()">`:""}</span>`};
+const bd=id=>{if(!id)return`<span class="b" style="background:#334">💤</span>`;const n=T[id][0].split(" ").map(w=>w[0]).join("").slice(0,2).toUpperCase();return`<span class="b" style="background:${id==ME?'#2f7bff':`hsl(${id*47%360} 55% 38%)`}">${n}${COD[id]?`<img src="../../Escudos/${COD[id]}.png" alt="" onload="this.parentNode.classList.add('ok')" onerror="this.remove()">`:""}</span>`};
 const nm=id=>id?T[id][0]:"Descansa";
 function save(t){if(t){render();return}S.u=Date.now();try{localStorage.setItem("juncalB",JSON.stringify(S))}catch(e){}if((API||FB)&&PW)push();render()}
 function ed(j,h,f,v){const m=S.m[j+"_"+h]||(S.m[j+"_"+h]={});if(v==="")delete m[f];else m[f]=v;save()}
@@ -701,7 +701,7 @@ function renderCopa(){
  return h+`<div class="bkt">`+rs.map(g=>`<div class="bkc"><h3>${esc(g.rd)}</h3>${g.l.map((x,i)=>card(x.r,x.h,x.a,i)+(E()?`<p style="text-align:center;margin:-6px 0 12px"><button onclick="delC(${x.r.n-100})">Eliminar partido</button></p>`:"")).join("")}</div>`).join("")+`</div>`}
 
 /* ===== Cromos y convocatoria ===== */
-const CROMOS_DIR="Cromos/";
+const CROMOS_DIR="../../Cromos/";
 const CROMOS_FILES=["Alex_10_ala.png","Edu_11_ala.png","Diego_3_ala.png","Erik_5_pivot.png","Gabriel_15_ala.png","Hector_18_ala.png","Ivan_entrenador.png","Izan_7_pivot.png","Javi_entrenador.png","Joel_8_ala.png","Manu_2_cierre.png","Marcos_13_portero.png","Nico_6_cierre.png","Pablo_89_portero.png","Pedro_28_ala.png","Ruben_1_portero.png"];
 const POSN={ala:"Ala",pivot:"Pívot",cierre:"Cierre",portero:"Portero",entrenador:"Entrenador"};
 // Nombre_dorsal_posicion.png  ·  Nombre_entrenador.png
@@ -819,7 +819,7 @@ let ck=0,ct;document.getElementById("tt").onclick=()=>{clearTimeout(ct);ct=setTi
 async function publish(){const j=JSON.stringify(S,null,1);try{await navigator.clipboard.writeText(j)}catch(e){}
  if(!location.hostname.endsWith("github.io")){exportD();return alert("Se ha descargado datos.json. Súbelo a la raíz de tu repositorio de GitHub.")}
  const u=location.hostname.replace(".github.io",""),sg=location.pathname.split("/")[1]||"",r=sg&&!sg.includes(".")?sg:u+".github.io";
- let ex=true;try{ex=(await fetch("datos.json?v="+Date.now(),{cache:"no-store"})).ok}catch(e){}
+ let ex=true;try{ex=(await fetch("../../datos.json?v="+Date.now(),{cache:"no-store"})).ok}catch(e){}
  window.open(`https://github.com/${u}/${r}/${ex?"edit/main/datos.json":"new/main?filename=datos.json"}`,"_blank");
  alert("Datos copiados. En la página de GitHub: selecciona todo (Ctrl+A), pega (Ctrl+V) y pulsa «Commit changes».")}
 async function syncNow(){

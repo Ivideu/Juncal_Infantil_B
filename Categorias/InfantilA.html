@@ -120,7 +120,7 @@ tr.me td{background:#2f7bff26;font-weight:700}
 /* =====================================================================
    CONFIGURACIÓN DE LA CATEGORÍA (de categorias.json)
    ===================================================================== */
-const CAT={nombre:"Torrejón Juncal A",liga:"Preferente Infantil FS · Grupo 2",grupo:"26738251",equipo:"18377726",node:"juncalInfA"};
+const CAT={nombre:"Torrejón Juncal A",liga:"Preferente Infantil FS · Grupo 2",grupo:"26738251",equipo:"18377726",node:"cat-infantil-a"};
 const FB="https://juncal-f0b64-default-rtdb.europe-west1.firebasedatabase.app";
 /* Datos que llegan de la sincronización con la RFFM (Firebase, nodo CAT.node), en el mismo formato que Infantil B:
    S.cfg = {T:{id:[nombre,pabellón]}, COD:{id:CodEquipo}, R:["dd-mm-aaaa|local-visitante,..."]}
@@ -129,7 +129,7 @@ let S={u:0,m:{}},T={},COD={},J=[],ME=0,loading=true,tab="jor",jn=1,jnAuto=true;
 try{const c=JSON.parse(localStorage.getItem("juncalA"));if(c&&c.u){S=c;loading=false}}catch(e){}
 function cfg(){const c=S.cfg||{};S.m=S.m||{};T=c.T||{};COD=c.COD||{};
  J=(c.R||[]).map((s,i)=>{const[d,p]=s.split("|");return{n:i+1,d:d.split("-").reverse().join("-"),p:p.split(",").map(x=>x.split("-").map(Number))}});
- ME=+Object.keys(COD).find(k=>String(COD[k])===CAT.equipo)||0}
+ ME=+Object.keys(COD).find(k=>String(COD[k])===String(c.equipo||CAT.equipo))||0}
 cfg();
 function apply(n){S=n;cfg();loading=false;try{localStorage.setItem("juncalA",JSON.stringify(S))}catch(e){}render()}
 (function(){const l=document.createElement("link");l.rel="preconnect";l.href=FB;document.head.appendChild(l);

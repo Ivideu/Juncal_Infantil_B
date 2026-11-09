@@ -1,5 +1,5 @@
 // scripts/proximos.mjs — Node 20, sin dependencias
-// Recorre cada categoría de scripts/categorias.json en la RFFM, busca el siguiente partido del club
+// Recorre cada categoría de categorias.json en la RFFM, busca el siguiente partido del club
 // y lo guarda en Firebase (campo "px" de los datos) para las fichas de "Próximos partidos" de la portada.
 // No toca partidos, resultados ni goleadores del Infantil B: solo añade/actualiza "px".
 import fs from "node:fs";
@@ -14,9 +14,26 @@ const { FBKEY, FBMAIL, FBPASS } = process.env;
 const AHORA = Number(process.env.AHORA_MS) || Date.now();
 const sleep = ms => process.env.SIN_PAUSAS ? Promise.resolve() : new Promise(r => setTimeout(r, ms));
 
-// Carga robusta del archivo de configuración desde la misma carpeta del script
-const confPath = path.join(__dirname, "categorias.json");
-const conf = JSON.parse(fs.readFileSync(confPath, "utf8"));
+// Carga robusta con respaldo (busca en la carpeta scripts/ o en la raíz si fuera necesario)
+function cargarConfig() {
+  const rutasCandidatas = [
+    path.join(__dirname, "categorias.json"),
+    path.join(__dirname, "..", "categorias.json")
+  ];
+  for (const r of rutasCandidatas) {
+    try {
+      if (fs.existsSync(r)) {
+        return JSON.parse(fs.readFileSync(r, "utf8"));
+      }
+    } catch (e) {
+      // Ignorar y probar la siguiente
+    }
+  }
+  console.error("Error crítico: No se encuentra el archivo categorias.json en ninguna ruta conocida.");
+  process.exit(1);
+}
+
+const conf = cargarConfig();
 
 const iso = f => { const k = String(f || "").match(/^(\d{2})[-/](\d{2})[-/](\d{4})/); return k ? `${k[3]}-${k[2]}-${k[1]}` : ""; };
 const limpiaCampo = s => String(s || "").replace(/\s*\(futbol sala\)\s*/i, " ").replace(/\s+/g, " ").trim();
@@ -110,7 +127,7 @@ for (let intento = 0; intento < 4; intento++) {
   if (actual === JSON.stringify(lista) && S.px?.temporada === conf.temporada) { console.log("Sin cambios"); break; }
   S.px = { actualizado: new Date(AHORA).toISOString(), temporada: conf.temporada, partidos: lista };
   S.u = Date.now();
-  // PUT condicional: si alguien escribió mientras tanto (tú desde el admin o la otra sincronización), Firebase responde 412 y reintentamos
+  // PUT condicional: si alguien escribió mientras tanto, Firebase responde 412 y reintentamos
   const p = await fetch(`${FB}/juncal.json?auth=${tok}`, { method: "PUT", headers: etag ? { "if-match": etag } : {}, body: JSON.stringify(JSON.stringify(S)) });
   if (p.ok) { console.log("Próximos partidos guardados:", lista.length); break; }
   if (p.status === 412) { console.warn("Conflicto de escritura, reintentando…"); await sleep(1000); continue; }

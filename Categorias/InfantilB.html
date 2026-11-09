@@ -454,7 +454,8 @@ header.site-banner .dl {
 <script>
 (function(){const b=document.getElementById("bg");for(let i=0;i<9;i++){const e=document.createElement("b");e.textContent="⚽";e.style.cssText="left:"+((i*11+Math.random()*8)%100)+"%;font-size:"+(22+Math.random()*34)+"px;animation-duration:"+(18+Math.random()*20)+"s;animation-delay:-"+(Math.random()*30)+"s";b.appendChild(e)}})();
 const ME=10;
-const COPA=false; // PONER EN TRUE SI HAY COPA, FALSE SI SOLO LIGA
+const COPA=false; // pon true para que todos vean la pestaña Copa (el entrenador siempre la ve)
+const GH_USER="Ivideu",GH_REPO="Juncal_Infantil_B";
 const T={2:["Aston C","P.M. San Blas, Madrid"],3:["Lope de Vega","P.M. Emperador Fernando, Alcalá de Henares"],4:["Torrejón Five Play","Pab. Jorge Garbajosa, Torrejón de Ardoz"],5:["Rivas Atlantis B","Polideportivo Parque Sureste, Rivas"],6:["Rivas Futsal B","Polideportivo Parque Sureste, Rivas"],7:["Malvar","C.D. Príncipe Felipe, C/ San Sebastián, 6 y 8, Arganda del Rey"],8:["Fusión San Fernando","P.M. Justo Gómez Salto, San Fernando de Henares"],9:["Diagonal C","P.M. El Nido, Parla"],10:["Juncal B","P.M. Nuria Fernández, Torrejón de Ardoz"],11:["Sporting Morata","P.M. Morata de Tajuña"],12:["Limones 5 B","P.M. Joaquín Blume, Torrejón de Ardoz"]};
 T[99]=["Equipo de prueba","P.M. Nuria Fernández, Torrejón de Ardoz"];
 const COD={2:24116776,3:27916794,4:17175596,5:18925059,6:17155533,7:18753107,8:26753258,9:27111405,10:24193914,11:26750489,12:21455532};
@@ -609,8 +610,7 @@ async function avisoPush(j,h,a){
    tema=j===0?"pruebas":"juncal",pre=j===0?"🧪 PRUEBA · ":"",
    titulo=pre+(a=="go1"?"⚽ Empieza el partido":a=="ht"?"🔔 Descanso":"🏁 Final del partido"),
    sc=a=="go1"?`Empieza el partido contra ${rv}, ¡VAMOS JUNCAL!!!`:a=="ht"?`Vamos ${est} contra ${rv}, ${us}-${th}. ¡ÁNIMO JUNCAL!!`:`Hemos quedado ${us}-${th} contra un gran rival. ¡GRAN PARTIDO JUNCAL!!!`;
-  if(!location.hostname.endsWith("github.io"))return;
-  const u=location.hostname.replace(".github.io",""),sg=location.pathname.split("/")[1]||"",r=sg&&!sg.includes(".")?sg:u+".github.io";
+  const u=GH_USER,r=GH_REPO;
   let tk="";try{tk=localStorage.getItem("ghtk")||""}catch(e){}
   if(!tk){tk=(prompt("Para enviar los avisos de descanso y final, pega tu token de GitHub (solo se guarda en este dispositivo):")||"").trim();if(!tk){setSt("⚠ Aviso no enviado: falta el token de GitHub");return}}
   const x=await fetch(`https://api.github.com/repos/${u}/${r}/actions/workflows/aviso.yml/dispatches`,{method:"POST",headers:{Authorization:"Bearer "+tk,Accept:"application/vnd.github+json","X-GitHub-Api-Version":"2022-11-28"},body:JSON.stringify({ref:"main",inputs:{titulo,texto:sc,tema}})});
@@ -877,14 +877,12 @@ function setEdit(on){
 }
 let ck=0,ct;document.getElementById("tt").onclick=()=>{clearTimeout(ct);ct=setTimeout(()=>ck=0,900);if(++ck>=5){ck=0;unlock()}};
 async function publish(){const j=JSON.stringify(S,null,1);try{await navigator.clipboard.writeText(j)}catch(e){}
- if(!location.hostname.endsWith("github.io")){exportD();return alert("Se ha descargado datos.json. Súbelo a la raíz de tu repositorio de GitHub.")}
- const u=location.hostname.replace(".github.io",""),sg=location.pathname.split("/")[1]||"",r=sg&&!sg.includes(".")?sg:u+".github.io";
+ const u=GH_USER,r=GH_REPO;
  let ex=true;try{ex=(await fetch("../../datos.json?v="+Date.now(),{cache:"no-store"})).ok}catch(e){}
  window.open(`https://github.com/${u}/${r}/${ex?"edit/main/datos.json":"new/main?filename=datos.json"}`,"_blank");
  alert("Datos copiados. En la página de GitHub: selecciona todo (Ctrl+A), pega (Ctrl+V) y pulsa «Commit changes».")}
 async function syncNow(){
- if(!location.hostname.endsWith("github.io"))return alert("Esta función solo funciona desde la web publicada en github.io");
- const u=location.hostname.replace(".github.io",""),sg=location.pathname.split("/")[1]||"",r=sg&&!sg.includes(".")?sg:u+".github.io";
+ const u=GH_USER,r=GH_REPO;
  let tk="";try{tk=localStorage.getItem("ghtk")||""}catch(e){}
  if(!tk){tk=(prompt("Pega tu token de GitHub (solo se guarda en este navegador):")||"").trim();if(!tk)return}
  setSt("Lanzando actualización…");

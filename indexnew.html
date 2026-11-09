@@ -156,6 +156,7 @@ button.fch:focus-visible{outline:3px solid var(--ye);outline-offset:3px}
 .fm{position:relative;width:min(92vw,calc(86vh*.982),680px);animation:stfPop .25s cubic-bezier(.2,1.3,.4,1) both}
 .fm .cartel{border-radius:20px;box-shadow:0 20px 60px rgba(0,0,0,.5);overflow:hidden}
 .fm .x{position:absolute;top:-14px;right:-14px;z-index:2;width:40px;height:40px;border-radius:50%;border:0;background:var(--ye);color:#0a0f1e;font-size:1.4rem;line-height:1;cursor:pointer}
+@media(max-width:600px){#matches{grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}}
 
 footer{border-top:1px solid rgba(255,255,255,.35);padding:40px 0;color:#fff;text-shadow:var(--sh);text-align:center;font-size:.9rem}
 footer a{color:var(--ye);font-weight:700}
@@ -388,11 +389,12 @@ function renderMatches(){
   g.innerHTML=MATCHES.map((p,i)=>`<button type="button" class="fch" data-i="${i}" aria-label="${esc(p.categoria)}: ver la ficha ampliada">${cartel(p)}</button>`).join("");
   updateMatches()}
 function updateMatches(){
-  const cs=[...$("#matches").querySelectorAll(".fch")],n=CONFIG.MATCH_VISIBLE,b=$("#moreMatches");
+  const cs=[...$("#matches").querySelectorAll(".fch")],n=innerWidth<=600?3:CONFIG.MATCH_VISIBLE,b=$("#moreMatches");
   cs.forEach((c,i)=>c.classList.toggle("mx",!matchesOpen&&i>=n));
   b.style.display=cs.length>n?"":"none";
   b.textContent=matchesOpen?"Ver menos ↑":"Todos los partidos ↓";b.setAttribute("aria-expanded",matchesOpen)}
 $("#moreMatches").onclick=()=>{matchesOpen=!matchesOpen;updateMatches()};
+addEventListener("resize",updateMatches);
 function closeMatch(){const o=$("#fOv");if(o)o.remove();document.body.style.overflow=""}
 function openMatch(i){
   const p=MATCHES[i];if(!p)return;closeMatch();

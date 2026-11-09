@@ -1,7 +1,4 @@
 // scripts/proximos.mjs — Node 20, sin dependencias
-// Recorre cada categoría de categorias.json en la RFFM, busca el siguiente partido del club
-// y lo guarda en Firebase (campo "px" de los datos) para las fichas de "Próximos partidos" de la portada.
-// No toca partidos, resultados ni goleadores del Infantil B: solo añade/actualiza "px".
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
@@ -14,22 +11,28 @@ const { FBKEY, FBMAIL, FBPASS } = process.env;
 const AHORA = Number(process.env.AHORA_MS) || Date.now();
 const sleep = ms => process.env.SIN_PAUSAS ? Promise.resolve() : new Promise(r => setTimeout(r, ms));
 
-// Carga robusta con respaldo (busca en la carpeta scripts/ o en la raíz si fuera necesario)
+// Búsqueda exhaustiva y segura de categorias.json en múltiples rutas posibles
 function cargarConfig() {
   const rutasCandidatas = [
-    path.join(__dirname, "categorias.json"),
-    path.join(__dirname, "..", "categorias.json")
+    path.join(__dirname, "categorias.json"),                 // scripts/categorias.json
+    path.join(__dirname, "..", "categorias.json"),             // /categorias.json (raíz)
+    path.resolve(process.cwd(), "scripts", "categorias.json"), // cwd/scripts/categorias.json
+    path.resolve(process.cwd(), "categorias.json")             // cwd/categorias.json
   ];
+
   for (const r of rutasCandidatas) {
     try {
       if (fs.existsSync(r)) {
+        console.log(`Configuración cargada correctamente desde: ${r}`);
         return JSON.parse(fs.readFileSync(r, "utf8"));
       }
     } catch (e) {
-      // Ignorar y probar la siguiente
+      // Ignorar error de lectura individual y probar la siguiente
     }
   }
-  console.error("Error crítico: No se encuentra el archivo categorias.json en ninguna ruta conocida.");
+
+  console.error("Error crítico: No se encuentra categorias.json en ninguna de estas rutas probadas:");
+  rutasCandidatas.forEach(r => console.error(` - ${r}`));
   process.exit(1);
 }
 
@@ -69,19 +72,19 @@ const esVisit = (c, p) => c.equipo ? String(p.CodEquipo_visitante) === String(c.
 
 // Siguiente partido del club en esa categoría. Devuelve {partido}, null (no quedan partidos) o {error:true} (RFFM no responde)
 async function siguiente(c, previo) {
-  const ini = Math.max(1, previo && previo.jornada ? previo.jornada - 1 : 1);   // las jornadas pasadas no se vuelven a leer
+  const ini = Math.max(1, previo && previo.jornada ? previo.jornada - 1 : 1);
   let seguidos = 0, leidas = 0;
   for (let r = ini; r < ini + 45; r++) {
     const d = await rffm(c.grupo, r);
     if (!d) { if (++seguidos >= 2) return leidas ? null : { error: true }; continue; }
     seguidos = 0;
-    if (!d.partidos.length) break;                       // se acabaron las jornadas
+    if (!d.partidos.length) break;
     leidas++;
     const p = d.partidos.find(q => esLocal(c, q) || esVisit(c, q));
-    if (!p) { await sleep(1200); continue; }             // el equipo descansa esa jornada
+    if (!p) { await sleep(1200); continue; }
     const fecha = iso(p.fecha), hora = (p.hora || "").slice(0, 5);
-    if (!fecha) { await sleep(1200); continue; }         // sin fecha todavía
-    if (madrid(fecha, hora || "23:59") + 3 * 36e5 < AHORA) { await sleep(1200); continue; }   // ya jugado
+    if (!fecha) { await sleep(1200); continue; }
+    if (madrid(fecha, hora || "23:59") + 3 * 36e5 < AHORA) { await sleep(1200); continue; }
     const casa = esLocal(c, p);
     console.log(`  ${c.nombre}: jornada ${r}, ${p.Nombre_equipo_local} - ${p.Nombre_equipo_visitante}, ${fecha} ${hora}`);
     return { partido: {
@@ -113,7 +116,7 @@ const tok = await login();
 const previos = (await leer(tok)).S.px?.partidos || [];
 const lista = [];
 for (const c of conf.categorias) {
-  if (!c.grupo) continue;                                // categoría sin activar
+  if (!c.grupo) continue;
   const ant = previos.find(p => p.id === c.id);
   const r = await siguiente(c, ant);
   if (r && r.partido) lista.push(r.partido);
@@ -127,7 +130,6 @@ for (let intento = 0; intento < 4; intento++) {
   if (actual === JSON.stringify(lista) && S.px?.temporada === conf.temporada) { console.log("Sin cambios"); break; }
   S.px = { actualizado: new Date(AHORA).toISOString(), temporada: conf.temporada, partidos: lista };
   S.u = Date.now();
-  // PUT condicional: si alguien escribió mientras tanto, Firebase responde 412 y reintentamos
   const p = await fetch(`${FB}/juncal.json?auth=${tok}`, { method: "PUT", headers: etag ? { "if-match": etag } : {}, body: JSON.stringify(JSON.stringify(S)) });
   if (p.ok) { console.log("Próximos partidos guardados:", lista.length); break; }
   if (p.status === 412) { console.warn("Conflicto de escritura, reintentando…"); await sleep(1000); continue; }

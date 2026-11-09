@@ -123,12 +123,6 @@ button.btn{font:inherit;font-weight:700;cursor:pointer}
 .cat .go{color:var(--mu);font-size:.88rem;margin-top:6px;transition:.2s}
 .cat:hover .go{color:var(--ac)}
 
-/* noticias */
-.news .ph{aspect-ratio:1}
-.news time{color:var(--ye2);font-size:.8rem;font-weight:700}
-.news p{display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
-
-
 /* ===== Próximos partidos: fichas tipo cartel =====
    El texto se escala con el ancho de la ficha (cqw), así la ficha ampliada es idéntica a la pequeña. */
 #matches{grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
@@ -253,13 +247,6 @@ footer a{color:var(--ye);font-weight:700}
   </div></section>
 
 
-  <section id="noticias" class="alt"><div class="wrap">
-    <h2 class="rv">Últimas <span>noticias</span></h2>
-    <p class="sub rv">Nuestras últimas publicaciones, directamente desde Instagram.</p>
-    <div class="grid news" id="news"></div>
-    <p style="margin-top:28px"><a class="btn o" href="https://www.instagram.com/torrejonjuncal/" target="_blank" rel="noopener">Ver todo en Instagram →</a></p>
-  </div></section>
-
   <section id="donde"><div class="wrap">
     <h2 class="rv">Dónde <span>jugamos</span></h2>
     <p class="sub rv">Pabellón Nuria Fernández, nuestra casa. Ven a animar al equipo.</p>
@@ -303,16 +290,6 @@ const CONFIG = {
   ESCUELA_IMG: "",    // foto de la sección "La escuela"
   ESCUELA_TXT: "Somos una escuela de fútbol sala donde cada niño y niña aprende, compite y disfruta. Trabajamos valores como el compañerismo, el esfuerzo y el respeto, con entrenadores formados y un ambiente de familia.",
 
-
-  /* NOTICIAS AUTOMÁTICAS DE INSTAGRAM (elige UNA opción):
-     A) FEED_URL: URL JSON de un servicio como Behold.so o similar (recomendado, sin exponer claves).
-     B) IG_TOKEN: token de la API de Instagram (cuenta profesional). Es visible en el código:
-        lo ideal es ponerlo detrás de un pequeño proxy/función serverless.
-     Si ambos están vacíos se muestra una tarjeta que lleva a vuestro Instagram. */
-  FEED_URL: "",
-  IG_TOKEN: "",
-  NEWS_DAYS: 0,   // 0 = las últimas publicaciones sin límite de fecha; 14 = solo las de las últimas 2 semanas
-  NEWS_COUNT: 6,
 
   /* PRÓXIMOS PARTIDOS: los guarda la sincronización de la RFFM en Firebase (campo "px"); aquí solo se leen */
   FB_URL: "https://juncal-f0b64-default-rtdb.europe-west1.firebasedatabase.app",
@@ -461,32 +438,6 @@ addEventListener("resize",updateCats);updateCats();
 function route(){const pg=location.hash==="#categorias";document.body.classList.toggle("pg",pg);
   if(pg)scrollTo(0,0);else if(location.hash.length>1)setTimeout(()=>{const t=document.querySelector(location.hash);t&&t.scrollIntoView()},30);}
 addEventListener("hashchange",route);route();
-
-// noticias de Instagram (últimas 2 semanas)
-//function renderNews(items){
-//  items.sort((x,y)=>new Date(y.timestamp)-new Date(x.timestamp));
-//  if(CONFIG.NEWS_DAYS>0){const lim=Date.now()-CONFIG.NEWS_DAYS*864e5;items=items.filter(i=>new Date(i.timestamp).getTime()>=lim)}
-//  items=items.slice(0,CONFIG.NEWS_COUNT);
-//  if(!items.length)return igCard("Todavía no hay publicaciones recientes. ¡Síguenos en Instagram!");
-//  $("#news").innerHTML=items.map(i=>{
-//    const img=i.thumbnail_url||i.media_url||"";
-//    const d=new Date(i.timestamp).toLocaleDateString("es-ES",{day:"numeric",month:"long",year:"numeric"});
-//    return `<a class="card rv in" href="${i.permalink}" target="_blank" rel="noopener"><div class="ph" ${bg(img)}></div><div class="cb"><time>${d}</time><p>${esc(i.caption)||"Ver publicación"}</p></div></a>`}).join("");
-//}
-//function igCard(t){
-//  $("#news").innerHTML=`<a class="card rv in" href="https://www.instagram.com/torrejonjuncal/" target="_blank" rel="noopener" style="grid-column:1/-1"><div class="cb" style="padding:30px"><h3>@torrejonjuncal</h3><p style="display:block">${t}</p></div></a>`;
-//}
-//async function loadNews(){
-//  try{
-//    let data;
-//    if(CONFIG.FEED_URL){const j=await (await fetch(CONFIG.FEED_URL)).json();data=j.posts||j.data||j;
-//      data=data.map(p=>({timestamp:p.timestamp,caption:p.caption||p.prunedCaption,permalink:p.permalink,media_url:p.mediaUrl||p.media_url,thumbnail_url:p.thumbnailUrl||p.thumbnail_url}));}
-//    else if(CONFIG.IG_TOKEN){const r=await fetch(`https://graph.instagram.com/me/media?fields=id,caption,media_type,media_url,thumbnail_url,permalink,timestamp&limit=20&access_token=${CONFIG.IG_TOKEN}`);data=(await r.json()).data;}
-//    else throw 0;
-//    renderNews(data);
-//  }catch(e){igCard("Consulta aquí nuestras últimas publicaciones y novedades del club.")}
-//}
-//loadNews();
 
 // contadores + reveal
 const io=new IntersectionObserver(es=>es.forEach(e=>{if(!e.isIntersecting)return;e.target.classList.add("in");io.unobserve(e.target)}),{threshold:.15});

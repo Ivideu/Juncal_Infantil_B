@@ -414,6 +414,9 @@ function openMatch(i){
   document.body.appendChild(o);document.body.style.overflow="hidden";o.querySelector(".x").focus()}
 $("#matches").addEventListener("click",e=>{const c=e.target.closest(".fch");if(c)openMatch(+c.dataset.i)});
 addEventListener("keydown",e=>{if(e.key==="Escape")closeMatch()});
+// mismo orden que las categorías de equipos (CONFIG.CATEGORIES)
+const nrm=t=>String(t||"").normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase().replace(/[^a-z0-9]/g,"");
+const ordCat=p=>{const k=[nrm(p.categoria),nrm(p.id)];const i=CONFIG.CATEGORIES.findIndex(c=>k.includes(nrm(c.name)));return i<0?999:i};
 async function loadMatches(){
   let lista=[];
   try{
@@ -423,7 +426,7 @@ async function loadMatches(){
     const ahora=Date.now();
     lista=(px.partidos||[]).filter(p=>p&&p.fecha&&Date.parse(p.fecha+"T"+(p.hora||"23:59"))+3*36e5>ahora)
       .map(p=>({...p,temporada:p.temporada||px.temporada}))
-      .sort((a,b)=>(a.fecha+(a.hora||"99:99")).localeCompare(b.fecha+(b.hora||"99:99")));
+      .sort((a,b)=>(ordCat(a)-ordCat(b))||(a.fecha+(a.hora||"99:99")).localeCompare(b.fecha+(b.hora||"99:99")));
   }catch(e){lista=MATCHES}
   const igual=JSON.stringify(lista)===JSON.stringify(MATCHES);
   MATCHES=lista;if(!igual||!$("#matches").children.length)renderMatches()}
@@ -433,7 +436,7 @@ document.addEventListener("visibilitychange",()=>{if(!document.hidden)loadMatche
 
 // categorías: una sola fila al principio; "Más categorías" despliega el resto en la misma página
 const catCard=c=>{
-  const inner=`<span class="age">${esc(c.age)}</span><h3>${esc(c.name)}</h3>`;
+  const inner=`<span class="age">${esc(c.age)}</span><h3>${esc(c.name)}</h3><span class="go">Partidos y clasificación</span>`;
   return c.url?`<a class="card cat" href="${esc(c.url)}">${inner}</a>`:`<div class="card cat sin">${inner}</div>`};
 $("#catHome").innerHTML=CONFIG.CATEGORIES.map(catCard).join("");
 $("#catGrid").innerHTML=CONFIG.CATEGORIES.map(catCard).join("");

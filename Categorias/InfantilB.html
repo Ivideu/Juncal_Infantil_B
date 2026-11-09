@@ -399,7 +399,11 @@ header.site-banner .dl {
 .bkt{display:flex;gap:14px;overflow-x:auto;padding-bottom:10px;align-items:flex-start}
 .bkc{flex:0 0 min(300px,88%)}
 .bkc>h3{font:800 1.3rem 'Barlow Condensed',sans-serif;color:var(--ye2);text-align:center;margin-bottom:8px}
-
+/* ===== Caja azul final con botón Volver ===== */
+.volver{margin:36px 0 10px;padding:24px 18px;border-radius:22px;text-align:center;color:#fff;background:linear-gradient(135deg,#3d8bff,#1e4fd8 55%,#0f2a78);border:1px solid #7aa9ff;box-shadow:0 14px 40px #1e4fd833}
+.volver p{margin-bottom:14px;font-weight:600}
+.volver button{background:var(--ye);color:#0a0f1e;border:0;font-weight:800;font-size:1.05rem;padding:12px 30px;border-radius:12px;box-shadow:0 4px 14px rgba(8,18,53,.35)}
+.volver button:hover{transform:translateY(-2px)}
 </style>
 </head>
 <body>
@@ -416,6 +420,10 @@ header.site-banner .dl {
 <section id="hero"></section>
 <nav id="nav"></nav>
 <main id="app"></main>
+<div class="volver">
+ <p>¿Quieres ver otra categoría?</p>
+ <button type="button" onclick="volver()">← Volver</button>
+</div>
 </div>
 <div id="adm">
  <span id="st" class="gap"></span>
@@ -847,11 +855,10 @@ function resetD(){
 }
 if(location.hash=="#admin")unlock();try{if(sessionStorage.getItem("adm")){PW=sessionStorage.getItem("pw")||"";document.body.classList.add("edit")}}catch(e){}
 if(API||FB)document.querySelector("#adm .on").remove();
-render();setInterval(tick,1000);
-let pc=0;setInterval(()=>{pc++;if(API&&!FB&&!E()&&(liveM()||pc%12==0))fetch(API+"?v="+Date.now(),{cache:"no-store"}).then(r=>r.json()).then(d=>{if(JSON.stringify(d)!==JSON.stringify(S)){S=d;fix();render()}}).catch(()=>{})},5000);
 /* Volver a la página anterior (si se abrió esta página directamente, va al inicio) */
 function volver(){if(history.length>1)history.back();else location.href="../../index.html#equipos"}
 render();setInterval(tick,1000);
+let pc=0;setInterval(()=>{pc++;if(API&&!FB&&!E()&&(liveM()||pc%12==0))fetch(API+"?v="+Date.now(),{cache:"no-store"}).then(r=>r.json()).then(d=>{if(JSON.stringify(d)!==JSON.stringify(S)){S=d;fix();render()}}).catch(()=>{})},5000);
 </script>
 </body>
 </html>

@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="icon" href="./images/escudo.png">
+<link rel="icon" href="./Images/escudo.png">
 <title>Torrejón Juncal · Escuela de Fútbol Sala</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,600;0,700;0,800;1,700;1,800&family=Barlow:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -205,7 +205,7 @@ footer a{color:var(--ye);font-weight:700}
 <div id="bg" aria-hidden="true"></div>
 
 <header id="hd"><div class="wrap"><nav>
-  <a href="#" class="logo"><img class="lg" src="./images/escudo.png" alt="Escudo Torrejón Juncal">Torrejón <b>Juncal</b></a>
+  <a href="#" class="logo"><img class="lg" src="./Images/escudo.png" alt="Escudo Torrejón Juncal">Torrejón <b>Juncal</b></a>
   <button id="burger" aria-label="Menú">☰</button>
   <div class="menu" id="menu">
     <a href="#escuela">La escuela</a>
@@ -289,7 +289,7 @@ footer a{color:var(--ye);font-weight:700}
   <div class="grid" id="catGrid"></div>
 </div></main>
 
-<footer><div class="wrap"><img class="fl" src="./images/escudo.png" alt=""><br>© <span id="yr"></span> Torrejón Juncal · Fútbol Sala ·
+<footer><div class="wrap"><img class="fl" src="./Images/escudo.png" alt=""><br>© <span id="yr"></span> Torrejón Juncal · Fútbol Sala ·
   <a href="https://www.instagram.com/torrejonjuncal/" target="_blank" rel="noopener">@torrejonjuncal</a></div></footer>
 
 <script>
@@ -381,7 +381,7 @@ addEventListener("keydown",e=>{if(e.key==="Escape")closeStaff()});
 const DIAS=["Domingo","Lunes","Martes","Miércoles","Jueves","Viernes","Sábado"],MESES=["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"];
 let MATCHES=[],matchesOpen=false;
 const iniciales=n=>String(n||"").split(/\s+/).filter(w=>w.length>1&&/^[A-Za-zÁÉÍÓÚÜÑáéíóúüñ]/.test(w)).map(w=>w[0]).join("").slice(0,2).toUpperCase();
-const escudoEq=(nombre,cod,mio)=>{const src=mio?"./images/escudo.png":cod?`Escudos/${encodeURIComponent(cod)}.png`:"";return `<i>${esc(iniciales(nombre))}</i>${src?`<img src="${src}" alt="" onerror="this.remove()">`:""}`};
+const escudoEq=(nombre,cod,mio)=>{const src=mio?"./Images/escudo.png":cod?`Escudos/${encodeURIComponent(cod)}.png`:"";return `<i>${esc(iniciales(nombre))}</i>${src?`<img src="${src}" alt="" onerror="this.remove()">`:""}`};
 function cartel(p){
   const d=new Date(p.fecha+"T12:00"),dia=DIAS[d.getDay()],fecha=`${String(d.getDate()).padStart(2,"0")} ${MESES[d.getMonth()]} ${d.getFullYear()}`,
     cat=String(p.categoria||"").toUpperCase(),liga=String(p.liga||"").toUpperCase(),loc=String(p.local||""),vis=String(p.visitante||""),

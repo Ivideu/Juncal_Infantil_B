@@ -5,7 +5,7 @@ on:
   push:
     paths:
       - ".github/workflows/apk.yml"
-      - "icon-192.png"
+      - "./Images/icon-192.png"
 
 permissions:
   contents: write
@@ -36,7 +36,7 @@ jobs:
             "appId": "es.juncalb.app",
             "appName": "Juncal B",
             "webDir": "www",
-            "server": { "url": "https://ivideu.github.io/Juncal_Infantil_B/", "cleartext": false },
+            "server": { "url": "https://torrejonjuncal.es/Categorias/InfantilB/", "cleartext": false },
             "android": { "allowMixedContent": false }
           }
           JSON

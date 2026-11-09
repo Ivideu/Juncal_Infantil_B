@@ -289,6 +289,7 @@ footer a{color:var(--ye);font-weight:700}
 </div></main>
 
 <footer><div class="wrap"><img class="fl" src="Images/escudo.png" alt=""><br>© <span id="yr"></span> Torrejón Juncal · Fútbol Sala ·
+  <a href="mailto:emtjfs@gmail.com">emtjfs@gmail.com</a> ·
   <a href="https://www.instagram.com/torrejonjuncal/" target="_blank" rel="noopener">@torrejonjuncal</a></div></footer>
 
 <script>
@@ -444,7 +445,7 @@ document.addEventListener("visibilitychange",()=>{if(!document.hidden)loadMatche
 // categorías: una sola fila al principio; "Más categorías" despliega el resto en la misma página
 const catCard=c=>{
   const inner=`<span class="age">${esc(c.age)}</span><h3>${esc(c.name)}</h3><span class="go">${c.url?"Resultados y clasificaciones →":"Próximamente"}</span>`;
-  return c.url?`<a class="card cat" href="${esc(c.url)}" target="_blank" rel="noopener">${inner}</a>`:`<div class="card cat sin">${inner}</div>`};
+  return c.url?`<a class="card cat" href="${esc(c.url)}" target="${esc(c.target||'_self')}">${inner}</a>`:`<div class="card cat sin">${inner}</div>`};
 $("#catHome").innerHTML=CONFIG.CATEGORIES.map(catCard).join("");
 $("#catGrid").innerHTML=CONFIG.CATEGORIES.map(catCard).join("");
 let catsOpen=false;

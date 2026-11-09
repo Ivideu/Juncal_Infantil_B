@@ -25,10 +25,9 @@ jobs:
           distribution: temurin
           java-version: 17
 
-      - name: Crear proyecto Capacitor (la app carga tu web publicada)
+- name: Crear proyecto Capacitor y configurar app
         run: |
           mkdir -p /tmp/app/www && cd /tmp/app
-          echo '<!doctype html><title>Juncal B</title>' > www/index.html
           npm init -y >/dev/null
           npm i @capacitor/core@6 @capacitor/cli@6 @capacitor/android@6 @capacitor-firebase/messaging@6 firebase
           cat > capacitor.config.json <<'JSON'
@@ -36,8 +35,11 @@ jobs:
             "appId": "es.juncalb.app",
             "appName": "Juncal B",
             "webDir": "www",
-            "server": { "url": "https://torrejonjuncal.es/Categorias/InfantilB/", "cleartext": false },
-            "android": { "allowMixedContent": false }
+            "server": { 
+              "url": "https://torrejonjuncal.es/Categorias/InfantilB.html", 
+              "cleartext": true 
+            },
+            "android": { "allowMixedContent": true }
           }
           JSON
           npx cap add android
@@ -71,8 +73,8 @@ jobs:
 
       - name: Publicar APK en Releases
         run: |
-          cp /tmp/app/android/app/build/outputs/apk/debug/app-debug.apk Juncal-B.apk
+          cp /tmp/app/android/app/build/outputs/apk/debug/app-debug.apk /tmp/app/android/Juncal-B.apk
           gh release delete apk --yes --cleanup-tag 2>/dev/null || true
-          gh release create apk Juncal-B.apk --title "App Android Juncal B" --notes "Descarga Juncal-B.apk e instálalo en tu móvil Android."
+          gh release create apk /tmp/app/android/Juncal-B.apk --title "App Android Juncal B" --notes "Descarga Juncal-B.apk e instálalo en tu móvil Android."
         env:
           GH_TOKEN: ${{ github.token }}

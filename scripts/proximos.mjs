@@ -3,11 +3,20 @@
 // y lo guarda en Firebase (campo "px" de los datos) para las fichas de "Próximos partidos" de la portada.
 // No toca partidos, resultados ni goleadores del Infantil B: solo añade/actualiza "px".
 import fs from "node:fs";
+import path from "node:path";
+import { fileURLToPath } from "node:url";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
 const FB = "https://juncal-f0b64-default-rtdb.europe-west1.firebasedatabase.app";
 const { FBKEY, FBMAIL, FBPASS } = process.env;
 const AHORA = Number(process.env.AHORA_MS) || Date.now();
 const sleep = ms => process.env.SIN_PAUSAS ? Promise.resolve() : new Promise(r => setTimeout(r, ms));
-const conf = JSON.parse(fs.readFileSync(new URL("./categorias.json", import.meta.url), "utf8"));
+
+// Carga robusta del archivo de configuración desde la misma carpeta del script
+const confPath = path.join(__dirname, "categorias.json");
+const conf = JSON.parse(fs.readFileSync(confPath, "utf8"));
 
 const iso = f => { const k = String(f || "").match(/^(\d{2})[-/](\d{2})[-/](\d{4})/); return k ? `${k[3]}-${k[2]}-${k[1]}` : ""; };
 const limpiaCampo = s => String(s || "").replace(/\s*\(futbol sala\)\s*/i, " ").replace(/\s+/g, " ").trim();
@@ -49,12 +58,12 @@ async function siguiente(c, previo) {
     const d = await rffm(c.grupo, r);
     if (!d) { if (++seguidos >= 2) return leidas ? null : { error: true }; continue; }
     seguidos = 0;
-    if (!d.partidos.length) break;                      // se acabaron las jornadas
+    if (!d.partidos.length) break;                       // se acabaron las jornadas
     leidas++;
     const p = d.partidos.find(q => esLocal(c, q) || esVisit(c, q));
-    if (!p) { await sleep(1200); continue; }            // el equipo descansa esa jornada
+    if (!p) { await sleep(1200); continue; }             // el equipo descansa esa jornada
     const fecha = iso(p.fecha), hora = (p.hora || "").slice(0, 5);
-    if (!fecha) { await sleep(1200); continue; }        // sin fecha todavía
+    if (!fecha) { await sleep(1200); continue; }         // sin fecha todavía
     if (madrid(fecha, hora || "23:59") + 3 * 36e5 < AHORA) { await sleep(1200); continue; }   // ya jugado
     const casa = esLocal(c, p);
     console.log(`  ${c.nombre}: jornada ${r}, ${p.Nombre_equipo_local} - ${p.Nombre_equipo_visitante}, ${fecha} ${hora}`);
@@ -87,7 +96,7 @@ const tok = await login();
 const previos = (await leer(tok)).S.px?.partidos || [];
 const lista = [];
 for (const c of conf.categorias) {
-  if (!c.grupo) continue;                               // categoría sin activar
+  if (!c.grupo) continue;                                // categoría sin activar
   const ant = previos.find(p => p.id === c.id);
   const r = await siguiente(c, ant);
   if (r && r.partido) lista.push(r.partido);

@@ -871,7 +871,7 @@ function setEdit(on){
     try{ sessionStorage.removeItem("adm"); sessionStorage.removeItem("pw"); }catch(e){} 
     PW = "";
     TS.on=false;
-    if(tab=="pla"||tab=="hor"||tab=="ent") tab="jor"; 
+    if(tab=="pla"||tab=="hor"||tab=="ent"||(tab=="cop"&&!COPA)) tab="jor"; 
   }
   render();
 }

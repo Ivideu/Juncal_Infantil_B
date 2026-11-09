@@ -125,10 +125,10 @@ button.btn{font:inherit;font-weight:700;cursor:pointer}
 
 /* ===== Próximos partidos: fichas tipo cartel =====
    El texto se escala con el ancho de la ficha (cqw), así la ficha ampliada es idéntica a la pequeña. */
-#matches{grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+#matches{grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
 .mx{display:none!important}
-button.fch{display:block;width:100%;padding:0;border:0;background:none;cursor:pointer;border-radius:18px;overflow:hidden;box-shadow:0 8px 28px rgba(8,18,53,.4);transition:.25s}
-button.fch:hover{transform:translateY(-6px)}
+button.fch{display:block;width:100%;padding:0;border:0;background:none;cursor:pointer;border-radius:10px;overflow:hidden;box-shadow:0 4px 14px rgba(8,18,53,.4);transition:.25s}
+button.fch:hover{transform:translateY(-4px)}
 button.fch:focus-visible{outline:3px solid var(--ye);outline-offset:3px}
 .cartel{position:relative;container-type:inline-size;aspect-ratio:842/857;width:100%;background:#0f2a78 url('Images/ficha-base.jpg') center/100% 100% no-repeat;color:#fff;text-align:center;user-select:none;-webkit-user-select:none}
 .cartel>*{position:absolute;margin:0}
@@ -156,7 +156,6 @@ button.fch:focus-visible{outline:3px solid var(--ye);outline-offset:3px}
 .fm{position:relative;width:min(92vw,calc(86vh*.982),680px);animation:stfPop .25s cubic-bezier(.2,1.3,.4,1) both}
 .fm .cartel{border-radius:20px;box-shadow:0 20px 60px rgba(0,0,0,.5);overflow:hidden}
 .fm .x{position:absolute;top:-14px;right:-14px;z-index:2;width:40px;height:40px;border-radius:50%;border:0;background:var(--ye);color:#0a0f1e;font-size:1.4rem;line-height:1;cursor:pointer}
-@media(max-width:600px){#matches{grid-template-columns:minmax(0,1fr)}}
 
 footer{border-top:1px solid rgba(255,255,255,.35);padding:40px 0;color:#fff;text-shadow:var(--sh);text-align:center;font-size:.9rem}
 footer a{color:var(--ye);font-weight:700}

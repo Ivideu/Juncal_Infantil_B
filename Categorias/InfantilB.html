@@ -406,12 +406,17 @@ header.site-banner .dl {
 .volver button:hover{transform:translateY(-2px)}
 
 /* ===== Entrenos (solo admin, sin cromos) ===== */
-.entb{display:flex;gap:6px}
-.entb button{min-width:84px;font-weight:700;border:2px solid;background:#fff}
-.entb .s{border-color:#22c55e;color:#15803d}.entb .s.act{background:#22c55e;color:#fff}
-.entb .n{border-color:#ef4444;color:#b91c1c}.entb .n.act{background:#ef4444;color:#fff}
+.entb{display:flex;gap:8px}
+.entb button{width:56px;height:46px;padding:0;border-radius:12px;font:800 1.5rem/1 Barlow,system-ui,sans-serif;border:2px solid;background:#fff;display:grid;place-items:center}
+.entb .s{border-color:#22c55e;color:#15803d}.entb .s.act{background:#22c55e;color:#fff;box-shadow:0 4px 14px #22c55e66}
+.entb .n{border-color:#ef4444;color:#b91c1c}.entb .n.act{background:#ef4444;color:#fff;box-shadow:0 4px 14px #ef444466}
 .entp{font:800 1.15rem 'Barlow Condensed',sans-serif;color:var(--mu);min-width:92px;text-align:right}
 .entp.ok{color:#15803d}.entp.ko{color:#b91c1c}
+.entw td,.entw th{padding:10px 6px}
+.entw .v{color:#15803d;font:800 1.3rem 'Barlow Condensed',sans-serif}
+.entw .x{color:#b91c1c;font:800 1.3rem 'Barlow Condensed',sans-serif}
+.entw .z{color:var(--mu)}
+.entw th small{display:block;font-weight:500;font-size:.72rem}
 </style>
 </head>
 <body>
@@ -687,7 +692,7 @@ function render(){
  if(jnAuto){const nx=nextL();jn=nx?nx.r.n:J.length}
  const tabs=[["jor","🗓 Jornadas"],["cal","📅 Mi calendario"],["cla","🏆 Clasificación"],["cop","🥇 Copa"],["gol","👟 Goleadores"],["cro","🎽 Jugadores"]];if(E())tabs.push(["hor","🕒 Horarios"],["pla","👥 Plantilla"],["ent","🏃 Entrenos"]);
  const nv=document.getElementById("nav"),big=tabs.length>4;nv.style.setProperty("--n",big?3:4);nv.className=big?"x":"";
- nv.innerHTML=tabs.map(([k,l])=>{const[ic,...tx]=l.split(" ");return`<button class="${tab==k?'on':''}" onclick="tab='${k}';if(tab=='jor')jnAuto=true;render()"><span>${ic}</span><span>${tx.join(" ")}</span></button>`}).join("");
+ nv.innerHTML=tabs.map(([k,l])=>{const[ic,...tx]=l.split(" ");return`<button class="${tab==k?'on':''}" onclick="tab='${k}';if(tab=='jor')jnAuto=true;if(tab=='ent')entD='';render()"><span>${ic}</span><span>${tx.join(" ")}</span></button>`}).join("");
  let h="";
  if(tab=="cal")h=myM().map((x,i)=>card(x.r,x.h,x.a,i)).join("");
  if(tab=="jor"){h=jsel()+[...J[jn-1].p].sort((x,y)=>y.includes(ME)-x.includes(ME)).map((p,i)=>card(J[jn-1],p[0],p[1],i)).join("")}
@@ -719,36 +724,40 @@ function renderCopa(){
 
 /* ===== Entrenos (miércoles y jueves) · solo admin · sin cromos =====
    S.ent = { "2026-11-11": { clave_jugador: 1 (fue) | 0 (no fue) } } */
-let entD="";const ENTN=8;
+let entD="";
 const hoyE=()=>new Date().toLocaleDateString("sv-SE",{timeZone:"Europe/Madrid"});
-function lastTrain(){let d=new Date(hoyE()+"T12:00:00Z");
- for(let i=0;i<7;i++){const w=d.getUTCDay();if(w==3||w==4)return d.toISOString().slice(0,10);d=new Date(d.getTime()-864e5)}
- return hoyE()}
-function setEnt(k,v){if(!E())return;const d=entD||lastTrain();S.ent=S.ent||{};const o=S.ent[d]||(S.ent[d]={});
+const dEnt=()=>entD||hoyE();
+function setEnt(k,v){if(!E())return;const d=dEnt();S.ent=S.ent||{};const o=S.ent[d]||(S.ent[d]={});
  if(o[k]===v)delete o[k];else o[k]=v;            // pulsar otra vez el mismo botón lo desmarca
  if(!Object.keys(o).length)delete S.ent[d];save()}
-function setEntAll(v){if(!E())return;const d=entD||lastTrain();S.ent=S.ent||{};const o=S.ent[d]||(S.ent[d]={});
+function setEntAll(v){if(!E())return;const d=dEnt();S.ent=S.ent||{};const o=S.ent[d]||(S.ent[d]={});
  jugList().forEach(c=>o[c.key]=v);save()}
 function setEntD(v){if(v){entD=v;render()}}
-/* Asistencia en los últimos n días con entreno registrado */
-function entStats(k,n){const ds=Object.keys(S.ent||{}).sort().slice(-n);let a=0,t=0;
- ds.forEach(d=>{const v=S.ent[d][k];if(v===1||v===0){t++;if(v===1)a++}});
+/* Asistencia en TODOS los entrenos registrados */
+function entStats(k){let a=0,t=0;
+ Object.keys(S.ent||{}).forEach(d=>{const v=S.ent[d][k];if(v===1||v===0){t++;if(v===1)a++}});
  return{a,t,p:t?Math.round(a/t*100):null}}
+/* Miércoles y jueves de la semana (lunes-domingo) de la fecha d */
+function weekWT(d){const dt=new Date(d+"T12:00:00Z"),off=(dt.getUTCDay()+6)%7,
+ f=n=>new Date(dt.getTime()+(n-off)*864e5).toISOString().slice(0,10);return{mi:f(2),ju:f(3)}}
+const fd=d=>d.slice(8)+"/"+d.slice(5,7);
 function renderEnt(){
- const d=entD||lastTrain(),o=(S.ent&&S.ent[d])||{},jug=jugList(),dia=["domingo","lunes","martes","miércoles","jueves","viernes","sábado"][new Date(d+"T12:00:00Z").getUTCDay()],
+ const d=dEnt(),o=(S.ent&&S.ent[d])||{},jug=jugList(),dia=["domingo","lunes","martes","miércoles","jueves","viernes","sábado"][new Date(d+"T12:00:00Z").getUTCDay()],
   fue=jug.filter(c=>o[c.key]===1).length,nof=jug.filter(c=>o[c.key]===0).length,
-  cls=p=>p==null?"":p>=75?"ok":p<50?"ko":"";
- const rows=jug.map(c=>{const v=o[c.key],s=entStats(c.key,ENTN),k=esc(c.key);
+  cls=p=>p==null?"":p>=75?"ok":p<50?"ko":"",
+  wk=weekWT(d),mi=(S.ent&&S.ent[wk.mi])||{},ju=(S.ent&&S.ent[wk.ju])||{};
+ const rows=jug.map(c=>{const v=o[c.key],s=entStats(c.key),k=esc(c.key);
   return`<div class="card" style="display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap"><span style="display:flex;align-items:center;gap:10px">${shirt(c.num,"#2f7bff")}<b>${esc(c.name)}</b></span>
   <span style="display:flex;align-items:center;gap:10px;flex-wrap:wrap"><span class="entp ${cls(s.p)}">${s.t?s.a+"/"+s.t+" · "+s.p+"%":"sin datos"}</span>
-  <span class="entb"><button class="s ${v===1?"act":""}" data-k="${k}" onclick="setEnt(this.dataset.k,1)">✔ Fue</button><button class="n ${v===0?"act":""}" data-k="${k}" onclick="setEnt(this.dataset.k,0)">✘ No fue</button></span></span></div>`}).join("");
- const res=jug.map(c=>({c,s:entStats(c.key,ENTN)})).sort((x,y)=>(y.s.p??-1)-(x.s.p??-1)||x.c.name.localeCompare(y.c.name));
+  <span class="entb"><button class="s ${v===1?"act":""}" aria-label="${esc(c.name)} fue" data-k="${k}" onclick="setEnt(this.dataset.k,1)">✔</button><button class="n ${v===0?"act":""}" aria-label="${esc(c.name)} no fue" data-k="${k}" onclick="setEnt(this.dataset.k,0)">✘</button></span></span></div>`}).join("");
+ const mark=v=>v===1?'<span class="v">V</span>':v===0?'<span class="x">X</span>':'<span class="z">–</span>';
  return`<div class="card"><h2 style="font-size:1.6rem;color:#0f2a6b;line-height:1.1">Asistencia a entrenos</h2>
   <div class="ed" style="display:flex;border:0;margin-top:8px;padding-top:0"><input type="date" value="${d}" onchange="setEntD(this.value)"><b>${dia}</b>
-  <button onclick="setEntAll(1)">✔ Todos fueron</button><button onclick="setEntAll(0)">✘ Nadie fue</button></div>
+  <button onclick="setEntAll(1)">✔ Todos</button><button onclick="setEntAll(0)">✘ Nadie</button></div>
   <div class="cvsum"><span class="cvs">✓ ${fue}</span><span class="cvs x">✕ ${nof}</span><span class="cvl" style="align-self:center">SIN MARCAR ${jug.length-fue-nof}</span></div></div>`
   +rows
-  +`<div class="cvhd"><h2>Resumen (últimos ${ENTN} entrenos)</h2></div><table><tr><th>#</th><th>Jugador</th><th>Fue</th><th>%</th></tr>${res.map((r,i)=>`<tr><td>${i+1}</td><td>${esc(r.c.name)}</td><td>${r.s.t?r.s.a+"/"+r.s.t:"–"}</td><td><b>${r.s.p==null?"–":r.s.p+"%"}</b></td></tr>`).join("")}</table>`}
+  +`<div class="cvhd"><h2>Resumen total (todos los entrenos)</h2></div><table><tr><th>Nº</th><th>Jugador</th><th>Fue</th><th>%</th></tr>${jug.map(c=>{const s=entStats(c.key);return`<tr><td>${esc(c.num||"–")}</td><td>${esc(c.name)}</td><td>${s.t?s.a+"/"+s.t:"–"}</td><td><b>${s.p==null?"–":s.p+"%"}</b></td></tr>`}).join("")}</table>`
+  +`<div class="cvhd"><h2>Resumen semanal</h2><span class="cvl">SEMANA DEL ${fd(wk.mi)}</span></div><table class="entw"><tr><th>Número</th><th>Jugador</th><th>Miércoles<small>${fd(wk.mi)}</small></th><th>Jueves<small>${fd(wk.ju)}</small></th></tr>${jug.map(c=>`<tr><td>${esc(c.num||"–")}</td><td>${esc(c.name)}</td><td>${mark(mi[c.key])}</td><td>${mark(ju[c.key])}</td></tr>`).join("")}</table>`}
 
 /* ===== Cromos y convocatoria ===== */
 const CROMOS_DIR="../../Cromos/";

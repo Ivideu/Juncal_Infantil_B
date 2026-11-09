@@ -22,32 +22,23 @@ if (!MANUAL && (horaMadrid < 9 || horaMadrid > 22 || (horaMadrid === 22 && minMa
 const FULLRUN = MANUAL || (horaMadrid === 9 && minMadrid < 10);   // primera ejecución del día y manuales: todas las jornadas
 const sleep = ms => new Promise(r => setTimeout(r, ms));
 
-
-// Búsqueda exhaustiva y segura de categorias.json en múltiples rutas posibles
+// Busca categorias.json en varias rutas posibles (scripts/, raíz, o la indicada en CATEGORIAS)
 function cargarConfig() {
-  const rutasCandidatas = [
-    path.join(__dirname, "categorias.json"),                 // scripts/categorias.json
-    path.join(__dirname, "..", "categorias.json"),             // /categorias.json (raíz)
-    path.resolve(process.cwd(), "scripts", "categorias.json"), // cwd/scripts/categorias.json
-    path.resolve(process.cwd(), "categorias.json")             // cwd/categorias.json
-  ];
-
-  for (const r of rutasCandidatas) {
+  const rutas = [
+    process.env.CATEGORIAS && path.resolve(process.cwd(), process.env.CATEGORIAS),
+    path.join(__dirname, "categorias.json"),                    // scripts/categorias.json
+    path.join(__dirname, "..", "categorias.json"),              // raíz del repositorio
+    path.resolve(process.cwd(), "scripts", "categorias.json"),
+    path.resolve(process.cwd(), "categorias.json")
+  ].filter(Boolean);
+  for (const r of rutas) {
     try {
-      if (fs.existsSync(r)) {
-        console.log(`Configuración cargada correctamente desde: ${r}`);
-        return JSON.parse(fs.readFileSync(r, "utf8"));
-      }
-    } catch (e) {
-      // Ignorar error de lectura individual y probar la siguiente
-    }
+      if (fs.existsSync(r)) { console.log("Configuración cargada desde:", r); return JSON.parse(fs.readFileSync(r, "utf8")); }
+    } catch (e) { console.error("No se pudo leer", r, String(e)); }
   }
-
-  console.error("Error crítico: No se encuentra categorias.json en ninguna de estas rutas probadas:");
-  rutasCandidatas.forEach(r => console.error(` - ${r}`));
+  console.error("No se encuentra categorias.json. Rutas probadas:\n - " + rutas.join("\n - "));
   process.exit(1);
 }
-
 const conf = cargarConfig();
 
 const iso = f => { const k = String(f || "").match(/^(\d{2})[-/](\d{2})[-/](\d{4})/); return k ? `${k[3]}-${k[2]}-${k[1]}` : ""; };

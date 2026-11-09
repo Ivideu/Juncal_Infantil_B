@@ -40,11 +40,12 @@ nav{display:flex;align-items:center;justify-content:space-between;height:68px}
 .lg{width:44px;height:44px;border-radius:50%}
 .pgb{aspect-ratio:848/190;width:100%;margin-bottom:40px;border-radius:16px;border-bottom:2px solid var(--ac);box-shadow:0 8px 28px rgba(0,40,120,.35);background:url('cabecera.jpg') center/100% 100% no-repeat}
 .fl{width:64px;height:64px;border-radius:50%;margin-bottom:12px}
-.menu{display:flex;gap:6px;align-items:center;font-weight:600;font-size:.95rem}
-.menu a:not(.btn){padding:10px 16px;border-radius:10px;font-size:1rem;color:var(--tx);transition:.2s}
+.menu{display:flex;flex-wrap:nowrap;gap:2px;align-items:center;font-weight:600;font-size:.95rem;margin-left:auto}
+.menu a:not(.btn){padding:10px 11px;border-radius:10px;font-size:.95rem;color:var(--tx);transition:.2s;white-space:nowrap}
+header .wrap{max-width:1180px}
 .menu a:not(.btn):hover{color:#0a0f1e;background:var(--ye)}
-.menu a.ig{display:flex;align-items:center;padding:10px 12px;color:var(--navy)}
-.menu a.ig:hover{color:#0a0f1e;background:var(--ye)}
+a.ig{display:flex;align-items:center;flex:none;margin-left:8px;padding:10px;border-radius:10px;color:var(--navy);transition:.2s}
+a.ig:hover{color:#0a0f1e;background:var(--ye)}
 #burger{display:none;background:none;border:0;color:var(--navy);font-size:1.8rem;cursor:pointer}
 
 /* hero */
@@ -173,7 +174,8 @@ footer a{color:var(--ye);font-weight:700}
  .hero{align-items:flex-end;padding-top:400px}
  .hero::before{bottom:auto;height:420px;background-position:100% 0}
  .two{grid-template-columns:1fr}
- #burger{display:block}
+ #burger{display:block;margin-left:auto}
+ .menu{margin-left:0}
  .menu{position:fixed;inset:68px 0 auto;background:#fff;flex-direction:column;padding:24px;display:none;border-bottom:1px solid var(--line)}
  .menu.o{display:flex}
  section{padding:56px 0}
@@ -196,10 +198,10 @@ footer a{color:var(--ye);font-weight:700}
     <a href="#tecnico">Cuerpo técnico</a>
     <a href="#donde">Dónde jugamos</a>
     <a href="#contacto">Contacto</a>
-    <a class="ig" href="https://www.instagram.com/torrejonjuncal/" target="_blank" rel="noopener" aria-label="Instagram de Torrejón Juncal">
-      <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
-    </a>
   </div>
+  <a class="ig" href="https://www.instagram.com/torrejonjuncal/" target="_blank" rel="noopener" aria-label="Instagram de Torrejón Juncal">
+    <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+  </a>
 </nav></div></header>
 
 <!-- ============ INICIO ============ -->

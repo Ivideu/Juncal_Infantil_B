@@ -463,30 +463,30 @@ function route(){const pg=location.hash==="#categorias";document.body.classList.
 addEventListener("hashchange",route);route();
 
 // noticias de Instagram (últimas 2 semanas)
-function renderNews(items){
-  items.sort((x,y)=>new Date(y.timestamp)-new Date(x.timestamp));
-  if(CONFIG.NEWS_DAYS>0){const lim=Date.now()-CONFIG.NEWS_DAYS*864e5;items=items.filter(i=>new Date(i.timestamp).getTime()>=lim)}
-  items=items.slice(0,CONFIG.NEWS_COUNT);
-  if(!items.length)return igCard("Todavía no hay publicaciones recientes. ¡Síguenos en Instagram!");
-  $("#news").innerHTML=items.map(i=>{
-    const img=i.thumbnail_url||i.media_url||"";
-    const d=new Date(i.timestamp).toLocaleDateString("es-ES",{day:"numeric",month:"long",year:"numeric"});
-    return `<a class="card rv in" href="${i.permalink}" target="_blank" rel="noopener"><div class="ph" ${bg(img)}></div><div class="cb"><time>${d}</time><p>${esc(i.caption)||"Ver publicación"}</p></div></a>`}).join("");
-}
-function igCard(t){
-  $("#news").innerHTML=`<a class="card rv in" href="https://www.instagram.com/torrejonjuncal/" target="_blank" rel="noopener" style="grid-column:1/-1"><div class="cb" style="padding:30px"><h3>@torrejonjuncal</h3><p style="display:block">${t}</p></div></a>`;
-}
-async function loadNews(){
-  try{
-    let data;
-    if(CONFIG.FEED_URL){const j=await (await fetch(CONFIG.FEED_URL)).json();data=j.posts||j.data||j;
-      data=data.map(p=>({timestamp:p.timestamp,caption:p.caption||p.prunedCaption,permalink:p.permalink,media_url:p.mediaUrl||p.media_url,thumbnail_url:p.thumbnailUrl||p.thumbnail_url}));}
-    else if(CONFIG.IG_TOKEN){const r=await fetch(`https://graph.instagram.com/me/media?fields=id,caption,media_type,media_url,thumbnail_url,permalink,timestamp&limit=20&access_token=${CONFIG.IG_TOKEN}`);data=(await r.json()).data;}
-    else throw 0;
-    renderNews(data);
-  }catch(e){igCard("Consulta aquí nuestras últimas publicaciones y novedades del club.")}
-}
-loadNews();
+//function renderNews(items){
+//  items.sort((x,y)=>new Date(y.timestamp)-new Date(x.timestamp));
+//  if(CONFIG.NEWS_DAYS>0){const lim=Date.now()-CONFIG.NEWS_DAYS*864e5;items=items.filter(i=>new Date(i.timestamp).getTime()>=lim)}
+//  items=items.slice(0,CONFIG.NEWS_COUNT);
+//  if(!items.length)return igCard("Todavía no hay publicaciones recientes. ¡Síguenos en Instagram!");
+//  $("#news").innerHTML=items.map(i=>{
+//    const img=i.thumbnail_url||i.media_url||"";
+//    const d=new Date(i.timestamp).toLocaleDateString("es-ES",{day:"numeric",month:"long",year:"numeric"});
+//    return `<a class="card rv in" href="${i.permalink}" target="_blank" rel="noopener"><div class="ph" ${bg(img)}></div><div class="cb"><time>${d}</time><p>${esc(i.caption)||"Ver publicación"}</p></div></a>`}).join("");
+//}
+//function igCard(t){
+//  $("#news").innerHTML=`<a class="card rv in" href="https://www.instagram.com/torrejonjuncal/" target="_blank" rel="noopener" style="grid-column:1/-1"><div class="cb" style="padding:30px"><h3>@torrejonjuncal</h3><p style="display:block">${t}</p></div></a>`;
+//}
+//async function loadNews(){
+//  try{
+//    let data;
+//    if(CONFIG.FEED_URL){const j=await (await fetch(CONFIG.FEED_URL)).json();data=j.posts||j.data||j;
+//      data=data.map(p=>({timestamp:p.timestamp,caption:p.caption||p.prunedCaption,permalink:p.permalink,media_url:p.mediaUrl||p.media_url,thumbnail_url:p.thumbnailUrl||p.thumbnail_url}));}
+//    else if(CONFIG.IG_TOKEN){const r=await fetch(`https://graph.instagram.com/me/media?fields=id,caption,media_type,media_url,thumbnail_url,permalink,timestamp&limit=20&access_token=${CONFIG.IG_TOKEN}`);data=(await r.json()).data;}
+//    else throw 0;
+//    renderNews(data);
+//  }catch(e){igCard("Consulta aquí nuestras últimas publicaciones y novedades del club.")}
+//}
+//loadNews();
 
 // contadores + reveal
 const io=new IntersectionObserver(es=>es.forEach(e=>{if(!e.isIntersecting)return;e.target.classList.add("in");io.unobserve(e.target)}),{threshold:.15});

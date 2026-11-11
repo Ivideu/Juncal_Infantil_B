@@ -1,0 +1,10 @@
+/* Pega esto AL FINAL de tu <style> (después de todo lo demás) */
+.cromo-wrap{display:flex;flex-direction:column;gap:6px;min-width:0}
+.cromo{cursor:pointer;border-radius:18px;overflow:hidden;background:#0b1735;box-shadow:0 12px 28px #071b4b38;transition:transform .2s,box-shadow .2s}
+.cromo:hover,.cromo:focus-visible{transform:translateY(-4px);box-shadow:0 18px 34px #071b4b55}
+.cromo-img{display:block;width:100%;height:auto}
+.cromo.off .cromo-img{filter:grayscale(.85) brightness(.8)}
+.cromo-tg{font-size:.82rem;padding:5px 8px}
+.pc-modal-inner{height:auto;width:auto;aspect-ratio:auto;line-height:0}
+.pc-modal-inner #cromoModalCard{height:auto;width:auto}
+.pc-modal-inner .cromo-img{width:auto;height:auto;max-height:86vh;max-width:88vw;border-radius:22px;box-shadow:0 0 0 1px #ffffff20,0 0 0 6px #ffffff08}

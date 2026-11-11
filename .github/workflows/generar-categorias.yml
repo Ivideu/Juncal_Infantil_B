@@ -1,0 +1,23 @@
+name: Generar categorías
+on:
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  generar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.12" }
+      - name: Generar páginas
+        run: |
+          S=scripts/generar_categorias.py
+          [ -f "$S" ] || S=.github/workflows/generar_categorias.py
+          python "$S" --escribir
+      - name: Guardar cambios
+        run: |
+          git config user.name "github-actions"
+          git config user.email "github-actions@users.noreply.github.com"
+          git add -A
+          git diff --cached --quiet && echo "Sin cambios" || (git commit -m "Generar páginas de categorías" && git push)

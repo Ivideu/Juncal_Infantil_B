@@ -259,7 +259,7 @@ footer a{color:var(--ye);font-weight:700}
     <h2 class="rv">Directiva <span>Juncal</span></h2>
     <p class="sub rv">Las personas que hacen crecer a nuestro club.</p>
     <div class="grid" id="staff"></div>
-    <p style="margin-top:22px"><button class="btn" id="moreStaff" type="button" aria-expanded="false" aria-controls="staff">Todo nuestra directiva ↓</button></p>
+    <p style="margin-top:22px"><button class="btn" id="moreStaff" type="button" aria-expanded="false" aria-controls="staff">Toda nuestra directiva ↓</button></p>
   </div></section>
 
 
@@ -364,7 +364,7 @@ function updateStaff(){
   const g=$("#staff"),n=CONFIG.STAFF_VISIBLE,cs=[...g.children];
   cs.forEach((c,i)=>c.classList.toggle("x",!staffOpen&&i>=n));
   const b=$("#moreStaff");b.style.display=cs.length>n?"":"none";
-  b.textContent=staffOpen?"Ver menos ↑":"Todo nuestro cuerpo técnico ↓";b.setAttribute("aria-expanded",staffOpen)}
+  b.textContent=staffOpen?"Ver menos ↑":"Toda nuestra directiva ↓";b.setAttribute("aria-expanded",staffOpen)}
 $("#moreStaff").onclick=()=>{staffOpen=!staffOpen;updateStaff()};
 addEventListener("resize",updateStaff);updateStaff();
 function closeStaff(){const o=$("#stfOv");if(o)o.remove();document.body.style.overflow=""}

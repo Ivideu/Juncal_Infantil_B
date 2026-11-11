@@ -10,7 +10,7 @@
   "use strict";
   const FB = "https://juncal-f0b64-default-rtdb.europe-west1.firebasedatabase.app",
         KEY = "AIzaSyDXqBUkie30z_Cmyj__ayhzGYyYxZMrB3Q",
-        DOM = "@entrenador.juncal.app"; // el usuario de Firebase de cada equipo es <equipo>@entrenador.juncal.app
+        DOM = "@torrejonjuncal.es"; // el usuario de Firebase de cada equipo es <equipo>@torrejonjuncal.es
 
   const sc = document.currentScript;
   const file = (location.pathname.split("/").pop() || "").replace(/\.html?$/i, "");

@@ -1,0 +1,7 @@
+/* ===== Efecto 3D de los cromos (pegar al final de tu bloque de estilos) ===== */
+.cromo{--rx:0deg;--ry:0deg;--g:0;--mx:50%;--my:50%;position:relative;transform:perspective(700px) rotateX(var(--rx)) rotateY(var(--ry));transition:transform .35s ease,box-shadow .35s ease;touch-action:pan-y;will-change:transform}
+.cromo.tilting{z-index:2;transition:transform .08s linear,box-shadow .2s;transform:perspective(700px) rotateX(var(--rx)) rotateY(var(--ry)) scale(1.04);box-shadow:0 22px 40px #071b4b66}
+.cromo:after{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;opacity:var(--g);transition:opacity .3s;mix-blend-mode:soft-light;
+ background:radial-gradient(circle at var(--mx) var(--my),#ffffffcc 0,#ffffff44 28%,transparent 58%),linear-gradient(115deg,transparent 30%,#ffd23f55 42%,#7dd3fc55 50%,#f0abfc55 58%,transparent 70%);
+ background-size:auto,250% 100%;background-position:0 0,var(--mx) 50%}
+.cromo.mod{cursor:default;touch-action:none;border-radius:20px}

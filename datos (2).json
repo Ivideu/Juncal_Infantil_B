@@ -1,0 +1,476 @@
+{
+ "u": 1794423478240,
+ "m": {
+  "1_10": {
+   "t": "11:00",
+   "c": {
+    "ph": "FT",
+    "run": false,
+    "base": 1509854,
+    "s": 1791018159826,
+    "since": 1791021144947,
+    "fin": 1791021682677
+   },
+   "h": 2,
+   "a": 5,
+   "g": {
+    "6-Nico": 1,
+    "2-Manu": 1
+   },
+   "gm": {
+    "6-Nico": [
+     31
+    ],
+    "2-Manu": [
+     44
+    ]
+   },
+   "p": "TORREJON DE ARDOZ - P.M. NURIA FERNANDEZ"
+  },
+  "2_7": {
+   "d": "2026-10-18",
+   "t": "11:13",
+   "p": "ARGANDA - C.D. PRINCIPE FELIPE",
+   "c": {
+    "ph": "FT",
+    "run": false,
+    "base": 1498424,
+    "s": 1792314817933,
+    "since": 1792317590552,
+    "fin": 1792318261067
+   },
+   "h": 4,
+   "a": 2,
+   "g": {
+    "2-Manu": 1,
+    "7-Izan": 1
+   },
+   "gm": {
+    "2-Manu": [
+     7
+    ],
+    "7-Izan": [
+     25
+    ]
+   }
+  },
+  "3_10": {
+   "d": "2026-10-25",
+   "p": "TORREJON DE ARDOZ - P.M. NURIA FERNANDEZ",
+   "t": "13:00",
+   "h": 1,
+   "a": 4,
+   "g": {
+    "6-Nico": 1
+   },
+   "gm": {
+    "6-Nico": [
+     22
+    ]
+   },
+   "c": {
+    "ph": "FT",
+    "run": false,
+    "base": 1484233,
+    "s": 1792932483677,
+    "since": 1792932489744,
+    "fin": 1792933973977
+   }
+  },
+  "1_8": {
+   "h": "3",
+   "a": "2",
+   "t": "11:15"
+  },
+  "1_6": {
+   "h": "3",
+   "a": "2",
+   "t": "12:14"
+  },
+  "1_4": {
+   "d": "2026-10-04",
+   "h": "1",
+   "a": "4",
+   "t": "12:30"
+  },
+  "1_12": {
+   "h": "3",
+   "a": "5",
+   "t": "13:23"
+  },
+  "2_3": {
+   "t": "13:00",
+   "h": 0,
+   "a": 16
+  },
+  "2_9": {
+   "t": "14:45",
+   "h": 1,
+   "a": 5
+  },
+  "2_11": {
+   "t": "12:00",
+   "h": 1,
+   "a": 5
+  },
+  "2_2": {
+   "t": "17:00",
+   "h": 2,
+   "a": 3
+  },
+  "3_12": {
+   "t": "11:00",
+   "h": 4,
+   "a": 2
+  },
+  "4_11": {
+   "p": "P.M. MORATA DE TAJUÑA",
+   "d": "2026-11-08",
+   "t": "13:00",
+   "c": {
+    "ph": "FT",
+    "run": false,
+    "base": 1556863,
+    "s": 1794139091325,
+    "since": 1794142317641,
+    "fin": 1794142615361
+   },
+   "h": 3,
+   "a": 2,
+   "g": {
+    "7-Izan": 2
+   },
+   "gm": {
+    "7-Izan": [
+     25,
+     50
+    ]
+   }
+  },
+  "5_10": {
+   "p": "TORREJON DE ARDOZ - P.M. NURIA FERNANDEZ",
+   "t": "18:00"
+  },
+  "6_4": {
+   "p": "TORREJON DE ARDOZ - PAB. JORGE GARBAJOSA"
+  },
+  "7_10": {
+   "p": "TORREJON DE ARDOZ - P.M. NURIA FERNANDEZ"
+  },
+  "8_8": {
+   "p": "SAN FERNANDO - P.M. JUSTO GOMEZ SALTO"
+  },
+  "9_12": {
+   "p": "TORREJON DE ARDOZ - P.M. JOAQUIN BLUME"
+  },
+  "11_3": {
+   "p": "ALCALA - P.M. EMPERADOR FERNANDO"
+  },
+  "12_5": {
+   "p": "RIVAS - POLID. PARQUE SURESTE"
+  },
+  "13_10": {
+   "p": "TORREJON DE ARDOZ - P.M. NURIA FERNANDEZ"
+  },
+  "14_9": {
+   "p": "PARLA - P.M. EL NIDO"
+  },
+  "15_10": {
+   "p": "TORREJON DE ARDOZ - P.M. NURIA FERNANDEZ"
+  },
+  "16_2": {
+   "p": "P.M. SAN BLAS"
+  },
+  "17_10": {
+   "p": "TORREJON DE ARDOZ - P.M. NURIA FERNANDEZ"
+  },
+  "18_6": {
+   "p": "RIVAS - POLID. PARQUE SURESTE"
+  },
+  "19_10": {
+   "p": "TORREJON DE ARDOZ - P.M. NURIA FERNANDEZ"
+  },
+  "20_10": {
+   "p": "TORREJON DE ARDOZ - P.M. NURIA FERNANDEZ"
+  },
+  "22_10": {
+   "p": "TORREJON DE ARDOZ - P.M. NURIA FERNANDEZ"
+  },
+  "3_6": {
+   "t": "12:20",
+   "h": 7,
+   "a": 0
+  },
+  "3_8": {
+   "t": "11:00",
+   "h": 1,
+   "a": 2
+  },
+  "3_3": {
+   "t": "12:00",
+   "h": 4,
+   "a": 6
+  },
+  "101_101": {
+   "t": "10:00",
+   "c": {
+    "ph": "FT",
+    "run": false,
+    "base": 1502982,
+    "s": 1793437298701,
+    "since": 1793440312946,
+    "fin": 1793440844904
+   },
+   "h": 2,
+   "a": 0
+  },
+  "4_5": {
+   "t": "17:00",
+   "h": 3,
+   "a": 3
+  },
+  "4_7": {
+   "d": "2026-11-08",
+   "t": "13:30",
+   "h": 3,
+   "a": 0
+  },
+  "4_4": {
+   "t": "11:15",
+   "h": 1,
+   "a": 11
+  },
+  "4_2": {
+   "d": "2026-11-08",
+   "t": "20:10",
+   "h": 1,
+   "a": 3
+  },
+  "5_5": {
+   "d": "2026-11-15",
+   "t": "19:00"
+  },
+  "5_12": {
+   "t": "13:00"
+  },
+  "5_8": {
+   "t": "13:45"
+  },
+  "5_3": {
+   "d": "2026-11-15",
+   "t": "13:00"
+  }
+ },
+ "pl": [
+  "1-Rubén",
+  "10-Alex",
+  "11-Edu",
+  "15-Gabriel",
+  "18-Héctor",
+  "2-Manu",
+  "5-Erik",
+  "6-Nico",
+  "7-Izan",
+  "8-Joel",
+  "89-Pablo",
+  "99-Marcos",
+  "Diego",
+  "Pedro"
+ ],
+ "dn": {
+  "Pedro": "28",
+  "99-Marcos": "13",
+  "Diego": "3"
+ },
+ "av": {},
+ "pos": {},
+ "estado": {
+  "Ruben_1_portero": "convocado",
+  "Joel_8_ala": "descartado",
+  "Hector_18_ala": "convocado",
+  "Nico_6_cierre": "convocado",
+  "Pablo_89_portero": "convocado",
+  "Diego_3_ala": "descartado",
+  "Izan_7_pivot": "convocado",
+  "Erik_5_pivot": "convocado",
+  "Edu_11_ala": "convocado",
+  "Javi_entrenador": "convocado",
+  "Gabriel_15_ala": "convocado"
+ },
+ "off": {
+  "Diego": 1,
+  "8-Joel": 1
+ },
+ "cp": [
+  {
+   "id": 1,
+   "rd": "Copa",
+   "rv": "CDE SPORT LATINA - EM ALUCHE FS",
+   "home": false,
+   "d": "2026-10-31",
+   "pav": "COL. ESCUELAS PIAS CARABANCHEL - Calle Eugenia de Montijo, 83"
+  }
+ ],
+ "px": {
+  "actualizado": "2026-11-09T13:48:43.688Z",
+  "temporada": "2026/27",
+  "partidos": [
+   {
+    "id": "aficionado-a",
+    "categoria": "Aficionado A",
+    "liga": "Preferente Aficionado FS · Grupo 2",
+    "jornada": 7,
+    "fecha": "2026-11-14",
+    "hora": "20:20",
+    "local": "ASTON F.S. - ALSA",
+    "visitante": "Torrejón Juncal A",
+    "codLocal": "24035942",
+    "codVisitante": "18377727",
+    "casa": false,
+    "campo": "P.M. SAN BLAS"
+   },
+   {
+    "id": "aficionado-b",
+    "categoria": "Aficionado B",
+    "liga": "Primera Aficionado FS · Grupo 2",
+    "jornada": 5,
+    "fecha": "2026-11-15",
+    "hora": "19:15",
+    "local": "Torrejón Juncal B",
+    "visitante": "AGRUPACION AUTO-ESCUELA SIMANCAS 'C'",
+    "codLocal": "26753966",
+    "codVisitante": "27846617",
+    "casa": true,
+    "campo": "TORREJON DE ARDOZ - P.M. JOSE ANTONIO PARAISO"
+   },
+   {
+    "id": "juvenil-a",
+    "categoria": "Juvenil A",
+    "liga": "Preferente Juvenil FS · Grupo 2",
+    "jornada": 6,
+    "fecha": "2026-11-14",
+    "hora": "19:15",
+    "local": "Torrejón Juncal A",
+    "visitante": "C.D.E. COLEGIO ALEMAN DE MADRID 'A'",
+    "codLocal": "17156865",
+    "codVisitante": "22517854",
+    "casa": true,
+    "campo": "TORREJON DE ARDOZ - P.M. NURIA FERNANDEZ"
+   },
+   {
+    "id": "juvenil-b",
+    "categoria": "Juvenil B",
+    "liga": "Primera Juvenil FS · Grupo 2",
+    "jornada": 5,
+    "fecha": "2026-11-14",
+    "hora": "",
+    "local": "Descansa",
+    "visitante": "Torrejón Juncal B",
+    "codLocal": "-1",
+    "codVisitante": "19691247",
+    "casa": false,
+    "campo": ""
+   },
+   {
+    "id": "cadete-a",
+    "categoria": "Cadete A",
+    "liga": "Primera Cadete FS · Grupo 2",
+    "jornada": 5,
+    "fecha": "2026-11-15",
+    "hora": "16:00",
+    "local": "Torrejón Juncal A",
+    "visitante": "INTER FUTBOL SALA - JP FINANCIAL 'D'",
+    "codLocal": "19691126",
+    "codVisitante": "26740893",
+    "casa": true,
+    "campo": "TORREJON DE ARDOZ - P.M. NURIA FERNANDEZ"
+   },
+   {
+    "id": "cadete-b",
+    "categoria": "Cadete B",
+    "liga": "Primera Cadete FS · Grupo 4",
+    "jornada": 2,
+    "fecha": "2026-12-12",
+    "hora": "14:00",
+    "local": "CLUB CORAZONISTAS 'B'",
+    "visitante": "Torrejón Juncal B",
+    "codLocal": "26724899",
+    "codVisitante": "26753965",
+    "casa": false,
+    "campo": "COL. SAGRADO CORAZON"
+   },
+   {
+    "id": "infantil-a",
+    "categoria": "Infantil A",
+    "liga": "Preferente Infantil FS · Grupo 2",
+    "jornada": 7,
+    "fecha": "2026-11-15",
+    "hora": "17:00",
+    "local": "Torrejón Juncal A",
+    "visitante": "CLUB ARGANDA FUTSAL 'B'",
+    "codLocal": "18377726",
+    "codVisitante": "17148884",
+    "casa": true,
+    "campo": "TORREJON DE ARDOZ - P.M. NURIA FERNANDEZ"
+   },
+   {
+    "id": "infantil-b",
+    "categoria": "Infantil B",
+    "liga": "Primera Infantil FS · Grupo 2",
+    "jornada": 5,
+    "fecha": "2026-11-14",
+    "hora": "18:00",
+    "local": "Torrejón Juncal B",
+    "visitante": "ASTON F.S. 'C'",
+    "codLocal": "24193914",
+    "codVisitante": "24116776",
+    "casa": true,
+    "campo": "TORREJON DE ARDOZ - P.M. NURIA FERNANDEZ"
+   },
+   {
+    "id": "alevin-a",
+    "categoria": "Alevín A",
+    "liga": "Alevín FS · Grupo 3",
+    "jornada": 5,
+    "fecha": "2026-11-15",
+    "hora": "12:15",
+    "local": "CDE FUSION FUTBOL SALA SAN FERNANDO 'A'",
+    "visitante": "Torrejón Juncal A",
+    "codLocal": "18377690",
+    "codVisitante": "19691198",
+    "casa": false,
+    "campo": "SAN FERNANDO - P.M. JUSTO GOMEZ SALTO"
+   },
+   {
+    "id": "alevin-b",
+    "categoria": "Alevín B",
+    "liga": "Alevín FS · Grupo 2",
+    "jornada": 5,
+    "fecha": "2026-11-14",
+    "hora": "11:00",
+    "local": "Torrejón Juncal B",
+    "visitante": "CD RIVAS FUTSAL - YOUFIRST SMART FINACE 'B'",
+    "codLocal": "26753964",
+    "codVisitante": "17149274",
+    "casa": true,
+    "campo": "TORREJON DE ARDOZ - P.M. NURIA FERNANDEZ"
+   }
+  ]
+ },
+ "ent": {
+  "2026-11-11": {
+   "Ruben_1_portero": 1,
+   "Marcos_13_portero": 0,
+   "Pablo_89_portero": 1,
+   "Manu_2_cierre": 0,
+   "Erik_5_pivot": 0,
+   "Nico_6_cierre": 0,
+   "Izan_7_pivot": 1,
+   "Alex_10_ala": 1,
+   "Edu_11_ala": 1,
+   "Gabriel_15_ala": 0,
+   "Hector_18_ala": 1,
+   "Pedro_28_ala": 0
+  }
+ }
+}

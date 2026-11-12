@@ -49,7 +49,7 @@ dialog h2{margin:0 0 12px;font-size:18px}label{display:block;margin:10px 0 4px;f
 <dialog id="dlg"><h2>Acceso</h2>
   <div class="seg"><button data-r="coach" class="on">Entrenador</button><button data-r="player">Jugador</button></div>
   <label for="cat">Categoría</label><select id="cat" style="width:100%"></select>
-  <label for="pin">Código</label><input id="pin" type="password" autocomplete="off" inputmode="text">
+  <label for="pin">Contraseña (entrenador) · Código (jugador)</label><input id="pin" type="password" autocomplete="off" inputmode="text">
   <div class="msg" id="err"></div>
   <div class="row"><button id="cancel">Cancelar</button><button id="go" class="p">Entrar</button></div>
 </dialog>
@@ -64,21 +64,24 @@ dialog h2{margin:0 0 12px;font-size:18px}label{display:block;margin:10px 0 4px;f
 
 <script>
 /* ============ CONFIGURACIÓN ============
- Los códigos van como hash SHA-256. Para generar uno: abre acceso.html#hash=MICODIGO
- y copia el resultado. */
+ Entrenadores: entran con su usuario de Firebase (la contraseña la gestiona Firebase).
+ Jugadores: código opcional como hash SHA-256; para generarlo abre acceso.html#hash=MICODIGO. */
 const CFG={
   owner:"TU_USUARIO", repo:"TU_REPOSITORIO", branch:"main", folder:"Pizarra",
-  cats:{
-    "Aficionado A":{coach:"",player:""},
-    "Aficionado B":{coach:"",player:""},
-    "Juvenil A":{coach:"",player:""},
-    "Juvenil B":{coach:"",player:""},
-    "Cadete A":{coach:"",player:""},
-    "Cadete B":{coach:"",player:""},
-    "Infantil A":{coach:"",player:""},
-    "Infantil B":{coach:"",player:""},
-    "Alevín A":{coach:"",player:""},
-    "Alevín B":{coach:"",player:""}
+  fbUrl:"https://juncal-f0b64-default-rtdb.europe-west1.firebasedatabase.app",
+  apiKey:"TU_API_KEY",            /* de Firebase: Configuración del proyecto > Tus apps */
+  dominio:"@torrejonjuncal.es",   /* entrenador = id + dominio, p. ej. alevin-a@torrejonjuncal.es */
+  cats:{   /* player: hash opcional del código de jugadores ("" = sin código) */
+    "Aficionado A":{id:"aficionado-a",player:""},
+    "Aficionado B":{id:"aficionado-b",player:""},
+    "Juvenil A":{id:"juvenil-a",player:""},
+    "Juvenil B":{id:"juvenil-b",player:""},
+    "Cadete A":{id:"cadete-a",player:""},
+    "Cadete B":{id:"cadete-b",player:""},
+    "Infantil A":{id:"infantil-a",player:""},
+    "Infantil B":{id:"infantil-b",player:""},
+    "Alevín A":{id:"alevin-a",player:""},
+    "Alevín B":{id:"alevin-b",player:""}
   }
 };
 /* ======================================= */
@@ -95,11 +98,21 @@ $("#cat").innerHTML=Object.keys(CFG.cats).map(c=>`<option>${esc(c)}</option>`).j
 $("#lock").onclick=()=>{$("#err").textContent="";$("#pin").value="";$("#dlg").showModal()};
 $("#cancel").onclick=()=>$("#dlg").close();
 $$("[data-r]").forEach(b=>b.onclick=()=>{role=b.dataset.r;$$("[data-r]").forEach(x=>x.classList.toggle("on",x===b))});
+const save=()=>sessionStorage.setItem("juncal_ses",JSON.stringify(ses));
+const fbAuth=async b=>{const r=await fetch(`https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${CFG.apiKey}`,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({...b,returnSecureToken:true})});const d=await r.json();if(!r.ok)throw 0;return{tok:d.idToken,ref:d.refreshToken,exp:Date.now()+d.expiresIn*1000-60000}};
+async function token(){
+  if(Date.now()<ses.exp)return ses.tok;
+  const r=await fetch(`https://securetoken.googleapis.com/v1/token?key=${CFG.apiKey}`,{method:"POST",headers:{"Content-Type":"application/x-www-form-urlencoded"},body:"grant_type=refresh_token&refresh_token="+ses.ref});
+  const d=await r.json();if(!r.ok)throw new Error("Sesión caducada: vuelve a entrar");
+  Object.assign(ses,{tok:d.id_token,ref:d.refresh_token,exp:Date.now()+d.expires_in*1000-60000});save();return ses.tok;
+}
 $("#go").onclick=async()=>{
-  const c=$("#cat").value,exp=CFG.cats[c][role],pin=$("#pin").value;
-  if(exp&&await sha(pin)!==exp){$("#err").textContent="Código incorrecto";return}
-  if(!exp&&role==="coach"){$("#err").textContent="Esta categoría no tiene código de entrenador configurado";return}
-  ses={role,cat:c};sessionStorage.setItem("juncal_ses",JSON.stringify(ses));$("#dlg").close();start();
+  const c=$("#cat").value,k=CFG.cats[c],pin=$("#pin").value;$("#err").textContent="";
+  try{
+    if(role==="coach")ses={role,cat:c,id:k.id,...await fbAuth({email:k.id+CFG.dominio,password:pin})};
+    else{if(k.player&&await sha(pin)!==k.player){$("#err").textContent="Código incorrecto";return}ses={role,cat:c,id:k.id}}
+  }catch(e){$("#err").textContent="Usuario o contraseña incorrectos";return}
+  save();$("#dlg").close();start();
 };
 $("#out").onclick=()=>{sessionStorage.removeItem("juncal_ses");location.reload()};
 
@@ -112,13 +125,9 @@ function start(){
 }
 
 /* ---------- vídeos publicados ---------- */
-async function readIndex(){
-  const r=await fetch(`${CFG.folder}/jugadas.json?`+Date.now());
-  return r.ok?r.json():[];
-}
 async function showList(box){
   box.innerHTML='<div class="empty">Cargando…</div>';
-  let l=[];try{l=(await readIndex()).filter(j=>j.cat===ses.cat)}catch(e){}
+  let l=[];try{const d=await(await fetch(`${CFG.fbUrl}/pizarra/${ses.id}.json`,{cache:"no-store"})).json();l=Object.values(d||{}).sort((a,b)=>b.ts-a.ts)}catch(e){}
   box.innerHTML=l.length?'<div class="grid">'+l.map(j=>`<div class="card"><video controls preload="metadata" playsinline src="${esc(CFG.folder+"/"+j.video)}"></video><div><b>${esc(j.title)}</b><small>${esc(j.cat)} · ${esc(j.date)}</small></div></div>`).join("")+"</div>":'<div class="empty">Todavía no hay jugadas para '+esc(ses.cat)+'.</div>';
 }
 
@@ -136,7 +145,7 @@ function initCoach(){
 }
 function openPub(blob,name,ext){
   pend={blob,ext};$("#ptit").value=name;$("#perr").textContent="";
-  $("#ppath").textContent=`${CFG.folder}/${slug(ses.cat)}/…`;$("#pub").showModal();
+  $("#ppath").textContent=`${CFG.folder}/${ses.id}/…`;$("#pub").showModal();
 }
 $("#pdl").onclick=()=>{
   const a=document.createElement("a");a.href=URL.createObjectURL(pend.blob);a.download=slug($("#ptit").value)+"."+pend.ext;a.click();$("#pub").close();
@@ -158,14 +167,13 @@ $("#pok").onclick=async()=>{
   if(!localStorage.getItem("juncal_tok")){err.textContent="Falta el token: ve a Ajustes";return}
   $("#pok").disabled=true;err.style.color="#fff";err.textContent="Subiendo…";
   try{
-    const id=slug(title)+"-"+Date.now().toString(36),dir=`${CFG.folder}/${slug(ses.cat)}`,vid=`${slug(ses.cat)}/${id}.${pend.ext}`;
+    const id=slug(title)+"-"+Date.now().toString(36),dir=`${CFG.folder}/${ses.id}`,vid=`${ses.id}/${id}.${pend.ext}`;
     await gh(`${dir}/${id}.${pend.ext}`,await b64(pend.blob));
     const pz=$("#fr").contentWindow.__pz;
     await gh(`${dir}/${id}.json`,u8(JSON.stringify({v:1,name:title,frames:pz.frames})));
-    const cur=await gh(`${CFG.folder}/jugadas.json`);
-    const list=cur?JSON.parse(new TextDecoder().decode(Uint8Array.from(atob(cur.content.replace(/\n/g,"")),c=>c.charCodeAt(0)))):[];
-    list.unshift({id,title,cat:ses.cat,video:vid,date:new Date().toISOString().slice(0,10)});
-    await gh(`${CFG.folder}/jugadas.json`,u8(JSON.stringify(list,null,1)));
+    const t=await token();
+    const r=await fetch(`${CFG.fbUrl}/pizarra/${ses.id}/${id}.json?auth=${t}`,{method:"PUT",body:JSON.stringify({id,title,cat:ses.cat,video:vid,date:new Date().toISOString().slice(0,10),ts:Date.now()})});
+    if(!r.ok)throw new Error("Firebase no permitió guardar: revisa las reglas");
     $("#pub").close();toast("Publicado en "+dir+" (se verá en ~1 min)");
   }catch(e){err.style.color="#fca5a5";err.textContent=e.message||"No se pudo subir"}
   $("#pok").disabled=false;

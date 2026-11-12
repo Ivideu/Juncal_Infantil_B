@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Pizarra táctica · Fútbol sala · Escuela Torrejón Juncal</title>
+<style>
+:root{--bl:#0b2a6f;--bl2:#123c9c;--ye:#ffd23f;--bg:#071a45;--panel:#0d2561;--line:rgba(255,255,255,.16)}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html,body{margin:0}
+body{font:14px/1.3 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;background:var(--bg);color:#fff;padding:10px}
+.app{max-width:1200px;margin:0 auto;display:flex;flex-direction:column;gap:8px}
+.bar{display:flex;flex-wrap:wrap;gap:6px 14px;align-items:center;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:8px 10px}
+.grp{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.grp>b{font-size:11px;letter-spacing:.08em;text-transform:uppercase;opacity:.65;margin-right:2px}
+button,select,input{font:inherit;color:#fff;background:#173a8f;border:1px solid var(--line);border-radius:8px;padding:6px 10px;min-height:34px}
+button{cursor:pointer;transition:background .15s,transform .05s}
+button:hover{background:#1f4cb8}
+button:active{transform:translateY(1px)}
+button:focus-visible,select:focus-visible,input:focus-visible{outline:3px solid var(--ye);outline-offset:1px}
+button.on{background:var(--ye);color:#0b2a6f;border-color:var(--ye);font-weight:700}
+button.primary{background:var(--ye);color:#0b2a6f;font-weight:700;border-color:var(--ye)}
+button.primary:hover{background:#ffe27a}
+button.rec{background:#dc2626;border-color:#dc2626;font-weight:700}
+button.rec:hover{background:#ef4444}
+button:disabled{opacity:.4;cursor:not-allowed}
+.dot{display:inline-block;width:11px;height:11px;border-radius:50%;margin-right:6px;vertical-align:-1px;border:1.5px solid rgba(0,0,0,.45)}
+select{padding-right:6px}
+input[type=text]{background:#0a1f55;min-width:0}
+#lab{width:64px;text-align:center}
+.cvw{border-radius:14px;overflow:hidden;border:1px solid var(--line);box-shadow:0 10px 30px rgba(0,0,0,.35);background:#0a1f55}
+canvas{display:block;width:100%;aspect-ratio:43.2/23.2;touch-action:none;cursor:default}
+canvas.draw{cursor:crosshair}
+#frames{display:flex;gap:6px;flex-wrap:wrap;align-items:center}
+#frames button{min-width:38px;padding:6px 8px}
+.sp{flex:1}
+#toast{position:fixed;left:50%;bottom:18px;transform:translateX(-50%);background:#fff;color:#0b2a6f;padding:9px 16px;border-radius:999px;font-weight:600;box-shadow:0 6px 20px rgba(0,0,0,.4);opacity:0;pointer-events:none;transition:opacity .2s;z-index:9}
+#toast.show{opacity:1}
+.hint{font-size:12px;opacity:.7;padding:0 4px}
+label.chk{display:flex;align-items:center;gap:6px;cursor:pointer}
+label.chk input{min-height:0;width:16px;height:16px;padding:0}
+@media(max-width:640px){body{padding:6px}.bar{padding:6px 8px}button,select,input{padding:6px 8px;font-size:13px}}
+</style>
+</head>
+<body>
+<div class="app">
+
+  <div class="bar">
+    <div class="grp"><b>Añadir</b>
+      <button data-add="j"><span class="dot" style="background:#ffd23f"></span>Juncal</button>
+      <button data-add="r"><span class="dot" style="background:#ef4444"></span>Rival</button>
+      <button data-add="gj"><span class="dot" style="background:#34d399"></span>Portero J.</button>
+      <button data-add="gr"><span class="dot" style="background:#a855f7"></span>Portero R.</button>
+      <button data-add="ball">⚽ Balón</button>
+      <button data-add="goal">🥅 Portería</button>
+      <button data-add="cone">🔶 Cono</button>
+    </div>
+    <div class="grp"><b>Colocar</b>
+      <select id="form" aria-label="Sistema de juego">
+        <option value="121">1-2-1 (rombo)</option>
+        <option value="22">2-2</option>
+        <option value="31">3-1</option>
+        <option value="40">4-0</option>
+      </select>
+      <button id="fj">Juncal</button>
+      <button id="fr">Rival</button>
+    </div>
+  </div>
+
+  <div class="bar">
+    <div class="grp" id="tools"><b>Herramienta</b>
+      <button data-tool="move" class="on">✥ Mover</button>
+      <button data-tool="pass">→ Pase</button>
+      <button data-tool="run">⇢ Desplazamiento</button>
+      <button data-tool="drib">〰 Conducción</button>
+      <button data-tool="free">✎ Libre</button>
+      <button id="undo" title="Deshacer último trazo">↶ Trazo</button>
+      <button id="clr" title="Borrar los trazos de este paso">Borrar trazos</button>
+    </div>
+    <div class="grp" id="selg" hidden><b>Seleccionado</b>
+      <input type="text" id="lab" maxlength="3" placeholder="Nº" aria-label="Número o texto">
+      <button id="rot">⟳ Girar</button>
+      <button id="del">🗑 Quitar</button>
+    </div>
+  </div>
+
+  <div class="cvw"><canvas id="cv" aria-label="Pizarra táctica de fútbol sala"></canvas></div>
+
+  <div class="bar">
+    <div class="grp"><b>Pasos</b><div id="frames"></div>
+      <button id="addf" class="primary">+ Nuevo paso</button>
+      <button id="delf">Quitar paso</button>
+    </div>
+    <div class="grp"><b>Animación</b>
+      <button id="play" class="primary">▶ Reproducir</button>
+      <select id="speed" aria-label="Duración de cada paso">
+        <option value="2.5">Lento</option>
+        <option value="1.6" selected>Normal</option>
+        <option value="0.9">Rápido</option>
+      </select>
+      <label class="chk"><input type="checkbox" id="loop"> Bucle</label>
+    </div>
+    <div class="grp"><b>Exportar</b>
+      <button id="rec" class="rec">⏺ Grabar vídeo</button>
+      <button id="png">🖼 Imagen</button>
+    </div>
+  </div>
+
+  <div class="bar">
+    <div class="grp"><b>Sesiones</b>
+      <input type="text" id="name" placeholder="Nombre de la sesión" maxlength="40" style="width:190px">
+      <button id="save" class="primary">Guardar</button>
+      <select id="list" aria-label="Sesiones guardadas" style="max-width:200px"><option value="">— guardadas —</option></select>
+      <button id="open">Abrir</button>
+      <button id="rm">Borrar</button>
+    </div>
+    <div class="grp">
+      <button id="exp">⬇ Archivo</button>
+      <button id="imp">⬆ Abrir archivo</button>
+      <input type="file" id="file" accept=".json,application/json" hidden>
+    </div>
+  </div>
+  <div class="hint">Cada paso es una posición. Coloca a los jugadores, pulsa «+ Nuevo paso», muévelos de nuevo y al reproducir se desplazan solos. Las sesiones se guardan en este navegador; usa «Archivo» para pasarlas a otro equipo.</div>
+</div>
+<div id="toast" role="status"></div>
+
+<script>
+(()=>{
+"use strict";
+const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
+const W=40,H=20,M=1.6,VW=W+2*M,VH=H+2*M;
+const cv=$("#cv"),cx=cv.getContext("2d");
+let S=1,K=1;
+
+/* ---------- estado ---------- */
+let frames=[{items:[],lines:[]}],cur=0,sel=null,nextId=1,tool="move",play=null,drag=null,drawing=null;
+const clone=o=>JSON.parse(JSON.stringify(o));
+const COL={j:["#ffd23f","#0b2a6f"],r:["#ef4444","#fff"],gj:["#34d399","#052e1f"],gr:["#a855f7","#fff"]};
+const isP=t=>t in COL;
+const Z=t=>t==="goal"?0:t==="cone"?1:t==="ball"?3:2;
+const F=()=>frames[cur];
+
+/* ---------- pista ---------- */
+function px(x){return (x+M)*S}
+function court(){
+  const w=cv.width,h=cv.height;
+  cx.fillStyle="#0a1f55";cx.fillRect(0,0,w,h);
+  cx.fillStyle="#1f5fc0";cx.fillRect(px(0),px(0),W*S,H*S);
+  cx.fillStyle="rgba(255,255,255,.045)";
+  for(let i=0;i<8;i+=2)cx.fillRect(px(i*5),px(0),5*S,H*S);
+  cx.strokeStyle="#fff";cx.lineWidth=.1*S;cx.lineCap="round";
+  cx.strokeRect(px(0),px(0),W*S,H*S);
+  const L=(a,b,c,d)=>{cx.beginPath();cx.moveTo(px(a),px(b));cx.lineTo(px(c),px(d));cx.stroke()};
+  const A=(x,y,r,a,b)=>{cx.beginPath();cx.arc(px(x),px(y),r*S,a,b);cx.stroke()};
+  L(20,0,20,H);A(20,10,3,0,Math.PI*2);
+  // áreas
+  A(0,8.5,6,-Math.PI/2,0);A(0,11.5,6,0,Math.PI/2);L(6,8.5,6,11.5);
+  A(40,8.5,6,Math.PI,Math.PI*1.5);A(40,11.5,6,Math.PI/2,Math.PI);L(34,8.5,34,11.5);
+  // esquinas
+  A(0,0,.25,0,Math.PI/2);A(40,0,.25,Math.PI/2,Math.PI);A(0,20,.25,-Math.PI/2,0);A(40,20,.25,Math.PI,Math.PI*1.5);
+  // marcas
+  cx.fillStyle="#fff";
+  [[20,10,.14],[6,10,.14],[34,10,.14],[10,10,.1],[30,10,.1]].forEach(([x,y,r])=>{cx.beginPath();cx.arc(px(x),px(y),r*S,0,7);cx.fill()});
+  // porterías fijas
+  [[0,-1],[40,1]].forEach(([x,d])=>{
+    const x0=px(x),x1=px(x+d*.9);
+    cx.save();cx.lineWidth=.07*S;cx.fillStyle="rgba(255,255,255,.12)";
+    cx.fillRect(Math.min(x0,x1),px(8.5),Math.abs(x1-x0),3*S);
+    cx.strokeStyle="rgba(255,255,255,.55)";cx.lineWidth=.03*S;
+    for(let k=1;k<6;k++){cx.beginPath();cx.moveTo(x0,px(8.5+k*.5));cx.lineTo(x1,px(8.5+k*.5));cx.stroke()}
+    for(let k=1;k<3;k++){const xx=x0+(x1-x0)*k/3;cx.beginPath();cx.moveTo(xx,px(8.5));cx.lineTo(xx,px(11.5));cx.stroke()}
+    cx.strokeStyle="#fff";cx.lineWidth=.1*S;
+    cx.strokeRect(Math.min(x0,x1),px(8.5),Math.abs(x1-x0),3*S);
+    cx.restore();
+  });
+}
+
+/* ---------- elementos ---------- */
+function item(it,x,y,a){
+  const X=px(x),Y=px(y);
+  cx.save();cx.globalAlpha=a;
+  if(it.t==="goal"){
+    cx.translate(X,Y);cx.rotate((it.rot||0)*Math.PI/2);
+    const w=1*S,h=3*S;
+    cx.fillStyle="rgba(255,255,255,.18)";cx.fillRect(-w/2,-h/2,w,h);
+    cx.strokeStyle="rgba(255,255,255,.6)";cx.lineWidth=.03*S;
+    for(let k=1;k<6;k++){cx.beginPath();cx.moveTo(-w/2,-h/2+k*h/6);cx.lineTo(w/2,-h/2+k*h/6);cx.stroke()}
+    for(let k=1;k<3;k++){cx.beginPath();cx.moveTo(-w/2+k*w/3,-h/2);cx.lineTo(-w/2+k*w/3,h/2);cx.stroke()}
+    cx.strokeStyle="#fff";cx.lineWidth=.1*S;cx.strokeRect(-w/2,-h/2,w,h);
+    cx.fillStyle="#fff";[-h/2,h/2].forEach(yy=>{cx.beginPath();cx.arc(w/2,yy,.13*S,0,7);cx.fill()});
+  }else if(it.t==="ball"){
+    const r=.34*S*K;cx.fillStyle="rgba(0,0,0,.3)";cx.beginPath();cx.ellipse(X+r*.2,Y+r*.8,r,r*.4,0,0,7);cx.fill();
+    cx.fillStyle="#fff";cx.strokeStyle="#111";cx.lineWidth=.05*S;cx.beginPath();cx.arc(X,Y,r,0,7);cx.fill();cx.stroke();
+    cx.fillStyle="#111";cx.beginPath();
+    for(let k=0;k<5;k++){const an=-Math.PI/2+k*Math.PI*2/5;cx.lineTo(X+Math.cos(an)*r*.45,Y+Math.sin(an)*r*.45)}
+    cx.fill();
+    for(let k=0;k<5;k++){const an=-Math.PI/2+k*Math.PI*2/5;cx.beginPath();cx.moveTo(X+Math.cos(an)*r*.45,Y+Math.sin(an)*r*.45);cx.lineTo(X+Math.cos(an)*r*.95,Y+Math.sin(an)*r*.95);cx.stroke()}
+  }else if(it.t==="cone"){
+    const s=.42*S*K;cx.fillStyle="#fb923c";cx.strokeStyle="rgba(0,0,0,.4)";cx.lineWidth=.04*S;
+    cx.beginPath();cx.moveTo(X,Y-s);cx.lineTo(X+s*.9,Y+s*.8);cx.lineTo(X-s*.9,Y+s*.8);cx.closePath();cx.fill();cx.stroke();
+    cx.fillStyle="#fff";cx.fillRect(X-s*.38,Y+s*.05,s*.76,s*.22);
+  }else{
+    const R=.62*S*K,[c,tc]=COL[it.t];
+    cx.fillStyle="rgba(0,0,0,.3)";cx.beginPath();cx.ellipse(X+R*.15,Y+R*.8,R,R*.42,0,0,7);cx.fill();
+    if(it.t[0]==="g"){cx.fillStyle="#fff";[-1,1].forEach(d=>{cx.beginPath();cx.arc(X+d*R*1.08,Y,R*.36,0,7);cx.fill()})}
+    cx.fillStyle=c;cx.strokeStyle="rgba(0,0,0,.5)";cx.lineWidth=.08*S;cx.beginPath();cx.arc(X,Y,R,0,7);cx.fill();cx.stroke();
+    cx.fillStyle="rgba(255,255,255,.28)";cx.beginPath();cx.ellipse(X-R*.3,Y-R*.4,R*.4,R*.22,-.5,0,7);cx.fill();
+    if(it.n){cx.fillStyle=tc;cx.font=`800 ${R*(it.n.length>2?.8:1.05)}px system-ui,sans-serif`;cx.textAlign="center";cx.textBaseline="middle";cx.fillText(it.n,X,Y+R*.06)}
+  }
+  cx.restore();
+}
+function ring(it){
+  const X=px(it.x),Y=px(it.y);
+  cx.save();cx.strokeStyle="#ffd23f";cx.lineWidth=.08*S;cx.setLineDash([.25*S,.2*S]);
+  cx.beginPath();cx.arc(X,Y,(it.t==="goal"?1.9:it.t==="ball"?.7*K:1.05*K)*S,0,7);cx.stroke();cx.restore();
+}
+
+/* ---------- trazos ---------- */
+const LC={pass:"#fff",run:"#fff",drib:"#ffd23f",free:"#7dd3fc"};
+function wavy(a,b){
+  const dx=b[0]-a[0],dy=b[1]-a[1],len=Math.hypot(dx,dy)||1,n=Math.max(4,Math.ceil(len/.1)),nx=-dy/len,ny=dx/len,o=[];
+  for(let i=0;i<=n;i++){const t=i/n,d=t*len,tp=Math.min(1,d/.7,(len-d)/.7),off=Math.sin(d/.85*Math.PI*2)*.24*Math.max(0,tp);
+    o.push([a[0]+dx*t+nx*off,a[1]+dy*t+ny*off])}
+  return o;
+}
+function line(l){
+  const p=l.pts;if(p.length<2)return;
+  cx.save();cx.lineWidth=.13*S;cx.lineCap="round";cx.lineJoin="round";cx.strokeStyle=cx.fillStyle=LC[l.k];
+  const path=l.k==="drib"?wavy(p[0],p[p.length-1]):p;
+  if(l.k==="run")cx.setLineDash([.5*S,.36*S]);
+  cx.beginPath();path.forEach((q,i)=>i?cx.lineTo(px(q[0]),px(q[1])):cx.moveTo(px(q[0]),px(q[1])));cx.stroke();
+  cx.setLineDash([]);
+  if(l.k!=="free"){
+    const a=p[0],b=p[p.length-1],an=Math.atan2(b[1]-a[1],b[0]-a[0]),h=.6;
+    cx.beginPath();cx.moveTo(px(b[0]),px(b[1]));
+    [-.45,.45].forEach(d=>cx.lineTo(px(b[0]-Math.cos(an+d)*h),px(b[1]-Math.sin(an+d)*h)));
+    cx.closePath();cx.fill();
+  }
+  cx.restore();
+}
+
+/* ---------- vista (con interpolación durante la animación) ---------- */
+const ease=t=>t<.5?2*t*t:1-Math.pow(-2*t+2,2)/2;
+function view(){
+  if(play&&play.seg!=null){
+    const A=frames[play.seg],B=frames[Math.min(play.seg+1,frames.length-1)],t=ease(play.t),out=[];
+    A.items.forEach(a=>{
+      const b=B.items.find(i=>i.id===a.id);
+      if(b)out.push({...a,x:a.x+(b.x-a.x)*t,y:a.y+(b.y-a.y)*t,rot:t>.5?b.rot:a.rot,n:t>.5?b.n:a.n,a:1});
+      else out.push({...a,a:1-t});
+    });
+    B.items.forEach(b=>{if(!A.items.some(a=>a.id===b.id))out.push({...b,a:t})});
+    return {items:out,lines:A.lines};
+  }
+  return {items:F().items.map(i=>({...i,a:1})),lines:F().lines.concat(drawing?[drawing]:[])};
+}
+function draw(){
+  cx.setTransform(1,0,0,1,0,0);
+  court();
+  const v=view();
+  v.lines.forEach(line);
+  v.items.map((it,k)=>[it,k]).sort((a,b)=>Z(a[0].t)-Z(b[0].t)||a[1]-b[1]).forEach(([it])=>item(it,it.x,it.y,it.a));
+  if(!play){const s=F().items.find(i=>i.id===sel);if(s)ring(s)}
+  const fs=M*S*.5;cx.fillStyle="rgba(255,255,255,.75)";cx.font=`600 ${fs}px system-ui,sans-serif`;cx.textBaseline="middle";
+  const idx=play&&play.seg!=null?Math.min(play.seg+(play.t>.5?1:0),frames.length-1):cur;
+  cx.textAlign="left";cx.fillText(`Paso ${idx+1} / ${frames.length}`,px(0),M*S*.5);
+  cx.textAlign="right";cx.fillText("Escuela Torrejón Juncal",px(W),M*S*.5);
+}
+
+/* ---------- ajuste de tamaño ---------- */
+function fit(){
+  const r=cv.getBoundingClientRect(),d=Math.min(2,window.devicePixelRatio||1);
+  cv.width=Math.round(r.width*d);cv.height=Math.round(r.width*VH/VW*d);S=cv.width/VW;K=r.width<700?1.45:1;draw();
+}
+new ResizeObserver(()=>{if(!(play&&play.rec))fit()}).observe(cv);
+
+/* ---------- puntero ---------- */
+function pos(e){
+  const r=cv.getBoundingClientRect();
+  const x=(e.clientX-r.left)/r.width*VW-M,y=(e.clientY-r.top)/r.height*VH-M;
+  return [Math.max(-M+.4,Math.min(W+M-.4,x)),Math.max(-M+.4,Math.min(H+M-.4,y))];
+}
+function hit(p){
+  const its=F().items.map((it,k)=>[it,k]).sort((a,b)=>Z(b[0].t)-Z(a[0].t)||b[1]-a[1]);
+  for(const [it] of its){
+    const dx=p[0]-it.x,dy=p[1]-it.y;
+    if(it.t==="goal"){
+      const an=-(it.rot||0)*Math.PI/2,lx=dx*Math.cos(an)-dy*Math.sin(an),ly=dx*Math.sin(an)+dy*Math.cos(an);
+      if(Math.abs(lx)<.9&&Math.abs(ly)<1.7)return it;
+    }else if(Math.hypot(dx,dy)<(it.t==="ball"||it.t==="cone"?.75*K:.95*K))return it;
+  }
+  return null;
+}
+cv.addEventListener("pointerdown",e=>{
+  if(play)return;
+  const p=pos(e);cv.setPointerCapture(e.pointerId);
+  if(tool==="move"){
+    const it=hit(p);
+    sel=it?it.id:null;
+    if(it)drag={it,dx:it.x-p[0],dy:it.y-p[1]};
+    syncSel();draw();
+  }else{
+    drawing={k:tool,pts:[p,p]};draw();
+  }
+});
+cv.addEventListener("pointermove",e=>{
+  const p=pos(e);
+  if(drag){drag.it.x=Math.max(-M+.6,Math.min(W+M-.6,p[0]+drag.dx));drag.it.y=Math.max(-M+.6,Math.min(H+M-.6,p[1]+drag.dy));draw()}
+  else if(drawing){
+    if(drawing.k==="free"){const l=drawing.pts[drawing.pts.length-1];if(Math.hypot(p[0]-l[0],p[1]-l[1])>.15)drawing.pts.push(p)}
+    else drawing.pts[1]=p;
+    draw();
+  }
+});
+const up=()=>{
+  drag=null;
+  if(drawing){
+    const a=drawing.pts[0],b=drawing.pts[drawing.pts.length-1];
+    if(Math.hypot(b[0]-a[0],b[1]-a[1])>.5)F().lines.push(drawing);
+    drawing=null;draw();
+  }
+};
+cv.addEventListener("pointerup",up);cv.addEventListener("pointercancel",up);
+
+/* ---------- herramientas ---------- */
+$$("[data-tool]").forEach(b=>b.onclick=()=>{
+  tool=b.dataset.tool;$$("[data-tool]").forEach(x=>x.classList.toggle("on",x===b));
+  cv.classList.toggle("draw",tool!=="move");
+  if(tool!=="move"){sel=null;syncSel();draw()}
+});
+$("#undo").onclick=()=>{if(play)return;F().lines.pop();draw()};
+$("#clr").onclick=()=>{if(play)return;F().lines=[];draw()};
+
+function syncSel(){
+  const s=F().items.find(i=>i.id===sel);
+  $("#selg").hidden=!s;
+  if(s){
+    $("#lab").hidden=!isP(s.t);$("#lab").value=s.n||"";
+    $("#rot").hidden=s.t!=="goal";
+  }
+}
+$("#lab").oninput=e=>{const s=F().items.find(i=>i.id===sel);if(s){s.n=e.target.value.slice(0,3);draw()}};
+$("#rot").onclick=()=>{const s=F().items.find(i=>i.id===sel);if(s){s.rot=((s.rot||0)+1)%4;draw()}};
+function delSel(){
+  if(play||sel==null)return;
+  F().items=F().items.filter(i=>i.id!==sel);sel=null;syncSel();draw();
+}
+$("#del").onclick=delSel;
+document.addEventListener("keydown",e=>{
+  if(e.target.tagName==="INPUT"||e.target.tagName==="SELECT")return;
+  if(e.key==="Delete"||e.key==="Backspace"){e.preventDefault();delSel()}
+  if(e.key==="Escape"){sel=null;syncSel();draw()}
+});
+
+function add(t,x,y,n){
+  const items=F().items,k=items.length;
+  const it={id:nextId++,t,x:x??20+((k%5)-2)*1.6,y:y??10+(Math.floor(k/5)%3-1)*1.6,rot:0};
+  if(isP(t))it.n=n??(t[0]==="g"?"1":String(items.filter(i=>i.t===t).length+1));
+  items.push(it);return it;
+}
+$$("[data-add]").forEach(b=>b.onclick=()=>{
+  if(play)return;
+  if(tool!=="move")$('[data-tool="move"]').click();
+  const it=add(b.dataset.add);sel=it.id;syncSel();draw();
+});
+
+/* ---------- sistemas de juego (Juncal ataca hacia la derecha) ---------- */
+const FORM={
+  121:[[10,10],[17,4.5],[17,15.5],[27,10]],
+  22:[[10,5.5],[10,14.5],[20,5],[20,15]],
+  31:[[10,10],[14,4],[14,16],[26,10]],
+  40:[[13,3.5],[13,8],[13,12],[13,16.5]]
+};
+function place(team){
+  if(play)return;
+  const f=FORM[$("#form").value],gk=team==="j"?"gj":"gr",pl=team;
+  F().items=F().items.filter(i=>i.t!==pl&&i.t!==gk);
+  const m=team==="r";
+  add(gk,m?38:2,10,"1");
+  f.forEach((p,i)=>add(pl,m?W-p[0]:p[0],m?H-p[1]:p[1],String(i+2)));
+  sel=null;syncSel();draw();
+}
+$("#fj").onclick=()=>place("j");$("#fr").onclick=()=>place("r");
+
+/* ---------- pasos ---------- */
+function ui(){
+  const box=$("#frames");box.innerHTML="";
+  frames.forEach((f,i)=>{
+    const b=document.createElement("button");b.textContent=i+1;b.className=i===cur?"on":"";
+    b.setAttribute("aria-label","Paso "+(i+1));
+    b.onclick=()=>{if(play)stop();cur=i;sel=null;syncSel();ui();draw()};
+    box.appendChild(b);
+  });
+  $("#delf").disabled=frames.length<2;
+}
+$("#addf").onclick=()=>{
+  if(play)return;
+  frames.splice(cur+1,0,{items:clone(F().items),lines:[]});cur++;sel=null;syncSel();ui();draw();
+  toast("Paso "+(cur+1)+" creado: mueve a los jugadores");
+};
+$("#delf").onclick=()=>{
+  if(play||frames.length<2)return;
+  frames.splice(cur,1);cur=Math.max(0,cur-1);sel=null;syncSel();ui();draw();
+};
+
+/* ---------- reproducción ---------- */
+let raf=0;
+function start(rec,onEnd){
+  if(frames.length<2){toast("Crea al menos 2 pasos para animar");return false}
+  stop();sel=null;syncSel();
+  play={seg:0,t:0,t0:performance.now(),rec:!!rec,onEnd,hold:0};cur=0;
+  $("#play").textContent="■ Parar";
+  raf=requestAnimationFrame(tick);return true;
+}
+function stop(){
+  cancelAnimationFrame(raf);
+  let cb=null;
+  if(play){cur=play.seg==null?cur:Math.min(frames.length-1,play.seg+(play.t>.5?1:0));if(play.end)cur=frames.length-1;
+    if(play.rec&&!play.end)cb=play.onEnd}
+  play=null;$("#play").textContent="▶ Reproducir";ui();draw();
+  if(cb)cb();
+}
+function tick(now){
+  if(!play)return;
+  const dur=+$("#speed").value*1000;
+  if(play.hold){
+    if(now>=play.hold){const cb=play.onEnd;play.end=true;stop();cb&&cb();return}
+    draw();raf=requestAnimationFrame(tick);return;
+  }
+  if(play.pause==null)play.pause=now+(play.rec?600:0);
+  if(now<play.pause){play.t=0;draw();raf=requestAnimationFrame(tick);return}
+  if(!play.t0r)play.t0r=now;
+  play.t=(now-play.t0r)/dur;
+  if(play.t>=1){
+    play.seg++;play.t0r=now;play.t=0;
+    if(play.seg>=frames.length-1){
+      if($("#loop").checked&&!play.rec){play.seg=0}
+      else{play.seg=frames.length-1;play.hold=now+(play.rec?900:0)||now;
+        play.seg=null;cur=frames.length-1;draw();raf=requestAnimationFrame(tick);return}
+    }
+  }
+  draw();raf=requestAnimationFrame(tick);
+}
+$("#play").onclick=()=>{play?stop():start(false)};
+
+/* ---------- vídeo e imagen ---------- */
+function dl(blob,name){
+  const a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download=name;
+  document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(a.href),4000);
+}
+$("#rec").onclick=()=>{
+  if(play){stop();return}
+  if(!window.MediaRecorder||!cv.captureStream){toast("Este navegador no permite grabar vídeo");return}
+  if(frames.length<2){toast("Crea al menos 2 pasos para grabar");return}
+  const mt=["video/webm;codecs=vp9","video/webm;codecs=vp8","video/webm","video/mp4"].find(m=>MediaRecorder.isTypeSupported(m));
+  if(!mt){toast("Este navegador no permite grabar vídeo");return}
+  const mr=new MediaRecorder(cv.captureStream(30),{mimeType:mt,videoBitsPerSecond:5e6}),ch=[];
+  mr.ondataavailable=e=>e.data.size&&ch.push(e.data);
+  mr.onstop=()=>{
+    const ext=mt.includes("mp4")?"mp4":"webm";
+    const blob=new Blob(ch,{type:mt}),nm=($("#name").value||"sesion").trim().replace(/[^\w\-áéíóúñ ]+/gi,"")||"sesion";
+    $("#rec").textContent="⏺ Grabar vídeo";
+    if(window.onVideo)window.onVideo(blob,nm,ext);else{dl(blob,nm+"."+ext);toast("Vídeo descargado")}
+  };
+  mr.start();$("#rec").textContent="■ Grabando… (parar)";
+  if(!start(true,()=>setTimeout(()=>mr.state!=="inactive"&&mr.stop(),300)))mr.stop();
+};
+$("#png").onclick=()=>{
+  if(play)return;
+  const s=sel;sel=null;draw();
+  cv.toBlob(b=>{dl(b,"pizarra-paso"+(cur+1)+".png");sel=s;draw()});
+};
+
+/* ---------- sesiones ---------- */
+const KEY="juncal_pizarra_v1";
+const rd=()=>{try{return JSON.parse(localStorage.getItem(KEY)||"{}")}catch(e){return{}}};
+const wr=o=>{try{localStorage.setItem(KEY,JSON.stringify(o));return true}catch(e){return false}};
+function refreshList(){
+  const l=$("#list"),o=rd();l.innerHTML='<option value="">— guardadas —</option>';
+  Object.keys(o).sort().forEach(k=>{const op=document.createElement("option");op.value=op.textContent=k;l.appendChild(op)});
+}
+function load(data){
+  if(!data||!Array.isArray(data.frames)||!data.frames.length)throw 0;
+  frames=data.frames.map(f=>({items:Array.isArray(f.items)?f.items:[],lines:Array.isArray(f.lines)?f.lines:[]}));
+  nextId=1+Math.max(0,...frames.flatMap(f=>f.items.map(i=>+i.id||0)));
+  cur=0;sel=null;syncSel();ui();draw();
+}
+$("#save").onclick=()=>{
+  const n=$("#name").value.trim();if(!n){toast("Ponle un nombre a la sesión");return}
+  const o=rd();o[n]={frames};
+  toast(wr(o)?"Sesión «"+n+"» guardada":"No se puede guardar aquí: usa «Archivo»");refreshList();$("#list").value=n;
+};
+$("#open").onclick=()=>{
+  const k=$("#list").value,o=rd();if(!k||!o[k]){toast("Elige una sesión");return}
+  try{load(o[k]);$("#name").value=k}catch(e){toast("Sesión dañada")}
+};
+$("#rm").onclick=()=>{
+  const k=$("#list").value,o=rd();if(!k)return;
+  if(!confirm("¿Borrar la sesión «"+k+"»?"))return;
+  delete o[k];wr(o);refreshList();
+};
+$("#exp").onclick=()=>dl(new Blob([JSON.stringify({v:1,name:$("#name").value,frames})],{type:"application/json"}),(($("#name").value||"sesion").trim()||"sesion")+".json");
+$("#imp").onclick=()=>$("#file").click();
+$("#file").onchange=e=>{
+  const f=e.target.files[0];if(!f)return;
+  const r=new FileReader();
+  r.onload=()=>{try{const d=JSON.parse(r.result);load(d);if(d.name)$("#name").value=d.name;toast("Sesión abierta")}catch(x){toast("Archivo no válido")}};
+  r.readAsText(f);e.target.value="";
+};
+
+/* ---------- aviso ---------- */
+let tt;function toast(m){const t=$("#toast");t.textContent=m;t.classList.add("show");clearTimeout(tt);tt=setTimeout(()=>t.classList.remove("show"),2200)}
+
+/* ---------- inicio ---------- */
+add("ball",20,10);
+$("#form").value="121";place("j");$("#form").value="22";place("r");$("#form").value="121";
+ui();refreshList();fit();
+window.__pz={load,toast,get name(){return $("#name").value},set name(v){$("#name").value=v},get frames(){return frames},get cur(){return cur},get play(){return play}};
+})();
+</script>
+</body>
+</html>

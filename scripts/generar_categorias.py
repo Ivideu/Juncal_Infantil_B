@@ -56,7 +56,7 @@ for cid, (carpeta, corto, liga0) in TABLA.items():
     t = rep(t, '"juncalB"', '"juncal_"+CAT.node')
     t = rep(t, ":JSON.parse(m.data)}catch(e){return}", ':(typeof m.data==="string"?JSON.parse(m.data):m.data)}catch(e){return}')
     t = rep(t, "actions/workflows/sync.yml/dispatches", "actions/workflows/sync-categorias.yml/dispatches")   # "Actualizar ahora" del propietario
-    cat = dict(nombre=nombre, corto=corto, liga=liga, node=node, email=node + "@juncal.club", grupo=str(c.get("grupo", "")), equipo=str(c.get("equipo", "")), me=0)
+    cat = dict(nombre=nombre, corto=corto, liga=liga, node=node, email=node + "@torrejonjuncal.es", grupo=str(c.get("grupo", "")), equipo=str(c.get("equipo", "")), me=0)
     t = rep(t, "</style>\n</head>", "</style>\n<script>const CAT=" + json.dumps(cat, ensure_ascii=False) + ";</script>\n</head>")
     t = rep(t, "</script>\n</body>", '</script>\n<script src="' + EXTRA_JS + '"></script>\n</body>')
     dest = OUT / (carpeta + ".html")

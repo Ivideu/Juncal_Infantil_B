@@ -576,6 +576,33 @@ nav{
   display:none;
 }
 
+.staff-grid{
+  align-items:start;
+}
+
+.staff-grid .stf.full{
+  aspect-ratio:auto;
+  height:auto;
+  border:0;
+  border-radius:0;
+  background:none;
+  box-shadow:none;
+  overflow:visible;
+  -webkit-backdrop-filter:none;
+  backdrop-filter:none;
+}
+
+.staff-grid .stf.full:hover{
+  transform:translateY(-6px);
+}
+
+.staff-grid .stf.full img{
+  display:block;
+  width:100%;
+  height:auto;
+  filter:drop-shadow(0 4px 10px rgba(8,18,53,.35));
+}
+
 .staff-more{
   margin-top:22px;
 }
@@ -2362,15 +2389,25 @@ const stfCard = (persona,index,seccion) => {
       data-section="${seccion}"
       aria-label="${esc(nombreAccesible)}, ${esc(cargoAccesible)}: ver ampliado">
 
-      <div
-        class="ph"
-        ${bg(persona.img)}
-        role="img"
-        aria-label="${esc(nombreAccesible)}">
+      ${
+        fullImage
+          ? `
+            <img
+              src="${esc(persona.img)}"
+              alt="${esc(nombreAccesible)}">
+          `
+          : `
+            <div
+              class="ph"
+              ${bg(persona.img)}
+              role="img"
+              aria-label="${esc(nombreAccesible)}">
 
-        ${persona.img ? "" : "Foto"}
+              ${persona.img ? "" : "Foto"}
 
-      </div>
+            </div>
+          `
+      }
 
       <div class="cb">
 
@@ -2388,8 +2425,6 @@ const stfCard = (persona,index,seccion) => {
   `;
 
 };
-
-
 /* =========================================================
    INSERTAR DIRECTIVA
    ========================================================= */

@@ -1,0 +1,9 @@
+alevin-b@torrejonjuncal.es	Balon27!
+alevin-a@torrejonjuncal.es	Golazo8#
+cadete-b@torrejonjuncal.es	Portero5!
+cadete-a@torrejonjuncal.es	Corner4@
+juvenil-b@torrejonjuncal.es	Falta22#
+juvenil-a@torrejonjuncal.es	Pase10!
+aficionado-b@torrejonjuncal.es	Penalti9@
+aficionado-a@torrejonjuncal.es	Regate7!
+infantil-a@torrejonjuncal.es	Mister6#

@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="es"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Acceso · Escuela Torrejón Juncal</title>
+<style>
+:root{--bl:#0b2a6f;--bg:#071a45;--pn:#0d2561;--ye:#ffd23f;--ln:rgba(255,255,255,.16)}
+*{box-sizing:border-box}[hidden]{display:none!important}
+body{margin:0;font:15px/1.4 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;background:var(--bg);color:#fff;min-height:100vh}
+header{display:flex;align-items:center;gap:12px;padding:12px 16px;background:var(--pn);border-bottom:1px solid var(--ln)}
+header h1{font-size:16px;margin:0;flex:1}header small{opacity:.65;display:block;font-weight:400}
+button,select,input{font:inherit;color:#fff;background:#173a8f;border:1px solid var(--ln);border-radius:8px;padding:8px 12px;min-height:38px}
+button{cursor:pointer}button:hover{background:#1f4cb8}
+button.p{background:var(--ye);color:var(--bl);font-weight:700;border-color:var(--ye)}button.p:hover{background:#ffe27a}
+input{background:#0a1f55;width:100%}:focus-visible{outline:3px solid var(--ye);outline-offset:1px}
+main{padding:14px;max-width:1200px;margin:0 auto}
+.tabs{display:flex;gap:6px;margin-bottom:12px}.tabs button.on{background:var(--ye);color:var(--bl);font-weight:700}
+iframe{width:100%;height:calc(100vh - 130px);min-height:640px;border:1px solid var(--ln);border-radius:12px;background:var(--bg)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px}
+.card{background:var(--pn);border:1px solid var(--ln);border-radius:12px;overflow:hidden}
+.card video{width:100%;display:block;background:#000;aspect-ratio:43.2/23.2}
+.card div{padding:10px 12px}.card b{display:block}.card small{opacity:.65}
+.empty{opacity:.7;padding:30px 0;text-align:center}
+#lock{position:fixed;right:16px;bottom:16px;z-index:5;border-radius:999px;background:var(--ye);color:var(--bl);font-weight:700;padding:10px 18px;box-shadow:0 6px 20px rgba(0,0,0,.45)}
+dialog{background:var(--pn);color:#fff;border:1px solid var(--ln);border-radius:14px;padding:20px;width:min(380px,92vw)}
+dialog::backdrop{background:rgba(0,0,0,.6)}
+dialog h2{margin:0 0 12px;font-size:18px}label{display:block;margin:10px 0 4px;font-size:12px;letter-spacing:.06em;text-transform:uppercase;opacity:.7}
+.row{display:flex;gap:8px;margin-top:16px;justify-content:flex-end}.seg{display:flex;gap:6px}.seg button{flex:1}.seg button.on{background:var(--ye);color:var(--bl);font-weight:700}
+.msg{color:#fca5a5;min-height:18px;margin-top:8px;font-size:13px}
+#toast{position:fixed;left:50%;bottom:76px;transform:translateX(-50%);background:#fff;color:var(--bl);padding:9px 16px;border-radius:999px;font-weight:600;opacity:0;pointer-events:none;transition:opacity .2s;z-index:20;max-width:90vw}#toast.show{opacity:1}
+</style></head><body>
+<header><h1>Escuela Torrejón Juncal<small id="who">Pizarra táctica · Fútbol sala</small></h1><button id="out" hidden>Salir</button></header>
+<main>
+  <div id="home" class="empty">Pulsa el candado 🔒 para entrar como entrenador o jugador.</div>
+  <section id="coach" hidden>
+    <div class="tabs"><button data-t="pz" class="on">Pizarra</button><button data-t="mine">Jugadas publicadas</button><button data-t="cfg">Ajustes</button></div>
+    <div id="t-pz"><iframe id="fr" title="Pizarra táctica"></iframe></div>
+    <div id="t-mine" hidden></div>
+    <div id="t-cfg" hidden style="max-width:480px">
+      <label for="tok">Token de GitHub (solo en este dispositivo)</label>
+      <input id="tok" type="password" autocomplete="off" placeholder="github_pat_…">
+      <div class="row"><button id="tokok" class="p">Guardar token</button></div>
+      <p class="msg" style="color:#fff;opacity:.7">Fine-grained token, solo este repositorio, permiso «Contents: Read and write».</p>
+    </div>
+  </section>
+  <section id="player" hidden><div id="plist"></div></section>
+</main>
+<button id="lock" aria-label="Acceso">🔒 Login</button>
+
+<dialog id="dlg"><h2>Acceso</h2>
+  <div class="seg"><button data-r="coach" class="on">Entrenador</button><button data-r="player">Jugador</button></div>
+  <label for="cat">Categoría</label><select id="cat" style="width:100%"></select>
+  <label for="pin">Contraseña (entrenador) · Código (jugador)</label><input id="pin" type="password" autocomplete="off" inputmode="text">
+  <div class="msg" id="err"></div>
+  <div class="row"><button id="cancel">Cancelar</button><button id="go" class="p">Entrar</button></div>
+</dialog>
+
+<dialog id="pub"><h2>Guardar jugada</h2>
+  <label for="ptit">Título</label><input id="ptit" maxlength="60">
+  <label>Se publicará en</label><div id="ppath" style="opacity:.8;word-break:break-all"></div>
+  <div class="msg" id="perr"></div>
+  <div class="row"><button id="pdl">Solo descargar</button><button id="pok" class="p">Publicar</button></div>
+</dialog>
+<div id="toast" role="status"></div>
+
+<script>
+/* ============ CONFIGURACIÓN ============
+ Entrenadores: entran con su usuario de Firebase (la contraseña la gestiona Firebase).
+ Jugadores: código opcional como hash SHA-256; para generarlo abre acceso.html#hash=MICODIGO. */
+const CFG={
+  owner:"TU_USUARIO", repo:"TU_REPOSITORIO", branch:"main", folder:"Pizarra",
+  fbUrl:"https://juncal-f0b64-default-rtdb.europe-west1.firebasedatabase.app",
+  apiKey:"TU_API_KEY",            /* de Firebase: Configuración del proyecto > Tus apps */
+  dominio:"@torrejonjuncal.es",   /* entrenador = id + dominio, p. ej. alevin-a@torrejonjuncal.es */
+  cats:{   /* player: hash opcional del código de jugadores ("" = sin código) */
+    "Aficionado A":{id:"aficionado-a",player:""},
+    "Aficionado B":{id:"aficionado-b",player:""},
+    "Juvenil A":{id:"juvenil-a",player:""},
+    "Juvenil B":{id:"juvenil-b",player:""},
+    "Cadete A":{id:"cadete-a",player:""},
+    "Cadete B":{id:"cadete-b",player:""},
+    "Infantil A":{id:"infantil-a",player:""},
+    "Infantil B":{id:"infantil-b",player:""},
+    "Alevín A":{id:"alevin-a",player:""},
+    "Alevín B":{id:"alevin-b",player:""}
+  }
+};
+/* ======================================= */
+const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const slug=s=>s.normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"")||"x";
+const sha=async t=>[...new Uint8Array(await crypto.subtle.digest("SHA-256",new TextEncoder().encode(t)))].map(b=>b.toString(16).padStart(2,"0")).join("");
+let tt;function toast(m){const t=$("#toast");t.textContent=m;t.classList.add("show");clearTimeout(tt);tt=setTimeout(()=>t.classList.remove("show"),3200)}
+let ses=JSON.parse(sessionStorage.getItem("juncal_ses")||"null"),role="coach",pend=null;
+
+if(location.hash.startsWith("#hash=")){sha(decodeURIComponent(location.hash.slice(6))).then(h=>prompt("Hash SHA-256 (cópialo en CFG):",h))}
+
+$("#cat").innerHTML=Object.keys(CFG.cats).map(c=>`<option>${esc(c)}</option>`).join("");
+$("#lock").onclick=()=>{$("#err").textContent="";$("#pin").value="";$("#dlg").showModal()};
+$("#cancel").onclick=()=>$("#dlg").close();
+$$("[data-r]").forEach(b=>b.onclick=()=>{role=b.dataset.r;$$("[data-r]").forEach(x=>x.classList.toggle("on",x===b))});
+const save=()=>sessionStorage.setItem("juncal_ses",JSON.stringify(ses));
+const fbAuth=async b=>{const r=await fetch(`https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${CFG.apiKey}`,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({...b,returnSecureToken:true})});const d=await r.json();if(!r.ok)throw 0;return{tok:d.idToken,ref:d.refreshToken,exp:Date.now()+d.expiresIn*1000-60000}};
+async function token(){
+  if(Date.now()<ses.exp)return ses.tok;
+  const r=await fetch(`https://securetoken.googleapis.com/v1/token?key=${CFG.apiKey}`,{method:"POST",headers:{"Content-Type":"application/x-www-form-urlencoded"},body:"grant_type=refresh_token&refresh_token="+ses.ref});
+  const d=await r.json();if(!r.ok)throw new Error("Sesión caducada: vuelve a entrar");
+  Object.assign(ses,{tok:d.id_token,ref:d.refresh_token,exp:Date.now()+d.expires_in*1000-60000});save();return ses.tok;
+}
+$("#go").onclick=async()=>{
+  const c=$("#cat").value,k=CFG.cats[c],pin=$("#pin").value;$("#err").textContent="";
+  try{
+    if(role==="coach")ses={role,cat:c,id:k.id,...await fbAuth({email:k.id+CFG.dominio,password:pin})};
+    else{if(k.player&&await sha(pin)!==k.player){$("#err").textContent="Código incorrecto";return}ses={role,cat:c,id:k.id}}
+  }catch(e){$("#err").textContent="Usuario o contraseña incorrectos";return}
+  save();$("#dlg").close();start();
+};
+$("#out").onclick=()=>{sessionStorage.removeItem("juncal_ses");location.reload()};
+
+function start(){
+  if(!ses)return;
+  $("#home").hidden=true;$("#lock").hidden=true;$("#out").hidden=false;
+  $("#who").textContent=(ses.role==="coach"?"Entrenador":"Jugador")+" · "+ses.cat;
+  if(ses.role==="coach"){$("#coach").hidden=false;initCoach()}
+  else{$("#player").hidden=false;showList($("#plist"))}
+}
+
+/* ---------- vídeos publicados ---------- */
+async function showList(box){
+  box.innerHTML='<div class="empty">Cargando…</div>';
+  let l=[];try{const d=await(await fetch(`${CFG.fbUrl}/pizarra/${ses.id}.json`,{cache:"no-store"})).json();l=Object.values(d||{}).sort((a,b)=>b.ts-a.ts)}catch(e){}
+  box.innerHTML=l.length?'<div class="grid">'+l.map(j=>`<div class="card"><video controls preload="metadata" playsinline src="${esc(CFG.folder+"/"+j.video)}"></video><div><b>${esc(j.title)}</b><small>${esc(j.cat)} · ${esc(j.date)}</small></div></div>`).join("")+"</div>":'<div class="empty">Todavía no hay jugadas para '+esc(ses.cat)+'.</div>';
+}
+
+/* ---------- entrenador ---------- */
+function initCoach(){
+  const fr=$("#fr");fr.src="pizarra.html";
+  fr.onload=()=>{fr.contentWindow.onVideo=(blob,name,ext)=>openPub(blob,name,ext)};
+  $$("[data-t]").forEach(b=>b.onclick=()=>{
+    $$("[data-t]").forEach(x=>x.classList.toggle("on",x===b));
+    ["pz","mine","cfg"].forEach(k=>$("#t-"+k).hidden=k!==b.dataset.t);
+    if(b.dataset.t==="mine")showList($("#t-mine"));
+  });
+  $("#tok").value=localStorage.getItem("juncal_tok")||"";
+  $("#tokok").onclick=()=>{localStorage.setItem("juncal_tok",$("#tok").value.trim());toast("Token guardado")};
+}
+function openPub(blob,name,ext){
+  pend={blob,ext};$("#ptit").value=name;$("#perr").textContent="";
+  $("#ppath").textContent=`${CFG.folder}/${ses.id}/…`;$("#pub").showModal();
+}
+$("#pdl").onclick=()=>{
+  const a=document.createElement("a");a.href=URL.createObjectURL(pend.blob);a.download=slug($("#ptit").value)+"."+pend.ext;a.click();$("#pub").close();
+};
+const b64=b=>new Promise(r=>{const f=new FileReader();f.onload=()=>r(f.result.split(",")[1]);f.readAsDataURL(b)});
+const u8=s=>btoa(String.fromCharCode(...new TextEncoder().encode(s)));
+const API=p=>`https://api.github.com/repos/${CFG.owner}/${CFG.repo}/contents/${p.split("/").map(encodeURIComponent).join("/")}`;
+async function gh(path,body){
+  const H={Authorization:"Bearer "+localStorage.getItem("juncal_tok"),Accept:"application/vnd.github+json"};
+  const g=await fetch(API(path)+"?ref="+CFG.branch+"&t="+Date.now(),{headers:H});
+  const cur=g.ok?await g.json():null,sha=cur?cur.sha:undefined;
+  if(!body)return cur;
+  const r=await fetch(API(path),{method:"PUT",headers:H,body:JSON.stringify({message:"Pizarra: "+path,content:body,branch:CFG.branch,sha})});
+  if(!r.ok)throw new Error(r.status===401||r.status===403?"Token no válido o sin permisos":r.status===404?"Repositorio no encontrado":"Error "+r.status);
+}
+$("#pok").onclick=async()=>{
+  const title=$("#ptit").value.trim(),err=$("#perr");
+  if(!title){err.textContent="Escribe un título";return}
+  if(!localStorage.getItem("juncal_tok")){err.textContent="Falta el token: ve a Ajustes";return}
+  $("#pok").disabled=true;err.style.color="#fff";err.textContent="Subiendo…";
+  try{
+    const id=slug(title)+"-"+Date.now().toString(36),dir=`${CFG.folder}/${ses.id}`,vid=`${ses.id}/${id}.${pend.ext}`;
+    await gh(`${dir}/${id}.${pend.ext}`,await b64(pend.blob));
+    const pz=$("#fr").contentWindow.__pz;
+    await gh(`${dir}/${id}.json`,u8(JSON.stringify({v:1,name:title,frames:pz.frames})));
+    const t=await token();
+    const r=await fetch(`${CFG.fbUrl}/pizarra/${ses.id}/${id}.json?auth=${t}`,{method:"PUT",body:JSON.stringify({id,title,cat:ses.cat,video:vid,date:new Date().toISOString().slice(0,10),ts:Date.now()})});
+    if(!r.ok)throw new Error("Firebase no permitió guardar: revisa las reglas");
+    $("#pub").close();toast("Publicado en "+dir+" (se verá en ~1 min)");
+  }catch(e){err.style.color="#fca5a5";err.textContent=e.message||"No se pudo subir"}
+  $("#pok").disabled=false;
+};
+start();
+</script></body></html>

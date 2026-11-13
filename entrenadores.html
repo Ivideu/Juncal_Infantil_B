@@ -45,12 +45,15 @@ iframe#pz{width:100%;border:0;display:block;height:900px;background:transparent}
 .list{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px}
 .it{background:#0a1f55;border:1px solid var(--line);border-radius:14px;overflow:hidden;display:flex;flex-direction:column}
 .it video{width:100%;aspect-ratio:43.2/23.2;background:#000;display:block}
+.it .ph{width:100%;aspect-ratio:43.2/23.2;background:#050f2e;display:flex;align-items:center;justify-content:center;text-align:center;padding:12px;font-size:13px;opacity:.8}
 .it .b{padding:10px 12px;display:flex;flex-direction:column;gap:8px;flex:1}
 .it h3{margin:0;font-size:15px}
 .it small{opacity:.7}
 .it .a{display:flex;gap:6px;margin-top:auto}
 .it .a button{flex:1;min-height:36px;padding:6px 8px;font-size:13px}
-.pend{background:#3b2f06;border:1px dashed var(--ye);border-radius:12px;padding:10px 12px;margin-bottom:8px;display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.pend{background:#3b2f06;border:1px dashed var(--ye);border-radius:12px;padding:10px 12px;margin-bottom:8px;display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+.pend .a{display:flex;gap:6px}
+.pend .a button{min-height:34px;padding:4px 10px}
 h2.sec{font-size:15px;margin:18px 0 8px;letter-spacing:.04em;text-transform:uppercase;opacity:.85}
 .modal{position:fixed;inset:0;background:rgba(3,8,28,.8);display:flex;align-items:center;justify-content:center;padding:16px;z-index:50}
 .modal .card{width:min(720px,100%);max-height:94vh;overflow:auto}
@@ -123,6 +126,7 @@ h2.sec{font-size:15px;margin:18px 0 8px;letter-spacing:.04em;text-transform:uppe
   </section>
 </main>
 
+<!-- Vista previa antes de publicar -->
 <div id="mPrev" class="modal" hidden role="dialog" aria-modal="true" aria-label="Vista previa">
   <div class="card">
     <h2 style="margin:0 0 4px" id="mT"></h2>
@@ -132,6 +136,19 @@ h2.sec{font-size:15px;margin:18px 0 8px;letter-spacing:.04em;text-transform:uppe
       <button id="mPub" class="primary">✔ Publicar en <span id="mCat"></span></button>
       <button id="mDl">⬇ Descargar</button>
       <button id="mNo">Descartar</button>
+    </div>
+  </div>
+</div>
+
+<!-- Visor de jugadas ya publicadas -->
+<div id="mVer" class="modal" hidden role="dialog" aria-modal="true" aria-label="Ver jugada">
+  <div class="card">
+    <h2 style="margin:0 0 4px" id="vT"></h2>
+    <p id="vI" style="margin:0 0 10px;opacity:.8"></p>
+    <video id="vV" controls playsinline></video>
+    <div class="row" style="margin-top:12px">
+      <button id="vEd" class="primary">✎ Cargar en la pizarra</button>
+      <button id="vCl">Cerrar</button>
     </div>
   </div>
 </div>
@@ -309,6 +326,37 @@ $("#mPub").onclick=async()=>{
   }
 };
 
+/* ---------- visor de jugadas ---------- */
+let ver=null; // {getSes:()=>Promise<obj>, titulo, blobUrl}
+function abrirVer(titulo,info,src,getSes,blobUrl){
+  cerrarVer();
+  ver={getSes,titulo,blobUrl:blobUrl||null};
+  $("#vT").textContent=titulo;$("#vI").textContent=info;
+  const v=$("#vV");v.src=src;
+  $("#mVer").hidden=false;
+  const p=v.play();if(p&&p.catch)p.catch(()=>{});
+}
+function cerrarVer(){
+  const v=$("#vV");v.pause();v.removeAttribute("src");v.load();
+  if(ver&&ver.blobUrl)URL.revokeObjectURL(ver.blobUrl);
+  ver=null;$("#mVer").hidden=true;
+}
+$("#vCl").onclick=cerrarVer;
+$("#mVer").addEventListener("click",e=>{if(e.target.id==="mVer")cerrarVer()});
+$("#vV").addEventListener("error",()=>{if(ver)toast("No se pudo reproducir el vídeo. Si aún se está archivando, prueba en unos minutos.")});
+function cargaEnPizarra(sesObj,titulo){
+  const pz=PZ();if(!pz)throw new Error("La pizarra aún no ha cargado");
+  pz.loadSession(sesObj);$("#tit").value=titulo;
+  document.querySelector('[data-tab="pizarra"]').click();
+  setSt("Jugada cargada. Cámbiala y publícala como nueva; después puedes borrar la antigua.");
+}
+$("#vEd").onclick=async()=>{
+  if(!ver)return;
+  const t=ver.titulo;
+  try{const s=await ver.getSes();cerrarVer();cargaEnPizarra(s,t)}
+  catch(x){toast("No se pudo abrir esa jugada")}
+};
+
 /* ---------- mis jugadas ---------- */
 const fecha=iso=>{const d=new Date(iso);return isNaN(d)?"":d.toLocaleDateString("es-ES",{day:"numeric",month:"short",year:"numeric"})};
 let pubs=[];
@@ -320,7 +368,7 @@ async function cargarJugadas(){
     const m=await api("pizarra_meta/"+mine);
     if(mine!==cat)return;
     const ks=Object.keys(m||{});
-    pend.innerHTML=ks.length?ks.map(k=>`<div class="pend"><span>✔ <b>${esc(m[k].titulo)}</b> <small>${esc(fecha(m[k].ts))} · ya visible para los jugadores</small></span><button class="danger" data-bp="${esc(k)}" style="min-height:34px;padding:4px 10px">🗑 Borrar</button></div>`).join(""):'<div class="empty">Nada en proceso.</div>';
+    pend.innerHTML=ks.length?ks.map(k=>`<div class="pend"><span>✔ <b>${esc(m[k].titulo)}</b> <small>${esc(fecha(m[k].ts))} · ya visible para los jugadores</small></span><div class="a"><button data-bv="${esc(k)}">▶ Ver</button><button class="danger" data-bp="${esc(k)}">🗑 Borrar</button></div></div>`).join(""):'<div class="empty">Nada en proceso.</div>';
   }catch(e){pend.innerHTML='<div class="empty">No se pudieron leer las pendientes.</div>'}
   try{
     const r=await fetch("./Pizarra/"+mine+"/index.json?"+Date.now());
@@ -328,23 +376,54 @@ async function cargarJugadas(){
   }catch(e){pubs=[]}
   try{const bo=await api("pizarra_borrar/"+mine)||{};pubs=pubs.filter(j=>!bo[j.id])}catch(e){}
   if(mine!==cat)return;
-  box.innerHTML=pubs.length?pubs.map((j,i)=>`<div class="it"><video controls preload="metadata" playsinline src="./Pizarra/${esc(mine)}/${esc(j.video)}"></video><div class="b"><h3>${esc(j.titulo)}</h3><small>${esc(fecha(j.fecha))}</small><div class="a"><button data-ed="${i}">✎ Editar</button><button class="danger" data-bo="${i}">🗑 Borrar</button></div></div></div>`).join(""):'<div class="empty">Todavía no hay jugadas publicadas en esta categoría.</div>';
+  box.innerHTML=pubs.length?pubs.map((j,i)=>`<div class="it"><video controls preload="metadata" playsinline src="./Pizarra/${esc(mine)}/${esc(j.video)}#t=0.1"></video><div class="b"><h3>${esc(j.titulo)}</h3><small>${esc(fecha(j.fecha))}</small><div class="a"><button data-vw="${i}">▶ Ver</button><button data-ed="${i}">✎ Editar</button><button class="danger" data-bo="${i}">🗑 Borrar</button></div></div></div>`).join(""):'<div class="empty">Todavía no hay jugadas publicadas en esta categoría.</div>';
 }
+// Si un vídeo archivado no carga, se avisa en vez de dejar un recuadro negro
+$("#pubs").addEventListener("error",e=>{
+  const v=e.target;
+  if(v.tagName!=="VIDEO")return;
+  const ph=document.createElement("div");ph.className="ph";
+  ph.textContent="Vídeo no disponible todavía. Puede estar archivándose; prueba en unos minutos.";
+  v.replaceWith(ph);
+},true);
+
+function b64ToBlob(s,mime){
+  const bin=atob(s),u=new Uint8Array(bin.length);
+  for(let i=0;i<bin.length;i++)u[i]=bin.charCodeAt(i);
+  return new Blob([u],{type:mime||"video/webm"});
+}
+
 $("#pend").onclick=async e=>{
-  const b=e.target.closest("[data-bp]");if(!b)return;
+  const bv=e.target.closest("[data-bv]"),b=e.target.closest("[data-bp]");
+  if(bv){
+    const k=bv.dataset.bv;bv.disabled=true;const txt=bv.textContent;bv.textContent="Cargando…";
+    try{
+      const d=await api("pizarra_cola/"+cat+"/"+k);
+      if(!d||!d.video)throw new Error("novideo");
+      const url=URL.createObjectURL(b64ToBlob(d.video,d.mime));
+      abrirVer(d.titulo||"Jugada",catName(cat)+" · "+fecha(d.fecha)+" · recién publicada",url,async()=>JSON.parse(d.sesion),url);
+    }catch(x){toast(x.message==="novideo"?"Esta jugada ya se archivó: búscala en «Archivadas en el repositorio»":"No se pudo cargar el vídeo")}
+    finally{bv.disabled=false;bv.textContent=txt}
+    return;
+  }
+  if(!b)return;
   if(!confirm("¿Borrar esta jugada? Los jugadores dejarán de verla."))return;
   try{await api("pizarra_cola/"+cat+"/"+b.dataset.bp,"DELETE");await api("pizarra_meta/"+cat+"/"+b.dataset.bp,"DELETE");cargarJugadas();toast("Jugada borrada")}
   catch(x){toast("No se pudo borrar")}
 };
 $("#pubs").onclick=async e=>{
-  const ed=e.target.closest("[data-ed]"),bo=e.target.closest("[data-bo]");
+  const vw=e.target.closest("[data-vw]"),ed=e.target.closest("[data-ed]"),bo=e.target.closest("[data-bo]");
+  if(vw){
+    const j=pubs[+vw.dataset.vw],mine=cat;
+    abrirVer(j.titulo,catName(mine)+" · "+fecha(j.fecha),"./Pizarra/"+mine+"/"+j.video,async()=>{
+      const r=await fetch("./Pizarra/"+mine+"/"+j.sesion+"?"+Date.now());if(!r.ok)throw 0;return r.json();
+    });
+  }
   if(ed){
     const j=pubs[+ed.dataset.ed];
     try{
       const r=await fetch("./Pizarra/"+cat+"/"+j.sesion+"?"+Date.now());if(!r.ok)throw 0;
-      PZ().loadSession(await r.json());$("#tit").value=j.titulo;
-      document.querySelector('[data-tab="pizarra"]').click();
-      setSt("Jugada cargada. Cámbiala y publícala como nueva; después puedes borrar la antigua.");
+      cargaEnPizarra(await r.json(),j.titulo);
     }catch(x){toast("No se pudo abrir esa jugada")}
   }
   if(bo){

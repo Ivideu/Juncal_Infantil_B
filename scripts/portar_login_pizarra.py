@@ -16,6 +16,13 @@ inf = open(sys.argv[1], encoding="utf-8").read()
 af = open(sys.argv[2], encoding="utf-8").read()
 out = sys.argv[3] if len(sys.argv) > 3 else "AficionadoA.nuevo.html"
 
+# Idempotente: si la categoría ya tiene el login nuevo, no se vuelve a portar (así se puede lanzar sobre todas).
+if 'id="mLog"' in af:
+    print("Ya portado, no se toca:", sys.argv[2])
+    if out != sys.argv[2]:
+        open(out, "w", encoding="utf-8").write(af)
+    sys.exit(0)
+
 
 def cut(s, a, b):
     """Texto de s desde a hasta b (sin incluir b)."""
@@ -55,7 +62,9 @@ af = rep(af, 'onchange="importD(this)">\n</div>\n', 'onchange="importD(this)">\n
 
 # 3) Constantes y variables de sesión de forma flexible
 af = rep(af, 'GH_REPO="Juncal_Infantil_B";',
-         'GH_REPO="Juncal_Infantil_B";\nconst CATK=CAT.node,CAT_NAME=CAT.corto,BASE="../",TEAM_MAIL=CAT.email;')
+         # CATK = id de la categoría ("aficionado-a"), igual que el CAT de InfantilB. NO el nodo "cat-aficionado-a":
+         # con el nodo, las rutas de Pizarra/ y de Firebase (pizarra_cola/...) y las reglas no encajan.
+         'GH_REPO="Juncal_Infantil_B";\nconst CATK=CAT.node.replace(/^cat-/,""),CAT_NAME=CAT.corto,BASE="../",TEAM_MAIL=CAT.email;')
 
 pw_anchor = re.search(r'let\s+PW\s*=\s*"[^"]*",?\s*(?:pt|RT)?', af)
 if pw_anchor:
@@ -89,6 +98,9 @@ hash_new = ('if(location.hash=="#admin")unlock();try{if(sessionStorage.getItem("
             '{PW=sessionStorage.getItem("pw")||"";RT=sessionStorage.getItem("rt")||"";'
             'ACC=sessionStorage.getItem("mail")||FBMAIL;document.body.classList.add("edit")}}catch(e){}')
 af = rep(af, hash_old, jug + keys + hash_new)
+
+# 7) Un solo botón de salir: el de la pestaña "Salir" del menú. Se quita el de la barra de administración (#adm).
+af = re.sub(r'[ \t]*<button onclick="setEdit\(false\)">🔓 Salir</button>\n', "", af, count=1)
 
 open(out, "w", encoding="utf-8").write(af)
 print("Listo:", out)

@@ -476,7 +476,6 @@ header.site-banner .dl {
 </div>
 <div id="adm">
  <span id="st" class="gap"></span>
- <button onclick="setEdit(false)">🔓 Salir</button>
  <button id="tbtn" onclick="toggleTest()">🧪 Partido de prueba</button>
  <button id="tout" onclick="toggleTest()" style="display:none">✕ Salir de la prueba</button>
  <button id="trst" onclick="resetTest()" style="display:none">🧹 Vaciar prueba</button>
@@ -526,7 +525,7 @@ header.site-banner .dl {
 let ME=CAT.me||0;
 const COPA=false; // pon true para que todos vean la pestaña Copa (el entrenador siempre la ve)
 const GH_USER="Ivideu",GH_REPO="Juncal_Infantil_B";
-const CATK=CAT.node,CAT_NAME=CAT.corto,BASE="../",TEAM_MAIL=CAT.email;
+const CATK=CAT.node.replace(/^cat-/,""),CAT_NAME=CAT.corto,BASE="../",TEAM_MAIL=CAT.email;
 const T={};
 T[99]=["Equipo de prueba","P.M. Nuria Fernández, Torrejón de Ardoz"];
 const COD={};

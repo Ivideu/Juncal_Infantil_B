@@ -1,7 +1,12 @@
 name: Portar Login y Pizarra
 
+# Copia el login (con acceso de administrador), la pestaña Jugadas y la Pizarra de Categorias/InfantilB.html
+# a todas las demás categorías. Las que ya lo tienen no se tocan.
 on:
-  workflow_dispatch: # Te permite ejecutarlo manualmente desde la pestaña "Actions" de GitHub
+  workflow_dispatch:
+
+permissions:
+  contents: write
 
 jobs:
   portar:
@@ -9,18 +14,21 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Configurar Python
-        uses: actions/setup-python@v5
+      - uses: actions/setup-python@v5
         with:
           python-version: '3.10'
 
-      - name: Ejecutar script de portabilidad
+      - name: Portar a todas las categorías
         run: |
-          # Ejemplo: portar de InfantilB a AficionadoA (ajústalo según tus archivos)
-          python3 scripts/portar_login_pizarra.py Categorias/InfantilB.html Categorias/AficionadoA.html Categorias/AficionadoA.html
+          for f in Categorias/*.html; do
+            case "$f" in
+              *InfantilB*) continue ;;
+            esac
+            python3 scripts/portar_login_pizarra.py Categorias/InfantilB.html "$f" "$f"
+          done
 
-      - name: Commitear y pushear cambios automáticamente
+      - name: Guardar cambios
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
-          commit_message: "Portar login y pizarra a Aficionado A"
+          commit_message: "Portar login y pizarra a las categorías"
           branch: main

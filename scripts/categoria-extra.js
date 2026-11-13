@@ -2,11 +2,14 @@
    Añade: cromos creados/editados desde el admin (con foto), contraseña propia por categoría, barra inferior solo para el propietario. */
 (function(){
 const OWN=()=>document.body.classList.contains("owner");
+/* Páginas con el login nuevo (ventana con acceso de administrador, Jugadas y Pizarra): ese login manda; aquí no se sobrescribe. */
+const PORT=typeof openLogin==="function";
 let AUTH_EMAIL=CAT.email;try{AUTH_EMAIL=sessionStorage.getItem("em")||CAT.email}catch(e){}
 if(AUTH_EMAIL===FBMAIL)document.body.classList.add("owner");
 document.head.insertAdjacentHTML("beforeend","<style>body.edit:not(.owner) #adm{display:none!important}.cvf{display:inline-flex;gap:6px;align-items:center;background:#e9f0ff;border-radius:99px;padding:2px 4px 2px 12px;font-weight:600}.cvf button{padding:0 8px;border-radius:99px}.cvf.ed2{background:#ffd23f}.cvc img,.cvph{aspect-ratio:535/1000}</style>");
 
-/* ---------- Login: contraseña de la categoría o contraseña del propietario ---------- */
+/* ---------- Login antiguo (solo en páginas sin el login nuevo) ---------- */
+if(!PORT){
 window.fbLogin=async function(pw,em){const r=await fetch("https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key="+FBKEY,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({email:em||AUTH_EMAIL,password:pw,returnSecureToken:true})}),d=await r.json();
  if(!d.idToken)return false;idt=d.idToken;exp=Date.now()+(d.expiresIn-120)*1000;return true};
 window.unlock=async function(){const p=(prompt("Contraseña de entrenador")||"").trim();if(!p)return;
@@ -18,6 +21,7 @@ window.unlock=async function(){const p=(prompt("Contraseña de entrenador")||"")
  document.body.classList.add("edit");document.body.classList.toggle("owner",own);render()};
 const _se=window.setEdit;
 window.setEdit=function(on){if(!on){document.body.classList.remove("owner");AUTH_EMAIL=CAT.email;try{sessionStorage.removeItem("em")}catch(e){}}_se(on)};
+}
 
 /* ---------- Calendario que llega de la sincronización (S.cfg) ---------- */
 function cfg2(){const c=S.cfg;if(!c||CAT.me)return;
@@ -112,9 +116,12 @@ function cromoForm(){
 
 /* ---------- Enganche en render ---------- */
 const _rn=window.render;
-window.render=function(){cfg2();buildCromos();_rn();
+window.render=function(){cfg2();buildCromos();
+ if(PORT)document.body.classList.toggle("owner",E()&&ACC===FBMAIL); // administrador del club: ve la barra completa
+ _rn();
  if(!E())return;
  if(tab=="pla")document.getElementById("app").insertAdjacentHTML("afterbegin",cromoForm());
- if(!OWN())document.getElementById("nav").insertAdjacentHTML("beforeend",'<button onclick="setEdit(false)"><span>🔓</span><span>Salir</span></button>')};
+
+ if(!PORT&&!OWN())document.getElementById("nav").insertAdjacentHTML("beforeend",'<button onclick="setEdit(false)"><span>🔓</span><span>Salir</span></button>')};
 render();
 })();

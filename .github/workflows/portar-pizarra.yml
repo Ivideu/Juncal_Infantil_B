@@ -1,0 +1,26 @@
+name: Portar Login y Pizarra
+
+on:
+  workflow_dispatch: # Te permite ejecutarlo manualmente desde la pestaña "Actions" de GitHub
+
+jobs:
+  portar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Configurar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+
+      - name: Ejecutar script de portabilidad
+        run: |
+          # Ejemplo: portar de InfantilB a AficionadoA (ajústalo según tus archivos)
+          python3 scripts/portar_login_pizarra.py Categorias/InfantilB.html Categorias/AficionadoA.html Categorias/AficionadoA.html
+
+      - name: Commitear y pushear cambios automáticamente
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "Portar login y pizarra a Aficionado A"
+          branch: main

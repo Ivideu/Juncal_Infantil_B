@@ -93,7 +93,7 @@ async function buscaImg(nombre){
  return ""}
 
 /* ---------- Crear / editar / borrar ---------- */
-let EDIT="";
+let EDIT="",PRE=null;
 function renameP(a,b){const i=S.pl.indexOf(a);if(i>-1)S.pl[i]=b;
  if(S.dn[a]!==undefined){S.dn[b]=S.dn[a];delete S.dn[a]}
  if(S.off&&S.off[a]){S.off[b]=S.off[a];delete S.off[a]}
@@ -115,27 +115,37 @@ window.addCromo=async function(){
  S.cromos=S.cromos||[];
  if(coach&&S.cromos.some(z=>z.coach&&z.img===img&&z.id!==EDIT))return alert("Ese entrenador ya está añadido");
  const c=EDIT&&S.cromos.find(z=>z.id===EDIT);
+ if(!c&&!coach&&PRE&&PRE.old&&name!==PRE.old)renameP(PRE.old,name);
  if(c){if(!c.coach&&!coach&&c.name!==name)renameP(c.name,name);
   if(!c.coach&&coach)quitaP(c.name);
   Object.assign(c,{name,num,pos,coach});if(coach)c.img=img;else delete c.img;delete c.foto}
  else S.cromos.push(Object.assign({id:Date.now().toString(36),name,num,pos,coach},coach?{img}:{}));
  if(!coach){if(!S.pl.includes(name)){S.pl.push(name);S.pl.sort((a,b)=>a.localeCompare(b))}S.dn[name]=num}
- EDIT="";save()};
-window.editCromo=function(id){const c=(S.cromos||[]).find(x=>x.id===id);if(!c)return;EDIT=id;render();window.scrollTo({top:0,behavior:"smooth"})};
-window.cancelCromo=function(){EDIT="";render()};
+ EDIT="";PRE=null;save()};
+window.editCromo=function(id){const c=(S.cromos||[]).find(x=>x.id===id);if(!c)return;EDIT=id;PRE=null;render();window.scrollTo({top:0,behavior:"smooth"})};
+window.editPl=function(i){const p=S.pl[i];if(!p)return;const q=pn(p);
+ const c=(S.cromos||[]).find(z=>!z.coach&&z.name===q.name);
+ if(c){EDIT=c.id;PRE=null}else{EDIT="";PRE={old:p,name:q.name,num:q.num}}
+ render();window.scrollTo({top:0,behavior:"smooth"})};
+window.delP=function(i){const n=S.pl[i];if(!n)return;if(!confirm("¿Eliminar a "+n+" de la plantilla?"))return;
+ const q=pn(n);
+ (S.cromos||[]).filter(c=>!c.coach&&c.name===q.name).forEach(c=>{if(S.estado)delete S.estado["g_"+c.id]});
+ S.cromos=(S.cromos||[]).filter(c=>c.coach||c.name!==q.name);
+ delete S.dn[n];if(S.off)delete S.off[n];if(S.estado)delete S.estado["p_"+n];S.pl.splice(i,1);save()};
+window.cancelCromo=function(){EDIT="";PRE=null;render()};
 window.delCromo=function(id){const c=(S.cromos||[]).find(x=>x.id===id);if(!c||!confirm("¿Borrar el cromo de "+c.name+"?"))return;
  S.cromos=S.cromos.filter(x=>x.id!==id);if(EDIT===id)EDIT="";
- if(!c.coach)quitaP(c.name);save()};
+ if(!c.coach)quitaP(c.name);if(S.estado)delete S.estado["g_"+id];save()};
 function cromoForm(){
- const ec=EDIT?(S.cromos||[]).find(x=>x.id===EDIT):null,v=ec||{name:"",num:"",pos:"ala"},co=v.pos==="entrenador";
+ const ec=EDIT?(S.cromos||[]).find(x=>x.id===EDIT):null,v=ec||(PRE?{name:PRE.name,num:PRE.num,pos:"ala"}:{name:"",num:"",pos:"ala"}),co=v.pos==="entrenador",mod=!!(ec||PRE);
  const opts=Object.keys(POS).map(k=>`<option value="${k}" ${v.pos===k?"selected":""}>${k==="pivot"?"Pívot":k[0].toUpperCase()+k.slice(1)}</option>`).join("");
  const picker=ENT.list&&ENT.list.length
   ?`<select id="cn_cs" aria-label="Entrenador">${ENT.list.map(e=>`<option value="${esc(e.path)}" ${v.img===e.path?"selected":""}>${esc(e.name)}</option>`).join("")}</select>`
   :`<input id="cn_ci" placeholder="Nombre del entrenador (como el archivo)" value="${esc(co?v.name:"")}" style="min-width:230px">`;
  const L=(S.cromos||[]).map(c=>`<span class="cvf ${c.id===EDIT?"ed2":""}">${esc(c.name)} ${c.coach?"· entrenador":"· "+esc(c.num)+" · "+esc(POS[c.pos]||c.pos)}<button onclick="editCromo('${c.id}')" aria-label="Editar">✎</button><button onclick="delCromo('${c.id}')" aria-label="Borrar">✕</button></span>`).join("");
- return`<div class="card"><h2 style="font-size:1.5rem;color:#0f2a6b">${ec?"Editar cromo":"Crear cromo"}</h2>
+ return`<div class="card"><h2 style="font-size:1.5rem;color:#0f2a6b">${ec?"Editar cromo":PRE?"Cromo de "+esc(PRE.name):"Crear cromo"}</h2>
  <div class="ed" style="display:flex"><span id="cn_pl" style="display:${co?"none":"contents"}"><input id="cn_name" placeholder="Nombre (sin apellido)" value="${esc(co?"":v.name)}"><input id="cn_num" class="g" type="number" min="0" max="99" placeholder="Nº" value="${esc(v.num)}"></span><span id="cn_co" style="display:${co?"contents":"none"}">${picker}</span><select id="cn_pos" onchange="cnPos(this.value)">${opts}</select></div>
- <div class="ed" style="display:flex"><button class="on" onclick="addCromo()">${ec?"💾 Guardar cambios":"＋ Crear cromo"}</button>${ec?'<button onclick="cancelCromo()">Cancelar</button>':""}</div>
+ <div class="ed" style="display:flex"><button class="on" onclick="addCromo()">${mod?"💾 Guardar cambios":"＋ Crear cromo"}</button>${mod?'<button onclick="cancelCromo()">Cancelar</button>':""}</div>
  <small class="gap" style="display:block;margin-top:6px">Jugadores: el cromo se escribe solo sobre Images/plantilla-jugador.jpg (portero: plantilla-portero.jpg). Entrenadores: se elige uno de Images/Entrenadores.</small>
  <div class="cvsum">${L||'<small class="gap">Aún no hay cromos.</small>'}</div></div>`}
 /* Cuerpo técnico dentro de la pestaña Plantilla */
@@ -144,13 +154,29 @@ function cuerpoTecnico(){
  return`<div class="cvhd"><h2>Cuerpo técnico</h2></div>`+l.map(c=>{const id=c.key.slice(2);
   return`<div class="card" style="display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap"><span style="display:flex;align-items:center;gap:12px"><img src="${c.src}" alt="Cromo de ${esc(c.name)}" style="width:56px;aspect-ratio:535/1000;object-fit:contain;border-radius:8px"><b>${esc(c.name)}</b><span class="gap">Entrenador</span></span><span style="display:flex;gap:8px"><button onclick="editCromo('${id}')">✎ Cambiar</button><button onclick="delCromo('${id}')">Quitar</button></span></div>`}).join("")}
 
+/* ---------- Guardado en Firebase: si falla, se avisa (antes solo se veía en la barra del administrador) ---------- */
+if(typeof push==="function"&&typeof fbTok==="function"&&FB){
+ window.push=function(){clearTimeout(pt);setSt("Guardando…");
+  pt=setTimeout(async()=>{
+   try{const t=await fbTok(),raw=JSON.stringify(S);lastRaw=raw;
+    const r=await fetch(FB+"/"+CAT.node+".json?auth="+t,{method:"PUT",body:JSON.stringify(raw)});
+    if(r.ok){setSt("✓ Guardado");return}
+    const m=(r.status===401||r.status===403)?"No se ha guardado: Firebase no permite escribir en «"+CAT.node+"». Hay que revisar las reglas.":"No se ha guardado (Firebase "+r.status+").";
+    setSt("⚠ "+m);toast(m)
+   }catch(e){const m=e===0?"La sesión ha caducado. Sal y vuelve a entrar para guardar.":"No se ha guardado: error de conexión.";setSt("⚠ "+m);toast(m)}
+  },150)}}
+
 /* ---------- Enganche en render ---------- */
 const _rn=window.render;
 window.render=function(){cfg2();buildCromos();
  if(PORT)document.body.classList.toggle("owner",E()&&ACC===FBMAIL); // administrador del club: ve la barra completa
  _rn();
  if(!E())return;
- if(tab=="pla"){const a=document.getElementById("app");a.insertAdjacentHTML("afterbegin",cromoForm());a.insertAdjacentHTML("beforeend",cuerpoTecnico());cargaEnt()}
+ if(tab=="pla"){const a=document.getElementById("app");a.insertAdjacentHTML("afterbegin",cromoForm());a.insertAdjacentHTML("beforeend",cuerpoTecnico());cargaEnt();
+  a.querySelectorAll('button[onclick^="delP("]').forEach(b=>{const m=b.getAttribute("onclick").match(/delP\((\d+)\)/);if(!m)return;const i=+m[1];
+   const e=document.createElement("button");e.textContent="✎ Editar";e.setAttribute("onclick","editPl("+i+")");b.parentNode.insertBefore(e,b);
+   const p=S.pl[i],c=p&&cromoFor(p),row=b.closest(".card"),sv=row&&row.querySelector("svg");
+   if(c&&sv){const im=document.createElement("img");im.src=c.src;im.alt="";im.style.cssText="width:34px;aspect-ratio:535/1000;object-fit:contain;border-radius:5px";sv.replaceWith(im)}})}
 
  if(!PORT&&!OWN())document.getElementById("nav").insertAdjacentHTML("beforeend",'<button onclick="setEdit(false)"><span>🔓</span><span>Salir</span></button>')};
 render();

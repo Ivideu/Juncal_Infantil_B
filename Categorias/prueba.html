@@ -37,10 +37,6 @@ h1,h2,.cn{font-family:'Barlow Condensed',sans-serif;letter-spacing:.02em}
 @keyframes pulse{50%{transform:scale(1.12);border-color:#2f7bff12}}
 #bg b{position:absolute;bottom:-70px;font-weight:400;opacity:.2;will-change:transform;animation:rise linear infinite}
 @keyframes rise{to{transform:translateY(-120vh) rotate(720deg)}}
-/* ===== Cabecera ===== */
-header{padding:28px 0 8px;display:flex;justify-content:space-between;gap:12px;align-items:center;flex-wrap:wrap}
-header h1{font-size:clamp(2rem,6vw,3.4rem);font-weight:800;line-height:1;color:#0f2a6b}
-header small{color:var(--mu);display:block;margin-top:6px}
 button,.btn{font:inherit;cursor:pointer;border:1px solid var(--line);background:var(--bg2);color:var(--tx);padding:8px 14px;border-radius:10px;transition:.2s}
 button:hover{border-color:var(--ac);transform:translateY(-1px)}button:focus-visible,input:focus-visible{outline:2px solid var(--ac);outline-offset:2px}
 .on{background:var(--ac);border-color:var(--ac);color:#fff}
@@ -329,69 +325,6 @@ select{font:inherit;background:var(--bg);color:var(--tx);border:1px solid var(--
 .dl:hover{background:#1d5fe0}
 @media(display-mode:standalone){.dl{display:none}}
 
-/* ===== Cabecera panorámica Torrejón Juncal ===== */
-header.site-banner {
-  position: relative;
-  width: 100%;
-  max-width: 100%;
-  margin: 0 auto 18px;
-  aspect-ratio: 1347 / 375;
-  height: auto;
-  min-height: 0;
-  padding: 0;
-  display: block;
-  overflow: hidden;
-  border-radius: 16px;
-  background-color: #050b1f;
-  background-image: linear-gradient(180deg, transparent 65%, rgba(5, 11, 31, .45) 100%), url('../../Images/cabecera-juncal.jpg');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  border-bottom: 2px solid #2f7bff;
-  box-shadow: 0 8px 28px rgba(0, 40, 120, .35);
-}
-header.site-banner > div { position: static; }
-header.site-banner #tt {
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-  width: 100%;
-  height: 100%;
-  padding: 0;
-  margin: 0;
-  font-size: 0;
-  line-height: 0;
-  color: transparent;
-  cursor: pointer;
-  user-select: none;
-  -webkit-user-select: none;
-}
-header.site-banner small { display: none; }
-header.site-banner .dl {
-  position: absolute;
-  z-index: 2;
-  top: 12px;
-  right: 16px;
-}
-@media (max-width: 600px) {
-  header.site-banner {
-    width: 100%;
-    aspect-ratio: 1347 / 375;
-    min-height: 0;
-    background-position: center;
-    border-radius: 12px;
-  }
-  header.site-banner .dl {
-    top: 6px;
-    right: 8px;
-    font-size: 12px;
-    padding: 6px 9px;
-  }
-}
-@media (prefers-reduced-motion: reduce) {
-  header.site-banner { scroll-behavior: auto; }
-}
-
 /* ===== Cartel FIN PARTIDO (sustituye al cronómetro cuando el partido termina) ===== */
 .lfin{letter-spacing:.06em;background:var(--ye);color:#0a0f1e;display:inline-block;border-radius:12px;padding:6px 26px;box-shadow:0 6px 24px #ffd23f44}
 #hero.fs .lfin{font-size:calc(var(--u)*13*var(--k));padding:calc(var(--u)*.5) calc(var(--u)*5)}
@@ -457,21 +390,49 @@ nav#nav .ml{font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color
 nav#nav .ml:empty{padding:0}
 nav#nav .ml:first-child{border:0;margin:0}
 @media(max-width:640px){nav#nav{justify-content:flex-start;gap:6px;padding-left:2px;padding-right:2px}nav#nav button{font-size:.85rem;padding:9px 11px;flex-direction:row}nav#nav .mi{font-size:.95rem}}
+
+/* ===== Barra de menú flotante (cápsula) · fija al hacer scroll ===== */
+#topbar{position:fixed;top:0;left:0;right:0;z-index:50;padding:calc(env(safe-area-inset-top,0px) + 8px) 12px 6px;display:flex;justify-content:center;pointer-events:none}
+#topbar .dock{pointer-events:auto;width:100%;max-width:980px;display:flex;align-items:center;gap:10px;padding:6px 8px 6px 14px;border-radius:999px;background:linear-gradient(135deg,rgba(15,42,107,.95),rgba(10,15,30,.95));border:1px solid #7aa9ff66;box-shadow:0 10px 30px #0b1b4a55,inset 0 1px 0 #ffffff22;-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px)}
+#tbsp{height:calc(env(safe-area-inset-top,0px) + 70px)}
+#topbar .brand{display:flex;align-items:center;gap:8px;flex:none;color:#fff;cursor:pointer;user-select:none;-webkit-user-select:none}
+#topbar .brand .bl{font-size:1.4rem;line-height:1}
+#topbar .brand b{font-size:1.35rem;font-weight:800;letter-spacing:.06em}
+#topbar .brand em{font-style:normal;color:var(--ye)}
+#topbar nav#nav{position:static;flex:1;min-width:0;padding:0;justify-content:flex-end;gap:6px}
+#topbar nav#nav .nrow{gap:4px}
+#topbar nav#nav button{background:transparent;border:0;box-shadow:none;color:#dbe7ff;border-radius:999px;padding:8px 13px;font-weight:600;transform:none}
+#topbar nav#nav button:hover{background:#ffffff1f}
+#topbar nav#nav .nrow button.on,#topbar nav#nav .nmb.on{background:var(--ye);color:#0a0f1e;box-shadow:0 0 16px #ffd23f88}
+#topbar nav#nav .npanel{background:#fff;border-radius:18px;top:calc(100% + 14px)}
+#topbar nav#nav .mi{color:var(--tx);border-radius:10px}
+#topbar nav#nav .mi:hover{background:#2f7bff14}
+#topbar nav#nav .mi.on{background:var(--ac);color:#fff;box-shadow:none}
+@media(max-width:640px){
+ #topbar .dock{padding:5px 6px 5px 10px;gap:6px}
+ #topbar .brand b{display:none}
+ #topbar nav#nav button{padding:9px 11px}
+ #topbar nav#nav .nrow button:not(.on) span:last-child,#topbar nav#nav .nmb:not(.on) span:last-child{display:none}
+ #topbar nav#nav .nrow button span:first-child,#topbar nav#nav .nmb span:first-child{font-size:1.15rem}
+}
 </style>
 </head>
 <body>
 <div id="bg" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+<div id="topbar">
+ <div class="dock">
+  <div id="tt" class="brand" aria-label="Torrejón Juncal B. Haz cinco clics para abrir el acceso de administración">
+   <span class="bl">⚽</span><b class="cn">JUNCAL <em>B</em></b>
+  </div>
+  <nav id="nav"></nav>
+ </div>
+</div>
 <div class="wrap">
-<header class="site-banner">
- <div><h1 id="tt" aria-label="Torrejón Juncal B. Haz cinco clics para abrir el acceso de administración">Escuela Torrejón Juncal B</h1><small>Primera Infantil FS · Grupo 2 · Temporada 2026-27</small></div>
- <!--<a class="dl" id="dl" href="../../descarga.html">📲 Descargar app</a>-->
-</header>
-<script>if(window.Capacitor||navigator.standalone)document.getElementById("dl").style.display="none"</script>
+<div id="tbsp"></div>
 <script>/* Avisos push: solo dentro de la app Android */
 (async()=>{try{const FM=window.Capacitor&&Capacitor.Plugins&&Capacitor.Plugins.FirebaseMessaging;if(!FM)return;
  const p=await FM.requestPermissions();if(p.receive==="granted")await FM.subscribeToTopic({topic:"juncal"})}catch(e){}})();</script>
 <section id="hero"></section>
-<nav id="nav"></nav>
 <main id="app"></main>
 
 <!-- Pizarra del entrenador (fuera de #app para que no se reinicie al refrescar la página) -->
@@ -650,6 +611,10 @@ function leaveFS(){FS=false;try{screen.orientation.unlock()}catch(e){}try{if(doc
 /* Ajusta la pantalla completa: calcula la unidad --u y reduce --k hasta que todo cabe (se recalcula con cada gol) */
 function fit(){
  const h=document.getElementById("hero");
+ /* La barra de menú solo se oculta en el directo a pantalla completa */
+ const tb=document.getElementById("topbar"),sp=document.getElementById("tbsp");
+ if(tb)tb.style.display=FS?"none":"";
+ if(sp)sp.style.display=FS?"none":"";
  if(FS&&!lvOn)leaveFS();
  h.classList.toggle("fs",FS);
  h.classList.toggle("adm",FS&&E());

@@ -365,6 +365,13 @@ select{font:inherit;background:var(--bg);color:var(--tx);border:1px solid var(--
 .pj h3{margin:8px 0 2px;font-size:1.05rem;line-height:1.2}
 #toast{position:fixed;left:50%;bottom:90px;transform:translateX(-50%);background:#fff;color:#0b2a6f;padding:9px 16px;border-radius:999px;font-weight:600;box-shadow:0 6px 20px rgba(0,0,0,.4);opacity:0;pointer-events:none;transition:opacity .2s;z-index:10001;max-width:92vw;text-align:center}
 #toast.show{opacity:1}
+/* ===== Pizarra: barra con botón de pantalla completa ===== */
+#pzbar{display:flex;justify-content:flex-end;align-items:center;gap:8px;padding:6px 8px;background:#0d2561;border-bottom:1px solid rgba(255,255,255,.16)}
+#pzbar button{background:#173a8f;color:#fff;border:1px solid rgba(255,255,255,.16);font-weight:700;padding:6px 14px;border-radius:8px;min-height:36px}
+#pzbar button:hover{background:#1f4cb8;transform:none}
+#pzf.fsp{position:fixed;inset:0;z-index:9990;margin:0;border-radius:0;display:flex;flex-direction:column;height:100vh;height:100dvh;padding:env(safe-area-inset-top,0px) env(safe-area-inset-right,0px) env(safe-area-inset-bottom,0px) env(safe-area-inset-left,0px)}
+#pzf.fsp #pzbar{flex:none}
+#pzf.fsp iframe{flex:1 1 0;min-height:0;height:100%}
 /* ===== Barra de menú fija: todas las opciones visibles en dos líneas ===== */
 #topbar{position:fixed;top:0;left:0;right:0;z-index:50;padding:calc(env(safe-area-inset-top,0px) + 8px) 10px 6px;display:flex;justify-content:center;pointer-events:none}
 #topbar .dock{pointer-events:auto;width:100%;max-width:980px;display:flex;align-items:center;gap:8px;padding:6px 8px;border-radius:20px;background:linear-gradient(90deg,rgba(246,236,214,.97),rgba(227,235,250,.97) 60%,rgba(212,217,234,.97));border:1px solid #2a5ba8;box-shadow:0 8px 24px #1e3a7a33,inset 0 1px 0 #ffffffaa;-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px)}
@@ -408,7 +415,7 @@ select{font:inherit;background:var(--bg);color:var(--tx);border:1px solid var(--
 
 <!-- Pizarra del entrenador (fuera de #app para que no se reinicie al refrescar la página) -->
 <div id="pizW" hidden>
- <div id="pzf"></div>
+ <div id="pzf"><div id="pzbar"><button type="button" id="pzfs">⛶ Pantalla completa</button></div></div>
  <div class="card">
   <div class="pubr">
    <div style="flex:1;min-width:200px"><label for="ptit" style="margin-top:0">Título de la jugada</label><input id="ptit" maxlength="60" placeholder="Ej.: Saque de esquina en corto"></div>
@@ -592,7 +599,7 @@ function fit(){
  h.classList.toggle("fs",FS);
  h.classList.toggle("adm",FS&&E());
  h.classList.toggle("rot",FS&&innerHeight>innerWidth);
- document.body.style.overflow=FS?"hidden":"";
+ document.body.style.overflow=(FS||PFS)?"hidden":"";
  h.style.setProperty("--u",h.clientHeight/100+"px");
  h.style.removeProperty("--k");
  if(FS){
@@ -609,7 +616,7 @@ function fit(){
 }
 if(document.fonts&&document.fonts.ready)document.fonts.ready.then(()=>fit());
 async function setFS(on){if(!on){leaveFS()}else{FS=true;try{await document.documentElement.requestFullscreen({navigationUI:"hide"})}catch(e){}try{await screen.orientation.lock("landscape")}catch(e){}try{wl=await navigator.wakeLock.request("screen")}catch(e){}}render()}
-document.addEventListener("fullscreenchange",()=>{if(!document.fullscreenElement&&FS){leaveFS();render()}});
+document.addEventListener("fullscreenchange",()=>{if(!document.fullscreenElement&&FS){leaveFS();render()}if(!document.fullscreenElement&&PFS)setPzFS(false)});
 addEventListener("resize",()=>{fit()});
 const HALF=25*60000;
 function evs(m){const g=m.g||{},gm=m.gm||{},a=[];Object.keys(g).forEach(n=>{const t=(gm[n]||[]).slice(0,g[n]);t.forEach(x=>a.push([x,n]));for(let i=t.length;i<g[n];i++)a.push([999,n])});return a.sort((x,y)=>x[0]-y[0]).map(([t,n])=>({t:t<999?t:0,n}))}
@@ -723,7 +730,8 @@ function render(){
  document.body.classList.toggle("owner",!!E()&&ACC===FBMAIL);
  subAdmin(E());
  if(loading){document.getElementById("hero").style.display="none";document.getElementById("nav").innerHTML="";document.getElementById("app").innerHTML="";return}
- document.getElementById("hero").style.display="";
+ /* El bloque grande (próximo partido / directo) solo se muestra en Jornadas */
+ document.getElementById("hero").style.display=tab=="jor"?"":"none";
  document.getElementById("hero").innerHTML=hero();fit();tick();goalWatch();
  document.getElementById("tbtn").classList.toggle("on",TS.on);document.getElementById("tout").style.display=document.getElementById("trst").style.display=TS.on?"":"none";
  if(jnAuto){const nx=nextL();jn=nx?nx.r.n:J.length}
@@ -743,7 +751,7 @@ function render(){
  if(tab=="cop")h=renderCopa();
  if(tab=="cro")h=renderJug();
  if(tab=="jug")h=renderPlays();
- const pzw=document.getElementById("pizW"),sp=E()&&tab=="piz";pzw.hidden=!sp;if(sp)ensurePiz();
+ const pzw=document.getElementById("pizW"),sp=E()&&tab=="piz";pzw.hidden=!sp;if(sp)ensurePiz();if(!sp&&PFS)setPzFS(false);
  document.getElementById("app").innerHTML=h;setTb()}
 
 /* ===== Copa: torneo aparte (no puntúa en la clasificación; sus goles sí suman en Goleadores) ===== */
@@ -913,6 +921,7 @@ function setEdit(on){
     try{ sessionStorage.removeItem("adm"); sessionStorage.removeItem("pw"); sessionStorage.removeItem("rt"); sessionStorage.removeItem("mail"); }catch(e){}
     PW = ""; RT = ""; ACC = FBMAIL; idt = ""; exp = 0;
     TS.on=false;
+    setPzFS(false);
     closeVer();rec=null;$("#mPrev").hidden=true;
     if(pzFr){pzFr.remove();pzFr=null}pzQ=null;
     if(["piz","pla","hor","ent"].includes(tab)||(tab=="cop"&&!COPA)) tab="jor";
@@ -1022,14 +1031,30 @@ async function delPl(i){
  }catch(e){toast("No se pudo borrar")}}
 
 /* Pizarra incrustada (se crea una sola vez y no se recarga al refrescar la página) */
-let pzFr=null,pzQ=null;
+let pzFr=null,pzQ=null,PFS=false;
 const PZ=()=>{try{return(pzFr&&pzFr.contentWindow&&pzFr.contentWindow.PZ)||null}catch(e){return null}};
-function ajusta(){try{const d=pzFr.contentDocument;if(d&&d.body)pzFr.style.height=Math.ceil(d.documentElement.scrollHeight)+"px"}catch(e){}}
+function ajusta(){try{if(PFS)return;const d=pzFr.contentDocument;if(d&&d.body)pzFr.style.height=Math.ceil(d.documentElement.scrollHeight)+"px"}catch(e){}}
 function ensurePiz(){
  if(pzFr)return;
  pzFr=document.createElement("iframe");pzFr.title="Pizarra táctica";pzFr.src=BASE+"pizarra.html";
  pzFr.addEventListener("load",()=>{ajusta();try{new ResizeObserver(ajusta).observe(pzFr.contentDocument.body)}catch(e){}flushPz()});
  $("#pzf").appendChild(pzFr)}
+/* Pizarra a pantalla completa: tapa el menú, la barra de admin y el resto de botones de la página */
+function setPzFS(on){
+ const f=$("#pzf");if(!f||on===PFS)return;
+ PFS=on;f.classList.toggle("fsp",on);
+ $("#pzfs").textContent=on?"✕ Salir de pantalla completa":"⛶ Pantalla completa";
+ document.body.style.overflow=(FS||PFS)?"hidden":"";
+ if(on){
+  try{const p=f.requestFullscreen&&f.requestFullscreen({navigationUI:"hide"});if(p&&p.catch)p.catch(()=>{})}catch(e){}
+  try{const p=screen.orientation&&screen.orientation.lock&&screen.orientation.lock("landscape");if(p&&p.catch)p.catch(()=>{})}catch(e){}
+ }else{
+  try{if(document.fullscreenElement)document.exitFullscreen()}catch(e){}
+  try{screen.orientation.unlock()}catch(e){}
+ }
+ if(pzFr&&!on)pzFr.style.height="900px";
+ setTimeout(ajusta,60)}
+$("#pzfs").onclick=()=>setPzFS(!PFS);
 function setPSt(t){$("#pst").textContent=t}
 function toPiz(ses,titulo){pzQ={ses,titulo};tab="piz";render();flushPz()}
 function flushPz(){const z=PZ();if(pzQ&&z){z.loadSession(pzQ.ses);$("#ptit").value=pzQ.titulo;setPSt("Jugada cargada. Cámbiala y publícala como nueva; después puedes borrar la antigua.");pzQ=null}}
@@ -1074,7 +1099,7 @@ $("#mPub").onclick=async()=>{
   const m=e===0?"La sesión ha caducado. Sal y vuelve a entrar.":(e&&(e.message==="401"||e.message==="403"))?"Sin permiso para publicar. Revisa las reglas de Firebase.":(e&&e.message)||"No se pudo publicar";
   setPSt(m);toast(m)}};
 
-document.addEventListener("keydown",e=>{if(e.key==="Escape"){closeCromo();closePick();closeLogin();if(ver)closeVer()}});
+document.addEventListener("keydown",e=>{if(e.key==="Escape"){closeCromo();closePick();closeLogin();if(ver)closeVer();if(PFS)setPzFS(false)}});
 if(location.hash=="#admin")unlock();try{if(sessionStorage.getItem("adm")){PW=sessionStorage.getItem("pw")||"";RT=sessionStorage.getItem("rt")||"";ACC=sessionStorage.getItem("mail")||TEAM_MAIL;document.body.classList.add("edit")}}catch(e){}
 if(API||FB)document.querySelector("#adm .on").remove();
 /* Volver a la página anterior (si se abrió esta página directamente, va al inicio) */

@@ -417,6 +417,29 @@ header.site-banner .dl {
 .entw .x{color:#b91c1c;font:800 1.3rem 'Barlow Condensed',sans-serif}
 .entw .z{color:var(--mu)}
 .entw th small{display:block;font-weight:500;font-size:.72rem}
+/* ===== Login, Jugadas (vídeos) y Pizarra del entrenador ===== */
+.mdl{position:fixed;inset:0;background:rgba(3,8,28,.8);display:flex;align-items:center;justify-content:center;padding:16px;z-index:10000}
+.mdl[hidden]{display:none}
+.mdl .card{width:min(560px,100%);max-height:94vh;overflow:auto;background:#fff;animation:none}
+.mdl label,#pizW label{display:block;font-size:.75rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--mu);margin:12px 0 4px}
+.mdl input,#pizW input{width:100%}
+.mdl a{color:#1d5fe0}
+#lgErr{background:#fee2e2;border:1px solid #ef4444;color:#7f1d1d;border-radius:10px;padding:8px 12px;margin-top:12px}
+#pizW{margin-top:4px}
+#pzf{border-radius:16px;overflow:hidden;background:#071a45;margin-bottom:12px}
+#pzf iframe{width:100%;border:0;display:block;height:900px;background:transparent}
+.pubr{display:flex;gap:10px;flex-wrap:wrap;align-items:flex-end}
+.pubr button{flex:0 0 auto;min-height:40px;font-weight:800}
+#pst{margin-top:8px;font-size:.9rem;min-height:18px}
+.pjg{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px}
+.pjg .card{margin:0;padding:10px}
+.pj video,.pjv,.pjn{width:100%;aspect-ratio:43.2/23.2;border-radius:10px;display:block}
+.pj video{background:#000}
+.pjv{border:0;color:#fff;font-size:3rem;cursor:pointer;background:linear-gradient(160deg,#1d3a8a,#0a1a4d)}
+.pjn{display:grid;place-items:center;background:#0a1a4d;color:#fff;padding:10px;text-align:center;font-size:.85rem}
+.pj h3{margin:8px 0 2px;font-size:1.05rem;line-height:1.2}
+#toast{position:fixed;left:50%;bottom:90px;transform:translateX(-50%);background:#fff;color:#0b2a6f;padding:9px 16px;border-radius:999px;font-weight:600;box-shadow:0 6px 20px rgba(0,0,0,.4);opacity:0;pointer-events:none;transition:opacity .2s;z-index:10001;max-width:92vw;text-align:center}
+#toast.show{opacity:1}
 </style>
 <script>const CAT={"nombre": "Torrejón Juncal Aficionado B", "corto": "Aficionado B", "liga": "Primera Aficionado FS · Grupo 2", "node": "cat-aficionado-b", "email": "aficionado-b@torrejonjuncal.es", "grupo": "28153964", "equipo": "26753966", "me": 0};</script>
 </head>
@@ -434,6 +457,18 @@ header.site-banner .dl {
 <section id="hero"></section>
 <nav id="nav"></nav>
 <main id="app"></main>
+<!-- Pizarra del entrenador (fuera de #app para que no se reinicie al refrescar la página) -->
+<div id="pizW" hidden>
+ <div id="pzf"></div>
+ <div class="card">
+  <div class="pubr">
+   <div style="flex:1;min-width:200px"><label for="ptit" style="margin-top:0">Título de la jugada</label><input id="ptit" maxlength="60" placeholder="Ej.: Saque de esquina en corto"></div>
+   <button class="on" id="pbtn">⏺ Grabar y publicar</button>
+  </div>
+  <div id="pst" class="gap">Crea los pasos en la pizarra y pulsa «Grabar y publicar». Verás el vídeo antes de enviarlo.</div>
+ </div>
+</div>
+
 <div class="volver">
  <p>¿Quieres ver otra categoría?</p>
  <button type="button" onclick="volver()">← Volver</button>
@@ -441,7 +476,6 @@ header.site-banner .dl {
 </div>
 <div id="adm">
  <span id="st" class="gap"></span>
- <button onclick="setEdit(false)">🔓 Salir</button>
  <button id="tbtn" onclick="toggleTest()">🧪 Partido de prueba</button>
  <button id="tout" onclick="toggleTest()" style="display:none">✕ Salir de la prueba</button>
  <button id="trst" onclick="resetTest()" style="display:none">🧹 Vaciar prueba</button>
@@ -452,11 +486,46 @@ header.site-banner .dl {
  <button onclick="resetD()">🗑 Borrar todo</button>
  <input type="file" id="imp" accept=".json" hidden onchange="importD(this)">
 </div>
+<!-- Login -->
+<div id="mLog" class="mdl" hidden role="dialog" aria-modal="true" aria-label="Acceso entrenadores">
+ <form class="card" id="fLog" autocomplete="on">
+  <h2 style="font-size:1.7rem;color:#0f2a6b">🔒 Acceso entrenadores</h2>
+  <p class="gap">Equipo: <b id="lgCat"></b></p>
+  <div id="lgAdm" hidden><label for="lgMail">Correo de administrador</label><input id="lgMail" type="email" autocomplete="username" placeholder="correo@ejemplo.com"></div>
+  <label for="lgPw">Contraseña</label>
+  <input id="lgPw" type="password" autocomplete="current-password" required>
+  <div id="lgErr" hidden></div>
+  <div class="ctl"><button type="submit" class="on" id="lgGo">Entrar</button><button type="button" id="lgX">Cancelar</button></div>
+  <p style="margin-top:12px;font-size:.9rem"><a href="#" id="lgTog">Acceso de administración del club</a></p>
+ </form>
+</div>
+
+<!-- Vista previa antes de publicar -->
+<div id="mPrev" class="mdl" hidden role="dialog" aria-modal="true" aria-label="Vista previa">
+ <div class="card">
+  <h2 id="mT" style="font-size:1.5rem;color:#0f2a6b"></h2>
+  <p id="mI" class="gap"></p>
+  <video id="mV" controls playsinline style="width:100%;border-radius:10px;background:#000;margin-top:8px"></video>
+  <div class="ctl"><button id="mPub" class="on">✔ Publicar</button><button id="mDl">⬇ Descargar</button><button id="mNo">Descartar</button></div>
+ </div>
+</div>
+
+<!-- Visor de jugadas recién publicadas -->
+<div id="mVer" class="mdl" hidden role="dialog" aria-modal="true" aria-label="Ver jugada">
+ <div class="card">
+  <h2 id="vT" style="font-size:1.5rem;color:#0f2a6b"></h2>
+  <p id="vI" class="gap"></p>
+  <video id="vV" controls playsinline style="width:100%;border-radius:10px;background:#000;margin-top:8px"></video>
+  <div class="ctl"><button id="vEd" class="on" hidden>✎ Cargar en la pizarra</button><button id="vCl">Cerrar</button></div>
+ </div>
+</div>
+<div id="toast" role="status"></div>
 <script>
 (function(){const b=document.getElementById("bg");for(let i=0;i<9;i++){const e=document.createElement("b");e.textContent="⚽";e.style.cssText="left:"+((i*11+Math.random()*8)%100)+"%;font-size:"+(22+Math.random()*34)+"px;animation-duration:"+(18+Math.random()*20)+"s;animation-delay:-"+(Math.random()*30)+"s";b.appendChild(e)}})();
 let ME=CAT.me||0;
 const COPA=false; // pon true para que todos vean la pestaña Copa (el entrenador siempre la ve)
 const GH_USER="Ivideu",GH_REPO="Juncal_Infantil_B";
+const CATK=CAT.node.replace(/^cat-/,""),CAT_NAME=CAT.corto,BASE="../",TEAM_MAIL=CAT.email;
 const T={};
 T[99]=["Equipo de prueba","P.M. Nuria Fernández, Torrejón de Ardoz"];
 const COD={};
@@ -469,11 +538,19 @@ const fix=()=>{S.m=S.m||{};S.pl=S.pl||[];S.dn=S.dn||{};S.off=S.off||{};S.cp=S.cp
 const isOff=p=>!!(S.off&&S.off[p]);
 let CACHE=null;try{CACHE=JSON.parse(localStorage.getItem("juncal_"+CAT.node))}catch(e){}
 if(!API&&CACHE)S=CACHE;fix();let loading=!!(API||FB);
-let PW="",pt;const setSt=t=>{document.getElementById("st").textContent=t};
+let PW="",RT="",ACC=FBMAIL,pt;;const setSt=t=>{document.getElementById("st").textContent=t};
 if(!FB)fetch(API?API+"?v="+Date.now():"../datos.json?v="+Date.now(),{cache:"no-store"}).then(r=>r.json()).then(d=>{if(API||(d.u||0)>S.u){S=d;fix()}loading=false;render()}).catch(()=>{if(API&&CACHE){S=CACHE;fix()}loading=false;render()});
 let idt="",exp=0,lastRaw="";
-async function fbLogin(pw){const r=await fetch("https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key="+FBKEY,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({email:FBMAIL,password:pw,returnSecureToken:true})}),d=await r.json();if(!d.idToken)return false;idt=d.idToken;exp=Date.now()+(d.expiresIn-120)*1000;return true}
-async function fbTok(){if(idt&&Date.now()<exp)return idt;if(!await fbLogin(PW))throw 0;return idt}
+async function fbLogin(pw,mail){const r=await fetch("https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key="+FBKEY,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({email:mail||ACC,password:pw,returnSecureToken:true})}),d=await r.json();if(!d.idToken)return false;idt=d.idToken;exp=Date.now()+(d.expiresIn-120)*1000;return true}
+async function fbTok(){
+ if(idt&&Date.now()<exp)return idt;
+ if(PW){if(!await fbLogin(PW))throw 0;return idt}
+ if(RT){
+  const r=await fetch("https://securetoken.googleapis.com/v1/token?key="+FBKEY,{method:"POST",headers:{"Content-Type":"application/x-www-form-urlencoded"},body:"grant_type=refresh_token&refresh_token="+encodeURIComponent(RT)}),d=await r.json();
+  if(!d.id_token)throw 0;
+  idt=d.id_token;exp=Date.now()+(+d.expires_in-120)*1000;return idt
+ }
+ throw 0}
 if(FB){const l=document.createElement("link");l.rel="preconnect";l.href=FB;document.head.appendChild(l);
  const es=new EventSource(FB+"/"+CAT.node+".json");
  es.addEventListener("put",ev=>{let m,n;try{m=JSON.parse(ev.data);if(m.path!=="/"||m.data===lastRaw)return;n=m.data==null?{u:0,m:{},pl:[]}:(typeof m.data==="string"?JSON.parse(m.data):m.data)}catch(e){return}
@@ -499,7 +576,7 @@ function resetTest(){if(!confirm("¿Vaciar el partido de prueba?"))return;TS.m={
 const done=m=>m.h!==undefined&&m.h!==""&&m.a!==undefined&&m.a!=="";
 const bd=id=>{if(!id)return`<span class="b" style="background:#334">💤</span>`;const n=T[id][0].split(" ").map(w=>w[0]).join("").slice(0,2).toUpperCase();return`<span class="b" style="background:${id==ME?'#2f7bff':`hsl(${id*47%360} 55% 38%)`}">${n}${COD[id]?`<img src="../Escudos/${COD[id]}.png" alt="" onload="this.parentNode.classList.add('ok')" onerror="this.remove()">`:""}</span>`};
 const nm=id=>!id||!T[id]?"Descansa":id==ME&&CAT.nombre?CAT.nombre:T[id][0];
-function save(t){if(t){render();return}S.u=Date.now();try{localStorage.setItem("juncal_"+CAT.node,JSON.stringify(S))}catch(e){}if((API||FB)&&PW)push();render()}
+function save(t){if(t){render();return}S.u=Date.now();try{localStorage.setItem("juncal_"+CAT.node,JSON.stringify(S))}catch(e){}if((API||FB)&&(PW||RT))push();render()}
 function ed(j,h,f,v){const m=S.m[j+"_"+h]||(S.m[j+"_"+h]={});if(v==="")delete m[f];else m[f]=v;save()}
 function addG(j,h){const n=document.getElementById("sel"+j).value,m=S.m[j+"_"+h]||(S.m[j+"_"+h]={});m.g=m.g||{};m.g[n]=(m.g[n]||0)+1;const mi=document.getElementById("min"+j).value;if(mi!=="")addMin(m,n,+mi);save()}
 function eg(j,h,k){const m=S.m[j+"_"+h],e=evs(m)[k];if(!e)return;const q=prompt("Minuto del gol de "+pn(e.n).name+" (número). Escribe 0 para borrar el gol:",e.t||"");if(q===null||q.trim()==="")return;const t=Math.floor(+q);if(isNaN(t)||t<0)return;const a=(m.gm&&m.gm[e.n])||[];
@@ -692,9 +769,10 @@ function render(){
  document.getElementById("hero").innerHTML=hero();fit();tick();goalWatch();
  document.getElementById("tbtn").classList.toggle("on",TS.on);document.getElementById("tout").style.display=document.getElementById("trst").style.display=TS.on?"":"none";
  if(jnAuto){const nx=nextL();jn=nx?nx.r.n:J.length}
- const tabs=[["jor","🗓 Jornadas"],["cal","📅 Mi calendario"],["cla","🏆 Clasificación"],["cop","🥇 Copa"],["gol","👟 Goleadores"],["cro","🎽 Jugadores"]].filter(t=>t[0]!="cop"||COPA||E());if(E())tabs.push(["hor","🕒 Horarios"],["pla","👥 Plantilla"],["ent","🏃 Entrenos"]);
+ const tabs=[["jor","🗓 Jornadas"],["cal","📅 Mi calendario"],["cla","🏆 Clasificación"],["cop","🥇 Copa"],["gol","👟 Goleadores"],["cro","🎽 Jugadores"],["jug","🎬 Jugadas"]].filter(t=>t[0]!="cop"||COPA||E());if(E())tabs.push(["piz","📋 Pizarra"],["hor","🕒 Horarios"],["pla","👥 Plantilla"],["ent","🏃 Entrenos"]);
+ tabs.push(E()?["out","🔓 Salir"]:["log","🔒 Login"]);
  const nv=document.getElementById("nav"),big=tabs.length>4;nv.style.setProperty("--n",big?3:4);nv.className=big?"x":"";
- nv.innerHTML=tabs.map(([k,l])=>{const[ic,...tx]=l.split(" ");return`<button class="${tab==k?'on':''}" onclick="tab='${k}';if(tab=='jor')jnAuto=true;if(tab=='ent')entD='';render()"><span>${ic}</span><span>${tx.join(" ")}</span></button>`}).join("");
+ nv.innerHTML=tabs.map(([k,l])=>{const[ic,...tx]=l.split(" ");const oc=k=="log"?"unlock()":k=="out"?"setEdit(false)":`tab='${k}';if(tab=='jor')jnAuto=true;if(tab=='ent')entD='';if(tab=='jug')PL=null;render()`;return`<button class="${tab==k?'on':''}" onclick="${oc}"><span>${ic}</span><span>${tx.join(" ")}</span></button>`}).join("");
  let h="";
  if(tab=="cal")h=myM().map((x,i)=>card(x.r,x.h,x.a,i)).join("");
  if(tab=="jor"){h=jsel()+[...J[jn-1].p].sort((x,y)=>y.includes(ME)-x.includes(ME)).map((p,i)=>card(J[jn-1],p[0],p[1],i)).join("")}
@@ -705,6 +783,8 @@ function render(){
  if(tab=="gol"){const s=scorers(),mx=s[0]?.g||1;h=s.length?s.map((x,i)=>`<div class="gl card" style="--i:${i}"><b class="cn" style="font-size:1.4rem;color:var(--ye2)">${i+1}</b>${gMini(x.n)}<div><div>${esc(pn(x.n).name)}</div><div class="bar" style="width:${x.g/mx*100}%"></div></div><b class="cn" style="font-size:1.6rem">${x.g}</b></div>`).join(""):`<div class="empty">⚽ Aún no hay goles registrados.</div>`}
  if(tab=="cop")h=renderCopa();
  if(tab=="cro")h=renderJug();
+ if(tab=="jug")h=renderPlays();
+ const pzw=document.getElementById("pizW"),sp=E()&&tab=="piz";pzw.hidden=!sp;if(sp)ensurePiz();
  document.getElementById("app").innerHTML=h}
 
 /* ===== Copa: torneo aparte (no puntúa en la clasificación; sus goles sí suman en Goleadores) ===== */
@@ -833,46 +913,51 @@ function closeGol(){clearTimeout(celebrate.t);const o=document.getElementById("g
 function closeCromo(){const o=document.getElementById("cromoOv");if(o)o.remove();document.body.style.overflow=""}
 document.addEventListener("click",e=>{const c=e.target.closest&&e.target.closest(".cromo[data-f]");if(c)openCromo(c.dataset.f)});
 
-document.addEventListener("keydown",e=>{if(e.key==="Escape"){closeCromo();closePick()}});
 
 async function sha(t){const b=await crypto.subtle.digest("SHA-256",new TextEncoder().encode(t));return[...new Uint8Array(b)].map(x=>x.toString(16).padStart(2,"0")).join("")}
 
-async function unlock(){
-  let p = prompt("Contraseña de entrenador");
-  if (!p) return;
-  p = p.trim();
-  let ok = false, er = false;
-  try {
-    ok = FB ? !!(await fbLogin(p)) : API ? (await(await fetch(API,{method:"POST",body:JSON.stringify({pw:p})})).json()).ok : await sha(p) === PH;
-  } catch(e) {
-    er = true;
-  }
-  if (ok) {
-    PW = p;
-    try { 
-      sessionStorage.setItem("adm", "1"); 
-      sessionStorage.setItem("pw", p); 
-    } catch(e) {}
-    
-    // Activa la clase edit en el body inmediatamente
-    document.body.classList.add("edit");
-    
-    // Fuerza la recarga completa de la interfaz para mostrar herramientas de admin
-    render();
-  } else {
-    alert(er ? "Error de conexión con Firebase." : "Contraseña incorrecta o usuario no registrado en Firebase Authentication.");
-  }
-}
+/* ===== Login del entrenador (ventana propia dentro de la categoría) ===== */
+const $q=s=>document.querySelector(s);
+function openLogin(){
+ if(E())return;
+ $q("#lgCat").textContent=CAT_NAME;$q("#lgErr").hidden=true;$q("#mLog").hidden=false;
+ setTimeout(()=>$q("#lgPw").focus(),50)}
+function closeLogin(){$q("#mLog").hidden=true}
+function unlock(){openLogin()}
+$q("#lgX").onclick=closeLogin;
+$q("#mLog").addEventListener("click",e=>{if(e.target.id==="mLog")closeLogin()});
+$q("#lgTog").onclick=e=>{e.preventDefault();const a=$q("#lgAdm");a.hidden=!a.hidden;$q("#lgTog").textContent=a.hidden?"Acceso de administración del club":"Acceso de entrenador del equipo"};
+/* Prueba primero la cuenta del equipo y, si no, la cuenta de siempre */
+async function doLogin(pw,mail){
+ const tries=mail?[mail]:[TEAM_MAIL,FBMAIL];
+ for(const m of tries){if(await fbLogin(pw,m)){ACC=m;return true}}
+ return false}
+$q("#fLog").onsubmit=async ev=>{
+ ev.preventDefault();
+ const pw=$q("#lgPw").value.trim(),mail=$q("#lgAdm").hidden?"":$q("#lgMail").value.trim(),b=$q("#lgGo");
+ if(!pw)return;
+ b.disabled=true;b.textContent="Entrando…";
+ let ok=false,er=false;
+ try{ok=await doLogin(pw,mail)}catch(e){er=true}
+ b.disabled=false;b.textContent="Entrar";
+ if(!ok){const x=$q("#lgErr");x.textContent=er?"No se pudo conectar. Revisa tu conexión.":"Contraseña incorrecta.";x.hidden=false;return}
+ PW=pw;RT="";
+ try{sessionStorage.setItem("adm","1");sessionStorage.setItem("cat",CATK);sessionStorage.setItem("pw",pw);sessionStorage.setItem("mail",ACC);sessionStorage.removeItem("rt")}catch(e){}
+ $q("#lgPw").value="";closeLogin();
+ document.body.classList.add("edit");
+ render()};
 
 function setEdit(on){
-  if(on){ 
-    document.body.classList.add("edit"); 
-  } else { 
-    document.body.classList.remove("edit"); 
-    try{ sessionStorage.removeItem("adm"); sessionStorage.removeItem("pw"); }catch(e){} 
-    PW = "";
+  if(on){
+    document.body.classList.add("edit");
+  } else {
+    document.body.classList.remove("edit");
+    try{ sessionStorage.removeItem("adm"); sessionStorage.removeItem("pw"); sessionStorage.removeItem("rt"); sessionStorage.removeItem("mail"); }catch(e){}
+    PW = ""; RT = ""; ACC = FBMAIL; idt = ""; exp = 0;
     TS.on=false;
-    if(tab=="pla"||tab=="hor"||tab=="ent"||(tab=="cop"&&!COPA)) tab="jor"; 
+    closeVer();rec=null;$q("#mPrev").hidden=true;
+    if(pzFr){pzFr.remove();pzFr=null}pzQ=null;
+    if(["piz","pla","hor","ent"].includes(tab)||(tab=="cop"&&!COPA)) tab="jor";
   }
   render();
 }
@@ -904,7 +989,134 @@ function resetD(){
     alert("Datos borrados correctamente. Ya puedes utilizar el botón 'Importar' para cargar tu archivo JSON.");
   }
 }
-if(location.hash=="#admin")unlock();try{if(sessionStorage.getItem("adm")){PW=sessionStorage.getItem("pw")||"";document.body.classList.add("edit")}}catch(e){}
+/* ===== Jugadas: los jugadores ven los vídeos; el entrenador además gestiona y graba ===== */
+let toastT;function toast(m){const t=$q("#toast");t.textContent=m;t.classList.add("show");clearTimeout(toastT);toastT=setTimeout(()=>t.classList.remove("show"),3200)}
+const fch=iso=>{const d=new Date(iso);return isNaN(d)?"":d.toLocaleDateString("es-ES",{day:"numeric",month:"short",year:"numeric"})};
+const slug=s=>s.normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-+|-+$/g,"").slice(0,40)||"jugada";
+const pad=n=>String(n).padStart(2,"0");
+const MAXB64=11e6; // límite de las reglas de Firebase
+/* Lectura: sin sesión para los jugadores, con token si es entrenador */
+async function fbGet(p){let q="";if(E()){try{q="?auth="+await fbTok()}catch(e){}}const r=await fetch(FB+"/"+p+".json"+q);if(!r.ok)throw new Error(String(r.status));return r.json()}
+async function fbApi(p,m,b){const t=await fbTok();const r=await fetch(FB+"/"+p+".json?auth="+t,{method:m||"GET",body:b===undefined?undefined:JSON.stringify(b)});if(!r.ok)throw new Error(String(r.status));return r.json()}
+const fileB64=blob=>new Promise((res,rej)=>{const f=new FileReader();f.onload=()=>res(String(f.result).split(",")[1]||"");f.onerror=()=>rej(new Error("No se pudo leer el vídeo"));f.readAsDataURL(blob)});
+function b64Blob(s,mime){const bin=atob(s),u=new Uint8Array(bin.length);for(let i=0;i<bin.length;i++)u[i]=bin.charCodeAt(i);return new Blob([u],{type:mime||"video/webm"})}
+
+let PL=null,PLloading=false;
+async function loadPlays(){
+ PLloading=true;
+ let arch=[],bo={},me={};
+ try{const r=await fetch(BASE+"Pizarra/"+CATK+"/index.json?"+Date.now());if(r.ok){const a=await r.json();if(Array.isArray(a))arch=a}}catch(e){}
+ try{bo=await fbGet("pizarra_borrar/"+CATK)||{}}catch(e){}
+ try{me=await fbGet("pizarra_meta/"+CATK)||{}}catch(e){}
+ const ids=new Set(arch.map(j=>j.id)),out=[];
+ arch.filter(j=>!bo[j.id]).forEach(j=>out.push({id:j.id,t:j.titulo,d:j.fecha,f:j}));
+ Object.keys(me).filter(k=>!ids.has(k)&&!bo[k]).forEach(k=>out.push({id:k,t:me[k].titulo,d:me[k].ts,p:1}));
+ out.sort((a,b)=>String(b.d).localeCompare(String(a.d)));
+ PL=out;PLloading=false;
+ if(tab=="jug")render()}
+function renderPlays(){
+ if(PL===null){if(!PLloading)loadPlays();return`<div class="empty">Cargando jugadas…</div>`}
+ const ed=E(),head=`<div class="card"><h2 style="font-size:1.6rem;color:#0f2a6b;line-height:1.1">🎬 Jugadas ${CAT_NAME}</h2><div class="cvsub">Vídeos de las jugadas que trabaja el equipo.</div></div>`;
+ if(!PL.length)return head+`<div class="empty">🎬 Todavía no hay jugadas publicadas.</div>`;
+ return head+`<div class="pjg">`+PL.map((j,i)=>`<div class="card pj">${j.f?`<video controls preload="metadata" playsinline src="${BASE}Pizarra/${CATK}/${esc(j.f.video)}#t=0.1"></video>`:`<button class="pjv" data-pv="${i}" aria-label="Ver ${esc(j.t)}">▶</button>`}<h3>${esc(j.t)}</h3><small class="gap">${esc(fch(j.d))}</small>${ed?`<div class="ctl" style="justify-content:flex-start"><button data-pe="${i}">✎ Editar</button><button data-pb="${i}">🗑 Borrar</button></div>`:""}</div>`).join("")+`</div>`}
+$q("#app").addEventListener("click",e=>{
+ const b=e.target.closest("[data-pv],[data-pe],[data-pb]");if(!b)return;
+ if(b.dataset.pv!==undefined)verPend(+b.dataset.pv);
+ else if(b.dataset.pe!==undefined)editPl(+b.dataset.pe);
+ else delPl(+b.dataset.pb)});
+/* Si un vídeo archivado no carga, se avisa en vez de dejar un recuadro negro */
+$q("#app").addEventListener("error",e=>{
+ const v=e.target;if(!v||v.tagName!=="VIDEO")return;
+ const d=document.createElement("div");d.className="pjn";d.textContent="Vídeo no disponible todavía. Puede estar archivándose; prueba en unos minutos.";v.replaceWith(d)},true);
+
+/* Visor (jugadas recién publicadas, que aún están en Firebase) */
+let ver=null;
+function openVer(t,info,url,ses){closeVer();ver={url,ses,t};$q("#vT").textContent=t;$q("#vI").textContent=info;const v=$q("#vV");v.src=url;$q("#vEd").hidden=!E();$q("#mVer").hidden=false;const p=v.play();if(p&&p.catch)p.catch(()=>{})}
+function closeVer(){const v=$q("#vV");v.pause();v.removeAttribute("src");v.load();if(ver&&ver.url)URL.revokeObjectURL(ver.url);ver=null;$q("#mVer").hidden=true}
+$q("#vCl").onclick=closeVer;
+$q("#mVer").addEventListener("click",e=>{if(e.target.id==="mVer")closeVer()});
+$q("#vV").addEventListener("error",()=>{if(ver)toast("No se pudo reproducir el vídeo. Si aún se está archivando, prueba en unos minutos.")});
+$q("#vEd").onclick=()=>{if(!ver||!ver.ses){toast("No se pudo abrir esa jugada");return}const s=ver.ses,t=ver.t;closeVer();toPiz(s,t)};
+async function verPend(i){
+ const j=PL[i];if(!j)return;toast("Cargando vídeo…");
+ try{
+  const d=await fbGet("pizarra_cola/"+CATK+"/"+j.id);
+  if(!d||!d.video)throw new Error("nv");
+  let ses=null;try{ses=JSON.parse(d.sesion)}catch(e){}
+  openVer(j.t,CAT_NAME+" · "+fch(j.d),URL.createObjectURL(b64Blob(d.video,d.mime)),ses)
+ }catch(e){toast(e.message==="nv"?"Esta jugada ya se archivó: vuelve a entrar en Jugadas.":"No se pudo cargar el vídeo")}}
+async function editPl(i){
+ const j=PL[i];if(!j)return;
+ try{
+  let ses;
+  if(j.f){const r=await fetch(BASE+"Pizarra/"+CATK+"/"+j.f.sesion+"?"+Date.now());if(!r.ok)throw 0;ses=await r.json()}
+  else{const d=await fbGet("pizarra_cola/"+CATK+"/"+j.id);ses=JSON.parse(d.sesion)}
+  toPiz(ses,j.t)
+ }catch(e){toast("No se pudo abrir esa jugada")}}
+async function delPl(i){
+ const j=PL[i];if(!j)return;
+ if(!confirm("¿Borrar la jugada «"+j.t+"»? Los jugadores dejarán de verla."))return;
+ try{
+  if(j.f)await fbApi("pizarra_borrar/"+CATK+"/"+j.id,"PUT",true);
+  else{await fbApi("pizarra_cola/"+CATK+"/"+j.id,"DELETE");await fbApi("pizarra_meta/"+CATK+"/"+j.id,"DELETE")}
+  PL.splice(i,1);render();toast("Jugada borrada")
+ }catch(e){toast("No se pudo borrar")}}
+
+/* Pizarra incrustada (se crea una sola vez y no se recarga al refrescar la página) */
+let pzFr=null,pzQ=null;
+const PZ=()=>{try{return(pzFr&&pzFr.contentWindow&&pzFr.contentWindow.PZ)||null}catch(e){return null}};
+function ajusta(){try{const d=pzFr.contentDocument;if(d&&d.body)pzFr.style.height=Math.ceil(d.documentElement.scrollHeight)+"px"}catch(e){}}
+function ensurePiz(){
+ if(pzFr)return;
+ pzFr=document.createElement("iframe");pzFr.title="Pizarra táctica";pzFr.src=BASE+"pizarra.html";
+ pzFr.addEventListener("load",()=>{ajusta();try{new ResizeObserver(ajusta).observe(pzFr.contentDocument.body)}catch(e){}flushPz()});
+ $q("#pzf").appendChild(pzFr)}
+function setPSt(t){$q("#pst").textContent=t}
+function toPiz(ses,titulo){pzQ={ses,titulo};tab="piz";render();flushPz()}
+function flushPz(){const z=PZ();if(pzQ&&z){z.loadSession(pzQ.ses);$q("#ptit").value=pzQ.titulo;setPSt("Jugada cargada. Cámbiala y publícala como nueva; después puedes borrar la antigua.");pzQ=null}}
+
+/* Grabar, previsualizar y publicar */
+let rec=null;
+$q("#pbtn").onclick=async()=>{
+ const titulo=$q("#ptit").value.trim(),pz=PZ();
+ if(!pz){toast("La pizarra aún no ha cargado");return}
+ if(pz.playing){pz.stop();return}
+ if(titulo.length<3){toast("Escribe un título para la jugada");$q("#ptit").focus();return}
+ if(pz.steps<2){toast("Crea al menos 2 pasos en la pizarra");return}
+ const b=$q("#pbtn");b.disabled=true;setPSt("Grabando… no cambies de pestaña hasta que termine.");
+ try{
+  const r=await pz.recordBlob();
+  if(r.blob.size<2000)throw new Error("El vídeo salió vacío. Inténtalo de nuevo con la pestaña a la vista.");
+  rec={...r,titulo};
+  $q("#mT").textContent=titulo;
+  $q("#mI").textContent=CAT_NAME+" · "+(r.blob.size/1048576).toFixed(1)+" MB · "+r.ext.toUpperCase();
+  const v=$q("#mV");if(v.src)URL.revokeObjectURL(v.src);v.src=URL.createObjectURL(r.blob);
+  $q("#mPub").disabled=false;$q("#mPrev").hidden=false;setPSt("Vídeo listo. Revísalo y publícalo.")
+ }catch(e){const m=(e&&e.message)||"No se pudo grabar";setPSt(m);toast(m)}
+ finally{b.disabled=false}};
+$q("#mNo").onclick=()=>{$q("#mPrev").hidden=true;$q("#mV").pause();rec=null;setPSt("Descartado.")};
+$q("#mDl").onclick=()=>{if(!rec)return;const a=document.createElement("a");a.href=URL.createObjectURL(rec.blob);a.download=slug(rec.titulo)+"."+rec.ext;document.body.appendChild(a);a.click();a.remove()};
+$q("#mPub").onclick=async()=>{
+ if(!rec)return;
+ const btn=$q("#mPub");btn.disabled=true;
+ try{
+  const data=await fileB64(rec.blob);
+  if(data.length>MAXB64)throw new Error("El vídeo es demasiado largo ("+(rec.blob.size/1048576).toFixed(1)+" MB). Reduce los pasos o usa la velocidad rápida.");
+  const d=new Date(),id=d.getFullYear()+pad(d.getMonth()+1)+pad(d.getDate())+"-"+pad(d.getHours())+pad(d.getMinutes())+pad(d.getSeconds())+"-"+slug(rec.titulo);
+  const sesion=JSON.stringify(PZ().getSession());
+  setPSt("Enviando…");
+  await fbApi("pizarra_cola/"+CATK+"/"+id,"PUT",{id,titulo:rec.titulo,fecha:d.toISOString(),ext:rec.ext,mime:rec.mime,video:data,sesion});
+  await fbApi("pizarra_meta/"+CATK+"/"+id,"PUT",{titulo:rec.titulo,ts:d.toISOString(),ext:rec.ext,mime:rec.mime});
+  $q("#mPrev").hidden=true;$q("#mV").pause();rec=null;$q("#ptit").value="";PL=null;
+  setPSt("✔ Publicada. Los jugadores ya la ven en la pestaña Jugadas; se archiva en el repositorio en unos minutos.");
+  toast("Jugada publicada en "+CAT_NAME)
+ }catch(e){
+  btn.disabled=false;
+  const m=e===0?"La sesión ha caducado. Sal y vuelve a entrar.":(e&&(e.message==="401"||e.message==="403"))?"Sin permiso para publicar. Revisa las reglas de Firebase.":(e&&e.message)||"No se pudo publicar";
+  setPSt(m);toast(m)}};
+
+document.addEventListener("keydown",e=>{if(e.key==="Escape"){closeCromo();closePick();closeLogin();if(ver)closeVer()}});
+if(location.hash=="#admin")unlock();try{if(sessionStorage.getItem("adm")&&sessionStorage.getItem("cat")===CATK){PW=sessionStorage.getItem("pw")||"";RT=sessionStorage.getItem("rt")||"";ACC=sessionStorage.getItem("mail")||FBMAIL;document.body.classList.add("edit")}}catch(e){}
 if(API||FB)document.querySelector("#adm .on").remove();
 /* Volver a la página anterior (si se abrió esta página directamente, va al inicio) */
 function volver(){if(history.length>1)history.back();else location.href="../index.html#equipos"}

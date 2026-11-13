@@ -367,17 +367,17 @@ select{font:inherit;background:var(--bg);color:var(--tx);border:1px solid var(--
 #toast.show{opacity:1}
 /* ===== Barra de menú fija: todas las opciones visibles en dos líneas ===== */
 #topbar{position:fixed;top:0;left:0;right:0;z-index:50;padding:calc(env(safe-area-inset-top,0px) + 8px) 10px 6px;display:flex;justify-content:center;pointer-events:none}
-#topbar .dock{pointer-events:auto;width:100%;max-width:980px;display:flex;align-items:center;gap:8px;padding:6px 8px;border-radius:20px;background:linear-gradient(135deg,rgba(15,42,107,.96),rgba(10,15,30,.96));border:1px solid #7aa9ff66;box-shadow:0 10px 30px #0b1b4a55,inset 0 1px 0 #ffffff22;-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px)}
+#topbar .dock{pointer-events:auto;width:100%;max-width:980px;display:flex;align-items:center;gap:8px;padding:6px 8px;border-radius:20px;background:linear-gradient(90deg,rgba(246,236,214,.97),rgba(227,235,250,.97) 60%,rgba(212,217,234,.97));border:1px solid #2a5ba8;box-shadow:0 8px 24px #1e3a7a33,inset 0 1px 0 #ffffffaa;-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px)}
 #tbsp{height:96px}
-#topbar .brand{flex:none;display:flex;flex-direction:column;align-items:center;gap:1px;padding:0 6px;color:#fff;cursor:pointer;user-select:none;-webkit-user-select:none}
+#topbar .brand{flex:none;display:flex;flex-direction:column;align-items:center;gap:1px;padding:0 6px;color:#0f2a6b;cursor:pointer;user-select:none;-webkit-user-select:none}
 #topbar .brand .bl{font-size:1.6rem;line-height:1}
-#topbar .brand b{font-size:.78rem;font-weight:800;letter-spacing:.08em;color:var(--ye)}
+#topbar .brand b{font-size:.78rem;font-weight:800;letter-spacing:.08em;color:#d97706}
 #topbar nav#nav{flex:1;min-width:0;display:grid;grid-template-columns:repeat(var(--c,4),minmax(0,1fr));grid-auto-rows:1fr;gap:4px;padding:0;position:static}
-#topbar nav#nav button{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;min-width:0;padding:5px 2px;border:0;border-radius:12px;background:#ffffff14;color:#dbe7ff;font-weight:600;font-size:.7rem;line-height:1.1;box-shadow:none;transform:none}
-#topbar nav#nav button:hover{background:#ffffff26;transform:none}
+#topbar nav#nav button{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;min-width:0;padding:5px 2px;border:0;border-radius:12px;background:rgba(255,255,255,.6);color:#10234b;font-weight:600;font-size:.7rem;line-height:1.1;box-shadow:none;transform:none}
+#topbar nav#nav button:hover{background:rgba(255,255,255,.95);transform:none}
 #topbar nav#nav button span:first-child{font-size:1.1rem;line-height:1.1}
 #topbar nav#nav button span:last-child{max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-#topbar nav#nav button.on{background:var(--ye);color:#0a0f1e;box-shadow:0 0 14px #ffd23f88}
+#topbar nav#nav button.on{background:var(--ye);color:#0a0f1e;box-shadow:0 3px 10px #d9770655}
 #topbar nav#nav button.out{background:#ef4444;color:#fff}
 @media(min-width:700px){
  #tbsp{height:104px}
@@ -580,12 +580,14 @@ const loc=(h,m)=>{const v=ven(h,m);return`📍 <a target="_blank" rel="noopener"
 let FS=false,wl=null;
 function leaveFS(){FS=false;try{screen.orientation.unlock()}catch(e){}try{if(document.fullscreenElement)document.exitFullscreen()}catch(e){}if(wl){try{wl.release()}catch(e){}wl=null}}
 /* Ajusta la pantalla completa: calcula la unidad --u y reduce --k hasta que todo cabe (se recalcula con cada gol) */
+function setTb(){const tb=document.getElementById("topbar"),sp=document.getElementById("tbsp");if(tb&&sp&&tb.offsetHeight>0)sp.style.height=(tb.offsetHeight+4)+"px"}
 function fit(){
  const h=document.getElementById("hero");
  /* La barra de menú solo se oculta en el directo a pantalla completa */
  const tb=document.getElementById("topbar"),sp=document.getElementById("tbsp");
  if(tb)tb.style.display=FS?"none":"";
- if(sp){sp.style.display=FS?"none":"";if(!FS&&tb)sp.style.height=tb.offsetHeight+"px"}
+ if(sp)sp.style.display=FS?"none":"";
+ if(!FS)setTb();
  if(FS&&!lvOn)leaveFS();
  h.classList.toggle("fs",FS);
  h.classList.toggle("adm",FS&&E());
@@ -742,7 +744,7 @@ function render(){
  if(tab=="cro")h=renderJug();
  if(tab=="jug")h=renderPlays();
  const pzw=document.getElementById("pizW"),sp=E()&&tab=="piz";pzw.hidden=!sp;if(sp)ensurePiz();
- document.getElementById("app").innerHTML=h}
+ document.getElementById("app").innerHTML=h;setTb()}
 
 /* ===== Copa: torneo aparte (no puntúa en la clasificación; sus goles sí suman en Goleadores) ===== */
 function addC(){const g=i=>document.getElementById(i).value.trim(),rv=g("cr_rv"),d=g("cr_d");
@@ -1078,6 +1080,7 @@ if(API||FB)document.querySelector("#adm .on").remove();
 /* Volver a la página anterior (si se abrió esta página directamente, va al inicio) */
 function volver(){if(history.length>1)history.back();else location.href="../index.html#equipos"}
 render();setInterval(tick,1000);
+try{new ResizeObserver(setTb).observe(document.getElementById("topbar"))}catch(e){}
 let pc=0;setInterval(()=>{pc++;if(API&&!FB&&!E()&&(liveM()||pc%12==0))fetch(API+"?v="+Date.now(),{cache:"no-store"}).then(r=>r.json()).then(d=>{if(JSON.stringify(d)!==JSON.stringify(S)){S=d;fix();render()}}).catch(()=>{})},5000);
 </script>
 </body>

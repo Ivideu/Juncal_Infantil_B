@@ -107,21 +107,7 @@ label.chk input{min-height:0;width:16px;height:16px;padding:0}
     </div>
   </div>
 
-  <div class="bar">
-    <div class="grp"><b>Sesiones</b>
-      <input type="text" id="name" placeholder="Nombre de la sesión" maxlength="40" style="width:190px">
-      <button id="save" class="primary">Guardar</button>
-      <select id="list" aria-label="Sesiones guardadas" style="max-width:200px"><option value="">— guardadas —</option></select>
-      <button id="open">Abrir</button>
-      <button id="rm">Borrar</button>
-    </div>
-    <div class="grp">
-      <button id="exp">⬇ Archivo</button>
-      <button id="imp">⬆ Abrir archivo</button>
-      <input type="file" id="file" accept=".json,application/json" hidden>
-    </div>
-  </div>
-  <div class="hint">Cada paso es una posición. Coloca a los jugadores, pulsa «+ Nuevo paso», muévelos de nuevo y al reproducir se desplazan solos. Las sesiones se guardan en este navegador; usa «Archivo» para pasarlas a otro equipo.</div>
+  <div class="hint">Cada paso es una posición. Coloca a los jugadores, pulsa «+ Nuevo paso», muévelos de nuevo y al reproducir se desplazan solos.</div>
 </div>
 <div id="toast" role="status"></div>
 
@@ -134,7 +120,7 @@ const cv=$("#cv"),cx=cv.getContext("2d");
 let S=1,K=1;
 
 /* ---------- estado ---------- */
-let frames=[{items:[],lines:[]}],cur=0,sel=null,nextId=1,tool="move",play=null,drag=null,drawing=null;
+let frames=[{items:[],lines:[]}],cur=0,sel=null,nextId=1,tool="move",play=null,drag=null,drawing=null,sname="";
 const clone=o=>JSON.parse(JSON.stringify(o));
 const COL={j:["#ffd23f","#0b2a6f"],r:["#ef4444","#fff"],gj:["#34d399","#052e1f"],gr:["#a855f7","#fff"]};
 const isP=t=>t in COL;
@@ -468,7 +454,7 @@ $("#rec").onclick=()=>{
   if(play){stop();return}
   $("#rec").textContent="■ Grabando… (parar)";
   recordBlob().then(r=>{
-    dl(r.blob,(($("#name").value||"sesion").trim().replace(/[^\w\-áéíóúñ ]+/gi,"")||"sesion")+"."+r.ext);
+    dl(r.blob,((sname||"sesion").trim().replace(/[^\w\-áéíóúñ ]+/gi,"")||"sesion")+"."+r.ext);
     toast("Vídeo descargado");
   }).catch(e=>toast(e.message)).finally(()=>{$("#rec").textContent="⏺ Grabar vídeo"});
 };
@@ -478,42 +464,13 @@ $("#png").onclick=()=>{
   cv.toBlob(b=>{dl(b,"pizarra-paso"+(cur+1)+".png");sel=s;draw()});
 };
 
-/* ---------- sesiones ---------- */
-const KEY="juncal_pizarra_v1";
-const rd=()=>{try{return JSON.parse(localStorage.getItem(KEY)||"{}")}catch(e){return{}}};
-const wr=o=>{try{localStorage.setItem(KEY,JSON.stringify(o));return true}catch(e){return false}};
-function refreshList(){
-  const l=$("#list"),o=rd();l.innerHTML='<option value="">— guardadas —</option>';
-  Object.keys(o).sort().forEach(k=>{const op=document.createElement("option");op.value=op.textContent=k;l.appendChild(op)});
-}
+/* ---------- carga de sesión (usada por la API de incrustación) ---------- */
 function load(data){
   if(!data||!Array.isArray(data.frames)||!data.frames.length)throw 0;
   frames=data.frames.map(f=>({items:Array.isArray(f.items)?f.items:[],lines:Array.isArray(f.lines)?f.lines:[]}));
   nextId=1+Math.max(0,...frames.flatMap(f=>f.items.map(i=>+i.id||0)));
   cur=0;sel=null;syncSel();ui();draw();
 }
-$("#save").onclick=()=>{
-  const n=$("#name").value.trim();if(!n){toast("Ponle un nombre a la sesión");return}
-  const o=rd();o[n]={frames};
-  toast(wr(o)?"Sesión «"+n+"» guardada":"No se puede guardar aquí: usa «Archivo»");refreshList();$("#list").value=n;
-};
-$("#open").onclick=()=>{
-  const k=$("#list").value,o=rd();if(!k||!o[k]){toast("Elige una sesión");return}
-  try{load(o[k]);$("#name").value=k}catch(e){toast("Sesión dañada")}
-};
-$("#rm").onclick=()=>{
-  const k=$("#list").value,o=rd();if(!k)return;
-  if(!confirm("¿Borrar la sesión «"+k+"»?"))return;
-  delete o[k];wr(o);refreshList();
-};
-$("#exp").onclick=()=>dl(new Blob([JSON.stringify({v:1,name:$("#name").value,frames})],{type:"application/json"}),(($("#name").value||"sesion").trim()||"sesion")+".json");
-$("#imp").onclick=()=>$("#file").click();
-$("#file").onchange=e=>{
-  const f=e.target.files[0];if(!f)return;
-  const r=new FileReader();
-  r.onload=()=>{try{const d=JSON.parse(r.result);load(d);if(d.name)$("#name").value=d.name;toast("Sesión abierta")}catch(x){toast("Archivo no válido")}};
-  r.readAsText(f);e.target.value="";
-};
 
 /* ---------- aviso ---------- */
 let tt;function toast(m){const t=$("#toast");t.textContent=m;t.classList.add("show");clearTimeout(tt);tt=setTimeout(()=>t.classList.remove("show"),2200)}
@@ -521,14 +478,14 @@ let tt;function toast(m){const t=$("#toast");t.textContent=m;t.classList.add("sh
 /* ---------- inicio ---------- */
 add("ball",20,10);
 $("#form").value="121";place("j");$("#form").value="22";place("r");$("#form").value="121";
-ui();refreshList();fit();
+ui();fit();
 /* API para incrustar la pizarra (la usa entrenadores.html, mismo origen) */
 window.PZ={
   recordBlob,
   get playing(){return !!play},
   stop:()=>{if(play)stop()},
-  getSession:()=>({v:1,name:$("#name").value,frames:clone(frames)}),
-  loadSession:d=>{if(play)stop();load(d);if(d.name)$("#name").value=d.name},
+  getSession:()=>({v:1,name:sname,frames:clone(frames)}),
+  loadSession:d=>{if(play)stop();load(d);sname=d.name||""},
   get steps(){return frames.length}
 };
 window.__pz={get frames(){return frames},get cur(){return cur},get play(){return play}};

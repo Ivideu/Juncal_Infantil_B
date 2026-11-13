@@ -468,11 +468,19 @@ const fix=()=>{S.m=S.m||{};S.pl=S.pl||[];S.dn=S.dn||{};S.off=S.off||{};S.cp=S.cp
 const isOff=p=>!!(S.off&&S.off[p]);
 let CACHE=null;try{CACHE=JSON.parse(localStorage.getItem("juncalB"))}catch(e){}
 if(!API&&CACHE)S=CACHE;fix();let loading=!!(API||FB);
-let PW="",pt;const setSt=t=>{document.getElementById("st").textContent=t};
+let PW="",RT="",pt;const setSt=t=>{document.getElementById("st").textContent=t};
 if(!FB)fetch(API?API+"?v="+Date.now():"../../datos.json?v="+Date.now(),{cache:"no-store"}).then(r=>r.json()).then(d=>{if(API||(d.u||0)>S.u){S=d;fix()}loading=false;render()}).catch(()=>{if(API&&CACHE){S=CACHE;fix()}loading=false;render()});
 let idt="",exp=0,lastRaw="";
 async function fbLogin(pw){const r=await fetch("https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key="+FBKEY,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({email:FBMAIL,password:pw,returnSecureToken:true})}),d=await r.json();if(!d.idToken)return false;idt=d.idToken;exp=Date.now()+(d.expiresIn-120)*1000;return true}
-async function fbTok(){if(idt&&Date.now()<exp)return idt;if(!await fbLogin(PW))throw 0;return idt}
+async function fbTok(){
+ if(idt&&Date.now()<exp)return idt;
+ if(PW){if(!await fbLogin(PW))throw 0;return idt}
+ if(RT){
+  const r=await fetch("https://securetoken.googleapis.com/v1/token?key="+FBKEY,{method:"POST",headers:{"Content-Type":"application/x-www-form-urlencoded"},body:"grant_type=refresh_token&refresh_token="+encodeURIComponent(RT)}),d=await r.json();
+  if(!d.id_token)throw 0;
+  idt=d.id_token;exp=Date.now()+(+d.expires_in-120)*1000;return idt
+ }
+ throw 0}
 if(FB){const l=document.createElement("link");l.rel="preconnect";l.href=FB;document.head.appendChild(l);
  const es=new EventSource(FB+"/juncal.json");
  es.addEventListener("put",ev=>{let m,n;try{m=JSON.parse(ev.data);if(m.path!=="/"||m.data===lastRaw)return;n=m.data==null?{u:0,m:{},pl:[]}:JSON.parse(m.data)}catch(e){return}
@@ -498,7 +506,7 @@ function resetTest(){if(!confirm("¿Vaciar el partido de prueba?"))return;TS.m={
 const done=m=>m.h!==undefined&&m.h!==""&&m.a!==undefined&&m.a!=="";
 const bd=id=>{if(!id)return`<span class="b" style="background:#334">💤</span>`;const n=T[id][0].split(" ").map(w=>w[0]).join("").slice(0,2).toUpperCase();return`<span class="b" style="background:${id==ME?'#2f7bff':`hsl(${id*47%360} 55% 38%)`}">${n}${COD[id]?`<img src="../../Escudos/${COD[id]}.png" alt="" onload="this.parentNode.classList.add('ok')" onerror="this.remove()">`:""}</span>`};
 const nm=id=>id?T[id][0]:"Descansa";
-function save(t){if(t){render();return}S.u=Date.now();try{localStorage.setItem("juncalB",JSON.stringify(S))}catch(e){}if((API||FB)&&PW)push();render()}
+function save(t){if(t){render();return}S.u=Date.now();try{localStorage.setItem("juncalB",JSON.stringify(S))}catch(e){}if((API||FB)&&(PW||RT))push();render()}
 function ed(j,h,f,v){const m=S.m[j+"_"+h]||(S.m[j+"_"+h]={});if(v==="")delete m[f];else m[f]=v;save()}
 function addG(j,h){const n=document.getElementById("sel"+j).value,m=S.m[j+"_"+h]||(S.m[j+"_"+h]={});m.g=m.g||{};m.g[n]=(m.g[n]||0)+1;const mi=document.getElementById("min"+j).value;if(mi!=="")addMin(m,n,+mi);save()}
 function eg(j,h,k){const m=S.m[j+"_"+h],e=evs(m)[k];if(!e)return;const q=prompt("Minuto del gol de "+pn(e.n).name+" (número). Escribe 0 para borrar el gol:",e.t||"");if(q===null||q.trim()==="")return;const t=Math.floor(+q);if(isNaN(t)||t<0)return;const a=(m.gm&&m.gm[e.n])||[];
@@ -868,8 +876,8 @@ function setEdit(on){
     document.body.classList.add("edit"); 
   } else { 
     document.body.classList.remove("edit"); 
-    try{ sessionStorage.removeItem("adm"); sessionStorage.removeItem("pw"); }catch(e){} 
-    PW = "";
+    try{ sessionStorage.removeItem("adm"); sessionStorage.removeItem("pw"); sessionStorage.removeItem("rt"); }catch(e){} 
+    PW = ""; RT = "";
     TS.on=false;
     if(tab=="pla"||tab=="hor"||tab=="ent"||(tab=="cop"&&!COPA)) tab="jor"; 
   }
@@ -903,7 +911,7 @@ function resetD(){
     alert("Datos borrados correctamente. Ya puedes utilizar el botón 'Importar' para cargar tu archivo JSON.");
   }
 }
-if(location.hash=="#admin")unlock();try{if(sessionStorage.getItem("adm")){PW=sessionStorage.getItem("pw")||"";document.body.classList.add("edit")}}catch(e){}
+if(location.hash=="#admin")unlock();try{if(sessionStorage.getItem("adm")){PW=sessionStorage.getItem("pw")||"";RT=sessionStorage.getItem("rt")||"";document.body.classList.add("edit")}}catch(e){}
 if(API||FB)document.querySelector("#adm .on").remove();
 /* Volver a la página anterior (si se abrió esta página directamente, va al inicio) */
 function volver(){if(history.length>1)history.back();else location.href="../index.html#equipos"}

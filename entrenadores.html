@@ -217,7 +217,13 @@ function setCat(){
   if(!$("#tJugadas").hidden)cargarJugadas();
 }
 $("#catSel").onchange=e=>{cat=e.target.value;LS.set("pzCatAdm",cat);setCat()};
-
+/* Al ir a la página de la categoría, entra ya como entrenador (sin volver a poner la contraseña) */
+$("#lnkCat").addEventListener("click",()=>{
+  try{
+    const rt=LS.get(rtKey());
+    if(rt){sessionStorage.setItem("adm","1");sessionStorage.setItem("rt",rt);sessionStorage.removeItem("pw")}
+  }catch(e){}
+});
 /* ---------- login ---------- */
 const eqSel=$("#eq");
 eqSel.innerHTML=CATS.map(c=>`<option value="${c[0]}">${esc(c[1])}</option>`).join("")+'<option value="_admin">Administración del club</option>';

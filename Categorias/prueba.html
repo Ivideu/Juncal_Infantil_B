@@ -917,20 +917,6 @@ function setEdit(on){
   }
   render();
 }
-/* ===== Cierre automático de la sesión de administrador por inactividad (4 min) ===== */
-const IDLE_MS=4*60000,IDLE_WARN=30000;
-let lastAct=Date.now(),idleWarned=false;
-function bump(){lastAct=Date.now();idleWarned=false}
-["pointerdown","keydown","touchstart","wheel","scroll","mousemove"].forEach(ev=>addEventListener(ev,bump,{passive:true,capture:true}));
-function bumpFrame(){try{["pointerdown","keydown","touchstart","wheel","scroll","mousemove"].forEach(ev=>pzFr.contentDocument.addEventListener(ev,bump,{passive:true,capture:true}))}catch(e){}}
-setInterval(()=>{
- if(!E()){lastAct=Date.now();idleWarned=false;return}
- /* No cerrar mientras se graba o se revisa un vídeo de la pizarra */
- if($("#pbtn").disabled||!$("#mPrev").hidden||!$("#mVer").hidden){bump();return}
- const left=IDLE_MS-(Date.now()-lastAct);
- if(left<=0){setEdit(false);toast("Sesión de administrador cerrada por inactividad");return}
- if(left<=IDLE_WARN&&!idleWarned){idleWarned=true;toast("Se cerrará la sesión de administrador en 30 s por inactividad")}
-},5000);
 let ck=0,ct;document.getElementById("tt").onclick=()=>{clearTimeout(ct);ct=setTimeout(()=>ck=0,900);if(++ck>=5){ck=0;unlock()}};
 async function publish(){const j=JSON.stringify(S,null,1);try{await navigator.clipboard.writeText(j)}catch(e){}
  const u=GH_USER,r=GH_REPO;
@@ -1040,7 +1026,7 @@ function ajusta(){try{const d=pzFr.contentDocument;if(d&&d.body)pzFr.style.heigh
 function ensurePiz(){
  if(pzFr)return;
  pzFr=document.createElement("iframe");pzFr.title="Pizarra táctica";pzFr.src=BASE+"pizarra.html";
- pzFr.addEventListener("load",()=>{bumpFrame();ajusta();try{new ResizeObserver(ajusta).observe(pzFr.contentDocument.body)}catch(e){}flushPz()});
+ pzFr.addEventListener("load",()=>{ajusta();try{new ResizeObserver(ajusta).observe(pzFr.contentDocument.body)}catch(e){}flushPz()});
  $("#pzf").appendChild(pzFr)}
 function setPSt(t){$("#pst").textContent=t}
 function toPiz(ses,titulo){pzQ={ses,titulo};tab="piz";render();flushPz()}

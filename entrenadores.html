@@ -39,7 +39,7 @@ label{display:block;font-size:12px;font-weight:700;letter-spacing:.06em;text-tra
 .row{display:flex;gap:10px;flex-wrap:wrap;align-items:flex-end}
 .row>*{flex:1;min-width:160px}
 .row>button{flex:0 0 auto}
-.pub{margin-bottom:10px}
+.pub{margin-top:10px}
 .pub .st{margin-top:8px;font-size:13px;opacity:.9;min-height:18px}
 iframe#pz{width:100%;border:0;display:block;height:900px;background:transparent}
 .list{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px}
@@ -103,6 +103,7 @@ h2.sec{font-size:15px;margin:18px 0 8px;letter-spacing:.04em;text-transform:uppe
     </div>
 
     <div id="tPizarra">
+      <iframe id="pz" src="./pizarra.html" title="Pizarra táctica"></iframe>
       <div class="card pub">
         <div class="row">
           <div><label for="tit" style="margin-top:0">Título de la jugada</label>
@@ -111,7 +112,6 @@ h2.sec{font-size:15px;margin:18px 0 8px;letter-spacing:.04em;text-transform:uppe
         </div>
         <div class="st" id="st">Crea los pasos en la pizarra y pulsa «Grabar y publicar». Verás el vídeo antes de enviarlo.</div>
       </div>
-      <iframe id="pz" src="./pizarra.html" title="Pizarra táctica"></iframe>
     </div>
 
     <div id="tJugadas" hidden>

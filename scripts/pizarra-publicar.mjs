@@ -36,6 +36,15 @@ async function del(tok, p) {
   const r = await fetch(url(tok, p), { method: "DELETE" });
   if (!r.ok) throw new Error(`DELETE ${p}: ${r.status}`);
 }
+// Las reglas dan lectura por categoría (pizarra_meta/<cat>), no del nodo completo: se lee categoría a categoría.
+async function porCategoria(tok, nodo) {
+  const out = {};
+  for (const cat of CATS) {
+    const v = await get(tok, `${nodo}/${cat}`);
+    if (v && typeof v === "object" && Object.keys(v).length) out[cat] = v;
+  }
+  return out;
+}
 const leerIndex = (cat) => {
   try { const a = JSON.parse(fs.readFileSync(path.join(OUT, cat, "index.json"), "utf8")); return Array.isArray(a) ? a : []; } catch { return []; }
 };
@@ -51,11 +60,10 @@ const formatoOk = (buf, ext) =>
 async function publicar() {
   const tok = await entrar();
   const hecho = { cola: [], borrar: [], pub: [], del: [] };
-  const meta = (await get(tok, "pizarra_meta")) || {};
+  const meta = await porCategoria(tok, "pizarra_meta");
   const cambiados = new Set();
 
   for (const cat of Object.keys(meta)) {
-    if (!CATS.includes(cat)) { console.log("Categoría ignorada:", cat); continue; }
     for (const key of Object.keys(meta[cat] || {})) {
       if (!ID_RE.test(key)) { console.log("Id no válido, se descarta:", key); hecho.cola.push([cat, key]); continue; }
       const it = await get(tok, `pizarra_cola/${cat}/${key}`);
@@ -91,9 +99,8 @@ async function publicar() {
     }
   }
 
-  const borrar = (await get(tok, "pizarra_borrar")) || {};
+  const borrar = await porCategoria(tok, "pizarra_borrar");
   for (const cat of Object.keys(borrar)) {
-    if (!CATS.includes(cat)) continue;
     for (const id of Object.keys(borrar[cat] || {})) {
       if (ID_RE.test(id)) {
         for (const ext of ["webm", "mp4", "json"]) fs.rmSync(path.join(OUT, cat, `${id}.${ext}`), { force: true });

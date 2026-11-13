@@ -351,16 +351,11 @@ select{font:inherit;background:var(--bg);color:var(--tx);border:1px solid var(--
 .mdl a{color:#1d5fe0}
 #lgErr{background:#fee2e2;border:1px solid #ef4444;color:#7f1d1d;border-radius:10px;padding:8px 12px;margin-top:12px}
 #pizW{margin-top:4px}
-#pizW:not([hidden]){display:flex;flex-direction:column;gap:6px}
-#pizW .card{margin:0;padding:8px 10px;animation:none}
-#pizW label.sr{position:absolute;width:1px;height:1px;margin:0;padding:0;overflow:hidden;clip:rect(0 0 0 0)}
-#pzf{flex:1;min-height:0;border-radius:16px;overflow:hidden;background:#071a45}
-#pzf iframe{width:100%;height:100%;border:0;display:block;background:transparent}
-body.piz{padding-bottom:0}
-body.piz #adm,body.piz .volver{display:none!important}
+#pzf{border-radius:16px;overflow:hidden;background:#071a45;margin-bottom:12px}
+#pzf iframe{width:100%;border:0;display:block;height:900px;background:transparent}
 .pubr{display:flex;gap:10px;flex-wrap:wrap;align-items:flex-end}
 .pubr button{flex:0 0 auto;min-height:40px;font-weight:800}
-#pst{margin-top:4px;font-size:.8rem;line-height:1.25}
+#pst{margin-top:8px;font-size:.9rem;min-height:18px}
 .pjg{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px}
 .pjg .card{margin:0;padding:10px}
 .pj video,.pjv,.pjn{width:100%;aspect-ratio:43.2/23.2;border-radius:10px;display:block}
@@ -413,14 +408,14 @@ body.piz #adm,body.piz .volver{display:none!important}
 
 <!-- Pizarra del entrenador (fuera de #app para que no se reinicie al refrescar la página) -->
 <div id="pizW" hidden>
+ <div id="pzf"></div>
  <div class="card">
   <div class="pubr">
-   <div style="flex:1;min-width:160px"><label class="sr" for="ptit">Título de la jugada</label><input id="ptit" maxlength="60" placeholder="Título de la jugada (ej.: Saque de esquina en corto)"></div>
+   <div style="flex:1;min-width:200px"><label for="ptit" style="margin-top:0">Título de la jugada</label><input id="ptit" maxlength="60" placeholder="Ej.: Saque de esquina en corto"></div>
    <button class="on" id="pbtn">⏺ Grabar y publicar</button>
   </div>
   <div id="pst" class="gap">Crea los pasos en la pizarra y pulsa «Grabar y publicar». Verás el vídeo antes de enviarlo.</div>
  </div>
- <div id="pzf"></div>
 </div>
 
 <div class="volver">
@@ -585,11 +580,7 @@ const loc=(h,m)=>{const v=ven(h,m);return`📍 <a target="_blank" rel="noopener"
 let FS=false,wl=null;
 function leaveFS(){FS=false;try{screen.orientation.unlock()}catch(e){}try{if(document.fullscreenElement)document.exitFullscreen()}catch(e){}if(wl){try{wl.release()}catch(e){}wl=null}}
 /* Ajusta la pantalla completa: calcula la unidad --u y reduce --k hasta que todo cabe (se recalcula con cada gol) */
-let lastTab="";
-/* La pizarra ocupa justo el alto visible (menú arriba), para no tener que subir ni bajar */
-function sizePiz(){const w=document.getElementById("pizW"),tb=document.getElementById("topbar");if(!w||w.hidden)return;w.style.height=Math.max(300,innerHeight-(tb?tb.offsetHeight:0)-20)+"px"}
-addEventListener("resize",sizePiz);
-function setTb(){const tb=document.getElementById("topbar"),sp=document.getElementById("tbsp");if(tb&&sp&&tb.offsetHeight>0)sp.style.height=(tb.offsetHeight+4)+"px";sizePiz()}
+function setTb(){const tb=document.getElementById("topbar"),sp=document.getElementById("tbsp");if(tb&&sp&&tb.offsetHeight>0)sp.style.height=(tb.offsetHeight+4)+"px"}
 function fit(){
  const h=document.getElementById("hero");
  /* La barra de menú solo se oculta en el directo a pantalla completa */
@@ -732,7 +723,7 @@ function render(){
  document.body.classList.toggle("owner",!!E()&&ACC===FBMAIL);
  subAdmin(E());
  if(loading){document.getElementById("hero").style.display="none";document.getElementById("nav").innerHTML="";document.getElementById("app").innerHTML="";return}
- document.getElementById("hero").style.display=(E()&&tab=="piz"&&!FS)?"none":"";
+ document.getElementById("hero").style.display="";
  document.getElementById("hero").innerHTML=hero();fit();tick();goalWatch();
  document.getElementById("tbtn").classList.toggle("on",TS.on);document.getElementById("tout").style.display=document.getElementById("trst").style.display=TS.on?"":"none";
  if(jnAuto){const nx=nextL();jn=nx?nx.r.n:J.length}
@@ -752,7 +743,7 @@ function render(){
  if(tab=="cop")h=renderCopa();
  if(tab=="cro")h=renderJug();
  if(tab=="jug")h=renderPlays();
- const pzw=document.getElementById("pizW"),sp=E()&&tab=="piz";pzw.hidden=!sp;document.body.classList.toggle("piz",sp);if(sp&&lastTab!="piz")scrollTo(0,0);lastTab=tab;if(sp)ensurePiz();sizePiz();
+ const pzw=document.getElementById("pizW"),sp=E()&&tab=="piz";pzw.hidden=!sp;if(sp)ensurePiz();
  document.getElementById("app").innerHTML=h;setTb()}
 
 /* ===== Copa: torneo aparte (no puntúa en la clasificación; sus goles sí suman en Goleadores) ===== */
@@ -1037,7 +1028,7 @@ function ajusta(){try{const d=pzFr.contentDocument;if(d&&d.body)pzFr.style.heigh
 function ensurePiz(){
  if(pzFr)return;
  pzFr=document.createElement("iframe");pzFr.title="Pizarra táctica";pzFr.src=BASE+"pizarra.html";
- pzFr.addEventListener("load",()=>{flushPz()});
+ pzFr.addEventListener("load",()=>{ajusta();try{new ResizeObserver(ajusta).observe(pzFr.contentDocument.body)}catch(e){}flushPz()});
  $("#pzf").appendChild(pzFr)}
 function setPSt(t){$("#pst").textContent=t}
 function toPiz(ses,titulo){pzQ={ses,titulo};tab="piz";render();flushPz()}

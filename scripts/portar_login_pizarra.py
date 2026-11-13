@@ -1,13 +1,10 @@
 #!/usr/bin/env python3
 """
-Porta el login por categoría, la pestaña Jugadas y la Pizarra de infantilb.html
-a AficionadoA.html (o a cualquier otra categoría con el mismo formato: CAT = {...}).
+Porta el login por categoría (con opción de administrador del club), la pestaña Jugadas
+y la Pizarra de infantilb.html a AficionadoA.html (o cualquier otra categoría).
 
 Uso:
-  python3 portar_login_pizarra.py infantilb.html AficionadoA.html AficionadoA.nuevo.html
-
-No modifica los originales. Si algún punto de anclaje no se encuentra, se detiene
-con un mensaje y no escribe nada.
+  python3 portar_login_pizarra.py Categorias/InfantilB.html Categorias/AficionadoA.html Categorias/AficionadoA.nuevo.html
 """
 import re
 import sys
@@ -39,30 +36,37 @@ def swap(dst, src, a, b):
 
 
 def port(js):
-    """CAT (texto en Infantil B) -> CATK; $ -> $q para no chocar con otros scripts."""
+    """CAT -> CATK; $ -> $q para no chocar con otros scripts."""
     js = re.sub(r"\bCAT\b", "CATK", js)
     return js.replace("const $=", "const $q=").replace("$(", "$q(")
 
 
-# 1) CSS
+# 1) CSS de la Pizarra y el visor de jugadas
 css = cut(inf, "/* ===== Login, Jugadas (vídeos) y Pizarra del entrenador ===== */", "</style>")
 af = rep(af, "</style>", css + "</style>")
 
-# 2) HTML: pizarra, login, vista previa, visor y toast
+# 2) HTML: Pizarra incrustada y los modales (incluyendo el de login completo con opción de administrador)
 piz = cut(inf, "<!-- Pizarra del entrenador", '<div class="volver">')
 af = rep(af, '<div class="volver">', piz + '<div class="volver">')
+
 modals = cut(inf, "<!-- Login -->", "<script>\n(function(){") .rstrip() + "\n"
 modals = modals.replace("✔ Publicar en Infantil B", "✔ Publicar")
 af = rep(af, 'onchange="importD(this)">\n</div>\n', 'onchange="importD(this)">\n</div>\n' + modals)
 
-# 3) Constantes y sesión
+# 3) Constantes y variables de sesión de forma flexible
 af = rep(af, 'GH_REPO="Juncal_Infantil_B";',
          'GH_REPO="Juncal_Infantil_B";\nconst CATK=CAT.node,CAT_NAME=CAT.corto,BASE="../",TEAM_MAIL=CAT.email;')
-af = rep(af, 'let PW="",pt;', 'let PW="",RT="",ACC=FBMAIL,pt;')
+
+pw_anchor = re.search(r'let\s+PW\s*=\s*"[^"]*",?\s*(?:pt|RT)?', af)
+if pw_anchor:
+    af = rep(af, pw_anchor.group(0), 'let PW="",RT="",ACC=FBMAIL,pt;')
+else:
+    raise AssertionError("No se encontró la línea de declaración de PW para actualizar las credenciales.")
+
 af = swap(af, inf, "async function fbLogin(", "if(FB){const l=document.createElement")
 af = rep(af, "if((API||FB)&&PW)push();render()}", "if((API||FB)&&(PW||RT))push();render()}")
 
-# 4) render(): pestañas, navegación y vistas
+# 4) render(): pestañas, navegación y vistas (Jugadas y Pizarra)
 af = swap(af, inf, 'const tabs=[["jor"', 'const nv=document.getElementById("nav")')
 af = swap(af, inf, "nv.innerHTML=tabs.map", '\n let h="";')
 af = rep(af, ' document.getElementById("app").innerHTML=h}',
@@ -70,13 +74,13 @@ af = rep(af, ' document.getElementById("app").innerHTML=h}',
          ' const pzw=document.getElementById("pizW"),sp=E()&&tab=="piz";pzw.hidden=!sp;if(sp)ensurePiz();\n'
          ' document.getElementById("app").innerHTML=h}')
 
-# 5) Login nuevo (sustituye unlock + setEdit)
-login = port(cut(inf, "/* ===== Login del entrenador", "let ck=0,ct;"))
-login = rep(login, 'sessionStorage.setItem("adm","1");',
-            'sessionStorage.setItem("adm","1");sessionStorage.setItem("cat",CATK);')
-af = rep(af, cut(af, "async function unlock(){", "let ck=0,ct;"), login)
+# 5) Lógica JavaScript del Login modal con opción de administrador y alternancia de correo
+login_js = port(cut(inf, "/* ===== Login del entrenador", "let ck=0,ct;"))
+login_js = rep(login_js, 'sessionStorage.setItem("adm","1");',
+               'sessionStorage.setItem("adm","1");sessionStorage.setItem("cat",CATK);')
+af = rep(af, cut(af, "async function unlock(){", "let ck=0,ct;"), login_js)
 
-# 6) Jugadas + Pizarra, y teclado; restauración de sesión solo si es de esta categoría
+# 6) Jugadas + Pizarra, eventos de teclado y restauración de sesión específica por categoría
 af = rep(af, 'document.addEventListener("keydown",e=>{if(e.key==="Escape"){closeCromo();closePick()}});\n', "")
 jug = port(cut(inf, "/* ===== Jugadas: los jugadores ven", 'document.addEventListener("keydown"'))
 keys = 'document.addEventListener("keydown",e=>{if(e.key==="Escape"){closeCromo();closePick();closeLogin();if(ver)closeVer()}});\n'
@@ -88,4 +92,4 @@ af = rep(af, hash_old, jug + keys + hash_new)
 
 open(out, "w", encoding="utf-8").write(af)
 print("Listo:", out)
-print("Comprueba: pestañas Jugadas y Login, entrar con la contraseña del equipo y abrir Pizarra.")
+print("Comprueba: modal de login con opción de administrador del club, pestaña Jugadas y Pizarra.")

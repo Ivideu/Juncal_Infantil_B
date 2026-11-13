@@ -1,0 +1,57 @@
+name: Publicar jugadas de la pizarra
+on:
+  schedule:
+    - cron: "*/5 * * * *"
+  workflow_dispatch:
+permissions:
+  contents: write
+  pages: write
+concurrency:
+  group: pizarra
+  cancel-in-progress: false
+jobs:
+  publicar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 20 }
+      - name: Pasar vídeos de Firebase a la carpeta Pizarra
+        env:
+          PIZARRA_BOT_EMAIL: ${{ secrets.PIZARRA_BOT_EMAIL }}
+          PIZARRA_BOT_PASSWORD: ${{ secrets.PIZARRA_BOT_PASSWORD }}
+        run: node scripts/pizarra-publicar.mjs publicar
+      - name: Guardar en el repositorio
+        id: guardar
+        run: |
+          git add -A Pizarra
+          if git diff --cached --quiet; then
+            echo "cambios=no" >> "$GITHUB_OUTPUT"
+            echo "Nada nuevo"
+          else
+            git config user.name "github-actions"
+            git config user.email "actions@users.noreply.github.com"
+            git commit -m "Pizarra: nuevas jugadas"
+            git pull --rebase origin "${GITHUB_REF_NAME}" || true
+            git push
+            echo "cambios=si" >> "$GITHUB_OUTPUT"
+          fi
+      - name: Pedir a GitHub Pages que se actualice
+        if: steps.guardar.outputs.cambios == 'si'
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh api -X POST "repos/${{ github.repository }}/pages/builds"
+      - name: Esperar a que la web ya sirva los cambios
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          URL="$(gh api "repos/${{ github.repository }}/pages" --jq .html_url 2>/dev/null || true)"
+          if [ -z "$URL" ]; then URL="https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/"; fi
+          PAGES_URL="$URL" node scripts/pizarra-publicar.mjs esperar
+      - name: Limpiar la cola de Firebase
+        env:
+          PIZARRA_BOT_EMAIL: ${{ secrets.PIZARRA_BOT_EMAIL }}
+          PIZARRA_BOT_PASSWORD: ${{ secrets.PIZARRA_BOT_PASSWORD }}
+        run: node scripts/pizarra-publicar.mjs limpiar

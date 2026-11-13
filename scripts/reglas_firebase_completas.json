@@ -1,0 +1,96 @@
+{
+  "rules": {
+    "juncal": {
+      ".read": true,
+      ".write": "auth != null && (auth.token.email == 'ivanblasco81@hotmail.com')"
+    },
+    "cat-aficionado-a": {
+      ".read": true,
+      ".write": "auth != null && auth.token.email == 'cat-aficionado-a@torrejonjuncal.es'"
+    },
+    "cat-aficionado-b": {
+      ".read": true,
+      ".write": "auth != null && auth.token.email == 'cat-aficionado-b@torrejonjuncal.es'"
+    },
+    "cat-juvenil-a": {
+      ".read": true,
+      ".write": "auth != null && auth.token.email == 'cat-juvenil-a@torrejonjuncal.es'"
+    },
+    "cat-juvenil-b": {
+      ".read": true,
+      ".write": "auth != null && auth.token.email == 'cat-juvenil-b@torrejonjuncal.es'"
+    },
+    "cat-cadete-a": {
+      ".read": true,
+      ".write": "auth != null && auth.token.email == 'cat-cadete-a@torrejonjuncal.es'"
+    },
+    "cat-cadete-b": {
+      ".read": true,
+      ".write": "auth != null && auth.token.email == 'cat-cadete-b@torrejonjuncal.es'"
+    },
+    "cat-infantil-a": {
+      ".read": true,
+      ".write": "auth != null && auth.token.email == 'cat-infantil-a@torrejonjuncal.es'"
+    },
+    "cat-alevin-a": {
+      ".read": true,
+      ".write": "auth != null && auth.token.email == 'cat-alevin-a@torrejonjuncal.es'"
+    },
+    "cat-alevin-b": {
+      ".read": true,
+      ".write": "auth != null && auth.token.email == 'cat-alevin-b@torrejonjuncal.es'"
+    },
+    "pizarra": {
+      ".read": true,
+      "$cat": {
+        ".write": "auth != null && auth.token.email == $cat + '@torrejonjuncal.es'"
+      }
+    },
+    "equipos": {
+      "$eq": {
+        ".read": "auth != null && (auth.token.email == $eq + '@torrejonjuncal.es' || auth.token.email == 'ivanblasco81@hotmail.com')",
+        ".write": "auth != null && (auth.token.email == $eq + '@torrejonjuncal.es' || auth.token.email == 'ivanblasco81@hotmail.com')"
+      }
+    },
+    "entrenos": {
+      "$eq": {
+        ".read": "auth != null && (auth.token.email == $eq + '@torrejonjuncal.es' || auth.token.email == 'ivanblasco81@hotmail.com')",
+        ".write": "auth != null && (auth.token.email == $eq + '@torrejonjuncal.es' || auth.token.email == 'ivanblasco81@hotmail.com')"
+      }
+    },
+    "convocatoria": {
+      ".read": true,
+      "$eq": {
+        ".write": "auth != null && (auth.token.email == $eq + '@torrejonjuncal.es' || auth.token.email == 'ivanblasco81@hotmail.com')"
+      }
+    },
+    "estadisticas": {
+      ".read": true,
+      "$eq": {
+        ".write": "auth != null && (auth.token.email == $eq + '@torrejonjuncal.es' || auth.token.email == 'ivanblasco81@hotmail.com')"
+      }
+    },
+    "pizarra_cola": {
+      "$eq": {
+        ".read": "auth != null && (auth.token.email == 'publicador@torrejonjuncal.es' || auth.token.email == 'ivanblasco81@hotmail.com')",
+        ".write": "auth != null && (auth.token.email == $eq + '@torrejonjuncal.es' || auth.token.email == 'publicador@torrejonjuncal.es' || auth.token.email == 'ivanblasco81@hotmail.com')",
+        "$k": {
+          ".read": true,
+          ".validate": "newData.hasChildren(['titulo','ext','video']) && newData.child('video').val().length < 11000000"
+        }
+      }
+    },
+    "pizarra_meta": {
+      "$eq": {
+        ".read": true,
+        ".write": "auth != null && (auth.token.email == $eq + '@torrejonjuncal.es' || auth.token.email == 'publicador@torrejonjuncal.es' || auth.token.email == 'ivanblasco81@hotmail.com')"
+      }
+    },
+    "pizarra_borrar": {
+      "$eq": {
+        ".read": true,
+        ".write": "auth != null && (auth.token.email == $eq + '@torrejonjuncal.es' || auth.token.email == 'publicador@torrejonjuncal.es' || auth.token.email == 'ivanblasco81@hotmail.com')"
+      }
+    }
+  }
+}

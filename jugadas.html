@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Jugadas · Escuela Torrejón Juncal</title>
+<link rel="icon" href="./Images/escudo.png">
+<style>
+:root{--ye:#ffd23f;--bg:#071a45;--panel:#0d2561;--line:rgba(255,255,255,.16)}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html,body{margin:0}
+body{font:15px/1.4 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;background:radial-gradient(1200px 600px at 80% -10%,#1a46b5 0,transparent 60%),var(--bg);color:#fff;min-height:100vh}
+header{display:flex;align-items:center;gap:12px;padding:14px 16px;max-width:1200px;margin:0 auto;flex-wrap:wrap}
+header img{width:44px;height:44px;object-fit:contain}
+header h1{font-size:20px;margin:0;flex:1;min-width:200px}
+header h1 small{display:block;font-size:12px;font-weight:600;color:var(--ye);letter-spacing:.06em;text-transform:uppercase}
+a.back{color:#fff;text-decoration:none;border:1px solid var(--line);background:#173a8f;border-radius:10px;padding:9px 13px}
+a.back:hover{background:#1f4cb8}
+a:focus-visible,button:focus-visible{outline:3px solid var(--ye);outline-offset:2px}
+main{max-width:1200px;margin:0 auto;padding:0 16px 48px}
+.lead{margin:0 0 14px;opacity:.85}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:18px}
+.chips button{font:inherit;color:#fff;background:#173a8f;border:1px solid var(--line);border-radius:999px;padding:8px 15px;min-height:40px;cursor:pointer}
+.chips button:hover{background:#1f4cb8}
+.chips button.on{background:var(--ye);color:#0b2a6f;border-color:var(--ye);font-weight:800}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px}
+.it{background:var(--panel);border:1px solid var(--line);border-radius:16px;overflow:hidden;box-shadow:0 8px 24px rgba(0,0,0,.25)}
+.it video{width:100%;aspect-ratio:43.2/23.2;background:#000;display:block}
+.it .b{padding:12px 14px}
+.it h2{margin:0 0 2px;font-size:16px}
+.it small{opacity:.7}
+.empty{background:var(--panel);border:1px dashed var(--line);border-radius:16px;padding:28px 18px;text-align:center;opacity:.9}
+.empty b{display:block;font-size:17px;margin-bottom:4px}
+</style>
+</head>
+<body>
+<header>
+  <img src="./Images/escudo.png" alt="" onerror="this.style.display='none'">
+  <h1><small>Escuela Torrejón Juncal</small>Jugadas de tu equipo</h1>
+  <a class="back" href="./">← Volver a la web</a>
+</header>
+<main>
+  <p class="lead">Elige tu categoría y repasa las jugadas que ha preparado tu entrenador.</p>
+  <div class="chips" id="chips" role="tablist" aria-label="Categoría"></div>
+  <div id="out" class="grid" aria-live="polite"></div>
+</main>
+<script>
+(()=>{
+"use strict";
+const CATS=[["aficionado-a","Aficionado A"],["aficionado-b","Aficionado B"],["juvenil-a","Juvenil A"],["juvenil-b","Juvenil B"],["cadete-a","Cadete A"],["cadete-b","Cadete B"],["infantil-a","Infantil A"],["infantil-b","Infantil B"],["alevin-a","Alevín A"],["alevin-b","Alevín B"]];
+const $=s=>document.querySelector(s);
+const esc=s=>String(s==null?"":s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const LS={get(k){try{return localStorage.getItem(k)}catch(e){return null}},set(k,v){try{localStorage.setItem(k,v)}catch(e){}}};
+const ok=id=>CATS.some(c=>c[0]===id);
+const q=new URLSearchParams(location.search).get("cat");
+let cat=ok(q)?q:ok(LS.get("jgCat"))?LS.get("jgCat"):CATS[0][0];
+const fecha=iso=>{const d=new Date(iso);return isNaN(d)?"":d.toLocaleDateString("es-ES",{day:"numeric",month:"long",year:"numeric"})};
+
+$("#chips").innerHTML=CATS.map(c=>`<button role="tab" data-c="${c[0]}">${esc(c[1])}</button>`).join("");
+$("#chips").onclick=e=>{const b=e.target.closest("[data-c]");if(b)elige(b.dataset.c)};
+
+const FB="https://juncal-f0b64-default-rtdb.europe-west1.firebasedatabase.app";
+const fj=async p=>{try{const r=await fetch(FB+"/"+p+".json");return r.ok?await r.json():null}catch(e){return null}};
+function aBlob(b64,mime){const bin=atob(b64),u=new Uint8Array(bin.length);for(let i=0;i<bin.length;i++)u[i]=bin.charCodeAt(i);return URL.createObjectURL(new Blob([u],{type:mime||"video/webm"}))}
+async function elige(id){
+  cat=id;LS.set("jgCat",id);
+  try{history.replaceState(null,"","?cat="+id)}catch(e){}
+  document.querySelectorAll("[data-c]").forEach(b=>{const on=b.dataset.c===id;b.classList.toggle("on",on);b.setAttribute("aria-selected",on)});
+  const out=$("#out"),mine=id;
+  out.innerHTML='<div class="empty">Cargando…</div>';out.className="";
+  // 1) jugadas ya archivadas en el repositorio  2) recién publicadas (en Firebase, hasta que se archivan)  3) borrados pendientes
+  const [repo,vivo,borr]=await Promise.all([
+    fetch("./Pizarra/"+id+"/index.json?"+Math.floor(Date.now()/30000)).then(r=>r.ok?r.json():[]).catch(()=>[]),
+    fj("pizarra_meta/"+id),fj("pizarra_borrar/"+id)]);
+  if(mine!==cat)return;
+  const hid=borr||{};
+  const list=(Array.isArray(repo)?repo:[]).filter(j=>!hid[j.id]).map(j=>({id:j.id,titulo:j.titulo,fecha:j.fecha,src:"./Pizarra/"+id+"/"+j.video}));
+  const ids=new Set(list.map(j=>j.id));
+  Object.keys(vivo||{}).forEach(k=>{if(!ids.has(k)&&!hid[k])list.push({id:k,titulo:vivo[k].titulo,fecha:vivo[k].ts,mime:vivo[k].mime,fb:true})});
+  if(!list.length){
+    out.className="";out.innerHTML=`<div class="empty"><b>Todavía no hay jugadas en ${esc(CATS.find(c=>c[0]===id)[1])}</b>Tu entrenador las irá publicando aquí.</div>`;return;
+  }
+  list.sort((a,b)=>String(b.fecha).localeCompare(String(a.fecha)));
+  out.className="grid";
+  out.innerHTML=list.map(j=>`<article class="it"><video controls preload="metadata" playsinline ${j.fb?'data-fb="'+esc(j.id)+'" data-mime="'+esc(j.mime||"")+'"':'src="'+esc(j.src)+'"'}></video><div class="b"><h2>${esc(j.titulo)}</h2><small>${esc(fecha(j.fecha))}${j.fb?" · nueva":""}</small></div></article>`).join("");
+  out.querySelectorAll("video[data-fb]").forEach(async v=>{
+    const b64=await fj("pizarra_cola/"+mine+"/"+v.dataset.fb+"/video");
+    if(b64&&mine===cat)v.src=aBlob(b64,v.dataset.mime);
+    else if(!b64)v.closest("article").remove();
+  });
+}
+elige(cat);
+})();
+</script>
+</body>
+</html>

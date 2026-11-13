@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Zona entrenadores · Escuela Torrejón Juncal</title>
+<link rel="icon" href="./Images/escudo.png">
+<style>
+:root{--bl:#0b2a6f;--bl2:#123c9c;--ye:#ffd23f;--bg:#071a45;--panel:#0d2561;--line:rgba(255,255,255,.16)}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html,body{margin:0}
+body{font:15px/1.4 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;background:radial-gradient(1200px 600px at 80% -10%,#1a46b5 0,transparent 60%),var(--bg);color:#fff;min-height:100vh}
+a{color:var(--ye)}
+header{display:flex;align-items:center;gap:12px;padding:12px 16px;max-width:1200px;margin:0 auto;flex-wrap:wrap}
+header img{width:40px;height:40px;object-fit:contain}
+header h1{font-size:18px;margin:0;flex:1;min-width:180px}
+header h1 small{display:block;font-size:12px;font-weight:600;color:var(--ye);letter-spacing:.06em;text-transform:uppercase}
+main{max-width:1200px;margin:0 auto;padding:0 16px 40px}
+button,select,input{font:inherit;color:#fff;background:#173a8f;border:1px solid var(--line);border-radius:10px;padding:9px 13px;min-height:40px}
+button{cursor:pointer}
+button:hover{background:#1f4cb8}
+button:focus-visible,select:focus-visible,input:focus-visible,a:focus-visible{outline:3px solid var(--ye);outline-offset:2px}
+button.primary{background:var(--ye);color:#0b2a6f;border-color:var(--ye);font-weight:800}
+button.primary:hover{background:#ffe27a}
+button.danger{background:#7f1d1d;border-color:#b91c1c}
+button:disabled{opacity:.45;cursor:not-allowed}
+input,select{background:#0a1f55;width:100%}
+label{display:block;font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;opacity:.75;margin:12px 0 5px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:18px}
+.login{max-width:420px;margin:6vh auto 0}
+.login h2{margin:0 0 4px;font-size:22px}
+.login p{margin:0 0 6px;opacity:.8}
+.err{background:#7f1d1d;border:1px solid #b91c1c;border-radius:10px;padding:9px 12px;margin-top:12px}
+.tabs{display:flex;gap:6px;margin:6px 0 12px;flex-wrap:wrap}
+.tabs button{border-radius:999px}
+.tabs button.on{background:var(--ye);color:#0b2a6f;border-color:var(--ye);font-weight:800}
+.row{display:flex;gap:10px;flex-wrap:wrap;align-items:flex-end}
+.row>*{flex:1;min-width:160px}
+.row>button{flex:0 0 auto}
+.pub{margin-bottom:10px}
+.pub .st{margin-top:8px;font-size:13px;opacity:.9;min-height:18px}
+iframe#pz{width:100%;border:0;display:block;height:900px;background:transparent}
+.list{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px}
+.it{background:#0a1f55;border:1px solid var(--line);border-radius:14px;overflow:hidden;display:flex;flex-direction:column}
+.it video{width:100%;aspect-ratio:43.2/23.2;background:#000;display:block}
+.it .b{padding:10px 12px;display:flex;flex-direction:column;gap:8px;flex:1}
+.it h3{margin:0;font-size:15px}
+.it small{opacity:.7}
+.it .a{display:flex;gap:6px;margin-top:auto}
+.it .a button{flex:1;min-height:36px;padding:6px 8px;font-size:13px}
+.pend{background:#3b2f06;border:1px dashed var(--ye);border-radius:12px;padding:10px 12px;margin-bottom:8px;display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap}
+h2.sec{font-size:15px;margin:18px 0 8px;letter-spacing:.04em;text-transform:uppercase;opacity:.85}
+.modal{position:fixed;inset:0;background:rgba(3,8,28,.8);display:flex;align-items:center;justify-content:center;padding:16px;z-index:50}
+.modal .card{width:min(720px,100%);max-height:94vh;overflow:auto}
+.modal video{width:100%;border-radius:10px;background:#000}
+.empty{opacity:.7;padding:14px 4px}
+#toast{position:fixed;left:50%;bottom:18px;transform:translateX(-50%);background:#fff;color:#0b2a6f;padding:9px 16px;border-radius:999px;font-weight:600;box-shadow:0 6px 20px rgba(0,0,0,.4);opacity:0;pointer-events:none;transition:opacity .2s;z-index:99;max-width:92vw;text-align:center}
+#toast.show{opacity:1}
+</style>
+</head>
+<body>
+<header>
+  <img src="./Images/escudo.png" alt="" onerror="this.style.display='none'">
+  <h1><small>Escuela Torrejón Juncal</small>Zona entrenadores</h1>
+  <a href="./" style="text-decoration:none"><button type="button">← Volver a la web</button></a>
+  <button id="out" hidden>Cerrar sesión</button>
+</header>
+
+<main>
+  <!-- LOGIN -->
+  <section id="vLogin" class="card login" hidden>
+    <h2>🔒 Acceso entrenadores</h2>
+    <p>Entra con la contraseña de tu equipo.</p>
+    <form id="fLogin" autocomplete="on">
+      <label for="eq">Equipo</label>
+      <select id="eq"></select>
+      <div id="admBox" hidden>
+        <label for="adm">Correo de administrador</label>
+        <input id="adm" type="email" autocomplete="username" placeholder="correo@ejemplo.com">
+      </div>
+      <label for="pw">Contraseña</label>
+      <input id="pw" type="password" autocomplete="current-password" required>
+      <div id="lerr" class="err" hidden></div>
+      <button class="primary" style="width:100%;margin-top:16px" id="bin">Entrar</button>
+    </form>
+  </section>
+
+  <!-- PANEL -->
+  <section id="vPanel" hidden>
+    <div class="row" style="margin-bottom:6px">
+      <div><label style="margin-top:0">Categoría</label>
+        <div id="catFija" style="font-size:20px;font-weight:800"></div>
+        <select id="catSel" hidden></select>
+      </div>
+      <a id="lnkCat" href="#"><button type="button">Entrenos y convocatoria →</button></a>
+    </div>
+
+    <div class="tabs" role="tablist">
+      <button data-tab="pizarra" class="on">📋 Pizarra</button>
+      <button data-tab="jugadas">🎬 Mis jugadas</button>
+    </div>
+
+    <div id="tPizarra">
+      <div class="card pub">
+        <div class="row">
+          <div><label for="tit" style="margin-top:0">Título de la jugada</label>
+            <input id="tit" maxlength="60" placeholder="Ej.: Saque de esquina en corto"></div>
+          <button class="primary" id="bpub">⏺ Grabar y publicar</button>
+        </div>
+        <div class="st" id="st">Crea los pasos en la pizarra y pulsa «Grabar y publicar». Verás el vídeo antes de enviarlo.</div>
+      </div>
+      <iframe id="pz" src="./pizarra.html" title="Pizarra táctica"></iframe>
+    </div>
+
+    <div id="tJugadas" hidden>
+      <h2 class="sec">Recién publicadas (archivándose en el repositorio)</h2>
+      <div id="pend"></div>
+      <h2 class="sec">Archivadas en el repositorio</h2>
+      <div id="pubs" class="list"></div>
+    </div>
+  </section>
+</main>
+
+<div id="mPrev" class="modal" hidden role="dialog" aria-modal="true" aria-label="Vista previa">
+  <div class="card">
+    <h2 style="margin:0 0 4px" id="mT"></h2>
+    <p id="mI" style="margin:0 0 10px;opacity:.8"></p>
+    <video id="mV" controls playsinline></video>
+    <div class="row" style="margin-top:12px">
+      <button id="mPub" class="primary">✔ Publicar en <span id="mCat"></span></button>
+      <button id="mDl">⬇ Descargar</button>
+      <button id="mNo">Descartar</button>
+    </div>
+  </div>
+</div>
+<div id="toast" role="status"></div>
+
+<script>
+(()=>{
+"use strict";
+const FB="https://juncal-f0b64-default-rtdb.europe-west1.firebasedatabase.app",
+      KEY="AIzaSyDXqBUkie30z_Cmyj__ayhzGYyYxZMrB3Q",
+      DOM="@torrejonjuncal.es",
+      MAXB64=11_000_000; // límite de las reglas
+const CATS=[["aficionado-a","Aficionado A","AficionadoA"],["aficionado-b","Aficionado B","AficionadoB"],["juvenil-a","Juvenil A","JuvenilA"],["juvenil-b","Juvenil B","JuvenilB"],["cadete-a","Cadete A","CadeteA"],["cadete-b","Cadete B","CadeteB"],["infantil-a","Infantil A","InfantilA"],["infantil-b","Infantil B","InfantilB"],["alevin-a","Alevín A","AlevinA"],["alevin-b","Alevín B","AlevinB"]];
+const $=s=>document.querySelector(s);
+const esc=s=>String(s==null?"":s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const LS={get(k){try{return localStorage.getItem(k)}catch(e){return null}},set(k,v){try{localStorage.setItem(k,v)}catch(e){}},del(k){try{localStorage.removeItem(k)}catch(e){}}};
+let tT;const toast=m=>{const t=$("#toast");t.textContent=m;t.classList.add("show");clearTimeout(tT);tT=setTimeout(()=>t.classList.remove("show"),3200)};
+
+/* ---------- sesión Firebase (REST) ---------- */
+// Entrenador: mismo almacenamiento que la zona entrenador de las categorías (zeRT_<equipo>) -> una sola entrada para todo.
+let ses=null,tok="",exp=0; // ses={eq,admin}
+const rtKey=()=>ses.admin?"pzAdmRT":"zeRT_"+ses.eq;
+const idt=async(path,body)=>{const r=await fetch("https://identitytoolkit.googleapis.com/v1/"+path+"?key="+KEY,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(body)});return r.json()};
+function setTok(d,rt,secs){tok=d;exp=Date.now()+(+secs-120)*1000;if(rt)LS.set(rtKey(),rt)}
+async function T(){
+  if(tok&&Date.now()<exp)return tok;
+  const rt=LS.get(rtKey());
+  if(rt){
+    try{
+      const r=await fetch("https://securetoken.googleapis.com/v1/token?key="+KEY,{method:"POST",headers:{"Content-Type":"application/x-www-form-urlencoded"},body:"grant_type=refresh_token&refresh_token="+encodeURIComponent(rt)});
+      const d=await r.json();if(d.id_token){setTok(d.id_token,d.refresh_token,d.expires_in);return tok}
+    }catch(e){}
+  }
+  throw new Error("auth");
+}
+async function api(path,method,body){
+  const t=await T();
+  const r=await fetch(FB+"/"+path+".json?auth="+t,{method:method||"GET",body:body===undefined?undefined:JSON.stringify(body)});
+  if(!r.ok)throw new Error(String(r.status));
+  return r.json();
+}
+
+/* ---------- vistas ---------- */
+const catName=id=>(CATS.find(c=>c[0]===id)||[0,id])[1];
+const catFile=id=>(CATS.find(c=>c[0]===id)||[0,0,""])[2];
+let cat="";
+function vistaLogin(msg){
+  $("#vPanel").hidden=true;$("#vLogin").hidden=false;$("#out").hidden=true;
+  const e=$("#lerr");e.hidden=!msg;e.textContent=msg||"";
+}
+function vistaPanel(){
+  $("#vLogin").hidden=true;$("#vPanel").hidden=false;$("#out").hidden=false;
+  const sel=$("#catSel");
+  if(ses.admin){
+    sel.hidden=false;$("#catFija").hidden=true;
+    sel.innerHTML=CATS.map(c=>`<option value="${c[0]}">${esc(c[1])}</option>`).join("");
+    cat=LS.get("pzCatAdm")&&CATS.some(c=>c[0]===LS.get("pzCatAdm"))?LS.get("pzCatAdm"):CATS[0][0];sel.value=cat;
+  }else{
+    cat=ses.eq;$("#catSel").hidden=true;$("#catFija").hidden=false;$("#catFija").textContent=catName(cat);
+  }
+  setCat();
+}
+function setCat(){
+  $("#lnkCat").href="./Categorias/"+catFile(cat)+".html";
+  $("#mCat").textContent=catName(cat);
+  if(!$("#tJugadas").hidden)cargarJugadas();
+}
+$("#catSel").onchange=e=>{cat=e.target.value;LS.set("pzCatAdm",cat);setCat()};
+
+/* ---------- login ---------- */
+const eqSel=$("#eq");
+eqSel.innerHTML=CATS.map(c=>`<option value="${c[0]}">${esc(c[1])}</option>`).join("")+'<option value="_admin">Administración del club</option>';
+eqSel.value=LS.get("pzEq")||CATS[0][0];
+const admSync=()=>{$("#admBox").hidden=eqSel.value!=="_admin"};
+eqSel.onchange=admSync;admSync();
+if(LS.get("pzAdmMail"))$("#adm").value=LS.get("pzAdmMail");
+
+$("#fLogin").onsubmit=async ev=>{
+  ev.preventDefault();
+  const admin=eqSel.value==="_admin",email=admin?$("#adm").value.trim():eqSel.value+DOM,pw=$("#pw").value;
+  const b=$("#bin");b.disabled=true;b.textContent="Entrando…";
+  try{
+    const d=await idt("accounts:signInWithPassword",{email,password:pw,returnSecureToken:true});
+    if(!d.idToken){vistaLogin(admin?"Correo o contraseña incorrectos.":"Contraseña incorrecta para este equipo.");return}
+    ses={eq:admin?"":eqSel.value,admin};
+    setTok(d.idToken,d.refreshToken,d.expiresIn);
+    LS.set("pzSes",JSON.stringify(ses));if(!admin)LS.set("pzEq",eqSel.value);else LS.set("pzAdmMail",email);
+    $("#pw").value="";vistaPanel();
+  }catch(e){vistaLogin("No se pudo conectar. Revisa tu conexión.")}
+  finally{b.disabled=false;b.textContent="Entrar"}
+};
+$("#out").onclick=()=>{
+  if(ses){LS.del(rtKey())}
+  LS.del("pzSes");ses=null;tok="";exp=0;vistaLogin();
+};
+
+(async()=>{
+  let s=null;try{s=JSON.parse(LS.get("pzSes")||"null")}catch(e){}
+  if(s&&(s.admin||CATS.some(c=>c[0]===s.eq))&&LS.get(s.admin?"pzAdmRT":"zeRT_"+s.eq)){
+    ses=s;
+    try{await T();vistaPanel();return}catch(e){ses=null}
+  }
+  vistaLogin();
+})();
+
+/* ---------- pestañas ---------- */
+document.querySelectorAll("[data-tab]").forEach(b=>b.onclick=()=>{
+  document.querySelectorAll("[data-tab]").forEach(x=>x.classList.toggle("on",x===b));
+  $("#tPizarra").hidden=b.dataset.tab!=="pizarra";$("#tJugadas").hidden=b.dataset.tab!=="jugadas";
+  if(b.dataset.tab==="jugadas")cargarJugadas();
+});
+
+/* ---------- pizarra incrustada ---------- */
+const fr=$("#pz");
+const PZ=()=>{try{return fr.contentWindow.PZ}catch(e){return null}};
+function ajusta(){
+  try{const d=fr.contentDocument;if(d&&d.body){fr.style.height=Math.ceil(d.documentElement.scrollHeight)+"px"}}catch(e){}
+}
+fr.addEventListener("load",()=>{
+  ajusta();
+  try{new ResizeObserver(ajusta).observe(fr.contentDocument.body)}catch(e){}
+});
+
+/* ---------- grabar, previsualizar y publicar ---------- */
+let rec=null; // {blob,ext,mime,titulo}
+const slug=s=>s.normalize("NFD").replace(/[̀-ͯ]/g,"").toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-+|-+$/g,"").slice(0,40)||"jugada";
+const pad=n=>String(n).padStart(2,"0");
+function setSt(t){$("#st").textContent=t}
+
+$("#bpub").onclick=async()=>{
+  const titulo=$("#tit").value.trim();
+  const pz=PZ();
+  if(!pz){toast("La pizarra aún no ha cargado");return}
+  if(pz.playing){pz.stop();return}
+  if(titulo.length<3){toast("Escribe un título para la jugada");$("#tit").focus();return}
+  if(pz.steps<2){toast("Crea al menos 2 pasos en la pizarra");return}
+  const b=$("#bpub");b.disabled=true;setSt("Grabando… no cambies de pestaña hasta que termine.");
+  try{
+    const r=await pz.recordBlob();
+    if(r.blob.size<2000)throw new Error("El vídeo salió vacío. Inténtalo de nuevo con la pestaña a la vista.");
+    rec={...r,titulo};
+    $("#mT").textContent=titulo;
+    $("#mI").textContent=catName(cat)+" · "+(r.blob.size/1048576).toFixed(1)+" MB · "+r.ext.toUpperCase();
+    const v=$("#mV");if(v.src)URL.revokeObjectURL(v.src);v.src=URL.createObjectURL(r.blob);
+    $("#mPub").disabled=false;$("#mPrev").hidden=false;setSt("Vídeo listo. Revísalo y publícalo.");
+  }catch(e){setSt(e.message||"No se pudo grabar");toast(e.message||"No se pudo grabar")}
+  finally{b.disabled=false}
+};
+$("#mNo").onclick=()=>{$("#mPrev").hidden=true;$("#mV").pause();rec=null;setSt("Descartado.")};
+$("#mDl").onclick=()=>{
+  if(!rec)return;
+  const a=document.createElement("a");a.href=URL.createObjectURL(rec.blob);a.download=slug(rec.titulo)+"."+rec.ext;
+  document.body.appendChild(a);a.click();a.remove();
+};
+const b64=blob=>new Promise((res,rej)=>{const f=new FileReader();f.onload=()=>res(String(f.result).split(",")[1]||"");f.onerror=()=>rej(new Error("No se pudo leer el vídeo"));f.readAsDataURL(blob)});
+
+$("#mPub").onclick=async()=>{
+  if(!rec)return;
+  const btn=$("#mPub");btn.disabled=true;
+  try{
+    const data=await b64(rec.blob);
+    if(data.length>MAXB64)throw new Error("El vídeo es demasiado largo ("+(rec.blob.size/1048576).toFixed(1)+" MB). Reduce los pasos o la velocidad lenta.");
+    const d=new Date(),id=d.getFullYear()+pad(d.getMonth()+1)+pad(d.getDate())+"-"+pad(d.getHours())+pad(d.getMinutes())+pad(d.getSeconds())+"-"+slug(rec.titulo);
+    const sesion=JSON.stringify(PZ().getSession());
+    setSt("Enviando…");
+    await api("pizarra_cola/"+cat+"/"+id,"PUT",{id,titulo:rec.titulo,fecha:d.toISOString(),ext:rec.ext,mime:rec.mime,video:data,sesion});
+    await api("pizarra_meta/"+cat+"/"+id,"PUT",{titulo:rec.titulo,ts:d.toISOString(),ext:rec.ext,mime:rec.mime});
+    $("#mPrev").hidden=true;$("#mV").pause();rec=null;$("#tit").value="";
+    setSt("✔ Publicada. Los jugadores ya la ven; se archiva en el repositorio (carpeta Pizarra) en unos minutos.");
+    toast("Jugada publicada en "+catName(cat));
+  }catch(e){
+    btn.disabled=false;
+    const m=e.message==="auth"?"La sesión ha caducado. Vuelve a entrar.":e.message==="401"||e.message==="403"?"Sin permiso para publicar. Revisa las reglas de Firebase.":e.message;
+    setSt(m);toast(m);
+  }
+};
+
+/* ---------- mis jugadas ---------- */
+const fecha=iso=>{const d=new Date(iso);return isNaN(d)?"":d.toLocaleDateString("es-ES",{day:"numeric",month:"short",year:"numeric"})};
+let pubs=[];
+async function cargarJugadas(){
+  const pend=$("#pend"),box=$("#pubs");
+  pend.innerHTML="";box.innerHTML='<div class="empty">Cargando…</div>';
+  const mine=cat;
+  try{
+    const m=await api("pizarra_meta/"+mine);
+    if(mine!==cat)return;
+    const ks=Object.keys(m||{});
+    pend.innerHTML=ks.length?ks.map(k=>`<div class="pend"><span>✔ <b>${esc(m[k].titulo)}</b> <small>${esc(fecha(m[k].ts))} · ya visible para los jugadores</small></span><button class="danger" data-bp="${esc(k)}" style="min-height:34px;padding:4px 10px">🗑 Borrar</button></div>`).join(""):'<div class="empty">Nada en proceso.</div>';
+  }catch(e){pend.innerHTML='<div class="empty">No se pudieron leer las pendientes.</div>'}
+  try{
+    const r=await fetch("./Pizarra/"+mine+"/index.json?"+Date.now());
+    pubs=r.ok?await r.json():[];if(!Array.isArray(pubs))pubs=[];
+  }catch(e){pubs=[]}
+  try{const bo=await api("pizarra_borrar/"+mine)||{};pubs=pubs.filter(j=>!bo[j.id])}catch(e){}
+  if(mine!==cat)return;
+  box.innerHTML=pubs.length?pubs.map((j,i)=>`<div class="it"><video controls preload="metadata" playsinline src="./Pizarra/${esc(mine)}/${esc(j.video)}"></video><div class="b"><h3>${esc(j.titulo)}</h3><small>${esc(fecha(j.fecha))}</small><div class="a"><button data-ed="${i}">✎ Editar</button><button class="danger" data-bo="${i}">🗑 Borrar</button></div></div></div>`).join(""):'<div class="empty">Todavía no hay jugadas publicadas en esta categoría.</div>';
+}
+$("#pend").onclick=async e=>{
+  const b=e.target.closest("[data-bp]");if(!b)return;
+  if(!confirm("¿Borrar esta jugada? Los jugadores dejarán de verla."))return;
+  try{await api("pizarra_cola/"+cat+"/"+b.dataset.bp,"DELETE");await api("pizarra_meta/"+cat+"/"+b.dataset.bp,"DELETE");cargarJugadas();toast("Jugada borrada")}
+  catch(x){toast("No se pudo borrar")}
+};
+$("#pubs").onclick=async e=>{
+  const ed=e.target.closest("[data-ed]"),bo=e.target.closest("[data-bo]");
+  if(ed){
+    const j=pubs[+ed.dataset.ed];
+    try{
+      const r=await fetch("./Pizarra/"+cat+"/"+j.sesion+"?"+Date.now());if(!r.ok)throw 0;
+      PZ().loadSession(await r.json());$("#tit").value=j.titulo;
+      document.querySelector('[data-tab="pizarra"]').click();
+      setSt("Jugada cargada. Cámbiala y publícala como nueva; después puedes borrar la antigua.");
+    }catch(x){toast("No se pudo abrir esa jugada")}
+  }
+  if(bo){
+    const j=pubs[+bo.dataset.bo];
+    if(!confirm("¿Borrar la jugada «"+j.titulo+"»? Los jugadores dejarán de verla y el archivo se eliminará del repositorio."))return;
+    try{await api("pizarra_borrar/"+cat+"/"+j.id,"PUT",true);bo.closest(".it").style.opacity=.35;bo.disabled=true;toast("Borrada: ya no la ven los jugadores; el archivo se elimina del repositorio en unos minutos")}
+    catch(x){toast("No se pudo pedir el borrado")}
+  }
+};
+})();
+</script>
+</body>
+</html>

@@ -48,16 +48,6 @@ button:hover{border-color:var(--ac);transform:translateY(-1px)}button:focus-visi
 .hv .cn{font-size:clamp(1.1rem,3.5vw,1.8rem);font-weight:700;max-width:220px}
 .cd{display:flex;gap:10px;justify-content:center}.cd div{background:#0a1f5a66;border-radius:12px;padding:8px 14px;min-width:64px;text-align:center}
 .cd b{font:800 2rem 'Barlow Condensed';display:block;line-height:1}.cd span{font-size:.75rem;color:var(--mu)}
-nav{display:flex;flex-wrap:wrap;gap:8px;padding:6px 0 14px;position:sticky;top:0;z-index:5; justify-content: center;}
-nav button{white-space:nowrap;font-weight:600}
-nav button span:first-child{margin-right:6px}
-@media(max-width:640px){
- nav{display:grid;grid-template-columns:repeat(var(--n,4),1fr);gap:6px}
- nav.x{position:static}
- nav button{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;padding:8px 2px;min-width:0;white-space:normal;text-align:center;line-height:1.15;font-size:clamp(.62rem,3vw,.8rem)}
- nav button span:first-child{margin:0;font-size:1.3rem}
-}
-@media(max-width:340px){nav{grid-template-columns:repeat(2,1fr)}}
 .b{display:inline-grid;place-items:center;width:44px;height:44px;border-radius:50%;font:800 1rem 'Barlow Condensed';color:#fff;flex:none;border:2px solid #fff;box-shadow:0 2px 8px #0f1b3d33}
 .card{background:var(--card);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border:1px solid var(--line);border-radius:16px;padding:14px 16px;margin-bottom:12px;box-shadow:0 4px 18px #1e4fd814;animation:in .5s both;animation-delay:calc(var(--i)*30ms)}
 @keyframes in{from{opacity:0;transform:translateY(10px)}}
@@ -375,45 +365,26 @@ select{font:inherit;background:var(--bg);color:var(--tx);border:1px solid var(--
 .pj h3{margin:8px 0 2px;font-size:1.05rem;line-height:1.2}
 #toast{position:fixed;left:50%;bottom:90px;transform:translateX(-50%);background:#fff;color:#0b2a6f;padding:9px 16px;border-radius:999px;font-weight:600;box-shadow:0 6px 20px rgba(0,0,0,.4);opacity:0;pointer-events:none;transition:opacity .2s;z-index:10001;max-width:92vw;text-align:center}
 #toast.show{opacity:1}
-nav#nav{display:flex;flex-wrap:nowrap;align-items:center;justify-content:center;gap:8px;position:sticky;top:0;z-index:20;padding:6px 0 14px}
-nav#nav .nrow{display:flex;gap:8px;overflow-x:auto;min-width:0;scrollbar-width:none;padding:2px}
-nav#nav .nrow::-webkit-scrollbar{display:none}
-nav#nav button{display:inline-flex;flex-direction:row;align-items:center;gap:6px;white-space:nowrap;padding:9px 14px;font-size:.95rem;line-height:1.2;min-width:0;flex:none}
-nav#nav button span:first-child{margin:0;font-size:1rem}
-nav#nav .nmore{position:relative;flex:none}
-nav#nav .npanel{display:none;position:absolute;right:0;top:calc(100% + 8px);min-width:230px;background:var(--bg2);border:1px solid var(--line);border-radius:16px;padding:8px;box-shadow:0 14px 40px #0b1b4a55;flex-direction:column;gap:2px;z-index:30}
-nav#nav.mo .npanel{display:flex}
-nav#nav .mi{width:100%;justify-content:flex-start;background:transparent;border:0;box-shadow:none;border-radius:10px;padding:11px 12px;font-size:1rem}
-nav#nav .mi:hover{background:#2f7bff14}
-nav#nav .mi.on{background:var(--ac);color:#fff}
-nav#nav .ml{font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--mu);padding:8px 12px 2px;border-top:1px solid var(--line);margin-top:4px}
-nav#nav .ml:empty{padding:0}
-nav#nav .ml:first-child{border:0;margin:0}
-@media(max-width:640px){nav#nav{justify-content:flex-start;gap:6px;padding-left:2px;padding-right:2px}nav#nav button{font-size:.85rem;padding:9px 11px;flex-direction:row}nav#nav .mi{font-size:.95rem}}
-
-/* ===== Barra de menú flotante (cápsula) · fija al hacer scroll ===== */
-#topbar{position:fixed;top:0;left:0;right:0;z-index:50;padding:calc(env(safe-area-inset-top,0px) + 8px) 12px 6px;display:flex;justify-content:center;pointer-events:none}
-#topbar .dock{pointer-events:auto;width:100%;max-width:980px;display:flex;align-items:center;gap:10px;padding:6px 8px 6px 14px;border-radius:999px;background:linear-gradient(135deg,rgba(15,42,107,.95),rgba(10,15,30,.95));border:1px solid #7aa9ff66;box-shadow:0 10px 30px #0b1b4a55,inset 0 1px 0 #ffffff22;-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px)}
-#tbsp{height:calc(env(safe-area-inset-top,0px) + 70px)}
-#topbar .brand{display:flex;align-items:center;gap:8px;flex:none;color:#fff;cursor:pointer;user-select:none;-webkit-user-select:none}
-#topbar .brand .bl{font-size:1.4rem;line-height:1}
-#topbar .brand b{font-size:1.35rem;font-weight:800;letter-spacing:.06em}
-#topbar .brand em{font-style:normal;color:var(--ye)}
-#topbar nav#nav{position:static;flex:1;min-width:0;padding:0;justify-content:flex-end;gap:6px}
-#topbar nav#nav .nrow{gap:4px}
-#topbar nav#nav button{background:transparent;border:0;box-shadow:none;color:#dbe7ff;border-radius:999px;padding:8px 13px;font-weight:600;transform:none}
-#topbar nav#nav button:hover{background:#ffffff1f}
-#topbar nav#nav .nrow button.on,#topbar nav#nav .nmb.on{background:var(--ye);color:#0a0f1e;box-shadow:0 0 16px #ffd23f88}
-#topbar nav#nav .npanel{background:#fff;border-radius:18px;top:calc(100% + 14px)}
-#topbar nav#nav .mi{color:var(--tx);border-radius:10px}
-#topbar nav#nav .mi:hover{background:#2f7bff14}
-#topbar nav#nav .mi.on{background:var(--ac);color:#fff;box-shadow:none}
-@media(max-width:640px){
- #topbar .dock{padding:5px 6px 5px 10px;gap:6px}
- #topbar .brand b{display:none}
- #topbar nav#nav button{padding:9px 11px}
- #topbar nav#nav .nrow button:not(.on) span:last-child,#topbar nav#nav .nmb:not(.on) span:last-child{display:none}
- #topbar nav#nav .nrow button span:first-child,#topbar nav#nav .nmb span:first-child{font-size:1.15rem}
+/* ===== Barra de menú fija: todas las opciones visibles en dos líneas ===== */
+#topbar{position:fixed;top:0;left:0;right:0;z-index:50;padding:calc(env(safe-area-inset-top,0px) + 8px) 10px 6px;display:flex;justify-content:center;pointer-events:none}
+#topbar .dock{pointer-events:auto;width:100%;max-width:980px;display:flex;align-items:center;gap:8px;padding:6px 8px;border-radius:20px;background:linear-gradient(135deg,rgba(15,42,107,.96),rgba(10,15,30,.96));border:1px solid #7aa9ff66;box-shadow:0 10px 30px #0b1b4a55,inset 0 1px 0 #ffffff22;-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px)}
+#tbsp{height:96px}
+#topbar .brand{flex:none;display:flex;flex-direction:column;align-items:center;gap:1px;padding:0 6px;color:#fff;cursor:pointer;user-select:none;-webkit-user-select:none}
+#topbar .brand .bl{font-size:1.6rem;line-height:1}
+#topbar .brand b{font-size:.78rem;font-weight:800;letter-spacing:.08em;color:var(--ye)}
+#topbar nav#nav{flex:1;min-width:0;display:grid;grid-template-columns:repeat(var(--c,4),minmax(0,1fr));grid-auto-rows:1fr;gap:4px;padding:0;position:static}
+#topbar nav#nav button{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;min-width:0;padding:5px 2px;border:0;border-radius:12px;background:#ffffff14;color:#dbe7ff;font-weight:600;font-size:.7rem;line-height:1.1;box-shadow:none;transform:none}
+#topbar nav#nav button:hover{background:#ffffff26;transform:none}
+#topbar nav#nav button span:first-child{font-size:1.1rem;line-height:1.1}
+#topbar nav#nav button span:last-child{max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+#topbar nav#nav button.on{background:var(--ye);color:#0a0f1e;box-shadow:0 0 14px #ffd23f88}
+#topbar nav#nav button.out{background:#ef4444;color:#fff}
+@media(min-width:700px){
+ #tbsp{height:104px}
+ #topbar .brand{flex-direction:row;gap:8px;padding:0 10px}
+ #topbar .brand b{font-size:1.3rem;letter-spacing:.06em}
+ #topbar nav#nav button{flex-direction:row;gap:6px;padding:9px 8px;font-size:.9rem}
+ #topbar nav#nav button span:first-child{font-size:1.05rem}
 }
 </style>
 </head>
@@ -422,7 +393,7 @@ nav#nav .ml:first-child{border:0;margin:0}
 <div id="topbar">
  <div class="dock">
   <div id="tt" class="brand" aria-label="Torrejón Juncal B. Haz cinco clics para abrir el acceso de administración">
-   <span class="bl">⚽</span><b class="cn">JUNCAL <em>B</em></b>
+   <span class="bl">⚽</span><b class="cn">JUNCAL B</b>
   </div>
   <nav id="nav"></nav>
  </div>
@@ -614,7 +585,7 @@ function fit(){
  /* La barra de menú solo se oculta en el directo a pantalla completa */
  const tb=document.getElementById("topbar"),sp=document.getElementById("tbsp");
  if(tb)tb.style.display=FS?"none":"";
- if(sp)sp.style.display=FS?"none":"";
+ if(sp){sp.style.display=FS?"none":"";if(!FS&&tb)sp.style.height=tb.offsetHeight+"px"}
  if(FS&&!lvOn)leaveFS();
  h.classList.toggle("fs",FS);
  h.classList.toggle("adm",FS&&E());
@@ -756,12 +727,9 @@ function render(){
  if(jnAuto){const nx=nextL();jn=nx?nx.r.n:J.length}
  const tabs=[["jor","🗓 Jornadas"],["cal","📅 Mi calendario"],["cla","🏆 Clasificación"],["cop","🥇 Copa"],["gol","👟 Goleadores"],["cro","🎽 Jugadores"],["jug","🎬 Jugadas"]].filter(t=>t[0]!="cop"||COPA||E());if(E())tabs.push(["piz","📋 Pizarra"],["hor","🕒 Horarios"],["pla","👥 Plantilla"],["ent","🏃 Entrenos"]);
  tabs.push(E()?["out","🔓 Salir"]:["log","🔒 Login"]);
- const nv=document.getElementById("nav"),big=tabs.length>4;nv.style.setProperty("--n",big?3:4);nv.className=big?"x":"";
- const PRIM=["jor","cal","cla","cop","gol","cro"],btn=([k,l],c)=>{const[ic,...tx]=l.split(" ");const oc=k=="log"?"unlock()":k=="out"?"setEdit(false)":`tab='${k}';if(tab=='jor')jnAuto=true;if(tab=='ent')entD='';if(tab=='jug')PL=null;render()`;return`<button class="${c||""} ${tab==k?'on':''}" onclick="${oc}"><span>${ic}</span><span>${tx.join(" ")}</span></button>`};
- const pr=tabs.filter(t=>PRIM.includes(t[0])),mn=tabs.filter(t=>!PRIM.includes(t[0])),adm=mn.filter(t=>["piz","hor","pla","ent"].includes(t[0])),pub=mn.filter(t=>t[0]=="jug"),ses=mn.filter(t=>t[0]=="log"||t[0]=="out"),inM=mn.some(t=>t[0]==tab&&t[0]!="log"&&t[0]!="out");
- nv.innerHTML=`<div class="nrow">${pr.map(t=>btn(t)).join("")}</div><div class="nmore"><button class="nmb ${inM?"on":""}" onclick="event.stopPropagation();document.getElementById('nav').classList.toggle('mo')" aria-haspopup="true"><span>☰</span><span>${inM?esc(mn.find(t=>t[0]==tab)[1].split(" ").slice(1).join(" ")):"Menú"}</span></button><div class="npanel">${pub.map(t=>btn(t,"mi")).join("")}${adm.length?`<div class="ml">Zona entrenador</div>`+adm.map(t=>btn(t,"mi")).join(""):""}<div class="ml"></div>${ses.map(t=>btn(t,"mi")).join("")}</div></div>`;
- if(!window._mn){window._mn=1;document.addEventListener("click",e=>{if(!e.target.closest(".nmore"))document.getElementById("nav").classList.remove("mo")})}
- {const r=nv.querySelector(".nrow"),o=r&&r.querySelector(".on");if(o)r.scrollLeft=o.offsetLeft-(r.clientWidth-o.offsetWidth)/2}
+ const SH={jor:"Jornadas",cal:"Calendario",cla:"Clasif.",cop:"Copa",gol:"Goleadores",cro:"Jugadores",jug:"Jugadas",piz:"Pizarra",hor:"Horarios",pla:"Plantilla",ent:"Entrenos",log:"Login",out:"Salir"};
+ const nv=document.getElementById("nav");nv.style.setProperty("--c",Math.ceil(tabs.length/2));
+ nv.innerHTML=tabs.map(([k,l])=>{const ic=l.split(" ")[0],oc=k=="log"?"unlock()":k=="out"?"setEdit(false)":`tab='${k}';if(tab=='jor')jnAuto=true;if(tab=='ent')entD='';if(tab=='jug')PL=null;render()`;return`<button class="${tab==k?'on':''}${k=='out'?' out':''}" onclick="${oc}"><span>${ic}</span><span>${SH[k]}</span></button>`}).join("");
  let h="";
  if(tab=="cal")h=myM().map((x,i)=>card(x.r,x.h,x.a,i)).join("");
  if(tab=="jor"){h=jsel()+[...J[jn-1].p].sort((x,y)=>y.includes(ME)-x.includes(ME)).map((p,i)=>card(J[jn-1],p[0],p[1],i)).join("")}
@@ -949,6 +917,20 @@ function setEdit(on){
   }
   render();
 }
+/* ===== Cierre automático de la sesión de administrador por inactividad (4 min) ===== */
+const IDLE_MS=4*60000,IDLE_WARN=30000;
+let lastAct=Date.now(),idleWarned=false;
+function bump(){lastAct=Date.now();idleWarned=false}
+["pointerdown","keydown","touchstart","wheel","scroll","mousemove"].forEach(ev=>addEventListener(ev,bump,{passive:true,capture:true}));
+function bumpFrame(){try{["pointerdown","keydown","touchstart","wheel","scroll","mousemove"].forEach(ev=>pzFr.contentDocument.addEventListener(ev,bump,{passive:true,capture:true}))}catch(e){}}
+setInterval(()=>{
+ if(!E()){lastAct=Date.now();idleWarned=false;return}
+ /* No cerrar mientras se graba o se revisa un vídeo de la pizarra */
+ if($("#pbtn").disabled||!$("#mPrev").hidden||!$("#mVer").hidden){bump();return}
+ const left=IDLE_MS-(Date.now()-lastAct);
+ if(left<=0){setEdit(false);toast("Sesión de administrador cerrada por inactividad");return}
+ if(left<=IDLE_WARN&&!idleWarned){idleWarned=true;toast("Se cerrará la sesión de administrador en 30 s por inactividad")}
+},5000);
 let ck=0,ct;document.getElementById("tt").onclick=()=>{clearTimeout(ct);ct=setTimeout(()=>ck=0,900);if(++ck>=5){ck=0;unlock()}};
 async function publish(){const j=JSON.stringify(S,null,1);try{await navigator.clipboard.writeText(j)}catch(e){}
  const u=GH_USER,r=GH_REPO;
@@ -1058,7 +1040,7 @@ function ajusta(){try{const d=pzFr.contentDocument;if(d&&d.body)pzFr.style.heigh
 function ensurePiz(){
  if(pzFr)return;
  pzFr=document.createElement("iframe");pzFr.title="Pizarra táctica";pzFr.src=BASE+"pizarra.html";
- pzFr.addEventListener("load",()=>{ajusta();try{new ResizeObserver(ajusta).observe(pzFr.contentDocument.body)}catch(e){}flushPz()});
+ pzFr.addEventListener("load",()=>{bumpFrame();ajusta();try{new ResizeObserver(ajusta).observe(pzFr.contentDocument.body)}catch(e){}flushPz()});
  $("#pzf").appendChild(pzFr)}
 function setPSt(t){$("#pst").textContent=t}
 function toPiz(ses,titulo){pzQ={ses,titulo};tab="piz";render();flushPz()}

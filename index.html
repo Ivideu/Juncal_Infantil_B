@@ -1,0 +1,4074 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="./Images/escudo.png">
+<title>Torrejón Juncal · Escuela de Fútbol Sala</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link
+  href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,600;0,700;0,800;1,700;1,800&family=Barlow:wght@400;500;600;700;800&display=swap"
+  rel="stylesheet">
+
+<style>
+:root{
+  --bg:#0f2a78;
+  --bg2:#ffffff;
+  --card:rgba(255,255,255,.92);
+  --line:#d5def5;
+  --tx:#0f1b3d;
+  --mu:#5a6a93;
+  --ac:#2f7bff;
+  --ye:#ffd23f;
+  --ye2:#d97706;
+  --navy:#0f2a6b;
+  --sh:
+    0 1px 4px rgba(8,18,53,.75),
+    0 0 14px rgba(8,18,53,.45);
+}
+
+*{
+  box-sizing:border-box;
+  margin:0;
+}
+
+html{
+  scroll-behavior:smooth;
+  scroll-padding-top:76px;
+  background:var(--bg);
+}
+
+body{
+  min-height:100vh;
+  color:var(--tx);
+  background:transparent;
+  font:16px/1.5 Barlow,system-ui,sans-serif;
+}
+
+h1,
+h2,
+h3{
+  font-family:"Barlow Condensed",sans-serif;
+  letter-spacing:.02em;
+  text-transform:uppercase;
+  line-height:1;
+}
+
+a{
+  color:inherit;
+  text-decoration:none;
+}
+
+button,
+input,
+select,
+textarea{
+  font:inherit;
+}
+
+.wrap{
+  width:100%;
+  max-width:980px;
+  margin:auto;
+  padding:0 16px;
+}
+
+section{
+  padding:70px 0;
+}
+
+h2{
+  margin-bottom:10px;
+  color:#fff;
+  font-size:clamp(2.2rem,5vw,3.4rem);
+  font-weight:800;
+  text-shadow:var(--sh);
+}
+
+h2 span{
+  color:var(--ye);
+  text-shadow:
+    0 2px 0 #0f2a78,
+    0 0 3px #0f2a78,
+    0 0 14px rgba(8,18,53,.5);
+}
+
+.sub{
+  max-width:620px;
+  margin-bottom:36px;
+  color:#fff;
+  text-shadow:var(--sh);
+}
+
+.btn{
+  display:inline-block;
+  padding:12px 24px;
+  border:0;
+  border-radius:12px;
+  color:#0a0f1e;
+  background:var(--ye);
+  box-shadow:0 4px 14px rgba(8,18,53,.35);
+  font-weight:700;
+  cursor:pointer;
+  transition:
+    transform .2s,
+    box-shadow .2s,
+    background-color .2s;
+}
+
+.btn:hover{
+  transform:translateY(-2px);
+  box-shadow:0 8px 24px rgba(8,18,53,.45);
+}
+
+.btn:focus-visible{
+  outline:3px solid #fff;
+  outline-offset:3px;
+}
+
+.btn.o{
+  color:var(--tx);
+  background:var(--bg2);
+}
+
+/* =========================================================
+   FONDO GENERAL
+   ========================================================= */
+
+#bg{
+  position:fixed;
+  inset:0;
+  z-index:-1;
+  overflow:hidden;
+  pointer-events:none;
+  background:
+    linear-gradient(
+      rgba(8,18,53,.22),
+      rgba(8,18,53,.22)
+    ),
+    linear-gradient(
+      90deg,
+      #f2b705 0%,
+      #ffd23f 18%,
+      #ffe98f 30%,
+      #dbe8ff 42%,
+      #5b9bff 58%,
+      #1e4fd8 78%,
+      #0f2a78 100%
+    ),
+    #0f2a78;
+}
+
+@media(prefers-reduced-motion:reduce){
+  *{
+    scroll-behavior:auto!important;
+    animation:none!important;
+    transition:none!important;
+  }
+}
+
+/* =========================================================
+   CABECERA Y NAVEGACIÓN
+   ========================================================= */
+
+header{
+  position:fixed;
+  inset:0 0 auto;
+  z-index:50;
+  background:rgba(255,255,255,.82);
+  border-bottom:1px solid var(--line);
+  box-shadow:0 4px 18px rgba(8,18,53,.25);
+  -webkit-backdrop-filter:blur(14px);
+  backdrop-filter:blur(14px);
+}
+
+header .wrap{
+  max-width:1280px;
+}
+
+nav{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  height:68px;
+}
+
+.logo{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  color:var(--navy);
+  font-family:"Barlow Condensed",sans-serif;
+  font-size:1.5rem;
+  font-weight:800;
+  text-transform:uppercase;
+}
+
+.logo b{
+  color:var(--ye2);
+}
+
+.lg{
+  width:44px;
+  height:44px;
+  border-radius:50%;
+}
+
+.pgb{
+  width:100%;
+  aspect-ratio:848/190;
+  margin-bottom:40px;
+  border-bottom:2px solid var(--ac);
+  border-radius:16px;
+  background:
+    url("Images/cabecera.jpg")
+    center / 100% 100%
+    no-repeat;
+  box-shadow:0 8px 28px rgba(0,40,120,.35);
+}
+
+.fl{
+  width:64px;
+  height:64px;
+  margin-bottom:12px;
+  border-radius:50%;
+}
+
+.menu{
+  display:flex;
+  align-items:center;
+  gap:6px;
+  font-size:.95rem;
+  font-weight:600;
+}
+
+.menu a{
+  white-space:nowrap;
+}
+
+.menu a:not(.btn){
+  padding:10px 16px;
+  border-radius:10px;
+  color:var(--tx);
+  font-size:1rem;
+  transition:
+    color .2s,
+    background-color .2s,
+    transform .2s;
+}
+
+.menu a:not(.btn):hover{
+  color:#0a0f1e;
+  background:var(--ye);
+}
+
+.menu a.ig{
+  flex:none;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  width:42px;
+  height:42px;
+  margin-left:8px;
+  padding:0!important;
+  border-radius:50%;
+  color:#fff;
+  background:
+    linear-gradient(
+      45deg,
+      #f2b705,
+      #e1306c 55%,
+      #7b3fe4
+    );
+  box-shadow:0 3px 10px rgba(8,18,53,.35);
+}
+
+.menu a.ig:hover{
+  color:#fff;
+  background:
+    linear-gradient(
+      45deg,
+      #ffd23f,
+      #e1306c 55%,
+      #7b3fe4
+    );
+  transform:translateY(-2px);
+}
+
+.menu a.ig span{
+  display:none;
+}
+
+#burger{
+  display:none;
+  padding:4px 8px;
+  border:0;
+  color:var(--navy);
+  background:none;
+  font-size:1.8rem;
+  cursor:pointer;
+}
+
+/* =========================================================
+   HERO Y ESCUELA
+   ========================================================= */
+
+.hero{
+  position:relative;
+  display:flex;
+  align-items:center;
+  min-height:100vh;
+  padding:104px 0 44px;
+  overflow:hidden;
+  background:transparent;
+}
+
+.hero::before{
+  content:"";
+  position:absolute;
+  top:68px;
+  right:0;
+  bottom:0;
+  left:0;
+  z-index:0;
+  background:
+    linear-gradient(
+      95deg,
+      rgba(8,18,53,.55) 6%,
+      rgba(8,18,53,.22) 40%,
+      rgba(8,18,53,0) 62%
+    ),
+    var(--hero,url("Images/fondo-hero.jpg"))
+    85% 0 / cover
+    no-repeat;
+  -webkit-mask-image:
+    linear-gradient(
+      180deg,
+      #000 55%,
+      transparent 100%
+    );
+  mask-image:
+    linear-gradient(
+      180deg,
+      #000 55%,
+      transparent 100%
+    );
+}
+
+.hero::after{
+  content:"";
+  position:absolute;
+  right:-120px;
+  bottom:-160px;
+  width:520px;
+  height:520px;
+  border:60px solid rgba(255,210,63,.2);
+  border-radius:50%;
+  animation:spin 20s linear infinite;
+}
+
+@keyframes spin{
+  to{
+    transform:rotate(360deg) scale(1.1);
+  }
+}
+
+.hero .wrap{
+  position:relative;
+  z-index:2;
+  width:100%;
+}
+
+#escuela{
+  padding:0;
+}
+
+.hero h1{
+  margin:14px 0 20px;
+  color:#fff;
+  font-size:clamp(2.6rem,5vw,4.2rem);
+  font-weight:800;
+  text-shadow:var(--sh);
+}
+
+.hero h1 em{
+  color:var(--ye);
+  font-style:normal;
+  text-shadow:
+    0 3px 0 #0f2a78,
+    0 0 4px #0f2a78,
+    0 0 18px rgba(8,18,53,.5);
+}
+
+.tag{
+  display:inline-block;
+  padding:4px 14px;
+  border:2px solid #0f2a78;
+  border-radius:6px;
+  color:#0a0f1e;
+  background:var(--ye);
+  font-size:.8rem;
+  font-weight:800;
+  letter-spacing:.1em;
+  text-transform:uppercase;
+}
+
+.hero p{
+  max-width:520px;
+  margin-bottom:30px;
+  color:#fff;
+  font-size:1.1rem;
+  text-shadow:var(--sh);
+}
+
+.hero .btns{
+  display:flex;
+  flex-wrap:wrap;
+  gap:14px;
+}
+
+.hero .btn{
+  text-shadow:none;
+}
+
+.stats{
+  display:flex;
+  flex-wrap:wrap;
+  gap:40px;
+  margin-top:56px;
+}
+
+.stats b{
+  display:block;
+  color:#fff;
+  font-family:"Barlow Condensed",sans-serif;
+  font-size:3rem;
+  line-height:1;
+  text-shadow:var(--sh);
+}
+
+.stats small{
+  color:#fff;
+  text-shadow:var(--sh);
+}
+
+/* =========================================================
+   TARJETAS GENERALES
+   ========================================================= */
+
+.grid{
+  display:grid;
+  grid-template-columns:
+    repeat(auto-fill,minmax(240px,1fr));
+  gap:20px;
+}
+
+.card{
+  overflow:hidden;
+  border:1px solid var(--line);
+  border-radius:16px;
+  background:var(--card);
+  box-shadow:0 4px 18px rgba(8,18,53,.25);
+  -webkit-backdrop-filter:blur(8px);
+  backdrop-filter:blur(8px);
+  transition:
+    transform .25s,
+    border-color .25s,
+    box-shadow .25s;
+}
+
+.card:hover{
+  border-color:var(--ac);
+  transform:translateY(-6px);
+}
+
+.ph{
+  display:grid;
+  place-items:center;
+  aspect-ratio:4/3;
+  color:var(--mu);
+  background:
+    linear-gradient(135deg,#bcd6ff,#e6efff)
+    center / cover
+    no-repeat;
+  font-size:.8rem;
+}
+
+/* =========================================================
+   DIRECTIVA JUNCAL Y ENTRENADORES JUNCAL
+   ========================================================= */
+
+.staff-section + .staff-section{
+  margin-top:58px;
+}
+
+.staff-title{
+  margin-bottom:10px;
+  color:#fff;
+  font-size:clamp(1.9rem,4vw,2.8rem);
+  font-weight:800;
+  text-shadow:var(--sh);
+}
+
+.staff-title span{
+  color:var(--ye);
+  text-shadow:
+    0 2px 0 #0f2a78,
+    0 0 3px #0f2a78,
+    0 0 14px rgba(8,18,53,.5);
+}
+
+.staff-grid{
+  display:grid;
+  grid-template-columns:
+    repeat(5,minmax(0,1fr));
+  gap:10px;
+}
+
+.staff-grid .stf{
+  display:flex;
+  flex-direction:column;
+  width:100%;
+  aspect-ratio:4/5;
+  padding:0;
+  overflow:hidden;
+  color:inherit;
+  font:inherit;
+  text-align:inherit;
+  cursor:pointer;
+}
+
+.staff-grid .stf.x{
+  display:none;
+}
+
+.staff-grid .ph{
+  flex:1;
+  min-height:0;
+  aspect-ratio:auto;
+  background-position:center;
+  background-size:cover;
+  background-repeat:no-repeat;
+  font-size:.7rem;
+}
+
+.staff-grid .cb{
+  flex:none;
+  padding:5px 4px 7px;
+  text-align:center;
+}
+
+.staff-grid .cb h3{
+  margin-bottom:1px;
+  color:var(--navy);
+  font-size:.85rem;
+}
+
+.staff-grid .cb p{
+  color:var(--mu);
+  font-size:.65rem;
+  line-height:1.2;
+}
+
+.staff-grid .stf.full .cb{
+  display:none;
+}
+
+.staff-grid{
+  align-items:start;
+}
+
+.staff-grid .stf.full{
+  aspect-ratio:auto;
+  height:auto;
+  border:0;
+  border-radius:0;
+  background:none;
+  box-shadow:none;
+  overflow:visible;
+  -webkit-backdrop-filter:none;
+  backdrop-filter:none;
+}
+
+.staff-grid .stf.full:hover{
+  transform:translateY(-6px);
+}
+
+.staff-grid .stf.full img{
+  display:block;
+  width:100%;
+  height:auto;
+  aspect-ratio:2 / 3;      /* misma proporción en directiva y entrenadores */
+  object-fit:cover;        /* si una imagen difiere un poco, recorta en vez de deformar */
+  filter:drop-shadow(0 4px 10px rgba(8,18,53,.35));
+}
+
+.staff-more{
+  margin-top:22px;
+}
+
+/* =========================================================
+   VISOR AMPLIADO DE DIRECTIVA Y ENTRENADORES
+   ========================================================= */
+
+#stfOv{
+  position:fixed;
+  inset:0;
+  z-index:100;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:16px;
+  background:rgba(8,18,53,.78);
+  -webkit-backdrop-filter:blur(6px);
+  backdrop-filter:blur(6px);
+  animation:stfIn .2s both;
+}
+
+@keyframes stfIn{
+  from{
+    opacity:0;
+  }
+}
+
+@keyframes stfPop{
+  from{
+    opacity:0;
+    transform:
+      scale(.9)
+      translateY(10px);
+  }
+}
+
+.stfm{
+  position:relative;
+  width:auto;
+  max-width:min(92vw,420px);
+  padding:14px 14px 18px;
+  border-radius:20px;
+  background:#fff;
+  box-shadow:0 20px 60px rgba(0,0,0,.45);
+  text-align:center;
+  animation:
+    stfPop .25s cubic-bezier(.2,1.3,.4,1)
+    both;
+}
+
+.stfm img,
+.stfm .nofoto{
+  display:block;
+  width:auto;
+  max-width:100%;
+  height:auto;
+  max-height:68vh;
+  margin:0 auto;
+  border-radius:14px;
+}
+
+.stfm .nofoto{
+  display:grid;
+  place-items:center;
+  width:260px;
+  aspect-ratio:4/5;
+  color:var(--mu);
+  background:
+    linear-gradient(135deg,#bcd6ff,#e6efff);
+}
+
+.stfm h3{
+  margin:12px 0 2px;
+  color:var(--navy);
+  font-size:1.8rem;
+}
+
+.stfm p{
+  color:var(--ye2);
+  font-size:.9rem;
+  font-weight:700;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+}
+
+.stfm .x{
+  position:absolute;
+  top:-14px;
+  right:-14px;
+  width:40px;
+  height:40px;
+  border:0;
+  border-radius:50%;
+  color:#0a0f1e;
+  background:var(--ye);
+  font-size:1.4rem;
+  line-height:1;
+  cursor:pointer;
+}
+
+.stfm .x:focus-visible{
+  outline:3px solid #fff;
+  outline-offset:3px;
+}
+
+/* =========================================================
+   ESCUELA
+   ========================================================= */
+
+.two{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  align-items:center;
+  gap:36px;
+}
+
+.kit.sq{
+  min-height:0;
+  aspect-ratio:1;
+}
+
+.pil{
+  display:grid;
+  gap:12px;
+}
+
+.pil .card{
+  display:flex;
+  align-items:center;
+  gap:14px;
+  padding:12px 16px;
+}
+
+.pil .card:hover{
+  transform:translateX(6px);
+}
+
+.cnt{
+  display:flex;
+  gap:6px 26px;
+  margin-top:4px;
+  color:var(--mu);
+  font-size:.82rem;
+}
+
+.cnt span{
+  display:flex;
+  flex-direction:column;
+  line-height:1.1;
+}
+
+.cnt b{
+  color:var(--navy);
+  font:
+    800 1.7rem/1
+    "Barlow Condensed",
+    sans-serif;
+}
+
+.pil i{
+  flex:none;
+  display:grid;
+  place-items:center;
+  width:46px;
+  height:46px;
+  border-radius:14px;
+  color:var(--ye);
+  background:var(--navy);
+}
+
+.pil h3{
+  margin-bottom:2px;
+  color:var(--navy);
+  font-size:1.25rem;
+}
+
+.pil p,
+.hero .pil p{
+  max-width:none;
+  margin:0;
+  color:var(--mu);
+  font-size:.92rem;
+  line-height:1.35;
+  text-shadow:none;
+}
+
+.kit{
+  position:relative;
+  min-height:340px;
+  overflow:hidden;
+  border:3px solid #fff;
+  border-radius:22px;
+  background:#03071a;
+  box-shadow:0 14px 40px rgba(8,18,53,.5);
+}
+
+.kit img{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  object-position:50% 50%;
+}
+
+/* =========================================================
+   DÓNDE JUGAMOS
+   ========================================================= */
+
+.nuria{
+  display:block;
+  width:100%;
+  height:auto;
+  border-radius:22px;
+  background:var(--card);
+  box-shadow:0 4px 18px rgba(8,18,53,.3);
+}
+
+.info{
+  display:flex;
+  align-items:center;
+  flex-wrap:wrap;
+  gap:16px;
+  margin-top:28px;
+}
+
+.info span{
+  color:#fff;
+  text-shadow:var(--sh);
+}
+
+.mail{
+  color:#fff;
+  font-size:1.1rem;
+  font-weight:700;
+  text-decoration:underline;
+  text-underline-offset:4px;
+  text-shadow:var(--sh);
+}
+
+.mail:hover{
+  color:var(--ye);
+}
+
+iframe{
+  width:100%;
+  height:320px;
+  margin-top:28px;
+  border:1px solid var(--line);
+  border-radius:16px;
+  box-shadow:0 4px 18px rgba(8,18,53,.3);
+}
+
+/* =========================================================
+   PÁGINA DE CATEGORÍAS
+   ========================================================= */
+
+#cats{
+  display:none;
+  padding-top:68px;
+}
+
+body.pg #home{
+  display:none;
+}
+
+body.pg #cats{
+  display:block;
+}
+
+.back{
+  color:#fff;
+  font-weight:700;
+  text-shadow:var(--sh);
+}
+
+button.btn{
+  font:inherit;
+  font-weight:700;
+  cursor:pointer;
+}
+
+.cats{
+  grid-template-columns:
+    repeat(4,minmax(0,1fr));
+}
+
+.cat{
+  display:flex;
+  flex-direction:column;
+  gap:6px;
+  padding:22px;
+}
+
+.cat.x{
+  display:none;
+}
+
+.cat.sin{
+  cursor:default;
+}
+
+.cat.sin .go{
+  color:var(--mu);
+  opacity:.7;
+}
+
+.cat .age{
+  color:var(--ye2);
+  font-size:.8rem;
+  font-weight:700;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+}
+
+.cat .go{
+  margin-top:6px;
+  color:var(--mu);
+  font-size:.88rem;
+  transition:color .2s;
+}
+
+.cat:hover .go{
+  color:var(--ac);
+}
+
+/* =========================================================
+   PRÓXIMOS PARTIDOS
+   ========================================================= */
+
+#matches{
+  grid-template-columns:
+    repeat(4,minmax(0,1fr));
+  gap:14px;
+}
+
+.mx{
+  display:none!important;
+}
+
+button.fch{
+  display:block;
+  width:100%;
+  padding:0;
+  overflow:hidden;
+  border:0;
+  border-radius:18px;
+  background:none;
+  box-shadow:0 8px 28px rgba(8,18,53,.4);
+  cursor:pointer;
+  transition:transform .25s;
+}
+
+button.fch:hover{
+  transform:translateY(-6px);
+}
+
+button.fch:focus-visible{
+  outline:3px solid var(--ye);
+  outline-offset:3px;
+}
+
+.cartel{
+  position:relative;
+  width:100%;
+  aspect-ratio:842/857;
+  color:#fff;
+  background:
+    #0f2a78
+    url("Images/ficha-base.jpg")
+    center / 100% 100%
+    no-repeat;
+  text-align:center;
+  user-select:none;
+  -webkit-user-select:none;
+  container-type:inline-size;
+}
+
+.cartel > *{
+  position:absolute;
+  margin:0;
+}
+
+.cartel .c-t,
+.cartel .c-l,
+.cartel .nm,
+.cartel .jor{
+  font-family:"Barlow Condensed",sans-serif;
+  font-style:italic;
+  font-weight:800;
+  line-height:1;
+  text-transform:uppercase;
+  paint-order:stroke fill;
+}
+
+.cartel .c-t{
+  top:21.5%;
+  left:15%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  width:70%;
+  height:11%;
+  color:var(--ye);
+  font-size:
+    min(
+      10cqw,
+      calc(120cqw / var(--n))
+    );
+  white-space:nowrap;
+  -webkit-text-stroke:1.1cqw #0f2a78;
+}
+
+.cartel .c-l{
+  top:32.3%;
+  left:8%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  width:84%;
+  height:5.4%;
+  color:var(--ye);
+  font-size:
+    min(
+      4.6cqw,
+      calc(145cqw / var(--m))
+    );
+  font-weight:700;
+  white-space:nowrap;
+  -webkit-text-stroke:.7cqw #0f2a78;
+}
+
+.cartel .eq{
+  display:grid;
+  place-items:center;
+  width:24.4%;
+  aspect-ratio:1/1;
+  overflow:hidden;
+  border:1.2cqw solid #fff;
+  border-radius:50%;
+  background:#fff;
+  box-shadow:
+    0 0 0 .9cqw var(--ye),
+    0 1cqw 3cqw rgba(0,0,0,.45);
+}
+
+.cartel .eq1{
+  top:38.2%;
+  left:8.6%;
+}
+
+.cartel .eq2{
+  top:37.9%;
+  left:67.1%;
+}
+
+.cartel .eq i{
+  color:#0f2a78;
+  font:
+    italic 800 8cqw/1
+    "Barlow Condensed",
+    sans-serif;
+  font-style:normal;
+}
+
+.cartel .eq img{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  object-fit:contain;
+  background:#fff;
+}
+
+.cartel .nm{
+  top:62%;
+  display:flex;
+  align-items:flex-start;
+  justify-content:center;
+  width:31%;
+  height:6.2%;
+  overflow:hidden;
+  color:#fff;
+  font-size:
+    min(
+      3.7cqw,
+      calc(130cqw / var(--k))
+    );
+  text-shadow:0 .3cqw .8cqw rgba(0,0,0,.6);
+  -webkit-text-stroke:.7cqw #0f2a78;
+}
+
+.cartel .nm1{
+  left:5.3%;
+}
+
+.cartel .nm2{
+  left:63.8%;
+}
+
+.cartel .dia,
+.cartel .fec,
+.cartel .hor,
+.cartel .lug,
+.cartel .cf{
+  font-family:Barlow,sans-serif;
+  line-height:1;
+  text-align:left;
+  text-shadow:0 .3cqw .8cqw rgba(0,0,0,.55);
+  white-space:nowrap;
+}
+
+.cartel .dia{
+  top:66.6%;
+  left:21.7%;
+  font-size:4.7cqw;
+  font-weight:700;
+}
+
+.cartel .fec{
+  top:71.6%;
+  left:21.7%;
+  font-size:2.9cqw;
+  font-weight:700;
+}
+
+.cartel .hor{
+  top:74.3%;
+  left:21.7%;
+  color:var(--ye);
+  font-size:5cqw;
+  font-weight:800;
+}
+
+.cartel .hor.s{
+  top:75%;
+  font-size:3.3cqw;
+}
+
+.cartel .lug{
+  top:69%;
+  left:61.2%;
+  display:-webkit-box;
+  width:35%;
+  overflow:hidden;
+  font-size:2.4cqw;
+  font-weight:700;
+  line-height:1.15;
+  text-transform:uppercase;
+  white-space:normal;
+  -webkit-box-orient:vertical;
+  -webkit-line-clamp:2;
+}
+
+.cartel .cf{
+  top:74.4%;
+  left:61.2%;
+  color:var(--ye);
+  font-size:3.4cqw;
+  font-weight:800;
+  text-transform:uppercase;
+}
+
+.cartel .jor{
+  top:80.6%;
+  left:5%;
+  width:90%;
+  color:#fff;
+  font-size:3.3cqw;
+  font-weight:700;
+  -webkit-text-stroke:.8cqw #0f2a78;
+}
+
+/* =========================================================
+   VISOR AMPLIADO DE PARTIDOS
+   ========================================================= */
+
+#fOv{
+  position:fixed;
+  inset:0;
+  z-index:100;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:16px;
+  background:rgba(8,18,53,.82);
+  -webkit-backdrop-filter:blur(6px);
+  backdrop-filter:blur(6px);
+  animation:stfIn .2s both;
+}
+
+.fm{
+  position:relative;
+  width:min(92vw,calc(86vh * .982),680px);
+  animation:
+    stfPop .25s cubic-bezier(.2,1.3,.4,1)
+    both;
+}
+
+.fm .cartel{
+  overflow:hidden;
+  border-radius:20px;
+  box-shadow:0 20px 60px rgba(0,0,0,.5);
+}
+
+.fm .x{
+  position:absolute;
+  top:-14px;
+  right:-14px;
+  z-index:2;
+  width:40px;
+  height:40px;
+  border:0;
+  border-radius:50%;
+  color:#0a0f1e;
+  background:var(--ye);
+  font-size:1.4rem;
+  line-height:1;
+  cursor:pointer;
+}
+
+/* =========================================================
+   PIE DE PÁGINA Y ANIMACIONES
+   ========================================================= */
+
+footer{
+  padding:40px 0;
+  border-top:1px solid rgba(255,255,255,.35);
+  color:#fff;
+  font-size:.9rem;
+  text-align:center;
+  text-shadow:var(--sh);
+}
+
+footer a{
+  color:var(--ye);
+  font-weight:700;
+}
+
+.rv{
+  opacity:0;
+  transform:translateY(30px);
+  transition:
+    opacity .7s,
+    transform .7s;
+}
+
+.rv.in{
+  opacity:1;
+  transform:none;
+}
+
+/* =========================================================
+   DISEÑO RESPONSIVE
+   ========================================================= */
+
+@media(max-width:800px){
+  .cats{
+    grid-template-columns:
+      repeat(2,minmax(0,1fr));
+  }
+
+  .cat{
+    padding:16px;
+  }
+
+  .hero{
+    min-height:0;
+    align-items:flex-start;
+    padding-top:96px;
+  }
+
+  .hero::before{
+    bottom:auto;
+    height:260px;
+    background-position:100% 0;
+  }
+
+  .menu a.ig{
+    justify-content:flex-start;
+    width:auto;
+    height:auto;
+    margin:6px 0 0;
+    padding:10px 16px!important;
+    border-radius:10px;
+  }
+
+  .menu a.ig span{
+    display:inline;
+  }
+
+  .two{
+    grid-template-columns:1fr;
+  }
+
+  .kit{
+    min-height:0;
+    aspect-ratio:1;
+  }
+
+  #burger{
+    display:block;
+  }
+
+  .menu{
+    position:fixed;
+    inset:68px 0 auto;
+    display:none;
+    flex-direction:column;
+    padding:24px;
+    border-bottom:1px solid var(--line);
+    background:#fff;
+  }
+
+  .menu.o{
+    display:flex;
+  }
+
+  section{
+    padding:56px 0;
+  }
+
+  .staff-grid{
+    grid-template-columns:
+      repeat(4,minmax(0,1fr));
+  }
+}
+
+@media(max-width:600px){
+  #matches{
+    grid-template-columns:
+      repeat(3,minmax(0,1fr));
+    gap:8px;
+  }
+
+  button.fch{
+    border-radius:10px;
+  }
+
+  .staff-grid{
+    grid-template-columns:
+      repeat(3,minmax(0,1fr));
+    gap:8px;
+  }
+
+  .staff-section + .staff-section{
+    margin-top:46px;
+  }
+}
+
+@media(max-width:420px){
+  .cats{
+    grid-template-columns:1fr;
+  }
+}
+
+@media(max-width:380px){
+  .staff-grid{
+    grid-template-columns:
+      repeat(2,minmax(0,1fr));
+  }
+}
+.lock{position:fixed;right:16px;bottom:16px;z-index:60;display:flex;align-items:center;gap:8px;padding:10px 16px;border-radius:999px;color:#0a0f1e;background:var(--ye);box-shadow:0 6px 20px rgba(8,18,53,.45);font-weight:700;transition:transform .2s}
+.lock:hover{transform:translateY(-2px)}
+.lock:focus-visible{outline:3px solid #fff;outline-offset:3px}
+</style>
+</head>
+<body>
+
+<div id="bg" aria-hidden="true"></div>
+
+<!-- =========================================================
+     CABECERA / MENÚ
+     ========================================================= -->
+<header id="hd">
+  <div class="wrap">
+    <nav>
+
+      <a href="#" class="logo">
+        <img
+          class="lg"
+          src="./Images/escudo.png"
+          alt="Escudo Torrejón Juncal">
+        Torrejón <b>Juncal</b>
+      </a>
+
+      <button
+        id="burger"
+        type="button"
+        aria-label="Menú"
+        aria-controls="menu"
+        aria-expanded="false">
+        ☰
+      </button>
+
+      <div class="menu" id="menu">
+
+        <a href="#escuela">
+          La escuela
+        </a>
+
+        <a href="#equipos">
+          Categorías
+        </a>
+
+        <a href="#partidos">
+          Partidos
+        </a>
+
+        <a href="#tecnico">
+          Club
+        </a>
+
+        <a href="#donde">
+          Dónde jugamos
+        </a>
+
+        <a href="#contacto">
+          Contacto
+        </a>
+
+        <a
+          class="ig"
+          href="https://www.instagram.com/torrejonjuncal/"
+          target="_blank"
+          rel="noopener"
+          aria-label="Instagram de Torrejón Juncal"
+          title="Instagram">
+
+          <svg
+            viewBox="0 0 24 24"
+            width="22"
+            height="22"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true">
+
+            <rect
+              x="3"
+              y="3"
+              width="18"
+              height="18"
+              rx="5">
+            </rect>
+
+            <circle
+              cx="12"
+              cy="12"
+              r="4">
+            </circle>
+
+            <circle
+              cx="17.5"
+              cy="6.5"
+              r="1"
+              fill="currentColor"
+              stroke="none">
+            </circle>
+
+          </svg>
+
+          <span>Instagram</span>
+        </a>
+
+      </div>
+
+    </nav>
+  </div>
+</header>
+
+
+<!-- =========================================================
+     INICIO
+     ========================================================= -->
+
+<main id="home">
+
+
+  <!-- =======================================================
+       LA ESCUELA
+       ======================================================= -->
+
+  <section id="escuela">
+
+    <div class="hero" id="heroBox">
+
+      <div class="wrap">
+
+        <div class="two">
+
+
+          <!-- TEXTO ESCUELA -->
+          <div class="rv">
+
+            <h2>
+              La <span>escuela</span>
+            </h2>
+
+            <p
+              class="sub"
+              style="margin:0 0 22px"
+              id="escuelaTxt">
+            </p>
+
+
+            <!-- DATOS Y CARACTERÍSTICAS -->
+            <div class="pil">
+
+
+              <!-- PASIÓN POR EL JUEGO -->
+              <div class="card pas">
+
+                <i>
+                  <svg
+                    viewBox="0 0 24 24"
+                    width="24"
+                    height="24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    aria-hidden="true">
+
+                    <path d="M13 2 4 14h7l-1 8 9-12h-7z"></path>
+
+                  </svg>
+                </i>
+
+                <div>
+
+                  <h3>
+                    Pasión por el juego
+                  </h3>
+
+                  <div
+                    class="cnt"
+                    id="stats">
+
+                    <span>
+                      <b data-n="10">0</b>
+                      equipos
+                    </span>
+
+                    <span>
+                      <b data-n="120">0</b>
+                      jugadores
+                    </span>
+
+                    <span>
+                      <b data-n="10">0</b>
+                      entrenadores
+                    </span>
+
+                  </div>
+
+                </div>
+
+              </div>
+
+
+              <!-- FORMAMOS PERSONAS -->
+              <div class="card">
+
+                <i>
+                  <svg
+                    viewBox="0 0 24 24"
+                    width="24"
+                    height="24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    aria-hidden="true">
+
+                    <circle
+                      cx="12"
+                      cy="8"
+                      r="4">
+                    </circle>
+
+                    <path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8"></path>
+
+                  </svg>
+                </i>
+
+                <div>
+
+                  <h3>
+                    Formamos personas
+                  </h3>
+
+                  <p>
+                    Compañerismo, esfuerzo y respeto dentro y fuera de la pista.
+                  </p>
+
+                </div>
+
+              </div>
+
+
+              <!-- COMPETIMOS -->
+              <div class="card">
+
+                <i>
+                  <svg
+                    viewBox="0 0 24 24"
+                    width="24"
+                    height="24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    aria-hidden="true">
+
+                    <path d="M8 21h8M12 17v4M7 4h10v5a5 5 0 0 1-10 0z"></path>
+                    <path d="M17 5h3v2a3 3 0 0 1-3 3M7 5H4v2a3 3 0 0 0 3 3"></path>
+
+                  </svg>
+                </i>
+
+                <div>
+
+                  <h3>
+                    Competimos juntos
+                  </h3>
+
+                  <p>
+                    Ligas federadas desde Alevín hasta Aficionado.
+                  </p>
+
+                </div>
+
+              </div>
+
+
+              <!-- FAMILIA -->
+              <div class="card">
+
+                <i>
+                  <svg
+                    viewBox="0 0 24 24"
+                    width="24"
+                    height="24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    aria-hidden="true">
+
+                    <path d="M12 21s-7-4.5-9-9.2C1.8 8.2 4 5 7.2 5c2 0 3.4 1 4.8 2.8C13.4 6 14.8 5 16.8 5 20 5 22.2 8.2 21 11.8 19 16.5 12 21 12 21z"></path>
+
+                  </svg>
+                </i>
+
+                <div>
+
+                  <h3>
+                    Una gran familia
+                  </h3>
+
+                  <p>
+                    Entrenadores formados y un ambiente en el que todos suman.
+                  </p>
+
+                </div>
+
+              </div>
+
+            </div>
+
+
+            <p style="margin-top:22px">
+
+              <a
+                class="btn"
+                href="#equipos">
+                Conoce nuestros equipos
+              </a>
+
+            </p>
+
+          </div>
+
+
+          <!-- IMAGEN EQUIPACIONES -->
+          <div
+            class="kit sq rv"
+            id="kit">
+
+            <img
+              src="Images/escuela-equipaciones.jpg"
+              alt="Equipaciones del Torrejón Juncal, temporada 26/27">
+
+          </div>
+
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- =======================================================
+       CATEGORÍAS
+       ======================================================= -->
+
+  <section
+    id="equipos"
+    class="alt">
+
+    <div class="wrap">
+
+      <h2 class="rv">
+        Nuestras <span>categorías</span>
+      </h2>
+
+      <p class="sub rv">
+        Pulsa en tu categoría para ver resultados, clasificaciones y calendario.
+      </p>
+
+      <div
+        class="grid cats"
+        id="catHome">
+      </div>
+
+      <p style="margin-top:28px">
+
+        <button
+          class="btn"
+          id="moreCats"
+          type="button"
+          aria-expanded="false"
+          aria-controls="catHome">
+          Más categorías ↓
+        </button>
+
+      </p>
+
+    </div>
+
+  </section>
+
+
+  <!-- =======================================================
+       PRÓXIMOS PARTIDOS
+       ======================================================= -->
+
+  <section id="partidos">
+
+    <div class="wrap">
+
+      <h2 class="rv">
+        Próximos <span>partidos</span>
+      </h2>
+
+      <p class="sub rv">
+        El siguiente partido de cada categoría, con día, hora y pabellón.
+        Se actualiza solo con los datos de la Federación.
+      </p>
+
+      <div
+        class="grid"
+        id="matches">
+      </div>
+
+      <p style="margin-top:22px">
+
+        <button
+          class="btn"
+          id="moreMatches"
+          type="button"
+          aria-expanded="false"
+          aria-controls="matches">
+          Todos los partidos ↓
+        </button>
+
+      </p>
+
+    </div>
+
+  </section>
+
+
+  <!-- =======================================================
+       DIRECTIVA Y ENTRENADORES JUNCAL
+       ======================================================= -->
+
+  <section id="tecnico">
+
+    <div class="wrap">
+
+
+      <!-- ===================================================
+           1. DIRECTIVA JUNCAL
+           =================================================== -->
+
+      <div class="staff-section">
+
+        <h2 class="rv">
+          Directiva <span>Juncal</span>
+        </h2>
+
+        <p class="sub rv">
+          Las personas responsables de la dirección y el crecimiento de nuestro club.
+        </p>
+
+
+        <!--
+          Las fichas de la directiva se generan desde JavaScript
+          utilizando CONFIG.DIRECTIVA.
+        -->
+        <div
+          class="staff-grid"
+          id="directivaStaff"
+          aria-label="Directiva Juncal">
+        </div>
+
+
+        <p class="staff-more">
+
+          <button
+            class="btn"
+            id="moreDirectiva"
+            type="button"
+            aria-expanded="false"
+            aria-controls="directivaStaff">
+            Toda nuestra directiva ↓
+          </button>
+
+        </p>
+
+      </div>
+
+
+      <!-- ===================================================
+           2. ENTRENADORES JUNCAL
+           =================================================== -->
+
+      <div class="staff-section">
+
+        <h2 class="staff-title rv">
+          Entrenadores <span>Juncal</span>
+        </h2>
+
+        <p class="sub rv">
+          El equipo técnico encargado de formar, acompañar y hacer crecer a nuestros jugadores.
+        </p>
+
+
+        <!--
+          Las fichas de entrenadores se generan desde JavaScript
+          utilizando CONFIG.ENTRENADORES.
+        -->
+        <div
+          class="staff-grid"
+          id="entrenadoresStaff"
+          aria-label="Entrenadores Juncal">
+        </div>
+
+
+        <p class="staff-more">
+
+          <button
+            class="btn"
+            id="moreEntrenadores"
+            type="button"
+            aria-expanded="false"
+            aria-controls="entrenadoresStaff">
+            Todos nuestros entrenadores ↓
+          </button>
+
+        </p>
+
+      </div>
+
+
+    </div>
+
+  </section>
+
+
+  <!-- =======================================================
+       DÓNDE JUGAMOS
+       ======================================================= -->
+
+  <section id="donde">
+
+    <div class="wrap">
+
+      <h2 class="rv">
+        Dónde <span>jugamos</span>
+      </h2>
+
+      <p class="sub rv">
+        Pabellón Nuria Fernández, nuestra casa. Ven a animar al equipo.
+      </p>
+
+      <img
+        class="nuria rv"
+        src="Images/Nuria.jpg"
+        alt="Pabellón Nuria Fernández">
+
+
+      <div class="info">
+
+        <a
+          class="btn"
+          id="mapsBtn"
+          href="#"
+          target="_blank"
+          rel="noopener">
+          📍 Abrir en Google Maps
+        </a>
+
+        <span>
+          Pabellón Nuria Fernández
+        </span>
+
+      </div>
+
+
+      <iframe
+        id="mapFrame"
+        loading="lazy"
+        title="Mapa del pabellón">
+      </iframe>
+
+    </div>
+
+  </section>
+
+
+  <!-- =======================================================
+       CONTACTO
+       ======================================================= -->
+
+  <section id="contacto">
+
+    <div class="wrap">
+
+      <h2 class="rv">
+        Contacta con <span>nosotros</span>
+      </h2>
+
+      <p class="sub rv">
+        ¿Quieres apuntarte, resolver una duda o colaborar con el club?
+        Escríbenos y te respondemos lo antes posible.
+      </p>
+
+      <div class="info">
+
+        <a
+          class="btn"
+          href="mailto:emtjfs@gmail.com?subject=Contacto%20desde%20la%20web">
+          ✉️ Escríbenos un email
+        </a>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+</main>
+
+
+<!-- =========================================================
+     PÁGINA DE CATEGORÍAS
+     ========================================================= -->
+
+<main id="cats">
+
+  <div class="wrap">
+
+    <div class="pgb"></div>
+
+
+    <p>
+      <a
+        href="#"
+        class="back">
+        ← Volver al inicio
+      </a>
+    </p>
+
+    <br>
+
+
+    <h2>
+      Nuestras <span>categorías</span>
+    </h2>
+
+
+    <p class="sub">
+      Pulsa sobre tu categoría para ver resultados, clasificaciones y calendario.
+    </p>
+
+
+    <div
+      class="grid"
+      id="catGrid">
+    </div>
+
+  </div>
+
+</main>
+
+
+<!-- =========================================================
+     PIE DE PÁGINA
+     ========================================================= -->
+
+<footer>
+
+  <div class="wrap">
+
+    <img
+      class="fl"
+      src="./Images/escudo.png"
+      alt="Escudo Torrejón Juncal">
+
+    <br>
+
+    © <span id="yr"></span>
+    Torrejón Juncal · Fútbol Sala ·
+
+    <a
+      href="https://www.instagram.com/torrejonjuncal/"
+      target="_blank"
+      rel="noopener">
+      @torrejonjuncal
+    </a>
+
+  </div>
+
+</footer>
+<a class="lock" href="entrenadores.html" data-acceso aria-label="Acceso entrenadores y jugadores">
+  <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="11" width="16" height="10" rx="2"></rect><path d="M8 11V7a4 4 0 0 1 8 0v4"></path></svg>
+  Login
+</a>
+<script>
+/* =====================================================================
+   CONFIGURACIÓN — EDITA PRINCIPALMENTE ESTA PARTE
+   ===================================================================== */
+
+const CONFIG = {
+
+  MAPS_URL:
+    "https://www.google.com/maps/search/?api=1&query=Pabell%C3%B3n+Nuria+Fern%C3%A1ndez",
+
+  MAP_EMBED:
+    "https://www.google.com/maps?q=Pabell%C3%B3n+Nuria+Fern%C3%A1ndez&output=embed",
+
+  HERO_IMG: "",
+
+  ESCUELA_TXT:
+    "Formamos jugadores y personas. Entrenamos, competimos y disfrutamos juntos desde los más pequeños hasta el primer equipo.",
+
+
+  /* =========================================================
+     PRÓXIMOS PARTIDOS
+     ========================================================= */
+
+  FB_URL:
+    "https://juncal-f0b64-default-rtdb.europe-west1.firebasedatabase.app",
+
+  SEASON: "2026/27",
+
+
+  /* =========================================================
+     DIRECTIVA JUNCAL
+     ========================================================= */
+
+  DIRECTIVA_VISIBLE: 5,
+
+  DIRECTIVA: [
+
+    {
+      name:"",
+      role:"",
+      img:"./Images/Entrenadores/AntonioPresi.png"
+    },
+
+    {
+      name:"",
+      role:"",
+      img:"./Images/Entrenadores/JaviDirector.png"
+    },
+
+    {
+      name:"",
+      role:"",
+      img:"./Images/Entrenadores/JoseVocal.png"
+    }
+
+    /*
+    PARA AÑADIR OTRO MIEMBRO:
+
+    ,{
+      name:"",
+      role:"",
+      img:"./Images/Entrenadores/NuevaPersona.png"
+    }
+
+    Si la imagen YA incluye nombre y cargo,
+    deja name y role vacíos.
+    */
+
+  ],
+
+
+  /* =========================================================
+     ENTRENADORES JUNCAL
+     ========================================================= */
+
+  ENTRENADORES_VISIBLE: 5,
+
+  ENTRENADORES: [
+{
+      name:"",
+      role:"",
+      img:"./Images/Entrenadores/Javier2.png"
+    },
+    {
+      name:"",
+      role:"",
+      img:"./Images/Entrenadores/Alberto.png"
+    },
+    
+    {
+      name:"",
+      role:"",
+      img:"./Images/Entrenadores/Carlos.png"
+    },
+
+    {
+      name:"",
+      role:"",
+      img:"./Images/Entrenadores/Dani.png"
+    },
+
+    {
+      name:"",
+      role:"",
+      img:"./Images/Entrenadores/Ivan.png"
+    },
+
+        {
+      name:"",
+      role:"",
+      img:"./Images/Entrenadores/JoseEntrenador.png"
+    }
+
+    /*
+    PARA AÑADIR OTRO ENTRENADOR:
+
+    ,{
+      name:"",
+      role:"",
+      img:"./Images/Entrenadores/NuevoEntrenador.png"
+    }
+    */
+
+  ],
+
+
+  /* =========================================================
+     CATEGORÍAS
+     ========================================================= */
+
+  CATEGORIES: [
+
+    {
+      name:"Aficionado A",
+      age:"Preferente Aficionado",
+      url:"Categorias/AficionadoA.html",
+      img:""
+    },
+
+    {
+      name:"Aficionado B",
+      age:"Primera Aficionado",
+      url:"Categorias/AficionadoB.html",
+      img:""
+    },
+
+    {
+      name:"Juvenil A",
+      age:"Preferente Juvenil",
+      url:"Categorias/JuvenilA.html",
+      img:""
+    },
+
+    {
+      name:"Juvenil B",
+      age:"Primera Juvenil",
+      url:"Categorias/JuvenilB.html",
+      img:""
+    },
+
+    {
+      name:"Cadete A",
+      age:"Primera Cadete",
+      url:"Categorias/CadeteA.html",
+      img:""
+    },
+
+    {
+      name:"Cadete B",
+      age:"Primera Cadete",
+      url:"Categorias/CadeteB.html",
+      img:""
+    },
+
+    {
+      name:"Infantil A",
+      age:"Preferente Infantil",
+      url:"Categorias/InfantilA.html",
+      img:""
+    },
+
+    {
+      name:"Infantil B",
+      age:"Primera Infantil",
+      url:"Categorias/InfantilB.html",
+      img:""
+    },
+
+    {
+      name:"Alevín A",
+      age:"Alevín",
+      url:"Categorias/AlevinA.html",
+      img:""
+    },
+
+    {
+      name:"Alevín B",
+      age:"Alevín",
+      url:"Categorias/AlevinB.html",
+      img:""
+    }
+
+  ]
+
+};
+
+
+/* =====================================================================
+   FUNCIONES GENERALES
+   ===================================================================== */
+
+const $ = selector =>
+  document.querySelector(selector);
+
+
+const bg = url =>
+  url
+    ? `style="background-image:url('${url}')"`
+    : "";
+
+
+const esc = text =>
+  String(text || "").replace(
+    /[&<>"]/g,
+    character => ({
+      "&":"&amp;",
+      "<":"&lt;",
+      ">":"&gt;",
+      '"':"&quot;"
+    }[character])
+  );
+
+
+/* =====================================================================
+   CONFIGURACIÓN BÁSICA
+   ===================================================================== */
+
+$("#yr").textContent =
+  new Date().getFullYear();
+
+
+$("#mapsBtn").href =
+  CONFIG.MAPS_URL;
+
+
+$("#mapFrame").src =
+  CONFIG.MAP_EMBED;
+
+
+$("#escuelaTxt").textContent =
+  CONFIG.ESCUELA_TXT;
+
+
+if(CONFIG.HERO_IMG){
+
+  $("#heroBox").style.setProperty(
+    "--hero",
+    `url('${CONFIG.HERO_IMG}')`
+  );
+
+}
+
+
+$("#heroBox").className = "hero";
+
+
+/* =====================================================================
+   CABECERA Y MENÚ MÓVIL
+   ===================================================================== */
+
+addEventListener(
+  "scroll",
+  () => {
+
+    $("#hd").classList.toggle(
+      "s",
+      scrollY > 30
+    );
+
+  }
+);
+
+
+$("#burger").onclick = () => {
+
+  const menu = $("#menu");
+
+  menu.classList.toggle("o");
+
+  $("#burger").setAttribute(
+    "aria-expanded",
+    menu.classList.contains("o")
+      ? "true"
+      : "false"
+  );
+
+};
+
+
+$("#menu").onclick = () => {
+
+  $("#menu").classList.remove("o");
+
+  $("#burger").setAttribute(
+    "aria-expanded",
+    "false"
+  );
+
+};
+
+
+/* =====================================================================
+   DIRECTIVA Y ENTRENADORES
+   ===================================================================== */
+
+
+/*
+ * Genera cada tarjeta.
+ *
+ * Si name y role están vacíos se considera que
+ * esos textos ya están incluidos dentro de la imagen.
+ */
+
+const stfCard = (persona,index,seccion) => {
+
+  const fullImage =
+    persona.img &&
+    !persona.name &&
+    !persona.role;
+
+
+  const nombreAccesible =
+    persona.name ||
+    (
+      seccion === "directiva"
+        ? "Miembro de la Directiva Juncal"
+        : "Entrenador del Torrejón Juncal"
+    );
+
+
+  const cargoAccesible =
+    persona.role ||
+    (
+      seccion === "directiva"
+        ? "Directiva Juncal"
+        : "Entrenadores Juncal"
+    );
+
+
+  return `
+    <button
+      type="button"
+      class="card stf${fullImage ? " full" : ""}"
+      data-i="${index}"
+      data-section="${seccion}"
+      aria-label="${esc(nombreAccesible)}, ${esc(cargoAccesible)}: ver ampliado">
+
+      ${
+        fullImage
+          ? `
+            <img
+              src="${esc(persona.img)}"
+              alt="${esc(nombreAccesible)}">
+          `
+          : `
+            <div
+              class="ph"
+              ${bg(persona.img)}
+              role="img"
+              aria-label="${esc(nombreAccesible)}">
+
+              ${persona.img ? "" : "Foto"}
+
+            </div>
+          `
+      }
+
+      <div class="cb">
+
+        <h3>
+          ${esc(persona.name)}
+        </h3>
+
+        <p>
+          ${esc(persona.role)}
+        </p>
+
+      </div>
+
+    </button>
+  `;
+
+};
+/* =========================================================
+   INSERTAR DIRECTIVA
+   ========================================================= */
+
+$("#directivaStaff").innerHTML =
+  CONFIG.DIRECTIVA
+    .map(
+      (persona,index) =>
+        stfCard(
+          persona,
+          index,
+          "directiva"
+        )
+    )
+    .join("");
+
+
+/* =========================================================
+   INSERTAR ENTRENADORES
+   ========================================================= */
+
+$("#entrenadoresStaff").innerHTML =
+  CONFIG.ENTRENADORES
+    .map(
+      (persona,index) =>
+        stfCard(
+          persona,
+          index,
+          "entrenadores"
+        )
+    )
+    .join("");
+
+
+/* =========================================================
+   ESTADO DE LOS DOS APARTADOS
+   ========================================================= */
+
+let directivaOpen = false;
+let entrenadoresOpen = false;
+
+
+/* =========================================================
+   MOSTRAR / OCULTAR FICHAS
+   ========================================================= */
+
+function updateStaffSection({
+  gridSelector,
+  buttonSelector,
+  visible,
+  open,
+  openText,
+  closedText
+}){
+
+  const grid =
+    $(gridSelector);
+
+  const button =
+    $(buttonSelector);
+
+
+  if(!grid || !button){
+    return;
+  }
+
+
+  const cards =
+    [...grid.children];
+
+
+  cards.forEach(
+    (card,index) => {
+
+      card.classList.toggle(
+        "x",
+        !open && index >= visible
+      );
+
+    }
+  );
+
+
+  button.style.display =
+    cards.length > visible
+      ? ""
+      : "none";
+
+
+  button.textContent =
+    open
+      ? openText
+      : closedText;
+
+
+  button.setAttribute(
+    "aria-expanded",
+    String(open)
+  );
+
+}
+
+
+/* =========================================================
+   ACTUALIZAR LOS DOS GRUPOS
+   ========================================================= */
+
+function updateAllStaff(){
+
+  updateStaffSection({
+
+    gridSelector:
+      "#directivaStaff",
+
+    buttonSelector:
+      "#moreDirectiva",
+
+    visible:
+      CONFIG.DIRECTIVA_VISIBLE,
+
+    open:
+      directivaOpen,
+
+    openText:
+      "Ver menos ↑",
+
+    closedText:
+      "Toda nuestra directiva ↓"
+
+  });
+
+
+  updateStaffSection({
+
+    gridSelector:
+      "#entrenadoresStaff",
+
+    buttonSelector:
+      "#moreEntrenadores",
+
+    visible:
+      CONFIG.ENTRENADORES_VISIBLE,
+
+    open:
+      entrenadoresOpen,
+
+    openText:
+      "Ver menos ↑",
+
+    closedText:
+      "Todos nuestros entrenadores ↓"
+
+  });
+
+}
+
+
+/* =========================================================
+   BOTÓN DIRECTIVA
+   ========================================================= */
+
+$("#moreDirectiva").onclick = () => {
+
+  directivaOpen =
+    !directivaOpen;
+
+  updateAllStaff();
+
+};
+
+
+/* =========================================================
+   BOTÓN ENTRENADORES
+   ========================================================= */
+
+$("#moreEntrenadores").onclick = () => {
+
+  entrenadoresOpen =
+    !entrenadoresOpen;
+
+  updateAllStaff();
+
+};
+
+
+addEventListener(
+  "resize",
+  updateAllStaff
+);
+
+
+updateAllStaff();
+
+
+/* =====================================================================
+   AMPLIACIÓN DE FOTOGRAFÍAS
+   ===================================================================== */
+
+function closeStaff(){
+
+  const overlay =
+    $("#stfOv");
+
+
+  if(overlay){
+    overlay.remove();
+  }
+
+
+  document.body.style.overflow =
+    "";
+
+}
+
+
+/* =========================================================
+   OBTENER PERSONA
+   ========================================================= */
+
+function getStaffMember(
+  seccion,
+  index
+){
+
+  if(seccion === "directiva"){
+
+    return CONFIG.DIRECTIVA[index];
+
+  }
+
+
+  if(seccion === "entrenadores"){
+
+    return CONFIG.ENTRENADORES[index];
+
+  }
+
+
+  return null;
+
+}
+
+
+/* =========================================================
+   ABRIR FOTOGRAFÍA
+   ========================================================= */
+
+function openStaff(
+  seccion,
+  index
+){
+
+  const persona =
+    getStaffMember(
+      seccion,
+      index
+    );
+
+
+  if(!persona){
+    return;
+  }
+
+
+  closeStaff();
+
+
+  const nombrePredeterminado =
+    seccion === "directiva"
+      ? "Directiva Juncal"
+      : "Entrenadores Juncal";
+
+
+  const nombreDialogo =
+    persona.name ||
+    nombrePredeterminado;
+
+
+  const mostrarInformacion =
+    persona.name ||
+    persona.role;
+
+
+  const overlay =
+    document.createElement("div");
+
+
+  overlay.id =
+    "stfOv";
+
+
+  overlay.setAttribute(
+    "role",
+    "dialog"
+  );
+
+
+  overlay.setAttribute(
+    "aria-modal",
+    "true"
+  );
+
+
+  overlay.setAttribute(
+    "aria-label",
+    nombreDialogo
+  );
+
+
+  overlay.innerHTML = `
+
+    <div class="stfm">
+
+      <button
+        class="x"
+        type="button"
+        aria-label="Cerrar">
+        ×
+      </button>
+
+      ${
+        persona.img
+          ? `
+            <img
+              src="${esc(persona.img)}"
+              alt="${esc(nombreDialogo)}">
+          `
+          : `
+            <div class="nofoto">
+              Foto
+            </div>
+          `
+      }
+
+      ${
+        mostrarInformacion
+          ? `
+            <h3>
+              ${esc(persona.name)}
+            </h3>
+
+            <p>
+              ${esc(persona.role)}
+            </p>
+          `
+          : ""
+      }
+
+    </div>
+
+  `;
+
+
+  overlay.onclick = event => {
+
+    if(
+      event.target === overlay ||
+      event.target.classList.contains("x")
+    ){
+
+      closeStaff();
+
+    }
+
+  };
+
+
+  document.body.appendChild(
+    overlay
+  );
+
+
+  document.body.style.overflow =
+    "hidden";
+
+
+  overlay
+    .querySelector(".x")
+    .focus();
+
+}
+
+
+/* =========================================================
+   CLIC EN FICHAS
+   ========================================================= */
+
+function staffGridClick(event){
+
+  const card =
+    event.target.closest(".stf");
+
+
+  if(!card){
+    return;
+  }
+
+
+  openStaff(
+    card.dataset.section,
+    Number(card.dataset.i)
+  );
+
+}
+
+
+$("#directivaStaff")
+  .addEventListener(
+    "click",
+    staffGridClick
+  );
+
+
+$("#entrenadoresStaff")
+  .addEventListener(
+    "click",
+    staffGridClick
+  );
+
+
+/* =====================================================================
+   PRÓXIMOS PARTIDOS
+   ===================================================================== */
+
+const DIAS = [
+  "Domingo",
+  "Lunes",
+  "Martes",
+  "Miércoles",
+  "Jueves",
+  "Viernes",
+  "Sábado"
+];
+
+
+const MESES = [
+  "Enero",
+  "Febrero",
+  "Marzo",
+  "Abril",
+  "Mayo",
+  "Junio",
+  "Julio",
+  "Agosto",
+  "Septiembre",
+  "Octubre",
+  "Noviembre",
+  "Diciembre"
+];
+
+
+let MATCHES = [];
+let matchesOpen = false;
+
+
+/* =========================================================
+   INICIALES DE EQUIPO
+   ========================================================= */
+
+const iniciales = nombre =>
+
+  String(nombre || "")
+
+    .split(/\s+/)
+
+    .filter(
+      palabra =>
+        palabra.length > 1 &&
+        /^[A-Za-zÁÉÍÓÚÜÑáéíóúüñ]/.test(
+          palabra
+        )
+    )
+
+    .map(
+      palabra =>
+        palabra[0]
+    )
+
+    .join("")
+
+    .slice(0,2)
+
+    .toUpperCase();
+
+
+/* =========================================================
+   ESCUDO DE EQUIPO
+   ========================================================= */
+
+const escudoEq = (
+  nombre,
+  codigo,
+  mio
+) => {
+
+  const src =
+    mio
+      ? "./Images/escudo.png"
+      : codigo
+        ? `Escudos/${encodeURIComponent(codigo)}.png`
+        : "";
+
+
+  return `
+
+    <i>
+      ${esc(iniciales(nombre))}
+    </i>
+
+    ${
+      src
+        ? `
+          <img
+            src="${src}"
+            alt=""
+            onerror="this.remove()">
+        `
+        : ""
+    }
+
+  `;
+
+};
+
+
+/* =========================================================
+   CREAR CARTEL DE PARTIDO
+   ========================================================= */
+
+function cartel(partido){
+
+  const fechaObjeto =
+    new Date(
+      partido.fecha + "T12:00"
+    );
+
+
+  const dia =
+    DIAS[
+      fechaObjeto.getDay()
+    ];
+
+
+  const fecha =
+    `${String(fechaObjeto.getDate()).padStart(2,"0")} ` +
+    `${MESES[fechaObjeto.getMonth()]} ` +
+    `${fechaObjeto.getFullYear()}`;
+
+
+  const categoria =
+    String(
+      partido.categoria || ""
+    ).toUpperCase();
+
+
+  const liga =
+    String(
+      partido.liga || ""
+    ).toUpperCase();
+
+
+  const local =
+    String(
+      partido.local || ""
+    );
+
+
+  const visitante =
+    String(
+      partido.visitante || ""
+    );
+
+
+  const hora =
+    partido.hora ||
+    "Por confirmar";
+
+
+  const lugar =
+    partido.campo ||
+    "Pabellón por confirmar";
+
+
+  const descripcion =
+    `${partido.categoria}, ` +
+    `${dia} ${fecha}: ` +
+    `${local} contra ${visitante}, ` +
+    `${hora}, ${lugar}`;
+
+
+  return `
+
+    <div
+      class="cartel"
+      role="img"
+      aria-label="${esc(descripcion)}">
+
+
+      <div
+        class="c-t"
+        style="--n:${Math.max(categoria.length,1)}">
+
+        ${esc(categoria)}
+
+      </div>
+
+
+      <div
+        class="c-l"
+        style="--m:${Math.max(liga.length,1)}">
+
+        ${esc(liga)}
+
+      </div>
+
+
+      <span class="eq eq1">
+
+        ${escudoEq(
+          local,
+          partido.codLocal,
+          partido.casa
+        )}
+
+      </span>
+
+
+      <span class="eq eq2">
+
+        ${escudoEq(
+          visitante,
+          partido.codVisitante,
+          !partido.casa
+        )}
+
+      </span>
+
+
+      <div
+        class="nm nm1"
+        style="--k:${Math.max(local.length,1)}">
+
+        ${esc(local)}
+
+      </div>
+
+
+      <div
+        class="nm nm2"
+        style="--k:${Math.max(visitante.length,1)}">
+
+        ${esc(visitante)}
+
+      </div>
+
+
+      <div class="dia">
+        ${dia}
+      </div>
+
+
+      <div class="fec">
+        ${fecha}
+      </div>
+
+
+      <div
+        class="hor${partido.hora ? "" : " s"}">
+
+        ${esc(hora)}
+
+      </div>
+
+
+      <div class="lug">
+        ${esc(lugar)}
+      </div>
+
+
+      <div class="cf">
+
+        ${
+          partido.casa
+            ? "Casa"
+            : "Fuera"
+        }
+
+      </div>
+
+
+      <div class="jor">
+
+        Jornada
+        ${esc(String(partido.jornada))}
+
+        •
+
+        Temporada
+        ${esc(partido.temporada || CONFIG.SEASON)}
+
+      </div>
+
+    </div>
+
+  `;
+
+}
+
+
+/* =========================================================
+   PINTAR PARTIDOS
+   ========================================================= */
+
+function renderMatches(){
+
+  const grid =
+    $("#matches");
+
+
+  const button =
+    $("#moreMatches");
+
+
+  if(!MATCHES.length){
+
+    grid.innerHTML = `
+
+      <p
+        class="sub"
+        style="grid-column:1/-1;margin:0">
+
+        Los próximos partidos aparecerán aquí
+        en cuanto se publiquen las jornadas.
+
+      </p>
+
+    `;
+
+
+    button.style.display =
+      "none";
+
+
+    return;
+
+  }
+
+
+  grid.innerHTML =
+
+    MATCHES
+
+      .map(
+        (partido,index) => `
+
+          <button
+            type="button"
+            class="fch"
+            data-i="${index}"
+            aria-label="${esc(partido.categoria)}: ver la ficha ampliada">
+
+            ${cartel(partido)}
+
+          </button>
+
+        `
+      )
+
+      .join("");
+
+
+  updateMatches();
+
+}
+
+
+/* =========================================================
+   MOSTRAR PARTIDOS
+   ========================================================= */
+
+function updateMatches(){
+
+  const grid =
+    $("#matches");
+
+
+  const cards =
+    [
+      ...grid.querySelectorAll(".fch")
+    ];
+
+
+  const columnas =
+    getComputedStyle(grid)
+      .gridTemplateColumns
+      .split(" ")
+      .length;
+
+
+  const button =
+    $("#moreMatches");
+
+
+  cards.forEach(
+    (card,index) => {
+
+      card.classList.toggle(
+        "mx",
+        !matchesOpen &&
+        index >= columnas
+      );
+
+    }
+  );
+
+
+  button.style.display =
+    cards.length > columnas
+      ? ""
+      : "none";
+
+
+  button.textContent =
+    matchesOpen
+      ? "Ver menos ↑"
+      : "Todos los partidos ↓";
+
+
+  button.setAttribute(
+    "aria-expanded",
+    String(matchesOpen)
+  );
+
+}
+
+
+$("#moreMatches").onclick = () => {
+
+  matchesOpen =
+    !matchesOpen;
+
+
+  updateMatches();
+
+};
+
+
+/* =========================================================
+   CERRAR PARTIDO AMPLIADO
+   ========================================================= */
+
+function closeMatch(){
+
+  const overlay =
+    $("#fOv");
+
+
+  if(overlay){
+    overlay.remove();
+  }
+
+
+  document.body.style.overflow =
+    "";
+
+}
+
+
+/* =========================================================
+   ABRIR PARTIDO AMPLIADO
+   ========================================================= */
+
+function openMatch(index){
+
+  const partido =
+    MATCHES[index];
+
+
+  if(!partido){
+    return;
+  }
+
+
+  closeMatch();
+
+
+  const overlay =
+    document.createElement("div");
+
+
+  overlay.id =
+    "fOv";
+
+
+  overlay.setAttribute(
+    "role",
+    "dialog"
+  );
+
+
+  overlay.setAttribute(
+    "aria-modal",
+    "true"
+  );
+
+
+  overlay.setAttribute(
+    "aria-label",
+    partido.categoria
+  );
+
+
+  overlay.innerHTML = `
+
+    <div class="fm">
+
+      <button
+        class="x"
+        type="button"
+        aria-label="Cerrar">
+        ×
+      </button>
+
+      ${cartel(partido)}
+
+    </div>
+
+  `;
+
+
+  overlay.onclick = event => {
+
+    if(
+      event.target === overlay ||
+      event.target.classList.contains("x")
+    ){
+
+      closeMatch();
+
+    }
+
+  };
+
+
+  document.body.appendChild(
+    overlay
+  );
+
+
+  document.body.style.overflow =
+    "hidden";
+
+
+  overlay
+    .querySelector(".x")
+    .focus();
+
+}
+
+
+$("#matches").addEventListener(
+  "click",
+  event => {
+
+    const card =
+      event.target.closest(".fch");
+
+
+    if(card){
+
+      openMatch(
+        Number(card.dataset.i)
+      );
+
+    }
+
+  }
+);
+
+
+/* =====================================================================
+   ORDEN DE LAS CATEGORÍAS
+   ===================================================================== */
+
+const nrm = texto =>
+
+  String(texto || "")
+
+    .normalize("NFD")
+
+    .replace(
+      /[\u0300-\u036f]/g,
+      ""
+    )
+
+    .toLowerCase()
+
+    .replace(
+      /[^a-z0-9]/g,
+      ""
+    );
+
+
+const ordCat = partido => {
+
+  const claves = [
+    nrm(partido.categoria),
+    nrm(partido.id)
+  ];
+
+
+  const index =
+    CONFIG.CATEGORIES.findIndex(
+      categoria =>
+        claves.includes(
+          nrm(categoria.name)
+        )
+    );
+
+
+  return index < 0
+    ? 999
+    : index;
+
+};
+
+
+/* =====================================================================
+   CARGAR PARTIDOS DESDE FIREBASE
+   ===================================================================== */
+
+async function loadMatches(){
+
+  let lista = [];
+
+
+  try{
+
+    const respuesta =
+      await fetch(
+        CONFIG.FB_URL + "/juncal.json",
+        {
+          cache:"no-store"
+        }
+      );
+
+
+    const raw =
+      await respuesta.json();
+
+
+    const datos =
+      typeof raw === "string"
+        ? JSON.parse(raw)
+        : (raw || {});
+
+
+    const proximos =
+      datos.px || {};
+
+
+    const ahora =
+      Date.now();
+
+
+    lista =
+      (proximos.partidos || [])
+
+        .filter(
+          partido =>
+            partido &&
+            partido.fecha &&
+            Date.parse(
+              partido.fecha +
+              "T" +
+              (partido.hora || "23:59")
+            ) +
+            3 * 36e5 >
+            ahora
+        )
+
+        .map(
+          partido => ({
+            ...partido,
+
+            temporada:
+              partido.temporada ||
+              proximos.temporada
+          })
+        )
+
+        .sort(
+          (a,b) =>
+
+            (
+              ordCat(a) -
+              ordCat(b)
+            )
+
+            ||
+
+            (
+              a.fecha +
+              (a.hora || "99:99")
+            ).localeCompare(
+
+              b.fecha +
+              (b.hora || "99:99")
+
+            )
+        );
+
+  }
+  catch(error){
+
+    /*
+     * Si falla temporalmente Firebase,
+     * se conservan los partidos que ya
+     * estaban cargados.
+     */
+
+    lista =
+      MATCHES;
+
+  }
+
+
+  const iguales =
+    JSON.stringify(lista) ===
+    JSON.stringify(MATCHES);
+
+
+  MATCHES =
+    lista;
+
+
+  if(
+    !iguales ||
+    !$("#matches").children.length
+  ){
+
+    renderMatches();
+
+  }
+
+}
+
+
+/*
+ * Recalcular cuántas fichas se enseñan
+ * al modificar el tamaño de la pantalla.
+ */
+
+addEventListener(
+  "resize",
+  () => {
+
+    if(
+      $("#matches").children.length &&
+      MATCHES.length
+    ){
+
+      updateMatches();
+
+    }
+
+  }
+);
+
+
+/*
+ * Primera carga.
+ */
+
+loadMatches();
+
+
+/*
+ * Actualización automática cada 5 minutos.
+ */
+
+setInterval(
+  loadMatches,
+  5 * 60 * 1000
+);
+
+
+/*
+ * Actualizar cuando el usuario vuelva
+ * a la pestaña del navegador.
+ */
+
+document.addEventListener(
+  "visibilitychange",
+  () => {
+
+    if(!document.hidden){
+      loadMatches();
+    }
+
+  }
+);
+
+
+/* =====================================================================
+   CATEGORÍAS
+   ===================================================================== */
+
+const catCard = categoria => {
+
+  const contenido = `
+
+    <span class="age">
+      ${esc(categoria.age)}
+    </span>
+
+    <h3>
+      ${esc(categoria.name)}
+    </h3>
+
+    <span class="go">
+      Partidos y clasificación
+    </span>
+
+  `;
+
+
+  return categoria.url
+
+    ? `
+
+      <a
+        class="card cat"
+        href="${esc(categoria.url)}">
+
+        ${contenido}
+
+      </a>
+
+    `
+
+    : `
+
+      <div class="card cat sin">
+
+        ${contenido}
+
+      </div>
+
+    `;
+
+};
+
+
+/* =========================================================
+   CATEGORÍAS DE LA PÁGINA PRINCIPAL
+   ========================================================= */
+
+$("#catHome").innerHTML =
+
+  CONFIG.CATEGORIES
+
+    .map(catCard)
+
+    .join("");
+
+
+/* =========================================================
+   CATEGORÍAS DE LA PÁGINA COMPLETA
+   ========================================================= */
+
+$("#catGrid").innerHTML =
+
+  CONFIG.CATEGORIES
+
+    .map(catCard)
+
+    .join("");
+
+
+let catsOpen = false;
+
+
+/* =========================================================
+   MOSTRAR / OCULTAR CATEGORÍAS
+   ========================================================= */
+
+function updateCats(){
+
+  const grid =
+    $("#catHome");
+
+
+  const columnas =
+    getComputedStyle(grid)
+      .gridTemplateColumns
+      .split(" ")
+      .length;
+
+
+  const cards =
+    [...grid.children];
+
+
+  cards.forEach(
+    (card,index) => {
+
+      card.classList.toggle(
+        "x",
+        !catsOpen &&
+        index >= columnas
+      );
+
+    }
+  );
+
+
+  const button =
+    $("#moreCats");
+
+
+  button.style.display =
+    cards.length > columnas
+      ? ""
+      : "none";
+
+
+  button.textContent =
+    catsOpen
+      ? "Ver menos ↑"
+      : "Más categorías ↓";
+
+
+  button.setAttribute(
+    "aria-expanded",
+    String(catsOpen)
+  );
+
+}
+
+
+$("#moreCats").onclick = () => {
+
+  catsOpen =
+    !catsOpen;
+
+
+  updateCats();
+
+};
+
+
+addEventListener(
+  "resize",
+  updateCats
+);
+
+
+updateCats();
+
+
+/* =====================================================================
+   RUTAS
+   #categorias muestra la página independiente
+   ===================================================================== */
+
+function route(){
+
+  const paginaCategorias =
+    location.hash === "#categorias";
+
+
+  document.body.classList.toggle(
+    "pg",
+    paginaCategorias
+  );
+
+
+  if(paginaCategorias){
+
+    scrollTo(
+      0,
+      0
+    );
+
+  }
+  else if(
+    location.hash.length > 1
+  ){
+
+    setTimeout(
+      () => {
+
+        const destino =
+          document.querySelector(
+            location.hash
+          );
+
+
+        if(destino){
+
+          destino.scrollIntoView();
+
+        }
+
+      },
+      30
+    );
+
+  }
+
+}
+
+
+addEventListener(
+  "hashchange",
+  route
+);
+
+
+route();
+
+
+/* =====================================================================
+   CONTADORES
+   ===================================================================== */
+
+const contar = elemento => {
+
+  const numero =
+    Number(elemento.dataset.n);
+
+
+  const inicio =
+    performance.now();
+
+
+  const duracion =
+    1800;
+
+
+  function animar(tiempo){
+
+    const progreso =
+      Math.min(
+        1,
+        (tiempo - inicio) /
+        duracion
+      );
+
+
+    const easing =
+      1 -
+      Math.pow(
+        1 - progreso,
+        3
+      );
+
+
+    elemento.textContent =
+      Math.round(
+        numero * easing
+      ) +
+      (
+        progreso === 1 &&
+        numero > 50
+          ? "+"
+          : ""
+      );
+
+
+    if(progreso < 1){
+
+      requestAnimationFrame(
+        animar
+      );
+
+    }
+
+  }
+
+
+  requestAnimationFrame(
+    animar
+  );
+
+};
+
+
+/* =====================================================================
+   ANIMACIONES DE APARICIÓN
+   ===================================================================== */
+
+const io =
+  new IntersectionObserver(
+
+    entradas =>
+      entradas.forEach(
+
+        entrada => {
+
+          if(!entrada.isIntersecting){
+            return;
+          }
+
+
+          entrada.target
+            .classList
+            .add("in");
+
+
+          io.unobserve(
+            entrada.target
+          );
+
+        }
+
+      ),
+
+    {
+      threshold:.15
+    }
+
+  );
+
+
+const observarReveal = () => {
+
+  document
+    .querySelectorAll(
+      ".rv:not(.in)"
+    )
+    .forEach(
+      elemento =>
+        io.observe(elemento)
+    );
+
+};
+
+
+observarReveal();
+
+
+/* =====================================================================
+   CONTADORES AL ENTRAR EN PANTALLA
+   ===================================================================== */
+
+const so =
+  new IntersectionObserver(
+
+    entradas =>
+      entradas.forEach(
+
+        entrada => {
+
+          if(!entrada.isIntersecting){
+            return;
+          }
+
+
+          entrada.target
+            .querySelectorAll(
+              "[data-n]"
+            )
+            .forEach(contar);
+
+
+          so.unobserve(
+            entrada.target
+          );
+
+        }
+
+      ),
+
+    {
+      threshold:.3
+    }
+
+  );
+
+
+document
+  .querySelectorAll("#stats")
+  .forEach(
+    elemento =>
+      so.observe(elemento)
+  );
+
+
+/* =====================================================================
+   TECLA ESCAPE
+   Cierra tanto fotografías como partidos ampliados.
+   ===================================================================== */
+
+addEventListener(
+  "keydown",
+  event => {
+
+    if(event.key !== "Escape"){
+      return;
+    }
+
+
+    if($("#stfOv")){
+      closeStaff();
+    }
+
+
+    if($("#fOv")){
+      closeMatch();
+    }
+
+  }
+);
+
+</script>
+
+<script src="scripts/acceso.js" defer></script>
+
+</body>
+</html>

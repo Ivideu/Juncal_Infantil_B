@@ -1,10 +1,14 @@
 /* ACCESO · Escuela Torrejón Juncal
-   Botón flotante abajo a la derecha (candado) con dos entradas: entrenadores y jugadores.
+   Botón de acceso (candado) con dos entradas: entrenadores y jugadores.
+   Si la página tiene un enlace con el atributo data-acceso, lo usa como botón; si no, crea uno flotante abajo a la derecha.
    Se pone UNA línea en la portada, justo antes de </body>:
-       <script src="acceso.js" defer></script>
+       <script src="scripts/acceso.js" defer></script>
 */
 (function () {
   "use strict";
+  // Las páginas de destino están en la raíz del sitio, esté este archivo donde esté la página que lo carga.
+  var BASE = "";
+  try { if (document.currentScript && document.currentScript.src) BASE = new URL("../", document.currentScript.src).href; } catch (e) {}
   var CATS = [["aficionado-a", "Aficionado A"], ["aficionado-b", "Aficionado B"], ["juvenil-a", "Juvenil A"], ["juvenil-b", "Juvenil B"], ["cadete-a", "Cadete A"], ["cadete-b", "Cadete B"], ["infantil-a", "Infantil A"], ["infantil-b", "Infantil B"], ["alevin-a", "Alevín A"], ["alevin-b", "Alevín B"]];
   var css = document.createElement("style");
   css.textContent =
@@ -28,9 +32,16 @@
     ".ac-b:hover{background:#ffe27a}";
   document.head.appendChild(css);
 
-  var fab = document.createElement("button");
-  fab.className = "ac-fab"; fab.type = "button"; fab.setAttribute("aria-haspopup", "dialog");
-  fab.innerHTML = "<span aria-hidden='true'>🔒</span> Acceso";
+  // Si la página ya trae su propio botón (<a data-acceso>), se usa ese; si no, se crea uno flotante.
+  var fab = document.querySelector("[data-acceso]");
+  var propio = !!fab;
+  if (!fab) {
+    fab = document.createElement("button");
+    fab.className = "ac-fab"; fab.type = "button";
+    fab.innerHTML = "<span aria-hidden='true'>🔒</span> Acceso";
+    document.body.appendChild(fab);
+  }
+  fab.setAttribute("aria-haspopup", "dialog");
 
   var ov = document.createElement("div");
   ov.className = "ac-ov"; ov.setAttribute("role", "dialog"); ov.setAttribute("aria-modal", "true"); ov.setAttribute("aria-label", "Acceso");
@@ -38,23 +49,22 @@
     "<div class='ac-box'>" +
     "<div class='ac-h'><b>🔒 Acceso</b><button class='ac-x' type='button' aria-label='Cerrar'>✕</button></div>" +
     "<div class='ac-g'>" +
-    "<div class='ac-c'><h3>🧑‍🏫 Entrenadores</h3><p>Pizarra táctica, jugadas, entrenos y convocatoria. Necesitas la contraseña de tu equipo.</p><a class='ac-b' href='entrenadores.html'>Entrar</a></div>" +
+    "<div class='ac-c'><h3>🧑‍🏫 Entrenadores</h3><p>Pizarra táctica, jugadas, entrenos y convocatoria. Necesitas la contraseña de tu equipo.</p><a class='ac-b' href='" + BASE + "entrenadores.html'>Entrar</a></div>" +
     "<div class='ac-c'><h3>⚽ Jugadores</h3><p>Mira las jugadas que ha preparado tu entrenador.</p>" +
     "<select aria-label='Tu categoría'>" + CATS.map(function (c) { return "<option value='" + c[0] + "'>" + c[1] + "</option>"; }).join("") + "</select>" +
-    "<a class='ac-b' href='jugadas.html'>Ver jugadas</a></div>" +
+    "<a class='ac-b' href='" + BASE + "jugadas.html'>Ver jugadas</a></div>" +
     "</div></div>";
 
-  document.body.appendChild(fab);
   document.body.appendChild(ov);
 
   var sel = ov.querySelector("select"), go = ov.querySelectorAll("a.ac-b")[1];
   try { var last = localStorage.getItem("jgCat"); if (last) sel.value = last; } catch (e) {}
-  function link() { go.href = "jugadas.html?cat=" + sel.value; }
+  function link() { go.href = BASE + "jugadas.html?cat=" + sel.value; }
   sel.addEventListener("change", link); link();
 
   function abrir() { ov.classList.add("on"); ov.querySelector(".ac-x").focus(); }
   function cerrar() { ov.classList.remove("on"); fab.focus(); }
-  fab.addEventListener("click", abrir);
+  fab.addEventListener("click", function (e) { if (propio) e.preventDefault(); abrir(); });
   ov.querySelector(".ac-x").addEventListener("click", cerrar);
   ov.addEventListener("click", function (e) { if (e.target === ov) cerrar(); });
   document.addEventListener("keydown", function (e) { if (e.key === "Escape" && ov.classList.contains("on")) cerrar(); });

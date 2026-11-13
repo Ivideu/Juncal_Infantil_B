@@ -105,6 +105,7 @@ tr.me td{background:#2f7bff26;font-weight:700}
 .empty{text-align:center;color:var(--mu);padding:40px 0}
 #adm{display:none;position:fixed;bottom:0;left:0;right:0;background:var(--bg2);border-top:1px solid var(--ac);padding:10px;justify-content:center;gap:8px;flex-wrap:wrap;z-index:9;box-shadow:0 -6px 24px #1e4fd822}
 body.edit #adm{display:flex}
+body.edit:not(.owner) #adm{display:none!important}
 select{font:inherit;background:var(--bg);color:var(--tx);border:1px solid var(--line);border-radius:8px;padding:6px 8px}.gc{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px;width:100%}.gc button{padding:3px 10px;font-size:.85rem}
 .live{text-align:center}.lt{font:700 1.15rem 'Barlow Condensed';letter-spacing:.06em;color:var(--ye)}
 .lb{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:8px;margin:14px 0}.lb .cn{font-size:clamp(1rem,3.6vw,1.7rem);font-weight:700}
@@ -766,6 +767,7 @@ let subA=false;
 async function subAdmin(on){try{const FM=window.Capacitor&&Capacitor.Plugins&&Capacitor.Plugins.FirebaseMessaging;if(!FM)return;
  if(on&&!subA){await FM.subscribeToTopic({topic:"pruebas"});subA=true}else if(!on&&subA){await FM.unsubscribeFromTopic({topic:"pruebas"});subA=false}}catch(e){}}
 function render(){
+ document.body.classList.toggle("owner",!!E()&&ACC===FBMAIL);
  subAdmin(E());
  if(loading){document.getElementById("hero").style.display="none";document.getElementById("nav").innerHTML="";document.getElementById("app").innerHTML="";return}
  document.getElementById("hero").style.display="";
@@ -1119,7 +1121,7 @@ $("#mPub").onclick=async()=>{
   setPSt(m);toast(m)}};
 
 document.addEventListener("keydown",e=>{if(e.key==="Escape"){closeCromo();closePick();closeLogin();if(ver)closeVer()}});
-if(location.hash=="#admin")unlock();try{if(sessionStorage.getItem("adm")){PW=sessionStorage.getItem("pw")||"";RT=sessionStorage.getItem("rt")||"";ACC=sessionStorage.getItem("mail")||FBMAIL;document.body.classList.add("edit")}}catch(e){}
+if(location.hash=="#admin")unlock();try{if(sessionStorage.getItem("adm")){PW=sessionStorage.getItem("pw")||"";RT=sessionStorage.getItem("rt")||"";ACC=sessionStorage.getItem("mail")||TEAM_MAIL;document.body.classList.add("edit")}}catch(e){}
 if(API||FB)document.querySelector("#adm .on").remove();
 /* Volver a la página anterior (si se abrió esta página directamente, va al inicio) */
 function volver(){if(history.length>1)history.back();else location.href="../index.html#equipos"}

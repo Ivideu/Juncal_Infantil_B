@@ -1,5 +1,5 @@
 /* categoria-extra.js · se carga DESPUÉS del script principal de cada categoría.
-   Añade: cromos creados/editados desde el admin (con foto), contraseña propia por categoría, barra inferior solo para el propietario. */
+   Añade: cromos creados desde el admin (jugadores sobre plantilla; entrenadores desde Images/Entrenadores), contraseña propia por categoría, barra inferior solo para el propietario. */
 (function(){
 const OWN=()=>document.body.classList.contains("owner");
 /* Páginas con el login nuevo (ventana con acceso de administrador, Jugadas y Pizarra): ese login manda; aquí no se sobrescribe. */
@@ -30,23 +30,22 @@ function cfg2(){const c=S.cfg;if(!c||CAT.me)return;
  (c.R||[]).forEach((s,i)=>{const[d,p]=s.split("|");J.push({n:i+1,d:d.split("-").reverse().join("-"),p:p.split(",").map(x=>x.split("-").map(Number))})});
  ME=+Object.keys(COD).find(k=>String(COD[k])===String(c.equipo||CAT.equipo))||0}
 
-/* ---------- Cromos generados: se escribe nombre, número y posición encima de la plantilla ---------- */
+/* ---------- Cromos de jugadores: nombre, número y posición escritos sobre la plantilla ---------- */
 const POS={portero:"PORTERO",cierre:"CIERRE",ala:"ALA",pivot:"PÍVOT",entrenador:"ENTRENADOR"};
 const W=535,H=1000,FF='"Barlow Condensed",Impact,"Arial Narrow",sans-serif';
 const BLANK="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==";
-/* Plantillas por defecto: Cromos/plantilla-jugador.jpg y Cromos/plantilla-portero.jpg */
-const TPL={},CUST={};let memo={};
+const RAIZ=CROMOS_DIR.replace(/Cromos\/$/,"");                       // raíz de la web vista desde esta página (normalmente "../")
+const rutaImg=p=>RAIZ+p.split("/").map(encodeURIComponent).join("/"); // "Images/Entrenadores/Ivan.jpg" -> URL
+/* Plantillas del repositorio: Images/plantilla-jugador.jpg y Images/plantilla-portero.jpg (también prueba "images/" y "Cromos/") */
+const TPL={};let memo={};
 const refresca=()=>{memo={};render()};
-["jugador","portero"].forEach(k=>{const i=new Image();i.onload=()=>{TPL[k]=i;refresca()};i.src=CROMOS_DIR+"plantilla-"+k+".jpg"});
+["jugador","portero"].forEach(k=>{const r=["Images/","images/","Cromos/"].map(d=>RAIZ+d+"plantilla-"+k+".jpg");let n=0;const i=new Image();
+ i.onload=()=>{TPL[k]=i;refresca()};i.onerror=()=>{if(++n<r.length)i.src=r[n]};i.src=r[0]});
 if(document.fonts&&document.fonts.load)document.fonts.load('800 60px "Barlow Condensed"').then(refresca).catch(()=>{});
-function baseDe(c){
- if(c.foto){let u=CUST[c.id];
-  if(!u||u.s!==c.foto){u=CUST[c.id]={s:c.foto,img:null};const i=new Image();i.onload=()=>{u.img=i;refresca()};i.src=c.foto}
-  if(u.img)return u.img}
- return TPL[c.pos==="portero"?"portero":"jugador"]}
+const baseDe=c=>TPL[c.pos==="portero"?"portero":"jugador"];
 function cromoImg(c){
  const base=baseDe(c);if(!base)return BLANK;
- const key=JSON.stringify([c.id,c.name,c.num,c.pos,c.coach,c.foto?c.foto.length:0,!!(c.foto&&CUST[c.id]&&CUST[c.id].img)]);
+ const key=JSON.stringify([c.id,c.name,c.num,c.pos,c.coach]);
  if(memo[key])return memo[key];
  const cv=document.createElement("canvas");cv.width=W;cv.height=H;const g=cv.getContext("2d");
  g.drawImage(base,0,0,W,H);
@@ -65,54 +64,85 @@ function cromoImg(c){
 /* Posiciones sobre la plantilla (535x1000): posición arriba-izquierda, número arriba-derecha, nombre abajo inclinado */
 const POSX={x:50,y:78,s:40,w:170},NUMX={x:488,y:96,s:104,w:150},NAMX={x:268,y:858,s:112,w:380,r:-.17};
 
+/* Entrenador con imagen propia (c.img) -> se muestra tal cual; el resto se dibuja sobre la plantilla */
 function buildCromos(){CROMOS.length=0;
- (S.cromos||[]).forEach(c=>CROMOS.push({file:"g_"+c.id,key:"g_"+c.id,name:c.name,num:c.num||"",pos:c.pos,coach:!!c.coach,src:cromoImg(c)}));
+ (S.cromos||[]).forEach(c=>CROMOS.push({file:"g_"+c.id,key:"g_"+c.id,name:c.name,num:c.num||"",pos:c.pos,coach:!!c.coach,src:(c.coach&&c.img)?rutaImg(c.img):cromoImg(c)}));
  CROMOS.sort((a,b)=>a.coach-b.coach||(a.pos==="portero"?0:1)-(b.pos==="portero"?0:1)||(+a.num||0)-(+b.num||0))}
 
-/* ---------- Cromo base propio (opcional): se ajusta y comprime para que ocupe poco en Firebase ---------- */
-let EDIT="",FOTO="";
-function leerFoto(f){return new Promise((ok,ko)=>{const r=new FileReader();r.onerror=ko;
- r.onload=()=>{const im=new Image();im.onerror=ko;
-  im.onload=()=>{const w=400,h=748,k=Math.max(w/im.width,h/im.height),cv=document.createElement("canvas");cv.width=w;cv.height=h;
-   cv.getContext("2d").drawImage(im,(w-im.width*k)/2,(h-im.height*k)/2,im.width*k,im.height*k);ok(cv.toDataURL("image/jpeg",.78))};
-  im.src=r.result};r.readAsDataURL(f)})}
-window.fotoSel=async function(inp){const f=inp.files[0];if(!f)return;
- try{FOTO=await leerFoto(f);const p=document.getElementById("cn_prev");p.src=FOTO;p.style.display="block"}
- catch(e){alert("No se pudo leer la imagen")}};
-window.quitaFoto=function(){FOTO="";const p=document.getElementById("cn_prev");p.style.display="none";document.getElementById("cn_foto").value=""};
+/* ---------- Entrenadores: se eligen de Images/Entrenadores/<nombre>.jpg ---------- */
+const ENT={list:null,started:false};
+/* Lista los archivos de la carpeta con la API de GitHub (sin token si el repositorio es público; si no, usa el token guardado) */
+async function cargaEnt(){
+ if(ENT.started)return;ENT.started=true;
+ let tk="";try{tk=localStorage.getItem("ghtk")||""}catch(e){}
+ const heads=tk?[{Authorization:"Bearer "+tk},{}]:[{}];
+ for(const d of ["Images","images"])for(const h of heads){
+  try{const r=await fetch(`https://api.github.com/repos/${GH_USER}/${GH_REPO}/contents/${d}/Entrenadores`,{headers:h});
+   if(!r.ok)continue;const a=await r.json();
+   if(Array.isArray(a)){ENT.list=a.filter(f=>f.type==="file"&&/\.(jpe?g|png|webp)$/i.test(f.name)).map(f=>({name:f.name.replace(/\.[^.]+$/,""),path:f.path})).sort((x,y)=>x.name.localeCompare(y.name));break}
+  }catch(e){}
+  if(ENT.list)break}
+ if(!ENT.list)ENT.list=[];
+ render()}
+const existe=u=>new Promise(ok=>{const i=new Image();i.onload=()=>ok(true);i.onerror=()=>ok(false);i.src=u});
+/* Si no se puede listar la carpeta, se escribe el nombre y se busca el archivo */
+async function buscaImg(nombre){
+ const n=nombre.trim(),cap=n.charAt(0).toUpperCase()+n.slice(1).toLowerCase();
+ for(const d of ["Images","images"])for(const nm of [...new Set([n,cap,n.toLowerCase()])])for(const e of [".jpg",".jpeg",".png",".webp"]){
+  const p=`${d}/Entrenadores/${nm}${e}`;if(await existe(rutaImg(p)))return p}
+ return ""}
 
 /* ---------- Crear / editar / borrar ---------- */
+let EDIT="";
 function renameP(a,b){const i=S.pl.indexOf(a);if(i>-1)S.pl[i]=b;
  if(S.dn[a]!==undefined){S.dn[b]=S.dn[a];delete S.dn[a]}
  if(S.off&&S.off[a]){S.off[b]=S.off[a];delete S.off[a]}
  Object.values(S.m).forEach(m=>["g","gm"].forEach(f=>{if(m[f]&&m[f][a]!==undefined){m[f][b]=m[f][a];delete m[f][a]}}));
  S.pl.sort((p,q)=>p.localeCompare(q))}
 function quitaP(a){const i=S.pl.indexOf(a);if(i>-1)S.pl.splice(i,1);delete S.dn[a];if(S.off)delete S.off[a]}
-window.addCromo=function(){const g=i=>document.getElementById(i).value.trim(),name=g("cn_name").replace(/[.$#\[\]\/]/g,""),num=g("cn_num"),pos=g("cn_pos"),coach=pos==="entrenador";
- if(!name||(!coach&&num===""))return alert("Pon el nombre y, si es jugador, el número");
+window.cnPos=function(v){const co=v==="entrenador";document.getElementById("cn_pl").style.display=co?"none":"contents";document.getElementById("cn_co").style.display=co?"contents":"none"};
+window.addCromo=async function(){
+ const g=i=>{const e=document.getElementById(i);return e?e.value.trim():""},pos=g("cn_pos"),coach=pos==="entrenador";
+ let name=g("cn_name").replace(/[.$#\[\]\/]/g,""),num=g("cn_num"),img="";
+ if(coach){
+  const cs=document.getElementById("cn_cs");
+  if(cs){img=cs.value;name=cs.options[cs.selectedIndex]?cs.options[cs.selectedIndex].textContent:""}
+  else{name=g("cn_ci").replace(/[.$#\[\]\/]/g,"");if(!name)return alert("Escribe el nombre del entrenador (el del archivo)");
+   img=await buscaImg(name);if(!img)return alert("No encuentro Images/Entrenadores/"+name+".jpg en la web. Revisa el nombre del archivo.");name=img.split("/").pop().replace(/\.[^.]+$/,"")}
+  if(!img)return alert("Elige un entrenador");
+  num="";
+ }else if(!name||num==="")return alert("Pon el nombre y, si es jugador, el número");
  S.cromos=S.cromos||[];
+ if(coach&&S.cromos.some(z=>z.coach&&z.img===img&&z.id!==EDIT))return alert("Ese entrenador ya está añadido");
  const c=EDIT&&S.cromos.find(z=>z.id===EDIT);
- if(c){if(!c.coach&&c.name!==name)renameP(c.name,name);
-  if(!c.coach&&coach)quitaP(name);
-  Object.assign(c,{name,num:coach?"":num,pos,coach,foto:FOTO})}
- else S.cromos.push({id:Date.now().toString(36),name,num:coach?"":num,pos,coach,foto:FOTO});
+ if(c){if(!c.coach&&!coach&&c.name!==name)renameP(c.name,name);
+  if(!c.coach&&coach)quitaP(c.name);
+  Object.assign(c,{name,num,pos,coach});if(coach)c.img=img;else delete c.img;delete c.foto}
+ else S.cromos.push(Object.assign({id:Date.now().toString(36),name,num,pos,coach},coach?{img}:{}));
  if(!coach){if(!S.pl.includes(name)){S.pl.push(name);S.pl.sort((a,b)=>a.localeCompare(b))}S.dn[name]=num}
- EDIT="";FOTO="";save()};
-window.editCromo=function(id){const c=(S.cromos||[]).find(x=>x.id===id);if(!c)return;EDIT=id;FOTO=c.foto||"";render();window.scrollTo({top:0,behavior:"smooth"})};
-window.cancelCromo=function(){EDIT="";FOTO="";render()};
+ EDIT="";save()};
+window.editCromo=function(id){const c=(S.cromos||[]).find(x=>x.id===id);if(!c)return;EDIT=id;render();window.scrollTo({top:0,behavior:"smooth"})};
+window.cancelCromo=function(){EDIT="";render()};
 window.delCromo=function(id){const c=(S.cromos||[]).find(x=>x.id===id);if(!c||!confirm("¿Borrar el cromo de "+c.name+"?"))return;
- S.cromos=S.cromos.filter(x=>x.id!==id);if(EDIT===id){EDIT="";FOTO=""}
+ S.cromos=S.cromos.filter(x=>x.id!==id);if(EDIT===id)EDIT="";
  if(!c.coach)quitaP(c.name);save()};
 function cromoForm(){
- const ec=EDIT?(S.cromos||[]).find(x=>x.id===EDIT):null,v=ec||{name:"",num:"",pos:"ala"};
+ const ec=EDIT?(S.cromos||[]).find(x=>x.id===EDIT):null,v=ec||{name:"",num:"",pos:"ala"},co=v.pos==="entrenador";
  const opts=Object.keys(POS).map(k=>`<option value="${k}" ${v.pos===k?"selected":""}>${k==="pivot"?"Pívot":k[0].toUpperCase()+k.slice(1)}</option>`).join("");
+ const picker=ENT.list&&ENT.list.length
+  ?`<select id="cn_cs" aria-label="Entrenador">${ENT.list.map(e=>`<option value="${esc(e.path)}" ${v.img===e.path?"selected":""}>${esc(e.name)}</option>`).join("")}</select>`
+  :`<input id="cn_ci" placeholder="Nombre del entrenador (como el archivo)" value="${esc(co?v.name:"")}" style="min-width:230px">`;
  const L=(S.cromos||[]).map(c=>`<span class="cvf ${c.id===EDIT?"ed2":""}">${esc(c.name)} ${c.coach?"· entrenador":"· "+esc(c.num)+" · "+esc(POS[c.pos]||c.pos)}<button onclick="editCromo('${c.id}')" aria-label="Editar">✎</button><button onclick="delCromo('${c.id}')" aria-label="Borrar">✕</button></span>`).join("");
  return`<div class="card"><h2 style="font-size:1.5rem;color:#0f2a6b">${ec?"Editar cromo":"Crear cromo"}</h2>
- <div class="ed" style="display:flex"><input id="cn_name" placeholder="Nombre (sin apellido)" value="${esc(v.name)}"><input id="cn_num" class="g" type="number" min="0" max="99" placeholder="Nº" value="${esc(v.num)}"><select id="cn_pos">${opts}</select></div>
+ <div class="ed" style="display:flex"><span id="cn_pl" style="display:${co?"none":"contents"}"><input id="cn_name" placeholder="Nombre (sin apellido)" value="${esc(co?"":v.name)}"><input id="cn_num" class="g" type="number" min="0" max="99" placeholder="Nº" value="${esc(v.num)}"></span><span id="cn_co" style="display:${co?"contents":"none"}">${picker}</span><select id="cn_pos" onchange="cnPos(this.value)">${opts}</select></div>
  <div class="ed" style="display:flex"><button class="on" onclick="addCromo()">${ec?"💾 Guardar cambios":"＋ Crear cromo"}</button>${ec?'<button onclick="cancelCromo()">Cancelar</button>':""}</div>
- <small class="gap" style="display:block;margin-top:6px">El cromo se genera solo sobre la plantilla (jugador o portero). Si un jugador tiene su propio cromo en blanco, súbelo aquí:</small>
- <div class="ed" style="display:flex"><input id="cn_foto" type="file" accept="image/*" onchange="fotoSel(this)"><img id="cn_prev" alt="Cromo base" src="${FOTO}" style="${FOTO?"":"display:none;"}width:44px;height:80px;object-fit:cover;border-radius:6px"><button onclick="quitaFoto()">Quitar</button></div>
+ <small class="gap" style="display:block;margin-top:6px">Jugadores: el cromo se escribe solo sobre Images/plantilla-jugador.jpg (portero: plantilla-portero.jpg). Entrenadores: se elige uno de Images/Entrenadores.</small>
  <div class="cvsum">${L||'<small class="gap">Aún no hay cromos.</small>'}</div></div>`}
+/* Cuerpo técnico dentro de la pestaña Plantilla */
+function cuerpoTecnico(){
+ const l=CROMOS.filter(c=>c.coach);if(!l.length)return"";
+ return`<div class="cvhd"><h2>Cuerpo técnico</h2></div>`+l.map(c=>{const id=c.key.slice(2);
+  return`<div class="card" style="display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap"><span style="display:flex;align-items:center;gap:12px"><img src="${c.src}" alt="Cromo de ${esc(c.name)}" style="width:56px;aspect-ratio:535/1000;object-fit:contain;border-radius:8px"><b>${esc(c.name)}</b><span class="gap">Entrenador</span></span><span style="display:flex;gap:8px"><button onclick="editCromo('${id}')">✎ Cambiar</button><button onclick="delCromo('${id}')">Quitar</button></span></div>`}).join("")}
 
 /* ---------- Enganche en render ---------- */
 const _rn=window.render;
@@ -120,7 +150,7 @@ window.render=function(){cfg2();buildCromos();
  if(PORT)document.body.classList.toggle("owner",E()&&ACC===FBMAIL); // administrador del club: ve la barra completa
  _rn();
  if(!E())return;
- if(tab=="pla")document.getElementById("app").insertAdjacentHTML("afterbegin",cromoForm());
+ if(tab=="pla"){const a=document.getElementById("app");a.insertAdjacentHTML("afterbegin",cromoForm());a.insertAdjacentHTML("beforeend",cuerpoTecnico());cargaEnt()}
 
  if(!PORT&&!OWN())document.getElementById("nav").insertAdjacentHTML("beforeend",'<button onclick="setEdit(false)"><span>🔓</span><span>Salir</span></button>')};
 render();

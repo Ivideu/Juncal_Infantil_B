@@ -442,6 +442,22 @@ header.site-banner .dl {
 .pj h3{margin:8px 0 2px;font-size:1.05rem;line-height:1.2}
 #toast{position:fixed;left:50%;bottom:90px;transform:translateX(-50%);background:#fff;color:#0b2a6f;padding:9px 16px;border-radius:999px;font-weight:600;box-shadow:0 6px 20px rgba(0,0,0,.4);opacity:0;pointer-events:none;transition:opacity .2s;z-index:10001;max-width:92vw;text-align:center}
 #toast.show{opacity:1}
+#pzf{display:flex;flex-direction:column}
+#pzf iframe{flex:none;order:1}
+#pzbar{display:flex;flex-wrap:wrap;justify-content:flex-end;align-items:center;gap:8px;padding:6px 8px;background:#0d2561;border-top:1px solid rgba(255,255,255,.16);order:2}
+#pzbar button{background:#173a8f;color:#fff;border:1px solid rgba(255,255,255,.16);font-weight:700;padding:6px 14px;border-radius:8px;min-height:36px}
+#pzbar button:hover{background:#1f4cb8;transform:none}
+#pzf.fsp{position:fixed;inset:0;z-index:9990;margin:0;border-radius:0;display:flex;flex-direction:column;height:100vh;height:100dvh;padding:env(safe-area-inset-top,0px) env(safe-area-inset-right,0px) env(safe-area-inset-bottom,0px) env(safe-area-inset-left,0px)}
+#pzf.fsp #pzbar{flex:none}
+#pzf.fsp iframe{flex:1 1 0;min-height:0;height:100%}
+#pzbar .fsx{display:flex;flex:1 1 300px;min-width:0;align-items:center;gap:8px}
+#pzf.fsp #pzbar .fsx{display:flex}
+#pzbar #ptit2{flex:0 1 260px;width:auto;min-width:90px;padding:6px 10px;min-height:36px;border:2px solid #7aa9ff;border-radius:8px;background:#fff;color:#0b2a6f;font-weight:600}
+#pzbar #ptit2::placeholder{color:#6b7aa6;font-weight:400}
+#pzbar #ptit2:focus{outline:3px solid #ffd23f;outline-offset:1px}
+#pzbar #pbtn2{background:var(--ye);border-color:var(--ye);color:#0b2a6f;white-space:nowrap}
+#pzbar #pst2{flex:1;min-width:0;font-size:.8rem;color:#c3d0ff;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+#pzf.fsp #pzbar{justify-content:space-between}
 </style>
 </head>
 <body>
@@ -461,8 +477,8 @@ header.site-banner .dl {
 
 <!-- Pizarra del entrenador (fuera de #app para que no se reinicie al refrescar la página) -->
 <div id="pizW" hidden>
- <div id="pzf"></div>
- <div class="card">
+ <div id="pzf"><div id="pzbar"><span class="fsx"><input id="ptit2" maxlength="60" placeholder="Título de la jugada" aria-label="Título de la jugada"><button type="button" id="pbtn2">⏺ Grabar y publicar</button><span id="pst2" role="status"></span></span></div></div>
+ <div class="card" hidden style="display:none">
   <div class="pubr">
    <div style="flex:1;min-width:200px"><label for="ptit" style="margin-top:0">Título de la jugada</label><input id="ptit" maxlength="60" placeholder="Ej.: Saque de esquina en corto"></div>
    <button class="on" id="pbtn">⏺ Grabar y publicar</button>
@@ -639,7 +655,7 @@ function fit(){
  h.classList.toggle("fs",FS);
  h.classList.toggle("adm",FS&&E());
  h.classList.toggle("rot",FS&&innerHeight>innerWidth);
- document.body.style.overflow=FS?"hidden":"";
+ document.body.style.overflow=(FS||PFS)?"hidden":"";
  h.style.setProperty("--u",h.clientHeight/100+"px");
  h.style.removeProperty("--k");
  if(FS){
@@ -656,7 +672,7 @@ function fit(){
 }
 if(document.fonts&&document.fonts.ready)document.fonts.ready.then(()=>fit());
 async function setFS(on){if(!on){leaveFS()}else{FS=true;try{await document.documentElement.requestFullscreen({navigationUI:"hide"})}catch(e){}try{await screen.orientation.lock("landscape")}catch(e){}try{wl=await navigator.wakeLock.request("screen")}catch(e){}}render()}
-document.addEventListener("fullscreenchange",()=>{if(!document.fullscreenElement&&FS){leaveFS();render()}});
+document.addEventListener("fullscreenchange",()=>{if(!document.fullscreenElement&&FS){leaveFS();render()}if(!document.fullscreenElement&&PFS)setPzFS(false);});
 addEventListener("resize",()=>{fit()});
 const HALF=25*60000;
 function evs(m){const g=m.g||{},gm=m.gm||{},a=[];Object.keys(g).forEach(n=>{const t=(gm[n]||[]).slice(0,g[n]);t.forEach(x=>a.push([x,n]));for(let i=t.length;i<g[n];i++)a.push([999,n])});return a.sort((x,y)=>x[0]-y[0]).map(([t,n])=>({t:t<999?t:0,n}))}
@@ -770,7 +786,7 @@ function render(){
  document.body.classList.toggle("owner",!!E()&&ACC===FBMAIL);
  subAdmin(E());
  if(loading){document.getElementById("hero").style.display="none";document.getElementById("nav").innerHTML="";document.getElementById("app").innerHTML="";return}
- document.getElementById("hero").style.display="";
+ document.getElementById("hero").style.display=tab=="jor"?"":"none";
  document.getElementById("hero").innerHTML=hero();fit();tick();goalWatch();
  document.getElementById("tbtn").classList.toggle("on",TS.on);document.getElementById("tout").style.display=document.getElementById("trst").style.display=TS.on?"":"none";
  if(jnAuto){const nx=nextL();jn=nx?nx.r.n:J.length}
@@ -789,7 +805,7 @@ function render(){
  if(tab=="cop")h=renderCopa();
  if(tab=="cro")h=renderJug();
  if(tab=="jug")h=renderPlays();
- const pzw=document.getElementById("pizW"),sp=E()&&tab=="piz";pzw.hidden=!sp;if(sp)ensurePiz();
+ const pzw=document.getElementById("pizW"),sp=E()&&tab=="piz";pzw.hidden=!sp;if(sp)ensurePiz();if(!sp&&PFS)setPzFS(false);
  document.getElementById("app").innerHTML=h}
 
 /* ===== Copa: torneo aparte (no puntúa en la clasificación; sus goles sí suman en Goleadores) ===== */
@@ -959,7 +975,7 @@ function setEdit(on){
     try{ sessionStorage.removeItem("adm"); sessionStorage.removeItem("pw"); sessionStorage.removeItem("rt"); sessionStorage.removeItem("mail"); }catch(e){}
     PW = ""; RT = ""; ACC = FBMAIL; idt = ""; exp = 0;
     TS.on=false;
-    closeVer();rec=null;$("#mPrev").hidden=true;
+    setPzFS(false);closeVer();rec=null;$("#mPrev").hidden=true;
     if(pzFr){pzFr.remove();pzFr=null}pzQ=null;
     if(["piz","pla","hor","ent"].includes(tab)||(tab=="cop"&&!COPA)) tab="jor";
   }
@@ -1068,15 +1084,56 @@ async function delPl(i){
  }catch(e){toast("No se pudo borrar")}}
 
 /* Pizarra incrustada (se crea una sola vez y no se recarga al refrescar la página) */
-let pzFr=null,pzQ=null;
+let pzFr=null,pzQ=null,PFS=false;
 const PZ=()=>{try{return(pzFr&&pzFr.contentWindow&&pzFr.contentWindow.PZ)||null}catch(e){return null}};
-function ajusta(){try{const d=pzFr.contentDocument;if(d&&d.body)pzFr.style.height=Math.ceil(d.documentElement.scrollHeight)+"px"}catch(e){}}
+function ajusta(){try{if(PFS)return;const d=pzFr.contentDocument;if(d&&d.body)pzFr.style.height=Math.ceil(d.documentElement.scrollHeight)+"px"}catch(e){}}
+/* Orden de la pizarra: 1) Colocar + pantalla completa, 2) Añadir, 3) Pasos y Animación, 4) Herramienta, 5) pista. Sin texto de ayuda */
+function pzStyle(){try{const d=pzFr.contentDocument;if(!d||d.getElementById("pzord"))return;
+ const st=d.createElement("style");st.id="pzord";
+ st.textContent=".app>.bar:nth-child(1){flex-direction:column;flex-wrap:nowrap;align-items:stretch;order:1}.app>.bar:nth-child(1)>.grp.colg{order:-1}.app>.bar:nth-child(4){order:2}.app>.bar:nth-child(2){order:3}.app>.cvw{order:4}.hint{display:none!important}";
+ d.head.appendChild(st);
+ const g=d.getElementById("form").closest(".grp");g.classList.add("colg");
+ if(!d.getElementById("pzfsIn")){const b=d.createElement("button");b.id="pzfsIn";b.type="button";b.textContent=PFS?"✕ Salir de pantalla completa":"⛶ Pantalla completa";b.style.marginLeft="auto";b.onclick=()=>parent.togPzFS();g.appendChild(b)}
+}catch(e){}}
 function ensurePiz(){
  if(pzFr)return;
  pzFr=document.createElement("iframe");pzFr.title="Pizarra táctica";pzFr.src=BASE+"pizarra.html";
- pzFr.addEventListener("load",()=>{ajusta();try{new ResizeObserver(ajusta).observe(pzFr.contentDocument.body)}catch(e){}flushPz()});
+ pzFr.addEventListener("load",()=>{pzStyle();ajusta();try{new ResizeObserver(ajusta).observe(pzFr.contentDocument.body)}catch(e){}flushPz()});
  $("#pzf").appendChild(pzFr)}
-function setPSt(t){$("#pst").textContent=t}
+/* Dentro de la pantalla completa, la pizarra se ajusta al alto disponible para verla entera sin bajar */
+let pzRO=null;
+function fsLayout(on){
+ try{
+  const d=pzFr&&pzFr.contentDocument,w=pzFr&&pzFr.contentWindow;if(!d)return;
+  if(pzRO){pzRO.disconnect();pzRO=null}
+  let st=d.getElementById("pzfsx");const box=d.querySelector(".cvw"),cv=d.getElementById("cv");
+  if(!on){if(st)st.remove();if(cv)cv.style.width="";return}
+  if(!st){st=d.createElement("style");st.id="pzfsx";
+   st.textContent="html,body{height:100%}body{padding:4px!important;overflow:hidden}.app{height:100%;max-width:none!important;gap:4px!important}.cvw{flex:1 1 0;min-height:0;display:flex;justify-content:center;align-items:center}.hint{display:none}.bar{padding:4px 8px!important}";
+   d.head.appendChild(st)}
+  const f=()=>{const h=box.clientHeight,wd=box.clientWidth;if(h>0)cv.style.width=Math.max(100,Math.min(wd,h*43.2/23.2))+"px"};
+  f();pzRO=new w.ResizeObserver(f);pzRO.observe(box);
+ }catch(e){}}
+/* Pizarra a pantalla completa: tapa el menú, la barra de admin y el resto de botones de la página */
+function setPzFS(on){
+ const f=document.querySelector("#pzf");if(!f||on===PFS)return;
+ PFS=on;f.classList.toggle("fsp",on);
+ try{const b=pzFr.contentDocument.getElementById("pzfsIn");if(b)b.textContent=on?"✕ Salir de pantalla completa":"⛶ Pantalla completa"}catch(e){}
+ document.body.style.overflow=(FS||PFS)?"hidden":"";
+ if(on){
+  try{const p=f.requestFullscreen&&f.requestFullscreen({navigationUI:"hide"});if(p&&p.catch)p.catch(()=>{})}catch(e){}
+  try{const p=screen.orientation&&screen.orientation.lock&&screen.orientation.lock("landscape");if(p&&p.catch)p.catch(()=>{})}catch(e){}
+ }else{
+  try{if(document.fullscreenElement)document.exitFullscreen()}catch(e){}
+  try{screen.orientation.unlock()}catch(e){}
+ }
+ if(pzFr&&!on)pzFr.style.height="900px";
+ if(on)document.querySelector("#ptit2").value=document.querySelector("#ptit").value;
+ fsLayout(on);setTimeout(()=>{if(PFS===on)fsLayout(on);ajusta()},150)}
+window.togPzFS=()=>setPzFS(!PFS);
+function setPSt(t){document.querySelector("#pst").textContent=t;document.querySelector("#pst2").textContent=t;document.querySelector("#ptit2").value=document.querySelector("#ptit").value}
+document.querySelector("#ptit2").oninput=e=>{document.querySelector("#ptit").value=e.target.value};
+document.querySelector("#pbtn2").onclick=()=>{if(document.querySelector("#pbtn").disabled)return;document.querySelector("#ptit").value=document.querySelector("#ptit2").value;document.querySelector("#pbtn").onclick()};
 function toPiz(ses,titulo){pzQ={ses,titulo};tab="piz";render();flushPz()}
 function flushPz(){const z=PZ();if(pzQ&&z){z.loadSession(pzQ.ses);$("#ptit").value=pzQ.titulo;setPSt("Jugada cargada. Cámbiala y publícala como nueva; después puedes borrar la antigua.");pzQ=null}}
 
@@ -1086,7 +1143,7 @@ $("#pbtn").onclick=async()=>{
  const titulo=$("#ptit").value.trim(),pz=PZ();
  if(!pz){toast("La pizarra aún no ha cargado");return}
  if(pz.playing){pz.stop();return}
- if(titulo.length<3){toast("Escribe un título para la jugada");$("#ptit").focus();return}
+ if(titulo.length<3){toast("Escribe un título para la jugada");document.getElementById("ptit2").focus();return}
  if(pz.steps<2){toast("Crea al menos 2 pasos en la pizarra");return}
  const b=$("#pbtn");b.disabled=true;setPSt("Grabando… no cambies de pestaña hasta que termine.");
  try{
@@ -1120,7 +1177,7 @@ $("#mPub").onclick=async()=>{
   const m=e===0?"La sesión ha caducado. Sal y vuelve a entrar.":(e&&(e.message==="401"||e.message==="403"))?"Sin permiso para publicar. Revisa las reglas de Firebase.":(e&&e.message)||"No se pudo publicar";
   setPSt(m);toast(m)}};
 
-document.addEventListener("keydown",e=>{if(e.key==="Escape"){closeCromo();closePick();closeLogin();if(ver)closeVer()}});
+document.addEventListener("keydown",e=>{if(e.key==="Escape"){closeCromo();closePick();closeLogin();if(ver)closeVer();if(PFS)setPzFS(false)}});
 if(location.hash=="#admin")unlock();try{if(sessionStorage.getItem("adm")){PW=sessionStorage.getItem("pw")||"";RT=sessionStorage.getItem("rt")||"";ACC=sessionStorage.getItem("mail")||TEAM_MAIL;document.body.classList.add("edit")}}catch(e){}
 if(API||FB)document.querySelector("#adm .on").remove();
 /* Volver a la página anterior (si se abrió esta página directamente, va al inicio) */

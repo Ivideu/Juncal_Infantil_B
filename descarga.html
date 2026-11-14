@@ -1,79 +1,126 @@
 <!DOCTYPE html>
 <html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Descargar app · Juncal B</title><link rel="icon" href="./icon-192.png">
+<title>Descargar apps · Escuela Torrejón Juncal</title><link rel="icon" href="./Images/icon-192.png">
 <style>
 :root{--bg:#eef4ff;--card:#fff;--line:#d5def5;--tx:#0f1b3d;--mu:#5a6a93;--ac:#2f7bff;--ok:#16a34a;--wa:#fff7e0;--wl:#f5c451}
 *{box-sizing:border-box}
 body{margin:0;font:16px/1.55 system-ui,-apple-system,sans-serif;background:linear-gradient(160deg,#f4f8ff,#e6efff 55%,#fff7e0);color:var(--tx);padding:24px 16px 60px;min-height:100vh}
-main{max-width:600px;margin:auto}
+main{max-width:640px;margin:auto}
 h1{font-size:1.9rem;line-height:1.15;margin:.4em 0 .1em}
 h2{font-size:1.25rem;margin:0 0 6px}
 .sub{color:var(--mu);margin:0 0 6px}
 .c{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px;margin:16px 0;box-shadow:0 4px 18px #1e4fd814}
-a.b{display:block;text-align:center;background:var(--ac);color:#fff;font-weight:700;font-size:1.1rem;text-decoration:none;padding:15px;border-radius:12px;margin:12px 0 4px}
-a.b:active{transform:scale(.98)}
-ol.s{list-style:none;counter-reset:n;padding:0;margin:14px 0 0}
-ol.s li{counter-increment:n;position:relative;padding:0 0 14px 44px}
-ol.s li:before{content:counter(n);position:absolute;left:0;top:0;width:30px;height:30px;border-radius:50%;background:var(--ac);color:#fff;font-weight:700;display:grid;place-items:center}
-ol.s li b{color:var(--tx)}
+.tools{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin:8px 0 10px}
+.tools button{font:inherit;font-weight:600;color:var(--ac);background:none;border:0;padding:8px 4px;cursor:pointer;text-decoration:underline}
+.grp{margin:14px 0 4px;font-size:.78rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--mu)}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+@media(max-width:380px){.grid{grid-template-columns:1fr}}
+.opt{position:relative;display:flex;align-items:center;gap:8px;border:2px solid var(--line);border-radius:14px;padding:12px 10px;cursor:pointer;background:#fff;min-height:56px;transition:border-color .12s,background .12s}
+.opt:hover{border-color:#9db9f5}
+.opt input{width:22px;height:22px;accent-color:var(--ac);flex:none;margin:0}
+.opt b{font-size:.93rem;min-width:0;overflow-wrap:break-word;hyphens:none}
+.opt:has(input:checked){border-color:var(--ac);background:#eaf2ff}
+.opt:has(input:focus-visible){outline:3px solid var(--ac);outline-offset:2px}
+.opt a{margin-left:auto;text-decoration:none;font-size:1.1rem;padding:4px 2px;border-radius:8px}
+.opt a:hover{background:#dbe8ff}
+button.go{display:block;width:100%;text-align:center;background:var(--ac);color:#fff;font:700 1.1rem system-ui,sans-serif;border:0;padding:15px;border-radius:12px;margin:18px 0 4px;cursor:pointer}
+button.go:disabled{background:#a9bde8;cursor:not-allowed}
+button.go:active:not(:disabled){transform:scale(.98)}
+#st{min-height:1.4em;margin:6px 0 0;color:var(--mu);font-size:.95rem}
+#st.ok{color:var(--ok);font-weight:700}
 .tip{background:var(--wa);border:1px solid var(--wl);border-radius:12px;padding:12px 14px;margin:12px 0 4px;font-size:.95rem}
-.ok{color:var(--ok);font-weight:700}
-figure{margin:12px 0;text-align:center}
-figure img{width:100%;max-width:300px;border-radius:14px;border:1px solid var(--line);box-shadow:0 4px 18px #0f1b3d22}
-figcaption{font-size:.85rem;color:var(--mu);margin-top:6px}
+ol.s{list-style:none;counter-reset:n;padding:0;margin:14px 0 0}
+ol.s li{counter-increment:n;position:relative;padding:0 0 12px 44px}
+ol.s li:before{content:counter(n);position:absolute;left:0;top:0;width:30px;height:30px;border-radius:50%;background:var(--ac);color:#fff;font-weight:700;display:grid;place-items:center}
 details{border-top:1px solid var(--line);padding:10px 0}
 details:first-of-type{border-top:0}
 summary{cursor:pointer;font-weight:600}
 details p{margin:8px 0 2px;color:var(--mu)}
 small{color:var(--mu)}
 </style></head><body><main>
-<img src="./Images/icon-192.png" width="72" height="72" alt="" style="border-radius:16px">
-<h1>App Escuela Torrejón Juncal B</h1>
-<p class="sub">Calendario, clasificación, goleadores y el directo del partido, con avisos al móvil.</p>
+<img src="./Images/icon-192.png" width="72" height="72" alt="" style="border-radius:16px" onerror="this.style.display='none'">
+<h1>Apps de Escuela Torrejón Juncal</h1>
+<p class="sub">Elige las categorías cuyas apps quieres y descárgalas. Cada categoría tiene su propia app.</p>
 
 <div class="c">
 <h2>🤖 Android</h2>
-<a class="b" href="https://github.com/Ivideu/Juncal_Infantil_B/releases/download/apk/Juncal-B.apk">⬇ Descargar la app (APK)</a>
-<small>Archivo oficial de la escuela · se instala en menos de un minuto</small>
+<div class="tools">
+  <small id="cnt">Ninguna seleccionada</small>
+  <span><button type="button" id="all">Seleccionar todas</button> · <button type="button" id="none">Quitar todas</button></span>
+</div>
+<div id="lista"></div>
+<button class="go" id="go" type="button" disabled>⬇ Descargar seleccionadas</button>
+<p id="st" role="status" aria-live="polite"></p>
+<small>Cada app pesa unos 4,5 MB. Con el icono ⬇ de cada casilla descargas solo esa app.</small>
+
+<div class="tip">📲 Si descargas <b>varias a la vez</b>, el navegador puede preguntar si permites descargas múltiples: pulsa <b>Permitir</b>.</div>
 
 <ol class="s">
-<li><b>Pulsa el botón azul</b> de arriba. Si el navegador dice que «este tipo de archivo puede dañar tu dispositivo», pulsa <b>Descargar de todos modos</b>.</li>
-<li><b>Abre el archivo descargado</b> (<i>Juncal-B.apk</i>) desde el aviso de descarga o desde la carpeta <i>Descargas</i>.</li>
+<li><b>Abre el archivo descargado</b> (<i>app-…-release.apk</i>) desde el aviso de descarga o desde la carpeta <i>Descargas</i>.</li>
 <li>Si el móvil lo pide, activa <b>«Permitir desde esta fuente»</b> para tu navegador y vuelve atrás.</li>
-<li>Puede salir el aviso de <b>Google Play Protect</b>: «Aplicación bloqueada para proteger tu dispositivo». Es normal en apps que no están en Play Store. Pulsa <b>«Instalar de todas formas»</b>, el texto que está <u>encima</u> del botón azul. <b>No pulses «Entendido»</b>, porque cancela la instalación.</li>
-<li>Abre <b>Juncal B</b> y, cuando te pregunte por las notificaciones, pulsa <b>Permitir</b>: así te avisaremos de la hora del partido, del descanso y del resultado final.</li>
+<li>Si sale el aviso de <b>Google Play Protect</b>, es normal en apps que no están en Play Store: pulsa <b>«Instalar de todas formas»</b> (el texto pequeño de arriba, no el botón grande).</li>
+<li>Abre la app y, cuando pregunte por las notificaciones, pulsa <b>Permitir</b> para recibir los avisos de partido.</li>
 </ol>
-
-<figure>
-<img src="ayuda-playprotect.png" alt="Aviso de Google Play Protect con «Instalar de todas formas» marcado en rojo">
-<figcaption>Así es el aviso. Pulsa «Instalar de todas formas».</figcaption>
-</figure>
-
-<div class="tip">🔒 <b>¿Es seguro?</b> Sí. Es la app de la escuela y solo muestra la información de la web del equipo. Play Protect avisa porque la app no se descarga de Play Store y porque es de un desarrollador nuevo para Google; no ha detectado ningún problema.</div>
 </div>
 
 <div class="c">
 <h2>❓ Preguntas frecuentes</h2>
 <details><summary>No me deja instalar / dice «app no instalada»</summary>
-<p>Si ya tenías una versión anterior instalada, <b>desinstálala primero</b> (mantén pulsado el icono → Desinstalar) y vuelve a instalar la nueva. No pierdes nada: los datos están en la web.</p></details>
-<details><summary>No veo el texto «Instalar de todas formas»</summary>
+<p>Si ya tenías una versión anterior de esa app, <b>desinstálala primero</b> (mantén pulsado el icono → Desinstalar) y vuelve a instalar la nueva. No pierdes nada: los datos están en la web.</p></details>
+<details><summary>No veo «Instalar de todas formas»</summary>
 <p>Entra en <b>Play Store → tu foto de perfil → Play Protect → ⚙ → desactiva «Analizar aplicaciones con Play Protect»</b>, instala la app y vuelve a activarlo.</p></details>
-<details><summary>No me llegan los avisos</summary>
-<p>Comprueba en <b>Ajustes → Aplicaciones → Juncal B → Notificaciones</b> que estén activadas. Los avisos llegan con la app cerrada o en segundo plano.</p></details>
-<details><summary>¿Hay que actualizarla?</summary>
-<p>No. La app se actualiza sola cada vez que la abres, siempre que tengas conexión.</p></details>
+<details><summary>¿Y en iPhone?</summary>
+<p>Apple no permite instalar apps fuera de la App Store. Abre la web en <b>Safari</b>, pulsa <b>Compartir</b> y elige <b>Añadir a pantalla de inicio</b>. En iPhone no llegan los avisos del partido.</p></details>
 </div>
 
-<div class="c">
-<h2>🍎 iPhone</h2>
-<p class="sub">Apple no permite instalar apps fuera de la App Store, pero la web se puede añadir como si fuera una app:</p>
-<ol class="s">
-<li>Abre esta web en <b>Safari</b>o <b>Google Chrome</b>.</li>
-<li>Pulsa el botón <b>Compartir</b> (el cuadrado con una flecha hacia arriba).</li>
-<li>Elige <b>Añadir a pantalla de inicio</b> y confirma.</li>
-</ol>
-<small>Se abre a pantalla completa y con el icono del equipo. En iPhone no llegan los avisos del partido.</small>
-</div>
+<p style="text-align:center"><a href="./" style="color:var(--ac);font-weight:600">← Volver a la web</a></p>
+</main>
+<script>
+(()=>{
+"use strict";
+// [id del archivo, nombre]; el archivo es App/app-<id>-release.apk
+const GRUPOS=[["Aficionado",[["aficionadoA","Aficionado A"],["aficionadoB","Aficionado B"]]],
+ ["Juvenil",[["juvenilA","Juvenil A"],["juvenilB","Juvenil B"]]],
+ ["Cadete",[["cadeteA","Cadete A"],["cadeteB","Cadete B"]]],
+ ["Infantil",[["infantilA","Infantil A"],["infantilB","Infantil B"]]],
+ ["Alevín",[["alevinA","Alevín A"],["alevinB","Alevín B"]]]];
+const RUTA=id=>"App/app-"+id+"-release.apk";
+const $=s=>document.querySelector(s);
+const LS={get(k){try{return localStorage.getItem(k)}catch(e){return null}},set(k,v){try{localStorage.setItem(k,v)}catch(e){}}};
+const TODAS=GRUPOS.flatMap(g=>g[1].map(c=>c[0]));
 
-<p style="text-align:center"><a href="./" style="color:var(--ac);font-weight:600">← Volver a la web del equipo</a></p>
-</main></body></html>
+$("#lista").innerHTML=GRUPOS.map(([g,cs])=>`<div class="grp">${g}</div><div class="grid">`+cs.map(([id,n])=>
+ `<label class="opt"><input type="checkbox" value="${id}"><b>${n}</b><a href="${RUTA(id)}" download title="Descargar solo ${n}" aria-label="Descargar solo ${n}">⬇</a></label>`).join("")+`</div>`).join("");
+const cbs=[...document.querySelectorAll("#lista input")];
+
+// Selección inicial: ?cat=infantilB (o varias, separadas por comas) y, si no, lo último que se eligió
+const q=(new URLSearchParams(location.search).get("cat")||"").split(",").map(x=>x.trim()).filter(x=>TODAS.includes(x));
+let ini=q.length?q:(LS.get("apkSel")||"").split(",").filter(x=>TODAS.includes(x));
+cbs.forEach(c=>c.checked=ini.includes(c.value));
+
+const sel=()=>cbs.filter(c=>c.checked).map(c=>c.value);
+function act(){const s=sel();$("#go").disabled=!s.length;
+ $("#go").textContent=s.length?"⬇ Descargar "+(s.length==1?"1 app":s.length+" apps"):"⬇ Descargar seleccionadas";
+ $("#cnt").textContent=s.length?s.length+(s.length==1?" seleccionada":" seleccionadas"):"Ninguna seleccionada";
+ LS.set("apkSel",s.join(","))}
+cbs.forEach(c=>c.addEventListener("change",act));
+$("#all").onclick=()=>{cbs.forEach(c=>c.checked=true);act()};
+$("#none").onclick=()=>{cbs.forEach(c=>c.checked=false);act()};
+// el icono ⬇ no debe marcar/desmarcar la casilla
+document.querySelectorAll(".opt a").forEach(a=>a.addEventListener("click",e=>e.stopPropagation()));
+
+const esp=ms=>new Promise(r=>setTimeout(r,ms));
+$("#go").onclick=async()=>{
+ const s=sel();if(!s.length)return;const b=$("#go"),st=$("#st");b.disabled=true;st.className="";
+ for(let i=0;i<s.length;i++){
+  st.textContent="Descargando "+(i+1)+" de "+s.length+"…";
+  const a=document.createElement("a");a.href=RUTA(s[i]);a.download="";a.style.display="none";document.body.appendChild(a);a.click();a.remove();
+  if(i<s.length-1)await esp(1200);   // pausa entre descargas para que el navegador no las bloquee
+ }
+ st.className="ok";st.textContent="✓ "+(s.length==1?"Descarga iniciada":s.length+" descargas iniciadas")+". Ábrelas desde el aviso o la carpeta Descargas.";
+ act();
+};
+act();
+})();
+</script>
+</body></html>

@@ -6,6 +6,7 @@ aplicar_cambios.py  ·  Pasa a las páginas de categoría los cambios de prueba.
   2) Pizarra: nuevo orden de barras (Colocar + pantalla completa, Añadir, Pasos y Animación,
      Herramienta, pista, Grabar y publicar), sin texto de ayuda y con pantalla completa.
   3) Campo del título de la jugada en blanco.
+  4) Se quita el banner de arriba y aparece el menú superior fijo (como en prueba.html).
 
 USO (desde la carpeta donde están los .html de las categorías):
     python aplicar_cambios.py Categorias           -> todos los .html con pizarra de esa carpeta (y subcarpetas)
@@ -83,43 +84,118 @@ document.querySelector("#ptit2").oninput=e=>{document.querySelector("#ptit").val
 document.querySelector("#pbtn2").onclick=()=>{if(document.querySelector("#pbtn").disabled)return;document.querySelector("#ptit").value=document.querySelector("#ptit2").value;document.querySelector("#pbtn").onclick()};
 """
 
-def aplicar(t):
-    fallos = []
-    def lit(a, b, nombre):
-        nonlocal t
-        if t.count(a) != 1:
-            fallos.append("%s (encontrado %d veces)" % (nombre, t.count(a)))
-        else:
-            t = t.replace(a, b)
-    def rx(p, f, nombre):
-        nonlocal t
-        n = len(re.findall(p, t))
-        if n != 1:
-            fallos.append("%s (encontrado %d veces)" % (nombre, n))
-        else:
-            t = re.sub(p, f, t)
+CSS_MENU = r"""/* ===== Barra de menú fija: todas las opciones visibles en dos líneas ===== */
+#topbar{position:fixed;top:0;left:0;right:0;z-index:50;padding:calc(env(safe-area-inset-top,0px) + 8px) 10px 6px;display:flex;justify-content:center;pointer-events:none}
+#topbar .dock{pointer-events:auto;width:100%;max-width:980px;display:flex;align-items:center;gap:8px;padding:6px 8px;border-radius:20px;background:linear-gradient(90deg,rgba(246,236,214,.97),rgba(227,235,250,.97) 60%,rgba(212,217,234,.97));border:1px solid #2a5ba8;box-shadow:0 8px 24px #1e3a7a33,inset 0 1px 0 #ffffffaa;-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px)}
+#tbsp{height:96px}
+#topbar .brand{flex:none;display:flex;flex-direction:column;align-items:center;gap:1px;padding:0 6px;color:#0f2a6b;cursor:pointer;user-select:none;-webkit-user-select:none}
+#topbar .brand .bl{font-size:1.6rem;line-height:1}
+#topbar .brand b{font-size:.78rem;font-weight:800;letter-spacing:.08em;color:#d97706}
+#topbar nav#nav{flex:1;min-width:0;display:grid;grid-template-columns:repeat(var(--c,4),minmax(0,1fr));grid-auto-rows:1fr;gap:4px;padding:0;position:static}
+#topbar nav#nav button{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;min-width:0;padding:5px 2px;border:0;border-radius:12px;background:rgba(255,255,255,.6);color:#10234b;font-weight:600;font-size:.7rem;line-height:1.1;box-shadow:none;transform:none}
+#topbar nav#nav button:hover{background:rgba(255,255,255,.95);transform:none}
+#topbar nav#nav button span:first-child{font-size:1.1rem;line-height:1.1}
+#topbar nav#nav button span:last-child{max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+#topbar nav#nav button.on{background:var(--ye);color:#0a0f1e;box-shadow:0 3px 10px #d9770655}
+#topbar nav#nav button.out{background:#ef4444;color:#fff}
+@media(min-width:700px){
+ #tbsp{height:104px}
+ #topbar .brand{flex-direction:row;gap:8px;padding:0 10px}
+ #topbar .brand b{font-size:1.3rem;letter-spacing:.06em}
+ #topbar nav#nav button{flex-direction:row;gap:6px;padding:9px 8px;font-size:.9rem}
+ #topbar nav#nav button span:first-child{font-size:1.05rem}
+}
+#topbar nav#nav button span:first-child{margin:0}"""
 
+TOPBAR = r"""<div id="topbar">
+ <div class="dock">
+  <div id="tt" class="brand" aria-label="Torrejón Juncal @@MARCA@@. Haz cinco clics para abrir el acceso de administración">
+   <span class="bl">⚽</span><b class="cn">@@MARCA@@</b>
+  </div>
+  <nav id="nav"></nav>
+ </div>
+</div>"""
+
+NV_SH = r""" const SH={jor:"Jornadas",cal:"Calendario",cla:"Clasif.",cop:"Copa",gol:"Goleadores",cro:"Jugadores",jug:"Jugadas",piz:"Pizarra",hor:"Horarios",pla:"Plantilla",ent:"Entrenos",log:"Login",out:"Salir"};"""
+NV_LINE = r""" const nv=document.getElementById("nav");nv.style.setProperty("--c",Math.ceil(tabs.length/2));"""
+NV_HTML = r""" nv.innerHTML=tabs.map(([k,l])=>{const ic=l.split(" ")[0],oc=k=="log"?"unlock()":k=="out"?"setEdit(false)":`tab='${k}';if(tab=='jor')jnAuto=true;if(tab=='ent')entD='';if(tab=='jug')PL=null;render()`;return`<button class="${tab==k?'on':''}${k=='out'?' out':''}" onclick="${oc}"><span>${ic}</span><span>${SH[k]}</span></button>`}).join("");"""
+SETTB = r"""function setTb(){const tb=document.getElementById("topbar"),sp=document.getElementById("tbsp");if(tb&&sp&&tb.offsetHeight>0)sp.style.height=(tb.offsetHeight+4)+"px"}"""
+FIT_TB = r""" const tb=document.getElementById("topbar"),sp=document.getElementById("tbsp");
+ if(tb)tb.style.display=FS?"none":"";
+ if(sp)sp.style.display=FS?"none":"";
+ if(!FS)setTb();"""
+
+class Parche:
+    def __init__(self, t):
+        self.t = t
+        self.fallos = []
+    def lit(self, a, b, nombre):
+        n = self.t.count(a)
+        if n != 1:
+            self.fallos.append("%s (encontrado %d veces)" % (nombre, n))
+        else:
+            self.t = self.t.replace(a, b)
+    def rx(self, patron, f, nombre, flags=0):
+        n = len(re.findall(patron, self.t, flags))
+        if n != 1:
+            self.fallos.append("%s (encontrado %d veces)" % (nombre, n))
+        else:
+            self.t = re.sub(patron, f, self.t, flags=flags)
+
+def etapa_pizarra(p):
     # 1) Bloque azul solo en Jornadas
-    lit('document.getElementById("hero").style.display="";',
+    p.lit('document.getElementById("hero").style.display="";',
         'document.getElementById("hero").style.display=tab=="jor"?"":"none";', "hero solo en Jornadas")
     # CSS
-    lit("</style>", CSS + "\n</style>", "cierre de <style>")
+    p.lit("</style>", CSS + "\n</style>", "cierre de <style>")
     # HTML de la barra inferior y tarjeta antigua oculta
-    lit('<div id="pzf"></div>', BAR, "contenedor #pzf")
-    rx(r'<div class="card">(\s*)<div class="pubr">', lambda m: '<div class="card" hidden style="display:none">' + m.group(1) + '<div class="pubr">', "tarjeta de grabar")
+    p.lit('<div id="pzf"></div>', BAR, "contenedor #pzf")
+    p.rx(r'<div class="card">(\s*)<div class="pubr">', lambda m: '<div class="card" hidden style="display:none">' + m.group(1) + '<div class="pubr">', "tarjeta de grabar")
     # JS
-    lit("let pzFr=null,pzQ=null;", "let pzFr=null,pzQ=null,PFS=false;", "variables de pizarra")
-    lit("function ajusta(){try{const d=", "function ajusta(){try{if(PFS)return;const d=", "función ajusta")
-    lit('pzFr.addEventListener("load",()=>{ajusta();', 'pzFr.addEventListener("load",()=>{pzStyle();ajusta();', "evento load del iframe")
-    lit("function ensurePiz(){", JS_PRE + "function ensurePiz(){", "función ensurePiz")
-    rx(r'function setPSt\(t\)\{[^}]*\}', lambda m: JS_POST.rstrip("\n"), "función setPSt")
-    lit('document.body.style.overflow=FS?"hidden":"";', 'document.body.style.overflow=(FS||PFS)?"hidden":"";', "overflow en fit")
-    rx(r'if\(!document\.fullscreenElement&&FS\)\{leaveFS\(\);render\(\)\}', lambda m: m.group(0) + "if(!document.fullscreenElement&&PFS)setPzFS(false);", "evento fullscreenchange")
-    lit("if(sp)ensurePiz();", "if(sp)ensurePiz();if(!sp&&PFS)setPzFS(false);", "render de pizarra")
-    rx(r'(TS\.on=false;\s*)(closeVer\(\);)', lambda m: m.group(1) + "setPzFS(false);" + m.group(2), "función setEdit")
-    lit("if(ver)closeVer()}});", "if(ver)closeVer();if(PFS)setPzFS(false)}});", "tecla Escape")
-    rx(r'\$q?\("#ptit"\)\.focus\(\)', lambda m: 'document.getElementById("ptit2").focus()', "foco del título")
-    return t, fallos
+    p.lit("let pzFr=null,pzQ=null;", "let pzFr=null,pzQ=null,PFS=false;", "variables de pizarra")
+    p.lit("function ajusta(){try{const d=", "function ajusta(){try{if(PFS)return;const d=", "función ajusta")
+    p.lit('pzFr.addEventListener("load",()=>{ajusta();', 'pzFr.addEventListener("load",()=>{pzStyle();ajusta();', "evento load del iframe")
+    p.lit("function ensurePiz(){", JS_PRE + "function ensurePiz(){", "función ensurePiz")
+    p.rx(r'function setPSt\(t\)\{[^}]*\}', lambda m: JS_POST.rstrip("\n"), "función setPSt")
+    p.lit('document.body.style.overflow=FS?"hidden":"";', 'document.body.style.overflow=(FS||PFS)?"hidden":"";', "overflow en fit")
+    p.rx(r'if\(!document\.fullscreenElement&&FS\)\{leaveFS\(\);render\(\)\}', lambda m: m.group(0) + "if(!document.fullscreenElement&&PFS)setPzFS(false);", "evento fullscreenchange")
+    p.lit("if(sp)ensurePiz();", "if(sp)ensurePiz();if(!sp&&PFS)setPzFS(false);", "render de pizarra")
+    p.rx(r'(TS\.on=false;\s*)(closeVer\(\);)', lambda m: m.group(1) + "setPzFS(false);" + m.group(2), "función setEdit")
+    p.lit("if(ver)closeVer()}});", "if(ver)closeVer();if(PFS)setPzFS(false)}});", "tecla Escape")
+    p.rx(r'\$q?\("#ptit"\)\.focus\(\)', lambda m: 'document.getElementById("ptit2").focus()', "foco del título")
+
+def etapa_menu(p):
+    t = p.t
+    m = re.search(r'"corto":\s*"([^"]+)"', t)
+    marca = (m.group(1) if m else "Juncal").upper()
+    marca = marca.replace("&", "&amp;").replace("<", "&lt;")
+    barra = TOPBAR.replace("@@MARCA@@", marca)
+    # 1) Fuera el banner de arriba
+    p.rx(r'<header class="site-banner">.*?</header>\s*', "", "banner de cabecera", re.S)
+    # 2) El menú sale de la página y pasa a la barra superior
+    p.lit('<nav id="nav"></nav>', "", "menú <nav id=nav>")
+    p.lit('<div class="wrap">', barra + '\n<div class="wrap">\n<div id="tbsp"></div>', "contenedor .wrap")
+    p.lit("</style>", CSS_MENU + "\n</style>", "cierre de <style> (menú)")
+    # 3) JavaScript del menú
+    p.lit('const nv=document.getElementById("nav"),big=tabs.length>4;nv.style.setProperty("--n",big?3:4);nv.className=big?"x":"";',
+          NV_SH.strip() + "\n" + NV_LINE.strip(), "construcción del menú")
+    p.rx(r'nv\.innerHTML=tabs\.map[^\n]*', lambda m: NV_HTML.strip(), "botones del menú")
+    p.rx(r'function fit\(\)\{(\s*)const h=document\.getElementById\("hero"\);',
+         lambda m: SETTB + "\nfunction fit(){" + m.group(1) + 'const h=document.getElementById("hero");\n' + FIT_TB, "función fit")
+    p.lit('document.getElementById("app").innerHTML=h}', 'document.getElementById("app").innerHTML=h;setTb()}', "final de render")
+    p.lit("render();setInterval(tick,1000);",
+          'render();setInterval(tick,1000);\ntry{new ResizeObserver(setTb).observe(document.getElementById("topbar"))}catch(e){}', "arranque")
+    # línea inútil (el botón de descarga está comentado): se quita si existe
+    p.t = re.sub(r'<script>if\(window\.Capacitor\|\|navigator\.standalone\)document\.getElementById\("dl"\)\.style\.display="none"</script>\s*', "", p.t)
+
+def aplicar(t):
+    p = Parche(t)
+    hecho = False
+    if 'id="pzbar"' not in p.t:
+        etapa_pizarra(p); hecho = True
+    if 'id="topbar"' not in p.t:
+        etapa_menu(p); hecho = True
+    return p.t, p.fallos, hecho
 
 def recoger(args):
     """Convierte carpetas en la lista de .html con pizarra que hay dentro (también en subcarpetas)."""
@@ -148,11 +224,11 @@ def main():
     ok = salt = mal = 0
     for f in ficheros:
         t = open(f, encoding="utf-8").read()
-        if 'id="pzbar"' in t:
+        nuevo, fallos, hecho = aplicar(t)
+        if not hecho:
             print("= %s: ya tenía los cambios, se salta." % f)
             salt += 1
             continue
-        nuevo, fallos = aplicar(t)
         if fallos:
             print("✗ %s: NO modificado. Faltan estos puntos:" % f)
             for x in fallos:

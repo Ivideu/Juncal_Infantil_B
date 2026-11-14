@@ -72,7 +72,7 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add -A
-          git commit -m "Categorías al formato nuevo: pizarra a pantalla completa y próximo partido solo en Jornadas"
+          git commit -m "Categorías al formato nuevo: menú superior, sin banner, pizarra a pantalla completa y próximo partido solo en Jornadas"
           git push origin main
 
       - name: Avisar si alguna página no se pudo actualizar

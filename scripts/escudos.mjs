@@ -38,7 +38,13 @@ function urlEscudo(p, lado) {
   }
   return "";
 }
-const absoluta = u => u.startsWith("//") ? "https:" + u : u.startsWith("/") ? "https://www.rffm.es" + u : u;
+// La RFFM guarda las imágenes en appweb.rffm.es (www.rffm.es devuelve una página HTML); se prueban varias formas de la misma ruta
+function candidatas(u) {
+  if (/^https?:\/\//i.test(u) && !/\/\/www\.rffm\.es\/(?!_next\/image)/i.test(u)) return [u];
+  const ruta = u.replace(/^https?:\/\/www\.rffm\.es/i, "").replace(/^\/*/, "/");
+  const real = "https://appweb.rffm.es/" + ruta;                      // https://appweb.rffm.es//pnfg/pimg/Clubes/…png
+  return [real, "https://www.rffm.es/_next/image?url=" + encodeURIComponent(real) + "&w=384&q=75", "https://www.rffm.es" + ruta];
+}
 
 const equipos = new Map();          // cod -> { nombre, url }
 let avisoClaves = false;
@@ -63,15 +69,18 @@ let bajados = 0, faltan = 0;
 for (const [cod, e] of equipos) {
   const f = path.join(DIR, cod + ".png");
   if (fs.existsSync(f) && fs.statSync(f).size > 200) continue;
-  const url = e.url ? absoluta(e.url) : PLANTILLA ? PLANTILLA.replace("{cod}", cod) : "";
-  if (!url) { faltan++; console.warn("Sin URL de escudo:", cod, e.nombre); continue; }
-  try {
-    const r = await fetch(url, { headers: { "User-Agent": UA }, signal: AbortSignal.timeout(20000) });
-    const tipo = r.headers.get("content-type") || "";
-    if (!r.ok || !/image/i.test(tipo)) { faltan++; console.warn("No es una imagen:", cod, e.nombre, r.status, tipo); continue; }
-    fs.writeFileSync(f, Buffer.from(await r.arrayBuffer()));
-    bajados++; console.log("Escudo guardado:", cod, e.nombre);
-  } catch (err) { faltan++; console.warn("Fallo al bajar", cod, e.nombre, String(err)); }
+  const lista = e.url ? candidatas(e.url) : PLANTILLA ? [PLANTILLA.replace("{cod}", cod)] : [];
+  if (!lista.length) { faltan++; console.warn("Sin URL de escudo:", cod, e.nombre); continue; }
+  let guardado = false, ultimo = "";
+  for (const url of lista) {
+    try {
+      const r = await fetch(url, { headers: { "User-Agent": UA, Accept: "image/avif,image/webp,image/png,image/*,*/*;q=0.8", Referer: "https://www.rffm.es/" }, signal: AbortSignal.timeout(20000) });
+      const tipo = r.headers.get("content-type") || "";
+      if (r.ok && /image/i.test(tipo)) { fs.writeFileSync(f, Buffer.from(await r.arrayBuffer())); guardado = true; bajados++; console.log("Escudo guardado:", cod, e.nombre); break; }
+      ultimo = `${url} -> ${r.status} ${tipo}`;
+    } catch (err) { ultimo = `${url} -> ${String(err)}`; }
+  }
+  if (!guardado) { faltan++; console.warn("No se pudo bajar", cod, e.nombre, "| valor RFFM:", e.url, "| último intento:", ultimo); }
   await sleep(300);
 }
 console.log(`Hecho. Nuevos: ${bajados}. Sin escudo: ${faltan}.`);

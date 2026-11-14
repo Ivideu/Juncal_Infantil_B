@@ -1,17 +1,23 @@
 // scripts/sync.mjs — Node 20, sin dependencias
 // Lee la RFFM y escribe en Firebase:
 //   · TODOS los partidos: fecha, hora
-//   · Partidos del Juncal B: además el pabellón (m.p). NUNCA resultado ni goleadores (los pones tú en el admin)
+//   · Partidos del Juncal B: además el pabellón (m.p) y, si tú no lo has puesto, el RESULTADO final
+//     (nunca goleadores: esos los pones tú en el admin; nunca pisa un resultado que ya hayas puesto)
 //   · Partidos de otros equipos: resultado (nunca goleadores)
 const FB = "https://juncal-f0b64-default-rtdb.europe-west1.firebasedatabase.app";
 const { FBKEY, FBMAIL, FBPASS, FCM_SERVICE_ACCOUNT } = process.env;
-const SOLO_CERRADAS = process.env.SOLO_CERRADAS === "1";   // 1 = solo guardar resultados con acta cerrada
+// 1 = solo guardar resultados con acta cerrada.
+// 0 = también los que ya han pasado ESPERA_MIN minutos desde su hora de inicio, aunque el acta siga abierta
+const SOLO_CERRADAS = process.env.SOLO_CERRADAS === "1";
+const ESPERA_MIN = +process.env.ESPERA_MIN || 100;
+// 1 = rellenar el resultado de los partidos del Juncal B cuando no lo hayas puesto tú; 0 = nunca
+const RESULTADO_PROPIO = process.env.RESULTADO_PROPIO !== "0";
 const MANUAL = process.env.GITHUB_EVENT_NAME === "workflow_dispatch";
-// GitHub programa en UTC; aquí filtramos por hora de Madrid (9:00–22:00), también con cambio de hora
+// GitHub programa en UTC; aquí filtramos por hora de Madrid (9:00–22:59), también con cambio de hora
 const ahoraMadrid = new Intl.DateTimeFormat("es-ES", { timeZone: "Europe/Madrid", hour: "numeric", minute: "numeric", hourCycle: "h23" }).formatToParts(new Date());
 const horaMadrid = +ahoraMadrid.find(x => x.type === "hour").value, minMadrid = +ahoraMadrid.find(x => x.type === "minute").value;
-if (!MANUAL && (horaMadrid < 9 || horaMadrid > 22 || (horaMadrid === 22 && minMadrid > 5))) { console.log("Fuera de horario:", horaMadrid + ":" + minMadrid, "en Madrid"); process.exit(0); }
-const FULLRUN = MANUAL || (horaMadrid === 9 && minMadrid < 10);   // primera ejecución del día y las manuales: las 22 jornadas
+if (!MANUAL && (horaMadrid < 9 || horaMadrid > 22)) { console.log("Fuera de horario:", horaMadrid + ":" + minMadrid, "en Madrid"); process.exit(0); }
+const FULLRUN = MANUAL || horaMadrid === 9;   // primera ejecución del día (las 9h) y las manuales: las 22 jornadas
 const ME = 10, GRUPO = "28125503";
 const sleep = ms => new Promise(r => setTimeout(r, ms));
 
@@ -46,6 +52,14 @@ const iso = f => { const k = String(f || "").match(/^(\d{2})[-/](\d{2})[-/](\d{4
 const num = v => (v === "" || v == null || isNaN(+v)) ? null : +v;
 const limpiaCampo = s => String(s || "").replace(/\s*\(futbol sala\)\s*$/i, "").trim();
 
+// Fecha (AAAA-MM-DD) y hora (HH:MM) de Madrid -> milisegundos UTC
+function madridMs(d, t) {
+  const [y, mo, da] = d.split("-").map(Number), [h, mi] = t.split(":").map(Number), g = Date.UTC(y, mo - 1, da, h, mi || 0);
+  const off = z => { const p = new Intl.DateTimeFormat("en-US", { timeZone: "Europe/Madrid", hourCycle: "h23", year: "numeric", month: "numeric", day: "numeric", hour: "numeric", minute: "numeric" })
+    .formatToParts(new Date(z)).reduce((o, x) => (o[x.type] = +x.value, o), {}); return Date.UTC(p.year, p.month - 1, p.day, p.hour, p.minute) - z; };
+  return g - off(g - off(g));
+}
+
 // ---------- RFFM ----------
 async function rffm(n) {
   const url = `https://www.rffm.es/api/results?idGroup=${GRUPO}&round=${n}`;
@@ -66,8 +80,8 @@ async function rffm(n) {
 }
 
 async function leerRFFM() {
-  const hoy = Date.now(), hoyISO = new Date(hoy).toISOString().slice(0, 10), out = [];
-  // Primeras ejecuciones del día y manuales: las 22 jornadas. Resto: últimos 14 días y próximos 7.
+  const hoy = Date.now(), hoyISO = new Date(hoy).toLocaleDateString("sv-SE", { timeZone: "Europe/Madrid" }), out = [];
+  // Primera ejecución del día (9h) y manuales: las 22 jornadas. Resto: últimos 14 días y próximos 7.
   const rondas = FULLRUN ? J : J.filter(j => {
     const t = new Date(j.d + "T12:00:00Z").getTime();
     return t > hoy - 14 * 864e5 && t < hoy + 7 * 864e5;
@@ -84,9 +98,11 @@ async function leerRFFM() {
         continue;                                   // descansa o equipo no reconocido
       }
       const fecha = iso(p.fecha), hora = (p.hora || "").slice(0, 5);
-      const jugado = p.partido_en_juego !== "1" && fecha && fecha <= hoyISO && (!SOLO_CERRADAS || p.acta_cerrada === "1");
-      if (fecha && hora && fecha === hoyISO && new Date(`${fecha}T${hora}:00Z`) < hoy - 90 * 6e4 &&
-          (!jugado || num(p.Goles_casa) === null))
+      const inicio = fecha && hora ? madridMs(fecha, hora) : 0;
+      const cerrada = p.acta_cerrada === "1";
+      const pasado = inicio && hoy > inicio + ESPERA_MIN * 6e4;
+      const jugado = p.partido_en_juego !== "1" && fecha && fecha <= hoyISO && (cerrada || (!SOLO_CERRADAS && pasado));
+      if (inicio && hoy > inicio + 90 * 6e4 && fecha === hoyISO && (!jugado || num(p.Goles_casa) === null))
         console.log("Sin resultado aún:", p.Nombre_equipo_local, "-", p.Nombre_equipo_visitante,
           "| acta_cerrada=" + p.acta_cerrada, "| goles=" + p.Goles_casa + "-" + p.Goles_visitante, "| en_juego=" + p.partido_en_juego);
       out.push({ h, a, fecha, hora, campo: limpiaCampo(p.campojuego),
@@ -113,11 +129,12 @@ async function login() {
   return d.idToken;
 }
 
+const hayRes = m => m.h !== undefined && m.h !== "" && m.a !== undefined && m.a !== "";
 let avisos = [];
 function aplicar(S, partidos) {
   S.m ||= {};
   avisos = [];
-  const hoyISO = new Date().toISOString().slice(0, 10);
+  const hoyISO = new Date().toLocaleDateString("sv-SE", { timeZone: "Europe/Madrid" });
   let total = 0;
   for (const r of partidos) {
     const jor = J.find(j => j.p.some(([x, y]) => x === r.h && y === r.a));
@@ -135,9 +152,12 @@ function aplicar(S, partidos) {
       else if (r.hora !== prevT || r.fecha !== prevD) avisos.push({ tipo: "cambio", jor: jor.n, h: r.h, a: r.a, fecha: r.fecha, hora: r.hora });
     }
     if (!mio && Number.isInteger(r.gl) && Number.isInteger(r.gv)) {
-      const igual = m.h !== undefined && m.h !== "" && +m.h === r.gl &&
-                    m.a !== undefined && m.a !== "" && +m.a === r.gv;
+      const igual = hayRes(m) && +m.h === r.gl && +m.a === r.gv;
       if (!igual) { m.h = r.gl; m.a = r.gv; ch++; }
+    }
+    // Partido del Juncal B: solo rellena el resultado si tú no lo has puesto ni has usado el directo
+    if (mio && RESULTADO_PROPIO && !m.c && !hayRes(m) && Number.isInteger(r.gl) && Number.isInteger(r.gv)) {
+      m.h = r.gl; m.a = r.gv; ch++;
     }
     if (ch) { S.m[k] = m; total += ch; }
   }

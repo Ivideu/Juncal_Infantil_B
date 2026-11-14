@@ -20,7 +20,7 @@ jobs:
           python-version: "3.12"
       - name: Ejecutar los scripts
         run: |
-          for s in escudos_categorias descanso_categorias cromos_nombres; do
+          for s in escudos_categorias descanso_categorias cromos_nombres jornada_semana; do
             if [ -f "scripts/$s.py" ]; then echo "=== $s ==="; python3 "scripts/$s.py"; else echo "(no está scripts/$s.py)"; fi
           done
       - name: Guardar cambios

@@ -56,6 +56,7 @@ for (const cat of conf.categorias || []) {
     for (const p of ps) for (const lado of ["local", "visitante"]) {
       const cod = String(p["CodEquipo_" + lado] || "");
       if (!cod || cod === "-1") continue;
+      if (/^\s*descansa/i.test(p["Nombre_equipo_" + lado] || "")) continue;   // la jornada de descanso no es un equipo
       const prev = equipos.get(cod) || { nombre: p["Nombre_equipo_" + lado], url: "" };
       prev.url = prev.url || urlEscudo(p, lado);
       equipos.set(cod, prev);

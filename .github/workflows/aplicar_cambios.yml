@@ -12,7 +12,7 @@ on:
         required: false
         default: "Categorias"
       script:
-        description: "Ruta del script dentro del repositorio"
+        description: "Ruta del script (si no está ahí, se busca solo en todo el repositorio)"
         required: false
         default: "aplicar_cambios.py"
 
@@ -42,9 +42,14 @@ jobs:
           CARPETA="${CARPETA:-Categorias}"
           SCRIPT="${SCRIPT:-aplicar_cambios.py}"
           if [ ! -f "$SCRIPT" ]; then
-            echo "::error::No encuentro el script en '$SCRIPT'. Súbelo al repositorio o cambia la ruta."
-            exit 1
+            echo "No está en '$SCRIPT'; lo busco en el resto del repositorio..."
+            SCRIPT="$(find . -type f -iname 'aplicar*cambios*.py' -not -path './.git/*' | head -n 1)"
+            if [ -z "$SCRIPT" ]; then
+              echo "::error::No encuentro aplicar_cambios.py en ninguna carpeta del repositorio. Súbelo (por ejemplo a la raíz) y vuelve a lanzar."
+              exit 1
+            fi
           fi
+          echo "Uso el script: $SCRIPT"
           if [ ! -d "$CARPETA" ]; then
             echo "::error::No existe la carpeta '$CARPETA'. Ojo: GitHub distingue mayúsculas y minúsculas."
             ls -la

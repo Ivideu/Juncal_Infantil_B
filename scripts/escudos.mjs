@@ -34,7 +34,7 @@ function urlEscudo(p, lado) {
   const w = lado === "local" ? /local|home/i : /visit|away/i;
   for (const [k, v] of Object.entries(p)) {
     if (typeof v !== "string" || !v) continue;
-    if (/escudo|logo|shield|badge|imagen|foto/i.test(k) && w.test(k)) return v;
+    if (/escudo|logo|shield|badge|imag|img|foto/i.test(k) && w.test(k)) return v;
   }
   return "";
 }

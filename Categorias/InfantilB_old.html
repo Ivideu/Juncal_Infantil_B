@@ -689,7 +689,11 @@ function hero(){const lv=liveM();lvOn=!!lv;if(lv)return liveHero(lv);const nx=ne
  <p class="loc">${loc(nx.h,m)}</p>
  ${m.t?`<div class="cd" id="cd" data-t="${when(nx).getTime()}"></div>`:""}${E()?`<p style="text-align:center;margin-top:14px"><button onclick="startLive(${nx.r.n},${nx.h})">📡 Iniciar directo ahora</button></p>`:""}`}
 function tick(){tickLive();const e=document.getElementById("cd");if(!e)return;let s=Math.max(0,(+e.dataset.t-Date.now())/1e3|0);const v=[[86400,"días"],[3600,"horas"],[60,"min"],[1,"seg"]];e.innerHTML=v.map(([k,l])=>{const n=s/k|0;s%=k;return`<div><b>${String(n).padStart(2,"0")}</b><span>${l}</span></div>`}).join("")}
-function jsel(){const c=(nextL()||{r:{n:0}}).r.n;
+/* Jornada de la semana: hasta el domingo a las 23:00 (Madrid) de la semana de su fecha */
+function wkJ(){const mad=(y,m,d)=>{for(const o of [1,2]){const t=Date.UTC(y,m-1,d,23-o,0);if(+new Intl.DateTimeFormat("en-GB",{timeZone:"Europe/Madrid",hour:"numeric",hourCycle:"h23"}).format(t)===23)return t}return Date.UTC(y,m-1,d,22,0)};
+ const fin=iso=>{const t=new Date(iso+"T12:00:00Z");t.setUTCDate(t.getUTCDate()+(7-t.getUTCDay())%7);return mad(t.getUTCFullYear(),t.getUTCMonth()+1,t.getUTCDate())};
+ const r=J.find(x=>x.d&&fin(x.d)>Date.now());return r?r.n:J.length}
+function jsel(){const c=wkJ();
  return`<div class="jsel"><button aria-label="Jornada anterior" ${jn<=1?"disabled":""} onclick="jn=${jn-1};jnAuto=false;render()">‹</button><select aria-label="Elegir jornada" onchange="jn=+this.value;jnAuto=false;render()">${J.map(r=>`<option value="${r.n}" ${jn==r.n?"selected":""}>Jornada ${r.n} · ${r.d.slice(8)}/${r.d.slice(5,7)}${r.n==c?" · actual":""}</option>`).join("")}</select><button aria-label="Jornada siguiente" ${jn>=J.length?"disabled":""} onclick="jn=${jn+1};jnAuto=false;render()">›</button></div>`}
 let subA=false;
 async function subAdmin(on){try{const FM=window.Capacitor&&Capacitor.Plugins&&Capacitor.Plugins.FirebaseMessaging;if(!FM)return;
@@ -700,7 +704,7 @@ function render(){
  document.getElementById("hero").style.display="";
  document.getElementById("hero").innerHTML=hero();fit();tick();goalWatch();
  document.getElementById("tbtn").classList.toggle("on",TS.on);document.getElementById("tout").style.display=document.getElementById("trst").style.display=TS.on?"":"none";
- if(jnAuto){const nx=nextL();jn=nx?nx.r.n:J.length}
+ if(jnAuto)jn=wkJ();
  const tabs=[["jor","🗓 Jornadas"],["cal","📅 Mi calendario"],["cla","🏆 Clasificación"],["cop","🥇 Copa"],["gol","👟 Goleadores"],["cro","🎽 Jugadores"]].filter(t=>t[0]!="cop"||COPA||E());if(E())tabs.push(["hor","🕒 Horarios"],["pla","👥 Plantilla"],["ent","🏃 Entrenos"]);
  const nv=document.getElementById("nav"),big=tabs.length>4;nv.style.setProperty("--n",big?3:4);nv.className=big?"x":"";
  nv.innerHTML=tabs.map(([k,l])=>{const[ic,...tx]=l.split(" ");return`<button class="${tab==k?'on':''}" onclick="tab='${k}';if(tab=='jor')jnAuto=true;if(tab=='ent')entD='';render()"><span>${ic}</span><span>${tx.join(" ")}</span></button>`}).join("");

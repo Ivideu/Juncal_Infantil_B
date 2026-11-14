@@ -1,0 +1,71 @@
+name: Aplicar cambios a las categorías
+
+# Ejecuta aplicar_cambios.py sobre las páginas de categoría y sube el resultado al repositorio.
+# Se lanza a mano: pestaña Actions > "Aplicar cambios a las categorías" > Run workflow.
+
+on:
+  workflow_dispatch:
+    inputs:
+      archivos:
+        description: "Archivos a procesar, separados por espacios (ej: categorias/AficionadoA.html categorias/AficionadoB.html). Vacío = todas las páginas del repositorio que tengan pizarra"
+        required: false
+        default: ""
+      script:
+        description: "Ruta del script dentro del repositorio"
+        required: false
+        default: "aplicar_cambios.py"
+
+permissions:
+  contents: write
+
+jobs:
+  aplicar:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Descargar el repositorio
+        uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - name: Instalar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Ejecutar el script
+        env:
+          ARCHIVOS: ${{ github.event.inputs.archivos }}
+          SCRIPT: ${{ github.event.inputs.script }}
+        run: |
+          set -e
+          if [ ! -f "$SCRIPT" ]; then
+            echo "No encuentro el script en '$SCRIPT'. Súbelo al repositorio o cambia la ruta."
+            exit 1
+          fi
+          SCRIPT_ABS="$(realpath "$SCRIPT")"
+          if [ -n "$ARCHIVOS" ]; then
+            read -r -a FICHEROS <<< "$ARCHIVOS"
+          else
+            mapfile -t FICHEROS < <(grep -rl 'id="pizW"' --include='*.html' . | grep -v '_copia_seguridad' | sort)
+          fi
+          if [ "${#FICHEROS[@]}" -eq 0 ]; then
+            echo "No hay ninguna página con pizarra que procesar."
+            exit 0
+          fi
+          echo "Páginas a procesar:"
+          printf ' - %s\n' "${FICHEROS[@]}"
+          python "$SCRIPT_ABS" "${FICHEROS[@]}"
+          # Las copias de seguridad no hacen falta: el original queda en el historial de Git
+          rm -rf _copia_seguridad
+
+      - name: Subir los cambios
+        run: |
+          if git diff --quiet; then
+            echo "No hay cambios que subir."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "Pizarra a pantalla completa y bloque de próximo partido solo en Jornadas"
+          git push origin main

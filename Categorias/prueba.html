@@ -423,7 +423,7 @@ select{font:inherit;background:var(--bg);color:var(--tx);border:1px solid var(--
 
 <!-- Pizarra del entrenador (fuera de #app para que no se reinicie al refrescar la página) -->
 <div id="pizW" hidden>
- <div id="pzf"><div id="pzbar"><span class="fsx"><input id="ptit2" maxlength="60" placeholder="Título de la jugada" aria-label="Título de la jugada"><button type="button" id="pbtn2">⏺ Grabar y publicar</button><span id="pst2" role="status"></span></span><button type="button" id="pzfs">⛶ Pantalla completa</button></div></div>
+ <div id="pzf"><div id="pzbar"><span class="fsx"><input id="ptit2" maxlength="60" placeholder="Título de la jugada" aria-label="Título de la jugada"><button type="button" id="pbtn2">⏺ Grabar y publicar</button><span id="pst2" role="status"></span></span></div></div>
  <div class="card" hidden style="display:none">
   <div class="pubr">
    <div style="flex:1;min-width:200px"><label for="ptit" style="margin-top:0">Título de la jugada</label><input id="ptit" maxlength="60" placeholder="Ej.: Saque de esquina en corto"></div>
@@ -1042,8 +1042,14 @@ async function delPl(i){
 let pzFr=null,pzQ=null,PFS=false;
 const PZ=()=>{try{return(pzFr&&pzFr.contentWindow&&pzFr.contentWindow.PZ)||null}catch(e){return null}};
 function ajusta(){try{if(PFS)return;const d=pzFr.contentDocument;if(d&&d.body)pzFr.style.height=Math.ceil(d.documentElement.scrollHeight)+"px"}catch(e){}}
-/* La barra de Pasos y Animación (3.ª barra de la pizarra) pasa a la parte superior */
-function pzStyle(){try{const d=pzFr.contentDocument;if(!d||d.getElementById("pzord"))return;const st=d.createElement("style");st.id="pzord";st.textContent=".app>.bar:nth-child(4){order:-1}";d.head.appendChild(st)}catch(e){}}
+/* Orden de la pizarra: 1) Colocar + pantalla completa, 2) Añadir, 3) Pasos y Animación, 4) Herramienta, 5) pista. Sin texto de ayuda */
+function pzStyle(){try{const d=pzFr.contentDocument;if(!d||d.getElementById("pzord"))return;
+ const st=d.createElement("style");st.id="pzord";
+ st.textContent=".app>.bar:nth-child(1){flex-direction:column;flex-wrap:nowrap;align-items:stretch;order:1}.app>.bar:nth-child(1)>.grp.colg{order:-1}.app>.bar:nth-child(4){order:2}.app>.bar:nth-child(2){order:3}.app>.cvw{order:4}.hint{display:none!important}";
+ d.head.appendChild(st);
+ const g=d.getElementById("form").closest(".grp");g.classList.add("colg");
+ if(!d.getElementById("pzfsIn")){const b=d.createElement("button");b.id="pzfsIn";b.type="button";b.textContent=PFS?"✕ Salir de pantalla completa":"⛶ Pantalla completa";b.style.marginLeft="auto";b.onclick=()=>parent.togPzFS();g.appendChild(b)}
+}catch(e){}}
 function ensurePiz(){
  if(pzFr)return;
  pzFr=document.createElement("iframe");pzFr.title="Pizarra táctica";pzFr.src=BASE+"pizarra.html";
@@ -1067,7 +1073,7 @@ function fsLayout(on){
 function setPzFS(on){
  const f=$("#pzf");if(!f||on===PFS)return;
  PFS=on;f.classList.toggle("fsp",on);
- $("#pzfs").textContent=on?"✕ Salir de pantalla completa":"⛶ Pantalla completa";
+ try{const b=pzFr.contentDocument.getElementById("pzfsIn");if(b)b.textContent=on?"✕ Salir de pantalla completa":"⛶ Pantalla completa"}catch(e){}
  document.body.style.overflow=(FS||PFS)?"hidden":"";
  if(on){
   try{const p=f.requestFullscreen&&f.requestFullscreen({navigationUI:"hide"});if(p&&p.catch)p.catch(()=>{})}catch(e){}
@@ -1079,7 +1085,7 @@ function setPzFS(on){
  if(pzFr&&!on)pzFr.style.height="900px";
  if(on)$("#ptit2").value=$("#ptit").value;
  fsLayout(on);setTimeout(()=>{if(PFS===on)fsLayout(on);ajusta()},150)}
-$("#pzfs").onclick=()=>setPzFS(!PFS);
+window.togPzFS=()=>setPzFS(!PFS);
 function setPSt(t){$("#pst").textContent=t;$("#pst2").textContent=t;$("#ptit2").value=$("#ptit").value}
 $("#ptit2").oninput=e=>{$("#ptit").value=e.target.value};
 $("#pbtn2").onclick=()=>{if($("#pbtn").disabled)return;$("#ptit").value=$("#ptit2").value;$("#pbtn").onclick()};

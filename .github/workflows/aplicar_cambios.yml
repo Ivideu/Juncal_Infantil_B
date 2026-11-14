@@ -1,0 +1,77 @@
+name: Aplicar cambios a las categorías
+
+# Pasa todas las páginas de la carpeta "Categorias" (y sus subcarpetas) al formato nuevo
+# ejecutando aplicar_cambios.py, y sube el resultado al repositorio.
+# Se lanza a mano: pestaña Actions > "Aplicar cambios a las categorías" > Run workflow.
+
+on:
+  workflow_dispatch:
+    inputs:
+      carpeta:
+        description: "Carpeta con las páginas de categoría (respeta mayúsculas y minúsculas)"
+        required: false
+        default: "Categorias"
+      script:
+        description: "Ruta del script dentro del repositorio"
+        required: false
+        default: "aplicar_cambios.py"
+
+permissions:
+  contents: write
+
+jobs:
+  aplicar:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Descargar el repositorio
+        uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - name: Instalar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Ejecutar el script
+        id: aplicar
+        env:
+          CARPETA: ${{ github.event.inputs.carpeta }}
+          SCRIPT: ${{ github.event.inputs.script }}
+        run: |
+          CARPETA="${CARPETA:-Categorias}"
+          SCRIPT="${SCRIPT:-aplicar_cambios.py}"
+          if [ ! -f "$SCRIPT" ]; then
+            echo "::error::No encuentro el script en '$SCRIPT'. Súbelo al repositorio o cambia la ruta."
+            exit 1
+          fi
+          if [ ! -d "$CARPETA" ]; then
+            echo "::error::No existe la carpeta '$CARPETA'. Ojo: GitHub distingue mayúsculas y minúsculas."
+            ls -la
+            exit 1
+          fi
+          set +e
+          python "$SCRIPT" "$CARPETA"
+          RC=$?
+          set -e
+          # Las copias de seguridad no hacen falta: el original queda en el historial de Git
+          rm -rf _copia_seguridad
+          echo "rc=$RC" >> "$GITHUB_OUTPUT"
+
+      - name: Subir los cambios
+        run: |
+          if git diff --quiet; then
+            echo "No hay cambios que subir."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "Categorías al formato nuevo: pizarra a pantalla completa y próximo partido solo en Jornadas"
+          git push origin main
+
+      - name: Avisar si alguna página no se pudo actualizar
+        if: steps.aplicar.outputs.rc != '0'
+        run: |
+          echo "::error::Alguna página no se pudo actualizar. Mira el registro del paso 'Ejecutar el script' para ver cuál y qué le falta."
+          exit 1

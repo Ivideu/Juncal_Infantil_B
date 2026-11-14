@@ -8,10 +8,11 @@ aplicar_cambios.py  ·  Pasa a las páginas de categoría los cambios de prueba.
   3) Campo del título de la jugada en blanco.
 
 USO (desde la carpeta donde están los .html de las categorías):
-    python aplicar_cambios.py                      -> procesa todos los .html que tengan pizarra
-    python aplicar_cambios.py AficionadoA.html AficionadoB.html
+    python aplicar_cambios.py Categorias           -> todos los .html con pizarra de esa carpeta (y subcarpetas)
+    python aplicar_cambios.py                      -> igual, pero en la carpeta actual
+    python aplicar_cambios.py AficionadoA.html     -> solo ese archivo
 
-Guarda una copia de cada original en la carpeta _copia_seguridad y sobrescribe el archivo.
+Guarda una copia de cada original en la carpeta _copia_seguridad y sobrescribe el archivo.\nTermina con error si alguna página no se ha podido actualizar.
 Si en una página no encuentra algún punto de anclaje, NO la toca y te dice cuál falta.
 Si la página ya tiene los cambios, la salta.
 """
@@ -120,30 +121,53 @@ def aplicar(t):
     rx(r'\$q?\("#ptit"\)\.focus\(\)', lambda m: 'document.getElementById("ptit2").focus()', "foco del título")
     return t, fallos
 
+def recoger(args):
+    """Convierte carpetas en la lista de .html con pizarra que hay dentro (también en subcarpetas)."""
+    res = []
+    for a in args:
+        if os.path.isdir(a):
+            for raiz, dirs, archivos in os.walk(a):
+                dirs[:] = [d for d in dirs if d != "_copia_seguridad" and not d.startswith(".")]
+                for n in sorted(archivos):
+                    if n.lower().endswith(".html"):
+                        ruta = os.path.join(raiz, n)
+                        if 'id="pizW"' in open(ruta, encoding="utf-8", errors="ignore").read():
+                            res.append(ruta)
+        elif os.path.isfile(a):
+            res.append(a)
+        else:
+            print("! No existe: %s" % a)
+    return res
+
 def main():
-    args = sys.argv[1:]
-    if args:
-        ficheros = args
-    else:
-        ficheros = [f for f in sorted(glob.glob("*.html")) if 'id="pizW"' in open(f, encoding="utf-8", errors="ignore").read()]
+    args = sys.argv[1:] or ["."]
+    ficheros = recoger(args)
     if not ficheros:
-        print("No he encontrado ningún .html con pizarra en esta carpeta.")
+        print("No he encontrado ningún .html con pizarra en: %s" % " ".join(args))
         return
-    os.makedirs("_copia_seguridad", exist_ok=True)
+    ok = salt = mal = 0
     for f in ficheros:
         t = open(f, encoding="utf-8").read()
         if 'id="pzbar"' in t:
             print("= %s: ya tenía los cambios, se salta." % f)
+            salt += 1
             continue
         nuevo, fallos = aplicar(t)
         if fallos:
             print("✗ %s: NO modificado. Faltan estos puntos:" % f)
             for x in fallos:
                 print("    - " + x)
+            mal += 1
             continue
-        shutil.copy2(f, os.path.join("_copia_seguridad", os.path.basename(f)))
+        dest = os.path.join("_copia_seguridad", os.path.relpath(f))
+        os.makedirs(os.path.dirname(dest) or ".", exist_ok=True)
+        shutil.copy2(f, dest)
         open(f, "w", encoding="utf-8", newline="").write(nuevo)
-        print("✓ %s: actualizado (copia en _copia_seguridad)." % f)
+        print("✓ %s: actualizado." % f)
+        ok += 1
+    print("\nResumen: %d actualizados, %d ya estaban, %d con problemas." % (ok, salt, mal))
+    if mal:
+        sys.exit(1)
 
 if __name__ == "__main__":
     main()

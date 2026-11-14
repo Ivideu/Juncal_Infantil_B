@@ -100,6 +100,14 @@ function renameP(a,b){const i=S.pl.indexOf(a);if(i>-1)S.pl[i]=b;
  Object.values(S.m).forEach(m=>["g","gm"].forEach(f=>{if(m[f]&&m[f][a]!==undefined){m[f][b]=m[f][a];delete m[f][a]}}));
  S.pl.sort((p,q)=>p.localeCompare(q))}
 function quitaP(a){const i=S.pl.indexOf(a);if(i>-1)S.pl.splice(i,1);delete S.dn[a];if(S.off)delete S.off[a]}
+/* Jugadores nuevos: se crean con cromo por defecto (Images/plantilla-jugador.jpg, posición Ala). Si es portero, se edita después. */
+window.addP=function(){
+ S.cromos=S.cromos||[];let k=0;
+ document.getElementById("np").value.split(/[,\n]/).map(x=>x.trim()).filter(Boolean).forEach(x=>{
+  const r=x.match(/^#?(\d{1,2})[\s.\-–]+(.+)$/),n=(r?r[2]:x).trim().replace(/[.$#\[\]\/]/g,"");if(!n)return;
+  if(!S.pl.includes(n))S.pl.push(n);if(r)S.dn[n]=r[1];
+  if(!S.cromos.some(c=>!c.coach&&c.name===n))S.cromos.push({id:Date.now().toString(36)+(k++),name:n,num:S.dn[n]||"",pos:"ala",coach:false})});
+ S.pl.sort((a,b)=>a.localeCompare(b));save()};
 window.cnPos=function(v){const co=v==="entrenador";document.getElementById("cn_pl").style.display=co?"none":"contents";document.getElementById("cn_co").style.display=co?"contents":"none"};
 window.addCromo=async function(){
  const g=i=>{const e=document.getElementById(i);return e?e.value.trim():""},pos=g("cn_pos"),coach=pos==="entrenador";

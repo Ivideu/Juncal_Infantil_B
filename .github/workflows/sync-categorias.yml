@@ -1,22 +1,15 @@
 name: Sincronizar categorías
 on:
-  workflow_dispatch:           # ejecución manual = revisión completa de todas las jornadas
+  workflow_dispatch:
     inputs:
       solo:
         description: "Id de una sola categoría (opcional, ej. cadete-a)"
         required: false
   schedule:
-    # Una vez por hora, todos los días. Minuto 27 (y no el 0) porque GitHub retrasa o se salta
-    # bastantes ejecuciones programadas en punto, que es cuando hay más carga.
-    # Va en UTC y cubre invierno y verano; el script solo actúa de 9:00 a 22:59 hora de Madrid.
-    - cron: "27 7-21 * * *"
-    # --- Alternativa si prefieres que solo corra de sábado a martes (quita el de arriba y activa este) ---
-    # - cron: "27 7-21 * * 6,0,1,2"
+    - cron: "*/10 * * * *"
 concurrency:
   group: sync-categorias
   cancel-in-progress: false
-permissions:
-  contents: read
 jobs:
   sync:
     runs-on: ubuntu-latest
@@ -32,5 +25,3 @@ jobs:
           FBMAIL: ${{ secrets.FBMAIL }}
           FBPASS: ${{ secrets.FBPASS }}
           SOLO: ${{ github.event.inputs.solo }}
-          SOLO_CERRADAS: "0"     # "1" = solo resultados con el acta cerrada
-          ESPERA_MIN: "100"      # minutos desde el inicio tras los que un partido "en juego" se da por terminado

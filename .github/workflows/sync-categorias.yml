@@ -6,7 +6,7 @@ on:
         description: "Id de una sola categoría (opcional, ej. cadete-a)"
         required: false
   schedule:
-    - cron: "*/10 * * * *"
+    - cron: "12 5-22 * * *"   # cada hora, todos los días (en UTC; el script solo actúa de 8:00 a 23:30 hora de Madrid)
 concurrency:
   group: sync-categorias
   cancel-in-progress: false

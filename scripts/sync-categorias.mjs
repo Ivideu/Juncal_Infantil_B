@@ -57,6 +57,20 @@ function madridMs(d, t) {
   return g - off(g - off(g));
 }
 
+// ---------- Jornada de la semana: dura hasta el domingo a las 23:00 (Madrid) ----------
+const madridFin = (y, m, d) => { for (const o of [1, 2]) { const t = Date.UTC(y, m - 1, d, 23 - o, 0);
+  if (+new Intl.DateTimeFormat("en-GB", { timeZone: "Europe/Madrid", hour: "numeric", hourCycle: "h23" }).format(t) === 23) return t; } return Date.UTC(y, m - 1, d, 22, 0); };
+const finSemana = isoF => { const t = new Date(isoF + "T12:00:00Z"); t.setUTCDate(t.getUTCDate() + (7 - t.getUTCDay()) % 7); return madridFin(t.getUTCFullYear(), t.getUTCMonth() + 1, t.getUTCDate()); };
+// fechas: array de "AAAA-MM-DD" (una por jornada, en orden). Devuelve los índices a leer: la jornada de esta semana
+// y la anterior hasta 36 h después de su fin (por si la RFFM cierra las actas tarde).
+function indicesActuales(fechas) {
+  const ahora = Date.now(); let cur = fechas.findIndex(f => f && finSemana(f) > ahora);
+  if (cur < 0) cur = fechas.length - 1;
+  const out = [cur];
+  if (cur > 0 && fechas[cur - 1] && ahora < finSemana(fechas[cur - 1]) + 36 * 36e5) out.unshift(cur - 1);
+  return out;
+}
+
 // ---------- RFFM ----------
 async function rffm(grupo, n) {
   const url = `https://www.rffm.es/api/results?idGroup=${grupo}&round=${n}`;
@@ -75,7 +89,7 @@ async function rffm(grupo, n) {
   return null;
 }
 
-// Devuelve { rondas:[{n,partidos}], full }. Completo: todas las jornadas hasta que la RFFM no devuelve más. Reciente: últimos 14 días y próximos 7.
+// Devuelve { rondas:[{n,partidos}], full }. Completo: todas las jornadas hasta que la RFFM no devuelve más. Reciente: solo la jornada de esta semana (hasta el domingo 23:00).
 async function leerRFFM(cat, prev) {
   const out = [], full = FULLRUN || !(prev && prev.cfg && prev.cfg.R && prev.cfg.R.length);
   if (full) {
@@ -99,12 +113,17 @@ async function leerRFFM(cat, prev) {
     }
     out.sort((a, b) => a.n - b.n);
   } else {
-    const hoy = Date.now();
-    for (let i = 0; i < prev.cfg.R.length; i++) {
-      const [dd, mm, aa] = prev.cfg.R[i].split("|")[0].split("-"), t = new Date(`${aa}-${mm}-${dd}T12:00:00Z`).getTime();
-      if (!(t > hoy - 14 * 864e5 && t < hoy + 7 * 864e5)) continue;
+    // Solo la jornada de esta semana (y la anterior unas horas, para los resultados que tardan en cerrarse)
+    const fechas = prev.cfg.R.map(r => { const [dd, mm, aa] = String(r).split("|")[0].split("-"); return `${aa}-${mm}-${dd}`; });
+    for (const i of indicesActuales(fechas)) {
       const d = await rffm(cat.grupo, i + 1);
-      if (d) out.push({ n: i + 1, partidos: d.partidos });
+      if (d) {
+        // Equipo que la web aún no conoce: se haría pasar por «descansa» y su resultado no se guardaría → lectura completa
+        const conocidos = new Set(Object.values(prev.cfg.COD || {}).map(String));
+        const nuevo = d.partidos.some(p => [p.CodEquipo_local, p.CodEquipo_visitante].some(c => +c !== -1 && c && !conocidos.has(String(c))));
+        if (nuevo) { console.log(`[${cat.id}] equipo nuevo en la jornada ${i + 1}: lectura completa`); return leerRFFM(cat, null); }
+        out.push({ n: i + 1, partidos: d.partidos });
+      }
       await sleep(1500);
     }
   }

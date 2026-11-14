@@ -10,8 +10,8 @@ const MANUAL = process.env.GITHUB_EVENT_NAME === "workflow_dispatch";
 // GitHub programa en UTC; aquí filtramos por hora de Madrid (9:00–22:00), también con cambio de hora
 const ahoraMadrid = new Intl.DateTimeFormat("es-ES", { timeZone: "Europe/Madrid", hour: "numeric", minute: "numeric", hourCycle: "h23" }).formatToParts(new Date());
 const horaMadrid = +ahoraMadrid.find(x => x.type === "hour").value, minMadrid = +ahoraMadrid.find(x => x.type === "minute").value;
-if (!MANUAL && (horaMadrid < 9 || horaMadrid > 22 || (horaMadrid === 22 && minMadrid > 5))) { console.log("Fuera de horario:", horaMadrid + ":" + minMadrid, "en Madrid"); process.exit(0); }
-const FULLRUN = MANUAL || (horaMadrid === 9 && minMadrid < 10);   // primera ejecución del día y las manuales: las 22 jornadas
+if (!MANUAL && (horaMadrid < 8 || (horaMadrid === 23 && minMadrid > 30))) { console.log("Fuera de horario:", horaMadrid + ":" + minMadrid, "en Madrid"); process.exit(0); }
+const FULLRUN = MANUAL || (horaMadrid === 9);   // primera ejecución del día y las manuales: las 22 jornadas
 const ME = 10, GRUPO = "28125503";
 const sleep = ms => new Promise(r => setTimeout(r, ms));
 
@@ -41,6 +41,20 @@ const J = R.map((s, i) => { const [d, p] = s.split("|");
   return { n: i + 1, d: d.split("-").reverse().join("-"),
            p: p.split(",").map(x => x.split("-").map(Number)) }; });
 
+// ---------- Jornada de la semana: dura hasta el domingo a las 23:00 (Madrid) ----------
+const madridFin = (y, m, d) => { for (const o of [1, 2]) { const t = Date.UTC(y, m - 1, d, 23 - o, 0);
+  if (+new Intl.DateTimeFormat("en-GB", { timeZone: "Europe/Madrid", hour: "numeric", hourCycle: "h23" }).format(t) === 23) return t; } return Date.UTC(y, m - 1, d, 22, 0); };
+const finSemana = isoF => { const t = new Date(isoF + "T12:00:00Z"); t.setUTCDate(t.getUTCDate() + (7 - t.getUTCDay()) % 7); return madridFin(t.getUTCFullYear(), t.getUTCMonth() + 1, t.getUTCDate()); };
+// fechas: array de "AAAA-MM-DD" (una por jornada, en orden). Devuelve los índices a leer: la jornada de esta semana
+// y la anterior hasta 36 h después de su fin (por si la RFFM cierra las actas tarde).
+function indicesActuales(fechas) {
+  const ahora = Date.now(); let cur = fechas.findIndex(f => f && finSemana(f) > ahora);
+  if (cur < 0) cur = fechas.length - 1;
+  const out = [cur];
+  if (cur > 0 && fechas[cur - 1] && ahora < finSemana(fechas[cur - 1]) + 36 * 36e5) out.unshift(cur - 1);
+  return out;
+}
+
 const iso = f => { const k = String(f || "").match(/^(\d{2})[-/](\d{2})[-/](\d{4})/);
   return k ? `${k[3]}-${k[2]}-${k[1]}` : ""; };
 const num = v => (v === "" || v == null || isNaN(+v)) ? null : +v;
@@ -68,10 +82,7 @@ async function rffm(n) {
 async function leerRFFM() {
   const hoy = Date.now(), hoyISO = new Date(hoy).toISOString().slice(0, 10), out = [];
   // Primeras ejecuciones del día y manuales: las 22 jornadas. Resto: últimos 14 días y próximos 7.
-  const rondas = FULLRUN ? J : J.filter(j => {
-    const t = new Date(j.d + "T12:00:00Z").getTime();
-    return t > hoy - 14 * 864e5 && t < hoy + 7 * 864e5;
-  });
+  const rondas = FULLRUN ? J : indicesActuales(J.map(j => j.d)).map(i => J[i]);   // solo la jornada de esta semana
   let fallos = 0;
   for (const j of rondas) {
     const d = await rffm(j.n);

@@ -14,12 +14,15 @@ const MAXJOR = 60;
 const { FBKEY, FBMAIL, FBPASS } = process.env;
 const SOLO = (process.env.SOLO || "").trim();                 // opcional: id de una sola categoría (para probar)
 const SOLO_CERRADAS = process.env.SOLO_CERRADAS === "1";      // 1 = solo guardar resultados con acta cerrada
+// Si la RFFM mantiene un partido "en juego" mucho después de empezar (pasa hasta que se cierra el acta),
+// se da por terminado cuando han pasado ESPERA_MIN minutos desde su hora de inicio
+const ESPERA_MIN = +process.env.ESPERA_MIN || 100;
 const MANUAL = process.env.GITHUB_EVENT_NAME === "workflow_dispatch";
-// GitHub programa en UTC; aquí filtramos por hora de Madrid (9:00–22:00), también con cambio de hora
+// GitHub programa en UTC; aquí filtramos por hora de Madrid (9:00–22:59), también con cambio de hora
 const ahoraMadrid = new Intl.DateTimeFormat("es-ES", { timeZone: "Europe/Madrid", hour: "numeric", minute: "numeric", hourCycle: "h23" }).formatToParts(new Date());
 const horaMadrid = +ahoraMadrid.find(x => x.type === "hour").value, minMadrid = +ahoraMadrid.find(x => x.type === "minute").value;
-if (!MANUAL && (horaMadrid < 9 || horaMadrid > 22 || (horaMadrid === 22 && minMadrid > 5))) { console.log("Fuera de horario:", horaMadrid + ":" + minMadrid, "en Madrid"); process.exit(0); }
-const FULLRUN = MANUAL || (horaMadrid === 9 && minMadrid < 10);   // primera ejecución del día y manuales: todas las jornadas
+if (!MANUAL && (horaMadrid < 9 || horaMadrid > 22)) { console.log("Fuera de horario:", horaMadrid + ":" + minMadrid, "en Madrid"); process.exit(0); }
+const FULLRUN = MANUAL || horaMadrid === 9;   // primera ejecución del día (las 9h) y manuales: todas las jornadas
 const sleep = ms => new Promise(r => setTimeout(r, ms));
 
 // Busca categorias.json en varias rutas posibles (scripts/, raíz, o la indicada en CATEGORIAS)
@@ -46,6 +49,14 @@ const num = v => (v === "" || v == null || isNaN(+v)) ? null : +v;
 const limpiaCampo = s => String(s || "").replace(/\s*\(futbol sala\)\s*$/i, "").trim();
 const cap = s => String(s || "").toLowerCase().replace(/(^|[\s.\-(])(\p{L})/gu, (_, a, b) => a + b.toUpperCase()).trim();
 
+// Fecha (AAAA-MM-DD) y hora (HH:MM) de Madrid -> milisegundos UTC
+function madridMs(d, t) {
+  const [y, mo, da] = d.split("-").map(Number), [h, mi] = t.split(":").map(Number), g = Date.UTC(y, mo - 1, da, h, mi || 0);
+  const off = z => { const p = new Intl.DateTimeFormat("en-US", { timeZone: "Europe/Madrid", hourCycle: "h23", year: "numeric", month: "numeric", day: "numeric", hour: "numeric", minute: "numeric" })
+    .formatToParts(new Date(z)).reduce((o, x) => (o[x.type] = +x.value, o), {}); return Date.UTC(p.year, p.month - 1, p.day, p.hour, p.minute) - z; };
+  return g - off(g - off(g));
+}
+
 // ---------- RFFM ----------
 async function rffm(grupo, n) {
   const url = `https://www.rffm.es/api/results?idGroup=${grupo}&round=${n}`;
@@ -69,14 +80,24 @@ async function leerRFFM(cat, prev) {
   const out = [], full = FULLRUN || !(prev && prev.cfg && prev.cfg.R && prev.cfg.R.length);
   if (full) {
     let nulos = 0;
+    const fallidas = [];
     for (let n = 1; n <= MAXJOR; n++) {
       const d = await rffm(cat.grupo, n);
-      if (!d) { if (++nulos >= 2) break; continue; }
+      if (!d) { fallidas.push(n); if (++nulos >= 3) break; continue; }
       nulos = 0;
       if (!d.partidos.length) break;
       out.push({ n, partidos: d.partidos });
       await sleep(1500);
     }
+    // Segunda pasada: jornadas que fallaron, con más calma (solo las que quedan antes de la última leída)
+    const ultima = out.length ? Math.max(...out.map(o => o.n)) : 0;
+    for (const n of fallidas.filter(n => n < ultima)) {
+      await sleep(5000);
+      const d = await rffm(cat.grupo, n);
+      if (d && d.partidos.length) out.push({ n, partidos: d.partidos });
+      else console.warn(`[${cat.id}] jornada ${n}: no se pudo leer (se conserva lo que había)`);
+    }
+    out.sort((a, b) => a.n - b.n);
   } else {
     const hoy = Date.now();
     for (let i = 0; i < prev.cfg.R.length; i++) {
@@ -110,7 +131,7 @@ async function leerFB(tok, node) {
 
 // ---------- Aplicar la RFFM sobre los datos ----------
 function aplicar(S, lectura, cat) {
-  const hoyISO = new Date().toISOString().slice(0, 10);
+  const hoy = Date.now(), hoyISO = new Date(hoy).toLocaleDateString("sv-SE", { timeZone: "Europe/Madrid" });
   S.m ||= {};
   const cfg = S.cfg ||= { T: {}, COD: {}, R: [] };
   const antes = JSON.stringify(cfg);
@@ -132,6 +153,7 @@ function aplicar(S, lectura, cat) {
     return id;
   };
   const R = lectura.full ? [] : null;
+  const prevR = Array.isArray(cfg.R) ? cfg.R.slice() : [];
   let ultimaFecha = "";
   for (const { n, partidos } of lectura.rondas) {
     const pares = [];
@@ -144,8 +166,16 @@ function aplicar(S, lectura, cat) {
       if (!h && !a) { if (+p.CodEquipo_local !== -1 || +p.CodEquipo_visitante !== -1) console.warn(`[${cat.id}] equipo desconocido:`, p.Nombre_equipo_local, "/", p.Nombre_equipo_visitante); continue; }
       pares.push(`${h}-${a}`);
       if (!h || !a) continue;                        // descansa
-      const jugado = p.partido_en_juego !== "1" && fecha && fecha <= hoyISO && (!SOLO_CERRADAS || p.acta_cerrada === "1");
+      const inicio = fecha && hora ? madridMs(fecha, hora) : 0;
+      const cerrada = p.acta_cerrada === "1";
+      const pasado = inicio && hoy > inicio + ESPERA_MIN * 6e4;
+      // Terminado = la RFFM ya no lo marca "en juego", o tiene el acta cerrada, o ya pasó tiempo de sobra desde su inicio
+      const terminado = cerrada || p.partido_en_juego !== "1" || pasado;
+      const jugado = terminado && fecha && fecha <= hoyISO && (!SOLO_CERRADAS || cerrada);
       const gl = jugado ? num(p.Goles_casa) : null, gv = jugado ? num(p.Goles_visitante) : null;
+      // Diagnóstico: partidos de hoy que ya deberían tener resultado y la RFFM todavía no lo da
+      if (inicio && fecha === hoyISO && hoy > inicio + 90 * 6e4 && (gl === null || gv === null))
+        console.log(`[${cat.id}] sin resultado aún: ${p.Nombre_equipo_local} - ${p.Nombre_equipo_visitante} | ${hora} | acta_cerrada=${p.acta_cerrada} | goles=${p.Goles_casa}-${p.Goles_visitante} | en_juego=${p.partido_en_juego}`);
       const k = `${n}_${h}`, m = S.m[k] || {};
       let ch = 0;
       if (fecha && fecha !== m.d) { m.d = fecha; ch++; }
@@ -160,12 +190,26 @@ function aplicar(S, lectura, cat) {
       R[n - 1] = `${f.split("-").reverse().join("-")}|${pares.join(",")}`;
     }
   }
-  if (R) cfg.R = R;
+  if (R) {
+    // Nunca dejar huecos (null) ni acortar el calendario: lo que no se pudo leer se conserva de la vez anterior.
+    // Si tampoco había nada, se pone una jornada vacía para que la web no se rompa.
+    const largo = Math.max(R.length, prevR.length);
+    let ult = "";
+    for (let i = 0; i < largo; i++) {
+      if (!R[i] && typeof prevR[i] === "string" && prevR[i]) R[i] = prevR[i];
+      if (!R[i]) { R[i] = `${ult || "31-12-2099"}|0-0`; console.warn(`[${cat.id}] jornada ${i + 1} sin datos: se deja vacía`); }
+      ult = R[i].split("|")[0];
+    }
+    cfg.R = R;
+  }
   // Equipo propio: el de categorias.json, o el primero cuyo nombre contenga JUNCAL
   if (lectura.full) {
     let eq = cat.equipo ? +cat.equipo : 0;
     if (!eq) { const id = Object.keys(cfg.T).find(i => /juncal/i.test(cfg.T[i][0])); if (id) eq = cfg.COD[id]; }
     if (eq) cfg.equipo = eq; else console.warn(`[${cat.id}] no se encontró el equipo propio (rellena "equipo" en categorias.json)`);
+    const idP = Object.keys(cfg.COD).find(i => cfg.COD[i] === cfg.equipo);
+    console.log(`[${cat.id}] equipo propio: ${cfg.equipo} → ${idP ? "id " + idP + " (" + (cfg.T[idP] || [])[0] + ")" : "NO ESTÁ ENTRE LOS EQUIPOS LEÍDOS"} · jornadas en el calendario: ${cfg.R.length}`);
+    if (!idP) console.error(`[${cat.id}] ¡OJO! El equipo propio (${cfg.equipo}) no aparece en la RFFM de este grupo: la web mostrará "Temporada finalizada". Revisa "equipo" y "grupo" en categorias.json`);
     cfg.nombre = cat.nombreEquipo || ""; cfg.liga = cat.liga || "";
   }
   if (JSON.stringify(cfg) !== antes) total++;

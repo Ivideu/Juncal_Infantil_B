@@ -1,0 +1,57 @@
+name: Sincronizar categorías
+
+# Cada ejecución repite la sincronización 1 vez por hora durante unas 5 horas y, al terminar, lanza la siguiente.
+# Así no depende de que GitHub dispare cada hora el cron (que a veces se retrasa o se salta ejecuciones).
+# Los cron de abajo son solo una red de seguridad por si la cadena se cortara.
+on:
+  workflow_dispatch:
+    inputs:
+      solo:
+        description: "Id de una sola categoría (opcional, ej. cadete-a)"
+        required: false
+      cadena:
+        description: "Uso interno (la propia cadena automática): 1 = encadenada, 0 = manual"
+        required: false
+        default: "0"
+  schedule:
+    - cron: "40 5,11,17 * * *"    # UTC: red de seguridad
+concurrency:
+  group: ${{ (github.event_name == 'schedule' || github.event.inputs.cadena == '1') && 'sync-categorias-auto' || 'sync-categorias-manual' }}
+  cancel-in-progress: false
+permissions:
+  contents: read
+  actions: write        # para lanzar la siguiente ejecución de la cadena
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    timeout-minutes: 345
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Sincronizar (1 vez por hora)
+        env:
+          FBKEY: ${{ secrets.FBKEY }}
+          FBMAIL: ${{ secrets.FBMAIL }}
+          FBPASS: ${{ secrets.FBPASS }}
+          SOLO: ${{ github.event.inputs.solo }}
+          CADENA: ${{ github.event.inputs.cadena }}
+        run: |
+          # Manual (o con una sola categoría): una sola pasada. Automática (cron o cadena): 5 pasadas, 1 por hora.
+          N=5; if [ "$GITHUB_EVENT_NAME" = "workflow_dispatch" ] && [ "$CADENA" != "1" ]; then N=1; fi
+          fallos=0
+          for i in $(seq 1 $N); do
+            ini=$(date +%s)
+            node scripts/sync-categorias.mjs || fallos=$((fallos+1))
+            if [ "$N" -gt 1 ]; then resto=$((3600-($(date +%s)-ini))); [ "$resto" -gt 0 ] && sleep "$resto"; fi
+          done
+          [ "$fallos" -eq 0 ] || echo "::warning::$fallos pasada(s) con error"
+      - name: Lanzar la siguiente ejecución
+        if: ${{ always() && (github.event_name == 'schedule' || github.event.inputs.cadena == '1') }}
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          h=$(TZ=Europe/Madrid date +%H%M)
+          # De noche (23:30–08:00) la cadena se para; el cron de las 5:40 UTC la retoma por la mañana
+          if [ "$h" -ge 0800 ] && [ "$h" -lt 2330 ]; then gh workflow run sync-categorias.yml --ref "${{ github.ref_name }}" -f cadena=1; else echo "Noche: la cadena se retoma por la mañana"; fi

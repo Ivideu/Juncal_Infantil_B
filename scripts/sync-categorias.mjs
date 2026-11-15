@@ -17,12 +17,18 @@ const SOLO_CERRADAS = process.env.SOLO_CERRADAS === "1";      // 1 = solo guarda
 // Si la RFFM mantiene un partido "en juego" mucho después de empezar (pasa hasta que se cierra el acta),
 // se da por terminado cuando han pasado ESPERA_MIN minutos desde su hora de inicio
 const ESPERA_MIN = +process.env.ESPERA_MIN || 100;
+// RAPIDO=1 (workflow «Sincronizar semana»): solo la jornada actual y la siguiente, nunca todas las jornadas
+const RAPIDO = process.env.RAPIDO === "1";
 const MANUAL = process.env.GITHUB_EVENT_NAME === "workflow_dispatch" && process.env.CADENA !== "1";   // CADENA=1: ejecución encadenada automática (no es manual)
 // GitHub programa en UTC; aquí filtramos por hora de Madrid (9:00–22:59), también con cambio de hora
 const ahoraMadrid = new Intl.DateTimeFormat("es-ES", { timeZone: "Europe/Madrid", hour: "numeric", minute: "numeric", hourCycle: "h23" }).formatToParts(new Date());
 const horaMadrid = +ahoraMadrid.find(x => x.type === "hour").value, minMadrid = +ahoraMadrid.find(x => x.type === "minute").value;
-if (!MANUAL && (horaMadrid < 8 || (horaMadrid === 23 && minMadrid > 30))) { console.log("Fuera de horario:", horaMadrid + ":" + minMadrid, "en Madrid"); process.exit(0); }
-const FULLRUN = MANUAL || horaMadrid === 9;   // primera ejecución del día (las 9h) y manuales: todas las jornadas
+const diaMadrid = new Intl.DateTimeFormat("en-US", { timeZone: "Europe/Madrid", weekday: "short" }).format(new Date());   // Sat, Sun, Mon, Tue…
+// Ventana del modo rápido: del sábado 9:00 al martes 23:30 (hora de Madrid)
+const dentroSemana = (diaMadrid === "Sat" && horaMadrid >= 9) || diaMadrid === "Sun" || diaMadrid === "Mon" || (diaMadrid === "Tue" && (horaMadrid < 23 || (horaMadrid === 23 && minMadrid <= 30)));
+if (RAPIDO && !MANUAL && !dentroSemana) { console.log("Fuera de la ventana sábado 9:00 – martes 23:30:", diaMadrid, horaMadrid + ":" + minMadrid, "en Madrid"); process.exit(0); }
+if (!RAPIDO && !MANUAL && (horaMadrid < 8 || (horaMadrid === 23 && minMadrid > 30))) { console.log("Fuera de horario:", horaMadrid + ":" + minMadrid, "en Madrid"); process.exit(0); }
+const FULLRUN = !RAPIDO && (MANUAL || horaMadrid === 9);   // primera ejecución del día (las 9h) y manuales: todas las jornadas
 const sleep = ms => new Promise(r => setTimeout(r, ms));
 
 // Busca categorias.json en varias rutas posibles (scripts/, raíz, o la indicada en CATEGORIAS)
@@ -68,6 +74,7 @@ function indicesActuales(fechas) {
   if (cur < 0) cur = fechas.length - 1;
   const out = [cur];
   if (cur > 0 && fechas[cur - 1] && ahora < finSemana(fechas[cur - 1]) + 36 * 36e5) out.unshift(cur - 1);
+  if (RAPIDO && cur < fechas.length - 1) out.push(cur + 1);   // modo rápido: también la jornada siguiente
   return out;
 }
 
@@ -121,6 +128,7 @@ async function leerRFFM(cat, prev) {
         // Equipo que la web aún no conoce: se haría pasar por «descansa» y su resultado no se guardaría → lectura completa
         const conocidos = new Set(Object.values(prev.cfg.COD || {}).map(String));
         const nuevo = d.partidos.some(p => [p.CodEquipo_local, p.CodEquipo_visitante].some(c => +c !== -1 && c && !conocidos.has(String(c))));
+        if (nuevo && RAPIDO) { console.warn(`[${cat.id}] equipo nuevo en la jornada ${i + 1}: se omite en modo rápido (lanza «Sincronizar categorías» a mano para la lectura completa)`); await sleep(1500); continue; }
         if (nuevo) { console.log(`[${cat.id}] equipo nuevo en la jornada ${i + 1}: lectura completa`); return leerRFFM(cat, null); }
         out.push({ n: i + 1, partidos: d.partidos });
       }

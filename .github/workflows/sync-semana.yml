@@ -1,0 +1,38 @@
+name: Sincronizar semana
+
+# Solo la jornada actual y la siguiente de cada categoría (1-2 peticiones por categoría: tarda ~1 minuto).
+# Se lanza cada hora, de sábado 9:00 a martes 23:00 (hora de Madrid). Fuera de esa ventana el script no hace nada.
+# Para leer todas las jornadas usa a mano «Sincronizar categorías».
+on:
+  workflow_dispatch:
+    inputs:
+      solo:
+        description: "Id de una sola categoría (opcional, ej. cadete-a)"
+        required: false
+  schedule:
+    # UTC. Sáb-dom-lun-mar, cada hora al minuto 5. El script filtra por hora de Madrid (sáb desde las 9:00, mar hasta las 23:30)
+    - cron: "5 * * * 6,0,1,2"
+    # Miércoles 00:05 UTC cubre el martes 23:05 hora de Madrid en horario de verano (UTC+2)
+    - cron: "5 0 * * 3"
+concurrency:
+  group: sync-semana
+  cancel-in-progress: false
+permissions:
+  contents: read
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Sincronizar jornada actual y siguiente
+        env:
+          FBKEY: ${{ secrets.FBKEY }}
+          FBMAIL: ${{ secrets.FBMAIL }}
+          FBPASS: ${{ secrets.FBPASS }}
+          SOLO: ${{ github.event.inputs.solo }}
+          RAPIDO: "1"
+        run: node scripts/sync-categorias.mjs

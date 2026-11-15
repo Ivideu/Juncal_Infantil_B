@@ -1,5 +1,7 @@
 name: Sincronizar categorías
 
+# Lectura completa de TODAS las jornadas: solo manual (la automática de cada semana es «Sincronizar semana»).
+# (La cadena automática ya no se activa sola.)
 # Cada ejecución repite la sincronización 1 vez por hora durante unas 5 horas y, al terminar, lanza la siguiente.
 # Así no depende de que GitHub dispare cada hora el cron (que a veces se retrasa o se salta ejecuciones).
 # Los cron de abajo son solo una red de seguridad por si la cadena se cortara.
@@ -13,8 +15,6 @@ on:
         description: "Uso interno (la propia cadena automática): 1 = encadenada, 0 = manual"
         required: false
         default: "0"
-  schedule:
-    - cron: "40 5,11,17 * * *"    # UTC: red de seguridad
 concurrency:
   group: ${{ (github.event_name == 'schedule' || github.event.inputs.cadena == '1') && 'sync-categorias-auto' || 'sync-categorias-manual' }}
   cancel-in-progress: false

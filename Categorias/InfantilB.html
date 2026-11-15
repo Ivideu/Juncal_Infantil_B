@@ -482,6 +482,8 @@ header.site-banner .dl {
 #topbar nav#nav button span:first-child{margin:0}
 .b.zz{background:#eef2ff!important;color:#5b6aa8;border:2px dashed #9fb0e6!important;box-shadow:none!important}
 .b.zz svg{display:block}
+/* marcador hero en una línea */
+.hv>.cn{flex:none;white-space:nowrap;max-width:none}
 </style>
 </head>
 <body>
@@ -718,7 +720,7 @@ function trimMin(m,k){if(!m.gm||!m.gm[k])return;if(!m.g||!m.g[k])delete m.gm[k];
 const mn=(m,n,g)=>{const t=(m.gm&&m.gm[n])||[];return t.length?t.map(x=>x+"'").join(", ")+(g>t.length?` +${g-t.length}`:""):"×"+g};let lvOn=false,lastP="";
 /* Tras "Final" el partido queda cerrado en portada (resultado, goles y FIN PARTIDO) hasta las 6:00 (Madrid) del lunes.
    Si acaba de lunes a viernes, hasta las 6:00 del día siguiente. */
-function holdEnd(fin){const d=new Date(fin).toLocaleDateString("sv-SE",{timeZone:"Europe/Madrid"}),w=new Date(d+"T12:00:00Z").getUTCDay(),n=w==6?2:1,e=new Date(Date.parse(d+"T12:00:00Z")+n*864e5).toISOString().slice(0,10);return madrid(e,"06:00")}
+function holdEnd(fin){const d=new Date(fin).toLocaleDateString("sv-SE",{timeZone:"Europe/Madrid"}),t=new Date(d+"T12:00:00Z");t.setUTCDate(t.getUTCDate()+(7-t.getUTCDay())%7);return Math.max(madrid(t.toISOString().slice(0,10),"23:00"),+fin+36e5)}
 function liveM(real){if(!real&&TS.on)return TX();const now=Date.now(),hoyM=new Date().toLocaleDateString("sv-SE",{timeZone:"Europe/Madrid"}),all=myM().filter(x=>x.h&&x.a);
  const ok=(x,fin)=>{const m=M(x.r.n,x.h),c=m.c;if(!!(c&&c.fin)!==fin)return false;const k=when(x).getTime(),st=c?Math.min(k-9e5,c.s||k):(m.t?k-9e5:1e18),en=fin?holdEnd(c.fin):(m.t?Math.max(k,c&&c.s||0):(c&&c.s)||k)+144e5;if(!m.t&&(m.d||x.r.d)>hoyM)return false;return now>=st&&now<en};
  return all.find(x=>ok(x,false))||all.slice().reverse().find(x=>ok(x,true))||null}

@@ -906,10 +906,10 @@ async function syncNow(){
  if(!tk){tk=(prompt("Pega tu token de GitHub (solo se guarda en este navegador):")||"").trim();if(!tk)return}
  setSt("Lanzando actualización…");
  try{
-  const x=await fetch(`https://api.github.com/repos/${u}/${r}/actions/workflows/sync.yml/dispatches`,{method:"POST",headers:{Authorization:"Bearer "+tk,Accept:"application/vnd.github+json","X-GitHub-Api-Version":"2022-11-28"},body:JSON.stringify({ref:"main"})});
+  const x=await fetch(`https://api.github.com/repos/${u}/${r}/actions/workflows/sync-semana.yml/dispatches`,{method:"POST",headers:{Authorization:"Bearer "+tk,Accept:"application/vnd.github+json","X-GitHub-Api-Version":"2022-11-28"},body:JSON.stringify({ref:"main"})});
   if(x.status===204){try{localStorage.setItem("ghtk",tk)}catch(e){}setSt("✓ Actualización lanzada. Los resultados llegarán en 1-2 minutos");setTimeout(()=>setSt(""),20000);return}
   if([401,403,404].includes(x.status)){try{localStorage.removeItem("ghtk")}catch(e){}}
-  setSt("⚠ GitHub respondió "+x.status+(x.status==401?" (token no válido)":x.status==404||x.status==403?" (token sin permiso o falta sync.yml en main)":""))
+  setSt("⚠ GitHub respondió "+x.status+(x.status==401?" (token no válido)":x.status==404||x.status==403?" (token sin permiso o falta sync-semana.yml en main)":""))
  }catch(e){setSt("⚠ No se pudo contactar con GitHub")}
 }
 function exportD(){const a=document.createElement("a");a.href=URL.createObjectURL(new Blob([JSON.stringify(S,null,1)],{type:"application/json"}));a.download="datos.json";a.click()}

@@ -39,6 +39,18 @@ canvas.draw{cursor:crosshair}
 label.chk{display:flex;align-items:center;gap:6px;cursor:pointer}
 label.chk input{min-height:0;width:16px;height:16px;padding:0}
 @media(max-width:640px){body{padding:6px}.bar{padding:6px 8px}button,select,input{padding:6px 8px;font-size:13px}}
+
+details.ia{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:8px 10px}
+details.ia>summary{cursor:pointer;font-weight:700;list-style:none}
+details.ia>summary::-webkit-details-marker{display:none}
+details.ia .ib{display:flex;flex-direction:column;gap:8px;margin-top:8px}
+details.ia textarea{font:inherit;color:#fff;background:#0a1f55;border:1px solid var(--line);border-radius:8px;padding:8px 10px;min-height:84px;resize:vertical;width:100%}
+details.ia .row{display:flex;flex-wrap:wrap;gap:6px 12px;align-items:center}
+details.ia input[type=password],details.ia input.mod{background:#0a1f55;flex:1;min-width:150px}
+details.ia small{opacity:.7;font-size:12px}
+details.ia a{color:var(--ye)}
+#iaSt{font-size:13px;min-height:1.2em}
+#iaSt.err{color:#fca5a5}
 </style>
 </head>
 <body>
@@ -100,6 +112,27 @@ label.chk input{min-height:0;width:16px;height:16px;padding:0}
       <label class="chk"><input type="checkbox" id="loop"> Bucle</label>
     </div>
   </div>
+
+
+  <details class="ia" id="ia">
+    <summary>✨ Crear jugada con IA (Gemini)</summary>
+    <div class="ib">
+      <textarea id="iaP" maxlength="1500" placeholder="Describe la jugada. Ej.: Saque de banda de Juncal en campo contrario con rombo 1-2-1: el pívot baja a recibir, pared con el ala derecho y el cierre aparece por la izquierda para rematar."></textarea>
+      <div class="row">
+        <label class="chk"><input type="checkbox" id="iaCur"> Partir de la jugada actual (modificarla)</label>
+        <button id="iaEx" type="button">Ejemplo</button>
+        <button id="iaGo" type="button" class="primary">✨ Generar</button>
+      </div>
+      <div class="row">
+        <input type="password" id="iaKey" placeholder="Clave API de Gemini (se guarda solo en este navegador)" autocomplete="off" aria-label="Clave API de Gemini">
+        <input type="text" class="mod" id="iaMod" list="iaMods" aria-label="Modelo" value="gemini-3.6-flash">
+        <datalist id="iaMods"><option value="gemini-3.6-flash"><option value="gemini-flash-latest"></datalist>
+        <button id="iaForget" type="button">Olvidar clave</button>
+      </div>
+      <div id="iaSt" role="status"></div>
+      <small>Clave gratuita en <a href="https://aistudio.google.com/apikey" target="_blank" rel="noopener">Google AI Studio</a>. No escribas nombres ni datos personales de jugadores en la descripción. La IA puede colocar mal a alguien: revisa y corrige los pasos antes de usarla.</small>
+    </div>
+  </details>
 
   <div class="hint">Cada paso es una posición. Coloca a los jugadores, pulsa «+ Nuevo paso», muévelos de nuevo y al reproducir se desplazan solos.</div>
 </div>
@@ -328,7 +361,7 @@ function delSel(){
 }
 $("#del").onclick=delSel;
 document.addEventListener("keydown",e=>{
-  if(e.target.tagName==="INPUT"||e.target.tagName==="SELECT")return;
+  if(["INPUT","SELECT","TEXTAREA"].includes(e.target.tagName))return;
   if(e.key==="Delete"||e.key==="Backspace"){e.preventDefault();delSel()}
   if(e.key==="Escape"){sel=null;syncSel();draw()}
 });
@@ -451,6 +484,94 @@ function load(data){
 
 /* ---------- aviso ---------- */
 let tt;function toast(m){const t=$("#toast");t.textContent=m;t.classList.add("show");clearTimeout(tt);tt=setTimeout(()=>t.classList.remove("show"),2200)}
+
+
+/* ---------- IA (Gemini): crear jugada desde una descripción ---------- */
+const IA_SYS=`Eres entrenador de fútbol sala y generas jugadas para una pizarra táctica animada. Responde SOLO con un JSON válido, sin texto adicional.
+PISTA: eje x de 0 a 40 (metros, de izquierda a derecha), eje y de 0 a 20 (de arriba a abajo). Centro (20,10). Porterías fijas en el centro de cada línea de fondo (x=0 y x=40, y entre 8.5 y 11.5); no las añadas. Área de cada portería: semicírculo de 6 m. Banda superior y=0, banda inferior y=20.
+EQUIPOS: "j" = Juncal (amarillo, nuestro equipo, ATACA hacia la derecha, portería rival en x=40). "r" = Rival (rojo, ataca hacia la izquierda). "gj" = portero de Juncal (cerca de x=2,y=10). "gr" = portero rival (cerca de x=38,y=10). "ball" = balón. "cone" = cono. "goal" = portería pequeña de entrenamiento (campo "rot": 0 o 1).
+FORMATO: {"name":"título corto","frames":[{"items":[{"id":"J2","t":"j","x":10,"y":10,"n":"2"}],"lines":[{"k":"pass","pts":[[x1,y1],[x2,y2]]}]}]}
+REGLAS:
+- "frames" son los pasos (posiciones sucesivas). Mínimo 2 pasos, máximo 10.
+- Cada elemento tiene "id" único y ESTABLE: el mismo jugador/balón lleva el mismo id en todos los pasos y se mueve de una posición a la siguiente. Si un elemento no aparece en un paso, se desvanece.
+- Jugadores ("j","r","gj","gr") llevan "n" (dorsal o texto de máximo 3 caracteres). Juncal normalmente 5 jugadores: portero "1" y de campo 2-5; rival igual si hace falta.
+- El balón ("ball", id "B") debe estar siempre donde esté el jugador que lo tiene o viajar hacia el receptor: si hay pase en el paso i, el balón termina en el paso i+1 en la posición del receptor.
+- "lines" de un paso i se dibujan MIENTRAS se anima del paso i al paso i+1: ponlas desde la posición del paso i hasta la posición del paso i+1. "k" puede ser: "pass" (pase del balón, de jugador a jugador), "run" (desplazamiento sin balón, discontinuo), "drib" (conducción con balón), "free" (trazo libre, varios puntos). En "pass","run","drib" usa exactamente 2 puntos.
+- El último paso no necesita líneas. Mantén todo dentro de la pista (x 0-40, y 0-20), con separación mínima de 1.5 m entre jugadores.
+- Usa un sistema coherente (por ejemplo rombo 1-2-1: cierre atrás, dos alas, pívot arriba) salvo que se pida otra cosa.
+- Si recibes una jugada actual y se pide modificarla, devuelve la jugada completa ya modificada manteniendo los ids.`;
+const IA_T=["j","r","gj","gr","ball","goal","cone"],IA_K=["pass","run","drib","free"];
+const num=(v,a,b)=>{v=+v;return Number.isFinite(v)?Math.max(a,Math.min(b,v)):null};
+function iaClean(d){
+  if(!d||!Array.isArray(d.frames))throw new Error("La IA no devolvió pasos válidos");
+  const ids=new Map();let nid=1;
+  const gid=k=>{k=String(k);if(!ids.has(k))ids.set(k,nid++);return ids.get(k)};
+  const out=[];
+  for(const f of d.frames.slice(0,10)){
+    if(!f||typeof f!=="object")continue;
+    const seen=new Set(),items=[],lines=[];
+    for(const it of (Array.isArray(f.items)?f.items:[]).slice(0,30)){
+      if(!it||!IA_T.includes(it.t))continue;
+      const x=num(it.x,0,W),y=num(it.y,0,H);if(x===null||y===null)continue;
+      const id=gid(it.id!=null?it.id:it.t+items.length);if(seen.has(id))continue;seen.add(id);
+      const o={id,t:it.t,x,y,rot:it.t==="goal"?(((+it.rot||0)%4)+4)%4:0};
+      if(isP(it.t))o.n=String(it.n??"").slice(0,3);
+      items.push(o);
+    }
+    for(const l of (Array.isArray(f.lines)?f.lines:[]).slice(0,20)){
+      if(!l||!IA_K.includes(l.k)||!Array.isArray(l.pts))continue;
+      let pts=l.pts.slice(0,l.k==="free"?60:2).map(p=>Array.isArray(p)?[num(p[0],0,W),num(p[1],0,H)]:[null,null]);
+      if(pts.some(p=>p[0]===null||p[1]===null)||pts.length<2)continue;
+      lines.push({k:l.k,pts});
+    }
+    if(items.length)out.push({items,lines});
+  }
+  if(out.length<2)throw new Error("La IA devolvió menos de 2 pasos válidos");
+  return {name:String(d.name||"").slice(0,60),frames:out};
+}
+function iaSt(m,err){const e=$("#iaSt");e.textContent=m;e.className=err?"err":""}
+const ST={get(k){try{return localStorage.getItem(k)||""}catch(e){return ""}},set(k,v){try{localStorage.setItem(k,v)}catch(e){}},del(k){try{localStorage.removeItem(k)}catch(e){}}};
+$("#iaKey").value=ST.get("pz_gkey");
+if(ST.get("pz_gmod"))$("#iaMod").value=ST.get("pz_gmod");
+$("#iaForget").onclick=()=>{ST.del("pz_gkey");$("#iaKey").value="";iaSt("Clave olvidada en este navegador.")};
+$("#iaEx").onclick=()=>{$("#iaP").value="Ataque posicional de Juncal con rombo 1-2-1 contra defensa 2-2. El cierre pasa al ala derecho, este se la da al pívot que baja a recibir y hace pared; el ala izquierdo se desmarca al segundo palo y remata a portería."};
+async function iaGo(){
+  const key=$("#iaKey").value.trim(),mod=$("#iaMod").value.trim()||"gemini-3.6-flash",txt=$("#iaP").value.trim();
+  if(play)stop();
+  if(!txt){iaSt("Escribe primero la descripción de la jugada.",1);return}
+  if(!key){iaSt("Pega tu clave API de Gemini (gratis en Google AI Studio).",1);return}
+  ST.set("pz_gkey",key);ST.set("pz_gmod",mod);
+  let prompt="Jugada a crear: "+txt;
+  if($("#iaCur").checked)prompt+="\n\nJugada actual (modifícala según lo pedido, manteniendo los ids):\n"+JSON.stringify({name:sname,frames:frames.map(f=>({items:f.items.map(({id,t,x,y,rot,n})=>({id,t,x:+x.toFixed(1),y:+y.toFixed(1),rot,n})),lines:f.lines.map(l=>({k:l.k,pts:l.pts.map(p=>[+p[0].toFixed(1),+p[1].toFixed(1)])}))}))});
+  const go=$("#iaGo"),ctl=new AbortController(),to=setTimeout(()=>ctl.abort(),90000);
+  go.disabled=true;iaSt("Generando la jugada… puede tardar unos segundos.");
+  try{
+    let r;
+    try{
+      r=await fetch("https://generativelanguage.googleapis.com/v1beta/models/"+encodeURIComponent(mod)+":generateContent",{
+        method:"POST",signal:ctl.signal,
+        headers:{"Content-Type":"application/json","x-goog-api-key":key},
+        body:JSON.stringify({systemInstruction:{parts:[{text:IA_SYS}]},contents:[{role:"user",parts:[{text:prompt}]}],generationConfig:{responseMimeType:"application/json",temperature:.4,maxOutputTokens:16384}})
+      });
+    }catch(e){throw new Error(e.name==="AbortError"?"Gemini tardó demasiado. Inténtalo de nuevo.":"No hay conexión con Gemini. Revisa tu internet.")}
+    if(!r.ok){
+      const c=r.status;
+      throw new Error(c===400?"Petición rechazada (¿clave no válida o descripción demasiado larga?).":c===403?"La clave no tiene permiso o no es válida.":c===404?"Ese modelo no existe o ya no está disponible. Cambia el nombre del modelo.":c===429?"Límite gratuito de Gemini alcanzado. Espera un minuto (o al día siguiente) y reintenta.":"Error de Gemini ("+c+"). Inténtalo de nuevo.");
+    }
+    const j=await r.json();
+    const cand=j.candidates&&j.candidates[0];
+    if(!cand){throw new Error(j.promptFeedback&&j.promptFeedback.blockReason?"Gemini bloqueó la petición. Reformula la descripción.":"Gemini no devolvió respuesta.")}
+    if(cand.finishReason==="MAX_TOKENS")throw new Error("La respuesta quedó cortada. Pide una jugada más sencilla.");
+    let t=((cand.content&&cand.content.parts)||[]).map(p=>p.text||"").join("").trim().replace(/^```(?:json)?\s*/i,"").replace(/\s*```$/,"");
+    let d;try{d=JSON.parse(t)}catch(e){throw new Error("La respuesta de la IA no era JSON válido. Inténtalo de nuevo.")}
+    const res=iaClean(d);
+    load(res);sname=res.name;
+    iaSt("Jugada creada: "+res.frames.length+" pasos"+(res.name?" («"+res.name+"»)":"")+". Pulsa ▶ Reproducir y corrige lo que haga falta.");
+    toast("Jugada creada con IA");
+  }catch(e){iaSt(e.message||"Error inesperado.",1)}
+  finally{clearTimeout(to);go.disabled=false}
+}
+$("#iaGo").onclick=iaGo;
 
 /* ---------- inicio ---------- */
 add("ball",20,10);

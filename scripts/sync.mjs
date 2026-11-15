@@ -6,12 +6,19 @@
 const FB = "https://juncal-f0b64-default-rtdb.europe-west1.firebasedatabase.app";
 const { FBKEY, FBMAIL, FBPASS, FCM_SERVICE_ACCOUNT } = process.env;
 const SOLO_CERRADAS = process.env.SOLO_CERRADAS === "1";   // 1 = solo guardar resultados con acta cerrada
+// RAPIDO=1 (workflow «Sincronizar semana»): solo la jornada actual y la siguiente, nunca las 22
+const RAPIDO = process.env.RAPIDO === "1";
 const MANUAL = process.env.GITHUB_EVENT_NAME === "workflow_dispatch" && process.env.CADENA !== "1";   // CADENA=1: ejecución encadenada automática (no es manual)
 // GitHub programa en UTC; aquí filtramos por hora de Madrid (9:00–22:00), también con cambio de hora
 const ahoraMadrid = new Intl.DateTimeFormat("es-ES", { timeZone: "Europe/Madrid", hour: "numeric", minute: "numeric", hourCycle: "h23" }).formatToParts(new Date());
 const horaMadrid = +ahoraMadrid.find(x => x.type === "hour").value, minMadrid = +ahoraMadrid.find(x => x.type === "minute").value;
-if (!MANUAL && (horaMadrid < 8 || (horaMadrid === 23 && minMadrid > 30))) { console.log("Fuera de horario:", horaMadrid + ":" + minMadrid, "en Madrid"); process.exit(0); }
-const FULLRUN = MANUAL || (horaMadrid === 9);   // primera ejecución del día y las manuales: las 22 jornadas
+const diaMadrid = new Intl.DateTimeFormat("en-US", { timeZone: "Europe/Madrid", weekday: "short" }).format(new Date());
+// Ventana del modo rápido (hora de Madrid): sábado 9:00 → martes 23:30, y una ejecución diaria (9:xx) de miércoles a viernes
+const dentroSemana = (diaMadrid === "Sat" && horaMadrid >= 9) || diaMadrid === "Sun" || diaMadrid === "Mon" || (diaMadrid === "Tue" && (horaMadrid < 23 || (horaMadrid === 23 && minMadrid <= 30)))
+  || (["Wed", "Thu", "Fri"].includes(diaMadrid) && horaMadrid === 9);   // miércoles a viernes: una sola ejecución al día, a las 9:xx
+if (RAPIDO && !MANUAL && !dentroSemana) { console.log("Fuera de la ventana de sincronización:", diaMadrid, horaMadrid + ":" + minMadrid, "en Madrid"); process.exit(0); }
+if (!RAPIDO && !MANUAL && (horaMadrid < 8 || (horaMadrid === 23 && minMadrid > 30))) { console.log("Fuera de horario:", horaMadrid + ":" + minMadrid, "en Madrid"); process.exit(0); }
+const FULLRUN = !RAPIDO && (MANUAL || horaMadrid === 9);   // primera ejecución del día y las manuales: las 22 jornadas
 const ME = 10, GRUPO = "28125503";
 const sleep = ms => new Promise(r => setTimeout(r, ms));
 
@@ -52,6 +59,7 @@ function indicesActuales(fechas) {
   if (cur < 0) cur = fechas.length - 1;
   const out = [cur];
   if (cur > 0 && fechas[cur - 1] && ahora < finSemana(fechas[cur - 1]) + 36 * 36e5) out.unshift(cur - 1);
+  if (RAPIDO && cur < fechas.length - 1) out.push(cur + 1);   // modo rápido: también la jornada siguiente
   return out;
 }
 

@@ -1,19 +1,25 @@
 name: Sincronizar semana
 
-# Solo la jornada actual y la siguiente de cada categoría (1-2 peticiones por categoría: tarda ~1 minuto).
-# Se lanza cada hora, de sábado 9:00 a martes 23:00 (hora de Madrid). Fuera de esa ventana el script no hace nada.
-# Para leer todas las jornadas usa a mano «Sincronizar categorías».
+# Sincronización de TODAS las categorías (Infantil B incluido): jornada anterior (hasta 36 h tras su fin), actual y siguiente.
+# Tarda ~1-2 minutos. Calendario (hora de Madrid):
+#   · sábado 9:00 → martes 23:00: cada hora
+#   · miércoles, jueves y viernes: una sola ejecución al día, a las 9:00
+# Manual: marca «completa» para leer TODAS las jornadas (tarda ~25 min con las 10 categorías).
 on:
   workflow_dispatch:
     inputs:
+      completa:
+        description: "Leer TODAS las jornadas (lento) en lugar de actual y siguiente"
+        type: boolean
+        default: false
       solo:
-        description: "Id de una sola categoría (opcional, ej. cadete-a)"
+        description: "Id de una sola categoría del resto (opcional, ej. cadete-a). Infantil B se sincroniza siempre"
         required: false
   schedule:
-    # UTC. Sáb-dom-lun-mar, cada hora al minuto 5. El script filtra por hora de Madrid (sáb desde las 9:00, mar hasta las 23:30)
+    # UTC. Sáb-dom-lun-mar, cada hora al minuto 5 (los scripts filtran por hora de Madrid: sáb desde las 9:00, mar hasta las 23:30)
     - cron: "5 * * * 6,0,1,2"
-    # Miércoles 00:05 UTC cubre el martes 23:05 hora de Madrid en horario de verano (UTC+2)
-    - cron: "5 0 * * 3"
+    # Mié-jue-vie: 7:05 y 8:05 UTC (= 9:05 en verano / en invierno); el script solo deja pasar la que cae a las 9 en Madrid
+    - cron: "5 7,8 * * 3,4,5"
 concurrency:
   group: sync-semana
   cancel-in-progress: false
@@ -22,17 +28,32 @@ permissions:
 jobs:
   sync:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 60
+    env:
+      FBKEY: ${{ secrets.FBKEY }}
+      FBMAIL: ${{ secrets.FBMAIL }}
+      FBPASS: ${{ secrets.FBPASS }}
+      RAPIDO: ${{ github.event.inputs.completa == 'true' && '0' || '1' }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
           node-version: 20
-      - name: Sincronizar jornada actual y siguiente
+      - name: Infantil B
+        id: infantilb
+        continue-on-error: true
         env:
-          FBKEY: ${{ secrets.FBKEY }}
-          FBMAIL: ${{ secrets.FBMAIL }}
-          FBPASS: ${{ secrets.FBPASS }}
+          FCM_SERVICE_ACCOUNT: ${{ secrets.FCM_SERVICE_ACCOUNT }}
+          SOLO_CERRADAS: "1"     # "1" = solo guarda resultados con el acta cerrada; "0" = en cuanto aparezcan
+        run: node scripts/sync.mjs
+      - name: Resto de categorías
+        id: resto
+        continue-on-error: true
+        env:
           SOLO: ${{ github.event.inputs.solo }}
-          RAPIDO: "1"
         run: node scripts/sync-categorias.mjs
+      - name: Comprobar resultado
+        if: ${{ steps.infantilb.outcome == 'failure' || steps.resto.outcome == 'failure' }}
+        run: |
+          echo "::error::Fallo en: Infantil B=${{ steps.infantilb.outcome }} · resto=${{ steps.resto.outcome }}"
+          exit 1

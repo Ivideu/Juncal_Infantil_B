@@ -24,9 +24,10 @@ const MANUAL = process.env.GITHUB_EVENT_NAME === "workflow_dispatch" && process.
 const ahoraMadrid = new Intl.DateTimeFormat("es-ES", { timeZone: "Europe/Madrid", hour: "numeric", minute: "numeric", hourCycle: "h23" }).formatToParts(new Date());
 const horaMadrid = +ahoraMadrid.find(x => x.type === "hour").value, minMadrid = +ahoraMadrid.find(x => x.type === "minute").value;
 const diaMadrid = new Intl.DateTimeFormat("en-US", { timeZone: "Europe/Madrid", weekday: "short" }).format(new Date());   // Sat, Sun, Mon, Tue…
-// Ventana del modo rápido: del sábado 9:00 al martes 23:30 (hora de Madrid)
-const dentroSemana = (diaMadrid === "Sat" && horaMadrid >= 9) || diaMadrid === "Sun" || diaMadrid === "Mon" || (diaMadrid === "Tue" && (horaMadrid < 23 || (horaMadrid === 23 && minMadrid <= 30)));
-if (RAPIDO && !MANUAL && !dentroSemana) { console.log("Fuera de la ventana sábado 9:00 – martes 23:30:", diaMadrid, horaMadrid + ":" + minMadrid, "en Madrid"); process.exit(0); }
+// Ventana del modo rápido (hora de Madrid): sábado 9:00 → martes 23:30, y una ejecución diaria (9:xx) de miércoles a viernes
+const dentroSemana = (diaMadrid === "Sat" && horaMadrid >= 9) || diaMadrid === "Sun" || diaMadrid === "Mon" || (diaMadrid === "Tue" && (horaMadrid < 23 || (horaMadrid === 23 && minMadrid <= 30)))
+  || (["Wed", "Thu", "Fri"].includes(diaMadrid) && horaMadrid === 9);   // miércoles a viernes: una sola ejecución al día, a las 9:xx
+if (RAPIDO && !MANUAL && !dentroSemana) { console.log("Fuera de la ventana de sincronización:", diaMadrid, horaMadrid + ":" + minMadrid, "en Madrid"); process.exit(0); }
 if (!RAPIDO && !MANUAL && (horaMadrid < 8 || (horaMadrid === 23 && minMadrid > 30))) { console.log("Fuera de horario:", horaMadrid + ":" + minMadrid, "en Madrid"); process.exit(0); }
 const FULLRUN = !RAPIDO && (MANUAL || horaMadrid === 9);   // primera ejecución del día (las 9h) y manuales: todas las jornadas
 const sleep = ms => new Promise(r => setTimeout(r, ms));

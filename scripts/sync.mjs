@@ -6,7 +6,7 @@
 const FB = "https://juncal-f0b64-default-rtdb.europe-west1.firebasedatabase.app";
 const { FBKEY, FBMAIL, FBPASS, FCM_SERVICE_ACCOUNT } = process.env;
 const SOLO_CERRADAS = process.env.SOLO_CERRADAS === "1";   // 1 = solo guardar resultados con acta cerrada
-const MANUAL = process.env.GITHUB_EVENT_NAME === "workflow_dispatch";
+const MANUAL = process.env.GITHUB_EVENT_NAME === "workflow_dispatch" && process.env.CADENA !== "1";   // CADENA=1: ejecución encadenada automática (no es manual)
 // GitHub programa en UTC; aquí filtramos por hora de Madrid (9:00–22:00), también con cambio de hora
 const ahoraMadrid = new Intl.DateTimeFormat("es-ES", { timeZone: "Europe/Madrid", hour: "numeric", minute: "numeric", hourCycle: "h23" }).formatToParts(new Date());
 const horaMadrid = +ahoraMadrid.find(x => x.type === "hour").value, minMadrid = +ahoraMadrid.find(x => x.type === "minute").value;

@@ -17,11 +17,11 @@ const SOLO_CERRADAS = process.env.SOLO_CERRADAS === "1";      // 1 = solo guarda
 // Si la RFFM mantiene un partido "en juego" mucho después de empezar (pasa hasta que se cierra el acta),
 // se da por terminado cuando han pasado ESPERA_MIN minutos desde su hora de inicio
 const ESPERA_MIN = +process.env.ESPERA_MIN || 100;
-const MANUAL = process.env.GITHUB_EVENT_NAME === "workflow_dispatch";
+const MANUAL = process.env.GITHUB_EVENT_NAME === "workflow_dispatch" && process.env.CADENA !== "1";   // CADENA=1: ejecución encadenada automática (no es manual)
 // GitHub programa en UTC; aquí filtramos por hora de Madrid (9:00–22:59), también con cambio de hora
 const ahoraMadrid = new Intl.DateTimeFormat("es-ES", { timeZone: "Europe/Madrid", hour: "numeric", minute: "numeric", hourCycle: "h23" }).formatToParts(new Date());
 const horaMadrid = +ahoraMadrid.find(x => x.type === "hour").value, minMadrid = +ahoraMadrid.find(x => x.type === "minute").value;
-if (!MANUAL && (horaMadrid < 9 || horaMadrid > 22)) { console.log("Fuera de horario:", horaMadrid + ":" + minMadrid, "en Madrid"); process.exit(0); }
+if (!MANUAL && (horaMadrid < 8 || (horaMadrid === 23 && minMadrid > 30))) { console.log("Fuera de horario:", horaMadrid + ":" + minMadrid, "en Madrid"); process.exit(0); }
 const FULLRUN = MANUAL || horaMadrid === 9;   // primera ejecución del día (las 9h) y manuales: todas las jornadas
 const sleep = ms => new Promise(r => setTimeout(r, ms));
 
@@ -193,8 +193,8 @@ function aplicar(S, lectura, cat) {
       const jugado = terminado && fecha && fecha <= hoyISO && (!SOLO_CERRADAS || cerrada);
       const gl = jugado ? num(p.Goles_casa) : null, gv = jugado ? num(p.Goles_visitante) : null;
       // Diagnóstico: partidos de hoy que ya deberían tener resultado y la RFFM todavía no lo da
-      if (inicio && fecha === hoyISO && hoy > inicio + 90 * 6e4 && (gl === null || gv === null))
-        console.log(`[${cat.id}] sin resultado aún: ${p.Nombre_equipo_local} - ${p.Nombre_equipo_visitante} | ${hora} | acta_cerrada=${p.acta_cerrada} | goles=${p.Goles_casa}-${p.Goles_visitante} | en_juego=${p.partido_en_juego}`);
+      if (inicio && hoy > inicio + 90 * 6e4 && (gl === null || gv === null))
+        console.log(`[${cat.id}] sin resultado aún: ${p.Nombre_equipo_local} - ${p.Nombre_equipo_visitante} | ${hora} | acta_cerrada=${p.acta_cerrada} | goles=${p.Goles_casa}-${p.Goles_visitante} | en_juego=${p.partido_en_juego} | estado=${p.estado} | motivo=${p.motivo_estado} | provisional=${p.ResultadoProvisional} | retirado=${p.Retirado_local}/${p.Retirado_visitante} | jugado=${jugado} | fecha=${fecha}`);
       const k = `${n}_${h}`, m = S.m[k] || {};
       let ch = 0;
       if (fecha && fecha !== m.d) { m.d = fecha; ch++; }

@@ -191,7 +191,10 @@ function aplicar(S, lectura, cat) {
       // Terminado = la RFFM ya no lo marca "en juego", o tiene el acta cerrada, o ya pasó tiempo de sobra desde su inicio
       const terminado = cerrada || p.partido_en_juego !== "1" || pasado;
       const jugado = terminado && fecha && fecha <= hoyISO && (!SOLO_CERRADAS || cerrada);
-      const gl = jugado ? num(p.Goles_casa) : null, gv = jugado ? num(p.Goles_visitante) : null;
+      let gl = jugado ? num(p.Goles_casa) : null, gv = jugado ? num(p.Goles_visitante) : null;
+      // Si la RFFM aún no da los goles pero sí un resultado provisional («3-1»), se usa ese hasta que cierren el acta
+      const prov = String(p.ResultadoProvisional || "").match(/^\s*(\d+)\s*[-:]\s*(\d+)\s*$/);
+      if (jugado && gl === null && gv === null && prov) { gl = +prov[1]; gv = +prov[2]; console.log(`[${cat.id}] resultado PROVISIONAL usado: ${p.Nombre_equipo_local} ${gl}-${gv} ${p.Nombre_equipo_visitante}`); }
       // Diagnóstico: partidos de hoy que ya deberían tener resultado y la RFFM todavía no lo da
       if (inicio && hoy > inicio + 90 * 6e4 && (gl === null || gv === null))
         console.log(`[${cat.id}] sin resultado aún: ${p.Nombre_equipo_local} - ${p.Nombre_equipo_visitante} | ${hora} | acta_cerrada=${p.acta_cerrada} | goles=${p.Goles_casa}-${p.Goles_visitante} | en_juego=${p.partido_en_juego} | estado=${p.estado} | motivo=${p.motivo_estado} | provisional=${p.ResultadoProvisional} | retirado=${p.Retirado_local}/${p.Retirado_visitante} | jugado=${jugado} | fecha=${fecha}`);

@@ -721,15 +721,20 @@ function tickLive(){const l=!!liveM();if(l!==lvOn){render();return}
  const e=document.getElementById("lc");if(!e)return;const d=e.dataset,el=Math.max(0,+d.base+(d.run=="1"?Date.now()-d.since:0)),s=el/1e3|0,pc=Math.min(100,el/HALF*100);
  e.textContent=String(s/60|0).padStart(2,"0")+":"+String(s%60).padStart(2,"0");
  document.getElementById("p1").style.width=(d.ph=="1"?pc:d.ph=="0"?0:100)+"%";document.getElementById("p2").style.width=(d.ph=="2"?pc:d.ph=="FT"?100:0)+"%"}
-function nextM(){const lv=liveM(1);if(lv)return lv;return myM().filter(x=>x.h&&x.a).find(cur)}
+function nextM(){const lv=liveM(1);if(lv)return lv;
+ const r=J.find(x=>x.n===wkJ()),p=r&&r.p.find(q=>q.includes(ME)),a=p?(p[0]&&p[1]?{r,h:p[0],a:p[1]}:{r,h:p[0],a:p[1],rest:1}):null;
+ const c=myM().filter(x=>x.r.copa&&x.h&&x.a).find(cur);
+ if(c&&(!a||a.rest||when(c)<=when(a)))return c;
+ return a||myM().filter(x=>x.h&&x.a).find(cur)}
 function hero(){const lv=liveM();lvOn=!!lv;if(lv)return liveHero(lv);const nx=nextM();
  if(!nx)return`<h2>Temporada finalizada 🏆</h2><p class="gap">No quedan partidos por jugar.</p>`;
- const m=M(nx.r.n,nx.h);
- return`<div class="cn" style="font-size:1.1rem;color:var(--ye)">PRÓXIMO PARTIDO · ${lab(nx.r).toUpperCase()}</div>
- <div class="hv"><div>${bd(nx.h)}<div class="cn">${nm(nx.h)}</div></div><div class="cn" style="font-size:2rem">VS</div><div>${bd(nx.a)}<div class="cn">${nm(nx.a)}</div></div></div>
+ if(nx.rest)return`<div class="cn" style="font-size:1.1rem;color:var(--ye)">${lab(nx.r).toUpperCase()}</div><div class="hv"><div>${bd(0)}<div class="cn">Descansa esta jornada</div></div></div><p style="text-align:center"><span class="dt dtb">${fmt(nx.r.d)}</span></p>`;
+ const m=M(nx.r.n,nx.h),dn=done(m),fut=when(nx).getTime()>Date.now();
+ return`<div class="cn" style="font-size:1.1rem;color:var(--ye)">${dn?"PARTIDO FINALIZADO":fut?"PRÓXIMO PARTIDO":"PARTIDO DE LA JORNADA"} · ${lab(nx.r).toUpperCase()}</div>
+ <div class="hv"><div>${bd(nx.h)}<div class="cn">${nm(nx.h)}</div></div><div class="cn" style="font-size:2rem">${dn?`${m.h} - ${m.a}`:"VS"}</div><div>${bd(nx.a)}<div class="cn">${nm(nx.a)}</div></div></div>
  <p style="text-align:center;margin-bottom:18px"><span class="dt dtb">${fmt(m.d||nx.r.d)} · ${m.t?m.t+" h":"hora por confirmar"}</span></p>
  <p class="loc">${loc(nx.h,m)}</p>
- ${m.t?`<div class="cd" id="cd" data-t="${when(nx).getTime()}"></div>`:""}${E()?`<p style="text-align:center;margin-top:14px"><button onclick="startLive(${nx.r.n},${nx.h})">📡 Iniciar directo ahora</button></p>`:""}`}
+ ${m.t&&fut&&!dn?`<div class="cd" id="cd" data-t="${when(nx).getTime()}"></div>`:""}${!dn&&!fut?`<p style="text-align:center;margin-top:12px">⏳ Resultado pendiente</p>`:""}${E()&&!dn?`<p style="text-align:center;margin-top:14px"><button onclick="startLive(${nx.r.n},${nx.h})">📡 Iniciar directo ahora</button></p>`:""}`}
 function tick(){tickLive();const e=document.getElementById("cd");if(!e)return;let s=Math.max(0,(+e.dataset.t-Date.now())/1e3|0);const v=[[86400,"días"],[3600,"horas"],[60,"min"],[1,"seg"]];e.innerHTML=v.map(([k,l])=>{const n=s/k|0;s%=k;return`<div><b>${String(n).padStart(2,"0")}</b><span>${l}</span></div>`}).join("")}
 /* Jornada de la semana: hasta el domingo a las 23:00 (Madrid) de la semana de su fecha */
 function wkJ(){const mad=(y,m,d)=>{for(const o of [1,2]){const t=Date.UTC(y,m-1,d,23-o,0);if(+new Intl.DateTimeFormat("en-GB",{timeZone:"Europe/Madrid",hour:"numeric",hourCycle:"h23"}).format(t)===23)return t}return Date.UTC(y,m-1,d,22,0)};

@@ -394,6 +394,9 @@ select{font:inherit;background:var(--bg);color:var(--tx);border:1px solid var(--
 #topbar nav#nav button span:last-child{max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 #topbar nav#nav button.on{background:var(--ye);color:#0a0f1e;box-shadow:0 3px 10px #d9770655}
 #topbar nav#nav button.out{background:#ef4444;color:#fff}
+#topbar nav#nav button.back{background:linear-gradient(135deg,#3d8bff,#1e4fd8);color:#fff;box-shadow:0 3px 10px #1e4fd855}
+#topbar nav#nav button.back:hover{background:linear-gradient(135deg,#5a9dff,#2a5fe6)}
+#topbar nav#nav button.back span:last-child{white-space:normal;line-height:1.05;text-align:center}
 @media(min-width:700px){
  #tbsp{height:104px}
  #topbar .brand{flex-direction:row;gap:8px;padding:0 10px}
@@ -436,10 +439,7 @@ select{font:inherit;background:var(--bg);color:var(--tx);border:1px solid var(--
  </div>
 </div>
 
-<div class="volver">
- <p>¿Quieres ver otra categoría?</p>
- <button type="button" onclick="volver()">← Volver</button>
-</div>
+<!-- -->
 </div>
 <div id="adm">
  <span id="st" class="gap"></span>
@@ -1169,6 +1169,7 @@ if(location.hash=="#admin")unlock();try{if(sessionStorage.getItem("adm")){PW=ses
 if(API||FB)document.querySelector("#adm .on").remove();
 /* Volver a la página anterior (si se abrió esta página directamente, va al inicio) */
 function volver(){if(history.length>1)history.back();else location.href="../index.html#equipos"}
+function volverTop(){if(E())setEdit(false);volver()}
 render();setInterval(tick,1000);
 try{new ResizeObserver(setTb).observe(document.getElementById("topbar"))}catch(e){}
 let pc=0;setInterval(()=>{pc++;if(API&&!FB&&!E()&&(liveM()||pc%12==0))fetch(API+"?v="+Date.now(),{cache:"no-store"}).then(r=>r.json()).then(d=>{if(JSON.stringify(d)!==JSON.stringify(S)){S=d;fix();render()}}).catch(()=>{})},5000);

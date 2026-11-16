@@ -502,6 +502,41 @@ header.site-banner .dl {
 .b.zz svg{display:block}
 /* marcador hero en una línea */
 .hv>.cn{flex:none;white-space:nowrap;max-width:none}
+/* ===== Menú: botones cuadrados + más sitio para logo y categoría ===== */
+#topbar .dock{gap:8px;padding:6px 8px}
+#topbar .brand{flex:none;width:112px;gap:5px}
+#topbar .club{font-size:.9rem;gap:6px;line-height:1}
+#topbar .club img{width:34px;height:34px}
+#topbar .catbtn .cur{font-size:.95rem;padding:5px 6px}
+#topbar .catbtn .chg{font-size:.68rem;padding:3px 6px}
+
+/* Botones cuadrados: la altura sale del ancho de la columna */
+#topbar nav#nav{grid-template-columns:repeat(var(--c,4),minmax(0,1fr));grid-auto-rows:auto;gap:4px;align-content:center}
+#topbar nav#nav button{aspect-ratio:1/1;min-height:0;padding:2px;gap:3px;font-size:.6rem}
+#topbar nav#nav button span:first-child{font-size:1.2rem}
+
+/* Móvil + admin: el logo y la categoría pasan a una fila propia, y los botones van debajo a todo el ancho */
+@media(max-width:699px){
+ body.edit #topbar .dock{flex-wrap:wrap}
+ body.edit #topbar .brand{width:100%;flex-direction:row;align-items:center;justify-content:space-between}
+ body.edit #topbar .catbtn{flex-direction:row}
+ body.edit #topbar nav#nav{flex:1 1 100%}
+ body.edit #topbar nav#nav button{min-height:0;padding:2px;font-size:.54rem}
+ body.edit #topbar nav#nav button span:first-child{font-size:1rem}
+}
+
+/* Escritorio: logo grande, categoría apilada y botones cuadrados de tamaño fijo, pegados a la derecha */
+@media(min-width:700px){
+ #topbar .brand{width:230px;gap:6px}
+ #topbar .club{font-size:1.25rem;gap:9px}
+ #topbar .club img{width:44px;height:44px}
+ #topbar .catbtn{flex-direction:column}
+ #topbar .catbtn .cur{font-size:1.1rem;padding:6px 10px}
+ #topbar .catbtn .chg{font-size:.8rem;padding:3px 10px}
+ #topbar nav#nav{grid-template-columns:repeat(var(--c,4),76px);justify-content:end;gap:6px}
+ #topbar nav#nav button{min-height:0;font-size:.78rem}
+ #topbar nav#nav button span:first-child{font-size:1.4rem}
+}
 </style>
 <script>const CAT={"nombre": "Torrejón Juncal Juvenil B", "corto": "Juvenil B", "liga": "Primera Juvenil FS · Grupo 2", "node": "cat-juvenil-b", "email": "juvenil-b@torrejonjuncal.es", "grupo": "28122269", "equipo": "19691247", "me": 0};</script>
 </head>

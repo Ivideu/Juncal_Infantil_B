@@ -499,6 +499,7 @@ header.site-banner .dl {
 <div id="tbsp"></div>
 <script>/* Avisos push: solo dentro de la app Android */
 (async()=>{try{const FM=window.Capacitor&&Capacitor.Plugins&&Capacitor.Plugins.FirebaseMessaging;if(!FM)return;
+ if(localStorage.getItem("jb_app"))return;   /* app nueva: los avisos se eligen en app.html */
  const p=await FM.requestPermissions();if(p.receive==="granted")await FM.subscribeToTopic({topic:"juncal"})}catch(e){}})();</script>
 <section id="hero"></section>
 

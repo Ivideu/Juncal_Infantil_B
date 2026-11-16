@@ -11,7 +11,7 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const FB = "https://juncal-f0b64-default-rtdb.europe-west1.firebasedatabase.app";
 const SALTAR = ["infantil-b"];            // categorías con su propia sincronización (admin + directo)
 const MAXJOR = 60;
-const { FBKEY, FBMAIL, FBPASS } = process.env;
+const { FBKEY, FBMAIL, FBPASS, FCM_SERVICE_ACCOUNT } = process.env;
 const SOLO = (process.env.SOLO || "").trim();                 // opcional: id de una sola categoría (para probar)
 const SOLO_CERRADAS = process.env.SOLO_CERRADAS === "1";      // 1 = solo guardar resultados con acta cerrada
 // Si la RFFM mantiene un partido "en juego" mucho después de empezar (pasa hasta que se cierra el acta),
@@ -157,11 +157,56 @@ async function leerFB(tok, node) {
   return { etag: g.headers.get("etag"), S: raw ? (typeof raw === "string" ? JSON.parse(raw) : raw) : null };
 }
 
+// ---------- Avisos push por categoría (Firebase Cloud Messaging) ----------
+// Cada categoría tiene su tema «juncal-<id>»: la app del club suscribe a los equipos que elige cada familia.
+let avisosCat = [];
+const b64u = b => Buffer.from(b).toString("base64url");
+async function tokenFCM(sa) {
+  const { createSign } = await import("node:crypto");
+  const now = Math.floor(Date.now() / 1000);
+  const head = b64u(JSON.stringify({ alg: "RS256", typ: "JWT" }));
+  const body = b64u(JSON.stringify({ iss: sa.client_email, scope: "https://www.googleapis.com/auth/firebase.messaging",
+    aud: "https://oauth2.googleapis.com/token", iat: now, exp: now + 3600 }));
+  const sig = createSign("RSA-SHA256").update(`${head}.${body}`).sign(sa.private_key, "base64url");
+  const r = await fetch("https://oauth2.googleapis.com/token", { method: "POST",
+    headers: { "Content-Type": "application/x-www-form-urlencoded" },
+    body: new URLSearchParams({ grant_type: "urn:ietf:params:oauth:grant-type:jwt-bearer", assertion: `${head}.${body}.${sig}` }) });
+  const d = await r.json();
+  if (!d.access_token) throw new Error("OAuth FCM: " + JSON.stringify(d));
+  return d.access_token;
+}
+const diaES = f => { const t = new Date(f + "T12:00:00Z").toLocaleDateString("es-ES", { weekday: "long", day: "numeric", month: "long", timeZone: "UTC" });
+  return t[0].toUpperCase() + t.slice(1); };
+async function avisar(cat, S, lista) {
+  if (!lista.length) return;
+  if (!FCM_SERVICE_ACCOUNT) { console.log(`[${cat.id}] aviso pendiente, falta el secret FCM_SERVICE_ACCOUNT:`, JSON.stringify(lista)); return; }
+  const nom = id => (S.cfg.T[id] && S.cfg.T[id][0]) || "Rival";
+  // Como máximo un aviso de horario (el del partido más próximo) y uno de resultado (el último)
+  const horario = lista.filter(x => x.tipo !== "final").sort((p, q) => p.jor - q.jor)[0];
+  const final = lista.filter(x => x.tipo === "final").sort((p, q) => q.jor - p.jor)[0];
+  try {
+    const sa = JSON.parse(FCM_SERVICE_ACCOUNT), tk = await tokenFCM(sa);
+    for (const x of [horario, final].filter(Boolean)) {
+      const title = x.tipo === "hora" ? `⚽ ${cat.nombre}: ¡ya hay hora para el partido!`
+                  : x.tipo === "cambio" ? `⚠️ ${cat.nombre}: cambio de día/hora` : `🏁 ${cat.nombre}: final del partido`;
+      const text = x.tipo === "final" ? `${nom(x.h)} ${x.gl} - ${x.gv} ${nom(x.a)}` : `${nom(x.h)} vs ${nom(x.a)} · ${diaES(x.fecha)} · ${x.hora} h`;
+      const r = await fetch(`https://fcm.googleapis.com/v1/projects/${sa.project_id}/messages:send`, { method: "POST",
+        headers: { Authorization: `Bearer ${tk}`, "Content-Type": "application/json" },
+        body: JSON.stringify({ message: { topic: "juncal-" + cat.id, notification: { title, body: text },
+          data: { categoria: cat.id, jornada: String(x.jor) }, android: { priority: "HIGH", notification: { channel_id: "default" } } } }) });
+      console.log(`[${cat.id}] aviso push`, r.ok ? "enviado:" : "ERROR " + r.status + " " + await r.text(), title, "|", text);
+    }
+  } catch (e) { console.error(`[${cat.id}] no se pudo enviar el aviso push:`, String(e)); }
+}
+
 // ---------- Aplicar la RFFM sobre los datos ----------
 function aplicar(S, lectura, cat) {
   const hoy = Date.now(), hoyISO = new Date(hoy).toLocaleDateString("sv-SE", { timeZone: "Europe/Madrid" });
+  const ayerISO = new Date(hoy - 864e5).toLocaleDateString("sv-SE", { timeZone: "Europe/Madrid" });
+  avisosCat = [];
   S.m ||= {};
   const cfg = S.cfg ||= { T: {}, COD: {}, R: [] };
+  const propioId = +(Object.keys(cfg.COD).find(i => cfg.COD[i] === cfg.equipo) || 0);
   const antes = JSON.stringify(cfg);
   const inv = () => Object.fromEntries(Object.entries(cfg.COD).map(([i, c]) => [String(c), +i]));
   let ids = inv(), total = 0;
@@ -208,12 +253,20 @@ function aplicar(S, lectura, cat) {
       if (inicio && hoy > inicio + 90 * 6e4 && (gl === null || gv === null))
         console.log(`[${cat.id}] sin resultado aún: ${p.Nombre_equipo_local} - ${p.Nombre_equipo_visitante} | ${hora} | acta_cerrada=${p.acta_cerrada} | goles=${p.Goles_casa}-${p.Goles_visitante} | en_juego=${p.partido_en_juego} | estado=${p.estado} | motivo=${p.motivo_estado} | provisional=${p.ResultadoProvisional} | retirado=${p.Retirado_local}/${p.Retirado_visitante} | jugado=${jugado} | fecha=${fecha}`);
       const k = `${n}_${h}`, m = S.m[k] || {};
+      const prevT = m.t, prevD = m.d, prevRes = m.h !== undefined && m.h !== "";
+      const propio = propioId && (h === propioId || a === propioId);
       let ch = 0;
       if (fecha && fecha !== m.d) { m.d = fecha; ch++; }
       if (hora && hora !== m.t) { m.t = hora; ch++; }
       const campo = limpiaCampo(p.campojuego);
       if (campo && campo !== m.p) { m.p = campo; ch++; }
       if (Number.isInteger(gl) && Number.isInteger(gv) && !(m.h !== undefined && m.h !== "" && +m.h === gl && +m.a === gv)) { m.h = gl; m.a = gv; ch++; }
+      // Avisos push del equipo propio (se envían después de guardar): hora nueva, cambio de día/hora y resultado final
+      if (propio && hora && fecha && inicio > hoy) {   // solo partidos que aún no han empezado
+        if (!prevT) avisosCat.push({ tipo: "hora", jor: n, h, a, fecha, hora });
+        else if (hora !== prevT || (prevD && fecha !== prevD)) avisosCat.push({ tipo: "cambio", jor: n, h, a, fecha, hora });
+      }
+      if (propio && !prevRes && Number.isInteger(gl) && Number.isInteger(gv) && fecha >= ayerISO) avisosCat.push({ tipo: "final", jor: n, h, a, fecha, gl, gv });
       if (ch) { S.m[k] = m; total += ch; }
     }
     if (R) {
@@ -269,7 +322,7 @@ for (const cat of cats) {
       // PUT condicional: si alguien escribió mientras tanto, Firebase responde 412 y reintentamos
       const p = await fetch(`${FB}/${node}.json?auth=${tok}`, {
         method: "PUT", headers: etag ? { "if-match": etag } : {}, body: JSON.stringify(JSON.stringify(S)) });
-      if (p.ok) { console.log(`[${cat.id}] cambios guardados: ${cambios}`); break; }
+      if (p.ok) { console.log(`[${cat.id}] cambios guardados: ${cambios}`); await avisar(cat, S, avisosCat); break; }
       if (p.status === 412) { console.warn(`[${cat.id}] conflicto de escritura, reintentando…`); await sleep(1000); continue; }
       throw new Error("Error al guardar: " + p.status);
     }

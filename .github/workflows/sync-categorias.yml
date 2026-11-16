@@ -36,6 +36,7 @@ jobs:
           FBMAIL: ${{ secrets.FBMAIL }}
           FBPASS: ${{ secrets.FBPASS }}
           SOLO: ${{ github.event.inputs.solo }}
+          FCM_SERVICE_ACCOUNT: ${{ secrets.FCM_SERVICE_ACCOUNT }}   # avisos push por categoría (tema juncal-<id>)
           CADENA: ${{ github.event.inputs.cadena }}
         run: |
           # Manual (o con una sola categoría): una sola pasada. Automática (cron o cadena): 5 pasadas, 1 por hora.

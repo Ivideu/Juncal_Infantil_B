@@ -1,0 +1,156 @@
+name: App Android firmada (APK + AAB)
+
+# Compila la app «Torrejón Juncal» (todas las categorías) y la FIRMA con tu clave.
+#   · APK firmado  → se publica en Releases (etiqueta «app») para instalar a mano.
+#   · AAB firmado  → se guarda como artefacto de esta ejecución (descárgalo y súbelo a Google Play Console).
+# La app carga https://torrejonjuncal.es/app.html, así que los cambios de la web llegan sin recompilar.
+#
+# Secrets necesarios (Settings > Secrets and variables > Actions):
+#   KEYSTORE_BASE64    tu archivo de clave codificado en base64  (ver GUIA_APP.md)
+#   KEYSTORE_PASSWORD  contraseña del archivo de clave
+#   KEY_ALIAS          alias de la clave dentro del archivo
+#   KEY_PASSWORD       contraseña de la clave (si es la misma que la del archivo, puedes no crearlo)
+#   GOOGLE_SERVICES_JSON  google-services.json de la app Android «es.torrejonjuncal.app» registrada en Firebase
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: "Nombre de versión (ej. 1.0.0)"
+        required: false
+        default: "1.0.0"
+
+permissions:
+  contents: write
+
+env:
+  APP_ID: es.torrejonjuncal.app
+  APP_NAME: Torrejón Juncal
+  APP_URL: https://torrejonjuncal.es/app.html
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 21
+
+      - name: Preparar y comprobar la clave de firma
+        env:
+          KEYSTORE_BASE64: ${{ secrets.KEYSTORE_BASE64 }}
+          KS_PASS: ${{ secrets.KEYSTORE_PASSWORD }}
+          KS_ALIAS: ${{ secrets.KEY_ALIAS }}
+        run: |
+          for v in KEYSTORE_BASE64 KS_PASS KS_ALIAS; do
+            [ -n "${!v}" ] || { echo "::error::Falta el secret para $v (mira GUIA_APP.md)"; exit 1; }
+          done
+          printf '%s' "$KEYSTORE_BASE64" | base64 -d > "$RUNNER_TEMP/juncal.keystore"
+          keytool -list -v -keystore "$RUNNER_TEMP/juncal.keystore" -storepass "$KS_PASS" -alias "$KS_ALIAS" \
+            | grep -E "Alias name|Owner:|Valid from|SHA256:" \
+            || { echo "::error::No se pudo abrir la clave: revisa KEYSTORE_PASSWORD y KEY_ALIAS"; exit 1; }
+
+      - name: Crear el proyecto Capacitor
+        run: |
+          mkdir -p /tmp/app/www && cd /tmp/app
+          npm init -y >/dev/null
+          npm i @capacitor/core@8 @capacitor/cli@8 @capacitor/android@8 @capacitor-firebase/messaging@8 firebase
+          cat > www/index.html <<'HTML'
+          <!doctype html><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+          <title>Torrejón Juncal</title><body style="background:#0a1f55;color:#fff;font-family:sans-serif;text-align:center;padding:40px">
+          <h2>Torrejón Juncal</h2><p>Sin conexión. Vuelve a abrir la app cuando tengas internet.</p>
+          HTML
+          node -e '
+            const c={appId:process.env.APP_ID,appName:process.env.APP_NAME,webDir:"www",
+              server:{url:process.env.APP_URL,allowNavigation:["torrejonjuncal.es","*.torrejonjuncal.es"]}};
+            require("fs").writeFileSync("capacitor.config.json",JSON.stringify(c,null,2))'
+          npx cap add android
+
+      - name: Avisos push (google-services.json)
+        env:
+          GOOGLE_SERVICES_JSON: ${{ secrets.GOOGLE_SERVICES_JSON }}
+        run: |
+          [ -n "$GOOGLE_SERVICES_JSON" ] || { echo "::error::Falta el secret GOOGLE_SERVICES_JSON (sin él no hay avisos push)"; exit 1; }
+          printf '%s' "$GOOGLE_SERVICES_JSON" > /tmp/app/android/app/google-services.json
+          grep -q "\"package_name\": *\"$APP_ID\"" /tmp/app/android/app/google-services.json \
+            || { echo "::error::El google-services.json no contiene la app $APP_ID. Registra esa app Android en Firebase y descarga el archivo de nuevo"; exit 1; }
+
+      - name: Icono de la app
+        run: |
+          cd /tmp/app/android/app/src/main/res
+          rm -rf mipmap-anydpi-v26
+          for d in mipmap-*; do
+            for f in ic_launcher.png ic_launcher_round.png ic_launcher_foreground.png; do
+              [ -f "$d/$f" ] && cp "$GITHUB_WORKSPACE/Images/icon-192.png" "$d/$f" || true
+            done
+          done
+
+      - name: Versión y firma en build.gradle
+        env:
+          VERSION: ${{ github.event.inputs.version || '1.0.0' }}
+        run: |
+          python3 - <<'PY'
+          import os, re
+          p = "/tmp/app/android/app/build.gradle"
+          s = open(p, encoding="utf-8").read()
+          assert "versionCode 1\n" in s and 'versionName "1.0"' in s, "plantilla de Capacitor distinta: revisar versionCode/versionName"
+          s = s.replace("versionCode 1\n", "versionCode " + os.environ["GITHUB_RUN_NUMBER"] + "\n")
+          s = s.replace('versionName "1.0"', 'versionName "' + os.environ["VERSION"] + '"')
+          sig = '''    signingConfigs {
+              release {
+                  storeFile file(System.getenv("KS_FILE"))
+                  storePassword System.getenv("KS_PASS")
+                  keyAlias System.getenv("KS_ALIAS")
+                  keyPassword System.getenv("KS_KEYPASS")
+              }
+          }
+          '''
+          old = "    buildTypes {\n        release {\n"
+          assert old in s, "plantilla de Capacitor distinta: revisar buildTypes"
+          s = s.replace(old, sig + old + "            signingConfig signingConfigs.release\n")
+          open(p, "w", encoding="utf-8").write(s)
+          PY
+
+      - name: Compilar APK y AAB firmados
+        env:
+          KS_FILE: ${{ runner.temp }}/juncal.keystore
+          KS_PASS: ${{ secrets.KEYSTORE_PASSWORD }}
+          KS_ALIAS: ${{ secrets.KEY_ALIAS }}
+          KS_KEYPASS: ${{ secrets.KEY_PASSWORD || secrets.KEYSTORE_PASSWORD }}
+        run: |
+          cd /tmp/app && npx cap sync android
+          cd android && chmod +x gradlew
+          ./gradlew assembleRelease bundleRelease --no-daemon
+
+      - name: Comprobar la firma y el nivel de API
+        run: |
+          APK=/tmp/app/android/app/build/outputs/apk/release/app-release.apk
+          AAB=/tmp/app/android/app/build/outputs/bundle/release/app-release.aab
+          ls -la "$APK" "$AAB"
+          AS=$(ls -d "$ANDROID_HOME"/build-tools/*/ | sort -V | tail -1)
+          "$AS/apksigner" verify --print-certs "$APK" | grep -E "Signer #1 certificate (DN|SHA-256)"
+          "$AS/aapt2" dump badging "$APK" | grep -E "^package|targetSdkVersion"
+
+      - name: Guardar el AAB (para Google Play)
+        uses: actions/upload-artifact@v4
+        with:
+          name: Juncal-AAB-firmado
+          path: /tmp/app/android/app/build/outputs/bundle/release/app-release.aab
+          retention-days: 30
+
+      - name: Publicar el APK firmado en Releases
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          cp /tmp/app/android/app/build/outputs/apk/release/app-release.apk /tmp/Torrejon-Juncal.apk
+          gh release delete app --yes --cleanup-tag 2>/dev/null || true
+          gh release create app /tmp/Torrejon-Juncal.apk --title "App Android Torrejón Juncal" \
+            --notes "Descarga Torrejon-Juncal.apk e instálalo en tu móvil Android (firmado con la clave del club)."

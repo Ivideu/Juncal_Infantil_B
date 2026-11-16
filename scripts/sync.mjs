@@ -193,7 +193,7 @@ async function avisar() {
     const text = `${NOM[x.h]} vs ${NOM[x.a]} · ${diaES(x.fecha)} · ${x.hora} h`;
     const r = await fetch(`https://fcm.googleapis.com/v1/projects/${sa.project_id}/messages:send`, { method: "POST",
       headers: { Authorization: `Bearer ${tk}`, "Content-Type": "application/json" },
-      body: JSON.stringify({ message: { topic: "juncal", notification: { title, body: text },
+      body: JSON.stringify({ message: { condition: "'juncal' in topics || 'juncal-infantil-b' in topics", notification: { title, body: text },
         data: { jornada: String(x.jor), rival }, android: { priority: "HIGH", notification: { channel_id: "default" } } } }) });
     console.log("Aviso push", r.ok ? "enviado:" : "ERROR " + r.status + " " + await r.text(), title, "|", text);
   } catch (e) { console.error("No se pudo enviar el aviso push:", String(e)); }

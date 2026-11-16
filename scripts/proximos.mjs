@@ -73,7 +73,8 @@ const esVisit = (c, p) => c.equipo ? String(p.CodEquipo_visitante) === String(c.
 // Siguiente partido del club en esa categoría. Devuelve {partido}, null (no quedan partidos) o {error:true} (RFFM no responde)
 async function siguiente(c, previo) {
   const ini = Math.max(1, previo && previo.jornada ? previo.jornada - 1 : 1);
-  let seguidos = 0, leidas = 0;
+  let seguidos = 0, leidas = 0, ult = null;
+  const ent = v => /^\d+$/.test(String(v ?? "").trim()) ? +v : null;
   for (let r = ini; r < ini + 45; r++) {
     const d = await rffm(c.grupo, r);
     if (!d) { if (++seguidos >= 2) return leidas ? null : { error: true }; continue; }
@@ -84,6 +85,18 @@ async function siguiente(c, previo) {
     if (!p) { await sleep(1200); continue; }
     const fecha = iso(p.fecha), hora = (p.hora || "").slice(0, 5);
     if (!fecha) { await sleep(1200); continue; }
+    // Último partido ya jugado (para el marcador de la app): acta cerrada o resultado provisional
+    {
+      const prov = String(p.ResultadoProvisional || "").match(/^\s*(\d+)\s*[-:]\s*(\d+)\s*$/);
+      const gl = ent(p.Goles_casa) ?? (prov ? +prov[1] : null), gv = ent(p.Goles_visitante) ?? (prov ? +prov[2] : null);
+      const cerrada = p.acta_cerrada === "1" || p.acta_cerrada === 1;
+      if (gl !== null && gv !== null && p.partido_en_juego !== "1" && (cerrada || prov || madrid(fecha, hora || "23:59") + 3 * 36e5 < AHORA)) {
+        const cs = esLocal(c, p);
+        ult = { jornada: r, fecha, gl, gv, casa: cs,
+          local: cs && c.nombreEquipo ? c.nombreEquipo : p.Nombre_equipo_local,
+          visitante: !cs && c.nombreEquipo ? c.nombreEquipo : p.Nombre_equipo_visitante };
+      }
+    }
     if (madrid(fecha, hora || "23:59") + 3 * 36e5 < AHORA) { await sleep(1200); continue; }
     const casa = esLocal(c, p);
     console.log(`  ${c.nombre}: jornada ${r}, ${p.Nombre_equipo_local} - ${p.Nombre_equipo_visitante}, ${fecha} ${hora}`);
@@ -92,7 +105,7 @@ async function siguiente(c, previo) {
       local: casa && c.nombreEquipo ? c.nombreEquipo : p.Nombre_equipo_local,
       visitante: !casa && c.nombreEquipo ? c.nombreEquipo : p.Nombre_equipo_visitante,
       codLocal: String(p.CodEquipo_local), codVisitante: String(p.CodEquipo_visitante),
-      casa, campo: limpiaCampo(p.campojuego) } };
+      casa, campo: limpiaCampo(p.campojuego), ultimo: ult || previo?.ultimo || null } };
   }
   return null;
 }

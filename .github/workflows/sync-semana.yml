@@ -51,6 +51,7 @@ jobs:
         continue-on-error: true
         env:
           SOLO: ${{ github.event.inputs.solo }}
+          FCM_SERVICE_ACCOUNT: ${{ secrets.FCM_SERVICE_ACCOUNT }}   # avisos push por categoría (tema juncal-<id>)
         run: node scripts/sync-categorias.mjs
       - name: Comprobar resultado
         if: ${{ steps.infantilb.outcome == 'failure' || steps.resto.outcome == 'failure' }}

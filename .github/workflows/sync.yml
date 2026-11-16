@@ -10,8 +10,6 @@ on:
         description: "Uso interno (la propia cadena automática): 1 = encadenada, 0 = manual"
         required: false
         default: "0"
-  schedule:
-    - cron: "50 5,11,17 * * *"    # UTC: red de seguridad
 concurrency:
   group: ${{ (github.event_name == 'schedule' || github.event.inputs.cadena == '1') && 'sync-rffm-auto' || 'sync-rffm-manual' }}
   cancel-in-progress: false

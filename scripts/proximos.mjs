@@ -72,8 +72,10 @@ const esVisit = (c, p) => c.equipo ? String(p.CodEquipo_visitante) === String(c.
 
 // Siguiente partido del club en esa categoría. Devuelve {partido}, null (no quedan partidos) o {error:true} (RFFM no responde)
 async function siguiente(c, previo) {
-  const ini = Math.max(1, previo && previo.jornada ? previo.jornada - 1 : 1);
-  let seguidos = 0, leidas = 0, ult = null;
+  // Se empieza una jornada antes de la más baja que aún tenía partido pendiente (un partido aplazado puede estar en una jornada anterior)
+  const base = previo && previo.jornada ? Math.min(previo.jornada, previo.pj || previo.jornada) : 1;
+  const ini = Math.max(1, base - 1);
+  let seguidos = 0, leidas = 0, ult = null, mejor = null, pj = 0;
   const ent = v => /^\d+$/.test(String(v ?? "").trim()) ? +v : null;
   for (let r = ini; r < ini + 45; r++) {
     const d = await rffm(c.grupo, r);
@@ -97,17 +99,27 @@ async function siguiente(c, previo) {
           visitante: !cs && c.nombreEquipo ? c.nombreEquipo : p.Nombre_equipo_visitante };
       }
     }
-    if (madrid(fecha, hora || "23:59") + 3 * 36e5 < AHORA) { await sleep(1200); continue; }
-    const casa = esLocal(c, p);
-    console.log(`  ${c.nombre}: jornada ${r}, ${p.Nombre_equipo_local} - ${p.Nombre_equipo_visitante}, ${fecha} ${hora}`);
-    return { partido: {
-      id: c.id, categoria: c.nombre, liga: limpiaLiga(c.liga), jornada: r, fecha, hora,
-      local: casa && c.nombreEquipo ? c.nombreEquipo : p.Nombre_equipo_local,
-      visitante: !casa && c.nombreEquipo ? c.nombreEquipo : p.Nombre_equipo_visitante,
-      codLocal: String(p.CodEquipo_local), codVisitante: String(p.CodEquipo_visitante),
-      casa, campo: limpiaCampo(p.campojuego), ultimo: ult || previo?.ultimo || null } };
+    const cuando = madrid(fecha, hora || "23:59");
+    if (cuando + 3 * 36e5 < AHORA) { await sleep(1200); continue; }
+    // Partido pendiente. Se elige el MÁS PRÓXIMO EN EL TIEMPO (no el de jornada más baja): un partido aplazado
+    // puede tener una fecha muy posterior a la de las jornadas siguientes.
+    if (!pj) pj = r;
+    if (!mejor || cuando < mejor.cuando) mejor = { cuando, r, p, fecha, hora };
+    // Si la jornada que se acaba de leer ya es posterior al mejor candidato, no puede haber nada más próximo
+    const fechas = d.partidos.map(q => iso(q.fecha)).filter(Boolean).sort();
+    if (fechas.length && fechas[0] > mejor.fecha) break;
+    await sleep(1200);
   }
-  return null;
+  if (!mejor) return null;
+  const { r, p, fecha, hora } = mejor, casa = esLocal(c, p);
+  console.log(`  ${c.nombre}: jornada ${r}, ${p.Nombre_equipo_local} - ${p.Nombre_equipo_visitante}, ${fecha} ${hora}`);
+  return { partido: {
+    id: c.id, categoria: c.nombre, liga: limpiaLiga(c.liga), jornada: r, fecha, hora,
+    local: casa && c.nombreEquipo ? c.nombreEquipo : p.Nombre_equipo_local,
+    visitante: !casa && c.nombreEquipo ? c.nombreEquipo : p.Nombre_equipo_visitante,
+    codLocal: String(p.CodEquipo_local), codVisitante: String(p.CodEquipo_visitante),
+    casa, campo: limpiaCampo(p.campojuego), ultimo: ult || previo?.ultimo || null,
+    ...(pj && pj < r ? { pj } : {}) } };
 }
 
 async function login() {

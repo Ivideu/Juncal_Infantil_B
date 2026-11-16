@@ -1,20 +1,20 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<link rel="stylesheet" href="../../css/fondojuncal.css"> 
+<link rel="stylesheet" href="../css/fondojuncal.css"> 
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>Juncal B · Primera Infantil FS G2 · 2026-27</title>
-<link rel="icon" type="image/png" sizes="192x192" href="../../Images/icon-192.png">
-<link rel="apple-touch-icon" href="../../Images/apple-touch-icon.png">
-<link rel="manifest" href="../../manifest.webmanifest">
+<title>Juvenil B · Primera Juvenil FS · Grupo 2 · 2026-27</title>
+<link rel="icon" type="image/png" sizes="192x192" href="../Images/icon-192.png">
+<link rel="apple-touch-icon" href="../Images/apple-touch-icon.png">
+<link rel="manifest" href="../manifest.webmanifest">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-title" content="Juncal_Inf.B">
+<meta name="apple-mobile-web-app-title" content="Juncal_JuvenilB">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
-<link rel="icon" type="image/png" href="../../Images/icon-192.png">
-   <link rel="stylesheet" href="../../css/bloque.css">
-   <link rel="stylesheet" href="../../css/efecto3d.css">
+<link rel="icon" type="image/png" href="../Images/icon-192.png">
+   <link rel="stylesheet" href="../css/bloque.css">
+   <link rel="stylesheet" href="../css/efecto3d.css">
  <!--  <script src="efecto3d.js"></script>-->
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
@@ -37,6 +37,10 @@ h1,h2,.cn{font-family:'Barlow Condensed',sans-serif;letter-spacing:.02em}
 @keyframes pulse{50%{transform:scale(1.12);border-color:#2f7bff12}}
 #bg b{position:absolute;bottom:-70px;font-weight:400;opacity:.2;will-change:transform;animation:rise linear infinite}
 @keyframes rise{to{transform:translateY(-120vh) rotate(720deg)}}
+/* ===== Cabecera ===== */
+header{padding:28px 0 8px;display:flex;justify-content:space-between;gap:12px;align-items:center;flex-wrap:wrap}
+header h1{font-size:clamp(2rem,6vw,3.4rem);font-weight:800;line-height:1;color:#0f2a6b}
+header small{color:var(--mu);display:block;margin-top:6px}
 button,.btn{font:inherit;cursor:pointer;border:1px solid var(--line);background:var(--bg2);color:var(--tx);padding:8px 14px;border-radius:10px;transition:.2s}
 button:hover{border-color:var(--ac);transform:translateY(-1px)}button:focus-visible,input:focus-visible{outline:2px solid var(--ac);outline-offset:2px}
 .on{background:var(--ac);border-color:var(--ac);color:#fff}
@@ -48,6 +52,16 @@ button:hover{border-color:var(--ac);transform:translateY(-1px)}button:focus-visi
 .hv .cn{font-size:clamp(1.1rem,3.5vw,1.8rem);font-weight:700;max-width:220px}
 .cd{display:flex;gap:10px;justify-content:center}.cd div{background:#0a1f5a66;border-radius:12px;padding:8px 14px;min-width:64px;text-align:center}
 .cd b{font:800 2rem 'Barlow Condensed';display:block;line-height:1}.cd span{font-size:.75rem;color:var(--mu)}
+nav{display:flex;flex-wrap:wrap;gap:8px;padding:6px 0 14px;position:sticky;top:0;z-index:5; justify-content: center;}
+nav button{white-space:nowrap;font-weight:600}
+nav button span:first-child{margin-right:6px}
+@media(max-width:640px){
+ nav{display:grid;grid-template-columns:repeat(var(--n,4),1fr);gap:6px}
+ nav.x{position:static}
+ nav button{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;padding:8px 2px;min-width:0;white-space:normal;text-align:center;line-height:1.15;font-size:clamp(.62rem,3vw,.8rem)}
+ nav button span:first-child{margin:0;font-size:1.3rem}
+}
+@media(max-width:340px){nav{grid-template-columns:repeat(2,1fr)}}
 .b{display:inline-grid;place-items:center;width:44px;height:44px;border-radius:50%;font:800 1rem 'Barlow Condensed';color:#fff;flex:none;border:2px solid #fff;box-shadow:0 2px 8px #0f1b3d33}
 .card{background:var(--card);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border:1px solid var(--line);border-radius:16px;padding:14px 16px;margin-bottom:12px;box-shadow:0 4px 18px #1e4fd814;animation:in .5s both;animation-delay:calc(var(--i)*30ms)}
 @keyframes in{from{opacity:0;transform:translateY(10px)}}
@@ -91,7 +105,6 @@ tr.me td{background:#2f7bff26;font-weight:700}
 .empty{text-align:center;color:var(--mu);padding:40px 0}
 #adm{display:none;position:fixed;bottom:0;left:0;right:0;background:var(--bg2);border-top:1px solid var(--ac);padding:10px;justify-content:center;gap:8px;flex-wrap:wrap;z-index:9;box-shadow:0 -6px 24px #1e4fd822}
 body.edit #adm{display:flex}
-body.edit:not(.owner) #adm{display:none!important}
 select{font:inherit;background:var(--bg);color:var(--tx);border:1px solid var(--line);border-radius:8px;padding:6px 8px}.gc{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px;width:100%}.gc button{padding:3px 10px;font-size:.85rem}
 .live{text-align:center}.lt{font:700 1.15rem 'Barlow Condensed';letter-spacing:.06em;color:var(--ye)}
 .lb{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:8px;margin:14px 0}.lb .cn{font-size:clamp(1rem,3.6vw,1.7rem);font-weight:700}
@@ -315,6 +328,69 @@ select{font:inherit;background:var(--bg);color:var(--tx);border:1px solid var(--
 .dl:hover{background:#1d5fe0}
 @media(display-mode:standalone){.dl{display:none}}
 
+/* ===== Cabecera panorámica Torrejón Juncal ===== */
+header.site-banner {
+  position: relative;
+  width: 100%;
+  max-width: 100%;
+  margin: 0 auto 18px;
+  aspect-ratio: 1347 / 375;
+  height: auto;
+  min-height: 0;
+  padding: 0;
+  display: block;
+  overflow: hidden;
+  border-radius: 16px;
+  background-color: #050b1f;
+  background-image: linear-gradient(180deg, transparent 65%, rgba(5, 11, 31, .45) 100%), url('../Images/cabecera-juncal.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  border-bottom: 2px solid #2f7bff;
+  box-shadow: 0 8px 28px rgba(0, 40, 120, .35);
+}
+header.site-banner > div { position: static; }
+header.site-banner #tt {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  margin: 0;
+  font-size: 0;
+  line-height: 0;
+  color: transparent;
+  cursor: pointer;
+  user-select: none;
+  -webkit-user-select: none;
+}
+header.site-banner small { display: none; }
+header.site-banner .dl {
+  position: absolute;
+  z-index: 2;
+  top: 12px;
+  right: 16px;
+}
+@media (max-width: 600px) {
+  header.site-banner {
+    width: 100%;
+    aspect-ratio: 1347 / 375;
+    min-height: 0;
+    background-position: center;
+    border-radius: 12px;
+  }
+  header.site-banner .dl {
+    top: 6px;
+    right: 8px;
+    font-size: 12px;
+    padding: 6px 9px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  header.site-banner { scroll-behavior: auto; }
+}
+
 /* ===== Cartel FIN PARTIDO (sustituye al cronómetro cuando el partido termina) ===== */
 .lfin{letter-spacing:.06em;background:var(--ye);color:#0a0f1e;display:inline-block;border-radius:12px;padding:6px 26px;box-shadow:0 6px 24px #ffd23f44}
 #hero.fs .lfin{font-size:calc(var(--u)*13*var(--k));padding:calc(var(--u)*.5) calc(var(--u)*5)}
@@ -341,7 +417,6 @@ select{font:inherit;background:var(--bg);color:var(--tx);border:1px solid var(--
 .entw .x{color:#b91c1c;font:800 1.3rem 'Barlow Condensed',sans-serif}
 .entw .z{color:var(--mu)}
 .entw th small{display:block;font-weight:500;font-size:.72rem}
-
 /* ===== Login, Jugadas (vídeos) y Pizarra del entrenador ===== */
 .mdl{position:fixed;inset:0;background:rgba(3,8,28,.8);display:flex;align-items:center;justify-content:center;padding:16px;z-index:10000}
 .mdl[hidden]{display:none}
@@ -351,8 +426,8 @@ select{font:inherit;background:var(--bg);color:var(--tx);border:1px solid var(--
 .mdl a{color:#1d5fe0}
 #lgErr{background:#fee2e2;border:1px solid #ef4444;color:#7f1d1d;border-radius:10px;padding:8px 12px;margin-top:12px}
 #pizW{margin-top:4px}
-#pzf{border-radius:16px;overflow:hidden;background:#071a45;margin-bottom:12px;display:flex;flex-direction:column}
-#pzf iframe{width:100%;border:0;display:block;height:900px;background:transparent;flex:none;order:1}
+#pzf{border-radius:16px;overflow:hidden;background:#071a45;margin-bottom:12px}
+#pzf iframe{width:100%;border:0;display:block;height:900px;background:transparent}
 .pubr{display:flex;gap:10px;flex-wrap:wrap;align-items:flex-end}
 .pubr button{flex:0 0 auto;min-height:40px;font-weight:800}
 #pst{margin-top:8px;font-size:.9rem;min-height:18px}
@@ -365,7 +440,8 @@ select{font:inherit;background:var(--bg);color:var(--tx);border:1px solid var(--
 .pj h3{margin:8px 0 2px;font-size:1.05rem;line-height:1.2}
 #toast{position:fixed;left:50%;bottom:90px;transform:translateX(-50%);background:#fff;color:#0b2a6f;padding:9px 16px;border-radius:999px;font-weight:600;box-shadow:0 6px 20px rgba(0,0,0,.4);opacity:0;pointer-events:none;transition:opacity .2s;z-index:10001;max-width:92vw;text-align:center}
 #toast.show{opacity:1}
-/* ===== Pizarra: barra con botón de pantalla completa ===== */
+#pzf{display:flex;flex-direction:column}
+#pzf iframe{flex:none;order:1}
 #pzbar{display:flex;flex-wrap:wrap;justify-content:flex-end;align-items:center;gap:8px;padding:6px 8px;background:#0d2561;border-top:1px solid rgba(255,255,255,.16);order:2}
 #pzbar button{background:#173a8f;color:#fff;border:1px solid rgba(255,255,255,.16);font-weight:700;padding:6px 14px;border-radius:8px;min-height:36px}
 #pzbar button:hover{background:#1f4cb8;transform:none}
@@ -404,16 +480,20 @@ select{font:inherit;background:var(--bg);color:var(--tx);border:1px solid var(--
  #topbar nav#nav button{flex-direction:row;gap:6px;padding:9px 8px;font-size:.9rem}
  #topbar nav#nav button span:first-child{font-size:1.05rem}
 }
+#topbar nav#nav button span:first-child{margin:0}
 .b.zz{background:#eef2ff!important;color:#5b6aa8;border:2px dashed #9fb0e6!important;box-shadow:none!important}
 .b.zz svg{display:block}
+/* marcador hero en una línea */
+.hv>.cn{flex:none;white-space:nowrap;max-width:none}
 </style>
+<script>const CAT={"nombre": "Torrejón Juncal Juvenil B", "corto": "Juvenil B", "liga": "Primera Juvenil FS · Grupo 2", "node": "cat-juvenil-b", "email": "juvenil-b@torrejonjuncal.es", "grupo": "28122269", "equipo": "19691247", "me": 0};</script>
 </head>
 <body>
 <div id="bg" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
 <div id="topbar">
  <div class="dock">
-  <div id="tt" class="brand" aria-label="Torrejón Juncal B.. Pulsa para cambiar de categoría">
-   <span class="bl">⚽</span><b class="cn">JUNCAL B</b>
+  <div id="tt" class="brand" aria-label="Torrejón Juncal JUVENIL B.. Pulsa para cambiar de categoría">
+   <span class="bl">⚽</span><b class="cn">JUVENIL B</b>
   </div>
   <nav id="nav"></nav>
  </div>
@@ -425,8 +505,8 @@ select{font:inherit;background:var(--bg);color:var(--tx);border:1px solid var(--
  if(localStorage.getItem("jb_app"))return;   /* app nueva: los avisos se eligen en app.html */
  const p=await FM.requestPermissions();if(p.receive==="granted")await FM.subscribeToTopic({topic:"juncal"})}catch(e){}})();</script>
 <section id="hero"></section>
-<main id="app"></main>
 
+<main id="app"></main>
 <!-- Pizarra del entrenador (fuera de #app para que no se reinicie al refrescar la página) -->
 <div id="pizW" hidden>
  <div id="pzf"><div id="pzbar"><span class="fsx"><input id="ptit2" maxlength="60" placeholder="Título de la jugada" aria-label="Título de la jugada"><button type="button" id="pbtn2">⏺ Grabar y publicar</button><span id="pst2" role="status"></span></span></div></div>
@@ -453,7 +533,6 @@ select{font:inherit;background:var(--bg);color:var(--tx);border:1px solid var(--
  <button onclick="resetD()">🗑 Borrar todo</button>
  <input type="file" id="imp" accept=".json" hidden onchange="importD(this)">
 </div>
-
 <!-- Login -->
 <div id="mLog" class="mdl" hidden role="dialog" aria-modal="true" aria-label="Acceso entrenadores">
  <form class="card" id="fLog" autocomplete="on">
@@ -474,7 +553,7 @@ select{font:inherit;background:var(--bg);color:var(--tx);border:1px solid var(--
   <h2 id="mT" style="font-size:1.5rem;color:#0f2a6b"></h2>
   <p id="mI" class="gap"></p>
   <video id="mV" controls playsinline style="width:100%;border-radius:10px;background:#000;margin-top:8px"></video>
-  <div class="ctl"><button id="mPub" class="on">✔ Publicar en Infantil B</button><button id="mDl">⬇ Descargar</button><button id="mNo">Descartar</button></div>
+  <div class="ctl"><button id="mPub" class="on">✔ Publicar</button><button id="mDl">⬇ Descargar</button><button id="mNo">Descartar</button></div>
  </div>
 </div>
 
@@ -488,27 +567,26 @@ select{font:inherit;background:var(--bg);color:var(--tx);border:1px solid var(--
  </div>
 </div>
 <div id="toast" role="status"></div>
-
 <script>
 (function(){const b=document.getElementById("bg");for(let i=0;i<9;i++){const e=document.createElement("b");e.textContent="⚽";e.style.cssText="left:"+((i*11+Math.random()*8)%100)+"%;font-size:"+(22+Math.random()*34)+"px;animation-duration:"+(18+Math.random()*20)+"s;animation-delay:-"+(Math.random()*30)+"s";b.appendChild(e)}})();
-const ME=10;
-const CAT="infantil-b",CAT_NAME="Infantil B",BASE="../../",TEAM_MAIL=CAT+"@torrejonjuncal.es"; // BASE: ruta a la raíz del sitio (igual que Cromos, Escudos y datos.json)
+let ME=CAT.me||0;
 const COPA=false; // pon true para que todos vean la pestaña Copa (el entrenador siempre la ve)
 const GH_USER="Ivideu",GH_REPO="Juncal_Infantil_B";
-const T={2:["Aston C","P.M. San Blas, Madrid"],3:["Lope de Vega","P.M. Emperador Fernando, Alcalá de Henares"],4:["Torrejón Five Play","Pab. Jorge Garbajosa, Torrejón de Ardoz"],5:["Rivas Atlantis B","Polideportivo Parque Sureste, Rivas"],6:["Rivas Futsal B","Polideportivo Parque Sureste, Rivas"],7:["Malvar","C.D. Príncipe Felipe, C/ San Sebastián, 6 y 8, Arganda del Rey"],8:["Fusión San Fernando","P.M. Justo Gómez Salto, San Fernando de Henares"],9:["Diagonal C","P.M. El Nido, Parla"],10:["Juncal B","P.M. Nuria Fernández, Torrejón de Ardoz"],11:["Sporting Morata","P.M. Morata de Tajuña"],12:["Limones 5 B","P.M. Joaquín Blume, Torrejón de Ardoz"]};
+const CATK=CAT.node.replace(/^cat-/,""),CAT_NAME=CAT.corto,BASE="../",TEAM_MAIL=CAT.email;
+const T={};
 T[99]=["Equipo de prueba","P.M. Nuria Fernández, Torrejón de Ardoz"];
-const COD={2:24116776,3:27916794,4:17175596,5:18925059,6:17155533,7:18753107,8:26753258,9:27111405,10:24193914,11:26750489,12:21455532};
-const R=["03-10-2026|0-3,10-5,8-7,6-9,4-11,12-2","17-10-2026|3-12,5-0,7-10,9-8,11-6,2-4","24-10-2026|3-5,0-7,10-9,8-11,6-2,12-4","07-11-2026|5-12,7-3,9-0,11-10,2-8,4-6","14-11-2026|5-7,3-9,0-11,10-2,8-4,12-6","21-11-2026|7-12,9-5,11-3,2-0,4-10,6-8","28-11-2026|7-9,5-11,3-2,0-4,10-6,12-8","12-12-2026|9-12,11-7,2-5,4-3,6-0,8-10","19-12-2026|9-11,7-2,5-4,3-6,0-8,12-10","16-01-2027|12-11,2-9,4-7,6-5,8-3,10-0","23-01-2027|11-2,9-4,7-6,5-8,3-10,0-12","30-01-2027|3-0,5-10,7-8,9-6,11-4,2-12","06-02-2027|12-3,0-5,10-7,8-9,6-11,4-2","20-02-2027|5-3,7-0,9-10,11-8,2-6,4-12","27-02-2027|12-5,3-7,0-9,10-11,8-2,6-4","06-03-2027|7-5,9-3,11-0,2-10,4-8,6-12","13-03-2027|12-7,5-9,3-11,0-2,10-4,8-6","03-04-2027|9-7,11-5,2-3,4-0,6-10,8-12","10-04-2027|12-9,7-11,5-2,3-4,0-6,10-8","17-04-2027|11-9,2-7,4-5,6-3,8-0,10-12","08-05-2027|11-12,9-2,7-4,5-6,3-8,0-10","29-05-2027|2-11,4-9,6-7,8-5,10-3,12-0"];
+const COD={};
+const R=[];
 const J=R.map((s,i)=>{const[d,p]=s.split("|");return{n:i+1,d:d.split("-").reverse().join("-"),p:p.split(",").map(x=>x.split("-").map(Number))}});
 const API=""; // 
 const FB="https://juncal-f0b64-default-rtdb.europe-west1.firebasedatabase.app",FBKEY="AIzaSyDXqBUkie30z_Cmyj__ayhzGYyYxZMrB3Q",FBMAIL="ivanblasco81@hotmail.com"; // Firebase en tiempo real configurado
 let S={u:0,m:{},pl:[]};
 const fix=()=>{S.m=S.m||{};S.pl=S.pl||[];S.dn=S.dn||{};S.off=S.off||{};S.cp=S.cp||[];S.ent=S.ent||{};S.cp.forEach(c=>{T[100+c.id]=[c.rv,c.pav||c.rv]})};
 const isOff=p=>!!(S.off&&S.off[p]);
-let CACHE=null;try{CACHE=JSON.parse(localStorage.getItem("juncalB"))}catch(e){}
+let CACHE=null;try{CACHE=JSON.parse(localStorage.getItem("juncal_"+CAT.node))}catch(e){}
 if(!API&&CACHE)S=CACHE;fix();let loading=!!(API||FB);
-let PW="",RT="",ACC=FBMAIL,pt;const setSt=t=>{document.getElementById("st").textContent=t};
-if(!FB)fetch(API?API+"?v="+Date.now():"../../datos.json?v="+Date.now(),{cache:"no-store"}).then(r=>r.json()).then(d=>{if(API||(d.u||0)>S.u){S=d;fix()}loading=false;render()}).catch(()=>{if(API&&CACHE){S=CACHE;fix()}loading=false;render()});
+let PW="",RT="",ACC=FBMAIL,pt;;const setSt=t=>{document.getElementById("st").textContent=t};
+if(!FB)fetch(API?API+"?v="+Date.now():"../datos.json?v="+Date.now(),{cache:"no-store"}).then(r=>r.json()).then(d=>{if(API||(d.u||0)>S.u){S=d;fix()}loading=false;render()}).catch(()=>{if(API&&CACHE){S=CACHE;fix()}loading=false;render()});
 let idt="",exp=0,lastRaw="";
 async function fbLogin(pw,mail){const r=await fetch("https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key="+FBKEY,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({email:mail||ACC,password:pw,returnSecureToken:true})}),d=await r.json();if(!d.idToken)return false;idt=d.idToken;exp=Date.now()+(d.expiresIn-120)*1000;return true}
 async function fbTok(){
@@ -521,13 +599,13 @@ async function fbTok(){
  }
  throw 0}
 if(FB){const l=document.createElement("link");l.rel="preconnect";l.href=FB;document.head.appendChild(l);
- const es=new EventSource(FB+"/juncal.json");
- es.addEventListener("put",ev=>{let m,n;try{m=JSON.parse(ev.data);if(m.path!=="/"||m.data===lastRaw)return;n=m.data==null?{u:0,m:{},pl:[]}:JSON.parse(m.data)}catch(e){return}
+ const es=new EventSource(FB+"/"+CAT.node+".json");
+ es.addEventListener("put",ev=>{let m,n;try{m=JSON.parse(ev.data);if(m.path!=="/"||m.data===lastRaw)return;n=m.data==null?{u:0,m:{},pl:[]}:(typeof m.data==="string"?JSON.parse(m.data):m.data)}catch(e){return}
   if(!loading&&E()&&(n.u||0)<S.u)return;
   S=n;fix();loading=false;render()});
  setTimeout(()=>{if(loading){const h=document.getElementById("hero");h.style.display="";h.innerHTML='<div class="empty">Sin conexión con la base de datos…</div>'}},8000)}
 function push(){clearTimeout(pt);setSt("Guardando…");pt=setTimeout(async()=>{try{
- if(FB){const t=await fbTok(),raw=JSON.stringify(S);lastRaw=raw;const r=await fetch(FB+"/juncal.json?auth="+t,{method:"PUT",body:JSON.stringify(raw)});setSt(r.ok?"✓ Guardado":"⚠ Sin permiso para guardar")}
+ if(FB){const t=await fbTok(),raw=JSON.stringify(S);lastRaw=raw;const r=await fetch(FB+"/"+CAT.node+".json?auth="+t,{method:"PUT",body:JSON.stringify(raw)});setSt(r.ok?"✓ Guardado":"⚠ Sin permiso para guardar")}
  else{const r=await(await fetch(API,{method:"POST",body:JSON.stringify({pw:PW,data:S})})).json();setSt(r.ok?"✓ Guardado en Google Sheets":"⚠ Contraseña incorrecta")}}catch(e){setSt("⚠ Error al guardar. Sal y vuelve a entrar con tu contraseña")}},FB?150:300)}
 const PH="31e2d5c324500e055afa24eadccfae8b980ae1c8a18db59722f1e228bd092040";
 const E=()=>document.body.classList.contains("edit");
@@ -543,9 +621,9 @@ const newTest=()=>({c:{ph:0,run:false,base:0,s:Date.now()}});
 function toggleTest(){if(!E())return;TS.on=!TS.on;if(TS.on&&!TS.m["0_"+ME])TS.m["0_"+ME]=newTest();render()}
 function resetTest(){if(!confirm("¿Vaciar el partido de prueba?"))return;TS.m={};TS.m["0_"+ME]=newTest();render()}
 const done=m=>m.h!==undefined&&m.h!==""&&m.a!==undefined&&m.a!=="";
-const bd=id=>{if(!id||!T[id]||/^descansa/i.test(T[id][0]))return`<span class="b zz" title="Descansa"><svg viewBox="0 0 24 24" width="62%" height="62%" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"/></svg></span>`;const n=T[id][0].split(" ").map(w=>w[0]).join("").slice(0,2).toUpperCase();return`<span class="b" style="background:${id==ME?'#2f7bff':`hsl(${id*47%360} 55% 38%)`}">${n}${(COD[id]||id==ME)?`<img src="${id==ME?"../../Images/escudo.png":"../../Escudos/"+COD[id]+".png"}" alt="" onload="this.parentNode.classList.add('ok')" onerror="this.remove()">`:""}</span>`};
-const nm=id=>id?T[id][0]:"Descansa";
-function save(t){if(t){render();return}S.u=Date.now();try{localStorage.setItem("juncalB",JSON.stringify(S))}catch(e){}if((API||FB)&&(PW||RT))push();render()}
+const bd=id=>{if(!id||!T[id]||/^descansa/i.test(T[id][0]))return`<span class="b zz" title="Descansa"><svg viewBox="0 0 24 24" width="62%" height="62%" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"/></svg></span>`;const n=T[id][0].split(" ").map(w=>w[0]).join("").slice(0,2).toUpperCase();return`<span class="b" style="background:${id==ME?'#2f7bff':`hsl(${id*47%360} 55% 38%)`}">${n}${(COD[id]||id==ME)?`<img src="${id==ME?"../Images/escudo.png":"../Escudos/"+COD[id]+".png"}" alt="" onload="this.parentNode.classList.add('ok')" onerror="this.remove()">`:""}</span>`};
+const nm=id=>!id||!T[id]||/^descansa/i.test(T[id][0])?"Descansa":id==ME&&CAT.nombre?CAT.nombre:T[id][0];
+function save(t){if(t){render();return}S.u=Date.now();try{localStorage.setItem("juncal_"+CAT.node,JSON.stringify(S))}catch(e){}if((API||FB)&&(PW||RT))push();render()}
 function ed(j,h,f,v){const m=S.m[j+"_"+h]||(S.m[j+"_"+h]={});if(v==="")delete m[f];else m[f]=v;save()}
 function addG(j,h){const n=document.getElementById("sel"+j).value,m=S.m[j+"_"+h]||(S.m[j+"_"+h]={});m.g=m.g||{};m.g[n]=(m.g[n]||0)+1;const mi=document.getElementById("min"+j).value;if(mi!=="")addMin(m,n,+mi);save()}
 function eg(j,h,k){const m=S.m[j+"_"+h],e=evs(m)[k];if(!e)return;const q=prompt("Minuto del gol de "+pn(e.n).name+" (número). Escribe 0 para borrar el gol:",e.t||"");if(q===null||q.trim()==="")return;const t=Math.floor(+q);if(isNaN(t)||t<0)return;const a=(m.gm&&m.gm[e.n])||[];
@@ -573,7 +651,7 @@ function card(r,h,a,i){
  x+="</div>";
  return x}
 /* Mis partidos: liga (J) + copa (S.cp), ordenados por fecha y hora */
-const myM=()=>{const l=J.map(r=>{const p=r.p.find(q=>q.includes(ME));return{r,h:p[0],a:p[1]}});
+const myM=()=>{const l=[];J.forEach(r=>{const p=r.p.find(q=>q.includes(ME));if(p)l.push({r,h:p[0],a:p[1]})});
  (S.cp||[]).forEach(c=>{const n=100+c.id;l.push({r:{n,d:c.d,copa:true,rd:c.rd},h:c.home?ME:n,a:c.home?n:ME})});
  const f=z=>{const m=M(z.r.n,z.h);return(m.d||z.r.d)+"T"+(m.t||"23:59")};
  return l.sort((x,y)=>f(x)<f(y)?-1:f(x)>f(y)?1:0)};
@@ -601,7 +679,6 @@ function leaveFS(){FS=false;try{screen.orientation.unlock()}catch(e){}try{if(doc
 function setTb(){const tb=document.getElementById("topbar"),sp=document.getElementById("tbsp");if(tb&&sp&&tb.offsetHeight>0)sp.style.height=(tb.offsetHeight+4)+"px"}
 function fit(){
  const h=document.getElementById("hero");
- /* La barra de menú solo se oculta en el directo a pantalla completa */
  const tb=document.getElementById("topbar"),sp=document.getElementById("tbsp");
  if(tb)tb.style.display=FS?"none":"";
  if(sp)sp.style.display=FS?"none":"";
@@ -627,7 +704,7 @@ function fit(){
 }
 if(document.fonts&&document.fonts.ready)document.fonts.ready.then(()=>fit());
 async function setFS(on){if(!on){leaveFS()}else{FS=true;try{await document.documentElement.requestFullscreen({navigationUI:"hide"})}catch(e){}try{await screen.orientation.lock("landscape")}catch(e){}try{wl=await navigator.wakeLock.request("screen")}catch(e){}}render()}
-document.addEventListener("fullscreenchange",()=>{if(!document.fullscreenElement&&FS){leaveFS();render()}if(!document.fullscreenElement&&PFS)setPzFS(false)});
+document.addEventListener("fullscreenchange",()=>{if(!document.fullscreenElement&&FS){leaveFS();render()}if(!document.fullscreenElement&&PFS)setPzFS(false);});
 addEventListener("resize",()=>{fit()});
 const HALF=25*60000;
 function evs(m){const g=m.g||{},gm=m.gm||{},a=[];Object.keys(g).forEach(n=>{const t=(gm[n]||[]).slice(0,g[n]);t.forEach(x=>a.push([x,n]));for(let i=t.length;i<g[n];i++)a.push([999,n])});return a.sort((x,y)=>x[0]-y[0]).map(([t,n])=>({t:t<999?t:0,n}))}
@@ -640,7 +717,7 @@ function trimMin(m,k){if(!m.gm||!m.gm[k])return;if(!m.g||!m.g[k])delete m.gm[k];
 const mn=(m,n,g)=>{const t=(m.gm&&m.gm[n])||[];return t.length?t.map(x=>x+"'").join(", ")+(g>t.length?` +${g-t.length}`:""):"×"+g};let lvOn=false,lastP="";
 /* Tras "Final" el partido queda cerrado en portada (resultado, goles y FIN PARTIDO) hasta las 6:00 (Madrid) del lunes.
    Si acaba de lunes a viernes, hasta las 6:00 del día siguiente. */
-function holdEnd(fin){const d=new Date(fin).toLocaleDateString("sv-SE",{timeZone:"Europe/Madrid"}),w=new Date(d+"T12:00:00Z").getUTCDay(),n=w==6?2:1,e=new Date(Date.parse(d+"T12:00:00Z")+n*864e5).toISOString().slice(0,10);return madrid(e,"06:00")}
+function holdEnd(fin){const d=new Date(fin).toLocaleDateString("sv-SE",{timeZone:"Europe/Madrid"}),t=new Date(d+"T12:00:00Z");t.setUTCDate(t.getUTCDate()+(7-t.getUTCDay())%7);return Math.max(madrid(t.toISOString().slice(0,10),"23:00"),+fin+36e5)}
 function liveM(real){if(!real&&TS.on)return TX();const now=Date.now(),hoyM=new Date().toLocaleDateString("sv-SE",{timeZone:"Europe/Madrid"}),all=myM().filter(x=>x.h&&x.a);
  const ok=(x,fin)=>{const m=M(x.r.n,x.h),c=m.c;if(!!(c&&c.fin)!==fin)return false;const k=when(x).getTime(),st=c?Math.min(k-9e5,c.s||k):(m.t?k-9e5:1e18),en=fin?holdEnd(c.fin):(m.t?Math.max(k,c&&c.s||0):(c&&c.s)||k)+144e5;if(!m.t&&(m.d||x.r.d)>hoyM)return false;return now>=st&&now<en};
  return all.find(x=>ok(x,false))||all.slice().reverse().find(x=>ok(x,true))||null}
@@ -716,7 +793,7 @@ function liveHero(x){const m=M(x.r.n,x.h),c=m.c||{ph:0},ph=c.ph||0,ok=done(m),ev
  <div class="pb"><div><i id="p1"></i></div><div><i id="p2"></i></div></div>
  <div class="pb pbl" style="font-size:.75rem;color:var(--mu);margin-top:4px"><span style="flex:1">1ª parte · 25'</span><span style="flex:1">2ª parte · 25'</span></div>`}
  ${ph==0&&x.r.n&&Date.now()<when(x)?`<div class="lt" style="margin:18px 0 8px">EMPIEZA EN</div><div class="cd" id="cd" data-t="${when(x).getTime()}"></div>`:""}
- ${ev.length?`<div class="lg" style="--gr:${gr[0]};--gs:${gr[1]}"><b>⚽ Goles del ${T[ME][0]}</b>${ev.map(e=>`<div>${gh(e)}</div>`).join("")}</div>`:""}${FS?`<button class="xb" onclick="setFS(false)">✕ Salir</button>`:`<div class="ctl"><button class="fsb" onclick="setFS(true)">⛶ Pantalla completa</button></div>`}${ad?`<div class="admw">${ad}</div>`:""}</div>`}
+ ${ev.length?`<div class="lg" style="--gr:${gr[0]};--gs:${gr[1]}"><b>⚽ Goles del ${nm(ME)}</b>${ev.map(e=>`<div>${gh(e)}</div>`).join("")}</div>`:""}${FS?`<button class="xb" onclick="setFS(false)">✕ Salir</button>`:`<div class="ctl"><button class="fsb" onclick="setFS(true)">⛶ Pantalla completa</button></div>`}${ad?`<div class="admw">${ad}</div>`:""}</div>`}
 function tickLive(){const l=!!liveM();if(l!==lvOn){render();return}
  const cd=document.getElementById("cd");if(cd&&document.getElementById("lc")&&+cd.dataset.t<=Date.now()){render();return}
  const e=document.getElementById("lc");if(!e)return;const d=e.dataset,el=Math.max(0,+d.base+(d.run=="1"?Date.now()-d.since:0)),s=el/1e3|0,pc=Math.min(100,el/HALF*100);
@@ -747,24 +824,23 @@ let subA=false;
 async function subAdmin(on){try{const FM=window.Capacitor&&Capacitor.Plugins&&Capacitor.Plugins.FirebaseMessaging;if(!FM)return;
  if(on&&!subA){await FM.subscribeToTopic({topic:"pruebas"});subA=true}else if(!on&&subA){await FM.unsubscribeFromTopic({topic:"pruebas"});subA=false}}catch(e){}}
 function render(){
- document.body.classList.toggle("owner",!!E()&&ACC===FBMAIL);
  subAdmin(E());
  if(loading){document.getElementById("hero").style.display="none";document.getElementById("nav").innerHTML="";document.getElementById("app").innerHTML="";return}
- /* El bloque grande (próximo partido / directo) solo se muestra en Jornadas */
  document.getElementById("hero").style.display=tab=="jor"?"":"none";
  document.getElementById("hero").innerHTML=hero();fit();tick();goalWatch();
  document.getElementById("tbtn").classList.toggle("on",TS.on);document.getElementById("tout").style.display=document.getElementById("trst").style.display=TS.on?"":"none";
  if(jnAuto)jn=wkJ();
  const tabs=[["jor","🗓 Jornadas"],["cal","📅 Mi calendario"],["cla","🏆 Clasificación"],["cop","🥇 Copa"],["gol","👟 Goleadores"],["cro","🎽 Jugadores"],["jug","🎬 Jugadas"]].filter(t=>t[0]!="cop"||COPA||E());if(E())tabs.push(["piz","📋 Pizarra"],["hor","🕒 Horarios"],["pla","👥 Plantilla"],["ent","🏃 Entrenos"]);
  tabs.push(E()?["out","🔓 Salir"]:["log","🔒 Login"]);
- const SH={jor:"Jornadas",cal:"Calendario",cla:"Clasif.",cop:"Copa",gol:"Goleadores",cro:"Jugadores",jug:"Jugadas",piz:"Pizarra",hor:"Horarios",pla:"Plantilla",ent:"Entrenos",log:"Login",out:"Salir"};
- const nv=document.getElementById("nav");nv.style.setProperty("--c",Math.ceil(tabs.length/2));
- nv.innerHTML=tabs.map(([k,l])=>{const ic=l.split(" ")[0],oc=k=="log"?"unlock()":k=="out"?"setEdit(false)":`tab='${k}';if(tab=='jor')jnAuto=true;if(tab=='ent')entD='';if(tab=='jug')PL=null;render()`;return`<button class="${tab==k?'on':''}${k=='out'?' out':''}" onclick="${oc}"><span>${ic}</span><span>${SH[k]}</span></button>`}).join("");
+ tabs.push(["back","↩ Volver"]);
+ const SH={jor:"Jornadas",cal:"Calendario",cla:"Clasif.",cop:"Copa",gol:"Goleadores",cro:"Jugadores",jug:"Jugadas",piz:"Pizarra",hor:"Horarios",pla:"Plantilla",ent:"Entrenos",log:"Login",out:"Salir",back:E()?"Salir y volver":"Volver"};
+const nv=document.getElementById("nav");nv.style.setProperty("--c",Math.ceil(tabs.length/2));
+ nv.innerHTML=tabs.map(([k,l])=>{const ic=l.split(" ")[0],oc=k=="log"?"unlock()":k=="out"?"setEdit(false)":k=="back"?"volverTop()":`tab='${k}';if(tab=='jor')jnAuto=true;if(tab=='ent')entD='';if(tab=='jug')PL=null;render()`;return`<button class="${tab==k?'on':''}${k=='out'?' out':''}${k=='back'?' back':''}" onclick="${oc}"${k=='back'?` title="${E()?"Cerrar sesión de entrenador y volver":"Volver a la página anterior"}"`:""}><span>${ic}</span><span>${SH[k]}</span></button>`}).join("");
  let h="";
  if(tab=="cal")h=myM().map((x,i)=>card(x.r,x.h,x.a,i)).join("");
  if(tab=="jor"){h=jsel()+[...J[jn-1].p].sort((x,y)=>y.includes(ME)-x.includes(ME)).map((p,i)=>card(J[jn-1],p[0],p[1],i)).join("")}
  if(tab=="cla"){h=`<table><tr><th>#</th><th>Equipo</th><th>PJ</th><th>G</th><th>E</th><th>P</th><th>GF</th><th>GC</th><th>DG</th><th>Pts</th></tr>${table().map((t,i)=>`<tr class="${t.id==ME?'me':''}"><td>${i+1}</td><td>${nm(t.id)}</td><td>${t.pj}</td><td>${t.g}</td><td>${t.e}</td><td>${t.p}</td><td>${t.gf}</td><td>${t.gc}</td><td>${t.dg>0?"+":""}${t.dg}</td><td><b>${t.pts}</b></td></tr>`).join("")}</table>`}
- if(tab=="hor"&&E())h=`<div class="card"><small class="gap">Pon la fecha y la hora de cada partido del Juncal B. Si dejas la hora vacía, se muestra "hora por confirmar".</small></div>`+myM().filter(x=>x.h&&x.a).map(x=>{const m=M(x.r.n,x.h);return`<div class="card" style="display:flex;gap:10px;align-items:center;flex-wrap:wrap"><b class="cn" style="color:var(--ye2);font-size:1.2rem;min-width:90px">${lab(x.r)}</b><span style="flex:1;min-width:160px">${nm(x.h)} - ${nm(x.a)}</span><input type="date" value="${m.d||x.r.d}" onchange="ed(${x.r.n},${x.h},'d',this.value)"><input type="time" value="${esc(m.t)}" onchange="ed(${x.r.n},${x.h},'t',this.value)"></div>`}).join("");
+ if(tab=="hor"&&E())h=`<div class="card"><small class="gap">Pon la fecha y la hora de cada partido del ${CAT.corto}. Si dejas la hora vacía, se muestra "hora por confirmar".</small></div>`+myM().filter(x=>x.h&&x.a).map(x=>{const m=M(x.r.n,x.h);return`<div class="card" style="display:flex;gap:10px;align-items:center;flex-wrap:wrap"><b class="cn" style="color:var(--ye2);font-size:1.2rem;min-width:90px">${lab(x.r)}</b><span style="flex:1;min-width:160px">${nm(x.h)} - ${nm(x.a)}</span><input type="date" value="${m.d||x.r.d}" onchange="ed(${x.r.n},${x.h},'d',this.value)"><input type="time" value="${esc(m.t)}" onchange="ed(${x.r.n},${x.h},'t',this.value)"></div>`}).join("");
  if(tab=="pla"&&E())h=`<div class="card"><div class="ed" style="display:flex"><input id="np" style="flex:1;min-width:200px" placeholder="Nº y nombre, ej: 7 Ana Ruiz (varios separados por coma)"><button onclick="addP()">＋ Añadir</button></div><small class="gap" style="display:block;margin-top:8px">Activo: aparece en la convocatoria y en el selector de goleadores. Inactivo: se oculta pero se conserva. Eliminar lo borra del todo.</small></div>`+(S.pl.map((p,i)=>{const off=isOff(p);return`<div class="card" style="display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap"><span style="display:flex;align-items:center;gap:10px;${off?"opacity:.5":""}">${shirt(pn(p).num,off?"#9aa5c4":"#2f7bff")}${esc(pn(p).name)}</span><span style="display:flex;gap:8px;align-items:center;flex-wrap:wrap"><input class="g" type="number" min="0" max="99" placeholder="Nº" value="${esc(pn(p).num)}" onchange="setDn(${i},this.value)"><button class="plt ${off?"":"act"}" aria-pressed="${!off}" onclick="togP(${i})">${off?"⏸ Inactivo":"✔ Activo"}</button><button onclick="delP(${i})">Eliminar</button></span></div>`}).join("")||'<div class="empty">Aún no hay jugadores.</div>');
  if(tab=="ent"&&E())h=renderEnt();
  if(tab=="gol"){const s=scorers(),mx=s[0]?.g||1;h=s.length?s.map((x,i)=>`<div class="gl card" style="--i:${i}"><b class="cn" style="font-size:1.4rem;color:var(--ye2)">${i+1}</b>${gMini(x.n)}<div><div>${esc(pn(x.n).name)}</div><div class="bar" style="width:${x.g/mx*100}%"></div></div><b class="cn" style="font-size:1.6rem">${x.g}</b></div>`).join(""):`<div class="empty">⚽ Aún no hay goles registrados.</div>`}
@@ -787,7 +863,7 @@ function renderCopa(){
  const l=myM().filter(x=>x.r.copa),rs=[];
  l.forEach(x=>{let g=rs.find(r=>r.rd==x.r.rd);if(!g)rs.push(g={rd:x.r.rd,l:[]});g.l.push(x)});
  let h=`<section class="cards-head"><div><h2>🥇 Copa</h2><p class="gap">Torneo aparte: no puntúa en la clasificación de liga, pero sus goles cuentan en Goleadores.</p></div></section>`;
- if(E())h+=`<div class="card"><div class="ed" style="display:flex"><input id="cr_rd" list="cr_l" placeholder="Ronda (ej: Cuartos de final)"><datalist id="cr_l"><option>Dieciseisavos de final</option><option>Octavos de final</option><option>Cuartos de final</option><option>Semifinal</option><option>Final</option></datalist><input id="cr_rv" placeholder="Rival"><select id="cr_h"><option value="1">Juncal B local</option><option value="0">Juncal B visitante</option></select><input id="cr_d" type="date"><input id="cr_t" type="time"><input id="cr_p" placeholder="Pabellón (opcional)"><button onclick="addC()">＋ Añadir partido</button></div></div>`;
+ if(E())h+=`<div class="card"><div class="ed" style="display:flex"><input id="cr_rd" list="cr_l" placeholder="Ronda (ej: Cuartos de final)"><datalist id="cr_l"><option>Dieciseisavos de final</option><option>Octavos de final</option><option>Cuartos de final</option><option>Semifinal</option><option>Final</option></datalist><input id="cr_rv" placeholder="Rival"><select id="cr_h"><option value="1">${CAT.corto} local</option><option value="0">${CAT.corto} visitante</option></select><input id="cr_d" type="date"><input id="cr_t" type="time"><input id="cr_p" placeholder="Pabellón (opcional)"><button onclick="addC()">＋ Añadir partido</button></div></div>`;
  if(!rs.length)return h+`<div class="empty">🥇 Aún no hay partidos de copa.</div>`;
  return h+`<div class="bkt">`+rs.map(g=>`<div class="bkc"><h3>${esc(g.rd)}</h3>${g.l.map((x,i)=>card(x.r,x.h,x.a,i)+(E()?`<p style="text-align:center;margin:-6px 0 12px"><button onclick="delC(${x.r.n-100})">Eliminar partido</button></p>`:"")).join("")}</div>`).join("")+`</div>`}
 
@@ -829,13 +905,13 @@ function renderEnt(){
   +`<div class="cvhd"><h2>Resumen semanal</h2><span class="cvl">SEMANA DEL ${fd(wk.mi)}</span></div><table class="entw"><tr><th>Número</th><th>Jugador</th><th>Miércoles<small>${fd(wk.mi)}</small></th><th>Jueves<small>${fd(wk.ju)}</small></th></tr>${jug.map(c=>`<tr><td>${esc(c.num||"–")}</td><td>${esc(c.name)}</td><td>${mark(mi[c.key])}</td><td>${mark(ju[c.key])}</td></tr>`).join("")}</table>`}
 
 /* ===== Cromos y convocatoria ===== */
-const CROMOS_DIR="../../Cromos/";
-const CROMOS_FILES=["Alex_10_ala.png","Edu_11_ala.png","Diego_3_ala.png","Erik_5_pivot.png","Gabriel_15_ala.png","Hector_18_ala.png","Ivan_entrenador.png","Izan_7_pivot.png","Javi_entrenador.png","Joel_8_ala.png","Manu_2_cierre.png","Marcos_13_portero.png","Nico_6_cierre.png","Pablo_89_portero.png","Pedro_28_ala.png","Ruben_1_portero.png"];
+const CROMOS_DIR="../Cromos/";
+const CROMOS_FILES=[];
 const POSN={ala:"Ala",pivot:"Pívot",cierre:"Cierre",portero:"Portero",entrenador:"Entrenador"};
 // Nombre_dorsal_posicion.png  ·  Nombre_entrenador.png
 const ORDC=c=>c.coach?(c.name==="Javi"?0:1):(c.pos==="portero"?0:1);
 const CROMOS=CROMOS_FILES.map(f=>{const k=f.replace(/\.png$/i,""),p=k.split("_"),co=p[p.length-1]==="entrenador";return{file:f,key:k,name:p[0],num:co?"":p[1],pos:co?"entrenador":p[2],coach:co}}).sort((a,b)=>ORDC(a)-ORDC(b)||(+a.num||0)-(+b.num||0));
-const cSrc=c=>CROMOS_DIR+encodeURIComponent(c.file);
+const cSrc=c=>c.src||CROMOS_DIR+encodeURIComponent(c.file);
 const cEst=c=>(S.estado&&S.estado[c.key])||"convocado";
 function setCon(k,v){if(!E())return;S.estado=S.estado||{};S.estado[k]=v;save()}
 function renderJug(){
@@ -900,36 +976,37 @@ function closeGol(){clearTimeout(celebrate.t);const o=document.getElementById("g
 function closeCromo(){const o=document.getElementById("cromoOv");if(o)o.remove();document.body.style.overflow=""}
 document.addEventListener("click",e=>{const c=e.target.closest&&e.target.closest(".cromo[data-f]");if(c)openCromo(c.dataset.f)});
 
+
 async function sha(t){const b=await crypto.subtle.digest("SHA-256",new TextEncoder().encode(t));return[...new Uint8Array(b)].map(x=>x.toString(16).padStart(2,"0")).join("")}
 
 /* ===== Login del entrenador (ventana propia dentro de la categoría) ===== */
-const $=s=>document.querySelector(s);
+const $q=s=>document.querySelector(s);
 function openLogin(){
  if(E())return;
- $("#lgCat").textContent=CAT_NAME;$("#lgErr").hidden=true;$("#mLog").hidden=false;
- setTimeout(()=>$("#lgPw").focus(),50)}
-function closeLogin(){$("#mLog").hidden=true}
+ $q("#lgCat").textContent=CAT_NAME;$q("#lgErr").hidden=true;$q("#mLog").hidden=false;
+ setTimeout(()=>$q("#lgPw").focus(),50)}
+function closeLogin(){$q("#mLog").hidden=true}
 function unlock(){openLogin()}
-$("#lgX").onclick=closeLogin;
-$("#mLog").addEventListener("click",e=>{if(e.target.id==="mLog")closeLogin()});
-$("#lgTog").onclick=e=>{e.preventDefault();const a=$("#lgAdm");a.hidden=!a.hidden;$("#lgTog").textContent=a.hidden?"Acceso de administración del club":"Acceso de entrenador del equipo"};
+$q("#lgX").onclick=closeLogin;
+$q("#mLog").addEventListener("click",e=>{if(e.target.id==="mLog")closeLogin()});
+$q("#lgTog").onclick=e=>{e.preventDefault();const a=$q("#lgAdm");a.hidden=!a.hidden;$q("#lgTog").textContent=a.hidden?"Acceso de administración del club":"Acceso de entrenador del equipo"};
 /* Prueba primero la cuenta del equipo y, si no, la cuenta de siempre */
 async function doLogin(pw,mail){
  const tries=mail?[mail]:[TEAM_MAIL,FBMAIL];
  for(const m of tries){if(await fbLogin(pw,m)){ACC=m;return true}}
  return false}
-$("#fLog").onsubmit=async ev=>{
+$q("#fLog").onsubmit=async ev=>{
  ev.preventDefault();
- const pw=$("#lgPw").value.trim(),mail=$("#lgAdm").hidden?"":$("#lgMail").value.trim(),b=$("#lgGo");
+ const pw=$q("#lgPw").value.trim(),mail=$q("#lgAdm").hidden?"":$q("#lgMail").value.trim(),b=$q("#lgGo");
  if(!pw)return;
  b.disabled=true;b.textContent="Entrando…";
  let ok=false,er=false;
  try{ok=await doLogin(pw,mail)}catch(e){er=true}
  b.disabled=false;b.textContent="Entrar";
- if(!ok){const x=$("#lgErr");x.textContent=er?"No se pudo conectar. Revisa tu conexión.":"Contraseña incorrecta.";x.hidden=false;return}
+ if(!ok){const x=$q("#lgErr");x.textContent=er?"No se pudo conectar. Revisa tu conexión.":"Contraseña incorrecta.";x.hidden=false;return}
  PW=pw;RT="";
- try{sessionStorage.setItem("adm","1");sessionStorage.setItem("pw",pw);sessionStorage.setItem("mail",ACC);sessionStorage.removeItem("rt")}catch(e){}
- $("#lgPw").value="";closeLogin();
+ try{sessionStorage.setItem("adm","1");sessionStorage.setItem("cat",CATK);sessionStorage.setItem("pw",pw);sessionStorage.setItem("mail",ACC);sessionStorage.removeItem("rt")}catch(e){}
+ $q("#lgPw").value="";closeLogin();
  document.body.classList.add("edit");
  render()};
 
@@ -941,8 +1018,7 @@ function setEdit(on){
     try{ sessionStorage.removeItem("adm"); sessionStorage.removeItem("pw"); sessionStorage.removeItem("rt"); sessionStorage.removeItem("mail"); }catch(e){}
     PW = ""; RT = ""; ACC = FBMAIL; idt = ""; exp = 0;
     TS.on=false;
-    setPzFS(false);
-    closeVer();rec=null;$("#mPrev").hidden=true;
+    setPzFS(false);closeVer();rec=null;$q("#mPrev").hidden=true;
     if(pzFr){pzFr.remove();pzFr=null}pzQ=null;
     if(["piz","pla","hor","ent"].includes(tab)||(tab=="cop"&&!COPA)) tab="jor";
   }
@@ -962,8 +1038,6 @@ function setEdit(on){
  document.body.appendChild(m);
  tt.setAttribute("role","button");tt.tabIndex=0;tt.setAttribute("aria-haspopup","menu");tt.setAttribute("aria-expanded","false");tt.setAttribute("aria-label","Cambiar de categoría");tt.title="Cambiar de categoría";
  const close=()=>{m.hidden=true;tt.setAttribute("aria-expanded","false")};
- m.addEventListener("click",e=>{const a=e.target.closest("a");if(!a)return;e.preventDefault();close();location.replace(a.href)});
- addEventListener("pageshow",()=>close());
  const open=()=>{m.hidden=false;const r=tt.getBoundingClientRect();m.style.top=Math.max(8,r.bottom+8)+"px";m.style.left=Math.max(8,Math.min(innerWidth-m.offsetWidth-8,r.left+r.width/2-m.offsetWidth/2))+"px";tt.setAttribute("aria-expanded","true");const a=m.querySelector("a.on")||m.querySelector(".cm-g a");if(a)a.focus({preventScroll:true})};
  tt.onclick=e=>{e.stopPropagation();m.hidden?open():close()};
  tt.onkeydown=e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();tt.onclick(e)}};
@@ -973,7 +1047,7 @@ function setEdit(on){
 })();
 async function publish(){const j=JSON.stringify(S,null,1);try{await navigator.clipboard.writeText(j)}catch(e){}
  const u=GH_USER,r=GH_REPO;
- let ex=true;try{ex=(await fetch("../../datos.json?v="+Date.now(),{cache:"no-store"})).ok}catch(e){}
+ let ex=true;try{ex=(await fetch("../datos.json?v="+Date.now(),{cache:"no-store"})).ok}catch(e){}
  window.open(`https://github.com/${u}/${r}/${ex?"edit/main/datos.json":"new/main?filename=datos.json"}`,"_blank");
  alert("Datos copiados. En la página de GitHub: selecciona todo (Ctrl+A), pega (Ctrl+V) y pulsa «Commit changes».")}
 async function syncNow(){
@@ -982,10 +1056,10 @@ async function syncNow(){
  if(!tk){tk=(prompt("Pega tu token de GitHub (solo se guarda en este navegador):")||"").trim();if(!tk)return}
  setSt("Lanzando actualización…");
  try{
-  const x=await fetch(`https://api.github.com/repos/${u}/${r}/actions/workflows/sync.yml/dispatches`,{method:"POST",headers:{Authorization:"Bearer "+tk,Accept:"application/vnd.github+json","X-GitHub-Api-Version":"2022-11-28"},body:JSON.stringify({ref:"main"})});
+  const x=await fetch(`https://api.github.com/repos/${u}/${r}/actions/workflows/sync-semana.yml/dispatches`,{method:"POST",headers:{Authorization:"Bearer "+tk,Accept:"application/vnd.github+json","X-GitHub-Api-Version":"2022-11-28"},body:JSON.stringify({ref:"main"})});
   if(x.status===204){try{localStorage.setItem("ghtk",tk)}catch(e){}setSt("✓ Actualización lanzada. Los resultados llegarán en 1-2 minutos");setTimeout(()=>setSt(""),20000);return}
   if([401,403,404].includes(x.status)){try{localStorage.removeItem("ghtk")}catch(e){}}
-  setSt("⚠ GitHub respondió "+x.status+(x.status==401?" (token no válido)":x.status==404||x.status==403?" (token sin permiso o falta sync.yml en main)":""))
+  setSt("⚠ GitHub respondió "+x.status+(x.status==401?" (token no válido)":x.status==404||x.status==403?" (token sin permiso o falta sync-semana.yml en main)":""))
  }catch(e){setSt("⚠ No se pudo contactar con GitHub")}
 }
 function exportD(){const a=document.createElement("a");a.href=URL.createObjectURL(new Blob([JSON.stringify(S,null,1)],{type:"application/json"}));a.download="datos.json";a.click()}
@@ -998,9 +1072,8 @@ function resetD(){
     alert("Datos borrados correctamente. Ya puedes utilizar el botón 'Importar' para cargar tu archivo JSON.");
   }
 }
-
 /* ===== Jugadas: los jugadores ven los vídeos; el entrenador además gestiona y graba ===== */
-let toastT;function toast(m){const t=$("#toast");t.textContent=m;t.classList.add("show");clearTimeout(toastT);toastT=setTimeout(()=>t.classList.remove("show"),3200)}
+let toastT;function toast(m){const t=$q("#toast");t.textContent=m;t.classList.add("show");clearTimeout(toastT);toastT=setTimeout(()=>t.classList.remove("show"),3200)}
 const fch=iso=>{const d=new Date(iso);return isNaN(d)?"":d.toLocaleDateString("es-ES",{day:"numeric",month:"short",year:"numeric"})};
 const slug=s=>s.normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-+|-+$/g,"").slice(0,40)||"jugada";
 const pad=n=>String(n).padStart(2,"0");
@@ -1015,9 +1088,9 @@ let PL=null,PLloading=false;
 async function loadPlays(){
  PLloading=true;
  let arch=[],bo={},me={};
- try{const r=await fetch(BASE+"Pizarra/"+CAT+"/index.json?"+Date.now());if(r.ok){const a=await r.json();if(Array.isArray(a))arch=a}}catch(e){}
- try{bo=await fbGet("pizarra_borrar/"+CAT)||{}}catch(e){}
- try{me=await fbGet("pizarra_meta/"+CAT)||{}}catch(e){}
+ try{const r=await fetch(BASE+"Pizarra/"+CATK+"/index.json?"+Date.now());if(r.ok){const a=await r.json();if(Array.isArray(a))arch=a}}catch(e){}
+ try{bo=await fbGet("pizarra_borrar/"+CATK)||{}}catch(e){}
+ try{me=await fbGet("pizarra_meta/"+CATK)||{}}catch(e){}
  const ids=new Set(arch.map(j=>j.id)),out=[];
  arch.filter(j=>!bo[j.id]).forEach(j=>out.push({id:j.id,t:j.titulo,d:j.fecha,f:j}));
  Object.keys(me).filter(k=>!ids.has(k)&&!bo[k]).forEach(k=>out.push({id:k,t:me[k].titulo,d:me[k].ts,p:1}));
@@ -1028,29 +1101,29 @@ function renderPlays(){
  if(PL===null){if(!PLloading)loadPlays();return`<div class="empty">Cargando jugadas…</div>`}
  const ed=E(),head=`<div class="card"><h2 style="font-size:1.6rem;color:#0f2a6b;line-height:1.1">🎬 Jugadas ${CAT_NAME}</h2><div class="cvsub">Vídeos de las jugadas que trabaja el equipo.</div></div>`;
  if(!PL.length)return head+`<div class="empty">🎬 Todavía no hay jugadas publicadas.</div>`;
- return head+`<div class="pjg">`+PL.map((j,i)=>`<div class="card pj">${j.f?`<video controls preload="metadata" playsinline src="${BASE}Pizarra/${CAT}/${esc(j.f.video)}#t=0.1"></video>`:`<button class="pjv" data-pv="${i}" aria-label="Ver ${esc(j.t)}">▶</button>`}<h3>${esc(j.t)}</h3><small class="gap">${esc(fch(j.d))}</small>${ed?`<div class="ctl" style="justify-content:flex-start"><button data-pe="${i}">✎ Editar</button><button data-pb="${i}">🗑 Borrar</button></div>`:""}</div>`).join("")+`</div>`}
-$("#app").addEventListener("click",e=>{
+ return head+`<div class="pjg">`+PL.map((j,i)=>`<div class="card pj">${j.f?`<video controls preload="metadata" playsinline src="${BASE}Pizarra/${CATK}/${esc(j.f.video)}#t=0.1"></video>`:`<button class="pjv" data-pv="${i}" aria-label="Ver ${esc(j.t)}">▶</button>`}<h3>${esc(j.t)}</h3><small class="gap">${esc(fch(j.d))}</small>${ed?`<div class="ctl" style="justify-content:flex-start"><button data-pe="${i}">✎ Editar</button><button data-pb="${i}">🗑 Borrar</button></div>`:""}</div>`).join("")+`</div>`}
+$q("#app").addEventListener("click",e=>{
  const b=e.target.closest("[data-pv],[data-pe],[data-pb]");if(!b)return;
  if(b.dataset.pv!==undefined)verPend(+b.dataset.pv);
  else if(b.dataset.pe!==undefined)editPl(+b.dataset.pe);
  else delPl(+b.dataset.pb)});
 /* Si un vídeo archivado no carga, se avisa en vez de dejar un recuadro negro */
-$("#app").addEventListener("error",e=>{
+$q("#app").addEventListener("error",e=>{
  const v=e.target;if(!v||v.tagName!=="VIDEO")return;
  const d=document.createElement("div");d.className="pjn";d.textContent="Vídeo no disponible todavía. Puede estar archivándose; prueba en unos minutos.";v.replaceWith(d)},true);
 
 /* Visor (jugadas recién publicadas, que aún están en Firebase) */
 let ver=null;
-function openVer(t,info,url,ses){closeVer();ver={url,ses,t};$("#vT").textContent=t;$("#vI").textContent=info;const v=$("#vV");v.src=url;$("#vEd").hidden=!E();$("#mVer").hidden=false;const p=v.play();if(p&&p.catch)p.catch(()=>{})}
-function closeVer(){const v=$("#vV");v.pause();v.removeAttribute("src");v.load();if(ver&&ver.url)URL.revokeObjectURL(ver.url);ver=null;$("#mVer").hidden=true}
-$("#vCl").onclick=closeVer;
-$("#mVer").addEventListener("click",e=>{if(e.target.id==="mVer")closeVer()});
-$("#vV").addEventListener("error",()=>{if(ver)toast("No se pudo reproducir el vídeo. Si aún se está archivando, prueba en unos minutos.")});
-$("#vEd").onclick=()=>{if(!ver||!ver.ses){toast("No se pudo abrir esa jugada");return}const s=ver.ses,t=ver.t;closeVer();toPiz(s,t)};
+function openVer(t,info,url,ses){closeVer();ver={url,ses,t};$q("#vT").textContent=t;$q("#vI").textContent=info;const v=$q("#vV");v.src=url;$q("#vEd").hidden=!E();$q("#mVer").hidden=false;const p=v.play();if(p&&p.catch)p.catch(()=>{})}
+function closeVer(){const v=$q("#vV");v.pause();v.removeAttribute("src");v.load();if(ver&&ver.url)URL.revokeObjectURL(ver.url);ver=null;$q("#mVer").hidden=true}
+$q("#vCl").onclick=closeVer;
+$q("#mVer").addEventListener("click",e=>{if(e.target.id==="mVer")closeVer()});
+$q("#vV").addEventListener("error",()=>{if(ver)toast("No se pudo reproducir el vídeo. Si aún se está archivando, prueba en unos minutos.")});
+$q("#vEd").onclick=()=>{if(!ver||!ver.ses){toast("No se pudo abrir esa jugada");return}const s=ver.ses,t=ver.t;closeVer();toPiz(s,t)};
 async function verPend(i){
  const j=PL[i];if(!j)return;toast("Cargando vídeo…");
  try{
-  const d=await fbGet("pizarra_cola/"+CAT+"/"+j.id);
+  const d=await fbGet("pizarra_cola/"+CATK+"/"+j.id);
   if(!d||!d.video)throw new Error("nv");
   let ses=null;try{ses=JSON.parse(d.sesion)}catch(e){}
   openVer(j.t,CAT_NAME+" · "+fch(j.d),URL.createObjectURL(b64Blob(d.video,d.mime)),ses)
@@ -1059,16 +1132,16 @@ async function editPl(i){
  const j=PL[i];if(!j)return;
  try{
   let ses;
-  if(j.f){const r=await fetch(BASE+"Pizarra/"+CAT+"/"+j.f.sesion+"?"+Date.now());if(!r.ok)throw 0;ses=await r.json()}
-  else{const d=await fbGet("pizarra_cola/"+CAT+"/"+j.id);ses=JSON.parse(d.sesion)}
+  if(j.f){const r=await fetch(BASE+"Pizarra/"+CATK+"/"+j.f.sesion+"?"+Date.now());if(!r.ok)throw 0;ses=await r.json()}
+  else{const d=await fbGet("pizarra_cola/"+CATK+"/"+j.id);ses=JSON.parse(d.sesion)}
   toPiz(ses,j.t)
  }catch(e){toast("No se pudo abrir esa jugada")}}
 async function delPl(i){
  const j=PL[i];if(!j)return;
  if(!confirm("¿Borrar la jugada «"+j.t+"»? Los jugadores dejarán de verla."))return;
  try{
-  if(j.f)await fbApi("pizarra_borrar/"+CAT+"/"+j.id,"PUT",true);
-  else{await fbApi("pizarra_cola/"+CAT+"/"+j.id,"DELETE");await fbApi("pizarra_meta/"+CAT+"/"+j.id,"DELETE")}
+  if(j.f)await fbApi("pizarra_borrar/"+CATK+"/"+j.id,"PUT",true);
+  else{await fbApi("pizarra_cola/"+CATK+"/"+j.id,"DELETE");await fbApi("pizarra_meta/"+CATK+"/"+j.id,"DELETE")}
   PL.splice(i,1);render();toast("Jugada borrada")
  }catch(e){toast("No se pudo borrar")}}
 
@@ -1088,7 +1161,7 @@ function ensurePiz(){
  if(pzFr)return;
  pzFr=document.createElement("iframe");pzFr.title="Pizarra táctica";pzFr.src=BASE+"pizarra.html";
  pzFr.addEventListener("load",()=>{pzStyle();ajusta();try{new ResizeObserver(ajusta).observe(pzFr.contentDocument.body)}catch(e){}flushPz()});
- $("#pzf").appendChild(pzFr)}
+ $q("#pzf").appendChild(pzFr)}
 /* Dentro de la pantalla completa, la pizarra se ajusta al alto disponible para verla entera sin bajar */
 let pzRO=null;
 function fsLayout(on){
@@ -1105,7 +1178,7 @@ function fsLayout(on){
  }catch(e){}}
 /* Pizarra a pantalla completa: tapa el menú, la barra de admin y el resto de botones de la página */
 function setPzFS(on){
- const f=$("#pzf");if(!f||on===PFS)return;
+ const f=document.querySelector("#pzf");if(!f||on===PFS)return;
  PFS=on;f.classList.toggle("fsp",on);
  try{const b=pzFr.contentDocument.getElementById("pzfsIn");if(b)b.textContent=on?"✕ Salir de pantalla completa":"⛶ Pantalla completa"}catch(e){}
  document.body.style.overflow=(FS||PFS)?"hidden":"";
@@ -1117,48 +1190,48 @@ function setPzFS(on){
   try{screen.orientation.unlock()}catch(e){}
  }
  if(pzFr&&!on)pzFr.style.height="900px";
- if(on)$("#ptit2").value=$("#ptit").value;
+ if(on)document.querySelector("#ptit2").value=document.querySelector("#ptit").value;
  fsLayout(on);setTimeout(()=>{if(PFS===on)fsLayout(on);ajusta()},150)}
 window.togPzFS=()=>setPzFS(!PFS);
-function setPSt(t){$("#pst").textContent=t;$("#pst2").textContent=t;$("#ptit2").value=$("#ptit").value}
-$("#ptit2").oninput=e=>{$("#ptit").value=e.target.value};
-$("#pbtn2").onclick=()=>{if($("#pbtn").disabled)return;$("#ptit").value=$("#ptit2").value;$("#pbtn").onclick()};
+function setPSt(t){document.querySelector("#pst").textContent=t;document.querySelector("#pst2").textContent=t;document.querySelector("#ptit2").value=document.querySelector("#ptit").value}
+document.querySelector("#ptit2").oninput=e=>{document.querySelector("#ptit").value=e.target.value};
+document.querySelector("#pbtn2").onclick=()=>{if(document.querySelector("#pbtn").disabled)return;document.querySelector("#ptit").value=document.querySelector("#ptit2").value;document.querySelector("#pbtn").onclick()};
 function toPiz(ses,titulo){pzQ={ses,titulo};tab="piz";render();flushPz()}
-function flushPz(){const z=PZ();if(pzQ&&z){z.loadSession(pzQ.ses);$("#ptit").value=pzQ.titulo;setPSt("Jugada cargada. Cámbiala y publícala como nueva; después puedes borrar la antigua.");pzQ=null}}
+function flushPz(){const z=PZ();if(pzQ&&z){z.loadSession(pzQ.ses);$q("#ptit").value=pzQ.titulo;setPSt("Jugada cargada. Cámbiala y publícala como nueva; después puedes borrar la antigua.");pzQ=null}}
 
 /* Grabar, previsualizar y publicar */
 let rec=null;
-$("#pbtn").onclick=async()=>{
- const titulo=$("#ptit").value.trim(),pz=PZ();
+$q("#pbtn").onclick=async()=>{
+ const titulo=$q("#ptit").value.trim(),pz=PZ();
  if(!pz){toast("La pizarra aún no ha cargado");return}
  if(pz.playing){pz.stop();return}
- if(titulo.length<3){toast("Escribe un título para la jugada");$("#ptit2").focus();return}
+ if(titulo.length<3){toast("Escribe un título para la jugada");document.getElementById("ptit2").focus();return}
  if(pz.steps<2){toast("Crea al menos 2 pasos en la pizarra");return}
- const b=$("#pbtn");b.disabled=true;setPSt("Grabando… no cambies de pestaña hasta que termine.");
+ const b=$q("#pbtn");b.disabled=true;setPSt("Grabando… no cambies de pestaña hasta que termine.");
  try{
   const r=await pz.recordBlob();
   if(r.blob.size<2000)throw new Error("El vídeo salió vacío. Inténtalo de nuevo con la pestaña a la vista.");
   rec={...r,titulo};
-  $("#mT").textContent=titulo;
-  $("#mI").textContent=CAT_NAME+" · "+(r.blob.size/1048576).toFixed(1)+" MB · "+r.ext.toUpperCase();
-  const v=$("#mV");if(v.src)URL.revokeObjectURL(v.src);v.src=URL.createObjectURL(r.blob);
-  $("#mPub").disabled=false;$("#mPrev").hidden=false;setPSt("Vídeo listo. Revísalo y publícalo.")
+  $q("#mT").textContent=titulo;
+  $q("#mI").textContent=CAT_NAME+" · "+(r.blob.size/1048576).toFixed(1)+" MB · "+r.ext.toUpperCase();
+  const v=$q("#mV");if(v.src)URL.revokeObjectURL(v.src);v.src=URL.createObjectURL(r.blob);
+  $q("#mPub").disabled=false;$q("#mPrev").hidden=false;setPSt("Vídeo listo. Revísalo y publícalo.")
  }catch(e){const m=(e&&e.message)||"No se pudo grabar";setPSt(m);toast(m)}
  finally{b.disabled=false}};
-$("#mNo").onclick=()=>{$("#mPrev").hidden=true;$("#mV").pause();rec=null;setPSt("Descartado.")};
-$("#mDl").onclick=()=>{if(!rec)return;const a=document.createElement("a");a.href=URL.createObjectURL(rec.blob);a.download=slug(rec.titulo)+"."+rec.ext;document.body.appendChild(a);a.click();a.remove()};
-$("#mPub").onclick=async()=>{
+$q("#mNo").onclick=()=>{$q("#mPrev").hidden=true;$q("#mV").pause();rec=null;setPSt("Descartado.")};
+$q("#mDl").onclick=()=>{if(!rec)return;const a=document.createElement("a");a.href=URL.createObjectURL(rec.blob);a.download=slug(rec.titulo)+"."+rec.ext;document.body.appendChild(a);a.click();a.remove()};
+$q("#mPub").onclick=async()=>{
  if(!rec)return;
- const btn=$("#mPub");btn.disabled=true;
+ const btn=$q("#mPub");btn.disabled=true;
  try{
   const data=await fileB64(rec.blob);
   if(data.length>MAXB64)throw new Error("El vídeo es demasiado largo ("+(rec.blob.size/1048576).toFixed(1)+" MB). Reduce los pasos o usa la velocidad rápida.");
   const d=new Date(),id=d.getFullYear()+pad(d.getMonth()+1)+pad(d.getDate())+"-"+pad(d.getHours())+pad(d.getMinutes())+pad(d.getSeconds())+"-"+slug(rec.titulo);
   const sesion=JSON.stringify(PZ().getSession());
   setPSt("Enviando…");
-  await fbApi("pizarra_cola/"+CAT+"/"+id,"PUT",{id,titulo:rec.titulo,fecha:d.toISOString(),ext:rec.ext,mime:rec.mime,video:data,sesion});
-  await fbApi("pizarra_meta/"+CAT+"/"+id,"PUT",{titulo:rec.titulo,ts:d.toISOString(),ext:rec.ext,mime:rec.mime});
-  $("#mPrev").hidden=true;$("#mV").pause();rec=null;$("#ptit").value="";PL=null;
+  await fbApi("pizarra_cola/"+CATK+"/"+id,"PUT",{id,titulo:rec.titulo,fecha:d.toISOString(),ext:rec.ext,mime:rec.mime,video:data,sesion});
+  await fbApi("pizarra_meta/"+CATK+"/"+id,"PUT",{titulo:rec.titulo,ts:d.toISOString(),ext:rec.ext,mime:rec.mime});
+  $q("#mPrev").hidden=true;$q("#mV").pause();rec=null;$q("#ptit").value="";PL=null;
   setPSt("✔ Publicada. Los jugadores ya la ven en la pestaña Jugadas; se archiva en el repositorio en unos minutos.");
   toast("Jugada publicada en "+CAT_NAME)
  }catch(e){
@@ -1167,7 +1240,7 @@ $("#mPub").onclick=async()=>{
   setPSt(m);toast(m)}};
 
 document.addEventListener("keydown",e=>{if(e.key==="Escape"){closeCromo();closePick();closeLogin();if(ver)closeVer();if(PFS)setPzFS(false)}});
-if(location.hash=="#admin")unlock();try{if(sessionStorage.getItem("adm")){PW=sessionStorage.getItem("pw")||"";RT=sessionStorage.getItem("rt")||"";ACC=sessionStorage.getItem("mail")||TEAM_MAIL;document.body.classList.add("edit")}}catch(e){}
+if(location.hash=="#admin")unlock();try{if(sessionStorage.getItem("adm")&&sessionStorage.getItem("cat")===CATK){PW=sessionStorage.getItem("pw")||"";RT=sessionStorage.getItem("rt")||"";ACC=sessionStorage.getItem("mail")||FBMAIL;document.body.classList.add("edit")}}catch(e){}
 if(API||FB)document.querySelector("#adm .on").remove();
 /* Volver a la página anterior (si se abrió esta página directamente, va al inicio) */
 function volver(){if(history.length>1)history.back();else location.href="../index.html#equipos"}
@@ -1176,5 +1249,6 @@ render();setInterval(tick,1000);
 try{new ResizeObserver(setTb).observe(document.getElementById("topbar"))}catch(e){}
 let pc=0;setInterval(()=>{pc++;if(API&&!FB&&!E()&&(liveM()||pc%12==0))fetch(API+"?v="+Date.now(),{cache:"no-store"}).then(r=>r.json()).then(d=>{if(JSON.stringify(d)!==JSON.stringify(S)){S=d;fix();render()}}).catch(()=>{})},5000);
 </script>
+<script src="../scripts/categoria-extra.js"></script>
 </body>
 </html>

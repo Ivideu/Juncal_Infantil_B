@@ -451,44 +451,53 @@ header.site-banner .dl {
 #pzbar #pbtn2{background:var(--ye);border-color:var(--ye);color:#0b2a6f;white-space:nowrap}
 #pzbar #pst2{flex:1;min-width:0;font-size:.8rem;color:#c3d0ff;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 #pzf.fsp #pzbar{justify-content:space-between}
-/* ===== Barra de menú fija: todas las opciones visibles en dos líneas ===== */
-#topbar{position:fixed;top:0;left:0;right:0;z-index:50;padding:calc(env(safe-area-inset-top,0px) + 8px) 10px 6px;display:flex;justify-content:center;pointer-events:none}
-#topbar .dock{pointer-events:auto;width:100%;max-width:980px;display:flex;align-items:center;gap:8px;padding:6px 8px;border-radius:20px;background:linear-gradient(90deg,rgba(246,236,214,.97),rgba(227,235,250,.97) 60%,rgba(212,217,234,.97));border:1px solid #2a5ba8;box-shadow:0 8px 24px #1e3a7a33,inset 0 1px 0 #ffffffaa;-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px)}
+
+/* ===== Barra de menú fija: más ancha, botones compactos y más cuadrados ===== */
+#topbar{position:fixed;top:0;left:0;right:0;z-index:50;padding:calc(env(safe-area-inset-top,0px) + 6px) 6px 4px;display:flex;justify-content:center;pointer-events:none}
+#topbar .dock{pointer-events:auto;width:100%;max-width:1180px;display:flex;align-items:center;gap:6px;padding:5px 6px;border-radius:18px;background:linear-gradient(90deg,rgba(246,236,214,.97),rgba(227,235,250,.97) 60%,rgba(212,217,234,.97));border:1px solid #2a5ba8;box-shadow:0 8px 24px #1e3a7a33,inset 0 1px 0 #ffffffaa;-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px)}
 #tbsp{height:96px}
 /* Logo del club + botón de categoría */
-#topbar .brand{flex:none;display:flex;flex-direction:column;align-items:stretch;gap:4px;padding:0 2px}
-#topbar .club{display:flex;align-items:center;gap:5px;color:#0f2a6b;text-decoration:none;font:800 .8rem/.95 'Barlow Condensed',sans-serif;letter-spacing:.02em;text-transform:uppercase}
-#topbar .club img{width:26px;height:26px;border-radius:50%;flex:none}
+#topbar .brand{flex:none;display:flex;flex-direction:column;align-items:stretch;gap:3px;padding:0 1px}
+#topbar .club{display:flex;align-items:center;gap:4px;color:#0f2a6b;text-decoration:none;font:800 .72rem/.95 'Barlow Condensed',sans-serif;letter-spacing:.02em;text-transform:uppercase}
+#topbar .club img{width:22px;height:22px;border-radius:50%;flex:none}
 #topbar .club b{display:block;color:#d97706}
-#topbar .catbtn{display:flex;flex-direction:column;align-items:stretch;padding:0;border:1px solid #0f2a6b;border-radius:10px;overflow:hidden;background:#fff;cursor:pointer;transform:none;transition:box-shadow .2s,border-color .2s}
+#topbar .catbtn{display:flex;flex-direction:column;align-items:stretch;padding:0;border:1px solid #0f2a6b;border-radius:9px;overflow:hidden;background:#fff;cursor:pointer;transform:none;transition:box-shadow .2s,border-color .2s}
 #topbar .catbtn:hover{transform:none;border-color:#2f7bff;box-shadow:0 3px 10px #2f7bff44}
-#topbar .catbtn .cur{display:block;padding:3px 6px;background:#0f2a6b;color:#ffd23f;font:800 .78rem/1 'Barlow Condensed',sans-serif;letter-spacing:.06em;text-align:center;white-space:nowrap}
-#topbar .catbtn .chg{display:flex;align-items:center;justify-content:center;gap:3px;padding:2px 6px;background:#eaf2ff;color:#2f7bff;font:700 .62rem/1.2 Barlow,sans-serif;white-space:nowrap}
+#topbar .catbtn .cur{display:block;padding:3px 5px;background:#0f2a6b;color:#ffd23f;font:800 .72rem/1 'Barlow Condensed',sans-serif;letter-spacing:.05em;text-align:center;white-space:nowrap}
+#topbar .catbtn .chg{display:flex;align-items:center;justify-content:center;gap:3px;padding:2px 5px;background:#eaf2ff;color:#2f7bff;font:700 .58rem/1.2 Barlow,sans-serif;white-space:nowrap}
 #topbar .catbtn .chg i{font-style:normal;transition:transform .2s}
 #topbar .catbtn[aria-expanded="true"] .chg i{transform:rotate(180deg)}
-#topbar nav#nav{flex:1;min-width:0;display:grid;grid-template-columns:repeat(var(--c,4),minmax(0,1fr));grid-auto-rows:1fr;gap:4px;padding:0;position:static}
-#topbar nav#nav button{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;min-width:0;padding:5px 2px;border:0;border-radius:12px;background:rgba(255,255,255,.6);color:#10234b;font-weight:600;font-size:.7rem;line-height:1.1;box-shadow:none;transform:none}
+/* Botones del menú: compactos, icono arriba y texto debajo, casi cuadrados */
+#topbar nav#nav{flex:1;min-width:0;display:grid;grid-template-columns:repeat(var(--c,4),minmax(0,1fr));grid-auto-rows:1fr;gap:3px;padding:0;position:static}
+#topbar nav#nav button{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;min-width:0;min-height:50px;padding:4px 1px;border:0;border-radius:10px;background:rgba(255,255,255,.6);color:#10234b;font-weight:600;font-size:.62rem;line-height:1.05;box-shadow:none;transform:none}
 #topbar nav#nav button:hover{background:rgba(255,255,255,.95);transform:none}
-#topbar nav#nav button span:first-child{font-size:1.1rem;line-height:1.1}
+#topbar nav#nav button span:first-child{font-size:1.05rem;line-height:1;margin:0}
 #topbar nav#nav button span:last-child{max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 #topbar nav#nav button.on{background:var(--ye);color:#0a0f1e;box-shadow:0 3px 10px #d9770655}
 #topbar nav#nav button.out{background:#ef4444;color:#fff}
 #topbar nav#nav button.back{background:linear-gradient(135deg,#3d8bff,#1e4fd8);color:#fff;box-shadow:0 3px 10px #1e4fd855}
 #topbar nav#nav button.back:hover{background:linear-gradient(135deg,#5a9dff,#2a5fe6)}
 #topbar nav#nav button.back span:last-child{white-space:normal;line-height:1.05;text-align:center}
-@media(min-width:700px){
- #tbsp{height:104px}
- #topbar .brand{gap:5px;padding:0 8px}
- #topbar .club{font-size:1.15rem;gap:8px}
- #topbar .club b{display:inline}
- #topbar .club img{width:30px;height:30px}
- #topbar .catbtn{flex-direction:row}
- #topbar .catbtn .cur{font-size:.95rem;padding:5px 10px}
- #topbar .catbtn .chg{font-size:.75rem;padding:0 10px}
- #topbar nav#nav button{flex-direction:row;gap:6px;padding:9px 8px;font-size:.9rem}
- #topbar nav#nav button span:first-child{font-size:1.05rem}
+/* Modo admin en móvil: 6 columnas, letra algo menor */
+@media(max-width:699px){
+ body.edit #topbar nav#nav button{font-size:.52rem;min-height:46px;padding:3px 0}
+ body.edit #topbar nav#nav button span:first-child{font-size:.95rem}
 }
-#topbar nav#nav button span:first-child{margin:0}
+@media(min-width:700px){
+ #tbsp{height:100px}
+ #topbar{padding:calc(env(safe-area-inset-top,0px) + 8px) 10px 6px}
+ #topbar .dock{max-width:1280px;gap:10px;padding:6px 10px}
+ #topbar .brand{gap:4px;padding:0 6px}
+ #topbar .club{font-size:1.05rem;gap:7px}
+ #topbar .club b{display:inline}
+ #topbar .club img{width:28px;height:28px}
+ #topbar .catbtn{flex-direction:row}
+ #topbar .catbtn .cur{font-size:.9rem;padding:5px 9px}
+ #topbar .catbtn .chg{font-size:.72rem;padding:0 9px}
+ #topbar nav#nav{gap:5px}
+ #topbar nav#nav button{flex-direction:column;gap:3px;min-height:56px;padding:6px 4px;font-size:.78rem}
+ #topbar nav#nav button span:first-child{font-size:1.25rem}
+}
 .b.zz{background:#eef2ff!important;color:#5b6aa8;border:2px dashed #9fb0e6!important;box-shadow:none!important}
 .b.zz svg{display:block}
 /* marcador hero en una línea */

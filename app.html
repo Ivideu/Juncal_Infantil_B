@@ -38,6 +38,7 @@ main{max-width:720px;margin:auto;padding:14px 16px}
 .when{text-align:center;margin-top:10px;font-weight:600}
 .when span{display:inline-block;background:var(--nv);color:#fff;border-radius:999px;padding:3px 12px;font-size:.92rem}
 .loc{text-align:center;color:var(--mu);font-size:.88rem;margin-top:4px}
+.loc a{color:var(--ac);font-weight:600;text-decoration:none;border-bottom:1px dashed currentColor}
 .last{margin-top:12px;padding-top:10px;border-top:1px dashed var(--line);display:flex;gap:8px;align-items:center;font-size:.92rem}
 .last .r{flex:1;min-width:0}
 .pill{flex:none;border-radius:999px;padding:1px 9px;font-weight:700;font-size:.8rem;color:#fff}
@@ -99,6 +100,8 @@ function toast(t){const m=$("#msg");m.textContent=t;m.classList.add("on");clearT
 const fecha=(f,h)=>{const d=new Date(f+"T12:00:00Z").toLocaleDateString("es-ES",{weekday:"short",day:"numeric",month:"short",timeZone:"UTC"}).replace(".","");return d[0].toUpperCase()+d.slice(1)+(h?" · "+h+" h":"")};
 const NEUTRO="data:image/svg+xml,"+encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48"><path d="M24 4l16 6v12c0 11-7 18-16 22C15 40 8 33 8 22V10z" fill="#c6d0ea"/><path d="M24 4l16 6v12c0 11-7 18-16 22z" fill="#a9b7dd"/></svg>');
 const escudo=(cod,own)=>`<img class="sh" alt="" src="${own?"Images/escudo.png":"Escudos/"+encodeURIComponent(cod)+".png"}" onerror="this.onerror=null;this.src=NEUTRO">`;
+// Enlace a Google Maps con la ruta hasta el campo ("Cómo llegar" desde la ubicación actual)
+const mapa=c=>"https://www.google.com/maps/dir/?api=1&destination="+encodeURIComponent(c);
 
 function card(c){
   const [id,nombre,file]=c,p=px.find(x=>x.id===id),on=av.includes(id);
@@ -108,7 +111,7 @@ function card(c){
     const own=p.casa?"L":"V";
     body=`<div class="vs"><div>${escudo(p.codLocal,own==="L")}<div class="cn">${esc(p.local)}</div></div><div class="mid">VS</div><div>${escudo(p.codVisitante,own==="V")}<div class="cn">${esc(p.visitante)}</div></div></div>
     <div class="when"><span>${esc(fecha(p.fecha,p.hora))}</span></div>
-    <div class="loc">Jornada ${p.jornada} · ${p.casa?"Juegas en casa":"Juegas fuera"}${p.campo?" · 📍 "+esc(p.campo):""}</div>`;
+    <div class="loc">Jornada ${p.jornada} · ${p.casa?"Juegas en casa":"Juegas fuera"}${p.campo?` · <a href="${mapa(p.campo)}" target="_blank" rel="noopener">📍 ${esc(p.campo)}</a>`:""}</div>`;
     const u=p.ultimo;
     if(u){
       const mio=u.casa?u.gl:u.gv,rv=u.casa?u.gv:u.gl,k=mio>rv?"w":mio<rv?"l":"d";

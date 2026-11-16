@@ -136,8 +136,16 @@ jobs:
           AAB=/tmp/app/android/app/build/outputs/bundle/release/app-release.aab
           ls -la "$APK" "$AAB"
           AS=$(ls -d "$ANDROID_HOME"/build-tools/*/ | sort -V | tail -1)
-          "$AS/apksigner" verify --print-certs "$APK" | grep -E "Signer #1 certificate (DN|SHA-256)"
-          "$AS/aapt2" dump badging "$APK" | grep -E "^package|targetSdkVersion"
+          echo "Build-tools usadas: $AS"
+
+          echo "== Firma del APK =="
+          "$AS/apksigner" verify --verbose --print-certs "$APK" > /tmp/firma.txt 2>&1 \
+            || { cat /tmp/firma.txt; echo "::error::La firma del APK no es válida"; exit 1; }
+          grep -iE "verifies|certificate (DN|SHA-256)" /tmp/firma.txt || cat /tmp/firma.txt
+
+          echo "== Paquete y nivel de API =="
+          "$AS/aapt2" dump badging "$APK" > /tmp/badging.txt 2>&1 || true
+          grep -E "^package|targetSdkVersion" /tmp/badging.txt || head -20 /tmp/badging.txt
 
       - name: Guardar el AAB (para Google Play)
         uses: actions/upload-artifact@v4

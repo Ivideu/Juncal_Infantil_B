@@ -479,26 +479,30 @@ header.site-banner .dl {
 #topbar nav#nav button.back{background:linear-gradient(135deg,#3d8bff,#1e4fd8);color:#fff;box-shadow:0 3px 10px #1e4fd855}
 #topbar nav#nav button.back:hover{background:linear-gradient(135deg,#5a9dff,#2a5fe6)}
 #topbar nav#nav button.back span:last-child{white-space:normal;line-height:1.05;text-align:center}
-/* Móvil y tableta: arriba logo + categoría centrados, debajo los botones */
+/* Móvil y tableta: compacto. Arriba logo + categoría, debajo los botones; la barra se va con el scroll */
 @media(max-width:999px){
- #topbar .dock{flex-wrap:wrap;gap:10px}
- #topbar .brand{width:100%;flex-direction:row;align-items:center;justify-content:center;gap:16px}
- #topbar .club{justify-content:flex-start}
- #topbar .catbtn{min-width:130px}
+ #topbar{position:absolute}
+ #topbar .dock{flex-wrap:wrap;gap:8px;padding:8px 10px}
+ #topbar .brand{width:100%;flex-direction:row;align-items:center;justify-content:center;gap:12px}
+ #topbar .club{justify-content:flex-start;font-size:1.05rem;gap:8px}
+ #topbar .club img{width:36px;height:36px}
+ #topbar .catbtn{min-width:0}
+ #topbar .catbtn .cur{padding:6px 14px;font-size:1rem}
+ #topbar nav#nav{--g:5px;max-width:calc(var(--k)*76px + (var(--k) - 1)*var(--g))}
+ #topbar nav#nav.odd button:last-child{flex-basis:calc(2*(100% - (var(--k) - 1)*var(--g))/var(--k) + var(--g));aspect-ratio:auto}
 }
 @media(max-width:699px){
- #topbar nav#nav button{font-size:.62rem}
- #topbar nav#nav button span:first-child{font-size:1.2rem}
+ #topbar{padding:calc(env(safe-area-inset-top,0px) + 4px) 4px 2px}
+ #topbar nav#nav button{font-size:.6rem;border-radius:9px}
+ #topbar nav#nav button span:first-child{font-size:1.15rem}
  body.edit #topbar nav#nav button{font-size:.5rem;padding:1px}
- body.edit #topbar nav#nav button span:first-child{font-size:1rem}
+ body.edit #topbar nav#nav button span:first-child{font-size:.95rem}
 }
-/* Escritorio: la barra se ajusta a su contenido. Normal = 1 fila; admin = 2 filas iguales */
+/* Escritorio: la barra se ajusta a su contenido; navFit() decide 1 fila o 2 y el ancho de cada botón */
 @media(min-width:1000px){
  #topbar{padding:calc(env(safe-area-inset-top,0px) + 8px) 10px 6px}
  #topbar .dock{width:fit-content;max-width:100%;gap:28px;padding:12px 22px}
- #topbar nav#nav{--bw:min(92px,calc((100vw - 340px - (var(--k) - 1)*var(--g))/var(--k)));flex:none;max-width:none;margin:0;width:calc(var(--k)*var(--bw) + (var(--k) - 1)*var(--g))}
- body:not(.edit) #topbar nav#nav{--k:var(--n,9)}
- body.edit #topbar nav#nav{--bw:min(84px,calc((100vw - 340px - (var(--k) - 1)*var(--g))/var(--k)))}
+ #topbar nav#nav{--bw:84px;flex:none;max-width:none;margin:0;width:calc(var(--k)*var(--bw) + (var(--k) - 1)*var(--g))}
  #topbar nav#nav button{flex:0 0 var(--bw)}
 }
 </style>
@@ -854,7 +858,7 @@ function render(){
  tabs.push(E()?["out","🔓 Salir"]:["log","🔒 Login"]);
  tabs.push(["back","↩ Volver"]);
  const SH={jor:"Jornadas",cal:"Calendario",cla:"Clasif.",cop:"Copa",gol:"Goleadores",cro:"Jugadores",jug:"Jugadas",cats:"Otras<br>categorías",piz:"Pizarra",hor:"Horarios",pla:"Plantilla",ent:"Entrenos",log:"Login",out:"Salir",back:E()?"Salir y volver":"Volver"};
-const nv=document.getElementById("nav");nv.style.setProperty("--c",Math.ceil(tabs.length/2));nv.style.setProperty("--n",tabs.length);
+const nv=document.getElementById("nav");nv.style.setProperty("--c",Math.ceil(tabs.length/2));nv.style.setProperty("--n",tabs.length);window.navFit&&navFit(tabs.length);
  nv.innerHTML=tabs.map(([k,l])=>{const ic=l.split(" ")[0],oc=k=="log"?"unlock()":k=="out"?"setEdit(false)":k=="back"?"volverTop()":k=="cats"?"openCats(this,event)":`tab='${k}';if(tab=='jor')jnAuto=true;if(tab=='ent')entD='';if(tab=='jug')PL=null;render()`;return`<button class="${tab==k?'on':''}${k=='out'?' out':''}${k=='back'?' back':''}${k=='cats'?' cats':''}" onclick="${oc}"${k=='back'?` title="${E()?"Cerrar sesión de entrenador y volver":"Volver a la página anterior"}"`:""}><span>${ic}</span><span>${SH[k]}</span></button>`}).join("");
  let h="";
  if(tab=="cal")h=myM().map((x,i)=>card(x.r,x.h,x.a,i)).join("");
@@ -1066,6 +1070,17 @@ function setEdit(on){
  document.addEventListener("click",e=>{if(!m.hidden&&!m.contains(e.target))close()});
  document.addEventListener("keydown",e=>{if(e.key==="Escape"&&!m.hidden){const b=anc;close();if(b&&b.isConnected)b.focus()}});
  addEventListener("scroll",()=>{if(!m.hidden)close()},{passive:true});
+})();
+/* Ajuste automático del menú: una fila mientras cada botón mida al menos 64 px (72 en admin); si no caben, dos filas iguales */
+(function(){let N=0;
+ window.navFit=n=>{if(n)N=n;const nv=document.getElementById("nav");if(!nv||!N)return;
+  const V=document.documentElement.clientWidth,desk=V>=1000,g=desk?6:5,adm=document.body.classList.contains("edit"),
+   cap=desk?(adm?84:92):76,
+   avail=desk?Math.min(V-20,1280)-46-210-28:V-(V<700?8:12)-22,
+   one=(avail-(N-1)*g)/N>=(adm?72:64),k=one?N:Math.ceil(N/2),
+   bw=Math.max(40,Math.min(cap,Math.floor((avail-(k-1)*g)/k)));
+  nv.style.setProperty("--k",k);nv.style.setProperty("--bw",bw+"px");nv.classList.toggle("odd",!one&&N%2===1)};
+ addEventListener("resize",()=>window.navFit());
 })();
 async function publish(){const j=JSON.stringify(S,null,1);try{await navigator.clipboard.writeText(j)}catch(e){}
  const u=GH_USER,r=GH_REPO;

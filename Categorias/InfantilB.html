@@ -1042,8 +1042,6 @@ function setEdit(on){
  document.body.appendChild(m);
  tt.setAttribute("role","button");tt.tabIndex=0;tt.setAttribute("aria-haspopup","menu");tt.setAttribute("aria-expanded","false");tt.setAttribute("aria-label","Cambiar de categoría");tt.title="Cambiar de categoría";
  const close=()=>{m.hidden=true;tt.setAttribute("aria-expanded","false")};
- m.addEventListener("click",e=>{const a=e.target.closest("a");if(!a)return;e.preventDefault();close();location.replace(a.href)});
- addEventListener("pageshow",()=>close());
  const open=()=>{m.hidden=false;const r=tt.getBoundingClientRect();m.style.top=Math.max(8,r.bottom+8)+"px";m.style.left=Math.max(8,Math.min(innerWidth-m.offsetWidth-8,r.left+r.width/2-m.offsetWidth/2))+"px";tt.setAttribute("aria-expanded","true");const a=m.querySelector("a.on")||m.querySelector(".cm-g a");if(a)a.focus({preventScroll:true})};
  tt.onclick=e=>{e.stopPropagation();m.hidden?open():close()};
  tt.onkeydown=e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();tt.onclick(e)}};

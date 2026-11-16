@@ -485,6 +485,19 @@ header.site-banner .dl {
 .b.zz svg{display:block}
 /* marcador hero en una línea */
 .hv>.cn{flex:none;white-space:nowrap;max-width:none}
+
+/* ===== Marca de la barra: logo, botón azul con la categoría y flecha animada ===== */
+#topbar .brand{flex-direction:column;align-items:center;gap:3px;padding:0 8px}
+#topbar .brand .logo{display:block;height:40px;width:auto;object-fit:contain}
+#topbar .brand b{display:block;background:#0f2a6b;color:#ffd23f;font-size:.85rem;font-weight:800;letter-spacing:.06em;line-height:1;white-space:nowrap;padding:7px 14px;border-radius:10px;box-shadow:0 3px 10px #0f2a6b55}
+#topbar .brand .arr{display:block;width:9px;height:9px;margin:0 auto 3px;border-right:3px solid #2f7bff;border-bottom:3px solid #2f7bff;transform:rotate(45deg);animation:arrBounce 1.3s ease-in-out infinite}
+@keyframes arrBounce{0%,100%{transform:rotate(45deg) translate(0,0);opacity:.55}50%{transform:rotate(45deg) translate(3px,3px);opacity:1}}
+#topbar .brand[aria-expanded="true"] .arr{animation:none;transform:rotate(225deg);opacity:1}
+@media(min-width:700px){
+ #topbar .brand{gap:4px;padding:0 14px}
+ #topbar .brand .logo{height:48px}
+ #topbar .brand b{font-size:1.1rem;padding:8px 20px}
+}
 </style>
 <script>const CAT={"nombre": "Torrejón Juncal Aficionado A", "corto": "Aficionado A", "liga": "Preferente Aficionado FS · Grupo 2", "node": "cat-aficionado-a", "email": "aficionado-a@torrejonjuncal.es", "grupo": "26738248", "equipo": "18377727", "me": 0};</script>
 </head>
@@ -493,7 +506,9 @@ header.site-banner .dl {
 <div id="topbar">
  <div class="dock">
   <div id="tt" class="brand" aria-label="Torrejón Juncal AFICIONADO A.. Pulsa para cambiar de categoría">
-   <span class="bl">⚽</span><b class="cn">AFICIONADO A</b>
+   <img class="logo" src="../Images/escudo.png" alt="Torrejón Juncal">
+   <b class="cn">AFICIONADO A</b>
+   <span class="arr" aria-hidden="true"></span>
   </div>
   <nav id="nav"></nav>
  </div>

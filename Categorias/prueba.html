@@ -399,11 +399,6 @@ header.site-banner .dl {
 .bkt{display:flex;gap:14px;overflow-x:auto;padding-bottom:10px;align-items:flex-start}
 .bkc{flex:0 0 min(300px,88%)}
 .bkc>h3{font:800 1.3rem 'Barlow Condensed',sans-serif;color:var(--ye2);text-align:center;margin-bottom:8px}
-/* ===== Caja azul final con botón Volver ===== */
-.volver{margin:36px 0 10px;padding:24px 18px;border-radius:22px;text-align:center;color:#fff;background:linear-gradient(135deg,#3d8bff,#1e4fd8 55%,#0f2a78);border:1px solid #7aa9ff;box-shadow:0 14px 40px #1e4fd833}
-.volver p{margin-bottom:14px;font-weight:600}
-.volver button{background:var(--ye);color:#0a0f1e;border:0;font-weight:800;font-size:1.05rem;padding:12px 30px;border-radius:12px;box-shadow:0 4px 14px rgba(8,18,53,.35)}
-.volver button:hover{transform:translateY(-2px)}
 
 /* ===== Entrenos (solo admin, sin cromos) ===== */
 .entb{display:flex;gap:8px}
@@ -460,9 +455,17 @@ header.site-banner .dl {
 #topbar{position:fixed;top:0;left:0;right:0;z-index:50;padding:calc(env(safe-area-inset-top,0px) + 8px) 10px 6px;display:flex;justify-content:center;pointer-events:none}
 #topbar .dock{pointer-events:auto;width:100%;max-width:980px;display:flex;align-items:center;gap:8px;padding:6px 8px;border-radius:20px;background:linear-gradient(90deg,rgba(246,236,214,.97),rgba(227,235,250,.97) 60%,rgba(212,217,234,.97));border:1px solid #2a5ba8;box-shadow:0 8px 24px #1e3a7a33,inset 0 1px 0 #ffffffaa;-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px)}
 #tbsp{height:96px}
-#topbar .brand{flex:none;display:flex;flex-direction:column;align-items:center;gap:1px;padding:0 6px;color:#0f2a6b;cursor:pointer;user-select:none;-webkit-user-select:none}
-#topbar .brand .bl{font-size:1.6rem;line-height:1}
-#topbar .brand b{font-size:.78rem;font-weight:800;letter-spacing:.08em;color:#d97706}
+/* Logo del club + botón de categoría */
+#topbar .brand{flex:none;display:flex;flex-direction:column;align-items:stretch;gap:4px;padding:0 2px}
+#topbar .club{display:flex;align-items:center;gap:5px;color:#0f2a6b;text-decoration:none;font:800 .8rem/.95 'Barlow Condensed',sans-serif;letter-spacing:.02em;text-transform:uppercase}
+#topbar .club img{width:26px;height:26px;border-radius:50%;flex:none}
+#topbar .club b{display:block;color:#d97706}
+#topbar .catbtn{display:flex;flex-direction:column;align-items:stretch;padding:0;border:1px solid #0f2a6b;border-radius:10px;overflow:hidden;background:#fff;cursor:pointer;transform:none;transition:box-shadow .2s,border-color .2s}
+#topbar .catbtn:hover{transform:none;border-color:#2f7bff;box-shadow:0 3px 10px #2f7bff44}
+#topbar .catbtn .cur{display:block;padding:3px 6px;background:#0f2a6b;color:#ffd23f;font:800 .78rem/1 'Barlow Condensed',sans-serif;letter-spacing:.06em;text-align:center;white-space:nowrap}
+#topbar .catbtn .chg{display:flex;align-items:center;justify-content:center;gap:3px;padding:2px 6px;background:#eaf2ff;color:#2f7bff;font:700 .62rem/1.2 Barlow,sans-serif;white-space:nowrap}
+#topbar .catbtn .chg i{font-style:normal;transition:transform .2s}
+#topbar .catbtn[aria-expanded="true"] .chg i{transform:rotate(180deg)}
 #topbar nav#nav{flex:1;min-width:0;display:grid;grid-template-columns:repeat(var(--c,4),minmax(0,1fr));grid-auto-rows:1fr;gap:4px;padding:0;position:static}
 #topbar nav#nav button{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;min-width:0;padding:5px 2px;border:0;border-radius:12px;background:rgba(255,255,255,.6);color:#10234b;font-weight:600;font-size:.7rem;line-height:1.1;box-shadow:none;transform:none}
 #topbar nav#nav button:hover{background:rgba(255,255,255,.95);transform:none}
@@ -475,8 +478,13 @@ header.site-banner .dl {
 #topbar nav#nav button.back span:last-child{white-space:normal;line-height:1.05;text-align:center}
 @media(min-width:700px){
  #tbsp{height:104px}
- #topbar .brand{flex-direction:row;gap:8px;padding:0 10px}
- #topbar .brand b{font-size:1.3rem;letter-spacing:.06em}
+ #topbar .brand{gap:5px;padding:0 8px}
+ #topbar .club{font-size:1.15rem;gap:8px}
+ #topbar .club b{display:inline}
+ #topbar .club img{width:30px;height:30px}
+ #topbar .catbtn{flex-direction:row}
+ #topbar .catbtn .cur{font-size:.95rem;padding:5px 10px}
+ #topbar .catbtn .chg{font-size:.75rem;padding:0 10px}
  #topbar nav#nav button{flex-direction:row;gap:6px;padding:9px 8px;font-size:.9rem}
  #topbar nav#nav button span:first-child{font-size:1.05rem}
 }
@@ -492,8 +500,14 @@ header.site-banner .dl {
 <div id="bg" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
 <div id="topbar">
  <div class="dock">
-  <div id="tt" class="brand" aria-label="Torrejón Juncal JUVENIL B.. Pulsa para cambiar de categoría">
-   <span class="bl">⚽</span><b class="cn">JUVENIL B</b>
+  <div class="brand">
+   <a class="club" href="../index.html" aria-label="Torrejón Juncal: ir al inicio">
+    <img src="../Images/escudo.png" alt="">
+    <span>Torrejón <b>Juncal</b></span>
+   </a>
+   <button id="tt" class="catbtn" type="button">
+    <span class="cur">JUVENIL B</span><span class="chg">Cambiar <i aria-hidden="true">▾</i></span>
+   </button>
   </div>
   <nav id="nav"></nav>
  </div>
@@ -519,7 +533,6 @@ header.site-banner .dl {
  </div>
 </div>
 
-<!-- -->
 </div>
 <div id="adm">
  <span id="st" class="gap"></span>
@@ -1024,23 +1037,24 @@ function setEdit(on){
   }
   render();
 }
-/* Menú de categorías en el logo */
+/* Menú de categorías en el botón de la barra */
 (function(){const tt=document.getElementById("tt");if(!tt)return;
  const L=[["AficionadoA","Aficionado A"],["AficionadoB","Aficionado B"],["JuvenilA","Juvenil A"],["JuvenilB","Juvenil B"],["CadeteA","Cadete A"],["CadeteB","Cadete B"],["InfantilA","Infantil A"],["InfantilB","Infantil B"],["AlevinA","Alevín A"],["AlevinB","Alevín B"]];
  const cur=decodeURIComponent((location.pathname.split("/").pop()||"")).replace(/\.html$/i,"");
  const st=document.createElement("style");st.textContent="#cmenu{position:fixed;z-index:9990;width:min(360px,calc(100vw - 16px));background:#fff;border:1px solid #d5def5;border-radius:16px;padding:12px;box-shadow:0 18px 50px #0f1b3d55;font-family:Barlow,system-ui,sans-serif}#cmenu[hidden]{display:none}"+
   "#cmenu .cm-h{display:flex;justify-content:space-between;align-items:center;gap:10px;margin:0 2px 10px;color:#0f1b3d}#cmenu .cm-h b{font:800 1.1rem 'Barlow Condensed',sans-serif;letter-spacing:.03em}#cmenu .cm-h a{font-size:.9rem;font-weight:600;color:#2f7bff;text-decoration:none}"+
   "#cmenu .cm-g{display:grid;grid-template-columns:1fr 1fr;gap:8px}#cmenu .cm-g a{display:block;text-align:center;padding:11px 8px;border:1px solid #d5def5;border-radius:10px;background:#f4f8ff;color:#0f1b3d;font-weight:600;text-decoration:none}"+
-  "#cmenu .cm-g a:hover{border-color:#2f7bff;background:#eaf2ff}#cmenu .cm-g a.on{background:#2f7bff;border-color:#2f7bff;color:#fff}#cmenu a:focus-visible{outline:3px solid #2f7bff;outline-offset:2px}#tt:focus-visible{outline:3px solid #ffd23f;outline-offset:-3px}";
+  "#cmenu .cm-g a:hover{border-color:#2f7bff;background:#eaf2ff}#cmenu .cm-g a.on{background:#2f7bff;border-color:#2f7bff;color:#fff}#cmenu a:focus-visible{outline:3px solid #2f7bff;outline-offset:2px}#tt:focus-visible{outline:3px solid #ffd23f;outline-offset:2px}";
  document.head.appendChild(st);
  const m=document.createElement("div");m.id="cmenu";m.hidden=true;m.setAttribute("role","menu");m.setAttribute("aria-label","Cambiar de categoría");
  m.innerHTML='<div class="cm-h"><b>Cambiar de categoría</b><a href="../index.html">🏠 Inicio</a></div><div class="cm-g">'+L.map(([f,n])=>'<a role="menuitem" href="./'+f+'.html"'+(f===cur?' class="on" aria-current="page"':'')+'>'+n+'</a>').join("")+'</div>';
  document.body.appendChild(m);
- tt.setAttribute("role","button");tt.tabIndex=0;tt.setAttribute("aria-haspopup","menu");tt.setAttribute("aria-expanded","false");tt.setAttribute("aria-label","Cambiar de categoría");tt.title="Cambiar de categoría";
+ tt.setAttribute("aria-haspopup","menu");tt.setAttribute("aria-expanded","false");tt.title="Cambiar de categoría";
  const close=()=>{m.hidden=true;tt.setAttribute("aria-expanded","false")};
+ m.addEventListener("click",e=>{const a=e.target.closest("a");if(!a)return;e.preventDefault();close();location.replace(a.href)});
+ addEventListener("pageshow",()=>close());
  const open=()=>{m.hidden=false;const r=tt.getBoundingClientRect();m.style.top=Math.max(8,r.bottom+8)+"px";m.style.left=Math.max(8,Math.min(innerWidth-m.offsetWidth-8,r.left+r.width/2-m.offsetWidth/2))+"px";tt.setAttribute("aria-expanded","true");const a=m.querySelector("a.on")||m.querySelector(".cm-g a");if(a)a.focus({preventScroll:true})};
  tt.onclick=e=>{e.stopPropagation();m.hidden?open():close()};
- tt.onkeydown=e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();tt.onclick(e)}};
  document.addEventListener("click",e=>{if(!m.hidden&&!m.contains(e.target))close()});
  document.addEventListener("keydown",e=>{if(e.key==="Escape"&&!m.hidden){close();tt.focus()}});
  addEventListener("scroll",()=>{if(!m.hidden)close()},{passive:true});

@@ -847,10 +847,10 @@ function render(){
  if(jnAuto)jn=wkJ();
  const tabs=[["jor","🗓 Jornadas"],["cal","📅 Mi calendario"],["cla","🏆 Clasificación"],["cop","🥇 Copa"],["gol","👟 Goleadores"],["cro","🎽 Jugadores"],["jug","🎬 Jugadas"]].filter(t=>t[0]!="cop"||COPA||E());if(E())tabs.push(["piz","📋 Pizarra"],["hor","🕒 Horarios"],["pla","👥 Plantilla"],["ent","🏃 Entrenos"]);
  tabs.push(E()?["out","🔓 Salir"]:["log","🔒 Login"]);
- tabs.push(["back","↩ Volver"]);
- const SH={jor:"Jornadas",cal:"Calendario",cla:"Clasif.",cop:"Copa",gol:"Goleadores",cro:"Jugadores",jug:"Jugadas",piz:"Pizarra",hor:"Horarios",pla:"Plantilla",ent:"Entrenos",log:"Login",out:"Salir",back:E()?"Salir y volver":"Volver"};
+ tabs.push(["back","🏠 Inicio"]);
+ const SH={jor:"Jornadas",cal:"Calendario",cla:"Clasif.",cop:"Copa",gol:"Goleadores",cro:"Jugadores",jug:"Jugadas",piz:"Pizarra",hor:"Horarios",pla:"Plantilla",ent:"Entrenos",log:"Login",out:"Salir",back:E()?"Salir e inicio":"Inicio"};
 const nv=document.getElementById("nav");nv.style.setProperty("--c",Math.ceil(tabs.length/2));
- nv.innerHTML=tabs.map(([k,l])=>{const ic=l.split(" ")[0],oc=k=="log"?"unlock()":k=="out"?"setEdit(false)":k=="back"?"volverTop()":`tab='${k}';if(tab=='jor')jnAuto=true;if(tab=='ent')entD='';if(tab=='jug')PL=null;render()`;return`<button class="${tab==k?'on':''}${k=='out'?' out':''}${k=='back'?' back':''}" onclick="${oc}"${k=='back'?` title="${E()?"Cerrar sesión de entrenador y volver":"Volver a la página anterior"}"`:""}><span>${ic}</span><span>${SH[k]}</span></button>`}).join("");
+ nv.innerHTML=tabs.map(([k,l])=>{const ic=l.split(" ")[0],oc=k=="log"?"unlock()":k=="out"?"setEdit(false)":k=="back"?"volverTop()":`tab='${k}';if(tab=='jor')jnAuto=true;if(tab=='ent')entD='';if(tab=='jug')PL=null;render()`;return`<button class="${tab==k?'on':''}${k=='out'?' out':''}${k=='back'?' back':''}" onclick="${oc}"${k=='back'?` title="${E()?"Cerrar sesión de entrenador e ir al inicio":"Ir al inicio"}"`:""}><span>${ic}</span><span>${SH[k]}</span></button>`}).join("");
  let h="";
  if(tab=="cal")h=myM().map((x,i)=>card(x.r,x.h,x.a,i)).join("");
  if(tab=="jor"){h=jsel()+[...J[jn-1].p].sort((x,y)=>y.includes(ME)-x.includes(ME)).map((p,i)=>card(J[jn-1],p[0],p[1],i)).join("")}
@@ -1258,7 +1258,9 @@ document.addEventListener("keydown",e=>{if(e.key==="Escape"){closeCromo();closeP
 if(location.hash=="#admin")unlock();try{if(sessionStorage.getItem("adm")&&sessionStorage.getItem("cat")===CATK){PW=sessionStorage.getItem("pw")||"";RT=sessionStorage.getItem("rt")||"";ACC=sessionStorage.getItem("mail")||FBMAIL;document.body.classList.add("edit")}}catch(e){}
 if(API||FB)document.querySelector("#adm .on").remove();
 /* Volver a la página anterior (si se abrió esta página directamente, va al inicio) */
-function volver(){if(history.length>1)history.back();else location.href="../index.html#equipos"}
+/* Volver al inicio: en la app Android va a app.html y en la web a index.html */
+const enApp=()=>{try{return !!(window.Capacitor&&((Capacitor.isNativePlatform&&Capacitor.isNativePlatform())||(Capacitor.Plugins&&Capacitor.Plugins.FirebaseMessaging)))||localStorage.getItem("jb_app")==="1"}catch(e){return false}};
+function volver(){location.href=enApp()?"../app.html":"../index.html"}
 function volverTop(){if(E())setEdit(false);volver()}
 render();setInterval(tick,1000);
 try{new ResizeObserver(setTb).observe(document.getElementById("topbar"))}catch(e){}

@@ -1,0 +1,23 @@
+name: Cambiar boton volver
+
+on: workflow_dispatch
+
+permissions:
+  contents: write
+
+jobs:
+  cambiar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Aplicar cambios a las categorías
+        run: python3 cambiar_volver.py
+
+      - name: Subir los cambios
+        run: |
+          git config user.name "github-actions"
+          git config user.email "github-actions@users.noreply.github.com"
+          git add Categorias
+          git diff --cached --quiet || git commit -m "Boton Inicio: web a index, app a app.html"
+          git push

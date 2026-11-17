@@ -85,23 +85,34 @@ button:hover{border-color:var(--ac);transform:translateY(-1px)}button:focus-visi
 }
 @media(prefers-reduced-motion:reduce){#hero.hn *{animation:none!important}}
 
-/* marcador directo (club) */
+/* marcador directo (club) v2 */
 #hero.hl:not(.fs){margin:18px 0;padding:26px 56px;border-radius:26px;border-color:#8db4ff;background:linear-gradient(90deg,#0b2273 0%,#1740c0 40%,#2f6bff 70%,#5b9bff 86%,#c9dcff 95%,#fff 100%);box-shadow:0 18px 44px rgba(8,18,53,.5)}
 #hero.hl:not(.fs):after{content:"";right:auto;left:-30px;bottom:-60px;width:260px;height:260px;font-size:0;background:url(../Images/escudo.png) center/contain no-repeat;opacity:.22;filter:grayscale(1) brightness(2);animation:none}
 #hero.hl .live .cn,#hero.hl .live .lt{text-shadow:0 2px 6px rgba(8,18,53,.55)}
-#hero.hl .gbtn{position:relative;flex-direction:column;gap:.15em;overflow:hidden;border:0;color:#0a0f1e;background:linear-gradient(180deg,#fff,#d6e4ff);box-shadow:0 .28em 0 #8fa9dd,0 .8em 1.3em rgba(8,18,53,.45);font-weight:800;transition:transform .15s,box-shadow .15s}
-#hero.hl .gbtn.me{background:linear-gradient(180deg,#ffe27a,#ffd23f);box-shadow:0 .28em 0 #b8860b,0 .8em 1.3em rgba(8,18,53,.45)}
-#hero.hl .gbtn:before{content:"";position:absolute;inset:0;background:linear-gradient(115deg,transparent 38%,rgba(255,255,255,.75) 50%,transparent 62%);transform:translateX(-130%);transition:transform .7s}
-#hero.hl .gbtn:hover{border:0;transform:translateY(-3px)}
-#hero.hl .gbtn:hover:before{transform:translateX(130%)}
-#hero.hl .gbtn:active{transform:translateY(.22em);box-shadow:0 .05em 0 #8fa9dd,0 .2em .5em rgba(8,18,53,.4)}
-#hero.hl .gbtn.me:active{box-shadow:0 .05em 0 #b8860b,0 .2em .5em rgba(8,18,53,.4)}
+#hero.hl:not(.fs) .lb .cn{font-size:clamp(1.1rem,3.8vw,2.1rem);line-height:1.05}
+#hero.hl:not(.fs) .ti{gap:8px}
+#hero.hl:not(.fs) .ti .b{width:92px;height:92px;font-size:2rem;border:3px solid #fff;box-shadow:0 0 0 3px var(--ye),0 10px 24px rgba(8,18,53,.5);overflow:hidden}
+#hero.hl:not(.fs) .ti .b.ok{background:#fff!important}
+#hero.hl:not(.fs) .gb{gap:8px}
+#hero.hl:not(.fs) .gbtn{width:auto;min-width:0;aspect-ratio:auto;white-space:nowrap;word-break:normal;padding:.35em 1.1em .35em .45em;border-radius:999px;font-size:clamp(1rem,3.8vw,1.35rem)}
+#hero.hl .gbtn{position:relative;flex-direction:row;gap:.5em;overflow:hidden;border:0;color:#0a0f1e;background:linear-gradient(180deg,#fff,#d6e4ff);box-shadow:inset 0 .12em 0 rgba(255,255,255,.9),0 .28em 0 #8fa9dd,0 .8em 1.2em rgba(8,18,53,.45);font-weight:800;transition:transform .15s,box-shadow .15s}
+#hero.hl .gbtn.me{background:linear-gradient(180deg,#ffe98f,#ffd23f 55%,#f2b705);box-shadow:inset 0 .12em 0 rgba(255,255,255,.8),0 .28em 0 #b8860b,0 .8em 1.2em rgba(8,18,53,.45)}
+#hero.hl .gbtn:before{content:"";position:absolute;inset:0;background:linear-gradient(115deg,transparent 38%,rgba(255,255,255,.8) 50%,transparent 62%);transform:translateX(-130%);transition:transform .7s}
+#hero.hl .gbtn.me:before{animation:hlBrillo 4s ease-in-out infinite}
+@keyframes hlBrillo{0%,70%{transform:translateX(-130%)}100%{transform:translateX(130%)}}
+#hero.hl .gbtn:hover{border:0;transform:translateY(-3px) scale(1.04)}
+#hero.hl .gbtn:hover:before{transform:translateX(130%);animation:none}
+#hero.hl .gbtn:active{transform:translateY(.22em);box-shadow:inset 0 .12em 0 rgba(255,255,255,.7),0 .04em 0 #8fa9dd,0 .15em .4em rgba(8,18,53,.4)}
+#hero.hl .gbtn.me:active{box-shadow:inset 0 .12em 0 rgba(255,255,255,.7),0 .04em 0 #b8860b,0 .15em .4em rgba(8,18,53,.4)}
 #hero.hl .gbtn:focus-visible{outline:3px solid #fff;outline-offset:3px}
-#hero.hl .gp{font:italic 800 2.6em/.9 "Barlow Condensed",sans-serif}
-#hero.hl .gt{font:800 1em/1 "Barlow Condensed",sans-serif;letter-spacing:.28em;text-indent:.28em}
-#hero.hl .gx{display:-webkit-box;max-width:100%;overflow:hidden;opacity:.72;font:700 .66em/1.15 Barlow,system-ui,sans-serif;text-transform:uppercase;-webkit-box-orient:vertical;-webkit-line-clamp:2}
-#hero.hl .gmn{color:#fff;border:1px solid rgba(255,255,255,.4);background:rgba(8,18,53,.5);-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px);font-weight:700}
-@media(max-width:760px){#hero.hl:not(.fs){padding:22px 14px 20px;background:linear-gradient(90deg,#0b2273 0%,#1740c0 38%,#2f6bff 70%,#5b9bff 84%,#c9dcff 94%,#fff 100%)}#hero.hl .gbtn{aspect-ratio:auto;min-height:6.2em;padding:6px 4px}}
+#hero.hl .gp{position:relative;display:grid;place-items:center;width:1.5em;height:1.5em;border-radius:50%;color:#ffd23f;background:#0f2a78;box-shadow:inset 0 .1em .2em rgba(255,255,255,.35);font:800 1.15em/1 "Barlow Condensed",sans-serif}
+#hero.hl .gbtn:not(.me) .gp{color:#fff}
+#hero.hl .gt{position:relative;white-space:nowrap;font:italic 800 1.25em/1 "Barlow Condensed",sans-serif;letter-spacing:.14em}
+#hero.hl .gx{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+#hero.hl .gmn{padding:.28em 1.1em;border:1px solid rgba(255,255,255,.55);border-radius:999px;color:#fff;background:linear-gradient(180deg,rgba(255,255,255,.28),rgba(255,255,255,.08));box-shadow:0 .2em 0 rgba(8,18,53,.6),0 .5em .9em rgba(8,18,53,.3);font-size:.8rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px);transition:transform .15s,box-shadow .15s,background-color .15s}
+#hero.hl .gmn:hover{transform:translateY(-2px);border-color:#fff}
+#hero.hl .gmn:active{transform:translateY(.18em);box-shadow:0 .03em 0 rgba(8,18,53,.6)}
+@media(max-width:760px){#hero.hl:not(.fs){padding:22px 12px 20px;background:linear-gradient(90deg,#0b2273 0%,#1740c0 38%,#2f6bff 70%,#5b9bff 84%,#c9dcff 94%,#fff 100%)}#hero.hl:not(.fs) .ti .b{width:70px;height:70px;font-size:1.5rem}#hero.hl:not(.fs) .gbtn{font-size:.95rem;padding:.3em .8em .3em .35em;gap:.35em}#hero.hl .gt{letter-spacing:.06em}}
 @keyframes spin{to{transform:rotate(360deg)}}
 .hv{display:flex;align-items:center;justify-content:space-around;gap:10px;margin:14px 0;text-align:center}
 .hv .cn{font-size:clamp(1.1rem,3.5vw,1.8rem);font-weight:700;max-width:220px}
@@ -855,7 +866,7 @@ function liveHero(x){const m=M(x.r.n,x.h),c=m.c||{ph:0},ph=c.ph||0,ok=done(m),ev
  const L={0:"A PUNTO DE EMPEZAR",1:'<span class="dot">🔴</span> EN DIRECTO · 1ª PARTE',HT:"☕ DESCANSO",2:'<span class="dot">🔴</span> EN DIRECTO · 2ª PARTE',FT:"🏁 FINAL DEL PARTIDO"}[ph];
  const B=(a,l)=>`<button onclick="clk(${x.r.n},${x.h},'${a}')">${l}</button>`;
  let ad="";if(E())ad=`<div class="ctl">${ph==0?B("go1","▶ Iniciar 1ª parte"):""}${(ph==1||ph==2)?(c.run?B("pause","⏸ Pausar"):B("resume","▶ Reanudar")):""}${ph==1?B("ht","🔔 Fin 1ª parte"):""}${ph=="HT"?B("go2","▶ Iniciar 2ª parte"):""}${ph==2?B("ft","🏁 Final"):""}${ph=="FT"?B("reopen","↩ Reabrir partido"):""}${B("reset","↺ Reiniciar")}</div>`;
- const side=(id,cls)=>{const mine=id==ME,btn=E()&&ph!="FT"?`<div class="gb"><button class="gbtn ${mine?"me":""}" onclick="${mine?`pickGol(${x.r.n},${x.h})`:`lg(${x.r.n},${x.h},'rv',1)`}"><span class="gp">＋1</span><span class="gt">GOL</span><span class="gx">${esc(nm(id))}</span></button><button class="gmn" onclick="lg(${x.r.n},${x.h},'${mine?"me":"rv"}',-1)">− Gol</button></div>`:"";return`<div class="ts ${cls}"><div class="ti">${bd(id)}<div class="cn">${nm(id)}</div></div>${btn}</div>`};
+ const side=(id,cls)=>{const mine=id==ME,btn=E()&&ph!="FT"?`<div class="gb"><button class="gbtn ${mine?"me":""}" onclick="${mine?`pickGol(${x.r.n},${x.h})`:`lg(${x.r.n},${x.h},'rv',1)`}"><span class="gp">＋</span><span class="gt">GOL</span><span class="gx">${esc(nm(id))}</span></button><button class="gmn" onclick="lg(${x.r.n},${x.h},'${mine?"me":"rv"}',-1)">− Gol</button></div>`:"";return`<div class="ts ${cls}"><div class="ti">${bd(id)}<div class="cn">${nm(id)}</div></div>${btn}</div>`};
  const sc=`${ok?m.h:0} - ${ok?m.a:0}`;
  return`<div class="live"><div class="lt">${L} · ${x.r.n===0?"JORNADA "+(nextL()||{r:{n:J.length}}).r.n:lab(x.r).toUpperCase()}</div><p class="loc" style="margin:8px 0 0">${loc(x.h,m)}</p>
  <div class="lb">${side(x.h,"")}<div class="big${sc.length>5?" s":""}">${sc}</div>${side(x.a,"r")}</div>

@@ -123,14 +123,14 @@ nav{display:flex;align-items:center;justify-content:space-between;height:68px}
 .mail:hover{color:var(--ye)}
 iframe{width:100%;height:320px;margin-top:28px;border:1px solid var(--line);border-radius:16px;box-shadow:0 4px 18px rgba(8,18,53,.3)}
 
-/* PÁGINA DE CATEGORÍAS */
+/* PÁGINA DE EQUIPOS */
 #cats{display:none;padding-top:68px}
 body.pg #home{display:none}
 body.pg #cats{display:block}
 .back{color:#fff;font-weight:700;text-shadow:var(--sh)}
 button.btn{font:inherit;font-weight:700;cursor:pointer}
 
-/* CATEGORÍAS: TARJETAS COMPACTAS, TODAS IGUALES (AZUL + AMARILLO DEL CLUB) */
+/* EQUIPOS: TARJETAS COMPACTAS, TODAS IGUALES (AZUL + AMARILLO DEL CLUB) */
 .cats{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));grid-template-rows:repeat(2,auto);grid-auto-flow:column;gap:12px}
 .cat{--c1:#1e4fd8;--c2:#0b1f66;container-type:inline-size;position:relative;display:flex;flex-direction:column;justify-content:flex-end;gap:3px;min-height:116px;padding:14px 14px;overflow:hidden;border:2px solid rgba(255,255,255,.9);border-radius:16px;color:#fff;background:linear-gradient(225deg,#ffd23f 0%,#f2b705 14%,#4f86ee 42%,var(--c1) 62%,var(--c2) 100%);box-shadow:0 6px 18px rgba(8,18,53,.35);animation:catIn .5s both;animation-delay:calc(var(--i,0)*60ms);transition:transform .25s cubic-bezier(.2,1.3,.4,1),box-shadow .25s}
 .cat::before{content:"";position:absolute;right:-10px;bottom:-14px;width:92px;height:92px;background:url("Images/escudo.png") center/contain no-repeat;opacity:.2;transform:rotate(-12deg);pointer-events:none;transition:transform .35s,opacity .35s}
@@ -264,7 +264,7 @@ footer a{color:var(--ye);font-weight:700}
       <button id="burger" type="button" aria-label="Menú" aria-controls="menu" aria-expanded="false">☰</button>
       <div class="menu" id="menu">
         <a href="#escuela">La escuela</a>
-        <a href="#equipos">Categorías</a>
+        <a href="#equipos">Equipos</a>
         <a href="#partidos">Partidos</a>
         <a href="#tecnico">Club</a>
         <a href="#donde">Dónde jugamos</a>
@@ -346,11 +346,11 @@ footer a{color:var(--ye);font-weight:700}
     </div>
   </section>
 
-  <!-- CATEGORÍAS -->
+  <!-- EQUIPOS -->
   <section id="equipos" class="alt">
     <div class="wrap">
-      <h2 class="rv">Nuestras <span>categorías</span></h2>
-      <p class="sub rv">Pulsa en tu categoría para ver resultados, clasificaciones y calendario.</p>
+      <h2 class="rv">Nuestros <span>equipos</span></h2>
+      <p class="sub rv">Pulsa en tu equipo para ver resultados, clasificaciones y calendario.</p>
       <div class="cats" id="catHome"></div>
     </div>
   </section>
@@ -359,8 +359,8 @@ footer a{color:var(--ye);font-weight:700}
   <section id="partidos">
     <div class="wrap">
       <h2 class="rv">Próximos <span>partidos</span></h2>
-      <p class="sub rv">El siguiente partido de cada categoría, con día, hora y pabellón. Se actualiza solo con los datos de la Federación.</p>
-      <div class="chips" id="mFilt" role="group" aria-label="Filtrar por categoría"></div>
+      <p class="sub rv">El siguiente partido de cada equipo, con día, hora y pabellón. Se actualiza solo con los datos de la Federación.</p>
+      <div class="chips" id="mFilt" role="group" aria-label="Filtrar por equipo"></div>
       <div class="car" id="mCar">
         <button class="ar l" id="mPrev" type="button" aria-label="Partidos anteriores">‹</button>
         <div id="matches" tabindex="0" aria-label="Próximos partidos, desliza para ver más"></div>
@@ -473,7 +473,7 @@ const CONFIG = {
     { name: "", role: "", img: "./Images/Entrenadores/Ivan.png" }
   ],
 
-  /* CATEGORÍAS */
+  /* EQUIPOS */
   CATEGORIES: [
     { name: "Aficionado A", age: "Preferente Aficionado", url: "Categorias/AficionadoA.html", img: "" },
     { name: "Aficionado B", age: "Primera Aficionado", url: "Categorias/AficionadoB.html", img: "" },
@@ -722,7 +722,7 @@ async function loadMatches() {
     lista = (px.partidos || [])
       .filter(p => p && p.fecha && Date.parse(p.fecha + "T" + (p.hora || "23:59")) + 3 * 36e5 > ahora)
       .map(p => ({ ...p, temporada: p.temporada || px.temporada }))
-      /* ORDEN: primero por categoría (Aficionado A → Alevín B), después por fecha y hora */
+      /* ORDEN: primero por equipo (Aficionado A → Alevín B), después por fecha y hora */
       .sort((a, b) => (ordCat(a) - ordCat(b)) || (a.fecha + (a.hora || "99:99")).localeCompare(b.fecha + (b.hora || "99:99")));
   } catch (e) {
     lista = MATCHES;
@@ -736,7 +736,7 @@ loadMatches();
 setInterval(loadMatches, 5 * 60 * 1000);
 document.addEventListener("visibilitychange", () => { if (!document.hidden) loadMatches(); });
 
-/* CATEGORÍAS (siempre desplegadas) */
+/* EQUIPOS (siempre desplegados) */
 const catCard = (c, i) => {
   const m = c.name.match(/^(.+?)\s+([AB])$/);
   const base = m ? m[1] : c.name, letra = m ? m[2] : "";

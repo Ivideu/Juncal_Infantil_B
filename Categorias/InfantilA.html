@@ -1049,7 +1049,7 @@ function setEdit(on){
   "#cmenu .cm-g a:hover{border-color:#2f7bff;background:#eaf2ff}#cmenu .cm-g a.on{background:#2f7bff;border-color:#2f7bff;color:#fff}#cmenu a:focus-visible{outline:3px solid #2f7bff;outline-offset:2px}#tt:focus-visible{outline:3px solid #ffd23f;outline-offset:-3px}";
  document.head.appendChild(st);
  const m=document.createElement("div");m.id="cmenu";m.hidden=true;m.setAttribute("role","menu");m.setAttribute("aria-label","Cambiar de categoría");
- m.innerHTML='<div class="cm-h"><b>Cambiar de categoría</b><a href="../index.html">🏠 Inicio</a></div><div class="cm-g">'+L.map(([f,n])=>'<a role="menuitem" href="./'+f+'.html"'+(f===cur?' class="on" aria-current="page"':'')+'>'+n+'</a>').join("")+'</div>';
+ m.innerHTML='<div class="cm-h"></div><div class="cm-g">'+L.map(([f,n])=>'<a role="menuitem" href="./'+f+'.html"'+(f===cur?' class="on" aria-current="page"':'')+'>'+n+'</a>').join("")+'</div>';
  document.body.appendChild(m);
  tt.setAttribute("role","button");tt.tabIndex=0;tt.setAttribute("aria-haspopup","menu");tt.setAttribute("aria-expanded","false");tt.setAttribute("aria-label","Cambiar de categoría");tt.title="Cambiar de categoría";
  const close=()=>{m.hidden=true;tt.setAttribute("aria-expanded","false")};

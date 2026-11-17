@@ -305,7 +305,6 @@ footer a{color:var(--ye);font-weight:700}
       <h2 class="rv">Nuestras <span>categorías</span></h2>
       <p class="sub rv">Pulsa en tu categoría para ver resultados, clasificaciones y calendario.</p>
       <div class="grid cats" id="catHome"></div>
-      <p style="margin-top:28px"><button class="btn" id="moreCats" type="button" aria-expanded="false" aria-controls="catHome">Más categorías ↓</button></p>
     </div>
   </section>
 
@@ -649,7 +648,7 @@ loadMatches();
 setInterval(loadMatches, 5 * 60 * 1000);
 document.addEventListener("visibilitychange", () => { if (!document.hidden) loadMatches(); });
 
-/* CATEGORÍAS */
+/* CATEGORÍAS (siempre desplegadas) */
 const catCard = c => {
   const html = `<span class="age">${esc(c.age)}</span><h3>${esc(c.name)}</h3><span class="go">Partidos y clasificación</span>`;
   return c.url ? `<a class="card cat" href="${esc(c.url)}">${html}</a>` : `<div class="card cat sin">${html}</div>`;
@@ -657,20 +656,6 @@ const catCard = c => {
 
 $("#catHome").innerHTML = CONFIG.CATEGORIES.map(catCard).join("");
 $("#catGrid").innerHTML = CONFIG.CATEGORIES.map(catCard).join("");
-let catsOpen = false;
-
-function updateCats() {
-  const grid = $("#catHome"), cards = [...grid.children], btn = $("#moreCats");
-  const cols = getComputedStyle(grid).gridTemplateColumns.split(" ").length;
-  cards.forEach((c, i) => c.classList.toggle("x", !catsOpen && i >= cols));
-  btn.style.display = cards.length > cols ? "" : "none";
-  btn.textContent = catsOpen ? "Ver menos ↑" : "Más categorías ↓";
-  btn.setAttribute("aria-expanded", String(catsOpen));
-}
-
-$("#moreCats").onclick = () => { catsOpen = !catsOpen; updateCats(); };
-addEventListener("resize", updateCats);
-updateCats();
 
 /* RUTAS */
 function route() {

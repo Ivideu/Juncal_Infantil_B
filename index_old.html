@@ -139,14 +139,15 @@ button.btn{font:inherit;font-weight:700;cursor:pointer}
 
 /* PRÓXIMOS PARTIDOS */
 #partidos{overflow-x:clip}
-.chips{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 18px}
+.chips{display:flex;flex-direction:column;align-items:center;gap:8px;margin:0 0 20px}
+.cr{display:flex;flex-wrap:wrap;justify-content:center;gap:8px}
 .chip{padding:7px 14px;border:2px solid rgba(255,255,255,.85);border-radius:999px;color:#fff;background:rgba(8,18,53,.35);font-size:.9rem;font-weight:700;text-shadow:var(--sh);cursor:pointer;transition:background-color .2s,color .2s}
 .chip.on{border-color:var(--ye);color:#0a0f1e;background:var(--ye);text-shadow:none}
 .chip:focus-visible{outline:3px solid #fff;outline-offset:2px}
-.car{position:relative;margin:0 calc(50% - 50vw);--g:max(16px,calc((100vw - 980px)/2 + 16px))}
-#matches{display:flex;gap:14px;padding:8px var(--g) 16px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding:0 var(--g);scrollbar-width:none;-webkit-overflow-scrolling:touch;overscroll-behavior-x:contain}
+.car{position:relative;--g:2px}
+#matches{display:flex;gap:14px;padding:8px var(--g) 16px;overflow-x:auto;justify-content:safe center;scroll-snap-type:x mandatory;scroll-padding:0 var(--g);scrollbar-width:none;-webkit-overflow-scrolling:touch;overscroll-behavior-x:contain}
 #matches::-webkit-scrollbar{display:none}
-.ms{flex:0 0 calc((100% - 28px)/3.25);display:flex;flex-direction:column;gap:10px;min-width:0;scroll-snap-align:start}
+.ms{flex:0 0 calc((100% - 28px)/3);display:flex;flex-direction:column;gap:10px;min-width:0;scroll-snap-align:start}
 .mi{display:flex;flex-direction:column;gap:4px;padding:12px 14px;border-radius:14px;background:var(--card);box-shadow:0 4px 18px rgba(8,18,53,.25)}
 .mi .w{display:flex;align-items:center;justify-content:space-between;gap:8px}
 .mi .d{color:var(--mu);font-size:.85rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase}
@@ -160,13 +161,17 @@ button.btn{font:inherit;font-weight:700;cursor:pointer}
 .mi .l{color:var(--mu);font-size:.82rem;line-height:1.25}
 .mi a.l{text-decoration:underline;text-underline-offset:3px}
 .mi a.l:hover{color:var(--ac)}
-.ar{position:absolute;top:26%;z-index:3;display:none;place-items:center;width:54px;height:54px;padding:0 0 4px;border:3px solid var(--navy);border-radius:50%;color:var(--navy);background:#fff;box-shadow:0 6px 20px rgba(8,18,53,.6);font-size:2.2rem;font-weight:700;line-height:1;cursor:pointer;transition:transform .2s,background-color .2s}
-.ar:hover{background:var(--ye);transform:scale(1.08)}
-.ar.l{left:max(10px,calc((100vw - 980px)/2 - 20px))}
-.ar.r{right:max(10px,calc((100vw - 980px)/2 - 20px))}
+.ar{position:absolute;top:26%;z-index:3;display:grid;place-items:center;width:54px;height:54px;padding:0 0 4px;border:3px solid var(--navy);border-radius:50%;color:var(--navy);background:#fff;box-shadow:0 6px 20px rgba(8,18,53,.6);font-size:2.2rem;font-weight:700;line-height:1;cursor:pointer;transition:background-color .2s,opacity .2s}
+.ar:hover{background:var(--ye);animation:none}
+.ar.l{left:-26px}
+.ar.r{right:-26px}
 .ar:disabled{opacity:0;pointer-events:none}
 .ar:focus-visible{outline:3px solid #fff;outline-offset:3px}
-@media(hover:hover) and (min-width:801px){.ar{display:grid}}
+.ar.r:not(:disabled){animation:nudgeR 1.5s ease-in-out infinite}
+.ar.l:not(:disabled){animation:nudgeL 1.5s ease-in-out infinite}
+@keyframes nudgeR{0%,100%{transform:translateX(0);box-shadow:0 6px 20px rgba(8,18,53,.6),0 0 0 0 rgba(255,210,63,.8)}50%{transform:translateX(7px);box-shadow:0 6px 20px rgba(8,18,53,.6),0 0 0 12px rgba(255,210,63,0)}}
+@keyframes nudgeL{0%,100%{transform:translateX(0);box-shadow:0 6px 20px rgba(8,18,53,.6),0 0 0 0 rgba(255,210,63,.8)}50%{transform:translateX(-7px);box-shadow:0 6px 20px rgba(8,18,53,.6),0 0 0 12px rgba(255,210,63,0)}}
+@media(max-width:1040px){.ar.l{left:-8px}.ar.r{right:-8px}}
 button.fch{display:block;width:100%;padding:0;overflow:hidden;border:0;border-radius:18px;background:none;box-shadow:0 8px 28px rgba(8,18,53,.4);cursor:pointer;transition:transform .25s}
 button.fch:hover{transform:translateY(-6px)}
 button.fch:focus-visible{outline:3px solid var(--ye);outline-offset:3px}
@@ -220,6 +225,12 @@ footer a{color:var(--ye);font-weight:700}
   section{padding:56px 0}
   .staff-grid{grid-template-columns:repeat(4,minmax(0,1fr))}
   .ms{flex-basis:calc((100% - 14px)/2.3)}
+  .chips{flex-direction:row;flex-wrap:wrap;justify-content:center}
+  .cr{display:contents}
+  .car{margin:0 calc(50% - 50vw);--g:16px}
+  .ar{width:46px;height:46px;font-size:1.9rem}
+  .ar.l{left:8px}
+  .ar.r{right:8px}
 }
 @media(max-width:600px){
   .ms{flex-basis:74%}
@@ -623,7 +634,9 @@ function renderChips() {
   if (mFiltro && !cats.includes(mFiltro)) mFiltro = "";
   const box = $("#mFilt");
   box.style.display = cats.length > 1 ? "" : "none";
-  box.innerHTML = ["", ...cats].map(c => `<button type="button" class="chip${c === mFiltro ? " on" : ""}" data-c="${esc(c)}" aria-pressed="${c === mFiltro}">${c ? esc(c) : "Todos"}</button>`).join("");
+  const todos = ["", ...cats], n = todos.length <= 5 ? todos.length : Math.ceil(todos.length / 2);
+  const chip = c => `<button type="button" class="chip${c === mFiltro ? " on" : ""}" data-c="${esc(c)}" aria-pressed="${c === mFiltro}">${c ? esc(c) : "Todos"}</button>`;
+  box.innerHTML = [todos.slice(0, n), todos.slice(n)].filter(r => r.length).map(r => `<div class="cr">${r.map(chip).join("")}</div>`).join("");
 }
 
 function flechas() {

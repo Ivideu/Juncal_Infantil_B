@@ -48,13 +48,12 @@ nav{display:flex;align-items:center;justify-content:space-between;height:68px}
 #burger{display:none;padding:4px 8px;border:0;color:var(--navy);background:none;font-size:1.8rem;cursor:pointer}
 
 /* HERO Y ESCUELA */
-.hero{position:relative;display:flex;align-items:center;min-height:0;padding:104px 0 40px;overflow:hidden;background:transparent}
+.hero{position:relative;display:flex;align-items:center;min-height:100vh;padding:104px 0 44px;overflow:hidden;background:transparent}
 .hero::before{content:"";position:absolute;inset:68px 0 0 0;z-index:0;background:linear-gradient(95deg,rgba(8,18,53,.55) 6%,rgba(8,18,53,.22) 40%,rgba(8,18,53,0) 62%),var(--hero,url("Images/fondo-hero.jpg")) 85% 0/cover no-repeat;-webkit-mask-image:linear-gradient(180deg,#000 55%,transparent 100%);mask-image:linear-gradient(180deg,#000 55%,transparent 100%)}
 .hero::after{content:"";position:absolute;right:-120px;bottom:-160px;width:520px;height:520px;border:60px solid rgba(255,210,63,.2);border-radius:50%;animation:spin 20s linear infinite}
 @keyframes spin{to{transform:rotate(360deg) scale(1.1)}}
 .hero .wrap{position:relative;z-index:2;width:100%}
 #escuela{padding:0}
-#equipos{padding-top:50px}
 .hero h1{margin:14px 0 20px;color:#fff;font-size:clamp(2.6rem,5vw,4.2rem);font-weight:800;text-shadow:var(--sh)}
 .hero h1 em{color:var(--ye);font-style:normal;text-shadow:0 3px 0 #0f2a78,0 0 4px #0f2a78,0 0 18px rgba(8,18,53,.5)}
 .tag{display:inline-block;padding:4px 14px;border:2px solid #0f2a78;border-radius:6px;color:#0a0f1e;background:var(--ye);font-size:.8rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase}
@@ -129,59 +128,18 @@ body.pg #home{display:none}
 body.pg #cats{display:block}
 .back{color:#fff;font-weight:700;text-shadow:var(--sh)}
 button.btn{font:inherit;font-weight:700;cursor:pointer}
-
-/* CATEGORÍAS: TARJETAS COMPACTAS, TODAS IGUALES (AZUL + AMARILLO DEL CLUB) */
-.cats{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));grid-template-rows:repeat(2,auto);grid-auto-flow:column;gap:12px}
-.cat{--c1:#1e4fd8;--c2:#0b1f66;container-type:inline-size;position:relative;display:flex;flex-direction:column;justify-content:flex-end;gap:3px;min-height:116px;padding:14px 14px;overflow:hidden;border:2px solid rgba(255,255,255,.9);border-radius:16px;color:#fff;background:linear-gradient(225deg,#ffd23f 0%,#f2b705 14%,#4f86ee 42%,var(--c1) 62%,var(--c2) 100%);box-shadow:0 6px 18px rgba(8,18,53,.35);animation:catIn .5s both;animation-delay:calc(var(--i,0)*60ms);transition:transform .25s cubic-bezier(.2,1.3,.4,1),box-shadow .25s}
-.cat::before{content:"";position:absolute;right:-10px;bottom:-14px;width:92px;height:92px;background:url("Images/escudo.png") center/contain no-repeat;opacity:.2;transform:rotate(-12deg);pointer-events:none;transition:transform .35s,opacity .35s}
-.cat::after{content:"";position:absolute;inset:0;background:linear-gradient(110deg,transparent 35%,rgba(255,255,255,.45) 50%,transparent 65%);transform:translateX(-120%);transition:transform .6s;pointer-events:none}
-.cat:hover{transform:translateY(-6px) rotate(-1.2deg) scale(1.03);box-shadow:0 14px 30px rgba(8,18,53,.5)}
-.cat:hover::before{transform:rotate(0) scale(1.15);opacity:.35}
-.cat:hover::after{transform:translateX(120%)}
-.cat:focus-visible{outline:3px solid var(--ye);outline-offset:3px}
-.cat .age{position:relative;z-index:1;display:block;overflow:hidden;color:rgba(255,255,255,.95);font-size:min(.85rem,8cqw);font-weight:700;letter-spacing:.04em;line-height:1.15;text-transform:uppercase;text-shadow:0 1px 3px rgba(0,0,0,.45);white-space:normal}
-.cat h3{position:relative;z-index:1;color:#fff;font-size:min(1.9rem,16cqw);font-weight:800;font-style:italic;letter-spacing:.01em;line-height:1;text-shadow:0 2px 6px rgba(0,0,0,.4);white-space:nowrap}
-.cat h3 em{color:var(--ye);font-style:inherit}
-.cat .go{position:absolute;top:8px;right:8px;z-index:1;display:grid;place-items:center;width:28px;height:28px;border-radius:50%;color:var(--ye);background:#0b1f66;font-weight:800;transform:translateX(8px);opacity:0;transition:transform .25s,opacity .25s}
-.cat:hover .go,.cat:focus-visible .go{transform:none;opacity:1}
-.cat.sin{cursor:default;filter:grayscale(.6)}
-@keyframes catIn{from{opacity:0;transform:translateY(16px) scale(.96)}}
+.cats{grid-template-columns:repeat(4,minmax(0,1fr))}
+.cat{display:flex;flex-direction:column;gap:6px;padding:22px}
+.cat.x{display:none}
+.cat.sin{cursor:default}
+.cat.sin .go{color:var(--mu);opacity:.7}
+.cat .age{color:var(--ye2);font-size:.8rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase}
+.cat .go{margin-top:6px;color:var(--mu);font-size:.88rem;transition:color .2s}
+.cat:hover .go{color:var(--ac)}
 
 /* PRÓXIMOS PARTIDOS */
-#partidos{overflow-x:clip}
-.chips{display:flex;flex-direction:column;align-items:center;gap:8px;margin:0 0 20px}
-.cr{display:flex;flex-wrap:wrap;justify-content:center;gap:8px}
-.chip{padding:7px 14px;border:2px solid rgba(255,255,255,.85);border-radius:999px;color:#fff;background:rgba(8,18,53,.35);font-size:.9rem;font-weight:700;text-shadow:var(--sh);cursor:pointer;transition:background-color .2s,color .2s}
-.chip.on{border-color:var(--ye);color:#0a0f1e;background:var(--ye);text-shadow:none}
-.chip:focus-visible{outline:3px solid #fff;outline-offset:2px}
-.car{position:relative;--g:2px}
-#matches{display:flex;gap:14px;padding:8px var(--g) 16px;overflow-x:auto;justify-content:safe center;scroll-snap-type:x mandatory;scroll-padding:0 var(--g);scrollbar-width:none;-webkit-overflow-scrolling:touch;overscroll-behavior-x:contain}
-#matches::-webkit-scrollbar{display:none}
-.ms{flex:0 0 calc((100% - 28px)/3);display:flex;flex-direction:column;gap:10px;min-width:0;scroll-snap-align:start}
-.mi{flex:1;display:flex;flex-direction:column;gap:4px;padding:12px 14px;border-radius:14px;background:var(--card);box-shadow:0 4px 18px rgba(8,18,53,.25)}
-.mi .w{display:flex;align-items:center;justify-content:space-between;gap:8px}
-.mi .d{color:var(--mu);font-size:.85rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase}
-.mi .d.hoy{padding:2px 9px;border-radius:6px;color:#0a0f1e;background:var(--ye)}
-.mi .b{padding:2px 10px;border-radius:999px;color:#fff;font-size:.75rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
-.mi .b.c{background:#16a34a}
-.mi .b.f{background:#2f7bff}
-.mi .h{color:var(--navy);font:800 2rem/1 "Barlow Condensed",sans-serif}
-.mi .h.s{font-size:1.2rem}
-.mi .r{color:var(--tx);font-size:.9rem;font-weight:700;line-height:1.2}
-.mi .l{color:var(--mu);font-size:.82rem;line-height:1.25}
-.mi a.l{text-decoration:underline;text-underline-offset:3px}
-.mi a.l:hover{color:var(--ac)}
-.ar{position:absolute;top:26%;z-index:3;display:grid;place-items:center;width:54px;height:54px;padding:0 0 4px;border:3px solid var(--navy);border-radius:50%;color:var(--navy);background:#fff;box-shadow:0 6px 20px rgba(8,18,53,.6);font-size:2.2rem;font-weight:700;line-height:1;cursor:pointer;transition:background-color .2s,opacity .2s}
-.ar:hover{background:var(--ye);animation:none}
-.ar.l{left:-26px}
-.ar.r{right:-26px}
-.ar:disabled{opacity:0;pointer-events:none}
-.ar:focus-visible{outline:3px solid #fff;outline-offset:3px}
-.ar.r:not(:disabled){animation:nudgeR 1.5s ease-in-out infinite}
-.ar.l:not(:disabled){animation:nudgeL 1.5s ease-in-out infinite}
-@keyframes nudgeR{0%,100%{transform:translateX(0);box-shadow:0 6px 20px rgba(8,18,53,.6),0 0 0 0 rgba(255,210,63,.8)}50%{transform:translateX(7px);box-shadow:0 6px 20px rgba(8,18,53,.6),0 0 0 12px rgba(255,210,63,0)}}
-@keyframes nudgeL{0%,100%{transform:translateX(0);box-shadow:0 6px 20px rgba(8,18,53,.6),0 0 0 0 rgba(255,210,63,.8)}50%{transform:translateX(-7px);box-shadow:0 6px 20px rgba(8,18,53,.6),0 0 0 12px rgba(255,210,63,0)}}
-@media(max-width:1040px){.ar.l{left:-8px}.ar.r{right:-8px}}
+#matches{grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
+.mx{display:none!important}
 button.fch{display:block;width:100%;padding:0;overflow:hidden;border:0;border-radius:18px;background:none;box-shadow:0 8px 28px rgba(8,18,53,.4);cursor:pointer;transition:transform .25s}
 button.fch:hover{transform:translateY(-6px)}
 button.fch:focus-visible{outline:3px solid var(--ye);outline-offset:3px}
@@ -221,9 +179,8 @@ footer a{color:var(--ye);font-weight:700}
 
 /* DISEÑO RESPONSIVE */
 @media(max-width:800px){
-  .cats{grid-template-columns:repeat(2,minmax(0,1fr));grid-template-rows:none;grid-auto-flow:row;gap:10px}
-  .cat{min-height:104px;padding:12px 12px}
-  .cat .go{opacity:1;transform:none}
+  .cats{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .cat{padding:16px}
   .hero{min-height:0;align-items:flex-start;padding-top:96px}
   .hero::before{bottom:auto;height:260px;background-position:100% 0}
   .menu a.ig{justify-content:flex-start;width:auto;height:auto;margin:6px 0 0;padding:10px 16px!important;border-radius:10px}
@@ -235,20 +192,14 @@ footer a{color:var(--ye);font-weight:700}
   .menu.o{display:flex}
   section{padding:56px 0}
   .staff-grid{grid-template-columns:repeat(4,minmax(0,1fr))}
-  .ms{flex-basis:calc((100% - 14px)/2.3)}
-  .chips{flex-direction:row;flex-wrap:wrap;justify-content:center}
-  .cr{display:contents}
-  .car{margin:0 calc(50% - 50vw);--g:16px}
-  .ar{width:46px;height:46px;font-size:1.9rem}
-  .ar.l{left:8px}
-  .ar.r{right:8px}
 }
 @media(max-width:600px){
-  .ms{flex-basis:74%}
-  button.fch{border-radius:14px}
+  #matches{grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+  button.fch{border-radius:10px}
   .staff-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
   .staff-section+.staff-section{margin-top:46px}
 }
+@media(max-width:420px){.cats{grid-template-columns:1fr}}
 @media(max-width:380px){.staff-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 </style>
 </head>
@@ -334,6 +285,8 @@ footer a{color:var(--ye);font-weight:700}
                 </div>
               </div>
             </div>
+
+            <p style="margin-top:22px"><a class="btn" href="#equipos">Conoce nuestros equipos</a></p>
           </div>
 
           <!-- IMAGEN EQUIPACIONES -->
@@ -351,7 +304,7 @@ footer a{color:var(--ye);font-weight:700}
     <div class="wrap">
       <h2 class="rv">Nuestras <span>categorías</span></h2>
       <p class="sub rv">Pulsa en tu categoría para ver resultados, clasificaciones y calendario.</p>
-      <div class="cats" id="catHome"></div>
+      <div class="grid cats" id="catHome"></div>
     </div>
   </section>
 
@@ -360,13 +313,8 @@ footer a{color:var(--ye);font-weight:700}
     <div class="wrap">
       <h2 class="rv">Próximos <span>partidos</span></h2>
       <p class="sub rv">El siguiente partido de cada categoría, con día, hora y pabellón. Se actualiza solo con los datos de la Federación.</p>
-      <div class="chips" id="mFilt" role="group" aria-label="Filtrar por categoría"></div>
-      <div class="car" id="mCar">
-        <button class="ar l" id="mPrev" type="button" aria-label="Partidos anteriores">‹</button>
-        <div id="matches" tabindex="0" aria-label="Próximos partidos, desliza para ver más"></div>
-        <button class="ar r" id="mNext" type="button" aria-label="Más partidos">›</button>
-      </div>
-      <p class="sub" id="mVacio" style="margin:0" hidden>Los próximos partidos aparecerán aquí en cuanto se publiquen las jornadas.</p>
+      <div class="grid" id="matches"></div>
+      <p style="margin-top:22px"><button class="btn" id="moreMatches" type="button" aria-expanded="false" aria-controls="matches">Todos los partidos ↓</button></p>
     </div>
   </section>
 
@@ -429,7 +377,7 @@ footer a{color:var(--ye);font-weight:700}
     <p><a href="#" class="back">← Volver al inicio</a></p><br>
     <h2>Nuestras <span>categorías</span></h2>
     <p class="sub">Pulsa sobre tu categoría para ver resultados, clasificaciones y calendario.</p>
-    <div class="cats" id="catGrid"></div>
+    <div class="grid" id="catGrid"></div>
   </div>
 </main>
 
@@ -619,63 +567,27 @@ function cartel(p) {
   </div>`;
 }
 
-const isoDe = d => d.getFullYear() + "-" + String(d.getMonth() + 1).padStart(2, "0") + "-" + String(d.getDate()).padStart(2, "0");
-let mFiltro = "";
-try { mFiltro = localStorage.getItem("jb_mf") || ""; } catch (e) {}
-
-function info(p) {
-  const f = new Date(p.fecha + "T12:00"), hoy = new Date(), man = new Date();
-  man.setDate(man.getDate() + 1);
-  const near = p.fecha === isoDe(hoy) || p.fecha === isoDe(man);
-  const dia = p.fecha === isoDe(hoy) ? "Hoy" : p.fecha === isoDe(man) ? "Mañana" : DIAS[f.getDay()];
-  const txt = `${dia} ${f.getDate()} ${MESES[f.getMonth()].slice(0, 3)}`;
-  const rival = p.casa ? p.visitante : p.local;
-  const lug = p.campo || "Pabellón por confirmar";
-  const lugar = p.campo
-    ? `<a class="l" href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(p.campo)}" target="_blank" rel="noopener">📍 ${esc(lug)}</a>`
-    : `<span class="l">📍 ${esc(lug)}</span>`;
-  return `<div class="mi"><div class="w"><span class="d${near ? " hoy" : ""}">${esc(txt)}</span><span class="b ${p.casa ? "c" : "f"}">${p.casa ? "Casa" : "Fuera"}</span></div><div class="h${p.hora ? "" : " s"}">${esc(p.hora || "Hora por confirmar")}</div><div class="r">vs ${esc(rival)}</div>${lugar}</div>`;
-}
-
-function renderChips() {
-  const cats = [...new Set(MATCHES.map(p => p.categoria))].sort((a, b) => ordCat({ categoria: a }) - ordCat({ categoria: b }));
-  if (mFiltro && !cats.includes(mFiltro)) mFiltro = "";
-  const box = $("#mFilt");
-  box.style.display = cats.length > 1 ? "" : "none";
-  const todos = ["", ...cats], n = todos.length <= 5 ? todos.length : Math.ceil(todos.length / 2);
-  const chip = c => `<button type="button" class="chip${c === mFiltro ? " on" : ""}" data-c="${esc(c)}" aria-pressed="${c === mFiltro}">${c ? esc(c) : "Todos"}</button>`;
-  box.innerHTML = [todos.slice(0, n), todos.slice(n)].filter(r => r.length).map(r => `<div class="cr">${r.map(chip).join("")}</div>`).join("");
-}
-
-function flechas() {
-  const g = $("#matches");
-  $("#mPrev").disabled = g.scrollLeft <= 2;
-  $("#mNext").disabled = g.scrollLeft >= g.scrollWidth - g.clientWidth - 2;
-}
-
 function renderMatches() {
-  const grid = $("#matches");
-  $("#mCar").hidden = !MATCHES.length;
-  $("#mVacio").hidden = !!MATCHES.length;
-  if (!MATCHES.length) { $("#mFilt").style.display = "none"; grid.innerHTML = ""; return; }
-  renderChips();
-  grid.innerHTML = MATCHES.map((p, i) => ({ p, i })).filter(x => !mFiltro || x.p.categoria === mFiltro)
-    .map(({ p, i }) => `<article class="ms"><button type="button" class="fch" data-i="${i}" aria-label="${esc(p.categoria)}: ver el cartel ampliado">${cartel(p)}</button>${info(p)}</article>`).join("");
-  grid.scrollLeft = 0;
-  flechas();
+  const grid = $("#matches"), btn = $("#moreMatches");
+  if (!MATCHES.length) {
+    grid.innerHTML = `<p class="sub" style="grid-column:1/-1;margin:0">Los próximos partidos aparecerán aquí en cuanto se publiquen las jornadas.</p>`;
+    btn.style.display = "none";
+    return;
+  }
+  grid.innerHTML = MATCHES.map((p, i) => `<button type="button" class="fch" data-i="${i}" aria-label="${esc(p.categoria)}: ver la ficha ampliada">${cartel(p)}</button>`).join("");
+  updateMatches();
 }
 
-$("#mFilt").addEventListener("click", e => {
-  const c = e.target.closest(".chip");
-  if (!c) return;
-  mFiltro = c.dataset.c;
-  try { localStorage.setItem("jb_mf", mFiltro); } catch (x) {}
-  renderMatches();
-});
-$("#matches").addEventListener("scroll", flechas, { passive: true });
-$("#mPrev").onclick = () => $("#matches").scrollBy({ left: -$("#matches").clientWidth * .8, behavior: "smooth" });
-$("#mNext").onclick = () => $("#matches").scrollBy({ left: $("#matches").clientWidth * .8, behavior: "smooth" });
-addEventListener("resize", flechas);
+function updateMatches() {
+  const grid = $("#matches"), cards = [...grid.querySelectorAll(".fch")], btn = $("#moreMatches");
+  const cols = getComputedStyle(grid).gridTemplateColumns.split(" ").length;
+  cards.forEach((c, i) => c.classList.toggle("mx", !matchesOpen && i >= cols));
+  btn.style.display = cards.length > cols ? "" : "none";
+  btn.textContent = matchesOpen ? "Ver menos ↑" : "Todos los partidos ↓";
+  btn.setAttribute("aria-expanded", String(matchesOpen));
+}
+
+$("#moreMatches").onclick = () => { matchesOpen = !matchesOpen; updateMatches(); };
 
 function closeMatch() {
   const ov = $("#fOv");
@@ -722,7 +634,6 @@ async function loadMatches() {
     lista = (px.partidos || [])
       .filter(p => p && p.fecha && Date.parse(p.fecha + "T" + (p.hora || "23:59")) + 3 * 36e5 > ahora)
       .map(p => ({ ...p, temporada: p.temporada || px.temporada }))
-      /* ORDEN: primero por categoría (Aficionado A → Alevín B), después por fecha y hora */
       .sort((a, b) => (ordCat(a) - ordCat(b)) || (a.fecha + (a.hora || "99:99")).localeCompare(b.fecha + (b.hora || "99:99")));
   } catch (e) {
     lista = MATCHES;
@@ -732,17 +643,15 @@ async function loadMatches() {
   if (!iguales || !$("#matches").children.length) renderMatches();
 }
 
+addEventListener("resize", () => { if ($("#matches").children.length && MATCHES.length) updateMatches(); });
 loadMatches();
 setInterval(loadMatches, 5 * 60 * 1000);
 document.addEventListener("visibilitychange", () => { if (!document.hidden) loadMatches(); });
 
 /* CATEGORÍAS (siempre desplegadas) */
-const catCard = (c, i) => {
-  const m = c.name.match(/^(.+?)\s+([AB])$/);
-  const base = m ? m[1] : c.name, letra = m ? m[2] : "";
-  const html = `<span class="age">${esc(c.age)}</span><h3>${esc(base)} <em>${esc(letra)}</em></h3><span class="go" aria-hidden="true">→</span>`;
-  const attrs = `class="cat${c.url ? "" : " sin"}" data-l="${letra}" style="--i:${i}"`;
-  return c.url ? `<a ${attrs} href="${esc(c.url)}" aria-label="${esc(c.name)}">${html}</a>` : `<div ${attrs}>${html}</div>`;
+const catCard = c => {
+  const html = `<span class="age">${esc(c.age)}</span><h3>${esc(c.name)}</h3><span class="go">Partidos y clasificación</span>`;
+  return c.url ? `<a class="card cat" href="${esc(c.url)}">${html}</a>` : `<div class="card cat sin">${html}</div>`;
 };
 
 $("#catHome").innerHTML = CONFIG.CATEGORIES.map(catCard).join("");

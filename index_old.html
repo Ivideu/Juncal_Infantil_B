@@ -723,7 +723,8 @@ async function loadMatches() {
     lista = (px.partidos || [])
       .filter(p => p && p.fecha && Date.parse(p.fecha + "T" + (p.hora || "23:59")) + 3 * 36e5 > ahora)
       .map(p => ({ ...p, temporada: p.temporada || px.temporada }))
-      .sort((a, b) => (a.fecha + (a.hora || "99:99")).localeCompare(b.fecha + (b.hora || "99:99")) || (ordCat(a) - ordCat(b)));
+      /* ORDEN: primero por categoría (Aficionado A → Alevín B), después por fecha y hora */
+      .sort((a, b) => (ordCat(a) - ordCat(b)) || (a.fecha + (a.hora || "99:99")).localeCompare(b.fecha + (b.hora || "99:99")));
   } catch (e) {
     lista = MATCHES;
   }

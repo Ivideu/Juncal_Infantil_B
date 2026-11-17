@@ -128,14 +128,28 @@ body.pg #home{display:none}
 body.pg #cats{display:block}
 .back{color:#fff;font-weight:700;text-shadow:var(--sh)}
 button.btn{font:inherit;font-weight:700;cursor:pointer}
-.cats{grid-template-columns:repeat(4,minmax(0,1fr))}
-.cat{display:flex;flex-direction:column;gap:6px;padding:22px}
-.cat.x{display:none}
-.cat.sin{cursor:default}
-.cat.sin .go{color:var(--mu);opacity:.7}
-.cat .age{color:var(--ye2);font-size:.8rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase}
-.cat .go{margin-top:6px;color:var(--mu);font-size:.88rem;transition:color .2s}
-.cat:hover .go{color:var(--ac)}
+
+/* CATEGORÍAS: TARJETAS COMPACTAS CON COLOR POR GRUPO Y ESCUDO */
+.cats{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));grid-template-rows:repeat(2,auto);grid-auto-flow:column;gap:12px}
+.cat{--c1:#2f7bff;--c2:#0f2a78;position:relative;display:flex;flex-direction:column;justify-content:flex-end;gap:2px;min-height:104px;padding:14px 16px;overflow:hidden;border:2px solid rgba(255,255,255,.9);border-radius:16px;color:#fff;background:linear-gradient(135deg,var(--c1),var(--c2));box-shadow:0 6px 18px rgba(8,18,53,.35);animation:catIn .5s both;animation-delay:calc(var(--i,0)*60ms);transition:transform .25s cubic-bezier(.2,1.3,.4,1),box-shadow .25s}
+.cat[data-g=aficionado]{--c1:#2a3f8f;--c2:#0b1538}
+.cat[data-g=juvenil]{--c1:#4f93ff;--c2:#1b46c4}
+.cat[data-g=cadete]{--c1:#22c55e;--c2:#0b6b32}
+.cat[data-g=infantil]{--c1:#ffb020;--c2:#d9480f}
+.cat[data-g=alevin]{--c1:#f2b705;--c2:#e1306c}
+.cat::before{content:"";position:absolute;right:-10px;bottom:-14px;width:92px;height:92px;background:url("Images/escudo.png") center/contain no-repeat;opacity:.2;transform:rotate(-12deg);pointer-events:none;transition:transform .35s,opacity .35s}
+.cat::after{content:"";position:absolute;inset:0;background:linear-gradient(110deg,transparent 35%,rgba(255,255,255,.45) 50%,transparent 65%);transform:translateX(-120%);transition:transform .6s;pointer-events:none}
+.cat:hover{transform:translateY(-6px) rotate(-1.2deg) scale(1.03);box-shadow:0 14px 30px rgba(8,18,53,.5)}
+.cat:hover::before{transform:rotate(0) scale(1.15);opacity:.35}
+.cat:hover::after{transform:translateX(120%)}
+.cat:focus-visible{outline:3px solid var(--ye);outline-offset:3px}
+.cat .age{position:relative;z-index:1;color:rgba(255,255,255,.92);font-size:.68rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;text-shadow:0 1px 3px rgba(0,0,0,.45)}
+.cat h3{position:relative;z-index:1;color:#fff;font-size:1.7rem;font-weight:800;font-style:italic;text-shadow:0 2px 6px rgba(0,0,0,.4)}
+.cat h3 em{color:var(--ye);font-style:inherit}
+.cat .go{position:absolute;top:10px;right:10px;z-index:1;display:grid;place-items:center;width:28px;height:28px;border-radius:50%;color:#0a0f1e;background:var(--ye);font-weight:800;transform:translateX(8px);opacity:0;transition:transform .25s,opacity .25s}
+.cat:hover .go,.cat:focus-visible .go{transform:none;opacity:1}
+.cat.sin{cursor:default;filter:grayscale(.6)}
+@keyframes catIn{from{opacity:0;transform:translateY(16px) scale(.96)}}
 
 /* PRÓXIMOS PARTIDOS */
 #partidos{overflow-x:clip}
@@ -211,8 +225,10 @@ footer a{color:var(--ye);font-weight:700}
 
 /* DISEÑO RESPONSIVE */
 @media(max-width:800px){
-  .cats{grid-template-columns:repeat(2,minmax(0,1fr))}
-  .cat{padding:16px}
+  .cats{grid-template-columns:repeat(2,minmax(0,1fr));grid-template-rows:none;grid-auto-flow:row;gap:10px}
+  .cat{min-height:92px;padding:12px 14px}
+  .cat h3{font-size:1.45rem}
+  .cat .go{opacity:1;transform:none}
   .hero{min-height:0;align-items:flex-start;padding-top:96px}
   .hero::before{bottom:auto;height:260px;background-position:100% 0}
   .menu a.ig{justify-content:flex-start;width:auto;height:auto;margin:6px 0 0;padding:10px 16px!important;border-radius:10px}
@@ -238,7 +254,6 @@ footer a{color:var(--ye);font-weight:700}
   .staff-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
   .staff-section+.staff-section{margin-top:46px}
 }
-@media(max-width:420px){.cats{grid-template-columns:1fr}}
 @media(max-width:380px){.staff-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 </style>
 </head>
@@ -343,7 +358,7 @@ footer a{color:var(--ye);font-weight:700}
     <div class="wrap">
       <h2 class="rv">Nuestras <span>categorías</span></h2>
       <p class="sub rv">Pulsa en tu categoría para ver resultados, clasificaciones y calendario.</p>
-      <div class="grid cats" id="catHome"></div>
+      <div class="cats" id="catHome"></div>
     </div>
   </section>
 
@@ -421,7 +436,7 @@ footer a{color:var(--ye);font-weight:700}
     <p><a href="#" class="back">← Volver al inicio</a></p><br>
     <h2>Nuestras <span>categorías</span></h2>
     <p class="sub">Pulsa sobre tu categoría para ver resultados, clasificaciones y calendario.</p>
-    <div class="grid" id="catGrid"></div>
+    <div class="cats" id="catGrid"></div>
   </div>
 </main>
 
@@ -728,9 +743,12 @@ setInterval(loadMatches, 5 * 60 * 1000);
 document.addEventListener("visibilitychange", () => { if (!document.hidden) loadMatches(); });
 
 /* CATEGORÍAS (siempre desplegadas) */
-const catCard = c => {
-  const html = `<span class="age">${esc(c.age)}</span><h3>${esc(c.name)}</h3><span class="go">Partidos y clasificación</span>`;
-  return c.url ? `<a class="card cat" href="${esc(c.url)}">${html}</a>` : `<div class="card cat sin">${html}</div>`;
+const catCard = (c, i) => {
+  const m = c.name.match(/^(.+?)\s+([AB])$/);
+  const base = m ? m[1] : c.name, letra = m ? m[2] : "";
+  const html = `<span class="age">${esc(c.age)}</span><h3>${esc(base)} <em>${esc(letra)}</em></h3><span class="go" aria-hidden="true">→</span>`;
+  const attrs = `class="cat${c.url ? "" : " sin"}" data-g="${nrm(base)}" style="--i:${i}"`;
+  return c.url ? `<a ${attrs} href="${esc(c.url)}" aria-label="${esc(c.name)}">${html}</a>` : `<div ${attrs}>${html}</div>`;
 };
 
 $("#catHome").innerHTML = CONFIG.CATEGORIES.map(catCard).join("");

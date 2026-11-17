@@ -54,7 +54,7 @@ button:hover{border-color:var(--ac);transform:translateY(-1px)}button:focus-visi
 #hero.hn .hnx{display:contents}
 #hero.hn .hn-fx{position:absolute;inset:0;z-index:-1;overflow:hidden;border-radius:inherit;pointer-events:none}
 #hero.hn .hn-fx i{position:absolute;left:-30px;bottom:-60px;width:260px;height:260px;background:url(../Images/escudo.png) center/contain no-repeat;opacity:.22;filter:grayscale(1) brightness(2)}
-#hero.hn .hn-lobo{position:absolute;right:0;bottom:0;z-index:0;width:auto;height:72%;opacity:.13;pointer-events:none;user-select:none}
+#hero.hn .hn-lobo{position:absolute;right:0;bottom:0;z-index:0;width:auto;height:96%;opacity:.13;pointer-events:none;user-select:none}
 #hero.hn .hn-tg{display:flex;align-items:center;flex-wrap:wrap;gap:8px;margin-bottom:16px}
 #hero.hn .hn-tg b{padding:5px 12px;border-radius:999px;color:#0a0f1e;background:var(--ye);font:800 .9rem/1 "Barlow Condensed",sans-serif;letter-spacing:.08em;text-transform:uppercase}
 #hero.hn .hn-tg span{color:#fff;font:700 .9rem/1 "Barlow Condensed",sans-serif;letter-spacing:.1em;text-transform:uppercase}
@@ -79,11 +79,29 @@ button:hover{border-color:var(--ac);transform:translateY(-1px)}button:focus-visi
 #hero.hn .cd span{font-size:.7rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase}
 @media(max-width:760px){
  #hero.hn{padding:22px 16px 20px;background:linear-gradient(90deg,#0b2273 0%,#1740c0 38%,#2f6bff 70%,#5b9bff 84%,#c9dcff 94%,#fff 100%)}
- #hero.hn .hn-lobo{right:0;height:56%}
+ #hero.hn .hn-lobo{right:0;height:84%}
  #hero.hn .hn-sh{width:74px;height:74px}
  #hero.hn .cd div{min-width:56px;padding:7px 6px}
 }
 @media(prefers-reduced-motion:reduce){#hero.hn *{animation:none!important}}
+
+/* marcador directo (club) */
+#hero.hl:not(.fs){margin:18px 0;padding:26px 56px;border-radius:26px;border-color:#8db4ff;background:linear-gradient(90deg,#0b2273 0%,#1740c0 40%,#2f6bff 70%,#5b9bff 86%,#c9dcff 95%,#fff 100%);box-shadow:0 18px 44px rgba(8,18,53,.5)}
+#hero.hl:not(.fs):after{content:"";right:auto;left:-30px;bottom:-60px;width:260px;height:260px;font-size:0;background:url(../Images/escudo.png) center/contain no-repeat;opacity:.22;filter:grayscale(1) brightness(2);animation:none}
+#hero.hl .live .cn,#hero.hl .live .lt{text-shadow:0 2px 6px rgba(8,18,53,.55)}
+#hero.hl .gbtn{position:relative;flex-direction:column;gap:.15em;overflow:hidden;border:0;color:#0a0f1e;background:linear-gradient(180deg,#fff,#d6e4ff);box-shadow:0 .28em 0 #8fa9dd,0 .8em 1.3em rgba(8,18,53,.45);font-weight:800;transition:transform .15s,box-shadow .15s}
+#hero.hl .gbtn.me{background:linear-gradient(180deg,#ffe27a,#ffd23f);box-shadow:0 .28em 0 #b8860b,0 .8em 1.3em rgba(8,18,53,.45)}
+#hero.hl .gbtn:before{content:"";position:absolute;inset:0;background:linear-gradient(115deg,transparent 38%,rgba(255,255,255,.75) 50%,transparent 62%);transform:translateX(-130%);transition:transform .7s}
+#hero.hl .gbtn:hover{border:0;transform:translateY(-3px)}
+#hero.hl .gbtn:hover:before{transform:translateX(130%)}
+#hero.hl .gbtn:active{transform:translateY(.22em);box-shadow:0 .05em 0 #8fa9dd,0 .2em .5em rgba(8,18,53,.4)}
+#hero.hl .gbtn.me:active{box-shadow:0 .05em 0 #b8860b,0 .2em .5em rgba(8,18,53,.4)}
+#hero.hl .gbtn:focus-visible{outline:3px solid #fff;outline-offset:3px}
+#hero.hl .gp{font:italic 800 2.6em/.9 "Barlow Condensed",sans-serif}
+#hero.hl .gt{font:800 1em/1 "Barlow Condensed",sans-serif;letter-spacing:.28em;text-indent:.28em}
+#hero.hl .gx{display:-webkit-box;max-width:100%;overflow:hidden;opacity:.72;font:700 .66em/1.15 Barlow,system-ui,sans-serif;text-transform:uppercase;-webkit-box-orient:vertical;-webkit-line-clamp:2}
+#hero.hl .gmn{color:#fff;border:1px solid rgba(255,255,255,.4);background:rgba(8,18,53,.5);-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px);font-weight:700}
+@media(max-width:760px){#hero.hl:not(.fs){padding:22px 14px 20px;background:linear-gradient(90deg,#0b2273 0%,#1740c0 38%,#2f6bff 70%,#5b9bff 84%,#c9dcff 94%,#fff 100%)}#hero.hl .gbtn{aspect-ratio:auto;min-height:6.2em;padding:6px 4px}}
 @keyframes spin{to{transform:rotate(360deg)}}
 .hv{display:flex;align-items:center;justify-content:space-around;gap:10px;margin:14px 0;text-align:center}
 .hv .cn{font-size:clamp(1.1rem,3.5vw,1.8rem);font-weight:700;max-width:220px}
@@ -837,7 +855,7 @@ function liveHero(x){const m=M(x.r.n,x.h),c=m.c||{ph:0},ph=c.ph||0,ok=done(m),ev
  const L={0:"A PUNTO DE EMPEZAR",1:'<span class="dot">🔴</span> EN DIRECTO · 1ª PARTE',HT:"☕ DESCANSO",2:'<span class="dot">🔴</span> EN DIRECTO · 2ª PARTE',FT:"🏁 FINAL DEL PARTIDO"}[ph];
  const B=(a,l)=>`<button onclick="clk(${x.r.n},${x.h},'${a}')">${l}</button>`;
  let ad="";if(E())ad=`<div class="ctl">${ph==0?B("go1","▶ Iniciar 1ª parte"):""}${(ph==1||ph==2)?(c.run?B("pause","⏸ Pausar"):B("resume","▶ Reanudar")):""}${ph==1?B("ht","🔔 Fin 1ª parte"):""}${ph=="HT"?B("go2","▶ Iniciar 2ª parte"):""}${ph==2?B("ft","🏁 Final"):""}${ph=="FT"?B("reopen","↩ Reabrir partido"):""}${B("reset","↺ Reiniciar")}</div>`;
- const side=(id,cls)=>{const mine=id==ME,btn=E()&&ph!="FT"?`<div class="gb"><button class="gbtn ${mine?"me":""}" onclick="${mine?`pickGol(${x.r.n},${x.h})`:`lg(${x.r.n},${x.h},'rv',1)`}">＋ Gol ${esc(nm(id))}</button><button class="gmn" onclick="lg(${x.r.n},${x.h},'${mine?"me":"rv"}',-1)">− Gol</button></div>`:"";return`<div class="ts ${cls}"><div class="ti">${bd(id)}<div class="cn">${nm(id)}</div></div>${btn}</div>`};
+ const side=(id,cls)=>{const mine=id==ME,btn=E()&&ph!="FT"?`<div class="gb"><button class="gbtn ${mine?"me":""}" onclick="${mine?`pickGol(${x.r.n},${x.h})`:`lg(${x.r.n},${x.h},'rv',1)`}"><span class="gp">＋1</span><span class="gt">GOL</span><span class="gx">${esc(nm(id))}</span></button><button class="gmn" onclick="lg(${x.r.n},${x.h},'${mine?"me":"rv"}',-1)">− Gol</button></div>`:"";return`<div class="ts ${cls}"><div class="ti">${bd(id)}<div class="cn">${nm(id)}</div></div>${btn}</div>`};
  const sc=`${ok?m.h:0} - ${ok?m.a:0}`;
  return`<div class="live"><div class="lt">${L} · ${x.r.n===0?"JORNADA "+(nextL()||{r:{n:J.length}}).r.n:lab(x.r).toUpperCase()}</div><p class="loc" style="margin:8px 0 0">${loc(x.h,m)}</p>
  <div class="lb">${side(x.h,"")}<div class="big${sc.length>5?" s":""}">${sc}</div>${side(x.a,"r")}</div>
@@ -882,7 +900,7 @@ function render(){
  subAdmin(E());
  if(loading){document.getElementById("hero").style.display="none";document.getElementById("nav").innerHTML="";document.getElementById("app").innerHTML="";return}
  document.getElementById("hero").style.display=tab=="jor"?"":"none";
- document.getElementById("hero").innerHTML=hero();document.getElementById("hero").classList.toggle("hn",!!document.querySelector("#hero .hnx"));fit();tick();goalWatch();
+ document.getElementById("hero").innerHTML=hero();document.getElementById("hero").classList.toggle("hn",!!document.querySelector("#hero .hnx"));document.getElementById("hero").classList.toggle("hl",!!document.querySelector("#hero .live"));fit();tick();goalWatch();
  document.getElementById("tbtn").classList.toggle("on",TS.on);document.getElementById("tout").style.display=document.getElementById("trst").style.display=TS.on?"":"none";
  if(jnAuto)jn=wkJ();
  const tabs=[["jor","🗓 Jornadas"],["cal","📅 Mi calendario"],["cla","🏆 Clasificación"],["cop","🥇 Copa"],["gol","👟 Goleadores"],["cro","🎽 Jugadores"],["jug","🎬 Jugadas"]].filter(t=>t[0]!="cop"||COPA||E());if(E())tabs.push(["piz","📋 Pizarra"],["hor","🕒 Horarios"],["pla","👥 Plantilla"],["ent","🏃 Entrenos"]);

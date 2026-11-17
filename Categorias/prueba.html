@@ -49,14 +49,12 @@ button:hover{border-color:var(--ac);transform:translateY(-1px)}button:focus-visi
 #hero:after{pointer-events:none;content:"⚽";position:absolute;right:-20px;bottom:-50px;font-size:200px;opacity:.1;animation:spin 40s linear infinite}
 
 /* ===== PRÓXIMO PARTIDO · diseño club (lobo) ===== */
-#hero.hn{margin:80px 0 18px;padding:26px 250px 24px 28px;overflow:visible;border-radius:26px;background:linear-gradient(135deg,#3d7bff 0%,#1740c0 48%,#0b2273 100%);border:1px solid #8db4ff;box-shadow:0 18px 44px rgba(8,18,53,.5);isolation:isolate}
+#hero.hn{margin:80px 0 18px;padding:26px 250px 24px 28px;overflow:visible;border-radius:26px;background:linear-gradient(90deg,#0b2273 0%,#1740c0 30%,#2f6bff 58%,#5b9bff 72%,#dbe8ff 85%,#ffe98f 94%,#ffd23f 100%);border:1px solid #8db4ff;box-shadow:0 18px 44px rgba(8,18,53,.5);isolation:isolate}
 #hero.hn:after{display:none}
 #hero.hn .hnx{display:contents}
 #hero.hn .hn-fx{position:absolute;inset:0;z-index:-1;overflow:hidden;border-radius:inherit;pointer-events:none}
-#hero.hn .hn-fx:before{content:"";position:absolute;top:-30%;right:-70px;width:340px;height:170%;background:linear-gradient(180deg,#ffd23f,#f2b705 60%,#d99a00);transform:skewX(-18deg);box-shadow:-26px 0 0 -8px rgba(255,255,255,.16)}
-#hero.hn .hn-fx:after{content:"";position:absolute;inset:0;background:radial-gradient(60% 80% at 8% 0,rgba(255,255,255,.28),transparent 60%),repeating-linear-gradient(115deg,rgba(255,255,255,.05) 0 2px,transparent 2px 26px)}
-#hero.hn .hn-fx i{position:absolute;left:-30px;bottom:-60px;width:260px;height:260px;background:url(../Images/escudo.png) center/contain no-repeat;opacity:.1;filter:grayscale(1) brightness(2)}
-#hero.hn .hn-lobo{position:absolute;right:10px;bottom:-4px;z-index:2;width:auto;height:128%;max-height:420px;filter:drop-shadow(0 14px 18px rgba(8,18,53,.55));animation:hnFlota 4.5s ease-in-out infinite;pointer-events:none;user-select:none}
+#hero.hn .hn-fx i{position:absolute;left:-30px;bottom:-60px;width:260px;height:260px;background:url(../Images/escudo.png) center/contain no-repeat;opacity:.22;filter:grayscale(1) brightness(2)}
+#hero.hn .hn-lobo{position:absolute;right:10px;bottom:-4px;z-index:2;width:auto;height:128%;max-height:420px;opacity:.2;animation:hnFlota 4.5s ease-in-out infinite;pointer-events:none;user-select:none}
 @keyframes hnFlota{50%{transform:translateY(-8px) rotate(-1deg)}}
 #hero.hn .hn-tg{display:flex;align-items:center;flex-wrap:wrap;gap:8px;margin-bottom:16px}
 #hero.hn .hn-tg b{padding:5px 12px;border-radius:999px;color:#0a0f1e;background:var(--ye);font:800 .9rem/1 "Barlow Condensed",sans-serif;letter-spacing:.08em;text-transform:uppercase}
@@ -81,9 +79,8 @@ button:hover{border-color:var(--ac);transform:translateY(-1px)}button:focus-visi
 #hero.hn .cd b{color:var(--ye);font-size:1.9rem}
 #hero.hn .cd span{font-size:.7rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase}
 @media(max-width:760px){
- #hero.hn{margin-top:96px;padding:22px 16px 20px}
+ #hero.hn{margin-top:96px;padding:22px 16px 20px;background:linear-gradient(90deg,#0b2273 0%,#1740c0 38%,#2f6bff 70%,#5b9bff 82%,#dbe8ff 92%,#ffe98f 97%,#ffd23f 100%)}
  #hero.hn .hn-lobo{right:6px;bottom:auto;top:-78px;height:170px;max-height:none}
- #hero.hn .hn-fx:before{width:60%;top:-10%;height:34%;right:-20%}
  #hero.hn .hn-tg{max-width:62%}
  #hero.hn .hn-sh{width:68px;height:68px}
  #hero.hn .cd div{min-width:56px;padding:7px 6px}

@@ -46,6 +46,12 @@ h2 span{color:var(--ye);text-shadow:0 2px 0 #0f2a78,0 0 3px #0f2a78,0 0 14px rgb
 .cs img{display:block;width:100%;height:100%;object-fit:cover;pointer-events:none;-webkit-user-drag:none;filter:drop-shadow(0 6px 14px rgba(8,18,53,.45))}
 .ar{top:44%}
 @media(max-width:800px){.car{--w:clamp(130px,40vw,200px)}}
+@media(min-width:801px){.ar.l{left:calc(50% - var(--w)*1.2 - 27px)}.ar.r{right:calc(50% - var(--w)*1.2 - 27px)}}
+/* Cromo en blanco: Nueva incorporación */
+.nv{position:relative;width:100%;height:100%;overflow:hidden;border:2px solid #fff;border-radius:16px;container-type:inline-size;background:linear-gradient(225deg,#ffd23f 0%,#f2b705 14%,#4f86ee 42%,#1e4fd8 62%,#0b1f66 100%);box-shadow:0 6px 14px rgba(8,18,53,.45)}
+.nv::before{content:"";position:absolute;left:50%;top:44%;width:62%;aspect-ratio:1;transform:translate(-50%,-50%);background:url("Images/escudo.png") center/contain no-repeat;filter:drop-shadow(0 4px 10px rgba(0,0,0,.4))}
+.nv b{position:absolute;left:0;right:0;bottom:7%;padding:3.5cqw 4cqw 3.5cqw 6cqw;color:#0a0f1e;background:var(--ye);font:800 8.4cqw/1 "Barlow Condensed",sans-serif;font-style:italic;letter-spacing:.02em;text-align:center;text-transform:uppercase;clip-path:polygon(0 0,100% 0,94% 50%,100% 100%,0 100%);box-shadow:0 3px 0 #0f2a78}
+.m.ph{width:min(80vw,320px)}.m.ph .nv{height:auto;aspect-ratio:2/3}
 @media(prefers-reduced-motion:reduce){*{animation:none!important}}
 </style></head><body>
 <div id="bg" aria-hidden="true"></div>
@@ -65,19 +71,21 @@ const ENTRENADORES=[
  {name:"",role:"",img:"./Images/Entrenadores/Alberto.png"},
  {name:"",role:"",img:"./Images/Entrenadores/Carlos.png"},
  {name:"",role:"",img:"./Images/Entrenadores/Dani.png"},
- {name:"",role:"",img:"./Images/Entrenadores/Ivan.png"}
- /* añade aquí los 4 que faltan: el carrusel se adapta solo */
+ {name:"",role:"",img:"./Images/Entrenadores/Ivan.png"},
+ /* Cromos en blanco: cuando llegue la foto, cambia la línea por {name:"",role:"",img:"./Images/Entrenadores/Nombre.png"} */
+ {placeholder:true},{placeholder:true},{placeholder:true},{placeholder:true}
 ];
 const $=s=>document.querySelector(s);
 const esc=t=>String(t||"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 function closeOv(){const o=$("#ov");if(o)o.remove();document.body.style.overflow=""}
 function openOv(i){const p=ENTRENADORES[i];if(!p)return;closeOv();const o=document.createElement("div");o.id="ov";o.setAttribute("role","dialog");o.setAttribute("aria-modal","true");o.setAttribute("aria-label","Entrenador");
- o.innerHTML=`<div class="m"><button class="x" type="button" aria-label="Cerrar">×</button><img src="${esc(p.img)}" alt="Entrenador del Torrejón Juncal"></div>`;
+ o.innerHTML=`<div class="m${p.placeholder?" ph":""}"><button class="x" type="button" aria-label="Cerrar">×</button>${p.placeholder?NV:`<img src="${esc(p.img)}" alt="Entrenador del Torrejón Juncal">`}</div>`;
  o.onclick=e=>{if(e.target===o||e.target.classList.contains("x"))closeOv()};document.body.appendChild(o);document.body.style.overflow="hidden";o.querySelector(".x").focus()}
 addEventListener("keydown",e=>{if(e.key==="Escape")closeOv()});
+const NV='<div class="nv"><b>Nueva incorporación</b></div>';
 const trk=$("#ring"),stage=$("#stage"),items=[];
 ENTRENADORES.forEach((p,i)=>{const b=document.createElement("button");b.type="button";b.className="cs";b.dataset.i=i;b.setAttribute("aria-label","Entrenador "+(i+1)+": ver ampliado");
- b.innerHTML=`<img src="${esc(p.img)}" alt="Entrenador del Torrejón Juncal" draggable="false">`;trk.appendChild(b);items.push(b)});
+ b.innerHTML=p.placeholder?NV:`<img src="${esc(p.img)}" alt="Entrenador del Torrejón Juncal" draggable="false">`;trk.appendChild(b);items.push(b)});
 const n=items.length,step=360/n;let R=0,cur=0,target=0,raf=0;
 function medidas(){const w=trk.offsetWidth;R=n>2?Math.max(w*.62,(w*1.18/2)/Math.tan(Math.PI/n)):w*.8;
  items.forEach((el,i)=>el.style.transform=`rotateY(${i*step}deg) translateZ(${R}px)`);pinta()}

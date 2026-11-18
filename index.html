@@ -213,6 +213,23 @@ button.fch:focus-visible{outline:3px solid var(--ye);outline-offset:3px}
 .fm .cartel{overflow:hidden;border-radius:20px;box-shadow:0 20px 60px rgba(0,0,0,.5)}
 .fm .x{position:absolute;top:-14px;right:-14px;z-index:2;width:40px;height:40px;border:0;border-radius:50%;color:#0a0f1e;background:var(--ye);font-size:1.4rem;line-height:1;cursor:pointer}
 
+/* ENTRENADORES: ANILLO 3D */
+#anillo{--w:clamp(170px,26vw,240px);position:relative}
+#anillo .stage{perspective:1500px;height:calc(var(--w)*1.5 + 70px);display:flex;align-items:center;justify-content:center;overflow:hidden;touch-action:pan-y;cursor:grab;user-select:none;-webkit-user-select:none}
+#anillo .stage.g{cursor:grabbing}
+#anillo .ring{position:relative;width:var(--w);height:calc(var(--w)*1.5);transform-style:preserve-3d;will-change:transform}
+#anillo .rc{position:absolute;inset:0;padding:0;border:0;background:none;cursor:pointer}
+#anillo .rc img{display:block;width:100%;height:100%;object-fit:cover;pointer-events:none;-webkit-user-drag:none;filter:drop-shadow(0 6px 14px rgba(8,18,53,.45))}
+#anillo .ar{top:44%}
+@media(max-width:800px){#anillo{--w:clamp(130px,40vw,200px)}}
+@media(min-width:801px){#anillo .ar.l{left:calc(50% - var(--w)*1.2 - 27px)}#anillo .ar.r{right:calc(50% - var(--w)*1.2 - 27px)}}
+
+/* CROMO EN BLANCO: NUEVA INCORPORACIÓN */
+.nv{position:relative;width:100%;height:100%;overflow:hidden;border:2px solid #fff;border-radius:16px;container-type:inline-size;background:linear-gradient(225deg,#ffd23f 0%,#f2b705 14%,#4f86ee 42%,#1e4fd8 62%,#0b1f66 100%);box-shadow:0 6px 14px rgba(8,18,53,.45)}
+.nv::before{content:"";position:absolute;left:50%;top:44%;width:62%;aspect-ratio:1;transform:translate(-50%,-50%);background:url("Images/escudo.png") center/contain no-repeat;filter:drop-shadow(0 4px 10px rgba(0,0,0,.4))}
+.nv b{position:absolute;left:0;right:0;bottom:7%;padding:3.5cqw 4cqw 3.5cqw 6cqw;color:#0a0f1e;background:var(--ye);font:800 8.4cqw/1 "Barlow Condensed",sans-serif;font-style:italic;letter-spacing:.02em;text-align:center;text-transform:uppercase;clip-path:polygon(0 0,100% 0,94% 50%,100% 100%,0 100%);box-shadow:0 3px 0 #0f2a78}
+.stfm .nv{width:min(70vw,300px);height:auto;aspect-ratio:2/3}
+
 /* PIE DE PÁGINA Y ANIMACIONES */
 footer{padding:40px 0;border-top:1px solid rgba(255,255,255,.35);color:#fff;font-size:.9rem;text-align:center;text-shadow:var(--sh)}
 footer a{color:var(--ye);font-weight:700}
@@ -388,8 +405,11 @@ footer a{color:var(--ye);font-weight:700}
         <h2 class="staff-title rv">Entrenadores <span>Juncal</span></h2>
         <p class="sub rv">El equipo técnico encargado de formar, acompañar y hacer crecer a nuestros jugadores.</p>
         <!-- Fichas generadas desde JS con CONFIG.ENTRENADORES -->
-        <div class="staff-grid" id="entrenadoresStaff" aria-label="Entrenadores Juncal"></div>
-        <p class="staff-more"><button class="btn" id="moreEntrenadores" type="button" aria-expanded="false" aria-controls="entrenadoresStaff">Todos nuestros entrenadores ↓</button></p>
+        <div id="anillo">
+  <button class="ar l" id="ringPrev" type="button" aria-label="Anterior">‹</button>
+  <div class="stage" id="ringStage" tabindex="0" aria-label="Entrenadores Juncal, gira el anillo"><div class="ring" id="ring"></div></div>
+  <button class="ar r" id="ringNext" type="button" aria-label="Siguiente">›</button>
+</div>
       </div>
 
     </div>
@@ -470,7 +490,8 @@ const CONFIG = {
     { name: "", role: "", img: "./Images/Entrenadores/Alberto.png" },
     { name: "", role: "", img: "./Images/Entrenadores/Carlos.png" },
     { name: "", role: "", img: "./Images/Entrenadores/Dani.png" },
-    { name: "", role: "", img: "./Images/Entrenadores/Ivan.png" }
+    { name: "", role: "", img: "./Images/Entrenadores/Ivan.png" },
+    { placeholder: true }, { placeholder: true }, { placeholder: true }, { placeholder: true }
   ],
 
   /* EQUIPOS */
@@ -523,7 +544,70 @@ const stfCard = (p, i, sec) => {
 };
 
 $("#directivaStaff").innerHTML = CONFIG.DIRECTIVA.map((p, i) => stfCard(p, i, "directiva")).join("");
-$("#entrenadoresStaff").innerHTML = CONFIG.ENTRENADORES.map((p, i) => stfCard(p, i, "entrenadores")).join("");
+/* ENTRENADORES: ANILLO 3D */
+const NV = '<div class="nv"><b>Nueva incorporación</b></div>';
+(() => {
+  const trk = $("#ring"), stage = $("#ringStage"), list = CONFIG.ENTRENADORES, items = [];
+  list.forEach((p, i) => {
+    const b = document.createElement("button");
+    b.type = "button"; b.className = "rc"; b.dataset.i = i;
+    b.setAttribute("aria-label", "Entrenador " + (i + 1) + ": ver ampliado");
+    b.innerHTML = p.placeholder ? NV : `<img src="${esc(p.img)}" alt="Entrenador del Torrejón Juncal" draggable="false">`;
+    trk.appendChild(b); items.push(b);
+  });
+  const n = items.length; if (!n) return;
+  const step = 360 / n;
+  let R = 0, cur = 0, target = 0, raf = 0, x0 = 0, c0 = 0, drag = false, mov = false;
+  const norm = d => { d = ((d % n) + n) % n; return d > n / 2 ? d - n : d; };
+  function pinta() {
+    trk.style.transform = `translateZ(${-R}px) rotateY(${-cur * step}deg)`;
+    items.forEach((el, i) => {
+      const d = norm(i - cur), a = Math.abs(d * step), c = (1 + Math.cos(a * Math.PI / 180)) / 2;
+      el.style.opacity = (.3 + .7 * c).toFixed(3);
+      el.style.filter = `brightness(${(.55 + .45 * c).toFixed(3)})`;
+      el.style.pointerEvents = a < 100 ? "auto" : "none";
+      el.style.zIndex = Math.round(c * 10);
+    });
+  }
+  function medidas() {
+    const w = trk.offsetWidth; if (!w) return;
+    R = n > 2 ? Math.max(w * .62, (w * 1.18 / 2) / Math.tan(Math.PI / n)) : w * .8;
+    items.forEach((el, i) => el.style.transform = `rotateY(${i * step}deg) translateZ(${R}px)`);
+    pinta();
+  }
+  function anima() {
+    const d = target - cur;
+    if (Math.abs(d) < .002) { cur = target; pinta(); raf = 0; return; }
+    cur += d * .14; pinta(); raf = requestAnimationFrame(anima);
+  }
+  const ir = v => { target = v; if (!raf) raf = requestAnimationFrame(anima); };
+  $("#ringPrev").onclick = () => ir(Math.round(target) - 1);
+  $("#ringNext").onclick = () => ir(Math.round(target) + 1);
+  stage.addEventListener("pointerdown", e => { drag = true; mov = false; x0 = e.clientX; c0 = cur; target = cur; });
+  addEventListener("pointermove", e => {
+    if (!drag) return;
+    const dx = e.clientX - x0;
+    if (Math.abs(dx) > 6) { mov = true; stage.classList.add("g"); }
+    if (mov) { cur = target = c0 - dx / (trk.offsetWidth * .7); pinta(); }
+  });
+  addEventListener("pointerup", () => { if (!drag) return; drag = false; stage.classList.remove("g"); if (mov) ir(Math.round(cur)); });
+  stage.addEventListener("click", e => {
+    if (mov) { mov = false; return; }
+    const c = e.target.closest(".rc"); if (!c) return;
+    const i = +c.dataset.i, d = norm(i - cur);
+    if (Math.abs(d) < .5) openStaff("entrenadores", i); else ir(Math.round(cur) + Math.round(d));
+  });
+  stage.addEventListener("wheel", e => {
+    if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) { e.preventDefault(); ir(target + Math.sign(e.deltaX) * .5); }
+  }, { passive: false });
+  $("#anillo").addEventListener("keydown", e => {
+    if (e.key === "ArrowRight") $("#ringNext").click();
+    if (e.key === "ArrowLeft") $("#ringPrev").click();
+  });
+  new ResizeObserver(medidas).observe(trk);
+  medidas();
+})();
+
 
 let directivaOpen = false, entrenadoresOpen = false;
 
@@ -543,7 +627,6 @@ function updateAllStaff() {
 }
 
 $("#moreDirectiva").onclick = () => { directivaOpen = !directivaOpen; updateAllStaff(); };
-$("#moreEntrenadores").onclick = () => { entrenadoresOpen = !entrenadoresOpen; updateAllStaff(); };
 addEventListener("resize", updateAllStaff);
 updateAllStaff();
 
@@ -569,7 +652,7 @@ function openStaff(sec, i) {
   ov.setAttribute("aria-modal", "true");
   ov.setAttribute("aria-label", nom);
   ov.innerHTML = `<div class="stfm"><button class="x" type="button" aria-label="Cerrar">×</button>${
-    p.img ? `<img src="${esc(p.img)}" alt="${esc(nom)}">` : `<div class="nofoto">Foto</div>`
+    p.placeholder ? NV : p.img ? `<img src="${esc(p.img)}" alt="${esc(nom)}">` : `<div class="nofoto">Foto</div>`
   }${p.name || p.role ? `<h3>${esc(p.name)}</h3><p>${esc(p.role)}</p>` : ""}</div>`;
   ov.onclick = e => { if (e.target === ov || e.target.classList.contains("x")) closeStaff(); };
   document.body.appendChild(ov);
@@ -582,7 +665,6 @@ function staffGridClick(e) {
   if (c) openStaff(c.dataset.section, Number(c.dataset.i));
 }
 $("#directivaStaff").addEventListener("click", staffGridClick);
-$("#entrenadoresStaff").addEventListener("click", staffGridClick);
 
 /* PRÓXIMOS PARTIDOS */
 const DIAS = ["Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"];

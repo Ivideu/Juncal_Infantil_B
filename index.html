@@ -220,13 +220,10 @@ button.fch:focus-visible{outline:3px solid var(--ye);outline-offset:3px}
 #anillo .ring{position:relative;width:var(--w);height:calc(var(--w)*1.5);transform-style:preserve-3d;will-change:transform}
 #anillo .rc{position:absolute;inset:0;padding:0;border:0;background:none;cursor:pointer}
 #anillo .rc img{display:block;width:100%;height:100%;object-fit:cover;pointer-events:none;-webkit-user-drag:none;filter:drop-shadow(0 6px 14px rgba(8,18,53,.45))}
-#anillo{--b:54px}
-#anillo .ar{top:50%;width:var(--b);height:var(--b);margin-top:calc(var(--b) / -2);font-size:2.2rem}
-#anillo .ar.l{left:calc(50% - var(--w) / 2 - var(--b) / 2)}
-#anillo .ar.r{right:calc(50% - var(--w) / 2 - var(--b) / 2)}
+#anillo .ar{top:50%;margin-top:-27px}
 @media(max-width:800px){
-  #anillo{--w:clamp(130px,40vw,200px);--b:44px}
-  #anillo .ar{font-size:1.8rem}
+  #anillo{--w:clamp(130px,40vw,200px)}
+  #anillo .ar{margin-top:-23px}
 }
 
 /* CROMO EN BLANCO: NUEVA INCORPORACIÓN */

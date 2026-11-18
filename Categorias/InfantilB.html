@@ -937,7 +937,7 @@ function render(){
  if(jnAuto)jn=wkJ();
  const tabs=[["jor","🗓 Jornadas"],["cal","📅 Mi calendario"],["cla","🏆 Clasificación"],["cop","🥇 Copa"],["gol","👟 Goleadores"],["cro","🎽 Jugadores"],["jug","🎬 Jugadas"]].filter(t=>t[0]!="cop"||COPA||E());if(E())tabs.push(["piz","📋 Pizarra"],["hor","🕒 Horarios"],["pla","👥 Plantilla"],["ent","🏃 Entrenos"]);
  tabs.push(E()?["out","🔓 Salir"]:["log","🔒 Login"]);
- tabs.push(["back","🏠 Inicio"]);
+ if(!E())tabs.push(["back","🏠 Inicio"]);
  const SH={jor:"Jornadas",cal:"Calendario",cla:"Clasif.",cop:"Copa",gol:"Goleadores",cro:"Jugadores",jug:"Jugadas",piz:"Pizarra",hor:"Horarios",pla:"Plantilla",ent:"Entrenos",log:"Login",out:"Salir",back:E()?"Salir e inicio":"Inicio"};
 const nv=document.getElementById("nav");nv.style.setProperty("--c",Math.ceil(tabs.length/2));
  nv.innerHTML=tabs.map(([k,l])=>{const ic=l.split(" ")[0],oc=k=="log"?"unlock()":k=="out"?"setEdit(false)":k=="back"?"volverTop()":`tab='${k}';if(tab=='jor')jnAuto=true;if(tab=='ent')entD='';if(tab=='jug')PL=null;render()`;return`<button class="${tab==k?'on':''}${k=='out'?' out':''}${k=='back'?' back':''}" onclick="${oc}"${k=='back'?` title="${E()?"Cerrar sesión de entrenador e ir al inicio":"Ir al inicio"}"`:""}><span>${ic}</span><span>${SH[k]}</span></button>`}).join("");

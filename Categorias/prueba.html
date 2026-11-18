@@ -567,6 +567,12 @@ header.site-banner .dl {
  #topbar .brand .logo{height:48px}
  #topbar .brand b{font-size:1.1rem;padding:8px 20px}
 }
+
+/* compartir WhatsApp (club) */
+#hero button.wa{display:inline-flex;align-items:center;gap:.5em;padding:.6em 1.3em;border:0;border-radius:999px;color:#fff;background:linear-gradient(180deg,#3be37a,#16a34a);box-shadow:inset 0 .12em 0 rgba(255,255,255,.45),0 .28em 0 #0e7a37,0 .8em 1.2em rgba(8,18,53,.4);font:800 1rem/1 Barlow,system-ui,sans-serif;text-shadow:0 1px 2px rgba(0,0,0,.25);cursor:pointer;transition:transform .15s,box-shadow .15s}
+#hero button.wa:hover{transform:translateY(-3px) scale(1.03)}
+#hero button.wa:active{transform:translateY(.22em);box-shadow:inset 0 .12em 0 rgba(255,255,255,.35),0 .04em 0 #0e7a37,0 .15em .4em rgba(8,18,53,.4)}
+#hero button.wa:focus-visible{outline:3px solid #fff;outline-offset:3px}
 </style>
 <script>const CAT={"nombre": "Torrejón Juncal Juvenil B", "corto": "Juvenil B", "liga": "Primera Juvenil FS · Grupo 2", "node": "cat-juvenil-b", "email": "juvenil-b@torrejonjuncal.es", "grupo": "28122269", "equipo": "19691247", "me": 0};</script>
 </head>
@@ -865,10 +871,17 @@ function goalBy(j,h,f,pl){
   if(j!==0&&!S.pl.includes(n)){S.pl.push(n);S.pl.sort((a,b)=>a.localeCompare(b));S.dn[n]=c.num}}
  lg(j,h,"me",1,n)}
 function startLive(j,h){const m=MS(j)[j+"_"+h]||(MS(j)[j+"_"+h]={});m.c={ph:0,run:false,base:0,s:Date.now()};save(j===0)}
+function waShare(n,h,k){try{const x=myM().find(q=>q.r.n==n&&q.h==h);if(!x)throw 0;
+ const m=M(n,h),ok=done(m),v=ven(h,m),jl=lab(x.r),d=fmt(m.d||x.r.d),hr=m.t?m.t+" h":"hora por confirmar",link=location.href.split("#")[0];
+ const A=nm(x.h),B=nm(x.a);let t;
+ if(k=="final")t=`🏁 *FINAL* · ${jl}\n${A} *${m.h} - ${m.a}* ${B}\n📅 ${d}\n📍 ${v}\n👉 ${link}`;
+ else if(k=="live")t=`🔴 *EN DIRECTO* · ${jl}\n${A} *${ok?m.h:0} - ${ok?m.a:0}* ${B}\n📍 ${v}\n👉 ${link}`;
+ else t=`⚽ *PRÓXIMO PARTIDO* · ${jl}\n${x.h==ME?"🏠":"✈️"} *${A}* vs *${B}*\n📅 ${d} · ${hr}\n📍 ${v}\n🗺️ https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(v)}\n¡Vamos Juncal! 💙💛`;
+ window.open("https://wa.me/?text="+encodeURIComponent(t),"_blank","noopener")}catch(e){alert("No se ha podido preparar el mensaje.")}}
 function liveHero(x){const m=M(x.r.n,x.h),c=m.c||{ph:0},ph=c.ph||0,ok=done(m),ev=evs(m),gr=ev.length<=6?[2,1]:ev.length<=12?[3,.75]:ev.length<=20?[4,.6]:[5,.5];
  const L={0:"A PUNTO DE EMPEZAR",1:'<span class="dot">🔴</span> EN DIRECTO · 1ª PARTE',HT:"☕ DESCANSO",2:'<span class="dot">🔴</span> EN DIRECTO · 2ª PARTE',FT:"🏁 FINAL DEL PARTIDO"}[ph];
  const B=(a,l)=>`<button onclick="clk(${x.r.n},${x.h},'${a}')">${l}</button>`;
- let ad="";if(E())ad=`<div class="ctl">${ph==0?B("go1","▶ Iniciar 1ª parte"):""}${(ph==1||ph==2)?(c.run?B("pause","⏸ Pausar"):B("resume","▶ Reanudar")):""}${ph==1?B("ht","🔔 Fin 1ª parte"):""}${ph=="HT"?B("go2","▶ Iniciar 2ª parte"):""}${ph==2?B("ft","🏁 Final"):""}${ph=="FT"?B("reopen","↩ Reabrir partido"):""}${B("reset","↺ Reiniciar")}</div>`;
+ let ad="";if(E())ad=`<div class="ctl">${ph==0?B("go1","▶ Iniciar 1ª parte"):""}${(ph==1||ph==2)?(c.run?B("pause","⏸ Pausar"):B("resume","▶ Reanudar")):""}${ph==1?B("ht","🔔 Fin 1ª parte"):""}${ph=="HT"?B("go2","▶ Iniciar 2ª parte"):""}${ph==2?B("ft","🏁 Final"):""}${ph=="FT"?B("reopen","↩ Reabrir partido"):""}${B("reset","↺ Reiniciar")}<button class="wa" onclick="waShare(${x.r.n},${x.h},'${ph=="FT"?"final":"live"}')">📲 Compartir en WhatsApp</button></div>`;
  const side=(id,cls)=>{const mine=id==ME,btn=E()&&ph!="FT"?`<div class="gb"><button class="gbtn ${mine?"me":""}" onclick="${mine?`pickGol(${x.r.n},${x.h})`:`lg(${x.r.n},${x.h},'rv',1)`}"><span class="gp">＋</span><span class="gt">GOL</span><span class="gx">${esc(nm(id))}</span></button><button class="gmn" onclick="lg(${x.r.n},${x.h},'${mine?"me":"rv"}',-1)">− Gol</button></div>`:"";return`<div class="ts ${cls}"><div class="ti">${bd(id)}<div class="cn">${nm(id)}</div></div>${btn}</div>`};
  const sc=`${ok?m.h:0} - ${ok?m.a:0}`;
  return`<div class="live"><div class="lt">${L} · ${x.r.n===0?"JORNADA "+(nextL()||{r:{n:J.length}}).r.n:lab(x.r).toUpperCase()}</div><p class="loc" style="margin:8px 0 0">${loc(x.h,m)}</p>
@@ -899,7 +912,7 @@ function hero(){const lv=liveM();lvOn=!!lv;if(lv)return liveHero(lv);const nx=ne
  <div class="hn-eq">${eqp(nx.h)}<div class="hn-vs">${dn?`${m.h} - ${m.a}`:"VS"}</div>${eqp(nx.a)}</div>
  <div class="hn-dt"><span>${fmt(m.d||nx.r.d)} · ${m.t?m.t+" h":"hora por confirmar"}</span></div>
  <p class="hn-loc">${loc(nx.h,m)}</p>
- ${m.t&&fut&&!dn?`<div class="cd" id="cd" data-t="${when(nx).getTime()}"></div>`:""}${!dn&&!fut?`<p style="text-align:center;margin-top:12px">⏳ Resultado pendiente</p>`:""}${E()&&!dn?`<p style="text-align:center;margin-top:14px"><button onclick="startLive(${nx.r.n},${nx.h})">📡 Iniciar directo ahora</button></p>`:""}</div>`}
+ ${m.t&&fut&&!dn?`<div class="cd" id="cd" data-t="${when(nx).getTime()}"></div>`:""}${!dn&&!fut?`<p style="text-align:center;margin-top:12px">⏳ Resultado pendiente</p>`:""}${E()&&!dn?`<p style="text-align:center;margin-top:14px"><button onclick="startLive(${nx.r.n},${nx.h})">📡 Iniciar directo ahora</button></p>`:""}${E()?`<p style="text-align:center;margin-top:12px"><button class="wa" onclick="waShare(${nx.r.n},${nx.h},'${dn?"final":"next"}')">📲 Compartir en WhatsApp</button></p>`:""}</div>`}
 function tick(){tickLive();const e=document.getElementById("cd");if(!e)return;let s=Math.max(0,(+e.dataset.t-Date.now())/1e3|0);const v=[[86400,"días"],[3600,"horas"],[60,"min"],[1,"seg"]];e.innerHTML=v.map(([k,l])=>{const n=s/k|0;s%=k;return`<div><b>${String(n).padStart(2,"0")}</b><span>${l}</span></div>`}).join("")}
 /* Jornada de la semana: hasta el domingo a las 23:00 (Madrid) de la semana de su fecha */
 function wkJ(){const mad=(y,m,d)=>{for(const o of [1,2]){const t=Date.UTC(y,m-1,d,23-o,0);if(+new Intl.DateTimeFormat("en-GB",{timeZone:"Europe/Madrid",hour:"numeric",hourCycle:"h23"}).format(t)===23)return t}return Date.UTC(y,m-1,d,22,0)};

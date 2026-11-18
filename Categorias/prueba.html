@@ -871,13 +871,66 @@ function goalBy(j,h,f,pl){
   if(j!==0&&!S.pl.includes(n)){S.pl.push(n);S.pl.sort((a,b)=>a.localeCompare(b));S.dn[n]=c.num}}
  lg(j,h,"me",1,n)}
 function startLive(j,h){const m=MS(j)[j+"_"+h]||(MS(j)[j+"_"+h]={});m.c={ph:0,run:false,base:0,s:Date.now()};save(j===0)}
-function waShare(n,h,k){try{const x=myM().find(q=>q.r.n==n&&q.h==h);if(!x)throw 0;
+function waImg(s){return new Promise(r=>{if(!s)return r(null);const i=new Image();i.onload=()=>r(i);i.onerror=()=>r(null);i.src=s})}
+async function waPoster(x,o){
+ const W=1080,H=1350,cv=document.createElement("canvas");cv.width=W;cv.height=H;const g=cv.getContext("2d");
+ try{await document.fonts.load('800 60px "Barlow Condensed"');await document.fonts.load('700 36px Barlow')}catch(e){}
+ const FC='"Barlow Condensed",Impact,sans-serif',FB='Barlow,system-ui,sans-serif',YE="#ffd23f",NV="#0f2a78";
+ const src=id=>id==ME?"../Images/escudo.png":COD[id]?"../Escudos/"+COD[id]+".png":"";
+ const [iH,iA,iE,iL]=await Promise.all([waImg(src(x.h)),waImg(src(x.a)),waImg("../Images/escudo.png"),waImg("../Images/lobo.png")]);
+ const gr=g.createLinearGradient(0,0,W,0);[[0,"#0b2273"],[.5,"#1740c0"],[.8,"#2f6bff"],[.93,"#5b9bff"],[.98,"#c9dcff"],[1,"#fff"]].forEach(([p,k])=>gr.addColorStop(p,k));
+ g.fillStyle=gr;g.fillRect(0,0,W,H);
+ if(iE){g.save();g.globalAlpha=.22;try{g.filter="grayscale(1) brightness(2)"}catch(e){}g.drawImage(iE,-70,H-420,520,520);g.restore()}
+ if(iL){const h=H*.74,w=iL.width*h/iL.height;g.save();g.globalAlpha=.14;g.drawImage(iL,W-w,H-h,w,h);g.restore()}
+ const rr=(a,b,w,h,r)=>{g.beginPath();g.moveTo(a+r,b);g.arcTo(a+w,b,a+w,b+h,r);g.arcTo(a+w,b+h,a,b+h,r);g.arcTo(a,b+h,a,b,r);g.arcTo(a,b,a+w,b,r);g.closePath()};
+ const T=(s,a,b,fnt,col,al,mw)=>{g.font=fnt;if(mw){let z=+fnt.match(/(\d+)px/)[1];while(g.measureText(s).width>mw&&z>18){z-=2;g.font=fnt.replace(/\d+px/,z+"px")}}g.fillStyle=col;g.textAlign=al||"center";g.textBaseline="middle";g.fillText(s,a,b)};
+ g.save();g.shadowColor="rgba(8,18,53,.55)";g.shadowBlur=10;g.shadowOffsetY=3;
+ // etiquetas superiores
+ g.font="800 36px "+FC;const tw=g.measureText(o.tag).width+56;rr(70,70,tw,64,32);g.fillStyle=YE;g.fill();T(o.tag,70+tw/2,102,"800 36px "+FC,"#0a0f1e");
+ T(o.jl.toUpperCase(),70+tw+28,102,"700 38px "+FC,"#fff","left");
+ if(o.casa){g.font="700 34px "+FC;const cw=g.measureText(o.casa).width+50,cx=W-70-cw;rr(cx,70,cw,64,32);g.lineWidth=4;g.strokeStyle="#fff";g.stroke();T(o.casa,cx+cw/2,102,"700 34px "+FC,"#fff")}
+ g.restore();
+ // escudos
+ const sh=(id,im,cx)=>{const cy=430,r=150;g.save();g.shadowColor="rgba(8,18,53,.5)";g.shadowBlur=30;g.shadowOffsetY=12;g.beginPath();g.arc(cx,cy,r+18,0,7);g.fillStyle=YE;g.fill();g.restore();g.beginPath();g.arc(cx,cy,r+6,0,7);g.fillStyle="#fff";g.fill();
+  g.save();g.beginPath();g.arc(cx,cy,r,0,7);g.clip();
+  if(im){const k=Math.min(2*r/im.width,2*r/im.height);g.drawImage(im,cx-im.width*k/2,cy-im.height*k/2,im.width*k,im.height*k)}
+  else{g.fillStyle=id==ME?"#2f7bff":`hsl(${id*47%360} 55% 38%)`;g.fillRect(cx-r,cy-r,2*r,2*r);T(nm(id).split(" ").map(w=>w[0]).join("").slice(0,2).toUpperCase(),cx,cy,"italic 800 130px "+FC,"#fff")}
+  g.restore()};
+ sh(x.h,iH,270);sh(x.a,iA,810);
+ g.save();g.shadowColor="rgba(8,18,53,.6)";g.shadowBlur=14;g.shadowOffsetY=5;
+ T(o.mid,540,430,(o.mid.length>4?"italic 800 120px ":"italic 800 150px ")+FC,YE,"center",190);
+ // nombres (hasta 2 líneas)
+ const nom=(id,cx)=>{const w=nm(id).toUpperCase().split(" ");let l1=w.join(" "),l2="";g.font="800 64px "+FC;if(g.measureText(l1).width>440&&w.length>1){let bi=1,bm=1e9;for(let i=1;i<w.length;i++){const m=Math.max(g.measureText(w.slice(0,i).join(" ")).width,g.measureText(w.slice(i).join(" ")).width);if(m<bm){bm=m;bi=i}}l1=w.slice(0,bi).join(" ");l2=w.slice(bi).join(" ")}
+  if(l2){T(l1,cx,640,"800 60px "+FC,"#fff","center",450);T(l2,cx,704,"800 60px "+FC,"#fff","center",450)}else T(l1,cx,672,"800 64px "+FC,"#fff","center",450)};
+ nom(x.h,270);nom(x.a,810);g.restore();
+ // fecha / hora
+ g.save();rr(100,800,880,120,28);g.fillStyle="#b8860b";g.translate(0,10);g.fill();g.translate(0,-10);
+ const gd=g.createLinearGradient(0,800,0,920);gd.addColorStop(0,"#ffe27a");gd.addColorStop(1,YE);rr(100,800,880,120,28);g.fillStyle=gd;g.shadowColor="rgba(8,18,53,.4)";g.shadowBlur=24;g.shadowOffsetY=10;g.fill();g.restore();
+ T(o.fecha,540,862,"800 62px "+FC,"#0a0f1e","center",820);
+ let y=960;
+ if(o.vest){rr(140,y,800,126,26);g.fillStyle="rgba(8,18,53,.55)";g.fill();g.lineWidth=2;g.strokeStyle="rgba(255,255,255,.35)";g.stroke();
+  T(o.vest[0],540,y+46,"800 50px "+FC,"#fff","center",740);T(o.vest[1],540,y+94,"600 32px "+FB,"#dbe8ff","center",740);y+=160}
+ T("📍 "+o.v,540,y+30,"700 36px "+FB,"#fff","center",960);
+ T("TORREJÓN JUNCAL · ESCUELA DE FÚTBOL SALA",540,H-48,"700 30px "+FC,"rgba(255,255,255,.85)");
+ return new Promise(r=>cv.toBlob(r,"image/png"))}
+async function waGo(t,blob,nom){
+ const f=blob?new File([blob],nom,{type:"image/png"}):null;
+ try{if(f&&navigator.canShare&&navigator.canShare({files:[f]})){await navigator.share({files:[f],text:t});return}}catch(e){if(e&&e.name=="AbortError")return}
+ if(blob){const a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download=nom;document.body.appendChild(a);a.click();a.remove()}
+ window.open("https://wa.me/?text="+encodeURIComponent(t),"_blank","noopener")}
+async function waShare(n,h,k){try{const x=myM().find(q=>q.r.n==n&&q.h==h);if(!x)throw 0;
  const m=M(n,h),ok=done(m),v=ven(h,m),jl=lab(x.r),d=fmt(m.d||x.r.d),hr=m.t?m.t+" h":"hora por confirmar",link=location.href.split("#")[0];
- const A=nm(x.h),B=nm(x.a);let t;
- if(k=="final")t=`🏁 *FINAL* · ${jl}\n${A} *${m.h} - ${m.a}* ${B}\n📅 ${d}\n📍 ${v}\n👉 ${link}`;
- else if(k=="live")t=`🔴 *EN DIRECTO* · ${jl}\n${A} *${ok?m.h:0} - ${ok?m.a:0}* ${B}\n📍 ${v}\n👉 ${link}`;
- else t=`⚽ *PRÓXIMO PARTIDO* · ${jl}\n${x.h==ME?"🏠":"✈️"} *${A}* vs *${B}*\n📅 ${d} · ${hr}\n📍 ${v}\n🗺️ https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(v)}\n¡Vamos Juncal! 💙💛`;
- window.open("https://wa.me/?text="+encodeURIComponent(t),"_blank","noopener")}catch(e){alert("No se ha podido preparar el mensaje.")}}
+ const A=nm(x.h),B=nm(x.a),T=id=>id==ME?`💙💛 *${nm(id).toUpperCase()}*`:`🔥 *${nm(id).toUpperCase()}*`;let t,o;
+ document.body.style.cursor="progress";
+ if(k=="final"){t=`🏁 *FINAL* · ${jl}\n${A} *${m.h} - ${m.a}* ${B}\n📅 ${d}\n📍 ${v}\n👉 ${link}`;o={tag:"FINAL",jl,mid:`${m.h} - ${m.a}`,fecha:d,v}}
+ else if(k=="live"){t=`🔴 *EN DIRECTO* · ${jl}\n${A} *${ok?m.h:0} - ${ok?m.a:0}* ${B}\n📍 ${v}\n👉 ${link}`;o={tag:"EN DIRECTO",jl,mid:`${ok?m.h:0} - ${ok?m.a:0}`,fecha:d,v}}
+ else{let vest=["EN EL VESTUARIO 30 MIN ANTES","del partido"],vt="⏰ *En el vestuario 30 min antes del partido*";
+  if(/^\d{1,2}:\d{2}$/.test(m.t||"")){const[a,b]=m.t.split(":").map(Number),z=((a*60+b-30)%1440+1440)%1440,s=String(z/60|0).padStart(2,"0")+":"+String(z%60).padStart(2,"0");vest=[`⏰ EN EL VESTUARIO A LAS ${s} H`,"30 min antes del partido"];vt=`⏰ *En el vestuario a las ${s} h* (30 min antes)`}
+  t=`⚽ *PRÓXIMO PARTIDO* · ${jl} · ${x.h==ME?"🏠 CASA":"✈️ FUERA"}\n\n${T(x.h)}\n        🆚\n${T(x.a)}\n\n📅 ${d} · ${hr}\n${vt}\n📍 ${v} 👉 https://maps.google.com/?q=${encodeURIComponent(v)}\n\n¡Vamos Juncal! 💙💛`;
+  o={tag:"PRÓXIMO PARTIDO",jl,casa:x.h==ME?"🏠 CASA":"✈️ FUERA",mid:"VS",fecha:`${d} · ${hr}`,vest,v}}
+ let blob=null;try{blob=await waPoster(x,o)}catch(e){}
+ document.body.style.cursor="";
+ await waGo(t,blob,"juncal-"+k+".png")}catch(e){document.body.style.cursor="";alert("No se ha podido preparar el mensaje.")}}
 function liveHero(x){const m=M(x.r.n,x.h),c=m.c||{ph:0},ph=c.ph||0,ok=done(m),ev=evs(m),gr=ev.length<=6?[2,1]:ev.length<=12?[3,.75]:ev.length<=20?[4,.6]:[5,.5];
  const L={0:"A PUNTO DE EMPEZAR",1:'<span class="dot">🔴</span> EN DIRECTO · 1ª PARTE',HT:"☕ DESCANSO",2:'<span class="dot">🔴</span> EN DIRECTO · 2ª PARTE',FT:"🏁 FINAL DEL PARTIDO"}[ph];
  const B=(a,l)=>`<button onclick="clk(${x.r.n},${x.h},'${a}')">${l}</button>`;

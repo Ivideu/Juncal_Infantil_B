@@ -1067,9 +1067,9 @@ function renderEntGrid(){
   ds.forEach(d=>jug.forEach(c=>{const v=(S.ent[d]||{})[c.key];if(v===1||v===0){t++;if(v===1)a++}}));
   const p=t?Math.round(a/t*100):null,open=k in entMesOpen?entMesOpen[k]:i===0,parts=[];
   for(let j=0;j<ds.length;j+=per)parts.push(ds.slice(j,j+per));
-  return`<details class="entm" ${open?"open":""} ontoggle="entTog('${k}',this.open)"><summary><b>${entMesN[+k.slice(5)-1]} ${k.slice(0,4)}</b><span>${ds.length} entrenos${p==null?"":` · <i class="${p>=75?"ok":p<50?"ko":""}">${p}% asistencia</i>`}</span></summary>${parts.map(x=>`<div class="entx">${entGridHTML(x,jug,false,true)}</div>`).join("")}</details>`}).join("");
+  return`<details class="entm" ${open?"open":""} ontoggle="entTog('${k}',this.open)"><summary><b>${entMesN[+k.slice(5)-1]} ${k.slice(0,4)}</b><span>${ds.length} entrenos${p==null?"":` · <i class="${p>=75?"ok":p<50?"ko":""}">${p}% asistencia</i>`}</span></summary>${parts.map(x=>`<div class="entx">${entGridHTML(x,jug,true,true)}</div>`).join("")}</details>`}).join("");
  return`<div class="cvhd"><h2>Resumen desde el día uno</h2><span class="cvl">${dates.length} ENTRENOS · ${new Set(dates.map(entMon)).size} SEMANAS</span></div>
- <small class="gap" style="display:block;margin:4px 0 8px">V = fue · X = no fue · – = sin marcar. Pulsa un mes para abrirlo o cerrarlo. Totales por jugador en «Resumen total», arriba.</small>`+html}
+ <small class="gap" style="display:block;margin:4px 0 8px">V = fue · X = no fue · – = sin marcar. Pulsa un mes para abrirlo o cerrarlo. Fue y % son el total de todos los entrenos.</small>`+html}
 
 /* ===== Cromos y convocatoria ===== */
 const CROMOS_DIR="../../Cromos/";

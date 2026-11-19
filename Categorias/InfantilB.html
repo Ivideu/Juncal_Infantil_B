@@ -1032,10 +1032,9 @@ function renderEnt(){
   fue=jug.filter(c=>o[c.key]===1).length,nof=jug.filter(c=>o[c.key]===0).length,
   cls=p=>p==null?"":p>=75?"ok":p<50?"ko":"",
   wk=weekWT(d),mi=(S.ent&&S.ent[wk.mi])||{},ju=(S.ent&&S.ent[wk.ju])||{};
- const rows=jug.map(c=>{const v=o[c.key],s=entStats(c.key),k=esc(c.key);
+ const rows=jug.map(c=>{const v=o[c.key],k=esc(c.key);
   return`<div class="card" style="display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap"><span style="display:flex;align-items:center;gap:10px">${shirt(c.num,"#2f7bff")}<b>${esc(c.name)}</b></span>
-  <span style="display:flex;align-items:center;gap:10px;flex-wrap:wrap"><span class="entp ${cls(s.p)}">${s.t?s.a+"/"+s.t+" · "+s.p+"%":"sin datos"}</span>
-  <span class="entb"><button class="s ${v===1?"act":""}" aria-label="${esc(c.name)} fue" data-k="${k}" onclick="setEnt(this.dataset.k,1)">✔</button><button class="n ${v===0?"act":""}" aria-label="${esc(c.name)} no fue" data-k="${k}" onclick="setEnt(this.dataset.k,0)">✘</button></span></span></div>`}).join("");
+  <span class="entb"><button class="s ${v===1?"act":""}" aria-label="${esc(c.name)} fue" data-k="${k}" onclick="setEnt(this.dataset.k,1)">✔</button><button class="n ${v===0?"act":""}" aria-label="${esc(c.name)} no fue" data-k="${k}" onclick="setEnt(this.dataset.k,0)">✘</button></span></div>`}).join("");
  const mark=v=>v===1?'<span class="v">V</span>':v===0?'<span class="x">X</span>':'<span class="z">–</span>';
  return`<div class="card"><h2 style="font-size:1.6rem;color:#0f2a6b;line-height:1.1">Asistencia a entrenos</h2>
   <div class="ed" style="display:flex;border:0;margin-top:8px;padding-top:0"><input type="date" value="${d}" onchange="setEntD(this.value)"><b>${dia}</b>

@@ -417,6 +417,35 @@ header.site-banner .dl {
 .entw .x{color:#b91c1c;font:800 1.3rem 'Barlow Condensed',sans-serif}
 .entw .z{color:var(--mu)}
 .entw th small{display:block;font-weight:500;font-size:.72rem}
+/* ===== casillero entrenos ===== */
+.entx{overflow-x:auto;border:1px solid var(--line);border-radius:14px;background:#fff;margin:6px 0 14px;-webkit-overflow-scrolling:touch}
+.entx table{border-collapse:separate;border-spacing:0;width:max-content;min-width:100%;font-size:.92rem}
+.entx th,.entx td{padding:7px 8px;text-align:center;border-bottom:1px solid #e6ecfb;white-space:nowrap}
+.entx thead th{background:#eef3ff;color:#0f2a6b;font-weight:800;position:sticky;top:0}
+.entx th small{display:block;font-weight:600;font-size:.7rem;color:var(--mu)}
+.entx .wk{background:#0f2a6b;color:#fff;font:800 .8rem 'Barlow Condensed',sans-serif;letter-spacing:.06em;border-left:2px solid #fff}
+.entx .sw{border-left:2px solid #c9d6f5}
+.entx .c1,.entx .c2{position:sticky;background:#fff;z-index:1;text-align:left}
+.entx thead .c1,.entx thead .c2{background:#eef3ff;z-index:2}
+.entx .c1{left:0;min-width:34px;text-align:center}.entx .c2{left:34px;min-width:96px;font-weight:700;box-shadow:2px 0 0 #e6ecfb}
+.entx .v{color:#15803d;font:800 1.15rem 'Barlow Condensed',sans-serif}
+.entx .x{color:#b91c1c;font:800 1.15rem 'Barlow Condensed',sans-serif}
+.entx .z{color:#b6c0dc}
+.entx .tt{font:800 1rem 'Barlow Condensed',sans-serif;border-left:2px solid #c9d6f5;background:#f7f9ff}
+.entx .tt.ok{color:#15803d}.entx .tt.ko{color:#b91c1c}
+.entx tfoot td{background:#f7f9ff;font-weight:800;color:#0f2a6b}
+.entm{margin:0 0 10px;border:1px solid var(--line);border-radius:14px;background:rgba(255,255,255,.7);overflow:hidden}
+.entm>summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap;padding:12px 14px;font:800 1.1rem 'Barlow Condensed',sans-serif;color:#0f2a6b;background:#eef3ff}
+.entm>summary::-webkit-details-marker{display:none}
+.entm>summary:before{content:"▸";margin-right:8px;transition:transform .15s;display:inline-block}
+.entm[open]>summary:before{transform:rotate(90deg)}
+.entm>summary b{flex:1;text-transform:uppercase;letter-spacing:.04em}
+.entm>summary span{font:700 .9rem Barlow,system-ui,sans-serif;color:var(--mu)}
+.entm>summary i{font-style:normal;font-weight:800;color:#0f2a6b}.entm>summary i.ok{color:#15803d}.entm>summary i.ko{color:#b91c1c}
+.entm .entx{margin:0;border-radius:0;border-width:1px 0 0}
+.entbar{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:4px 0 8px}
+.entbar button{background:#0f2a6b;color:#fff;border:0;border-radius:12px;padding:10px 16px;font:800 .95rem Barlow,system-ui,sans-serif}
+
 /* ===== Login, Jugadas (vídeos) y Pizarra del entrenador ===== */
 .mdl{position:fixed;inset:0;background:rgba(3,8,28,.8);display:flex;align-items:center;justify-content:center;padding:16px;z-index:10000}
 .mdl[hidden]{display:none}
@@ -1001,8 +1030,40 @@ function renderEnt(){
   <button onclick="setEntAll(1)">✔ Todos</button><button onclick="setEntAll(0)">✘ Nadie</button></div>
   <div class="cvsum"><span class="cvs">✓ ${fue}</span><span class="cvs x">✕ ${nof}</span><span class="cvl" style="align-self:center">SIN MARCAR ${jug.length-fue-nof}</span></div></div>`
   +rows
-  +`<div class="cvhd"><h2>Resumen total (todos los entrenos)</h2></div><table><tr><th>Nº</th><th>Jugador</th><th>Fue</th><th>%</th></tr>${jug.map(c=>{const s=entStats(c.key);return`<tr><td>${esc(c.num||"–")}</td><td>${esc(c.name)}</td><td>${s.t?s.a+"/"+s.t:"–"}</td><td><b>${s.p==null?"–":s.p+"%"}</b></td></tr>`}).join("")}</table>`
-  +`<div class="cvhd"><h2>Resumen semanal</h2><span class="cvl">SEMANA DEL ${fd(wk.mi)}</span></div><table class="entw"><tr><th>Número</th><th>Jugador</th><th>Miércoles<small>${fd(wk.mi)}</small></th><th>Jueves<small>${fd(wk.ju)}</small></th></tr>${jug.map(c=>`<tr><td>${esc(c.num||"–")}</td><td>${esc(c.name)}</td><td>${mark(mi[c.key])}</td><td>${mark(ju[c.key])}</td></tr>`).join("")}</table>`}
+  +renderEntGrid()}
+
+
+/* ===== Casillero de entrenos desde el día uno ===== */
+function entDates(){return Object.keys(S.ent||{}).filter(d=>Object.values(S.ent[d]||{}).some(v=>v===1||v===0)).sort()}
+const entMon=d=>{const t=new Date(d+"T12:00:00Z"),o=(t.getUTCDay()+6)%7;return new Date(t.getTime()-o*864e5).toISOString().slice(0,10)};
+const entDia=d=>["Dom","Lun","Mar","Mié","Jue","Vie","Sáb"][new Date(d+"T12:00:00Z").getUTCDay()];
+function entGridHTML(dates,jug,withTot,foot){
+ const wk=[];dates.forEach(d=>{const m=entMon(d),l=wk[wk.length-1];if(l&&l.m===m)l.n++;else wk.push({m,n:1})});
+ const first=new Set(),ds=[];let acc=0;wk.forEach(w=>{first.add(dates[acc]);acc+=w.n});
+ const mk=v=>v===1?'<span class="v">V</span>':v===0?'<span class="x">X</span>':'<span class="z">–</span>';
+ const cls=p=>p==null?"":p>=75?"ok":p<50?"ko":"";
+ const h1=`<tr><th class="c1" rowspan="2">Nº</th><th class="c2" rowspan="2">Jugador</th>${wk.map((w,i)=>`<th class="wk" colspan="${w.n}">SEM ${entWkNum(w.m)} · ${fd(w.m)}</th>`).join("")}${withTot?'<th class="tt" rowspan="2">Fue</th><th class="tt" rowspan="2">%</th>':""}</tr>`;
+ const h2=`<tr>${dates.map(d=>`<th class="${first.has(d)?"sw":""}">${entDia(d)}<small>${fd(d)}</small></th>`).join("")}</tr>`;
+ const body=jug.map(c=>{const s=entStats(c.key);return`<tr><td class="c1">${esc(c.num||"–")}</td><td class="c2">${esc(c.name)}</td>${dates.map(d=>`<td class="${first.has(d)?"sw":""}">${mk((S.ent[d]||{})[c.key])}</td>`).join("")}${withTot?`<td class="tt">${s.t?s.a+"/"+s.t:"–"}</td><td class="tt ${cls(s.p)}">${s.p==null?"–":s.p+"%"}</td>`:""}</tr>`}).join("");
+ const ft=foot?`<tfoot><tr><td class="c1"></td><td class="c2">Asistentes</td>${dates.map(d=>`<td class="${first.has(d)?"sw":""}">${jug.filter(c=>(S.ent[d]||{})[c.key]===1).length}</td>`).join("")}${withTot?"<td></td><td></td>":""}</tr></tfoot>`:"";
+ return`<table><thead>${h1}${h2}</thead><tbody>${body}</tbody>${ft}</table>`}
+function entWkNum(m){const ds=entDates();return[...new Set(ds.map(entMon))].indexOf(m)+1}
+let entMesOpen={};
+const entMesN=["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"];
+function entTog(k,o){entMesOpen[k]=o}
+function renderEntGrid(){
+ const dates=entDates(),jug=jugList();
+ if(!dates.length)return`<div class="cvhd"><h2>Resumen desde el día uno</h2></div><div class="empty">Aún no hay entrenos registrados.</div>`;
+ const per=window.innerWidth<700?4:window.innerWidth<1100?10:16,meses={};
+ dates.forEach(d=>(meses[d.slice(0,7)]=meses[d.slice(0,7)]||[]).push(d));
+ const keys=Object.keys(meses).sort().reverse();
+ const html=keys.map((k,i)=>{const ds=meses[k];let a=0,t=0;
+  ds.forEach(d=>jug.forEach(c=>{const v=(S.ent[d]||{})[c.key];if(v===1||v===0){t++;if(v===1)a++}}));
+  const p=t?Math.round(a/t*100):null,open=k in entMesOpen?entMesOpen[k]:i===0,parts=[];
+  for(let j=0;j<ds.length;j+=per)parts.push(ds.slice(j,j+per));
+  return`<details class="entm" ${open?"open":""} ontoggle="entTog('${k}',this.open)"><summary><b>${entMesN[+k.slice(5)-1]} ${k.slice(0,4)}</b><span>${ds.length} entrenos${p==null?"":` · <i class="${p>=75?"ok":p<50?"ko":""}">${p}% asistencia</i>`}</span></summary>${parts.map(x=>`<div class="entx">${entGridHTML(x,jug,true,true)}</div>`).join("")}</details>`}).join("");
+ return`<div class="cvhd"><h2>Resumen desde el día uno</h2><span class="cvl">${dates.length} ENTRENOS · ${new Set(dates.map(entMon)).size} SEMANAS</span></div>
+ <small class="gap" style="display:block;margin:4px 0 8px">V = fue · X = no fue · – = sin marcar. Pulsa un mes para abrirlo o cerrarlo. Fue y % son el total de todos los entrenos.</small>`+html}
 
 /* ===== Cromos y convocatoria ===== */
 const CROMOS_DIR="../Cromos/";

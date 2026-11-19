@@ -1035,7 +1035,6 @@ function renderEnt(){
   <button onclick="setEntAll(1)">✔ Todos</button><button onclick="setEntAll(0)">✘ Nadie</button></div>
   <div class="cvsum"><span class="cvs">✓ ${fue}</span><span class="cvs x">✕ ${nof}</span><span class="cvl" style="align-self:center">SIN MARCAR ${jug.length-fue-nof}</span></div></div>`
   +rows
-  +`<div class="cvhd"><h2>Resumen total (todos los entrenos)</h2></div><table><tr><th>Nº</th><th>Jugador</th><th>Fue</th><th>%</th></tr>${jug.map(c=>{const s=entStats(c.key);return`<tr><td>${esc(c.num||"–")}</td><td>${esc(c.name)}</td><td>${s.t?s.a+"/"+s.t:"–"}</td><td><b>${s.p==null?"–":s.p+"%"}</b></td></tr>`}).join("")}</table>`
   +renderEntGrid()}
 
 

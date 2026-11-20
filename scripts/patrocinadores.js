@@ -9,23 +9,24 @@
   const DIRECCION = "izquierda";   // "izquierda": los logos avanzan hacia la izquierda · "derecha": hacia la derecha
   const VELOCIDAD = 55;            // píxeles por segundo
   const RUTA = "Images/patrocinadores/";
+  const VERSION = "2";             // súbelo si cambias los logos, para que el navegador no use la versión antigua
 
   const SPONSORS = [
-    { name: "Ayuntamiento de Torrejón de Ardoz", img: "ayuntamiento.png", w: 364, h: 92,  logoH: 38, url: "https://www.ayto-torrejon.es/" },
-    { name: "Asiem Servicios Jurídicos",         img: "asiem.png",        w: 300, h: 172, logoH: 46, url: "" },
-    { name: "Inmobiliaria Provan",               img: "provan.png",       w: 212, h: 180, logoH: 46, url: "" },
-    { name: "Hurtado, S.L.",                     img: "hurtado.png",      w: 252, h: 140, logoH: 44, url: "" },
-    { name: "Gor2Bar",                           img: "gor2bar.png",      w: 248, h: 96,  logoH: 38, url: "" },
-    { name: "Lasercor",                          img: "lasercor.png",     w: 276, h: 96,  logoH: 36, url: "" },
-    { name: "Cedecar",                           img: "cedecar.png",      w: 248, h: 80,  logoH: 34, url: "" },
-    { name: "delaoliva",                         img: "delaoliva.png",    w: 240, h: 60,  logoH: 30, url: "" },
-    { name: "Cosmos Telecomunicaciones",         img: "cosmos.png",       w: 244, h: 84,  logoH: 38, url: "" }
+    { name: "Ayuntamiento de Torrejón de Ardoz", img: "ayuntamiento.png", w: 744, h: 200,  logoH: 38, url: "https://www.ayto-torrejon.es/" },
+    { name: "Asiem Servicios Jurídicos",         img: "asiem.png",        w: 616, h: 360, logoH: 46, url: "" },
+    { name: "Inmobiliaria Provan",               img: "provan.png",       w: 440, h: 360, logoH: 46, url: "" },
+    { name: "Hurtado, S.L.",                     img: "hurtado.png",      w: 520, h: 296, logoH: 44, url: "" },
+    { name: "Gor2Bar",                           img: "gor2bar.png",      w: 512, h: 208,  logoH: 38, url: "" },
+    { name: "Lasercor",                          img: "lasercor.png",     w: 568, h: 192,  logoH: 36, url: "" },
+    { name: "Cedecar",                           img: "cedecar.png",      w: 512, h: 176,  logoH: 34, url: "" },
+    { name: "delaoliva",                         img: "delaoliva.png",    w: 496, h: 136,  logoH: 30, url: "" },
+    { name: "Cosmos Telecomunicaciones",         img: "cosmos.png",       w: 504, h: 184,  logoH: 38, url: "" }
   ];
 
   const esc = t => String(t || "").replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
 
   function item(s, copia) {
-    const img = `<img src="${RUTA + esc(s.img)}" alt="${copia ? "" : esc(s.name)}" width="${s.w}" height="${s.h}" decoding="async" draggable="false" style="--h:${s.logoH}px">`;
+    const img = `<img src="${RUTA + esc(s.img)}?v=${VERSION}" alt="${copia ? "" : esc(s.name)}" width="${s.w}" height="${s.h}" decoding="async" draggable="false" style="--h:${s.logoH}px">`;
     if (!s.url) return `<span class="sp-it" title="${esc(s.name)}"${copia ? ' aria-hidden="true"' : ""}>${img}</span>`;
     return `<a class="sp-it" href="${esc(s.url)}" target="_blank" rel="noopener sponsored" title="${esc(s.name)}" aria-label="${esc(s.name)} (se abre en una pestaña nueva)"${copia ? ' aria-hidden="true" tabindex="-1"' : ""}>${img}</a>`;
   }

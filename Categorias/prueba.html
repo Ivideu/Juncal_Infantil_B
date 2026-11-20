@@ -990,8 +990,8 @@ async function shCartel(p){
  return cv}
 function shTexto(p){const h=p.hora?(()=>{const[a,b]=p.hora.split(":").map(Number),t=a*60+b-30;return String(Math.floor(t/60)).padStart(2,"0")+":"+String(t%60).padStart(2,"0")})():"";
  const hoy=new Date().toLocaleDateString("sv-SE",{timeZone:"Europe/Madrid"}),man=new Date(Date.now()+864e5).toLocaleDateString("sv-SE",{timeZone:"Europe/Madrid"});
- const dia=p.d===hoy?"Hoy":p.d===man?"Mañana":p.dia,maps="https://www.google.com/maps/search/?api=1&query="+encodeURIComponent(p.campo);
- return[`⚽ *${CAT_NAME}* · ${p.jor}`,`🆚 *${p.loc}* vs *${p.vis}*`,`📅 ${dia} ${p.f.getDate()} ${SH_MESES[p.f.getMonth()].slice(0,3)} · 🕒 ${p.hora?p.hora+" h":"hora por confirmar"} · ${p.casa?"🏠 Casa":"✈ Fuera"}`,`📍 ${p.campo}\n${maps}`,h?`👕 Vestuario: ${h} h (30 min antes)`:"",shConv()].filter(Boolean).join("\n")}
+ const dia=p.d===hoy?"Hoy":p.d===man?"Mañana":p.dia,maps="https://maps.google.com/?q="+encodeURIComponent(p.campo);
+ return[`⚽ *${CAT_NAME}* · ${p.jor}`,`🆚 *${p.loc}* vs *${p.vis}*`,`📅 ${dia} ${p.f.getDate()} ${SH_MESES[p.f.getMonth()].slice(0,3)} · 🕒 ${p.hora?p.hora+" h":"hora por confirmar"} · ${p.casa?"🏠 Casa":"✈ Fuera"}`,`📍 ${p.campo}: ${maps}`,h?`👕 Vestuario: ${h} h (30 min antes)`:"",shConv()].filter(Boolean).join("\n")}
 function shConv(){const l=jugList().filter(c=>cEst(c)==="convocado");if(!l.length)return"";
  return`👥 *Convocados (${l.length}):*\n`+l.map(c=>`• ${c.num?c.num+" · ":""}${c.name}${c.pos==="portero"?" 🧤":""}`).join("\n")}
 async function compartirPartido(){
@@ -1014,6 +1014,8 @@ function jsel(){const c=wkJ();
 let subA=false;
 async function subAdmin(on){try{const FM=window.Capacitor&&Capacitor.Plugins&&Capacitor.Plugins.FirebaseMessaging;if(!FM)return;
  if(on&&!subA){await FM.subscribeToTopic({topic:"pruebas"});subA=true}else if(!on&&subA){await FM.unsubscribeFromTopic({topic:"pruebas"});subA=false}}catch(e){}}
+function navCols(){const nv=document.getElementById("nav");if(!nv)return;const n=+nv.dataset.n||0,r=n>10&&innerWidth<700?3:2;nv.style.setProperty("--c",Math.ceil(n/r));if(typeof setTb==="function")setTb()}
+addEventListener("resize",navCols);
 function render(){
  document.body.classList.toggle("owner",!!E()&&ACC===FBMAIL);
  subAdmin(E());
@@ -1027,7 +1029,7 @@ function render(){
  tabs.push(E()?["out","🔓 Salir"]:["log","🔒 Login"]);
  if(!E())tabs.push(["back","🏠 Inicio"]);
  const SH={jor:"Jornadas",cal:"Calendario",cla:"Clasif.",cop:"Copa",gol:"Goleadores",cro:"Jugadores",jug:"Jugadas",piz:"Pizarra",hor:"Horarios",pla:"Plantilla",ent:"Entrenos",log:"Login",out:"Salir",shr:"Compartir",back:E()?"Salir e inicio":"Inicio"};
-const nv=document.getElementById("nav");nv.style.setProperty("--c",Math.ceil(tabs.length/2));
+const nv=document.getElementById("nav");nv.dataset.n=tabs.length;navCols();
  nv.innerHTML=tabs.map(([k,l])=>{const ic=l.split(" ")[0],oc=k=="log"?"unlock()":k=="out"?"setEdit(false)":k=="shr"?"compartirPartido()":k=="back"?"volverTop()":`tab='${k}';if(tab=='jor')jnAuto=true;if(tab=='ent')entD='';if(tab=='jug')PL=null;render()`;return`<button class="${tab==k?'on':''}${k=='out'?' out':''}${k=='back'?' back':''}" onclick="${oc}"${k=='back'?` title="${E()?"Cerrar sesión de entrenador e ir al inicio":"Ir al inicio"}"`:""}><span>${ic}</span><span>${SH[k]}</span></button>`}).join("");
  let h="";
  if(tab=="cal")h=myM().map((x,i)=>card(x.r,x.h,x.a,i)).join("");

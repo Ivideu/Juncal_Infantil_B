@@ -1,0 +1,44 @@
+/* =====================================================================
+   BARRA DE PATROCINADORES  ·  fija abajo, logos en movimiento continuo
+   Se construye con scripts/patrocinadores.js
+   ===================================================================== */
+
+body.has-spons{padding-bottom:var(--spons-h,72px)}
+
+#spons{--spons-h:72px;position:fixed;left:0;right:0;bottom:0;z-index:60;display:flex;align-items:stretch;height:var(--spons-h);overflow:hidden;border-top:3px solid var(--ye,#ffd23f);background:#fff;box-shadow:0 -6px 22px rgba(8,18,53,.3)}
+
+/* Etiqueta amarilla a la izquierda */
+#spons .sp-tag{position:relative;z-index:2;flex:none;display:flex;align-items:center;padding:0 30px 0 18px;color:#0a0f1e;background:var(--ye,#ffd23f);font:800 1rem/1 "Barlow Condensed",sans-serif;letter-spacing:.14em;text-transform:uppercase;clip-path:polygon(0 0,100% 0,calc(100% - 16px) 100%,0 100%);box-shadow:inset -10px 0 14px -10px rgba(8,18,53,.35)}
+
+/* Zona visible, con desvanecido en los bordes */
+#spons .sp-view{position:relative;flex:1;min-width:0;overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 34px,#000 calc(100% - 34px),transparent);mask-image:linear-gradient(90deg,transparent,#000 34px,#000 calc(100% - 34px),transparent)}
+
+/* Pista en movimiento: dos mitades idénticas y se desplaza -50% en bucle */
+#spons .sp-track{display:flex;align-items:center;width:max-content;height:100%;animation:spMove var(--dur,40s) linear infinite;will-change:transform}
+#spons.sp-der .sp-track{animation-direction:reverse}
+#spons:hover .sp-track,#spons:focus-within .sp-track{animation-play-state:paused}
+@keyframes spMove{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+#spons .sp-half,#spons .sp-grp{display:flex;align-items:center}
+#spons .sp-grp{gap:56px;padding-right:56px}
+
+/* Cada patrocinador */
+#spons .sp-it{flex:none;display:flex;align-items:center;justify-content:center;border-radius:8px;transition:transform .3s cubic-bezier(.2,1.5,.4,1),filter .3s}
+#spons a.sp-it:hover,#spons a.sp-it:focus-visible{transform:scale(1.14)}
+#spons a.sp-it:focus-visible{outline:3px solid var(--ac,#2f7bff);outline-offset:4px}
+#spons .sp-it img{display:block;height:var(--h,44px);width:auto;max-width:none;mix-blend-mode:multiply;-webkit-user-drag:none;user-select:none}
+#spons span.sp-it{cursor:default}
+
+@media(max-width:600px){
+  #spons{--spons-h:60px}
+  #spons .sp-tag{padding:0 20px 0 10px;font-size:.7rem;letter-spacing:.06em}
+  #spons .sp-grp{gap:40px;padding-right:40px}
+  #spons .sp-it img{height:calc(var(--h,44px)*.8)}
+}
+
+/* Sin animaciones: la barra se puede deslizar con el dedo o el ratón */
+@media(prefers-reduced-motion:reduce){
+  #spons .sp-track{animation:none}
+  #spons .sp-view{overflow-x:auto;-webkit-mask-image:none;mask-image:none;scrollbar-width:thin}
+  #spons .sp-half[aria-hidden="true"]{display:none}
+}

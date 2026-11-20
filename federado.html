@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="./Images/escudo.png">
+<title>Equipos federados · Torrejón Juncal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,600;0,700;0,800;1,700;1,800&family=Barlow:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0f2a78;--bg2:#ffffff;--card:rgba(255,255,255,.92);--line:#d5def5;--tx:#0f1b3d;--mu:#5a6a93;--ac:#2f7bff;--ye:#ffd23f;--ye2:#d97706;--navy:#0f2a6b;--sh:0 1px 4px rgba(8,18,53,.75),0 0 14px rgba(8,18,53,.45)}
+*{box-sizing:border-box;margin:0}
+html{scroll-behavior:smooth;background:var(--bg)}
+body{min-height:100vh;color:var(--tx);background:transparent;font:16px/1.5 Barlow,system-ui,sans-serif}
+h1,h2,h3{font-family:"Barlow Condensed",sans-serif;letter-spacing:.02em;text-transform:uppercase;line-height:1}
+a{color:inherit;text-decoration:none}
+button,input,select,textarea{font:inherit}
+.wrap{width:100%;max-width:980px;margin:auto;padding:0 16px}
+h2{margin-bottom:10px;color:#fff;font-size:clamp(2.2rem,5vw,3.4rem);font-weight:800;text-shadow:var(--sh)}
+h2 span{color:var(--ye);text-shadow:0 2px 0 #0f2a78,0 0 3px #0f2a78,0 0 14px rgba(8,18,53,.5)}
+.sub{max-width:620px;margin-bottom:36px;color:#fff;text-shadow:var(--sh)}
+.btn{display:inline-block;padding:12px 24px;border:0;border-radius:12px;color:#0a0f1e;background:var(--ye);box-shadow:0 4px 14px rgba(8,18,53,.35);font-weight:700;cursor:pointer;transition:transform .2s,box-shadow .2s}
+.btn:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(8,18,53,.45)}
+
+/* FONDO GENERAL */
+#bg{position:fixed;inset:0;z-index:-1;overflow:hidden;pointer-events:none;background:linear-gradient(rgba(8,18,53,.22),rgba(8,18,53,.22)),linear-gradient(90deg,#f2b705 0%,#ffd23f 18%,#ffe98f 30%,#dbe8ff 42%,#5b9bff 58%,#1e4fd8 78%,#0f2a78 100%),#0f2a78}
+@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;animation:none!important;transition:none!important}}
+
+/* CABECERA Y NAVEGACIÓN (igual que en el inicio) */
+header{position:fixed;inset:0 0 auto;z-index:50;background:rgba(255,255,255,.82);border-bottom:1px solid var(--line);box-shadow:0 4px 18px rgba(8,18,53,.25);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px)}
+header .wrap{max-width:1280px}
+nav{display:flex;align-items:center;justify-content:space-between;height:68px}
+.logo{display:flex;align-items:center;gap:10px;color:var(--navy);font-family:"Barlow Condensed",sans-serif;font-size:1.5rem;font-weight:800;text-transform:uppercase}
+.logo b{color:var(--ye2)}
+.lg{width:44px;height:44px;border-radius:50%}
+.fl{width:64px;height:64px;margin-bottom:12px;border-radius:50%}
+.menu{display:flex;align-items:center;gap:6px;font-size:.95rem;font-weight:600}
+.menu a{white-space:nowrap}
+.menu a:not(.btn){padding:10px 16px;border-radius:10px;color:var(--tx);font-size:1rem;transition:color .2s,background-color .2s,transform .2s}
+.menu a:not(.btn):hover{color:#0a0f1e;background:var(--ye)}
+.menu a.ig{flex:none;display:flex;align-items:center;justify-content:center;gap:8px;width:42px;height:42px;margin-left:8px;padding:0!important;border-radius:50%;color:#fff;background:linear-gradient(45deg,#f2b705,#e1306c 55%,#7b3fe4);box-shadow:0 3px 10px rgba(8,18,53,.35)}
+.menu a.ig:hover{color:#fff;background:linear-gradient(45deg,#ffd23f,#e1306c 55%,#7b3fe4);transform:translateY(-2px)}
+.menu a.ig span{display:none}
+#burger{display:none;padding:4px 8px;border:0;color:var(--navy);background:none;font-size:1.8rem;cursor:pointer}
+
+/* PÁGINA */
+main{padding:92px 0 56px}
+.pgb{width:100%;aspect-ratio:848/190;margin-bottom:40px;border-bottom:2px solid var(--ac);border-radius:16px;background:url("Images/cabecera.jpg") center/100% 100% no-repeat;box-shadow:0 8px 28px rgba(0,40,120,.35)}
+.back{color:#fff;font-weight:700;text-shadow:var(--sh)}
+.back:hover{color:var(--ye)}
+
+/* AVISO «PRÓXIMAMENTE» */
+.soon{position:relative;display:flex;align-items:center;gap:20px;max-width:620px;padding:22px 24px;overflow:hidden;border:2px solid rgba(255,255,255,.9);border-radius:18px;color:#fff;background:linear-gradient(225deg,#ffd23f 0%,#f2b705 10%,#4f86ee 38%,#1e4fd8 62%,#0b1f66 100%);box-shadow:0 8px 24px rgba(8,18,53,.4)}
+.soon img{flex:none;width:64px;height:64px;filter:drop-shadow(0 3px 8px rgba(0,0,0,.4))}
+.soon h3{margin-bottom:4px;font-size:1.7rem;font-style:italic;text-shadow:0 2px 6px rgba(0,0,0,.4)}
+.soon p{font-size:.95rem;text-shadow:0 1px 3px rgba(0,0,0,.5)}
+
+/* PIE DE PÁGINA */
+footer{padding:40px 0;border-top:1px solid rgba(255,255,255,.35);color:#fff;font-size:.9rem;text-align:center;text-shadow:var(--sh)}
+footer a{color:var(--ye);font-weight:700}
+
+/* EQUIPOS: TARJETAS COMPACTAS, TODAS IGUALES (AZUL + AMARILLO DEL CLUB) */
+.cats{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));grid-template-rows:repeat(2,auto);grid-auto-flow:column;gap:12px}
+.cat{--c1:#1e4fd8;--c2:#0b1f66;container-type:inline-size;position:relative;display:flex;flex-direction:column;justify-content:flex-end;gap:3px;min-height:116px;padding:14px 14px;overflow:hidden;border:2px solid rgba(255,255,255,.9);border-radius:16px;color:#fff;background:linear-gradient(225deg,#ffd23f 0%,#f2b705 14%,#4f86ee 42%,var(--c1) 62%,var(--c2) 100%);box-shadow:0 6px 18px rgba(8,18,53,.35);animation:catIn .5s both;animation-delay:calc(var(--i,0)*60ms);transition:transform .25s cubic-bezier(.2,1.3,.4,1),box-shadow .25s}
+.cat::before{content:"";position:absolute;right:-10px;bottom:-14px;width:92px;height:92px;background:url("Images/escudo.png") center/contain no-repeat;opacity:.2;transform:rotate(-12deg);pointer-events:none;transition:transform .35s,opacity .35s}
+.cat::after{content:"";position:absolute;inset:0;background:linear-gradient(110deg,transparent 35%,rgba(255,255,255,.45) 50%,transparent 65%);transform:translateX(-120%);transition:transform .6s;pointer-events:none}
+.cat:hover{transform:translateY(-6px) rotate(-1.2deg) scale(1.03);box-shadow:0 14px 30px rgba(8,18,53,.5)}
+.cat:hover::before{transform:rotate(0) scale(1.15);opacity:.35}
+.cat:hover::after{transform:translateX(120%)}
+.cat:focus-visible{outline:3px solid var(--ye);outline-offset:3px}
+.cat .age{position:relative;z-index:1;display:block;overflow:hidden;color:rgba(255,255,255,.95);font-size:min(.85rem,8cqw);font-weight:700;letter-spacing:.04em;line-height:1.15;text-transform:uppercase;text-shadow:0 1px 3px rgba(0,0,0,.45);white-space:normal}
+.cat h3{position:relative;z-index:1;color:#fff;font-size:min(1.9rem,16cqw);font-weight:800;font-style:italic;letter-spacing:.01em;line-height:1;text-shadow:0 2px 6px rgba(0,0,0,.4);white-space:nowrap}
+.cat h3 em{color:var(--ye);font-style:inherit}
+.cat .go{position:absolute;top:8px;right:8px;z-index:1;display:grid;place-items:center;width:28px;height:28px;border-radius:50%;color:var(--ye);background:#0b1f66;font-weight:800;transform:translateX(8px);opacity:0;transition:transform .25s,opacity .25s}
+.cat:hover .go,.cat:focus-visible .go{transform:none;opacity:1}
+.cat.sin{cursor:default;filter:grayscale(.6)}
+@keyframes catIn{from{opacity:0;transform:translateY(16px) scale(.96)}}
+
+/* DISEÑO RESPONSIVE */
+@media(max-width:800px){
+  .cats{grid-template-columns:repeat(2,minmax(0,1fr));grid-template-rows:none;grid-auto-flow:row;gap:10px}
+  .cat{min-height:104px;padding:12px 12px}
+  .cat .go{opacity:1;transform:none}
+  .menu a.ig{justify-content:flex-start;width:auto;height:auto;margin:6px 0 0;padding:10px 16px!important;border-radius:10px}
+  .menu a.ig span{display:inline}
+  #burger{display:block}
+  .menu{position:fixed;inset:68px 0 auto;display:none;flex-direction:column;align-items:stretch;padding:24px;border-bottom:1px solid var(--line);background:#fff}
+  .menu.o{display:flex}
+}
+@media(max-width:600px){.soon{flex-direction:column;align-items:flex-start}}
+</style>
+<link rel="stylesheet" href="css/menu-equipos.css">
+<link rel="stylesheet" href="css/patrocinadores.css">
+</head>
+<body>
+
+<div id="bg" aria-hidden="true"></div>
+
+<!-- CABECERA / MENÚ -->
+<header id="hd">
+  <div class="wrap">
+    <nav>
+      <a href="index.html" class="logo"><img class="lg" src="./Images/escudo.png" alt="Escudo Torrejón Juncal">Torrejón <b>Juncal</b></a>
+      <button id="burger" type="button" aria-label="Menú" aria-controls="menu" aria-expanded="false">☰</button>
+      <div class="menu" id="menu">
+        <a href="index.html#escuela">La escuela</a>
+        <!-- EQUIPOS: DESPLEGABLE LOCAL / FEDERADO -->
+        <div class="dd" id="ddEquipos">
+          <button class="dd-btn" type="button" aria-haspopup="true" aria-expanded="false" aria-controls="ddEquiposPanel">Equipos<svg class="dd-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"></path></svg></button>
+          <div class="dd-panel" id="ddEquiposPanel" role="group" aria-label="Equipos">
+            <span class="dd-wm" aria-hidden="true"></span>
+            <p class="dd-kicker">Elige competición</p>
+            <div class="dd-grid">
+              <a class="dd-it" style="--k:0" href="local.html">
+                <span class="dd-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-5.6-7-11a7 7 0 0 1 14 0c0 5.4-7 11-7 11z"></path><circle cx="12" cy="10" r="2.6"></circle></svg></span>
+                <span class="dd-tx"><strong>Local</strong><small>Equipos y competiciones locales</small></span>
+                <span class="dd-go" aria-hidden="true">→</span>
+              </a>
+              <a class="dd-it" style="--k:1" href="federado.html" aria-current="page">
+                <span class="dd-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 4 6v6c0 4.6 3.2 7.8 8 9 4.8-1.2 8-4.4 8-9V6z"></path><path d="m9 12 2 2 4-4"></path></svg></span>
+                <span class="dd-tx"><strong>Federado</strong><small>Equipos y ligas federadas</small></span>
+                <span class="dd-go" aria-hidden="true">→</span>
+              </a>
+            </div>
+            <a class="dd-all" href="index.html#equipos">Ver todos los equipos <span aria-hidden="true">↓</span></a>
+          </div>
+        </div>
+        <a href="index.html#partidos">Partidos</a>
+        <a href="index.html#tecnico">Club</a>
+        <a href="index.html#donde">Dónde jugamos</a>
+        <a href="index.html#contacto">Contacto</a>
+        <a class="ig" href="https://www.instagram.com/torrejonjuncal/" target="_blank" rel="noopener" aria-label="Instagram de Torrejón Juncal" title="Instagram">
+          <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"></rect><circle cx="12" cy="12" r="4"></circle><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"></circle></svg>
+          <span>Instagram</span>
+        </a>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+    <div class="pgb"></div>
+    <p><a href="index.html" class="back">← Volver al inicio</a></p><br>
+    <h2>Equipos <span>federados</span></h2>
+    <p class="sub">Pulsa sobre tu equipo para ver resultados, clasificaciones y calendario.</p>
+    <div class="cats" id="catGrid"></div>
+  </div>
+</main>
+
+<!-- PIE DE PÁGINA -->
+<footer>
+  <div class="wrap">
+    <img class="fl" src="./Images/escudo.png" alt="Escudo Torrejón Juncal"><br>
+    © <span id="yr"></span> Torrejón Juncal · Fútbol Sala · <a href="https://www.instagram.com/torrejonjuncal/" target="_blank" rel="noopener">@torrejonjuncal</a>
+  </div>
+</footer>
+
+<script>
+const $ = s => document.querySelector(s);
+const esc = t => String(t || "").replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+$("#yr").textContent = new Date().getFullYear();
+
+/* MENÚ MÓVIL */
+$("#burger").onclick = () => {
+  const m = $("#menu");
+  m.classList.toggle("o");
+  $("#burger").setAttribute("aria-expanded", String(m.classList.contains("o")));
+};
+$("#menu").onclick = e => {
+  if (e.target.closest(".dd-btn")) return;
+  $("#menu").classList.remove("o");
+  $("#burger").setAttribute("aria-expanded", "false");
+};
+
+/* EQUIPOS FEDERADOS (mismo listado que CONFIG.CATEGORIES de index.html) */
+const CATEGORIES = [
+  { name: "Aficionado A", age: "Preferente Aficionado", url: "Categorias/AficionadoA.html" },
+  { name: "Aficionado B", age: "Primera Aficionado", url: "Categorias/AficionadoB.html" },
+  { name: "Juvenil A", age: "Preferente Juvenil", url: "Categorias/JuvenilA.html" },
+  { name: "Juvenil B", age: "Primera Juvenil", url: "Categorias/JuvenilB.html" },
+  { name: "Cadete A", age: "Primera Cadete", url: "Categorias/CadeteA.html" },
+  { name: "Cadete B", age: "Primera Cadete", url: "Categorias/CadeteB.html" },
+  { name: "Infantil A", age: "Preferente Infantil", url: "Categorias/InfantilA.html" },
+  { name: "Infantil B", age: "Primera Infantil", url: "Categorias/InfantilB.html" },
+  { name: "Alevín A", age: "Alevín", url: "Categorias/AlevinA.html" },
+  { name: "Alevín B", age: "Alevín", url: "Categorias/AlevinB.html" }
+];
+const catCard = (c, i) => {
+  const m = c.name.match(/^(.+?)\s+([AB])$/);
+  const base = m ? m[1] : c.name, letra = m ? m[2] : "";
+  const html = `<span class="age">${esc(c.age)}</span><h3>${esc(base)} <em>${esc(letra)}</em></h3><span class="go" aria-hidden="true">→</span>`;
+  const attrs = `class="cat${c.url ? "" : " sin"}" data-l="${letra}" style="--i:${i}"`;
+  return c.url ? `<a ${attrs} href="${esc(c.url)}" aria-label="${esc(c.name)}">${html}</a>` : `<div ${attrs}>${html}</div>`;
+};
+$("#catGrid").innerHTML = CATEGORIES.map(catCard).join("");
+</script>
+<script src="scripts/menu-equipos.js"></script>
+<script src="scripts/patrocinadores.js"></script>
+</body>
+</html>

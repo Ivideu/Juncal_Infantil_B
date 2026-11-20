@@ -272,6 +272,8 @@ footer a{color:var(--ye);font-weight:700}
 }
 @media(max-width:380px){.staff-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 </style>
+<link rel="stylesheet" href="css/menu-equipos.css">
+<link rel="stylesheet" href="css/patrocinadores.css">
 </head>
 <body>
 
@@ -285,7 +287,27 @@ footer a{color:var(--ye);font-weight:700}
       <button id="burger" type="button" aria-label="Menú" aria-controls="menu" aria-expanded="false">☰</button>
       <div class="menu" id="menu">
         <a href="#escuela">La escuela</a>
-        <a href="#equipos">Equipos</a>
+        <!-- EQUIPOS: DESPLEGABLE LOCAL / FEDERADO -->
+        <div class="dd" id="ddEquipos">
+          <button class="dd-btn" type="button" aria-haspopup="true" aria-expanded="false" aria-controls="ddEquiposPanel">Equipos<svg class="dd-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"></path></svg></button>
+          <div class="dd-panel" id="ddEquiposPanel" role="group" aria-label="Equipos">
+            <span class="dd-wm" aria-hidden="true"></span>
+            <p class="dd-kicker">Elige competición</p>
+            <div class="dd-grid">
+              <a class="dd-it" style="--k:0" href="local.html">
+                <span class="dd-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-5.6-7-11a7 7 0 0 1 14 0c0 5.4-7 11-7 11z"></path><circle cx="12" cy="10" r="2.6"></circle></svg></span>
+                <span class="dd-tx"><strong>Local</strong><small>Equipos y competiciones locales</small></span>
+                <span class="dd-go" aria-hidden="true">→</span>
+              </a>
+              <a class="dd-it" style="--k:1" href="federado.html">
+                <span class="dd-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 4 6v6c0 4.6 3.2 7.8 8 9 4.8-1.2 8-4.4 8-9V6z"></path><path d="m9 12 2 2 4-4"></path></svg></span>
+                <span class="dd-tx"><strong>Federado</strong><small>Equipos y ligas federadas</small></span>
+                <span class="dd-go" aria-hidden="true">→</span>
+              </a>
+            </div>
+            <a class="dd-all" href="#equipos">Ver todos los equipos <span aria-hidden="true">↓</span></a>
+          </div>
+        </div>
         <a href="#partidos">Partidos</a>
         <a href="#tecnico">Club</a>
         <a href="#donde">Dónde jugamos</a>
@@ -532,7 +554,8 @@ $("#burger").onclick = () => {
   m.classList.toggle("o");
   $("#burger").setAttribute("aria-expanded", String(m.classList.contains("o")));
 };
-$("#menu").onclick = () => {
+$("#menu").onclick = e => {
+  if (e.target.closest(".dd-btn")) return;   /* abrir el desplegable «Equipos» no cierra el menú */
   $("#menu").classList.remove("o");
   $("#burger").setAttribute("aria-expanded", "false");
 };
@@ -881,5 +904,7 @@ addEventListener("keydown", e => {
   if ($("#fOv")) closeMatch();
 });
 </script>
+<script src="scripts/menu-equipos.js"></script>
+<script src="scripts/patrocinadores.js"></script>
 </body>
 </html>

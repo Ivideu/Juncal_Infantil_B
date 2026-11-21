@@ -42,15 +42,15 @@ const refresca=()=>{memo={};render()};
 (function(){const r=[RAIZ+"Cromos/camiseta-base.jpg",RAIZ+"Images/camiseta-base.jpg"];let n=0;const i=new Image();
  i.onload=()=>{BASE.img=i;refresca()};i.onerror=()=>{if(++n<r.length)i.src=r[n]};i.src=r[0]})();
 /* Tipografías (Google Fonts): nombre = Knewave (pincel deportivo), dorsal = Russo One. Se re-dibuja cuando terminan de cargar */
-(function(){const l=document.createElement("link");l.rel="stylesheet";l.href="https://fonts.googleapis.com/css2?family=Knewave&family=Russo+One&display=swap";
- l.onload=()=>Promise.all([document.fonts.load('60px "Knewave"',"ABCÑÓ"),document.fonts.load('430px "Russo One"',"0123456789")]).then(refresca).catch(()=>{});
+(function(){const l=document.createElement("link");l.rel="stylesheet";l.href="https://fonts.googleapis.com/css2?family=Knewave&family=Russo+One&family=Fredoka:wght@700&display=swap";
+ l.onload=()=>Promise.all([document.fonts.load('60px "Knewave"',"ABCÑÓ"),document.fonts.load('700 360px "Fredoka"',"0123456789")]).then(refresca).catch(()=>{});
  document.head.appendChild(l)})();
 /* Texto distinto del nombre en la camiseta (opcional): CAM_TXT["Ivan"]="I.BLASCO" */
 const CAM_TXT=window.CAM_TXT||(window.CAM_TXT={});
 /* Posiciones sobre la imagen original de 992x1072 */
 const CAM={out:640,
  nom:{font:'"Knewave","Permanent Marker","Impact",sans-serif',cx:492,base:326,cap:66,maxW:400,sx:.92,skew:0},
- num:{font:'400 {s}px "Russo One","Barlow Condensed","Impact",sans-serif',cx:497,base:652,size:440,maxW:420,skew:-.1,navy:"#14308f"}};
+ num:{font:'700 {s}px "Fredoka","Russo One","Barlow Condensed","Impact",sans-serif',cx:497,base:622,size:360,maxW:340,skew:-.06,navy:"#14308f"}};
 function cromoImg(c){
  if(!BASE.img)return BLANK;
  const key=JSON.stringify([c.id,c.name,c.num,c.coach,CAM_TXT[c.name]||""]);
@@ -66,7 +66,7 @@ function cromoImg(c){
  /* Dorsal: sombra azul, línea blanca exterior, línea azul y relleno blanco (doble línea como la camiseta) */
  const d=c.coach?"":String(c.num||"").trim();
  if(d){const n=CAM.num;let s=n.size;g.font=n.font.replace("{s}",s);const w=g.measureText(d).width;if(w>n.maxW){s*=n.maxW/w;g.font=n.font.replace("{s}",s)}
-  g.save();g.translate(n.cx,n.base);g.transform(1,0,n.skew,1,0,0);g.lineJoin="miter";g.miterLimit=3;
+  g.save();g.translate(n.cx,n.base);g.transform(1,0,n.skew,1,0,0);g.lineJoin="round";
   g.fillStyle=n.navy;g.strokeStyle=n.navy;g.lineWidth=s*.06;g.fillText(d,14,14);g.strokeText(d,14,14);   // sombra
   g.strokeStyle="#fff";g.lineWidth=s*.075;g.strokeText(d,0,0);                                          // línea blanca exterior
   g.strokeStyle=n.navy;g.lineWidth=s*.04;g.strokeText(d,0,0);                                            // línea azul
@@ -183,29 +183,34 @@ if(typeof push==="function"&&typeof fbTok==="function"&&FB){
    }catch(e){const m=e===0?"La sesión ha caducado. Sal y vuelve a entrar para guardar.":"No se ha guardado: error de conexión.";setSt("⚠ "+m);toast(m)}
   },150)}}
 
-/* ---------- Selector de goleador: botones grandes con número y nombre bien legibles ---------- */
-document.head.insertAdjacentHTML("beforeend","<style>#pickOv .pk-t{display:flex;align-items:center;gap:.5em;padding:0 .6em;width:auto;height:auto;background:linear-gradient(180deg,#2f6bff,#1740c0);border:3px solid #7aa9ff;border-radius:16px;color:#fff;box-shadow:0 6px 0 #0b2273;text-align:left;overflow:hidden;cursor:pointer;-webkit-tap-highlight-color:transparent}#pickOv .pk-t:active{transform:translateY(4px);box-shadow:0 2px 0 #0b2273}#pickOv .pk-n{flex:none;display:grid;place-items:center;min-width:1.8em;height:1.8em;padding:0 .2em;border-radius:50%;background:#ffd23f;color:#0a0f1e;font:800 .85em/1 'Barlow Condensed',sans-serif}#pickOv .pk-m{min-width:0;font:800 1em/1.05 'Barlow Condensed',sans-serif;text-transform:uppercase;letter-spacing:.02em;overflow-wrap:anywhere}#pickOv .pk-t.pk-o{background:linear-gradient(180deg,#566089,#2b3358);border-color:#9aa5c4;box-shadow:0 6px 0 #151a33}#pickOv .pk-t.pk-o .pk-m{font-size:.6em}</style>");
+/* ---------- Selector de goleador: cada camiseta lleva debajo una casilla con número y nombre legibles ---------- */
+document.head.insertAdjacentHTML("beforeend","<style>#pickOv .pk-t{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;width:auto;height:auto;padding:0;background:none;border:0;border-radius:14px;box-shadow:none;cursor:pointer;-webkit-tap-highlight-color:transparent;transition:transform .12s}#pickOv .pk-t:active{transform:scale(.95)}#pickOv .pk-t .pk-i{flex:none;display:block;width:auto;height:auto;object-fit:contain;border-radius:12px;box-shadow:0 6px 18px #0009}#pickOv .pk-ph,#pickOv .pk-ball{display:grid;place-items:center;background:linear-gradient(160deg,#1d3a8a,#0a1a4d);border:2px solid #7aa9ff}#pickOv .pk-ph svg{width:55%;height:auto}#pickOv .pk-ball{font-size:5em;line-height:1;color:#fff}#pickOv .pk-b{display:flex;align-items:center;justify-content:center;gap:.4em;max-width:100%;padding:.18em .5em;background:#fff;border:3px solid #ffd23f;border-radius:.7em;box-shadow:0 .12em 0 #b8860b;color:#0a1a4d;overflow:hidden}#pickOv .pk-n{flex:none;display:grid;place-items:center;min-width:1.7em;height:1.7em;padding:0 .3em;border-radius:99px;background:#0f2a6b;color:#ffd23f;font:700 .8em/1 Fredoka,'Barlow Condensed',sans-serif}#pickOv .pk-m{min-width:0;font:800 1em/1.1 'Barlow Condensed',sans-serif;text-transform:uppercase;letter-spacing:.02em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}#pickOv .pk-o .pk-b{background:#e6eaf5;border-color:#9aa5c4;box-shadow:0 .12em 0 #6b7392}#pickOv .pk-o .pk-m{font-size:.7em;white-space:normal;text-align:center}</style>");
 window.pickGol=function(j,h){
  closePick();
  const jug=jugList().filter(c=>cEst(c)==="convocado");
  const ov=document.createElement("div");ov.id="pickOv";
  if(FS&&innerHeight>innerWidth)ov.classList.add("rot");
- const tile=c=>`<button class="pk-c pk-t" ${c.extra?`data-p="${esc(c.pl)}"`:`data-f="${esc(c.file)}"`} aria-label="${esc(c.name)}"><b class="pk-n">${esc(c.num||"–")}</b><span class="pk-m">${esc(c.name)}</span></button>`;
- ov.innerHTML=`<div class="pk-h">¿QUIÉN HA MARCADO?</div><div class="pk-g">${jug.map(tile).join("")}<button class="pk-c pk-t pk-o" data-o="1"><b class="pk-n">⚽</b><span class="pk-m">En propia puerta del rival</span></button></div><button class="pk-x">Cancelar</button>`;
+ const tile=c=>`<button class="pk-c pk-t" ${c.extra?`data-p="${esc(c.pl)}"`:`data-f="${esc(c.file)}"`} aria-label="${esc(c.name)}">${c.extra?`<div class="pk-i pk-ph">${shirt(c.num,"#2f7bff")}</div>`:`<img class="pk-i" src="${cSrc(c)}" alt="">`}<div class="pk-b"><b class="pk-n">${esc(c.num||"–")}</b><span class="pk-m">${esc(c.name)}</span></div></button>`;
+ ov.innerHTML=`<div class="pk-h">¿QUIÉN HA MARCADO?</div><div class="pk-g">${jug.map(tile).join("")}<button class="pk-c pk-t pk-o" data-o="1"><div class="pk-i pk-ball">⚽</div><div class="pk-b"><span class="pk-m">En propia puerta del rival</span></div></button></div><button class="pk-x">Cancelar</button>`;
  ov.onclick=e=>{const b=e.target.closest("button");
   if(b&&b.dataset.f)goalBy(j,h,b.dataset.f);
   else if(b&&b.dataset.p!==undefined)goalBy(j,h,"",b.dataset.p);
   else if(b&&b.dataset.o)goalBy(j,h,"");
   else if((b&&b.classList.contains("pk-x"))||e.target===ov)closePick()};
- document.body.appendChild(ov);fitPick()};
-/* Reparte los botones para que quepan todos con la letra más grande posible */
+ document.body.appendChild(ov);fitPick();ov.querySelectorAll("img").forEach(i=>{if(!i.complete)i.onload=fitPick})};
+/* Reparte las camisetas para que quepan todas con la casilla de nombre lo más grande posible */
 window.fitPick=function(){const ov=document.getElementById("pickOv");if(!ov)return;ov.classList.toggle("rot",FS&&innerHeight>innerWidth);
- const g=ov.querySelector(".pk-g"),t=[...g.children],n=t.length,W=g.clientWidth,H=g.clientHeight,gap=Math.max(8,Math.min(W,H)*.02);
+ const g=ov.querySelector(".pk-g"),t=[...g.children],n=t.length,W=g.clientWidth,H=g.clientHeight,gap=Math.max(8,Math.min(W,H)*.02),ar=992/1072;
  const L=Math.max(5,...t.filter(b=>!b.classList.contains("pk-o")).map(b=>b.querySelector(".pk-m").textContent.length));
- const emW=1.2+1.53+.5+L*.5;let best=0,bc=1,bw=0,bh=0;
- for(let c=1;c<=n;c++){const r=Math.ceil(n/c),w=(W-gap*(c-1))/c,h=(H-gap*(r-1))/r,f=Math.min(h*.42,w/emW);if(f>best){best=f;bc=c;bw=w;bh=h}}
- g.style.gap=gap+"px";g.style.gridTemplateColumns=`repeat(${bc},${Math.floor(bw)}px)`;g.style.gridAutoRows=Math.floor(bh)+"px";
- t.forEach(b=>{b.style.fontSize=Math.floor(best)+"px"})};
+ const emW=.9+1.4+.4+L*.5;let best=null;
+ for(let c=1;c<=n;c++){const r=Math.ceil(n/c),w=(W-gap*(c-1))/c,h=(H-gap*(r-1))/r,f=Math.min(w/emW,h*.17),ih=h-f*1.9-12;if(ih<=0)continue;
+  const iw=Math.min(w,ih*ar),sc=f*iw;if(!best||sc>best.sc)best={c,w,h,f,iw,sc}}
+ if(!best)best={c:n,w:W/n,h:H,f:12,iw:W/n,sc:0};
+ g.style.gap=gap+"px";g.style.gridTemplateColumns=`repeat(${best.c},${Math.floor(best.w)}px)`;g.style.gridAutoRows=Math.floor(best.h)+"px";
+ t.forEach(b=>{b.style.width=Math.floor(best.w)+"px";b.style.height=Math.floor(best.h)+"px";
+  const i=b.querySelector(".pk-i");i.style.width=Math.floor(best.iw)+"px";i.style.height=Math.floor(best.iw/ar)+"px";
+  if(i.classList.contains("pk-ball"))i.style.fontSize=Math.floor(best.iw*.4)+"px";
+  b.querySelector(".pk-b").style.fontSize=Math.floor(best.f)+"px"})};
 
 /* ---------- Enganche en render ---------- */
 const _rn=window.render;

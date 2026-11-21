@@ -30,7 +30,7 @@ jobs:
         with:
           python-version: "3.12"
       - name: Instalar pdftotext
-        run: command -v pdftotext >/dev/null || (sudo apt-get update -qq && sudo apt-get install -y -qq poppler-utils)
+        run: sudo apt-get update -qq && sudo apt-get install -y -qq poppler-utils tesseract-ocr tesseract-ocr-spa
       - name: Leer los PDF del Ayuntamiento
         env:
           DIAG: ${{ github.event_name == 'push' && '1' || '' }}

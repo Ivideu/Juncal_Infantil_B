@@ -1,0 +1,52 @@
+name: Pasar Infantil B a la sincronización común
+
+# Una sola vez (es seguro repetirlo): Infantil B pasa a sincronizarse igual que el resto de categorías.
+#  1) guarda una copia de todos sus datos (con los goles de cada jugador) en Backup/
+#  2) lee la RFFM con el mismo script de las demás y añade calendario, equipos, horas y resultados
+#  3) comprueba que los goles, minutos, plantilla y directos no han cambiado ni un dato; si algo falla, restaura la copia
+on:
+  workflow_dispatch:
+  push:
+    paths: [".github/workflows/migrar-infantil-b.yml"]
+    branches: [main]
+concurrency:
+  group: sync-semana
+  cancel-in-progress: false
+permissions:
+  contents: write
+jobs:
+  migrar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      FBKEY: ${{ secrets.FBKEY }}
+      FBMAIL: ${{ secrets.FBMAIL }}
+      FBPASS: ${{ secrets.FBPASS }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: 1 · Copia de seguridad
+        run: |
+          mkdir -p Backup
+          node scripts/verificar-goles.mjs copia juncal "Backup/juncal-$(date -u +%Y%m%d-%H%M).json" | tee /tmp/copia.txt
+          cp "$(ls -t Backup/juncal-*.json | head -1)" /tmp/antes.json
+      - name: 2 · Sincronizar Infantil B con el script común
+        env:
+          SOLO: infantil-b
+          FORZAR: "1"
+          FCM_SERVICE_ACCOUNT: ""
+        run: node scripts/sync-categorias.mjs 2>&1 | tee /tmp/sync.txt
+      - name: 3 · Comprobar que no se ha tocado ningún gol
+        run: node scripts/verificar-goles.mjs comprobar juncal /tmp/antes.json 2>&1 | tee /tmp/verif.txt
+      - name: Guardar la copia y el informe
+        if: always()
+        run: |
+          { echo "Migración Infantil B — $(date -u +%FT%TZ)"; echo; cat /tmp/copia.txt; echo; tail -25 /tmp/sync.txt; echo; cat /tmp/verif.txt; } > Backup/migracion-infantil-b.txt 2>&1 || true
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add Backup
+          git diff --cached --quiet && exit 0
+          git commit -q -m "Infantil B: copia de seguridad e informe de la migración"
+          for i in 1 2 3; do git pull -q --rebase -X theirs origin "${GITHUB_REF_NAME}" && git push -q && exit 0; sleep 5; done

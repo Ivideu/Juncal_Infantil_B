@@ -1,5 +1,5 @@
 // scripts/sync-categorias.mjs — Node 20, sin dependencias
-// Una sola sincronización para TODAS las categorías de solo lectura (todas menos Infantil B, que lleva admin y directo).
+// Una sola sincronización para TODAS las categorías (Infantil B incluido: guarda en el nodo "juncal", ver "node" en categorias.json).
 // Lee categorias.json y, por cada categoría con "grupo" rellenado, lee la RFFM y escribe en Firebase el nodo "cat-<id>":
 //   · cfg: equipos (T), CodEquipo (COD), calendario (R), equipo propio (equipo), nombre y liga. Se construye solo desde la RFFM
 //   · m:   fecha, hora, pabellón y resultado de TODOS los partidos
@@ -9,7 +9,7 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const FB = "https://juncal-f0b64-default-rtdb.europe-west1.firebasedatabase.app";
-const SALTAR = ["infantil-b"];            // categorías con su propia sincronización (admin + directo)
+const SALTAR = [];                        // categorías que NO se sincronizan aquí (ninguna: Infantil B ya va por este mismo script)
 const MAXJOR = 60;
 const { FBKEY, FBMAIL, FBPASS, FCM_SERVICE_ACCOUNT } = process.env;
 const SOLO = (process.env.SOLO || "").trim();                 // opcional: id de una sola categoría (para probar)
@@ -19,7 +19,7 @@ const SOLO_CERRADAS = process.env.SOLO_CERRADAS === "1";      // 1 = solo guarda
 const ESPERA_MIN = +process.env.ESPERA_MIN || 100;
 // RAPIDO=1 (workflow «Sincronizar semana»): solo la jornada actual y la siguiente, nunca todas las jornadas
 const RAPIDO = process.env.RAPIDO === "1";
-const MANUAL = process.env.GITHUB_EVENT_NAME === "workflow_dispatch" && process.env.CADENA !== "1";   // CADENA=1: ejecución encadenada automática (no es manual)
+const MANUAL = (process.env.GITHUB_EVENT_NAME === "workflow_dispatch" && process.env.CADENA !== "1") || process.env.FORZAR === "1";   // CADENA=1: ejecución encadenada automática (no es manual)
 // GitHub programa en UTC; aquí filtramos por hora de Madrid (9:00–22:59), también con cambio de hora
 const ahoraMadrid = new Intl.DateTimeFormat("es-ES", { timeZone: "Europe/Madrid", hour: "numeric", minute: "numeric", hourCycle: "h23" }).formatToParts(new Date());
 const horaMadrid = +ahoraMadrid.find(x => x.type === "hour").value, minMadrid = +ahoraMadrid.find(x => x.type === "minute").value;
@@ -192,11 +192,21 @@ async function avisar(cat, S, lista) {
       const text = x.tipo === "final" ? `${nom(x.h)} ${x.gl} - ${x.gv} ${nom(x.a)}` : `${nom(x.h)} vs ${nom(x.a)} · ${diaES(x.fecha)} · ${x.hora} h`;
       const r = await fetch(`https://fcm.googleapis.com/v1/projects/${sa.project_id}/messages:send`, { method: "POST",
         headers: { Authorization: `Bearer ${tk}`, "Content-Type": "application/json" },
-        body: JSON.stringify({ message: { topic: "juncal-" + cat.id, notification: { title, body: text },
+        body: JSON.stringify({ message: { ...(cat.avisoGeneral ? { condition: `'juncal' in topics || 'juncal-${cat.id}' in topics` } : { topic: "juncal-" + cat.id }), notification: { title, body: text },
           data: { categoria: cat.id, jornada: String(x.jor) }, android: { priority: "HIGH", notification: { channel_id: "default" } } } }) });
       console.log(`[${cat.id}] aviso push`, r.ok ? "enviado:" : "ERROR " + r.status + " " + await r.text(), title, "|", text);
     }
   } catch (e) { console.error(`[${cat.id}] no se pudo enviar el aviso push:`, String(e)); }
+}
+
+// Total de goles de jugadores (m.g) y de minutos (m.gm) guardados: la sincronización NUNCA debe reducirlo
+function golesTotal(S) {
+  let t = 0;
+  for (const m of Object.values(S.m || {})) {
+    for (const v of Object.values((m && m.g) || {})) t += +v || 0;
+    for (const a of Object.values((m && m.gm) || {})) t += Array.isArray(a) ? a.length : 0;
+  }
+  return t;
 }
 
 // ---------- Aplicar la RFFM sobre los datos ----------
@@ -206,6 +216,10 @@ function aplicar(S, lectura, cat) {
   avisosCat = [];
   S.m ||= {};
   const cfg = S.cfg ||= { T: {}, COD: {}, R: [] };
+  cfg.T ||= {}; cfg.COD ||= {}; cfg.R ||= [];
+  // Categorías que ya tenían datos propios (Infantil B): los ids de equipo YA usados en las claves de partido (jornada_idLocal)
+  // se respetan. Así los goles y demás datos guardados siguen apuntando al partido correcto.
+  if (cat.ids && !Object.keys(cfg.COD).length) cfg.COD = Object.fromEntries(Object.entries(cat.ids).map(([i, c]) => [i, +c]));
   const propioId = +(Object.keys(cfg.COD).find(i => cfg.COD[i] === cfg.equipo) || 0);
   const antes = JSON.stringify(cfg);
   const inv = () => Object.fromEntries(Object.entries(cfg.COD).map(([i, c]) => [String(c), +i]));
@@ -253,6 +267,7 @@ function aplicar(S, lectura, cat) {
       if (inicio && hoy > inicio + 90 * 6e4 && (gl === null || gv === null))
         console.log(`[${cat.id}] sin resultado aún: ${p.Nombre_equipo_local} - ${p.Nombre_equipo_visitante} | ${hora} | acta_cerrada=${p.acta_cerrada} | goles=${p.Goles_casa}-${p.Goles_visitante} | en_juego=${p.partido_en_juego} | estado=${p.estado} | motivo=${p.motivo_estado} | provisional=${p.ResultadoProvisional} | retirado=${p.Retirado_local}/${p.Retirado_visitante} | jugado=${jugado} | fecha=${fecha}`);
       const k = `${n}_${h}`, m = S.m[k] || {};
+      if (m.c && !m.c.fin) continue;                 // directo en curso desde el admin: no se toca hasta que termine
       const prevT = m.t, prevD = m.d, prevRes = m.h !== undefined && m.h !== "";
       const propio = propioId && (h === propioId || a === propioId);
       let ch = 0;
@@ -309,14 +324,16 @@ console.log("Categorías:", cats.map(c => c.id).join(", "));
 const tok = await login();
 let errores = 0;
 for (const cat of cats) {
-  const node = "cat-" + cat.id;
+  const node = cat.node || "cat-" + cat.id;
   try {
     const { S: previo } = await leerFB(tok, node);
     const lectura = await leerRFFM(cat, previo);
     for (let intento = 0; intento < 4; intento++) {
       const { etag, S: leido } = await leerFB(tok, node);
       const S = leido || { u: 0, m: {}, cfg: { T: {}, COD: {}, R: [] } };
+      const golesAntes = golesTotal(S);
       const cambios = aplicar(S, lectura, cat);
+      if (golesTotal(S) < golesAntes) throw new Error(`se perderían goles de jugadores (${golesAntes} → ${golesTotal(S)}): no se guarda nada`);
       if (!cambios) { console.log(`[${cat.id}] sin cambios`); break; }
       S.u = Date.now();
       // PUT condicional: si alguien escribió mientras tanto, Firebase responde 412 y reintentamos

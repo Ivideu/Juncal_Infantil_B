@@ -9,7 +9,9 @@
     { "id": "cadete-a", "nombre": "Cadete A", "liga": "Primera Cadete FS · Grupo 2", "grupo": "27435112", "equipo": "19691126", "nombreEquipo": "Torrejón Juncal A" },
     { "id": "cadete-b", "nombre": "Cadete B", "liga": "Primera Cadete FS · Grupo 4", "grupo": "27435140", "equipo": "26753965", "nombreEquipo": "Torrejón Juncal B" },
     { "id": "infantil-a", "nombre": "Infantil A", "liga": "Preferente Infantil FS · Grupo 2", "grupo": "26738251", "equipo": "18377726", "nombreEquipo": "Torrejón Juncal A" },
-    { "id": "infantil-b", "nombre": "Infantil B", "liga": "Primera Infantil FS · Grupo 2", "grupo": "28125503", "equipo": "24193914", "nombreEquipo": "Torrejón Juncal B" },
+    { "id": "infantil-b", "nombre": "Infantil B", "liga": "Primera Infantil FS · Grupo 2", "grupo": "28125503", "equipo": "24193914", "nombreEquipo": "Torrejón Juncal B",
+      "node": "juncal", "avisoGeneral": true,
+      "ids": { "2": 24116776, "3": 27916794, "4": 17175596, "5": 18925059, "6": 17155533, "7": 18753107, "8": 26753258, "9": 27111405, "10": 24193914, "11": 26750489, "12": 21455532 } },
     { "id": "alevin-a", "nombre": "Alevín A", "liga": "Alevín FS · Grupo 3", "grupo": "28105877", "equipo": "19691198", "nombreEquipo": "Torrejón Juncal A" },
     { "id": "alevin-b", "nombre": "Alevín B", "liga": "Alevín FS · Grupo 2", "grupo": "27597476", "equipo": "26753964", "nombreEquipo": "Torrejón Juncal B" }
   ]

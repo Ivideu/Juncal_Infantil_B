@@ -1,0 +1,41 @@
+name: Recuperar asistencia a entrenos de Infantil B
+
+# La tabla de entrenos usa ahora una clave nueva por jugador. Esto copia las marcas antiguas (Ruben_1_portero...) a la clave nueva
+# emparejando por nombre y dorsal. Solo añade; no borra nada. Antes guarda una copia en Backup/.
+on:
+  workflow_dispatch:
+  push:
+    paths: [".github/workflows/migrar-entrenos.yml"]
+    branches: [main]
+concurrency:
+  group: sync-semana
+  cancel-in-progress: false
+permissions:
+  contents: write
+jobs:
+  entrenos:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      FBKEY: ${{ secrets.FBKEY }}
+      FBMAIL: ${{ secrets.FBMAIL }}
+      FBPASS: ${{ secrets.FBPASS }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Copia del estado actual
+        run: node scripts/verificar-goles.mjs copia juncal "Backup/juncal-antes-de-entrenos-$(date -u +%Y%m%d-%H%M).json"
+      - name: Pasar las marcas a las claves nuevas
+        run: node scripts/migrar-entrenos.mjs juncal 2>&1 | tee /tmp/informe.txt
+      - name: Guardar informe
+        if: always()
+        run: |
+          { echo "Entrenos — $(date -u +%FT%TZ)"; echo; cat /tmp/informe.txt; } > Backup/entrenos-informe.txt
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add Backup
+          git diff --cached --quiet && exit 0
+          git commit -q -m "Entrenos de Infantil B recuperados: informe"
+          for i in 1 2 3; do git pull -q --rebase -X theirs origin "${GITHUB_REF_NAME}" && git push -q && exit 0; sleep 5; done

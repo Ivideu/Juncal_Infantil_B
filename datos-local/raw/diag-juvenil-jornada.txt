@@ -1,0 +1,229 @@
+### pdffonts /home/runner/work/Juncal_Infantil_B/Juncal_Infantil_B/datos-local/raw/pdf/juvenil-jornada.pdf
+name                                 type              encoding         emb sub uni object ID
+------------------------------------ ----------------- ---------------- --- --- --- ---------
+CIDFont+F1                           CID TrueType      Identity-H       yes no  yes     11  0
+CIDFont+F2                           CID TrueType      Identity-H       yes no  yes     19  0
+
+### pdfimages -list
+page   num  type   width height color comp bpc  enc interp  object ID x-ppi y-ppi size ratio
+--------------------------------------------------------------------------------------------
+   1     0 image     475    57  rgb     3   8  image  no        21  0   600   600 1890B 2.3%
+   1     1 smask     475    57  gray    1   8  image  no        21  0   600   600 1194B 4.4%
+   1     2 image     362    57  rgb     3   8  image  no        23  0   600   600 1416B 2.3%
+   1     3 smask     362    57  gray    1   8  image  no        23  0   600   600 1001B 4.9%
+   1     4 image     502    57  rgb     3   8  image  no        25  0   600   600 2134B 2.5%
+   1     5 smask     502    57  gray    1   8  image  no        25  0   600   600 1356B 4.7%
+   1     6 image     598    57  rgb     3   8  image  no        27  0   600   600 2299B 2.2%
+   1     7 smask     598    57  gray    1   8  image  no        27  0   600   600 1476B 4.3%
+   1     8 image      28    48  rgb     3   8  image  no        29  0   600   600  114B 2.8%
+   1     9 smask      28    48  gray    1   8  image  no        29  0   600   600   87B 6.5%
+   1    10 image      28    48  rgb     3   8  image  no        31  0   600   600  136B 3.4%
+   1    11 smask      28    48  gray    1   8  image  no        31  0   600   600  106B 7.9%
+   1    12 image     560    57  rgb     3   8  image  no        33  0   600   600 2202B 2.3%
+   1    13 smask     560    57  gray    1   8  image  no        33  0   600   600 1450B 4.5%
+   1    14 image     367    57  rgb     3   8  image  no        35  0   600   600 1661B 2.6%
+   1    15 smask     367    57  gray    1   8  image  no        35  0   600   600  922B 4.4%
+   1    16 image      28    48  rgb     3   8  image  no        29  0   600   600  114B 2.8%
+   1    17 smask      28    48  gray    1   8  image  no        29  0   600   600   87B 6.5%
+   1    18 image      28    51  rgb     3   8  image  no        37  0   600   600  152B 3.5%
+   1    19 smask      28    51  gray    1   8  image  no        37  0   600   600  126B 8.8%
+   1    20 image     456    57  rgb     3   8  image  no        39  0   600   600 1906B 2.4%
+   1    21 smask     456    57  gray    1   8  image  no        39  0   600   600 1122B 4.3%
+   1    22 image     133    57  rgb     3   8  image  no        41  0   600   600  587B 2.6%
+   1    23 smask     133    57  gray    1   8  image  no        41  0   600   600  392B 5.2%
+   1    24 image      30    48  rgb     3   8  image  no        43  0   600   600  113B 2.6%
+   1    25 smask      30    48  gray    1   8  image  no        43  0   600   600   87B 6.0%
+   1    26 image      28    51  rgb     3   8  image  no        37  0   600   600  152B 3.5%
+   1    27 smask      28    51  gray    1   8  image  no        37  0   600   600  126B 8.8%
+   1    28 image     357    57  rgb     3   8  image  no        45  0   600   600 1233B 2.0%
+   1    29 smask     357    57  gray    1   8  image  no        45  0   600   600  669B 3.3%
+   1    30 image     591    66  rgb     3   8  image  no        47  0   600   600 2570B 2.2%
+   1    31 smask     591    66  gray    1   8  image  no        47  0   600   600 1849B 4.7%
+   1    32 image      30    48  rgb     3   8  image  no        43  0   600   600  113B 2.6%
+   1    33 smask      30    48  gray    1   8  image  no        43  0   600   600   87B 6.0%
+   1    34 image      28    51  rgb     3   8  image  no        37  0   600   600  152B 3.5%
+   1    35 smask      28    51  gray    1   8  image  no        37  0   600   600  126B 8.8%
+   1    36 image     501    57  rgb     3   8  image  no        49  0   600   600 2147B 2.5%
+   1    37 smask     501    57  gray    1   8  image  no        49  0   600   600 1370B 4.8%
+   1    38 image     480    57  rgb     3   8  image  no        51  0   600   600 1765B 2.2%
+   1    39 smask     480    57  gray    1   8  image  no        51  0   600   600 1144B 4.2%
+   1    40 image      19    48  rgb     3   8  image  no        53  0   600   600   80B 2.9%
+   1    41 smask      19    48  gray    1   8  image  no        53  0   600   600   63B 6.9%
+   1    42 image      28    51  rgb     3   8  image  no        55  0   600   600  117B 2.7%
+   1    43 smask      28    51  gray    1   8  image  no        55  0   600   600   97B 6.8%
+   1    44 image     538    57  rgb     3   8  image  no        57  0   600   600 1897B 2.1%
+   1    45 smask     538    57  gray    1   8  image  no        57  0   600   600 1204B 3.9%
+   1    46 image     709    57  rgb     3   8  image  no        59  0   600   600 2797B 2.3%
+   1    47 smask     709    57  gray    1   8  image  no        59  0   600   600 1910B 4.7%
+   1    48 image      28    51  rgb     3   8  image  no        55  0   600   600  117B 2.7%
+   1    49 smask      28    51  gray    1   8  image  no        55  0   600   600   97B 6.8%
+   1    50 image      28    48  rgb     3   8  image  no        29  0   600   600  114B 2.8%
+   1    51 smask      28    48  gray    1   8  image  no        29  0   600   600   87B 6.5%
+   1    52 image     463    57  rgb     3   8  image  no        61  0   600   600 1947B 2.5%
+   1    53 smask     463    57  gray    1   8  image  no        61  0   600   600 1159B 4.4%
+   1    54 image     654    57  rgb     3   8  image  no        63  0   600   600 2774B 2.5%
+   1    55 smask     654    57  gray    1   8  image  no        63  0   600   600 1436B 3.9%
+   1    56 image      28    48  rgb     3   8  image  no        65  0   600   600   61B 1.5%
+   1    57 smask      28    48  gray    1   8  image  no        65  0   600   600   39B 2.9%
+   1    58 image      28    51  rgb     3   8  image  no        55  0   600   600  117B 2.7%
+   1    59 smask      28    51  gray    1   8  image  no        55  0   600   600   97B 6.8%
+   1    60 image     403    57  rgb     3   8  image  no        67  0   600   600 1604B 2.3%
+   1    61 smask     403    57  gray    1   8  image  no        67  0   600   600 1051B 4.6%
+   1    62 image     633    60  rgb     3   8  i
+### pdftotext -raw
+CAMPEONATO:
+FASE LIGA CAMPEÓN JUVENIL
+14/11
+14/11 15:00 NURIA FDEZ 3
+14/11 16:00 NURIA FDEZ 1
+14/11 16:00 NURIA FDEZ 3
+14/11 17:00 NURIA FDEZ 3
+14/11 17:00 NURIA FDEZ 1
+14/11 18:00 NURIA FDEZ 3
+14/11 19:00 NURIA FDEZ 2
+14/11 19:00 NURIA FDEZ 3
+14/11 20:00 NURIA FDEZ 2
+14/11 20:00 NURIA FDEZ 3
+Jornada Nº 4
+Equipos Campo Día/Mes Hora Árbitros
+CLASIFICACIÓN
+1 SPORTIUM 4 4 0 0 14 4 10 12
+2 BIRRAREAL FC 4 3 1 0 11 6 5 10
+3 ASTOM BIRRAS 3 3 0 0 20 8 12 9
+4 BAYERN F.S. 4 3 0 1 18 7 11 9
+5 BESACON BLIN BLIN 4 2 1 1 18 13 5 7
+6 JACK NUNIELS 3 2 1 0 20 7 13 7
+7 TORREJON SALA 4 2 1 1 10 7 3 7
+8 COCA JUNIOR 4 2 1 1 14 12 2 7
+9 VODKA JUNIOR 4 2 0 2 13 5 8 6
+10 SCA 4 2 0 2 11 19 -8 6
+11 LOQUENDOCITY FC 4 1 1 2 16 19 -3 4
+12 POYATO BELLACO 3 1 1 1 10 12 -2 4
+13 MAHOUCHESTER 3 1 1 1 9 10 -1 4
+14 FLAMANGO 4 1 1 2 8 9 -1 4
+15 CARDOS FC. 4 1 1 2 10 18 -8 4
+16 EL CARTEL 4 1 1 2 12 13 -1 4
+17 SEVERO T.ROJO 4 1 1 2 8 9 -1 4
+18 LA BENDICION 4 1 0 3 8 15 -7 3
+19 MK urban proyect fs 4 1 0 3 7 20 -13 3
+20 RIVILLOS LIMONES 5 4 0 0 4 5 14 -9 0
+21 SEVERO T. 4 0 0 4 1 16 -15 0
+Nombre
+Sc PT Goleadores Porteros Deportividad Texto Nada
+Goleadores Porteros Deportividad Texto Nada
+J G E P GF GC DG
+21/11 S
+21/11 14:00 NURIA FDEZ 2 S
+21/11 15:00 NURIA FDEZ 1 S
+21/11 15:00 NURIA FDEZ 2 S
+21/11 16:00 NURIA FDEZ 1 S
+21/11 16:00 NURIA FDEZ 2 S
+21/11 16:00 NURIA FDEZ 3 S
+21/11 17:00 NURIA FDEZ 1 S
+21/11 17:00 NURIA FDEZ 2 S
+21/11 17:00 NURIA FDEZ 3 S
+21/11 18:00 NURIA FDEZ 3 S
+Enfrentamientos de la jornada 5
+### pdftotext -bbox-layout
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>enfrentamientos</title>
+<meta name="Author" content="Pija"/>
+<meta name="Producer" content="Microsoft: Print To PDF"/>
+<meta name="CreationDate" content="2026-11-15T22:39:32+01"/>
+<meta name="ModDate" content="2026-11-15T22:39:32+01"/>
+</head>
+<body>
+<doc>
+  <page width="595.320010" height="841.920040">
+    <flow>
+      <block xMin="193.441088" yMin="13.570832" xMax="402.019666" yMax="44.959110">
+        <line xMin="242.759392" yMin="13.570832" xMax="347.277941" yMax="29.239497">
+          <word xMin="242.759392" yMin="13.570832" xMax="347.277941" yMax="29.239497">CAMPEONATO:</word>
+        </line>
+        <line xMin="193.441088" yMin="29.290445" xMax="402.019666" yMax="44.959110">
+          <word xMin="193.441088" yMin="29.290445" xMax="230.029388" yMax="44.959110">FASE</word>
+          <word xMin="233.595553" yMin="29.290445" xMax="265.691045" yMax="44.959110">LIGA</word>
+          <word xMin="269.397611" yMin="29.290445" xMax="340.327806" yMax="44.959110">CAMPEÓN</word>
+          <word xMin="344.090532" yMin="29.290445" xMax="402.019666" yMax="44.959110">JUVENIL</word>
+        </line>
+      </block>
+      <block xMin="244.322462" yMin="52.571657" xMax="329.629640" yMax="68.240322">
+        <line xMin="244.322462" yMin="52.571657" xMax="329.629640" yMax="68.240322">
+          <word xMin="244.322462" yMin="52.571657" xMax="298.741590" yMax="68.240322">Jornada</word>
+          <word xMin="302.588556" yMin="52.571657" xMax="317.962381" yMax="68.240322">Nº</word>
+          <word xMin="321.823387" yMin="52.571657" xMax="329.629640" yMax="68.240322">4</word>
+        </line>
+      </block>
+      <block xMin="110.279018" yMin="72.419111" xMax="157.630896" yMax="85.811076">
+        <line xMin="110.279018" yMin="72.419111" xMax="157.630896" yMax="85.811076">
+          <word xMin="110.279018" yMin="72.419111" xMax="157.630896" yMax="85.811076">Equipos</word>
+        </line>
+      </block>
+    </flow>
+    <flow>
+      <block xMin="248.156542" yMin="74.147677" xMax="285.964381" yMax="85.262942">
+        <line xMin="248.156542" yMin="74.147677" xMax="285.964381" yMax="85.262942">
+          <word xMin="248.156542" yMin="74.147677" xMax="285.964381" yMax="85.262942">Día/Mes</word>
+        </line>
+      </block>
+    </flow>
+    <flow>
+      <block xMin="311.638499" yMin="72.419111" xMax="352.318394" yMax="85.811076">
+        <line xMin="311.638499" yMin="72.419111" xMax="352.318394" yMax="85.811076">
+          <word xMin="311.638499" yMin="72.419111" xMax="352.318394" yMax="85.811076">Campo</word>
+        </line>
+      </block>
+    </flow>
+    <flow>
+      <block xMin="374.277599" yMin="72.419111" xMax="401.589529" yMax="85.811076">
+        <line xMin="374.277599" yMin="72.419111" xMax="401.589529" yMax="85.811076">
+          <word xMin="374.277599" yMin="72.419111" xMax="401.589529" yMax="85.811076">Hora</word>
+        </line>
+      </block>
+    </flow>
+    <flow>
+      <block xMin="254.038420" yMin="88.815706" xMax="276.682361" yMax="218.856449">
+        <line xMin="254.038420" yMin="88.815706" xMax="276.682361" yMax="98.859680">
+          <word xMin="254.038420" yMin="88.815706" xMax="276.682361" yMax="98.859680">14/11</word>
+        </line>
+        <line xMin="254.038420" yMin="100.812747" xMax="276.682361" yMax="110.856721">
+          <word xMin="254.038420" yMin="100.812747" xMax="276.682361" yMax="110.856721">14/11</word>
+        </line>
+        <line xMin="254.038420" yMin="112.814180" xMax="276.682361" yMax="122.858154">
+          <word xMin="254.038420" yMin="112.814180" xMax="276.682361" yMax="122.858154">14/11</word>
+        </line>
+        <line xMin="254.038420" yMin="124.815613" xMax="276.682361" yMax="134.859587">
+          <word xMin="254.038420" yMin="124.815613" xMax="276.682361" yMax="134.859587">14/11</word>
+        </line>
+        <line xMin="254.038420" yMin="136.812647" xMax="276.682361" yMax="146.856621">
+          <word xMin="254.038420" yMin="136.812647" xMax="276.682361" yMax="146.856621">14/11</word>
+        </line>
+        <line xMin="254.038420" yMin="148.814094" xMax="276.682361" yMax="158.858068">
+          <word xMin="254.038420" yMin="148.814094" xMax="276.682361" yMax="158.858068">14/11</word>
+        </line>
+        <line xMin="254.038420" yMin="160.815527" xMax="276.682361" yMax="170.859501">
+          <word xMin="254.038420" yMin="160.815527" xMax="276.682361" yMax="170.859501">14/11</word>
+        </line>
+        <line xMin="254.038420" yMin="172.812561" xMax="276.682361" yMax="182.856535">
+          <word xMin="254.038420" yMin="172.812561" xMax="276.682361" yMax="182.856535">14/11</word>
+        </line>
+        <line xMin="254.038420" yMin="184.813994" xMax="276.682361" yMax="194.857968">
+          <word xMin="254.038420" yMin="184.813994" xMax="276.682361" yMax="194.857968">14/11</word>
+        </line>
+        <line xMin="254.038420" yMin="196.815427" xMax="276.682361" yMax="206.859401">
+          <word xMin="254.038420" yMin="196.815427" xMax="276.682361" yMax="206.859401">14/11</word>
+        </line>
+        <line xMin="254.038420" yMin="208.812475" xMax="276.682361" yMax="218.856449">
+          <word xMin="254.038420" yMin="208.812475" xMax="276.682361" yMax="218.856449">14/11</word>
+        </line>
+      </block>
+    </flow>
+    <flow>
+      <block xMin="299.038852" yMin="100.812747" xMax="360.562693" yMax="218.856449">
+        <line xMin="299.038852" yMin="100.812747" xMax="360.562693" yMax="110.856721">
+          <word xMin="299.038852" yMin="100.812747" xMax="326.992779" yMax="110.856721">NURIA</word>
+          <word xMin="329.548773" yMin="100.812747" xMax="353.038712" yMax="110.856721">FDEZ</word>
+          <word xMin="355.558706" yMin="100.812747" xMax="360.562693" yMax="110.856721">3</word>
+        </line>
+        <line xMin="299.038852" yMin="112.814180" xMax="360.562693" 

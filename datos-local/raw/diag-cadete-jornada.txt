@@ -1,0 +1,182 @@
+### pdffonts /home/runner/work/Juncal_Infantil_B/Juncal_Infantil_B/datos-local/raw/pdf/cadete-jornada.pdf
+name                                 type              encoding         emb sub uni object ID
+------------------------------------ ----------------- ---------------- --- --- --- ---------
+CIDFont+F1                           CID TrueType      Identity-H       yes no  yes     11  0
+CIDFont+F2                           CID TrueType      Identity-H       yes no  yes     19  0
+
+### pdfimages -list
+page   num  type   width height color comp bpc  enc interp  object ID x-ppi y-ppi size ratio
+--------------------------------------------------------------------------------------------
+   1     0 image     655    57  rgb     3   8  image  no        21  0   600   600 2520B 2.2%
+   1     1 smask     655    57  gray    1   8  image  no        21  0   600   600 1675B 4.5%
+   1     2 image     362    57  rgb     3   8  image  no        23  0   600   600 1416B 2.3%
+   1     3 smask     362    57  gray    1   8  image  no        23  0   600   600 1001B 4.9%
+   1     4 image     658    57  rgb     3   8  image  no        25  0   600   600 2466B 2.2%
+   1     5 smask     658    57  gray    1   8  image  no        25  0   600   600 1668B 4.4%
+   1     6 image     726    57  rgb     3   8  image  no        27  0   600   600 3020B 2.4%
+   1     7 smask     726    57  gray    1   8  image  no        27  0   600   600 2137B 5.2%
+   1     8 image      19    48  rgb     3   8  image  no        29  0   600   600   80B 2.9%
+   1     9 smask      19    48  gray    1   8  image  no        29  0   600   600   63B 6.9%
+   1    10 image      28    48  rgb     3   8  image  no        31  0   600   600  114B 2.8%
+   1    11 smask      28    48  gray    1   8  image  no        31  0   600   600   87B 6.5%
+   1    12 image     643    57  rgb     3   8  image  no        33  0   600   600 2467B 2.2%
+   1    13 smask     643    57  gray    1   8  image  no        33  0   600   600 1630B 4.4%
+   1    14 image     424    57  rgb     3   8  image  no        35  0   600   600 1590B 2.2%
+   1    15 smask     424    57  gray    1   8  image  no        35  0   600   600  758B 3.1%
+   1    16 image      28    51  rgb     3   8  image  no        37  0   600   600  161B 3.8%
+   1    17 smask      28    51  gray    1   8  image  no        37  0   600   600  129B 9.0%
+   1    18 image      28    48  rgb     3   8  image  no        31  0   600   600  114B 2.8%
+   1    19 smask      28    48  gray    1   8  image  no        31  0   600   600   87B 6.5%
+   1    20 image     726    57  rgb     3   8  image  no        39  0   600   600 3018B 2.4%
+   1    21 smask     726    57  gray    1   8  image  no        39  0   600   600 2123B 5.1%
+   1    22 image     655    57  rgb     3   8  image  no        41  0   600   600 2513B 2.2%
+   1    23 smask     655    57  gray    1   8  image  no        41  0   600   600 1591B 4.3%
+   1    24 image      30    48  rgb     3   8  image  no        43  0   600   600  113B 2.6%
+   1    25 smask      30    48  gray    1   8  image  no        43  0   600   600   87B 6.0%
+   1    26 image      28    51  rgb     3   8  image  no        45  0   600   600  117B 2.7%
+   1    27 smask      28    51  gray    1   8  image  no        45  0   600   600   97B 6.8%
+   1    28 image     362    57  rgb     3   8  image  no        23  0   600   600 1416B 2.3%
+   1    29 smask     362    57  gray    1   8  image  no        23  0   600   600 1001B 4.9%
+   1    30 image     643    57  rgb     3   8  image  no        33  0   600   600 2467B 2.2%
+   1    31 smask     643    57  gray    1   8  image  no        33  0   600   600 1630B 4.4%
+   1    32 image     726    57  rgb     3   8  image  no        27  0   600   600 3020B 2.4%
+   1    33 smask     726    57  gray    1   8  image  no        27  0   600   600 2137B 5.2%
+   1    34 image     655    57  rgb     3   8  image  no        21  0   600   600 2520B 2.2%
+   1    35 smask     655    57  gray    1   8  image  no        21  0   600   600 1675B 4.5%
+   1    36 image     726    57  rgb     3   8  image  no        39  0   600   600 3018B 2.4%
+   1    37 smask     726    57  gray    1   8  image  no        39  0   600   600 2123B 5.1%
+   1    38 image     658    57  rgb     3   8  image  no        25  0   600   600 2466B 2.2%
+   1    39 smask     658    57  gray    1   8  image  no        25  0   600   600 1668B 4.4%
+   1    40 image     655    57  rgb     3   8  image  no        41  0   600   600 2513B 2.2%
+   1    41 smask     655    57  gray    1   8  image  no        41  0   600   600 1591B 4.3%
+   1    42 image     424    57  rgb     3   8  image  no        35  0   600   600 1590B 2.2%
+   1    43 smask     424    57  gray    1   8  image  no        35  0   600   600  758B 3.1%
+
+### pdftotext -raw
+CAMPEONATO:
+1ª FASE CAMPEÓN DE INVIERNO CADETE
+15/11
+15/11 10:00 NURIA FDEZ 2
+15/11 13:00 NURIA FDEZ 2
+15/11 14:00 NURIA FDEZ 1
+Jornada Nº 4
+Equipos Campo Día/Mes Hora Árbitros
+CLASIFICACIÓN
+1 LEON FELIPE 4 4 0 0 26 6 20 12
+2 CIUD.TORREJON "B" 4 3 1 0 16 5 11 10
+3 SEVERO TORREJON 3 2 0 1 10 7 3 6
+4 RIVILLOS LIMONES 3 1 1 1 9 3 6 4
+5 CIUD.TORREJON "A" 3 1 0 2 8 9 -1 3
+6 TORREJON JUNCAL 4 0 0 4 6 23 -17 0
+7 RIVILLOS LIMONES 3 0 0 3 0 22 -22 0
+Nombre
+Sc PT Goleadores Porteros Deportividad Texto Nada
+Goleadores Porteros Deportividad Texto Nada
+J G E P GF GC DG
+22/11 D
+22/11 10:00 NURIA FDEZ 2 D
+22/11 14:00 NURIA FDEZ 2 D
+22/11 14:00 NURIA FDEZ 1 D
+Enfrentamientos de la jornada 5
+### pdftotext -bbox-layout
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>enfrentamientos</title>
+<meta name="Author" content="Pija"/>
+<meta name="Producer" content="Microsoft: Print To PDF"/>
+<meta name="CreationDate" content="2026-11-15T22:35:41+01"/>
+<meta name="ModDate" content="2026-11-15T22:35:41+01"/>
+</head>
+<body>
+<doc>
+  <page width="595.320010" height="841.920040">
+    <flow>
+      <block xMin="153.597031" yMin="13.570832" xMax="437.430131" yMax="44.959110">
+        <line xMin="242.759392" yMin="13.570832" xMax="347.277941" yMax="29.239497">
+          <word xMin="242.759392" yMin="13.570832" xMax="347.277941" yMax="29.239497">CAMPEONATO:</word>
+        </line>
+        <line xMin="153.597031" yMin="29.290445" xMax="437.430131" yMax="44.959110">
+          <word xMin="153.597031" yMin="29.290445" xMax="166.654253" yMax="44.959110">1ª</word>
+          <word xMin="170.304659" yMin="29.290445" xMax="206.892958" yMax="44.959110">FASE</word>
+          <word xMin="210.599524" yMin="29.290445" xMax="281.529719" yMax="44.959110">CAMPEÓN</word>
+          <word xMin="285.292445" yMin="29.290445" xMax="304.751916" yMax="44.959110">DE</word>
+          <word xMin="308.458482" yMin="29.290445" xMax="376.650873" yMax="44.959110">INVIERNO</word>
+          <word xMin="380.343399" yMin="29.290445" xMax="437.430131" yMax="44.959110">CADETE</word>
+        </line>
+      </block>
+      <block xMin="244.322462" yMin="52.571657" xMax="329.629640" yMax="68.240322">
+        <line xMin="244.322462" yMin="52.571657" xMax="329.629640" yMax="68.240322">
+          <word xMin="244.322462" yMin="52.571657" xMax="298.741590" yMax="68.240322">Jornada</word>
+          <word xMin="302.588556" yMin="52.571657" xMax="317.962381" yMax="68.240322">Nº</word>
+          <word xMin="321.823387" yMin="52.571657" xMax="329.629640" yMax="68.240322">4</word>
+        </line>
+      </block>
+      <block xMin="110.279018" yMin="72.419111" xMax="157.630896" yMax="85.811076">
+        <line xMin="110.279018" yMin="72.419111" xMax="157.630896" yMax="85.811076">
+          <word xMin="110.279018" yMin="72.419111" xMax="157.630896" yMax="85.811076">Equipos</word>
+        </line>
+      </block>
+    </flow>
+    <flow>
+      <block xMin="248.156542" yMin="74.147677" xMax="285.964381" yMax="85.262942">
+        <line xMin="248.156542" yMin="74.147677" xMax="285.964381" yMax="85.262942">
+          <word xMin="248.156542" yMin="74.147677" xMax="285.964381" yMax="85.262942">Día/Mes</word>
+        </line>
+      </block>
+    </flow>
+    <flow>
+      <block xMin="311.638499" yMin="72.419111" xMax="352.318394" yMax="85.811076">
+        <line xMin="311.638499" yMin="72.419111" xMax="352.318394" yMax="85.811076">
+          <word xMin="311.638499" yMin="72.419111" xMax="352.318394" yMax="85.811076">Campo</word>
+        </line>
+      </block>
+    </flow>
+    <flow>
+      <block xMin="374.277599" yMin="72.419111" xMax="401.589529" yMax="85.811076">
+        <line xMin="374.277599" yMin="72.419111" xMax="401.589529" yMax="85.811076">
+          <word xMin="374.277599" yMin="72.419111" xMax="401.589529" yMax="85.811076">Hora</word>
+        </line>
+      </block>
+    </flow>
+    <flow>
+      <block xMin="254.038420" yMin="88.815706" xMax="276.682361" yMax="134.859587">
+        <line xMin="254.038420" yMin="88.815706" xMax="276.682361" yMax="98.859680">
+          <word xMin="254.038420" yMin="88.815706" xMax="276.682361" yMax="98.859680">15/11</word>
+        </line>
+        <line xMin="254.038420" yMin="100.812747" xMax="276.682361" yMax="110.856721">
+          <word xMin="254.038420" yMin="100.812747" xMax="276.682361" yMax="110.856721">15/11</word>
+        </line>
+        <line xMin="254.038420" yMin="112.814180" xMax="276.682361" yMax="122.858154">
+          <word xMin="254.038420" yMin="112.814180" xMax="276.682361" yMax="122.858154">15/11</word>
+        </line>
+        <line xMin="254.038420" yMin="124.815613" xMax="276.682361" yMax="134.859587">
+          <word xMin="254.038420" yMin="124.815613" xMax="276.682361" yMax="134.859587">15/11</word>
+        </line>
+      </block>
+    </flow>
+    <flow>
+      <block xMin="299.038852" yMin="100.812747" xMax="360.562693" yMax="134.859587">
+        <line xMin="299.038852" yMin="100.812747" xMax="360.562693" yMax="110.856721">
+          <word xMin="299.038852" yMin="100.812747" xMax="326.992779" yMax="110.856721">NURIA</word>
+          <word xMin="329.548773" yMin="100.812747" xMax="353.038712" yMax="110.856721">FDEZ</word>
+          <word xMin="355.558706" yMin="100.812747" xMax="360.562693" yMax="110.856721">2</word>
+        </line>
+        <line xMin="299.038852" yMin="112.814180" xMax="360.562693" yMax="122.858154">
+          <word xMin="299.038852" yMin="112.814180" xMax="326.992779" yMax="122.858154">NURIA</word>
+          <word xMin="329.548773" yMin="112.814180" xMax="353.038712" yMax="122.858154">FDEZ</word>
+          <word xMin="355.558706" yMin="112.814180" xMax="360.562693" yMax="122.858154">2</word>
+        </line>
+        <line xMin="299.038852" yMin="124.815613" xMax="360.562693" yMax="134.859587">
+          <word xMin="299.038852" yMin="124.815613" xMax="326.992779" yMax="134.859587">NURIA</word>
+          <word xMin="329.548773" yMin="124.815613" xMax="353.038712" yMax="134.859587">FDEZ</word>
+          <word xMin="355.558706" yMin="124.815613" xMax="360.562693" yMax="134.859587">1</word>
+        </line>
+      </block>
+    </flow>
+    <flow>
+      <block xMin="375.718106" yMin="100.812747" xMax="398.362047" yMax="134.859587">
+        <line xMin="375.718106" yMin="100.812747" xMax="398.362047" yMax="110.856721">
+          <word xMin="375.718106" yMin="100.812747" xMax="398.362047" yMax="110.856721">10:00</word>
+        </line>
+        <line xMin="375.718106" yMin="112.814180" xMax="398.362047" yMax="122.858154">
+          <word xMin="375.718106" yMin="112.814180" xMax="398.362047" yMax="122.8581

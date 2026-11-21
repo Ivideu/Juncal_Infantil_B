@@ -1,12 +1,12 @@
 /* categoria-extra.js · se carga DESPUÉS del script principal de cada categoría.
-   Añade: cromos creados desde el admin (jugadores sobre plantilla; entrenadores desde Images/Entrenadores), contraseña propia por categoría, barra inferior solo para el propietario. */
+   Añade: cromos creados desde el admin (jugadores sobre la camiseta del 20 aniversario; entrenadores desde Images/Entrenadores), contraseña propia por categoría, barra inferior solo para el propietario. */
 (function(){
 const OWN=()=>document.body.classList.contains("owner");
 /* Páginas con el login nuevo (ventana con acceso de administrador, Jugadas y Pizarra): ese login manda; aquí no se sobrescribe. */
 const PORT=typeof openLogin==="function";
 let AUTH_EMAIL=CAT.email;try{AUTH_EMAIL=sessionStorage.getItem("em")||CAT.email}catch(e){}
 if(AUTH_EMAIL===FBMAIL)document.body.classList.add("owner");
-document.head.insertAdjacentHTML("beforeend","<style>body.edit:not(.owner) #adm{display:none!important}.cvf{display:inline-flex;gap:6px;align-items:center;background:#e9f0ff;border-radius:99px;padding:2px 4px 2px 12px;font-weight:600}.cvf button{padding:0 8px;border-radius:99px}.cvf.ed2{background:#ffd23f}.cvc img,.cvph{aspect-ratio:535/1000}</style>");
+document.head.insertAdjacentHTML("beforeend","<style>body.edit:not(.owner) #adm{display:none!important}.cvf{display:inline-flex;gap:6px;align-items:center;background:#e9f0ff;border-radius:99px;padding:2px 4px 2px 12px;font-weight:600}.cvf button{padding:0 8px;border-radius:99px}.cvf.ed2{background:#ffd23f}.cvc img{aspect-ratio:auto;max-width:170px}.cvph{aspect-ratio:992/1072;max-width:170px}</style>");
 
 /* ---------- Login antiguo (solo en páginas sin el login nuevo) ---------- */
 if(!PORT){
@@ -30,41 +30,44 @@ function cfg2(){const c=S.cfg;if(!c||CAT.me)return;
  (c.R||[]).forEach((s,i)=>{const[d,p]=s.split("|");J.push({n:i+1,d:d.split("-").reverse().join("-"),p:p.split(",").map(x=>x.split("-").map(Number))})});
  ME=+Object.keys(COD).find(k=>String(COD[k])===String(c.equipo||CAT.equipo))||0}
 
-/* ---------- Cromos de jugadores: nombre, número y posición escritos sobre la plantilla ---------- */
+/* ---------- Cromos de jugadores: nombre y número escritos sobre la camiseta del 20 aniversario ---------- */
 const POS={portero:"PORTERO",cierre:"CIERRE",ala:"ALA",pivot:"PÍVOT",entrenador:"ENTRENADOR"};
-const W=535,H=1000,FF='"Barlow Condensed",Impact,"Arial Narrow",sans-serif';
 const BLANK="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==";
 const RAIZ=CROMOS_DIR.replace(/Cromos\/$/,"");                       // raíz de la web vista desde esta página (normalmente "../")
 const rutaImg=p=>RAIZ+p.split("/").map(encodeURIComponent).join("/"); // "Images/Entrenadores/Ivan.jpg" -> URL
-/* Plantillas del repositorio: Images/plantilla-jugador.jpg y Images/plantilla-portero.jpg (también prueba "images/" y "Cromos/") */
-const TPL={};let memo={};
-const refresca=()=>{memo={};render()};
-["jugador","portero"].forEach(k=>{const r=["Images/","images/","Cromos/"].map(d=>RAIZ+d+"plantilla-"+k+".jpg");let n=0;const i=new Image();
- i.onload=()=>{TPL[k]=i;refresca()};i.onerror=()=>{if(++n<r.length)i.src=r[n]};i.src=r[0]});
-if(document.fonts&&document.fonts.load)document.fonts.load('800 60px "Barlow Condensed"').then(refresca).catch(()=>{});
-const baseDe=c=>TPL[c.pos==="portero"?"portero":"jugador"];
-function cromoImg(c){
- const base=baseDe(c);if(!base)return BLANK;
- const key=JSON.stringify([c.id,c.name,c.num,c.pos,c.coach]);
- if(memo[key])return memo[key];
- const cv=document.createElement("canvas");cv.width=W;cv.height=H;const g=cv.getContext("2d");
- g.drawImage(base,0,0,W,H);
- /* t: texto en cursiva con borde oscuro y brillo azul. (x,y)=centro/derecha/izquierda según align; rot en radianes */
- const t=(s,x,y,size,align,maxW,rot)=>{
-  g.save();g.translate(x,y);if(rot)g.rotate(rot);g.transform(1,0,-.2,1,0,0);
-  g.font=`800 ${size}px ${FF}`;const w=g.measureText(s).width;if(maxW&&w>maxW)size*=maxW/w;
-  g.font=`800 ${size}px ${FF}`;g.textAlign=align;g.textBaseline="middle";g.lineJoin="round";
-  g.lineWidth=size*.12;g.strokeStyle="rgba(3,10,38,.9)";g.strokeText(s,0,0);
-  g.shadowColor="rgba(40,140,255,.95)";g.shadowBlur=size*.3;g.fillStyle="#fff";g.fillText(s,0,0);g.fillText(s,0,0);
-  g.restore()};
- t(POS[c.pos]||String(c.pos||"").toUpperCase(),POSX.x,POSX.y,POSX.s,"left",POSX.w);
- if(!c.coach)t(String(c.num),NUMX.x,NUMX.y,NUMX.s,"right",NUMX.w);
- t(String(c.name).toUpperCase(),NAMX.x,NAMX.y,NAMX.s,"center",NAMX.w,NAMX.r);
- return memo[key]=cv.toDataURL("image/jpeg",.9)}
-/* Posiciones sobre la plantilla (535x1000): posición arriba-izquierda, número arriba-derecha, nombre abajo inclinado */
-const POSX={x:50,y:78,s:40,w:170},NUMX={x:488,y:96,s:104,w:150},NAMX={x:268,y:858,s:112,w:380,r:-.17};
 
-/* Entrenador con imagen propia (c.img) -> se muestra tal cual; el resto se dibuja sobre la plantilla */
+/* ===== Cromo = camiseta trasera 20 aniversario ===== */
+const BASE={img:null};let memo={};
+const refresca=()=>{memo={};render()};
+(function(){const r=[RAIZ+"Cromos/camiseta-base.jpg",RAIZ+"Images/camiseta-base.jpg"];let n=0;const i=new Image();
+ i.onload=()=>{BASE.img=i;refresca()};i.onerror=()=>{if(++n<r.length)i.src=r[n]};i.src=r[0]})();
+/* Tipografía del nombre: pincel (Permanent Marker). El dorsal usa Barlow Condensed, que la página ya carga */
+document.head.insertAdjacentHTML("beforeend",'<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap">');
+if(document.fonts&&document.fonts.load)Promise.all([document.fonts.load('92px "Permanent Marker"',"ABC"),document.fonts.load('800 445px "Barlow Condensed"',"0123456789")]).then(refresca).catch(()=>{});
+/* Texto distinto del nombre en la camiseta (opcional): CAM_TXT["Ivan"]="I.BLASCO" */
+const CAM_TXT=window.CAM_TXT||(window.CAM_TXT={});
+/* Posiciones sobre la imagen original de 992x1072 */
+const CAM={out:640,
+ nom:{font:'"Permanent Marker","Impact",sans-serif',cx:492,base:322,cap:92,maxW:560},
+ num:{font:'800 {s}px "Barlow Condensed","Impact",sans-serif',cx:497,base:650,size:445,maxW:430,skew:-.1,navy:"#14308f"}};
+function cromoImg(c){
+ if(!BASE.img)return BLANK;
+ const key=JSON.stringify([c.id,c.name,c.num,c.coach,CAM_TXT[c.name]||""]);
+ if(memo[key])return memo[key];
+ const k=CAM.out/992,cv=document.createElement("canvas");cv.width=CAM.out;cv.height=Math.round(1072*k);
+ const g=cv.getContext("2d");g.scale(k,k);g.drawImage(BASE.img,0,0,992,1072);
+ g.textAlign="center";g.textBaseline="alphabetic";g.lineJoin="round";
+ const t=String(CAM_TXT[c.name]||c.name||"").toUpperCase();
+ if(t){const n=CAM.nom;let s=n.cap/.72;g.font=s+"px "+n.font;const w=g.measureText(t).width;if(w>n.maxW){s*=n.maxW/w;g.font=s+"px "+n.font}
+  g.fillStyle="#fff";g.shadowColor="rgba(8,20,70,.55)";g.shadowBlur=6;g.shadowOffsetY=3;g.fillText(t,n.cx,n.base);g.shadowColor="transparent"}
+ const d=c.coach?"":String(c.num||"").trim();
+ if(d){const n=CAM.num;let s=n.size;g.font=n.font.replace("{s}",s);const w=g.measureText(d).width;if(w>n.maxW){s*=n.maxW/w;g.font=n.font.replace("{s}",s)}
+  g.save();g.translate(n.cx,n.base);g.transform(1,0,n.skew,1,0,0);
+  g.fillStyle=n.navy;g.fillText(d,13,13);g.fillStyle="#fff";g.fillText(d,0,0);
+  g.strokeStyle=n.navy;g.lineWidth=Math.max(4,s*.014);g.strokeText(d,0,0);g.restore()}
+ return memo[key]=cv.toDataURL("image/jpeg",.9)}
+
+/* Entrenador con imagen propia (c.img) -> se muestra tal cual; el resto se dibuja sobre la camiseta */
 function buildCromos(){CROMOS.length=0;
  (S.cromos||[]).forEach(c=>CROMOS.push({file:"g_"+c.id,key:"g_"+c.id,name:c.name,num:c.num||"",pos:c.pos,coach:!!c.coach,src:(c.coach&&c.img)?rutaImg(c.img):cromoImg(c)}));
  CROMOS.sort((a,b)=>a.coach-b.coach||(a.pos==="portero"?0:1)-(b.pos==="portero"?0:1)||(+a.num||0)-(+b.num||0))}
@@ -100,7 +103,7 @@ function renameP(a,b){const i=S.pl.indexOf(a);if(i>-1)S.pl[i]=b;
  Object.values(S.m).forEach(m=>["g","gm"].forEach(f=>{if(m[f]&&m[f][a]!==undefined){m[f][b]=m[f][a];delete m[f][a]}}));
  S.pl.sort((p,q)=>p.localeCompare(q))}
 function quitaP(a){const i=S.pl.indexOf(a);if(i>-1)S.pl.splice(i,1);delete S.dn[a];if(S.off)delete S.off[a]}
-/* Jugadores nuevos: se crean con cromo por defecto (Images/plantilla-jugador.jpg, posición Ala). Si es portero, se edita después. */
+/* Jugadores nuevos: se crean con cromo por defecto (camiseta, posición Ala). Si es portero, se edita después. */
 window.addP=function(){
  S.cromos=S.cromos||[];let k=0;
  document.getElementById("np").value.split(/[,\n]/).map(x=>x.trim()).filter(Boolean).forEach(x=>{
@@ -154,7 +157,7 @@ function cromoForm(){
  return`<div class="card"><h2 style="font-size:1.5rem;color:#0f2a6b">${ec?"Editar cromo":PRE?"Cromo de "+esc(PRE.name):"Crear cromo"}</h2>
  <div class="ed" style="display:flex"><span id="cn_pl" style="display:${co?"none":"contents"}"><input id="cn_name" placeholder="Nombre (sin apellido)" value="${esc(co?"":v.name)}"><input id="cn_num" class="g" type="number" min="0" max="99" placeholder="Nº" value="${esc(v.num)}"></span><span id="cn_co" style="display:${co?"contents":"none"}">${picker}</span><select id="cn_pos" onchange="cnPos(this.value)">${opts}</select></div>
  <div class="ed" style="display:flex"><button class="on" onclick="addCromo()">${mod?"💾 Guardar cambios":"＋ Crear cromo"}</button>${mod?'<button onclick="cancelCromo()">Cancelar</button>':""}</div>
- <small class="gap" style="display:block;margin-top:6px">Jugadores: el cromo se escribe solo sobre Images/plantilla-jugador.jpg (portero: plantilla-portero.jpg). Entrenadores: se elige uno de Images/Entrenadores.</small>
+ <small class="gap" style="display:block;margin-top:6px">Jugadores: el nombre y el número se escriben solos sobre Cromos/camiseta-base.jpg. Entrenadores: se elige uno de Images/Entrenadores.</small>
  <div class="cvsum">${L||'<small class="gap">Aún no hay cromos.</small>'}</div></div>`}
 /* Cuerpo técnico dentro de la pestaña Plantilla */
 function cuerpoTecnico(){
@@ -184,7 +187,7 @@ window.render=function(){cfg2();buildCromos();
   a.querySelectorAll('button[onclick^="delP("]').forEach(b=>{const m=b.getAttribute("onclick").match(/delP\((\d+)\)/);if(!m)return;const i=+m[1];
    const e=document.createElement("button");e.textContent="✎ Editar";e.setAttribute("onclick","editPl("+i+")");b.parentNode.insertBefore(e,b);
    const p=S.pl[i],c=p&&cromoFor(p),row=b.closest(".card"),sv=row&&row.querySelector("svg");
-   if(c&&sv){const im=document.createElement("img");im.src=c.src;im.alt="";im.style.cssText="width:34px;aspect-ratio:535/1000;object-fit:contain;border-radius:5px";sv.replaceWith(im)}})}
+   if(c&&sv){const im=document.createElement("img");im.src=c.src;im.alt="";im.style.cssText="width:40px;aspect-ratio:992/1072;object-fit:contain;border-radius:5px";sv.replaceWith(im)}})}
 
  if(!PORT&&!OWN())document.getElementById("nav").insertAdjacentHTML("beforeend",'<button onclick="setEdit(false)"><span>🔓</span><span>Salir</span></button>')};
 render();

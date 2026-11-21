@@ -41,15 +41,16 @@ const BASE={img:null};let memo={};
 const refresca=()=>{memo={};render()};
 (function(){const r=[RAIZ+"Cromos/camiseta-base.jpg",RAIZ+"Images/camiseta-base.jpg"];let n=0;const i=new Image();
  i.onload=()=>{BASE.img=i;refresca()};i.onerror=()=>{if(++n<r.length)i.src=r[n]};i.src=r[0]})();
-/* Tipografía del nombre: pincel (Permanent Marker). El dorsal usa Barlow Condensed, que la página ya carga */
-document.head.insertAdjacentHTML("beforeend",'<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap">');
-if(document.fonts&&document.fonts.load)Promise.all([document.fonts.load('92px "Permanent Marker"',"ABC"),document.fonts.load('700 430px "Barlow Condensed"',"0123456789")]).then(refresca).catch(()=>{});
+/* Tipografías (Google Fonts): nombre = Knewave (pincel deportivo), dorsal = Russo One. Se re-dibuja cuando terminan de cargar */
+(function(){const l=document.createElement("link");l.rel="stylesheet";l.href="https://fonts.googleapis.com/css2?family=Knewave&family=Russo+One&display=swap";
+ l.onload=()=>Promise.all([document.fonts.load('60px "Knewave"',"ABCÑÓ"),document.fonts.load('430px "Russo One"',"0123456789")]).then(refresca).catch(()=>{});
+ document.head.appendChild(l)})();
 /* Texto distinto del nombre en la camiseta (opcional): CAM_TXT["Ivan"]="I.BLASCO" */
 const CAM_TXT=window.CAM_TXT||(window.CAM_TXT={});
 /* Posiciones sobre la imagen original de 992x1072 */
 const CAM={out:640,
- nom:{font:'"Permanent Marker","Impact",sans-serif',cx:492,base:326,cap:60,maxW:380,sx:.8,skew:-.1},
- num:{font:'700 {s}px "Barlow Condensed","Impact",sans-serif',cx:497,base:652,size:430,maxW:400,skew:-.08,navy:"#14308f"}};
+ nom:{font:'"Knewave","Permanent Marker","Impact",sans-serif',cx:492,base:326,cap:66,maxW:400,sx:.92,skew:0},
+ num:{font:'400 {s}px "Russo One","Barlow Condensed","Impact",sans-serif',cx:497,base:652,size:440,maxW:420,skew:-.1,navy:"#14308f"}};
 function cromoImg(c){
  if(!BASE.img)return BLANK;
  const key=JSON.stringify([c.id,c.name,c.num,c.coach,CAM_TXT[c.name]||""]);
@@ -65,7 +66,7 @@ function cromoImg(c){
  /* Dorsal: sombra azul, línea blanca exterior, línea azul y relleno blanco (doble línea como la camiseta) */
  const d=c.coach?"":String(c.num||"").trim();
  if(d){const n=CAM.num;let s=n.size;g.font=n.font.replace("{s}",s);const w=g.measureText(d).width;if(w>n.maxW){s*=n.maxW/w;g.font=n.font.replace("{s}",s)}
-  g.save();g.translate(n.cx,n.base);g.transform(1,0,n.skew,1,0,0);
+  g.save();g.translate(n.cx,n.base);g.transform(1,0,n.skew,1,0,0);g.lineJoin="miter";g.miterLimit=3;
   g.fillStyle=n.navy;g.strokeStyle=n.navy;g.lineWidth=s*.06;g.fillText(d,14,14);g.strokeText(d,14,14);   // sombra
   g.strokeStyle="#fff";g.lineWidth=s*.075;g.strokeText(d,0,0);                                          // línea blanca exterior
   g.strokeStyle=n.navy;g.lineWidth=s*.04;g.strokeText(d,0,0);                                            // línea azul
@@ -181,6 +182,30 @@ if(typeof push==="function"&&typeof fbTok==="function"&&FB){
     setSt("⚠ "+m);toast(m)
    }catch(e){const m=e===0?"La sesión ha caducado. Sal y vuelve a entrar para guardar.":"No se ha guardado: error de conexión.";setSt("⚠ "+m);toast(m)}
   },150)}}
+
+/* ---------- Selector de goleador: botones grandes con número y nombre bien legibles ---------- */
+document.head.insertAdjacentHTML("beforeend","<style>#pickOv .pk-t{display:flex;align-items:center;gap:.5em;padding:0 .6em;width:auto;height:auto;background:linear-gradient(180deg,#2f6bff,#1740c0);border:3px solid #7aa9ff;border-radius:16px;color:#fff;box-shadow:0 6px 0 #0b2273;text-align:left;overflow:hidden;cursor:pointer;-webkit-tap-highlight-color:transparent}#pickOv .pk-t:active{transform:translateY(4px);box-shadow:0 2px 0 #0b2273}#pickOv .pk-n{flex:none;display:grid;place-items:center;min-width:1.8em;height:1.8em;padding:0 .2em;border-radius:50%;background:#ffd23f;color:#0a0f1e;font:800 .85em/1 'Barlow Condensed',sans-serif}#pickOv .pk-m{min-width:0;font:800 1em/1.05 'Barlow Condensed',sans-serif;text-transform:uppercase;letter-spacing:.02em;overflow-wrap:anywhere}#pickOv .pk-t.pk-o{background:linear-gradient(180deg,#566089,#2b3358);border-color:#9aa5c4;box-shadow:0 6px 0 #151a33}#pickOv .pk-t.pk-o .pk-m{font-size:.6em}</style>");
+window.pickGol=function(j,h){
+ closePick();
+ const jug=jugList().filter(c=>cEst(c)==="convocado");
+ const ov=document.createElement("div");ov.id="pickOv";
+ if(FS&&innerHeight>innerWidth)ov.classList.add("rot");
+ const tile=c=>`<button class="pk-c pk-t" ${c.extra?`data-p="${esc(c.pl)}"`:`data-f="${esc(c.file)}"`} aria-label="${esc(c.name)}"><b class="pk-n">${esc(c.num||"–")}</b><span class="pk-m">${esc(c.name)}</span></button>`;
+ ov.innerHTML=`<div class="pk-h">¿QUIÉN HA MARCADO?</div><div class="pk-g">${jug.map(tile).join("")}<button class="pk-c pk-t pk-o" data-o="1"><b class="pk-n">⚽</b><span class="pk-m">En propia puerta del rival</span></button></div><button class="pk-x">Cancelar</button>`;
+ ov.onclick=e=>{const b=e.target.closest("button");
+  if(b&&b.dataset.f)goalBy(j,h,b.dataset.f);
+  else if(b&&b.dataset.p!==undefined)goalBy(j,h,"",b.dataset.p);
+  else if(b&&b.dataset.o)goalBy(j,h,"");
+  else if((b&&b.classList.contains("pk-x"))||e.target===ov)closePick()};
+ document.body.appendChild(ov);fitPick()};
+/* Reparte los botones para que quepan todos con la letra más grande posible */
+window.fitPick=function(){const ov=document.getElementById("pickOv");if(!ov)return;ov.classList.toggle("rot",FS&&innerHeight>innerWidth);
+ const g=ov.querySelector(".pk-g"),t=[...g.children],n=t.length,W=g.clientWidth,H=g.clientHeight,gap=Math.max(8,Math.min(W,H)*.02);
+ const L=Math.max(5,...t.filter(b=>!b.classList.contains("pk-o")).map(b=>b.querySelector(".pk-m").textContent.length));
+ const emW=1.2+1.53+.5+L*.5;let best=0,bc=1,bw=0,bh=0;
+ for(let c=1;c<=n;c++){const r=Math.ceil(n/c),w=(W-gap*(c-1))/c,h=(H-gap*(r-1))/r,f=Math.min(h*.42,w/emW);if(f>best){best=f;bc=c;bw=w;bh=h}}
+ g.style.gap=gap+"px";g.style.gridTemplateColumns=`repeat(${bc},${Math.floor(bw)}px)`;g.style.gridAutoRows=Math.floor(bh)+"px";
+ t.forEach(b=>{b.style.fontSize=Math.floor(best)+"px"})};
 
 /* ---------- Enganche en render ---------- */
 const _rn=window.render;

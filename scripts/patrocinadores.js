@@ -20,7 +20,7 @@
     { name: "Lasercor",                          img: "lasercor.png",     w: 568, h: 192,  logoH: 36, url: "https://www.lasercor.com/" },
     { name: "Cedecar",                           img: "cedecar.png",      w: 512, h: 176,  logoH: 34, url: "https://cedecar.com/" },
     { name: "delaoliva",                         img: "delaoliva.png",    w: 496, h: 136,  logoH: 30, url: "https://delaoliva.com/" },
-    { name: "BBVA",                              img: "BBVA.png",         w: 496, h: 136,  logoH: 30, url: "https://www.bbvacom/" },
+    { name: "BBVA",                              img: "BBVA.png",         w: 496, h: 136,  logoH: 30, url: "https://www.bbva.com/" },
     { name: "Cosmos Telecomunicaciones",         img: "cosmos.png",       w: 504, h: 184,  logoH: 38, url: "https://www.cosmos.tel/" }
   ];
 

@@ -1,0 +1,292 @@
+{
+ "id": "alevin",
+ "nombre": "Alevín",
+ "actualizado": "2026-11-21T07:57:36Z",
+ "fuente": {
+  "calendario": [
+   "https://deportes.ayto-torrejon.es/sites/default/files/users/user355/CALENDARIO%20FASE%20DE%20CAMPE%C3%93N%20ALEVIN%20.2627.pdf"
+  ],
+  "jornada": [
+   "https://deportes.ayto-torrejon.es/sites/default/files/users/user355/HORARIOS%20ALEVIN%20%2021NOVIEMBRE%20(3).pdf"
+  ]
+ },
+ "jornadas": [
+  {
+   "n": 1,
+   "descansa": "Rivillos Limones 5 \"A\"",
+   "partidos": [
+    {
+     "local": "Zarzuela T.Juncal",
+     "visitante": "Rivillos Limones 5 \"B\"",
+     "campo": "NURIA FDEZ 1",
+     "fecha": "2026-10-18",
+     "dia": "D",
+     "hora": "10:00"
+    },
+    {
+     "local": "Torrejon Juncal",
+     "visitante": "Severo T.Rojo",
+     "campo": "NURIA FDEZ 1",
+     "fecha": "2026-10-18",
+     "dia": "D",
+     "hora": "12:00"
+    },
+    {
+     "local": "Humanitas",
+     "visitante": "Severo T.Amarillo",
+     "campo": "NURIA FDEZ 1",
+     "fecha": "2026-10-18",
+     "dia": "D",
+     "hora": "13:00"
+    },
+    {
+     "local": "Ciudad de Torrejon",
+     "visitante": "Torrejon Sala",
+     "campo": "NURIA FDEZ 1",
+     "fecha": "2026-10-18",
+     "dia": "D",
+     "hora": "11:00"
+    }
+   ]
+  },
+  {
+   "n": 2,
+   "descansa": "Rivillos Limones 5 \"B\"",
+   "partidos": []
+  },
+  {
+   "n": 4,
+   "descansa": "Severo T.Amarillo",
+   "partidos": []
+  },
+  {
+   "n": 5,
+   "descansa": "Torrejon Sala",
+   "partidos": []
+  },
+  {
+   "n": 6,
+   "descansa": "Humanitas",
+   "partidos": []
+  },
+  {
+   "n": 7,
+   "descansa": "Torrejon Juncal",
+   "partidos": []
+  },
+  {
+   "n": 8,
+   "descansa": "Zarzuela T.Juncal",
+   "partidos": []
+  },
+  {
+   "n": 9,
+   "descansa": "Ciudad de Torrejon",
+   "partidos": []
+  },
+  {
+   "n": 10,
+   "descansa": "Rivillos Limones 5 \"A\"",
+   "partidos": []
+  },
+  {
+   "n": 11,
+   "descansa": "Rivillos Limones 5 \"B\"",
+   "partidos": []
+  },
+  {
+   "n": 13,
+   "descansa": "Severo T.Amarillo",
+   "partidos": []
+  },
+  {
+   "n": 14,
+   "descansa": "Torrejon Sala",
+   "partidos": []
+  },
+  {
+   "n": 16,
+   "descansa": "Torrejon Juncal",
+   "partidos": []
+  },
+  {
+   "n": 18,
+   "descansa": "Ciudad de Torrejon",
+   "partidos": []
+  }
+ ],
+ "clasificacion": [
+  {
+   "pos": 1,
+   "equipo": "Torrejon Sala",
+   "pj": 4,
+   "g": 3,
+   "e": 0,
+   "p": 1,
+   "gf": 23,
+   "gc": 13,
+   "dg": 10,
+   "pts": 9
+  },
+  {
+   "pos": 2,
+   "equipo": "Humanitas",
+   "pj": 4,
+   "g": 3,
+   "e": 0,
+   "p": 1,
+   "gf": 20,
+   "gc": 13,
+   "dg": 7,
+   "pts": 9
+  },
+  {
+   "pos": 3,
+   "equipo": "Rivillos Limones",
+   "pj": 3,
+   "g": 3,
+   "e": 0,
+   "p": 0,
+   "gf": 15,
+   "gc": 2,
+   "dg": 13,
+   "pts": 9
+  },
+  {
+   "pos": 4,
+   "equipo": "Ciudad De",
+   "pj": 4,
+   "g": 2,
+   "e": 0,
+   "p": 2,
+   "gf": 16,
+   "gc": 11,
+   "dg": 5,
+   "pts": 6
+  },
+  {
+   "pos": 5,
+   "equipo": "Severo T.Rojo",
+   "pj": 3,
+   "g": 2,
+   "e": 0,
+   "p": 1,
+   "gf": 6,
+   "gc": 4,
+   "dg": 2,
+   "pts": 6
+  },
+  {
+   "pos": 6,
+   "equipo": "Severo T.Amarillo",
+   "pj": 3,
+   "g": 2,
+   "e": 0,
+   "p": 1,
+   "gf": 11,
+   "gc": 15,
+   "dg": -4,
+   "pts": 6
+  },
+  {
+   "pos": 7,
+   "equipo": "Zarzuela T.Juncal",
+   "pj": 4,
+   "g": 1,
+   "e": 0,
+   "p": 3,
+   "gf": 11,
+   "gc": 14,
+   "dg": -3,
+   "pts": 3
+  },
+  {
+   "pos": 8,
+   "equipo": "Torrejon Juncal",
+   "pj": 4,
+   "g": 0,
+   "e": 0,
+   "p": 4,
+   "gf": 9,
+   "gc": 20,
+   "dg": -11,
+   "pts": 0
+  },
+  {
+   "pos": 9,
+   "equipo": "Rivillos Limones",
+   "pj": 3,
+   "g": 0,
+   "e": 0,
+   "p": 3,
+   "gf": 3,
+   "gc": 22,
+   "dg": -19,
+   "pts": 0
+  }
+ ],
+ "avisos": [
+  "Jornada 2: no sé separar equipos y campo en «RIVILLOS LIMONES 5 \"A\"         CIUDAD DE TORREJON» (columnas: 2)",
+  "Jornada 2: no sé separar equipos y campo en «SEVERO T.ROJO           ZARZUELA T.JUNCAL» (columnas: 2)",
+  "Jornada 2: no sé separar equipos y campo en «SEVERO T.AMARILLO            TORREJON JUNCAL» (columnas: 2)",
+  "Jornada 2: no sé separar equipos y campo en «TORREJON SALA            HUMANITAS» (columnas: 2)",
+  "Jornada 4: no sé separar equipos y campo en «RIVILLOS LIMONES 5 \"B\"         CIUDAD DE TORREJON» (columnas: 2)",
+  "Jornada 4: no sé separar equipos y campo en «SEVERO T.ROJO           RIVILLOS LIMONES 5 \"A\"» (columnas: 2)",
+  "Jornada 4: no sé separar equipos y campo en «TORREJON SALA            ZARZUELA T.JUNCAL» (columnas: 2)",
+  "Jornada 4: no sé separar equipos y campo en «HUMANITAS           TORREJON JUNCAL» (columnas: 2)",
+  "Jornada 5: no sé separar equipos y campo en «RIVILLOS LIMONES 5 \"B\"         SEVERO T.ROJO» (columnas: 2)",
+  "Jornada 5: no sé separar equipos y campo en «RIVILLOS LIMONES 5 \"A\"         SEVERO T.AMARILLO» (columnas: 2)",
+  "Jornada 5: no sé separar equipos y campo en «ZARZUELA T.JUNCAL           HUMANITAS» (columnas: 2)",
+  "Jornada 5: no sé separar equipos y campo en «CIUDAD DE TORREJON             TORREJON JUNCAL» (columnas: 2)",
+  "Jornada 6: no sé separar equipos y campo en «SEVERO T.ROJO           CIUDAD DE TORREJON» (columnas: 2)",
+  "Jornada 6: no sé separar equipos y campo en «SEVERO T.AMARILLO            RIVILLOS LIMONES 5 \"B\"» (columnas: 2)",
+  "Jornada 6: no sé separar equipos y campo en «TORREJON SALA            RIVILLOS LIMONES 5 \"A\"» (columnas: 2)",
+  "Jornada 6: no sé separar equipos y campo en «TORREJON JUNCAL             ZARZUELA T.JUNCAL» (columnas: 2)",
+  "Jornada 7: no sé separar equipos y campo en «SEVERO T.ROJO           SEVERO T.AMARILLO» (columnas: 2)",
+  "Jornada 7: no sé separar equipos y campo en «RIVILLOS LIMONES 5 \"B\"         TORREJON SALA» (columnas: 2)",
+  "Jornada 7: no sé separar equipos y campo en «RIVILLOS LIMONES 5 \"A\"         HUMANITAS» (columnas: 2)",
+  "Jornada 7: no sé separar equipos y campo en «CIUDAD DE TORREJON             ZARZUELA T.JUNCAL» (columnas: 2)",
+  "Jornada 8: no sé separar equipos y campo en «SEVERO T.AMARILLO            CIUDAD DE TORREJON» (columnas: 2)",
+  "Jornada 8: no sé separar equipos y campo en «TORREJON SALA            SEVERO T.ROJO» (columnas: 2)",
+  "Jornada 8: no sé separar equipos y campo en «HUMANITAS           RIVILLOS LIMONES 5 \"B\"» (columnas: 2)",
+  "Jornada 8: no sé separar equipos y campo en «TORREJON JUNCAL             RIVILLOS LIMONES 5 \"A\"» (columnas: 2)",
+  "Jornada 9: no sé separar equipos y campo en «SEVERO T.AMARILLO            TORREJON SALA» (columnas: 2)",
+  "Jornada 9: no sé separar equipos y campo en «SEVERO T.ROJO           HUMANITAS» (columnas: 2)",
+  "Jornada 9: no sé separar equipos y campo en «RIVILLOS LIMONES 5 \"B\"         TORREJON JUNCAL» (columnas: 2)",
+  "Jornada 9: no sé separar equipos y campo en «RIVILLOS LIMONES 5 \"A\"         ZARZUELA T.JUNCAL» (columnas: 2)",
+  "Jornada 10: no sé separar equipos y campo en «RIVILLOS LIMONES 5 \"B\"         ZARZUELA T.JUNCAL» (columnas: 2)",
+  "Jornada 10: no sé separar equipos y campo en «SEVERO T.ROJO           TORREJON JUNCAL» (columnas: 2)",
+  "Jornada 10: no sé separar equipos y campo en «SEVERO T.AMARILLO            HUMANITAS» (columnas: 2)",
+  "Jornada 10: no sé separar equipos y campo en «TORREJON SALA            CIUDAD DE TORREJON» (columnas: 2)",
+  "Jornada 11: no sé separar equipos y campo en «CIUDAD DE TORREJON             RIVILLOS LIMONES 5 \"A\"» (columnas: 2)",
+  "Jornada 11: no sé separar equipos y campo en «ZARZUELA T.JUNCAL           SEVERO T.ROJO» (columnas: 2)",
+  "Jornada 11: no sé separar equipos y campo en «TORREJON JUNCAL             SEVERO T.AMARILLO» (columnas: 2)",
+  "Jornada 11: no sé separar equipos y campo en «HUMANITAS           TORREJON SALA» (columnas: 2)",
+  "Jornada 13: no sé separar equipos y campo en «CIUDAD DE TORREJON             RIVILLOS LIMONES 5 \"B\"» (columnas: 2)",
+  "Jornada 13: no sé separar equipos y campo en «RIVILLOS LIMONES 5 \"A\"         SEVERO T.ROJO» (columnas: 2)",
+  "Jornada 13: no sé separar equipos y campo en «ZARZUELA T.JUNCAL           TORREJON SALA» (columnas: 2)",
+  "Jornada 13: no sé separar equipos y campo en «TORREJON JUNCAL             HUMANITAS» (columnas: 2)",
+  "Jornada 14: no sé separar equipos y campo en «SEVERO T.ROJO           RIVILLOS LIMONES 5 \"B\"» (columnas: 2)",
+  "Jornada 14: no sé separar equipos y campo en «SEVERO T.AMARILLO            RIVILLOS LIMONES 5 \"A\"» (columnas: 2)",
+  "Jornada 14: no sé separar equipos y campo en «HUMANITAS           ZARZUELA T.JUNCAL» (columnas: 2)",
+  "Jornada 14: no sé separar equipos y campo en «TORREJON JUNCAL             CIUDAD DE TORREJON» (columnas: 2)",
+  "Jornada 16: no sé separar equipos y campo en «SEVERO T.AMARILLO            SEVERO T.ROJO» (columnas: 2)",
+  "Jornada 16: no sé separar equipos y campo en «TORREJON SALA            RIVILLOS LIMONES 5 \"B\"» (columnas: 2)",
+  "Jornada 16: no sé separar equipos y campo en «HUMANITAS           RIVILLOS LIMONES 5 \"A\"» (columnas: 2)",
+  "Jornada 16: no sé separar equipos y campo en «ZARZUELA T.JUNCAL           CIUDAD DE TORREJON» (columnas: 2)",
+  "Jornada 18: no sé separar equipos y campo en «TORREJON SALA            SEVERO T.AMARILLO» (columnas: 2)",
+  "Jornada 18: no sé separar equipos y campo en «HUMANITAS           SEVERO T.ROJO» (columnas: 2)",
+  "Jornada 18: no sé separar equipos y campo en «TORREJON JUNCAL             RIVILLOS LIMONES 5 \"B\"» (columnas: 2)",
+  "Jornada 18: no sé separar equipos y campo en «ZARZUELA T.JUNCAL           RIVILLOS LIMONES 5 \"A\"» (columnas: 2)"
+ ],
+ "equipos": [
+  "Ciudad de Torrejon",
+  "Humanitas",
+  "Rivillos Limones 5 \"B\"",
+  "Severo T.Amarillo",
+  "Severo T.Rojo",
+  "Torrejon Juncal",
+  "Torrejon Sala",
+  "Zarzuela T.Juncal"
+ ]
+}

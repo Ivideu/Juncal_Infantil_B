@@ -1,0 +1,154 @@
+                            JORNADAS DEL CAMPEONATO
+Deporte: Futbol Sala
+Categoría: PREBENJAMIN
+Competición: 1ª FASE PREBENJAMIN
+
+       Jornada Nº1                                        Campo        Fecha        Hora
+ 1             DESCANSA           RIVILLOS LIMONES 5                   17-10-26 S
+ 1    T.JUNCAL JAIME VERA         CFS BARRIO DEL        J.GARBAJOSA    17-10-26 S 10:00
+ 1   TORR.JUCAL ZARZUELA          TORREJON SALA "A"     NURIA FDEZ 3   17-10-26 S 11:00
+ 1   TORR.JUNCAL SEVERO           TORREJON SALA "B"     J.GARBAJOSA    17-10-26 S 11:00
+ 1            HUMANITAS           CIUDAD DE TORREJON    NURIA FDEZ 3   17-10-26 S 12:00
+
+       Jornada Nº2                                        Campo        Fecha        Hora
+ 1     RIVILLOS LIMONES 5         HUMANITAS                            24-10-26 S
+ 1        CFS BARRIO DEL          DESCANSA                             24-10-26 S
+ 1     TORREJON SALA "A"          T.JUNCAL JAIME VERA                  24-10-26 S
+ 1     TORREJON SALA "B"          TORR.JUCAL ZARZUELA                  24-10-26 S
+ 1   CIUDAD DE TORREJON           TORR.JUNCAL SEVERO                   24-10-26 S
+
+       Jornada Nº3                                        Campo        Fecha        Hora
+ 1     RIVILLOS LIMONES 5         CFS BARRIO DEL                       7-11-26 S
+ 1             DESCANSA           TORREJON SALA "A"                    7-11-26 S
+ 1    T.JUNCAL JAIME VERA         TORREJON SALA "B"                    7-11-26 S
+ 1   TORR.JUCAL ZARZUELA          CIUDAD DE TORREJON                   7-11-26 S
+ 1            HUMANITAS           TORR.JUNCAL SEVERO                   7-11-26 S
+
+       Jornada Nº4                                        Campo        Fecha        Hora
+ 1        CFS BARRIO DEL          HUMANITAS                            14-11-26 S
+ 1     TORREJON SALA "A"          RIVILLOS LIMONES 5                   14-11-26 S
+ 1     TORREJON SALA "B"          DESCANSA                             14-11-26 S
+ 1   CIUDAD DE TORREJON           T.JUNCAL JAIME VERA                  14-11-26 S
+ 1   TORR.JUNCAL SEVERO           TORR.JUCAL ZARZUELA                  14-11-26 S
+
+       Jornada Nº5                                        Campo        Fecha        Hora
+ 1        CFS BARRIO DEL          TORREJON SALA "A"                    21-11-26 S
+ 1     RIVILLOS LIMONES 5         TORREJON SALA "B"                    21-11-26 S
+ 1             DESCANSA           CIUDAD DE TORREJON                   21-11-26 S
+ 1    T.JUNCAL JAIME VERA         TORR.JUNCAL SEVERO                   21-11-26 S
+ 1            HUMANITAS           TORR.JUCAL ZARZUELA                  21-11-26 S
+
+       Jornada Nº6                                        Campo        Fecha        Hora
+ 1     TORREJON SALA "A"          HUMANITAS                            28-11-26 S
+ 1     TORREJON SALA "B"          CFS BARRIO DEL                       28-11-26 S
+ 1   CIUDAD DE TORREJON           RIVILLOS LIMONES 5                   28-11-26 S
+ 1   TORR.JUNCAL SEVERO           DESCANSA                             28-11-26 S
+ 1   TORR.JUCAL ZARZUELA          T.JUNCAL JAIME VERA                  28-11-26 S
+
+
+
+
+                                                                           Página. 1
+                            JORNADAS DEL CAMPEONATO
+Deporte: Futbol Sala
+Categoría: PREBENJAMIN
+Competición: 1ª FASE PREBENJAMIN
+
+       Jornada Nº7                                      Campo   Fecha        Hora
+ 1     TORREJON SALA "A"          TORREJON SALA "B"             12-12-26 S
+ 1        CFS BARRIO DEL          CIUDAD DE TORREJON            12-12-26 S
+ 1     RIVILLOS LIMONES 5         TORR.JUNCAL SEVERO            12-12-26 S
+ 1             DESCANSA           TORR.JUCAL ZARZUELA           12-12-26 S
+ 1            HUMANITAS           T.JUNCAL JAIME VERA           12-12-26 S
+
+       Jornada Nº8                                      Campo   Fecha        Hora
+ 1     TORREJON SALA "B"          HUMANITAS                     19-12-26 S
+ 1   CIUDAD DE TORREJON           TORREJON SALA "A"             19-12-26 S
+ 1   TORR.JUNCAL SEVERO           CFS BARRIO DEL                19-12-26 S
+ 1   TORR.JUCAL ZARZUELA          RIVILLOS LIMONES 5            19-12-26 S
+ 1    T.JUNCAL JAIME VERA         DESCANSA                      19-12-26 S
+
+       Jornada Nº9                                      Campo   Fecha        Hora
+ 1     TORREJON SALA "B"          CIUDAD DE TORREJON            16-01-27 S
+ 1     TORREJON SALA "A"          TORR.JUNCAL SEVERO            16-01-27 S
+ 1        CFS BARRIO DEL          TORR.JUCAL ZARZUELA           16-01-27 S
+ 1     RIVILLOS LIMONES 5         T.JUNCAL JAIME VERA           16-01-27 S
+ 1            HUMANITAS           DESCANSA                      16-01-27 S
+
+       Jornada Nº10                                     Campo   Fecha        Hora
+ 1     RIVILLOS LIMONES 5         DESCANSA                      23-01-27 S
+ 1        CFS BARRIO DEL          T.JUNCAL JAIME VERA           23-01-27 S
+ 1     TORREJON SALA "A"          TORR.JUCAL ZARZUELA           23-01-27 S
+ 1     TORREJON SALA "B"          TORR.JUNCAL SEVERO            23-01-27 S
+ 1   CIUDAD DE TORREJON           HUMANITAS                     23-01-27 S
+
+       Jornada Nº11                                     Campo   Fecha        Hora
+ 1            HUMANITAS           RIVILLOS LIMONES 5            30-01-27 S
+ 1             DESCANSA           CFS BARRIO DEL                30-01-27 S
+ 1    T.JUNCAL JAIME VERA         TORREJON SALA "A"             30-01-27 S
+ 1   TORR.JUCAL ZARZUELA          TORREJON SALA "B"             30-01-27 S
+ 1   TORR.JUNCAL SEVERO           CIUDAD DE TORREJON            30-01-27 S
+
+       Jornada Nº12                                     Campo   Fecha        Hora
+ 1        CFS BARRIO DEL          RIVILLOS LIMONES 5            6-02-27 S
+ 1     TORREJON SALA "A"          DESCANSA                      6-02-27 S
+ 1     TORREJON SALA "B"          T.JUNCAL JAIME VERA           6-02-27 S
+ 1   CIUDAD DE TORREJON           TORR.JUCAL ZARZUELA           6-02-27 S
+ 1   TORR.JUNCAL SEVERO           HUMANITAS                     6-02-27 S
+
+
+
+
+                                                                    Página. 2
+                            JORNADAS DEL CAMPEONATO
+Deporte: Futbol Sala
+Categoría: PREBENJAMIN
+Competición: 1ª FASE PREBENJAMIN
+
+       Jornada Nº13                                     Campo   Fecha        Hora
+ 1            HUMANITAS           CFS BARRIO DEL                20-02-27 S
+ 1     RIVILLOS LIMONES 5         TORREJON SALA "A"             20-02-27 S
+ 1             DESCANSA           TORREJON SALA "B"             20-02-27 S
+ 1    T.JUNCAL JAIME VERA         CIUDAD DE TORREJON            20-02-27 S
+ 1   TORR.JUCAL ZARZUELA          TORR.JUNCAL SEVERO            20-02-27 S
+
+       Jornada Nº14                                     Campo   Fecha        Hora
+ 1     TORREJON SALA "A"          CFS BARRIO DEL                27-02-27 S
+ 1     TORREJON SALA "B"          RIVILLOS LIMONES 5            27-02-27 S
+ 1   CIUDAD DE TORREJON           DESCANSA                      27-02-27 S
+ 1   TORR.JUNCAL SEVERO           T.JUNCAL JAIME VERA           27-02-27 S
+ 1   TORR.JUCAL ZARZUELA          HUMANITAS                     27-02-27 S
+
+       Jornada Nº15                                     Campo   Fecha        Hora
+ 1            HUMANITAS           TORREJON SALA "A"             6-03-27 S
+ 1        CFS BARRIO DEL          TORREJON SALA "B"             6-03-27 S
+ 1     RIVILLOS LIMONES 5         CIUDAD DE TORREJON            6-03-27 S
+ 1             DESCANSA           TORR.JUNCAL SEVERO            6-03-27 S
+ 1    T.JUNCAL JAIME VERA         TORR.JUCAL ZARZUELA           6-03-27 S
+
+       Jornada Nº16                                     Campo   Fecha        Hora
+ 1     TORREJON SALA "B"          TORREJON SALA "A"             13-03-27 S
+ 1   CIUDAD DE TORREJON           CFS BARRIO DEL                13-03-27 S
+ 1   TORR.JUNCAL SEVERO           RIVILLOS LIMONES 5            13-03-27 S
+ 1   TORR.JUCAL ZARZUELA          DESCANSA                      13-03-27 S
+ 1    T.JUNCAL JAIME VERA         HUMANITAS                     13-03-27 S
+
+       Jornada Nº17                                     Campo   Fecha        Hora
+ 1            HUMANITAS           TORREJON SALA "B"             3-04-27 S
+ 1     TORREJON SALA "A"          CIUDAD DE TORREJON            3-04-27 S
+ 1        CFS BARRIO DEL          TORR.JUNCAL SEVERO            3-04-27 S
+ 1     RIVILLOS LIMONES 5         TORR.JUCAL ZARZUELA           3-04-27 S
+ 1             DESCANSA           T.JUNCAL JAIME VERA           3-04-27 S
+
+       Jornada Nº18                                     Campo   Fecha        Hora
+ 1   CIUDAD DE TORREJON           TORREJON SALA "B"             10-04-27 S
+ 1   TORR.JUNCAL SEVERO           TORREJON SALA "A"             10-04-27 S
+ 1   TORR.JUCAL ZARZUELA          CFS BARRIO DEL                10-04-27 S
+ 1    T.JUNCAL JAIME VERA         RIVILLOS LIMONES 5            10-04-27 S
+ 1             DESCANSA           HUMANITAS                     10-04-27 S
+
+
+
+
+                                                                    Página. 3
+

@@ -1,0 +1,181 @@
+{
+ "id": "cadete",
+ "nombre": "Cadete",
+ "actualizado": "2026-11-21T07:57:36Z",
+ "fuente": {
+  "calendario": [
+   "https://deportes.ayto-torrejon.es/sites/default/files/users/user355/CALENDARIO%20CADETE%20CAMPEON%20DE%20INVIERNO%20.2627.pdf"
+  ],
+  "jornada": [
+   "https://deportes.ayto-torrejon.es/sites/default/files/users/user355/HORARIOS%20CADETE%2022NOVIEMBRE%20(1).pdf"
+  ]
+ },
+ "jornadas": [
+  {
+   "n": 1,
+   "descansa": "Rivillos Limones 5 \"A\"",
+   "partidos": [
+    {
+     "local": "Leon Felipe",
+     "visitante": "Rivillos Limones 5 \"B\"",
+     "campo": "NURIA FDEZ 1",
+     "fecha": "2026-10-17",
+     "dia": "S",
+     "hora": "9:00"
+    },
+    {
+     "local": "Torrejon Juncal",
+     "visitante": "Severo Torrejon",
+     "campo": "NURIA FDEZ 2",
+     "fecha": "2026-10-17",
+     "dia": "S",
+     "hora": "9:00"
+    },
+    {
+     "local": "Ciud.Torrejon \"B\"",
+     "visitante": "Ciud.Torrejon \"A\"",
+     "campo": "NURIA FDEZ 3",
+     "fecha": "2026-10-17",
+     "dia": "S",
+     "hora": "9:00"
+    }
+   ]
+  },
+  {
+   "n": 2,
+   "descansa": "Rivillos Limones 5 \"B\"",
+   "partidos": []
+  },
+  {
+   "n": 4,
+   "descansa": "Ciud.Torrejon \"A\"",
+   "partidos": []
+  },
+  {
+   "n": 5,
+   "descansa": "Torrejon Juncal",
+   "partidos": []
+  },
+  {
+   "n": 6,
+   "descansa": "Leon Felipe",
+   "partidos": []
+  },
+  {
+   "n": 7,
+   "descansa": "Ciud.Torrejon \"B\"",
+   "partidos": []
+  }
+ ],
+ "clasificacion": [
+  {
+   "pos": 1,
+   "equipo": "Leon Felipe",
+   "pj": 4,
+   "g": 4,
+   "e": 0,
+   "p": 0,
+   "gf": 26,
+   "gc": 6,
+   "dg": 20,
+   "pts": 12
+  },
+  {
+   "pos": 2,
+   "equipo": "Ciud.Torrejon \"B\"",
+   "pj": 4,
+   "g": 3,
+   "e": 1,
+   "p": 0,
+   "gf": 16,
+   "gc": 5,
+   "dg": 11,
+   "pts": 10
+  },
+  {
+   "pos": 3,
+   "equipo": "Severo Torrejon",
+   "pj": 3,
+   "g": 2,
+   "e": 0,
+   "p": 1,
+   "gf": 10,
+   "gc": 7,
+   "dg": 3,
+   "pts": 6
+  },
+  {
+   "pos": 4,
+   "equipo": "Rivillos Limones",
+   "pj": 3,
+   "g": 1,
+   "e": 1,
+   "p": 1,
+   "gf": 9,
+   "gc": 3,
+   "dg": 6,
+   "pts": 4
+  },
+  {
+   "pos": 5,
+   "equipo": "Ciud.Torrejon \"A\"",
+   "pj": 3,
+   "g": 1,
+   "e": 0,
+   "p": 2,
+   "gf": 8,
+   "gc": 9,
+   "dg": -1,
+   "pts": 3
+  },
+  {
+   "pos": 6,
+   "equipo": "Torrejon Juncal",
+   "pj": 4,
+   "g": 0,
+   "e": 0,
+   "p": 4,
+   "gf": 6,
+   "gc": 23,
+   "dg": -17,
+   "pts": 0
+  },
+  {
+   "pos": 7,
+   "equipo": "Rivillos Limones",
+   "pj": 3,
+   "g": 0,
+   "e": 0,
+   "p": 3,
+   "gf": 0,
+   "gc": 22,
+   "dg": -22,
+   "pts": 0
+  }
+ ],
+ "avisos": [
+  "Jornada 2: no sé separar equipos y campo en «RIVILLOS LIMONES 5 \"A\"         CIUD.TORREJON \"B\"» (columnas: 2)",
+  "Jornada 2: no sé separar equipos y campo en «SEVERO TORREJON             LEON FELIPE» (columnas: 2)",
+  "Jornada 2: no sé separar equipos y campo en «CIUD.TORREJON \"A\"           TORREJON JUNCAL» (columnas: 2)",
+  "Jornada 4: no sé separar equipos y campo en «RIVILLOS LIMONES 5 \"B\"         CIUD.TORREJON \"B\"» (columnas: 2)",
+  "Jornada 4: no sé separar equipos y campo en «SEVERO TORREJON             RIVILLOS LIMONES 5 \"A\"» (columnas: 2)",
+  "Jornada 4: no sé separar equipos y campo en «TORREJON JUNCAL             LEON FELIPE» (columnas: 2)",
+  "Jornada 5: no sé separar equipos y campo en «RIVILLOS LIMONES 5 \"B\"         SEVERO TORREJON» (columnas: 2)",
+  "Jornada 5: no sé separar equipos y campo en «RIVILLOS LIMONES 5 \"A\"         CIUD.TORREJON \"A\"» (columnas: 2)",
+  "Jornada 5: no sé separar equipos y campo en «CIUD.TORREJON \"B\"           LEON FELIPE» (columnas: 2)",
+  "Jornada 6: no sé separar equipos y campo en «SEVERO TORREJON             CIUD.TORREJON \"B\"» (columnas: 2)",
+  "Jornada 6: no sé separar equipos y campo en «CIUD.TORREJON \"A\"           RIVILLOS LIMONES 5 \"B\"» (columnas: 2)",
+  "Jornada 6: no sé separar equipos y campo en «TORREJON JUNCAL             RIVILLOS LIMONES 5 \"A\"» (columnas: 2)",
+  "Jornada 7: no sé separar equipos y campo en «SEVERO TORREJON             CIUD.TORREJON \"A\"» (columnas: 2)",
+  "Jornada 7: no sé separar equipos y campo en «RIVILLOS LIMONES 5 \"B\"         TORREJON JUNCAL» (columnas: 2)",
+  "Jornada 7: no sé separar equipos y campo en «RIVILLOS LIMONES 5 \"A\"         LEON FELIPE» (columnas: 2)"
+ ],
+ "equipos": [
+  "Ciud.Torrejon \"A\"",
+  "Ciud.Torrejon \"B\"",
+  "Leon Felipe",
+  "Rivillos Limones 5 \"B\"",
+  "Severo Torrejon",
+  "Torrejon Juncal"
+ ]
+}

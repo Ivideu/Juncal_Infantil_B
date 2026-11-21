@@ -1,0 +1,126 @@
+{
+ "actualizado": "2026-11-21T07:57:36Z",
+ "categorias": [
+  {
+   "id": "senior-superliga",
+   "nombre": "Senior Superliga",
+   "equipos": 0,
+   "jornadas": 0,
+   "partidos": 0,
+   "jugados": 0,
+   "juncal": false,
+   "avisos": 60,
+   "actualizado": "2026-11-21T07:57:36Z"
+  },
+  {
+   "id": "senior-preferente",
+   "nombre": "Senior Preferente",
+   "equipos": 0,
+   "jornadas": 0,
+   "partidos": 0,
+   "jugados": 0,
+   "juncal": false,
+   "avisos": 60,
+   "actualizado": "2026-11-21T07:57:36Z"
+  },
+  {
+   "id": "senior-primera",
+   "nombre": "Senior Primera",
+   "equipos": 0,
+   "jornadas": 0,
+   "partidos": 0,
+   "jugados": 0,
+   "juncal": false,
+   "avisos": 1,
+   "actualizado": "2026-11-21T07:57:36Z"
+  },
+  {
+   "id": "senior-segunda",
+   "nombre": "Senior Segunda",
+   "equipos": 0,
+   "jornadas": 0,
+   "partidos": 0,
+   "jugados": 0,
+   "juncal": false,
+   "avisos": 60,
+   "actualizado": "2026-11-21T07:57:36Z"
+  },
+  {
+   "id": "senior-tercera",
+   "nombre": "Senior Tercera",
+   "equipos": 0,
+   "jornadas": 10,
+   "partidos": 0,
+   "jugados": 0,
+   "juncal": false,
+   "avisos": 50,
+   "actualizado": "2026-11-21T07:57:36Z"
+  },
+  {
+   "id": "juvenil",
+   "nombre": "Juvenil",
+   "equipos": 20,
+   "jornadas": 16,
+   "partidos": 10,
+   "jugados": 0,
+   "juncal": false,
+   "avisos": 149,
+   "actualizado": "2026-11-21T07:57:36Z"
+  },
+  {
+   "id": "cadete",
+   "nombre": "Cadete",
+   "equipos": 6,
+   "jornadas": 6,
+   "partidos": 3,
+   "jugados": 0,
+   "juncal": true,
+   "avisos": 15,
+   "actualizado": "2026-11-21T07:57:36Z"
+  },
+  {
+   "id": "infantil",
+   "nombre": "Infantil",
+   "equipos": 10,
+   "jornadas": 17,
+   "partidos": 5,
+   "jugados": 0,
+   "juncal": true,
+   "avisos": 80,
+   "actualizado": "2026-11-21T07:57:36Z"
+  },
+  {
+   "id": "alevin",
+   "nombre": "Alevín",
+   "equipos": 8,
+   "jornadas": 14,
+   "partidos": 4,
+   "jugados": 0,
+   "juncal": true,
+   "avisos": 52,
+   "actualizado": "2026-11-21T07:57:36Z"
+  },
+  {
+   "id": "benjamin",
+   "nombre": "Benjamín",
+   "equipos": 10,
+   "jornadas": 1,
+   "partidos": 5,
+   "jugados": 0,
+   "juncal": true,
+   "avisos": 65,
+   "actualizado": "2026-11-21T07:57:36Z"
+  },
+  {
+   "id": "prebenjamin",
+   "nombre": "Prebenjamín",
+   "equipos": 8,
+   "jornadas": 14,
+   "partidos": 4,
+   "jugados": 0,
+   "juncal": true,
+   "avisos": 52,
+   "actualizado": "2026-11-21T07:57:36Z"
+  }
+ ]
+}

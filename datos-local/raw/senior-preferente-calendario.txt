@@ -1,0 +1,116 @@
+                           JORNADAS DEL CAMPEONATO
+Deporte: Futbol Sala
+Categoría: SENIOR PREFERENTE
+Competición: CAMPEÓN DE INVIERNO
+
+     Jornada Nº1                                      Campo   Fecha        Hora
+ 1     TORREJON UNITED           LOCOTROES                    17-10-26 S
+ 1     MANCHESTER PITY           LAGARTOS                     17-10-26 S
+ 1           SPRINFIELD          DAGANZO FUTSAL               17-10-26 S
+ 1                 ZEUS          ZARZUELA XXI                 17-10-26 S
+ 1   BAYERN D.L.CANINOS          SEVERO TORREJON              17-10-26 S
+ 1            INTER T.J.         BARRIO LA CAÑADA             17-10-26 S
+
+     Jornada Nº2                                      Campo   Fecha        Hora
+ 1          LOCOTROES            INTER T.J.                   24-10-26 S
+ 1           LAGARTOS            TORREJON UNITED              24-10-26 S
+ 1     DAGANZO FUTSAL            MANCHESTER PITY              24-10-26 S
+ 1         ZARZUELA XXI          SPRINFIELD                   24-10-26 S
+ 1    SEVERO TORREJON            ZEUS                         24-10-26 S
+ 1    BARRIO LA CAÑADA           BAYERN D.L.CANINOS           24-10-26 S
+
+     Jornada Nº3                                      Campo   Fecha        Hora
+ 1          LOCOTROES            LAGARTOS                     7-11-26 S
+ 1     TORREJON UNITED           DAGANZO FUTSAL               7-11-26 S
+ 1     MANCHESTER PITY           ZARZUELA XXI                 7-11-26 S
+ 1           SPRINFIELD          SEVERO TORREJON              7-11-26 S
+ 1                 ZEUS          BARRIO LA CAÑADA             7-11-26 S
+ 1            INTER T.J.         BAYERN D.L.CANINOS           7-11-26 S
+
+     Jornada Nº4                                      Campo   Fecha        Hora
+ 1           LAGARTOS            INTER T.J.                   14-11-26 S
+ 1     DAGANZO FUTSAL            LOCOTROES                    14-11-26 S
+ 1         ZARZUELA XXI          TORREJON UNITED              14-11-26 S
+ 1    SEVERO TORREJON            MANCHESTER PITY              14-11-26 S
+ 1    BARRIO LA CAÑADA           SPRINFIELD                   14-11-26 S
+ 1   BAYERN D.L.CANINOS          ZEUS                         14-11-26 S
+
+     Jornada Nº5                                      Campo   Fecha        Hora
+ 1           LAGARTOS            DAGANZO FUTSAL               21-11-26 S
+ 1          LOCOTROES            ZARZUELA XXI                 21-11-26 S
+ 1     TORREJON UNITED           SEVERO TORREJON              21-11-26 S
+ 1     MANCHESTER PITY           BARRIO LA CAÑADA             21-11-26 S
+ 1           SPRINFIELD          BAYERN D.L.CANINOS           21-11-26 S
+ 1            INTER T.J.         ZEUS                         21-11-26 S
+
+
+
+
+                                                                  Página. 1
+                           JORNADAS DEL CAMPEONATO
+Deporte: Futbol Sala
+Categoría: SENIOR PREFERENTE
+Competición: CAMPEÓN DE INVIERNO
+
+     Jornada Nº6                                      Campo   Fecha        Hora
+ 1     DAGANZO FUTSAL            INTER T.J.                   28-11-26 S
+ 1         ZARZUELA XXI          LAGARTOS                     28-11-26 S
+ 1    SEVERO TORREJON            LOCOTROES                    28-11-26 S
+ 1    BARRIO LA CAÑADA           TORREJON UNITED              28-11-26 S
+ 1   BAYERN D.L.CANINOS          MANCHESTER PITY              28-11-26 S
+ 1                 ZEUS          SPRINFIELD                   28-11-26 S
+
+     Jornada Nº7                                      Campo   Fecha        Hora
+ 1     DAGANZO FUTSAL            ZARZUELA XXI                 12-12-26 S
+ 1           LAGARTOS            SEVERO TORREJON              12-12-26 S
+ 1          LOCOTROES            BARRIO LA CAÑADA             12-12-26 S
+ 1     TORREJON UNITED           BAYERN D.L.CANINOS           12-12-26 S
+ 1     MANCHESTER PITY           ZEUS                         12-12-26 S
+ 1            INTER T.J.         SPRINFIELD                   12-12-26 S
+
+     Jornada Nº8                                      Campo   Fecha        Hora
+ 1         ZARZUELA XXI          INTER T.J.                   19-12-26 S
+ 1    SEVERO TORREJON            DAGANZO FUTSAL               19-12-26 S
+ 1    BARRIO LA CAÑADA           LAGARTOS                     19-12-26 S
+ 1   BAYERN D.L.CANINOS          LOCOTROES                    19-12-26 S
+ 1                 ZEUS          TORREJON UNITED              19-12-26 S
+ 1           SPRINFIELD          MANCHESTER PITY              19-12-26 S
+
+     Jornada Nº9                                      Campo   Fecha        Hora
+ 1         ZARZUELA XXI          SEVERO TORREJON              16-01-27 S
+ 1     DAGANZO FUTSAL            BARRIO LA CAÑADA             16-01-27 S
+ 1           LAGARTOS            BAYERN D.L.CANINOS           16-01-27 S
+ 1          LOCOTROES            ZEUS                         16-01-27 S
+ 1     TORREJON UNITED           SPRINFIELD                   16-01-27 S
+ 1            INTER T.J.         MANCHESTER PITY              16-01-27 S
+
+     Jornada Nº10                                     Campo   Fecha        Hora
+ 1    SEVERO TORREJON            INTER T.J.                   23-01-27 S
+ 1    BARRIO LA CAÑADA           ZARZUELA XXI                 23-01-27 S
+ 1   BAYERN D.L.CANINOS          DAGANZO FUTSAL               23-01-27 S
+ 1                 ZEUS          LAGARTOS                     23-01-27 S
+ 1           SPRINFIELD          LOCOTROES                    23-01-27 S
+ 1     MANCHESTER PITY           TORREJON UNITED              23-01-27 S
+
+
+
+
+                                                                  Página. 2
+                          JORNADAS DEL CAMPEONATO
+Deporte: Futbol Sala
+Categoría: SENIOR PREFERENTE
+Competición: CAMPEÓN DE INVIERNO
+
+     Jornada Nº11                                    Campo   Fecha        Hora
+ 1    SEVERO TORREJON           BARRIO LA CAÑADA             30-01-27 S
+ 1        ZARZUELA XXI          BAYERN D.L.CANINOS           30-01-27 S
+ 1     DAGANZO FUTSAL           ZEUS                         30-01-27 S
+ 1          LAGARTOS            SPRINFIELD                   30-01-27 S
+ 1         LOCOTROES            MANCHESTER PITY              30-01-27 S
+ 1           INTER T.J.         TORREJON UNITED              30-01-27 S
+
+
+
+
+                                                                 Página. 3
+

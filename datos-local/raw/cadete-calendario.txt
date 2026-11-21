@@ -1,0 +1,52 @@
+                              JORNADAS DEL CAMPEONATO
+Deporte: Futbol Sala
+Categoría: CADETE
+Competición: CAMPEÓN DE INVIERNO
+
+       Jornada Nº1                                             Campo        Fecha        Hora
+ 1              DESCANSA            RIVILLOS LIMONES 5 "A"                  17-10-26 S
+ 1            LEON FELIPE           RIVILLOS LIMONES 5 "B"   NURIA FDEZ 1   17-10-26 S   9:00
+ 1      TORREJON JUNCAL             SEVERO TORREJON          NURIA FDEZ 2   17-10-26 S   9:00
+ 1      CIUD.TORREJON "B"           CIUD.TORREJON "A"        NURIA FDEZ 3   17-10-26 S   9:00
+
+       Jornada Nº2                                             Campo        Fecha        Hora
+ 1   RIVILLOS LIMONES 5 "A"         CIUD.TORREJON "B"                       24-10-26 S
+ 1   RIVILLOS LIMONES 5 "B"         DESCANSA                                24-10-26 S
+ 1      SEVERO TORREJON             LEON FELIPE                             24-10-26 S
+ 1      CIUD.TORREJON "A"           TORREJON JUNCAL                         24-10-26 S
+
+       Jornada Nº3                                             Campo        Fecha        Hora
+ 1   RIVILLOS LIMONES 5 "A"         RIVILLOS LIMONES 5 "B"                  7-11-26 S
+ 1              DESCANSA            SEVERO TORREJON                         7-11-26 S
+ 1            LEON FELIPE           CIUD.TORREJON "A"                       7-11-26 S
+ 1      CIUD.TORREJON "B"           TORREJON JUNCAL                         7-11-26 S
+
+       Jornada Nº4                                             Campo        Fecha        Hora
+ 1   RIVILLOS LIMONES 5 "B"         CIUD.TORREJON "B"                       14-11-26 S
+ 1      SEVERO TORREJON             RIVILLOS LIMONES 5 "A"                  14-11-26 S
+ 1      CIUD.TORREJON "A"           DESCANSA                                14-11-26 S
+ 1      TORREJON JUNCAL             LEON FELIPE                             14-11-26 S
+
+       Jornada Nº5                                             Campo        Fecha        Hora
+ 1   RIVILLOS LIMONES 5 "B"         SEVERO TORREJON                         21-11-26 S
+ 1   RIVILLOS LIMONES 5 "A"         CIUD.TORREJON "A"                       21-11-26 S
+ 1              DESCANSA            TORREJON JUNCAL                         21-11-26 S
+ 1      CIUD.TORREJON "B"           LEON FELIPE                             21-11-26 S
+
+       Jornada Nº6                                             Campo        Fecha        Hora
+ 1      SEVERO TORREJON             CIUD.TORREJON "B"                       28-11-26 S
+ 1      CIUD.TORREJON "A"           RIVILLOS LIMONES 5 "B"                  28-11-26 S
+ 1      TORREJON JUNCAL             RIVILLOS LIMONES 5 "A"                  28-11-26 S
+ 1            LEON FELIPE           DESCANSA                                28-11-26 S
+
+       Jornada Nº7                                             Campo        Fecha        Hora
+ 1      SEVERO TORREJON             CIUD.TORREJON "A"                       12-12-26 S
+ 1   RIVILLOS LIMONES 5 "B"         TORREJON JUNCAL                         12-12-26 S
+ 1   RIVILLOS LIMONES 5 "A"         LEON FELIPE                             12-12-26 S
+ 1      CIUD.TORREJON "B"           DESCANSA                                12-12-26 S
+
+
+
+
+                                                                                Página. 1
+

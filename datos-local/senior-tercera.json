@@ -1,0 +1,117 @@
+{
+ "id": "senior-tercera",
+ "nombre": "Senior Tercera",
+ "actualizado": "2026-11-21T07:57:36Z",
+ "fuente": {
+  "calendario": [
+   "https://deportes.ayto-torrejon.es/sites/default/files/users/user355/CALENDARIO%20TERCERA%20CAMPEON%20DE%20INVIERNO%20.2627.pdf"
+  ],
+  "jornada": []
+ },
+ "jornadas": [
+  {
+   "n": 1,
+   "descansa": "Vermeer",
+   "partidos": []
+  },
+  {
+   "n": 2,
+   "descansa": "Noctra Torrejon \"B\"",
+   "partidos": []
+  },
+  {
+   "n": 4,
+   "descansa": "Torrejon Hortaleza",
+   "partidos": []
+  },
+  {
+   "n": 5,
+   "descansa": "Fifita",
+   "partidos": []
+  },
+  {
+   "n": 6,
+   "descansa": "Aguilas Team",
+   "partidos": []
+  },
+  {
+   "n": 7,
+   "descansa": "Real Fachadolid",
+   "partidos": []
+  },
+  {
+   "n": 8,
+   "descansa": "Class Hairsalon",
+   "partidos": []
+  },
+  {
+   "n": 9,
+   "descansa": "Borussia Donuts",
+   "partidos": []
+  },
+  {
+   "n": 10,
+   "descansa": "Taka Taka \"B\"",
+   "partidos": []
+  },
+  {
+   "n": 11,
+   "descansa": "Limoneta Og",
+   "partidos": []
+  }
+ ],
+ "clasificacion": [],
+ "avisos": [
+  "Jornada 1: no sé separar equipos y campo en «TAKA TAKA \"B\"           NOCTRA TORREJON \"B\"» (columnas: 2)",
+  "Jornada 1: no sé separar equipos y campo en «BORUSSIA DONUTS             ADN FUTSAL» (columnas: 2)",
+  "Jornada 1: no sé separar equipos y campo en «CLASS HAIRSALON             TORREJON HORTALEZA» (columnas: 2)",
+  "Jornada 1: no sé separar equipos y campo en «REAL FACHADOLID             FIFITA» (columnas: 2)",
+  "Jornada 1: no sé separar equipos y campo en «LIMONETA OG             AGUILAS TEAM» (columnas: 2)",
+  "Jornada 2: no sé separar equipos y campo en «VERMEER              LIMONETA OG» (columnas: 2)",
+  "Jornada 2: no sé separar equipos y campo en «ADN FUTSAL             TAKA TAKA \"B\"» (columnas: 2)",
+  "Jornada 2: no sé separar equipos y campo en «TORREJON HORTALEZA             BORUSSIA DONUTS» (columnas: 2)",
+  "Jornada 2: no sé separar equipos y campo en «FIFITA         CLASS HAIRSALON» (columnas: 2)",
+  "Jornada 2: no sé separar equipos y campo en «AGUILAS TEAM             REAL FACHADOLID» (columnas: 2)",
+  "Jornada 4: no sé separar equipos y campo en «NOCTRA TORREJON \"B\"            LIMONETA OG» (columnas: 2)",
+  "Jornada 4: no sé separar equipos y campo en «ADN FUTSAL             VERMEER» (columnas: 2)",
+  "Jornada 4: no sé separar equipos y campo en «FIFITA         TAKA TAKA \"B\"» (columnas: 2)",
+  "Jornada 4: no sé separar equipos y campo en «AGUILAS TEAM             BORUSSIA DONUTS» (columnas: 2)",
+  "Jornada 4: no sé separar equipos y campo en «REAL FACHADOLID             CLASS HAIRSALON» (columnas: 2)",
+  "Jornada 5: no sé separar equipos y campo en «NOCTRA TORREJON \"B\"            ADN FUTSAL» (columnas: 2)",
+  "Jornada 5: no sé separar equipos y campo en «VERMEER              TORREJON HORTALEZA» (columnas: 2)",
+  "Jornada 5: no sé separar equipos y campo en «TAKA TAKA \"B\"           AGUILAS TEAM» (columnas: 2)",
+  "Jornada 5: no sé separar equipos y campo en «BORUSSIA DONUTS             REAL FACHADOLID» (columnas: 2)",
+  "Jornada 5: no sé separar equipos y campo en «LIMONETA OG             CLASS HAIRSALON» (columnas: 2)",
+  "Jornada 6: no sé separar equipos y campo en «ADN FUTSAL             LIMONETA OG» (columnas: 2)",
+  "Jornada 6: no sé separar equipos y campo en «TORREJON HORTALEZA             NOCTRA TORREJON \"B\"» (columnas: 2)",
+  "Jornada 6: no sé separar equipos y campo en «FIFITA         VERMEER» (columnas: 2)",
+  "Jornada 6: no sé separar equipos y campo en «REAL FACHADOLID             TAKA TAKA \"B\"» (columnas: 2)",
+  "Jornada 6: no sé separar equipos y campo en «CLASS HAIRSALON             BORUSSIA DONUTS» (columnas: 2)",
+  "Jornada 7: no sé separar equipos y campo en «ADN FUTSAL             TORREJON HORTALEZA» (columnas: 2)",
+  "Jornada 7: no sé separar equipos y campo en «NOCTRA TORREJON \"B\"            FIFITA» (columnas: 2)",
+  "Jornada 7: no sé separar equipos y campo en «VERMEER              AGUILAS TEAM» (columnas: 2)",
+  "Jornada 7: no sé separar equipos y campo en «TAKA TAKA \"B\"           CLASS HAIRSALON» (columnas: 2)",
+  "Jornada 7: no sé separar equipos y campo en «LIMONETA OG             BORUSSIA DONUTS» (columnas: 2)",
+  "Jornada 8: no sé separar equipos y campo en «TORREJON HORTALEZA             LIMONETA OG» (columnas: 2)",
+  "Jornada 8: no sé separar equipos y campo en «FIFITA         ADN FUTSAL» (columnas: 2)",
+  "Jornada 8: no sé separar equipos y campo en «AGUILAS TEAM             NOCTRA TORREJON \"B\"» (columnas: 2)",
+  "Jornada 8: no sé separar equipos y campo en «REAL FACHADOLID             VERMEER» (columnas: 2)",
+  "Jornada 8: no sé separar equipos y campo en «BORUSSIA DONUTS             TAKA TAKA \"B\"» (columnas: 2)",
+  "Jornada 9: no sé separar equipos y campo en «TORREJON HORTALEZA             FIFITA» (columnas: 2)",
+  "Jornada 9: no sé separar equipos y campo en «ADN FUTSAL             AGUILAS TEAM» (columnas: 2)",
+  "Jornada 9: no sé separar equipos y campo en «NOCTRA TORREJON \"B\"            REAL FACHADOLID» (columnas: 2)",
+  "Jornada 9: no sé separar equipos y campo en «VERMEER              CLASS HAIRSALON» (columnas: 2)",
+  "Jornada 9: no sé separar equipos y campo en «LIMONETA OG             TAKA TAKA \"B\"» (columnas: 2)",
+  "Jornada 10: no sé separar equipos y campo en «FIFITA         LIMONETA OG» (columnas: 2)",
+  "Jornada 10: no sé separar equipos y campo en «AGUILAS TEAM             TORREJON HORTALEZA» (columnas: 2)",
+  "Jornada 10: no sé separar equipos y campo en «REAL FACHADOLID             ADN FUTSAL» (columnas: 2)",
+  "Jornada 10: no sé separar equipos y campo en «CLASS HAIRSALON             NOCTRA TORREJON \"B\"» (columnas: 2)",
+  "Jornada 10: no sé separar equipos y campo en «BORUSSIA DONUTS             VERMEER» (columnas: 2)",
+  "Jornada 11: no sé separar equipos y campo en «FIFITA         AGUILAS TEAM» (columnas: 2)",
+  "Jornada 11: no sé separar equipos y campo en «TORREJON HORTALEZA          REAL FACHADOLID» (columnas: 2)",
+  "Jornada 11: no sé separar equipos y campo en «ADN FUTSAL          CLASS HAIRSALON» (columnas: 2)",
+  "Jornada 11: no sé separar equipos y campo en «NOCTRA TORREJON \"B\"         BORUSSIA DONUTS» (columnas: 2)",
+  "Jornada 11: no sé separar equipos y campo en «VERMEER           TAKA TAKA \"B\"» (columnas: 2)"
+ ],
+ "equipos": []
+}

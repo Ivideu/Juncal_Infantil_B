@@ -1,0 +1,337 @@
+                              JORNADAS DEL CAMPEONATO
+Deporte: Futbol Sala
+Categoría: JUVENIL
+Competición: LIGA DE CAMPEÓN
+
+      Jornada Nº1                                           Campo        Fecha        Hora
+ 1             DESCANSA             POYATO BELLACO                       17-10-26 S
+ 1    BESACON BLIN BLIN             MAHOUCHESTER          NURIA FDEZ 1   17-10-26 S 15:00
+ 1                    SCA           ASTOM BIRRAS          NURIA FDEZ 1   17-10-26 S 16:00
+ 1      MK urban proyect fs         JACK NUNIELS          NURIA FDEZ 2   17-10-26 S 17:00
+ 1         BIRRAREAL FC             LA BENDICION          NURIA FDEZ 2   17-10-26 S 18:00
+ 1    RIVILLOS LIMONES 5            COCA JUNIOR           NURIA FDEZ 2   17-10-26 S 15:00
+ 1     LOQUENDOCITY FC              EL CARTEL             NURIA FDEZ 3   17-10-26 S 15:00
+ 1           BAYERN F.S.            VODKA JUNIOR          NURIA FDEZ 2   17-10-26 S 16:00
+ 1   SEVERO T. AMARILLO             SPORTIUM BUCAREST     NURIA FDEZ 3   17-10-26 S 16:00
+ 1        SEVERO T.ROJO             CARDOS FC.            NURIA FDEZ 2   17-10-26 S 14:00
+ 1             FLAMANGO             TORREJON SALA         NURIA FDEZ 3   17-10-26 S 17:00
+
+      Jornada Nº2                                           Campo        Fecha        Hora
+ 1      POYATO BELLACO              FLAMANGO                             24-10-26 S
+ 1      MAHOUCHESTER                DESCANSA                             24-10-26 S
+ 1         ASTOM BIRRAS             BESACON BLIN BLIN                    24-10-26 S
+ 1         JACK NUNIELS             SCA                                  24-10-26 S
+ 1          LA BENDICION            MK urban proyect fs                  24-10-26 S
+ 1          COCA JUNIOR             BIRRAREAL FC                         24-10-26 S
+ 1             EL CARTEL            RIVILLOS LIMONES 5                   24-10-26 S
+ 1         VODKA JUNIOR             LOQUENDOCITY FC                      24-10-26 S
+ 1   SPORTIUM BUCAREST              BAYERN F.S.                          24-10-26 S
+ 1           CARDOS FC.             SEVERO T. AMARILLO                   24-10-26 S
+ 1       TORREJON SALA              SEVERO T.ROJO                        24-10-26 S
+
+      Jornada Nº3                                           Campo        Fecha        Hora
+ 1      POYATO BELLACO              MAHOUCHESTER                         7-11-26 S
+ 1             DESCANSA             ASTOM BIRRAS                         7-11-26 S
+ 1    BESACON BLIN BLIN             JACK NUNIELS                         7-11-26 S
+ 1                    SCA           LA BENDICION                         7-11-26 S
+ 1      MK urban proyect fs         COCA JUNIOR                          7-11-26 S
+ 1         BIRRAREAL FC             EL CARTEL                            7-11-26 S
+ 1    RIVILLOS LIMONES 5            VODKA JUNIOR                         7-11-26 S
+ 1     LOQUENDOCITY FC              SPORTIUM BUCAREST                    7-11-26 S
+ 1           BAYERN F.S.            CARDOS FC.                           7-11-26 S
+ 1   SEVERO T. AMARILLO             TORREJON SALA                        7-11-26 S
+ 1             FLAMANGO             SEVERO T.ROJO                        7-11-26 S
+
+
+
+
+                                                                             Página. 1
+                              JORNADAS DEL CAMPEONATO
+Deporte: Futbol Sala
+Categoría: JUVENIL
+Competición: LIGA DE CAMPEÓN
+
+      Jornada Nº4                                         Campo   Fecha        Hora
+ 1      MAHOUCHESTER                FLAMANGO                      14-11-26 S
+ 1         ASTOM BIRRAS             POYATO BELLACO                14-11-26 S
+ 1         JACK NUNIELS             DESCANSA                      14-11-26 S
+ 1          LA BENDICION            BESACON BLIN BLIN             14-11-26 S
+ 1          COCA JUNIOR             SCA                           14-11-26 S
+ 1             EL CARTEL            MK urban proyect fs           14-11-26 S
+ 1         VODKA JUNIOR             BIRRAREAL FC                  14-11-26 S
+ 1   SPORTIUM BUCAREST              RIVILLOS LIMONES 5            14-11-26 S
+ 1           CARDOS FC.             LOQUENDOCITY FC               14-11-26 S
+ 1       TORREJON SALA              BAYERN F.S.                   14-11-26 S
+ 1        SEVERO T.ROJO             SEVERO T. AMARILLO            14-11-26 S
+
+      Jornada Nº5                                         Campo   Fecha        Hora
+ 1      MAHOUCHESTER                ASTOM BIRRAS
+ 1      POYATO BELLACO              JACK NUNIELS                  21-11-26 S
+ 1             DESCANSA             LA BENDICION                  21-11-26 S
+ 1    BESACON BLIN BLIN             COCA JUNIOR                   21-11-26 S
+ 1                    SCA           EL CARTEL                     21-11-26 S
+ 1      MK urban proyect fs         VODKA JUNIOR                  21-11-26 S
+ 1         BIRRAREAL FC             SPORTIUM BUCAREST             21-11-26 S
+ 1    RIVILLOS LIMONES 5            CARDOS FC.                    21-11-26 S
+ 1     LOQUENDOCITY FC              TORREJON SALA                 21-11-26 S
+ 1           BAYERN F.S.            SEVERO T.ROJO                 21-11-26 S
+ 1             FLAMANGO             SEVERO T. AMARILLO            21-11-26 S
+
+      Jornada Nº6                                         Campo   Fecha        Hora
+ 1         ASTOM BIRRAS             FLAMANGO                      28-11-26 S
+ 1         JACK NUNIELS             MAHOUCHESTER                  28-11-26 S
+ 1          LA BENDICION            POYATO BELLACO                28-11-26 S
+ 1          COCA JUNIOR             DESCANSA                      28-11-26 S
+ 1             EL CARTEL            BESACON BLIN BLIN             28-11-26 S
+ 1         VODKA JUNIOR             SCA                           28-11-26 S
+ 1   SPORTIUM BUCAREST              MK urban proyect fs           28-11-26 S
+ 1           CARDOS FC.             BIRRAREAL FC                  28-11-26 S
+ 1       TORREJON SALA              RIVILLOS LIMONES 5            28-11-26 S
+ 1        SEVERO T.ROJO             LOQUENDOCITY FC               28-11-26 S
+ 1   SEVERO T. AMARILLO             BAYERN F.S.                   28-11-26 S
+
+
+
+
+                                                                      Página. 2
+                              JORNADAS DEL CAMPEONATO
+Deporte: Futbol Sala
+Categoría: JUVENIL
+Competición: LIGA DE CAMPEÓN
+
+      Jornada Nº7                                         Campo   Fecha        Hora
+ 1         ASTOM BIRRAS             JACK NUNIELS                  12-12-26 S
+ 1      MAHOUCHESTER                LA BENDICION                  12-12-26 S
+ 1      POYATO BELLACO              COCA JUNIOR                   12-12-26 S
+ 1             DESCANSA             EL CARTEL                     12-12-26 S
+ 1    BESACON BLIN BLIN             VODKA JUNIOR                  12-12-26 S
+ 1                    SCA           SPORTIUM BUCAREST             12-12-26 S
+ 1      MK urban proyect fs         CARDOS FC.                    12-12-26 S
+ 1         BIRRAREAL FC             TORREJON SALA                 12-12-26 S
+ 1    RIVILLOS LIMONES 5            SEVERO T.ROJO                 12-12-26 S
+ 1     LOQUENDOCITY FC              SEVERO T. AMARILLO            12-12-26 S
+ 1             FLAMANGO             BAYERN F.S.                   12-12-26 S
+
+      Jornada Nº8                                         Campo   Fecha        Hora
+ 1         JACK NUNIELS             FLAMANGO                      19-12-26 S
+ 1          LA BENDICION            ASTOM BIRRAS                  19-12-26 S
+ 1          COCA JUNIOR             MAHOUCHESTER                  19-12-26 S
+ 1             EL CARTEL            POYATO BELLACO                19-12-26 S
+ 1         VODKA JUNIOR             DESCANSA                      19-12-26 S
+ 1   SPORTIUM BUCAREST              BESACON BLIN BLIN             19-12-26 S
+ 1           CARDOS FC.             SCA                           19-12-26 S
+ 1       TORREJON SALA              MK urban proyect fs           19-12-26 S
+ 1        SEVERO T.ROJO             BIRRAREAL FC                  19-12-26 S
+ 1   SEVERO T. AMARILLO             RIVILLOS LIMONES 5            19-12-26 S
+ 1           BAYERN F.S.            LOQUENDOCITY FC               19-12-26 S
+
+      Jornada Nº9                                         Campo   Fecha        Hora
+ 1         JACK NUNIELS             LA BENDICION                  16-01-27 S
+ 1         ASTOM BIRRAS             COCA JUNIOR                   16-01-27 S
+ 1      MAHOUCHESTER                EL CARTEL                     16-01-27 S
+ 1      POYATO BELLACO              VODKA JUNIOR                  16-01-27 S
+ 1             DESCANSA             SPORTIUM BUCAREST             16-01-27 S
+ 1    BESACON BLIN BLIN             CARDOS FC.                    16-01-27 S
+ 1                    SCA           TORREJON SALA                 16-01-27 S
+ 1      MK urban proyect fs         SEVERO T.ROJO                 16-01-27 S
+ 1         BIRRAREAL FC             SEVERO T. AMARILLO            16-01-27 S
+ 1    RIVILLOS LIMONES 5            BAYERN F.S.                   16-01-27 S
+ 1             FLAMANGO             LOQUENDOCITY FC               16-01-27 S
+
+
+
+
+                                                                      Página. 3
+                              JORNADAS DEL CAMPEONATO
+Deporte: Futbol Sala
+Categoría: JUVENIL
+Competición: LIGA DE CAMPEÓN
+
+      Jornada Nº10                                        Campo   Fecha        Hora
+ 1          LA BENDICION            FLAMANGO                      23-01-27 S
+ 1          COCA JUNIOR             JACK NUNIELS                  23-01-27 S
+ 1             EL CARTEL            ASTOM BIRRAS                  23-01-27 S
+ 1         VODKA JUNIOR             MAHOUCHESTER                  23-01-27 S
+ 1   SPORTIUM BUCAREST              POYATO BELLACO                23-01-27 S
+ 1           CARDOS FC.             DESCANSA                      23-01-27 S
+ 1       TORREJON SALA              BESACON BLIN BLIN             23-01-27 S
+ 1        SEVERO T.ROJO             SCA                           23-01-27 S
+ 1   SEVERO T. AMARILLO             MK urban proyect fs           23-01-27 S
+ 1           BAYERN F.S.            BIRRAREAL FC                  23-01-27 S
+ 1     LOQUENDOCITY FC              RIVILLOS LIMONES 5            23-01-27 S
+
+      Jornada Nº11                                        Campo   Fecha        Hora
+ 1          LA BENDICION            COCA JUNIOR                   30-01-27 S
+ 1         JACK NUNIELS             EL CARTEL                     30-01-27 S
+ 1         ASTOM BIRRAS             VODKA JUNIOR                  30-01-27 S
+ 1      MAHOUCHESTER                SPORTIUM BUCAREST             30-01-27 S
+ 1      POYATO BELLACO              CARDOS FC.                    30-01-27 S
+ 1             DESCANSA             TORREJON SALA                 30-01-27 S
+ 1    BESACON BLIN BLIN             SEVERO T.ROJO                 30-01-27 S
+ 1                    SCA           SEVERO T. AMARILLO            30-01-27 S
+ 1      MK urban proyect fs         BAYERN F.S.                   30-01-27 S
+ 1         BIRRAREAL FC             LOQUENDOCITY FC               30-01-27 S
+ 1             FLAMANGO             RIVILLOS LIMONES 5            30-01-27 S
+
+      Jornada Nº12                                        Campo   Fecha        Hora
+ 1          COCA JUNIOR             FLAMANGO                      6-02-27 S
+ 1             EL CARTEL            LA BENDICION                  6-02-27 S
+ 1         VODKA JUNIOR             JACK NUNIELS                  6-02-27 S
+ 1   SPORTIUM BUCAREST              ASTOM BIRRAS                  6-02-27 S
+ 1           CARDOS FC.             MAHOUCHESTER                  6-02-27 S
+ 1       TORREJON SALA              POYATO BELLACO                6-02-27 S
+ 1        SEVERO T.ROJO             DESCANSA                      6-02-27 S
+ 1   SEVERO T. AMARILLO             BESACON BLIN BLIN             6-02-27 S
+ 1           BAYERN F.S.            SCA                           6-02-27 S
+ 1     LOQUENDOCITY FC              MK urban proyect fs           6-02-27 S
+ 1    RIVILLOS LIMONES 5            BIRRAREAL FC                  6-02-27 S
+
+
+
+
+                                                                      Página. 4
+                              JORNADAS DEL CAMPEONATO
+Deporte: Futbol Sala
+Categoría: JUVENIL
+Competición: LIGA DE CAMPEÓN
+
+      Jornada Nº13                                        Campo   Fecha        Hora
+ 1          COCA JUNIOR             EL CARTEL                     20-02-27 S
+ 1          LA BENDICION            VODKA JUNIOR                  20-02-27 S
+ 1         JACK NUNIELS             SPORTIUM BUCAREST             20-02-27 S
+ 1         ASTOM BIRRAS             CARDOS FC.                    20-02-27 S
+ 1      MAHOUCHESTER                TORREJON SALA                 20-02-27 S
+ 1      POYATO BELLACO              SEVERO T.ROJO                 20-02-27 S
+ 1             DESCANSA             SEVERO T. AMARILLO            20-02-27 S
+ 1    BESACON BLIN BLIN             BAYERN F.S.                   20-02-27 S
+ 1                    SCA           LOQUENDOCITY FC               20-02-27 S
+ 1      MK urban proyect fs         RIVILLOS LIMONES 5            20-02-27 S
+ 1             FLAMANGO             BIRRAREAL FC                  20-02-27 S
+
+      Jornada Nº14                                        Campo   Fecha        Hora
+ 1             EL CARTEL            FLAMANGO                      27-02-27 S
+ 1         VODKA JUNIOR             COCA JUNIOR                   27-02-27 S
+ 1   SPORTIUM BUCAREST              LA BENDICION                  27-02-27 S
+ 1           CARDOS FC.             JACK NUNIELS                  27-02-27 S
+ 1       TORREJON SALA              ASTOM BIRRAS                  27-02-27 S
+ 1        SEVERO T.ROJO             MAHOUCHESTER                  27-02-27 S
+ 1   SEVERO T. AMARILLO             POYATO BELLACO                27-02-27 S
+ 1           BAYERN F.S.            DESCANSA                      27-02-27 S
+ 1     LOQUENDOCITY FC              BESACON BLIN BLIN             27-02-27 S
+ 1    RIVILLOS LIMONES 5            SCA                           27-02-27 S
+ 1         BIRRAREAL FC             MK urban proyect fs           27-02-27 S
+
+      Jornada Nº15                                        Campo   Fecha        Hora
+ 1             EL CARTEL            VODKA JUNIOR                  6-03-27 S
+ 1          COCA JUNIOR             SPORTIUM BUCAREST             6-03-27 S
+ 1          LA BENDICION            CARDOS FC.                    6-03-27 S
+ 1         JACK NUNIELS             TORREJON SALA                 6-03-27 S
+ 1         ASTOM BIRRAS             SEVERO T.ROJO                 6-03-27 S
+ 1      MAHOUCHESTER                SEVERO T. AMARILLO            6-03-27 S
+ 1      POYATO BELLACO              BAYERN F.S.                   6-03-27 S
+ 1             DESCANSA             LOQUENDOCITY FC               6-03-27 S
+ 1    BESACON BLIN BLIN             RIVILLOS LIMONES 5            6-03-27 S
+ 1                    SCA           BIRRAREAL FC                  6-03-27 S
+ 1             FLAMANGO             MK urban proyect fs           6-03-27 S
+
+
+
+
+                                                                      Página. 5
+                              JORNADAS DEL CAMPEONATO
+Deporte: Futbol Sala
+Categoría: JUVENIL
+Competición: LIGA DE CAMPEÓN
+
+      Jornada Nº16                                        Campo   Fecha        Hora
+ 1         VODKA JUNIOR             FLAMANGO                      13-03-27 S
+ 1   SPORTIUM BUCAREST              EL CARTEL                     13-03-27 S
+ 1           CARDOS FC.             COCA JUNIOR                   13-03-27 S
+ 1       TORREJON SALA              LA BENDICION                  13-03-27 S
+ 1        SEVERO T.ROJO             JACK NUNIELS                  13-03-27 S
+ 1   SEVERO T. AMARILLO             ASTOM BIRRAS                  13-03-27 S
+ 1           BAYERN F.S.            MAHOUCHESTER                  13-03-27 S
+ 1     LOQUENDOCITY FC              POYATO BELLACO                13-03-27 S
+ 1    RIVILLOS LIMONES 5            DESCANSA                      13-03-27 S
+ 1         BIRRAREAL FC             BESACON BLIN BLIN             13-03-27 S
+ 1      MK urban proyect fs         SCA                           13-03-27 S
+
+      Jornada Nº17                                        Campo   Fecha        Hora
+ 1         VODKA JUNIOR             SPORTIUM BUCAREST             3-04-27 S
+ 1             EL CARTEL            CARDOS FC.                    3-04-27 S
+ 1          COCA JUNIOR             TORREJON SALA                 3-04-27 S
+ 1          LA BENDICION            SEVERO T.ROJO                 3-04-27 S
+ 1         JACK NUNIELS             SEVERO T. AMARILLO            3-04-27 S
+ 1         ASTOM BIRRAS             BAYERN F.S.                   3-04-27 S
+ 1      MAHOUCHESTER                LOQUENDOCITY FC               3-04-27 S
+ 1      POYATO BELLACO              RIVILLOS LIMONES 5            3-04-27 S
+ 1             DESCANSA             BIRRAREAL FC                  3-04-27 S
+ 1    BESACON BLIN BLIN             MK urban proyect fs           3-04-27 S
+ 1             FLAMANGO             SCA                           3-04-27 S
+
+      Jornada Nº18                                        Campo   Fecha        Hora
+ 1   SPORTIUM BUCAREST              FLAMANGO                      10-04-27 S
+ 1           CARDOS FC.             VODKA JUNIOR                  10-04-27 S
+ 1       TORREJON SALA              EL CARTEL                     10-04-27 S
+ 1        SEVERO T.ROJO             COCA JUNIOR                   10-04-27 S
+ 1   SEVERO T. AMARILLO             LA BENDICION                  10-04-27 S
+ 1           BAYERN F.S.            JACK NUNIELS                  10-04-27 S
+ 1     LOQUENDOCITY FC              ASTOM BIRRAS                  10-04-27 S
+ 1    RIVILLOS LIMONES 5            MAHOUCHESTER                  10-04-27 S
+ 1         BIRRAREAL FC             POYATO BELLACO                10-04-27 S
+ 1      MK urban proyect fs         DESCANSA                      10-04-27 S
+ 1                    SCA           BESACON BLIN BLIN             10-04-27 S
+
+
+
+
+                                                                      Página. 6
+                              JORNADAS DEL CAMPEONATO
+Deporte: Futbol Sala
+Categoría: JUVENIL
+Competición: LIGA DE CAMPEÓN
+
+      Jornada Nº19                                        Campo   Fecha        Hora
+ 1   SPORTIUM BUCAREST              CARDOS FC.                    17-04-27 S
+ 1         VODKA JUNIOR             TORREJON SALA                 17-04-27 S
+ 1             EL CARTEL            SEVERO T.ROJO                 17-04-27 S
+ 1          COCA JUNIOR             SEVERO T. AMARILLO            17-04-27 S
+ 1          LA BENDICION            BAYERN F.S.                   17-04-27 S
+ 1         JACK NUNIELS             LOQUENDOCITY FC               17-04-27 S
+ 1         ASTOM BIRRAS             RIVILLOS LIMONES 5            17-04-27 S
+ 1      MAHOUCHESTER                BIRRAREAL FC                  17-04-27 S
+ 1      POYATO BELLACO              MK urban proyect fs           17-04-27 S
+ 1             DESCANSA             SCA                           17-04-27 S
+ 1             FLAMANGO             BESACON BLIN BLIN             17-04-27 S
+
+      Jornada Nº20                                        Campo   Fecha        Hora
+ 1           CARDOS FC.             FLAMANGO                      24-04-27 S
+ 1       TORREJON SALA              SPORTIUM BUCAREST             24-04-27 S
+ 1        SEVERO T.ROJO             VODKA JUNIOR                  24-04-27 S
+ 1   SEVERO T. AMARILLO             EL CARTEL                     24-04-27 S
+ 1           BAYERN F.S.            COCA JUNIOR                   24-04-27 S
+ 1     LOQUENDOCITY FC              LA BENDICION                  24-04-27 S
+ 1    RIVILLOS LIMONES 5            JACK NUNIELS                  24-04-27 S
+ 1         BIRRAREAL FC             ASTOM BIRRAS                  24-04-27 S
+ 1      MK urban proyect fs         MAHOUCHESTER                  24-04-27 S
+ 1                    SCA           POYATO BELLACO                24-04-27 S
+ 1    BESACON BLIN BLIN             DESCANSA                      24-04-27 S
+
+      Jornada Nº21                                        Campo   Fecha        Hora
+ 1           CARDOS FC.             TORREJON SALA                 8-05-27 S
+ 1   SPORTIUM BUCAREST              SEVERO T.ROJO                 8-05-27 S
+ 1         VODKA JUNIOR             SEVERO T. AMARILLO            8-05-27 S
+ 1             EL CARTEL            BAYERN F.S.                   8-05-27 S
+ 1          COCA JUNIOR             LOQUENDOCITY FC               8-05-27 S
+ 1          LA BENDICION            RIVILLOS LIMONES 5            8-05-27 S
+ 1         JACK NUNIELS             BIRRAREAL FC                  8-05-27 S
+ 1         ASTOM BIRRAS             MK urban proyect fs           8-05-27 S
+ 1      MAHOUCHESTER                SCA                           8-05-27 S
+ 1      POYATO BELLACO              BESACON BLIN BLIN             8-05-27 S
+ 1             FLAMANGO             DESCANSA                      8-05-27 S
+
+
+
+
+                                                                      Página. 7
+

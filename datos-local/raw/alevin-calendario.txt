@@ -1,0 +1,154 @@
+                              JORNADAS DEL CAMPEONATO
+Deporte: Futbol Sala
+Categoría: ALEVIN
+Competición: FASE CAMPEÓN ALEVIN
+
+       Jornada Nº1                                             Campo        Fecha        Hora
+ 1              DESCANSA            RIVILLOS LIMONES 5 "A"                  18-10-26 D
+ 1      ZARZUELA T.JUNCAL           RIVILLOS LIMONES 5 "B"   NURIA FDEZ 1   18-10-26 D 10:00
+ 1      TORREJON JUNCAL             SEVERO T.ROJO            NURIA FDEZ 1   18-10-26 D 12:00
+ 1              HUMANITAS           SEVERO T.AMARILLO        NURIA FDEZ 1   18-10-26 D 13:00
+ 1   CIUDAD DE TORREJON             TORREJON SALA            NURIA FDEZ 1   18-10-26 D 11:00
+
+       Jornada Nº2                                             Campo        Fecha        Hora
+ 1   RIVILLOS LIMONES 5 "A"         CIUDAD DE TORREJON                      24-10-26 S
+ 1   RIVILLOS LIMONES 5 "B"         DESCANSA                                24-10-26 S
+ 1          SEVERO T.ROJO           ZARZUELA T.JUNCAL                       24-10-26 S
+ 1     SEVERO T.AMARILLO            TORREJON JUNCAL                         24-10-26 S
+ 1         TORREJON SALA            HUMANITAS                               24-10-26 S
+
+       Jornada Nº3                                             Campo        Fecha        Hora
+ 1   RIVILLOS LIMONES 5 "A"         RIVILLOS LIMONES 5 "B"                  7-11-26 S
+ 1              DESCANSA            SEVERO T.ROJO                           7-11-26 S
+ 1      ZARZUELA T.JUNCAL           SEVERO T.AMARILLO                       7-11-26 S
+ 1      TORREJON JUNCAL             TORREJON SALA                           7-11-26 S
+ 1   CIUDAD DE TORREJON             HUMANITAS                               7-11-26 S
+
+       Jornada Nº4                                             Campo        Fecha        Hora
+ 1   RIVILLOS LIMONES 5 "B"         CIUDAD DE TORREJON                      14-11-26 S
+ 1          SEVERO T.ROJO           RIVILLOS LIMONES 5 "A"                  14-11-26 S
+ 1     SEVERO T.AMARILLO            DESCANSA                                14-11-26 S
+ 1         TORREJON SALA            ZARZUELA T.JUNCAL                       14-11-26 S
+ 1              HUMANITAS           TORREJON JUNCAL                         14-11-26 S
+
+       Jornada Nº5                                             Campo        Fecha        Hora
+ 1   RIVILLOS LIMONES 5 "B"         SEVERO T.ROJO                           21-11-26 S
+ 1   RIVILLOS LIMONES 5 "A"         SEVERO T.AMARILLO                       21-11-26 S
+ 1              DESCANSA            TORREJON SALA                           21-11-26 S
+ 1      ZARZUELA T.JUNCAL           HUMANITAS                               21-11-26 S
+ 1   CIUDAD DE TORREJON             TORREJON JUNCAL                         21-11-26 S
+
+       Jornada Nº6                                             Campo        Fecha        Hora
+ 1          SEVERO T.ROJO           CIUDAD DE TORREJON                      28-11-26 S
+ 1     SEVERO T.AMARILLO            RIVILLOS LIMONES 5 "B"                  28-11-26 S
+ 1         TORREJON SALA            RIVILLOS LIMONES 5 "A"                  28-11-26 S
+ 1              HUMANITAS           DESCANSA                                28-11-26 S
+ 1      TORREJON JUNCAL             ZARZUELA T.JUNCAL                       28-11-26 S
+
+
+
+
+                                                                                Página. 1
+                              JORNADAS DEL CAMPEONATO
+Deporte: Futbol Sala
+Categoría: ALEVIN
+Competición: FASE CAMPEÓN ALEVIN
+
+       Jornada Nº7                                           Campo   Fecha        Hora
+ 1          SEVERO T.ROJO           SEVERO T.AMARILLO                12-12-26 S
+ 1   RIVILLOS LIMONES 5 "B"         TORREJON SALA                    12-12-26 S
+ 1   RIVILLOS LIMONES 5 "A"         HUMANITAS                        12-12-26 S
+ 1              DESCANSA            TORREJON JUNCAL                  12-12-26 S
+ 1   CIUDAD DE TORREJON             ZARZUELA T.JUNCAL                12-12-26 S
+
+       Jornada Nº8                                           Campo   Fecha        Hora
+ 1     SEVERO T.AMARILLO            CIUDAD DE TORREJON               19-12-26 S
+ 1         TORREJON SALA            SEVERO T.ROJO                    19-12-26 S
+ 1              HUMANITAS           RIVILLOS LIMONES 5 "B"           19-12-26 S
+ 1      TORREJON JUNCAL             RIVILLOS LIMONES 5 "A"           19-12-26 S
+ 1      ZARZUELA T.JUNCAL           DESCANSA                         19-12-26 S
+
+       Jornada Nº9                                           Campo   Fecha        Hora
+ 1     SEVERO T.AMARILLO            TORREJON SALA                    16-01-27 S
+ 1          SEVERO T.ROJO           HUMANITAS                        16-01-27 S
+ 1   RIVILLOS LIMONES 5 "B"         TORREJON JUNCAL                  16-01-27 S
+ 1   RIVILLOS LIMONES 5 "A"         ZARZUELA T.JUNCAL                16-01-27 S
+ 1   CIUDAD DE TORREJON             DESCANSA                         16-01-27 S
+
+       Jornada Nº10                                          Campo   Fecha        Hora
+ 1   RIVILLOS LIMONES 5 "A"         DESCANSA                         23-01-27 S
+ 1   RIVILLOS LIMONES 5 "B"         ZARZUELA T.JUNCAL                23-01-27 S
+ 1          SEVERO T.ROJO           TORREJON JUNCAL                  23-01-27 S
+ 1     SEVERO T.AMARILLO            HUMANITAS                        23-01-27 S
+ 1         TORREJON SALA            CIUDAD DE TORREJON               23-01-27 S
+
+       Jornada Nº11                                          Campo   Fecha        Hora
+ 1   CIUDAD DE TORREJON             RIVILLOS LIMONES 5 "A"           30-01-27 S
+ 1              DESCANSA            RIVILLOS LIMONES 5 "B"           30-01-27 S
+ 1      ZARZUELA T.JUNCAL           SEVERO T.ROJO                    30-01-27 S
+ 1      TORREJON JUNCAL             SEVERO T.AMARILLO                30-01-27 S
+ 1              HUMANITAS           TORREJON SALA                    30-01-27 S
+
+       Jornada Nº12                                          Campo   Fecha        Hora
+ 1   RIVILLOS LIMONES 5 "B"         RIVILLOS LIMONES 5 "A"           6-02-27 S
+ 1          SEVERO T.ROJO           DESCANSA                         6-02-27 S
+ 1     SEVERO T.AMARILLO            ZARZUELA T.JUNCAL                6-02-27 S
+ 1         TORREJON SALA            TORREJON JUNCAL                  6-02-27 S
+ 1              HUMANITAS           CIUDAD DE TORREJON               6-02-27 S
+
+
+
+
+                                                                         Página. 2
+                              JORNADAS DEL CAMPEONATO
+Deporte: Futbol Sala
+Categoría: ALEVIN
+Competición: FASE CAMPEÓN ALEVIN
+
+       Jornada Nº13                                          Campo   Fecha        Hora
+ 1   CIUDAD DE TORREJON             RIVILLOS LIMONES 5 "B"           20-02-27 S
+ 1   RIVILLOS LIMONES 5 "A"         SEVERO T.ROJO                    20-02-27 S
+ 1              DESCANSA            SEVERO T.AMARILLO                20-02-27 S
+ 1      ZARZUELA T.JUNCAL           TORREJON SALA                    20-02-27 S
+ 1      TORREJON JUNCAL             HUMANITAS                        20-02-27 S
+
+       Jornada Nº14                                          Campo   Fecha        Hora
+ 1          SEVERO T.ROJO           RIVILLOS LIMONES 5 "B"           27-02-27 S
+ 1     SEVERO T.AMARILLO            RIVILLOS LIMONES 5 "A"           27-02-27 S
+ 1         TORREJON SALA            DESCANSA                         27-02-27 S
+ 1              HUMANITAS           ZARZUELA T.JUNCAL                27-02-27 S
+ 1      TORREJON JUNCAL             CIUDAD DE TORREJON               27-02-27 S
+
+       Jornada Nº15                                          Campo   Fecha        Hora
+ 1   CIUDAD DE TORREJON             SEVERO T.ROJO                    6-03-27 S
+ 1   RIVILLOS LIMONES 5 "B"         SEVERO T.AMARILLO                6-03-27 S
+ 1   RIVILLOS LIMONES 5 "A"         TORREJON SALA                    6-03-27 S
+ 1              DESCANSA            HUMANITAS                        6-03-27 S
+ 1      ZARZUELA T.JUNCAL           TORREJON JUNCAL                  6-03-27 S
+
+       Jornada Nº16                                          Campo   Fecha        Hora
+ 1     SEVERO T.AMARILLO            SEVERO T.ROJO                    13-03-27 S
+ 1         TORREJON SALA            RIVILLOS LIMONES 5 "B"           13-03-27 S
+ 1              HUMANITAS           RIVILLOS LIMONES 5 "A"           13-03-27 S
+ 1      TORREJON JUNCAL             DESCANSA                         13-03-27 S
+ 1      ZARZUELA T.JUNCAL           CIUDAD DE TORREJON               13-03-27 S
+
+       Jornada Nº17                                          Campo   Fecha        Hora
+ 1   CIUDAD DE TORREJON             SEVERO T.AMARILLO                3-04-27 S
+ 1          SEVERO T.ROJO           TORREJON SALA                    3-04-27 S
+ 1   RIVILLOS LIMONES 5 "B"         HUMANITAS                        3-04-27 S
+ 1   RIVILLOS LIMONES 5 "A"         TORREJON JUNCAL                  3-04-27 S
+ 1              DESCANSA            ZARZUELA T.JUNCAL                3-04-27 S
+
+       Jornada Nº18                                          Campo   Fecha        Hora
+ 1         TORREJON SALA            SEVERO T.AMARILLO                10-04-27 S
+ 1              HUMANITAS           SEVERO T.ROJO                    10-04-27 S
+ 1      TORREJON JUNCAL             RIVILLOS LIMONES 5 "B"           10-04-27 S
+ 1      ZARZUELA T.JUNCAL           RIVILLOS LIMONES 5 "A"           10-04-27 S
+ 1              DESCANSA            CIUDAD DE TORREJON               10-04-27 S
+
+
+
+
+                                                                         Página. 3
+

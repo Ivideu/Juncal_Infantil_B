@@ -1,0 +1,222 @@
+                              JORNADAS DEL CAMPEONATO
+Deporte: Futbol Sala
+Categoría: INFANTIL
+Competición: LIGA DE CAMPEÓN
+
+       Jornada Nº1                                             Campo        Fecha        Hora
+ 1              DESCANSA            TORRIJAS FC                             17-10-26 S
+ 1             VEREDILLAS           RIVILLOS LIMONES 5 "A"   J.GARBAJOSA    17-10-26 S   9:00
+ 1            LEON FELIPE           RIVILLOS LIMONES 5 "B"   NURIA FDEZ 3   17-10-26 S 13:00
+ 1   TORREJON JUNCAL "B"            SEVERO TORREJON          J.A.PARAISO    17-10-26 S 15:00
+ 1   TORREJON JUNCAL "A"            TORREJON SALA            NURIA FDEZ 3   17-10-26 S 14:00
+ 1      CIUD.TORREJON "B"           CIUD.TORREJON "A"        NURIA FDEZ 1   17-10-26 S 14:00
+
+       Jornada Nº2                                             Campo        Fecha        Hora
+ 1            TORRIJAS FC           CIUD.TORREJON "B"                       24-10-26 S
+ 1   RIVILLOS LIMONES 5 "A"         DESCANSA                                24-10-26 S
+ 1   RIVILLOS LIMONES 5 "B"         VEREDILLAS                              24-10-26 S
+ 1      SEVERO TORREJON             LEON FELIPE                             24-10-26 S
+ 1         TORREJON SALA            TORREJON JUNCAL "B"                     24-10-26 S
+ 1      CIUD.TORREJON "A"           TORREJON JUNCAL "A"                     24-10-26 S
+
+       Jornada Nº3                                             Campo        Fecha        Hora
+ 1            TORRIJAS FC           RIVILLOS LIMONES 5 "A"                  7-11-26 S
+ 1              DESCANSA            RIVILLOS LIMONES 5 "B"                  7-11-26 S
+ 1             VEREDILLAS           SEVERO TORREJON                         7-11-26 S
+ 1            LEON FELIPE           TORREJON SALA                           7-11-26 S
+ 1   TORREJON JUNCAL "B"            CIUD.TORREJON "A"                       7-11-26 S
+ 1      CIUD.TORREJON "B"           TORREJON JUNCAL "A"                     7-11-26 S
+
+       Jornada Nº4                                             Campo        Fecha        Hora
+ 1   RIVILLOS LIMONES 5 "A"         CIUD.TORREJON "B"                       14-11-26 S
+ 1   RIVILLOS LIMONES 5 "B"         TORRIJAS FC                             14-11-26 S
+ 1      SEVERO TORREJON             DESCANSA                                14-11-26 S
+ 1         TORREJON SALA            VEREDILLAS                              14-11-26 S
+ 1      CIUD.TORREJON "A"           LEON FELIPE                             14-11-26 S
+ 1   TORREJON JUNCAL "A"            TORREJON JUNCAL "B"                     14-11-26 S
+
+       Jornada Nº5                                             Campo        Fecha        Hora
+ 1   RIVILLOS LIMONES 5 "A"         RIVILLOS LIMONES 5 "B"                  21-11-26 S
+ 1            TORRIJAS FC           SEVERO TORREJON                         21-11-26 S
+ 1              DESCANSA            TORREJON SALA                           21-11-26 S
+ 1             VEREDILLAS           CIUD.TORREJON "A"                       21-11-26 S
+ 1            LEON FELIPE           TORREJON JUNCAL "A"                     21-11-26 S
+ 1      CIUD.TORREJON "B"           TORREJON JUNCAL "B"                     21-11-26 S
+
+
+
+
+                                                                                Página. 1
+                              JORNADAS DEL CAMPEONATO
+Deporte: Futbol Sala
+Categoría: INFANTIL
+Competición: LIGA DE CAMPEÓN
+
+       Jornada Nº6                                           Campo   Fecha        Hora
+ 1   RIVILLOS LIMONES 5 "B"         CIUD.TORREJON "B"                28-11-26 S
+ 1      SEVERO TORREJON             RIVILLOS LIMONES 5 "A"           28-11-26 S
+ 1         TORREJON SALA            TORRIJAS FC                      28-11-26 S
+ 1      CIUD.TORREJON "A"           DESCANSA                         28-11-26 S
+ 1   TORREJON JUNCAL "A"            VEREDILLAS                       28-11-26 S
+ 1   TORREJON JUNCAL "B"            LEON FELIPE                      28-11-26 S
+
+       Jornada Nº7                                           Campo   Fecha        Hora
+ 1   RIVILLOS LIMONES 5 "B"         SEVERO TORREJON                  12-12-26 S
+ 1   RIVILLOS LIMONES 5 "A"         TORREJON SALA                    12-12-26 S
+ 1            TORRIJAS FC           CIUD.TORREJON "A"                12-12-26 S
+ 1              DESCANSA            TORREJON JUNCAL "A"              12-12-26 S
+ 1             VEREDILLAS           TORREJON JUNCAL "B"              12-12-26 S
+ 1      CIUD.TORREJON "B"           LEON FELIPE                      12-12-26 S
+
+       Jornada Nº8                                           Campo   Fecha        Hora
+ 1      SEVERO TORREJON             CIUD.TORREJON "B"                19-12-26 S
+ 1         TORREJON SALA            RIVILLOS LIMONES 5 "B"           19-12-26 S
+ 1      CIUD.TORREJON "A"           RIVILLOS LIMONES 5 "A"           19-12-26 S
+ 1   TORREJON JUNCAL "A"            TORRIJAS FC                      19-12-26 S
+ 1   TORREJON JUNCAL "B"            DESCANSA                         19-12-26 S
+ 1            LEON FELIPE           VEREDILLAS                       19-12-26 S
+
+       Jornada Nº9                                           Campo   Fecha        Hora
+ 1      SEVERO TORREJON             TORREJON SALA                    16-01-27 S
+ 1   RIVILLOS LIMONES 5 "B"         CIUD.TORREJON "A"                16-01-27 S
+ 1   RIVILLOS LIMONES 5 "A"         TORREJON JUNCAL "A"              16-01-27 S
+ 1            TORRIJAS FC           TORREJON JUNCAL "B"              16-01-27 S
+ 1              DESCANSA            LEON FELIPE                      16-01-27 S
+ 1      CIUD.TORREJON "B"           VEREDILLAS                       16-01-27 S
+
+       Jornada Nº10                                          Campo   Fecha        Hora
+ 1         TORREJON SALA            CIUD.TORREJON "B"                23-01-27 S
+ 1      CIUD.TORREJON "A"           SEVERO TORREJON                  23-01-27 S
+ 1   TORREJON JUNCAL "A"            RIVILLOS LIMONES 5 "B"           23-01-27 S
+ 1   TORREJON JUNCAL "B"            RIVILLOS LIMONES 5 "A"           23-01-27 S
+ 1            LEON FELIPE           TORRIJAS FC                      23-01-27 S
+ 1             VEREDILLAS           DESCANSA                         23-01-27 S
+
+
+
+
+                                                                         Página. 2
+                              JORNADAS DEL CAMPEONATO
+Deporte: Futbol Sala
+Categoría: INFANTIL
+Competición: LIGA DE CAMPEÓN
+
+       Jornada Nº11                                          Campo   Fecha        Hora
+ 1         TORREJON SALA            CIUD.TORREJON "A"                30-01-27 S
+ 1      SEVERO TORREJON             TORREJON JUNCAL "A"              30-01-27 S
+ 1   RIVILLOS LIMONES 5 "B"         TORREJON JUNCAL "B"              30-01-27 S
+ 1   RIVILLOS LIMONES 5 "A"         LEON FELIPE                      30-01-27 S
+ 1            TORRIJAS FC           VEREDILLAS                       30-01-27 S
+ 1      CIUD.TORREJON "B"           DESCANSA                         30-01-27 S
+
+       Jornada Nº12                                          Campo   Fecha        Hora
+ 1            TORRIJAS FC           DESCANSA                         6-02-27 S
+ 1   RIVILLOS LIMONES 5 "A"         VEREDILLAS                       6-02-27 S
+ 1   RIVILLOS LIMONES 5 "B"         LEON FELIPE                      6-02-27 S
+ 1      SEVERO TORREJON             TORREJON JUNCAL "B"              6-02-27 S
+ 1         TORREJON SALA            TORREJON JUNCAL "A"              6-02-27 S
+ 1      CIUD.TORREJON "A"           CIUD.TORREJON "B"                6-02-27 S
+
+       Jornada Nº13                                          Campo   Fecha        Hora
+ 1      CIUD.TORREJON "B"           TORRIJAS FC                      20-02-27 S
+ 1              DESCANSA            RIVILLOS LIMONES 5 "A"           20-02-27 S
+ 1             VEREDILLAS           RIVILLOS LIMONES 5 "B"           20-02-27 S
+ 1            LEON FELIPE           SEVERO TORREJON                  20-02-27 S
+ 1   TORREJON JUNCAL "B"            TORREJON SALA                    20-02-27 S
+ 1   TORREJON JUNCAL "A"            CIUD.TORREJON "A"                20-02-27 S
+
+       Jornada Nº14                                          Campo   Fecha        Hora
+ 1   RIVILLOS LIMONES 5 "A"         TORRIJAS FC                      27-02-27 S
+ 1   RIVILLOS LIMONES 5 "B"         DESCANSA                         27-02-27 S
+ 1      SEVERO TORREJON             VEREDILLAS                       27-02-27 S
+ 1         TORREJON SALA            LEON FELIPE                      27-02-27 S
+ 1      CIUD.TORREJON "A"           TORREJON JUNCAL "B"              27-02-27 S
+ 1   TORREJON JUNCAL "A"            CIUD.TORREJON "B"                27-02-27 S
+
+       Jornada Nº15                                          Campo   Fecha        Hora
+ 1      CIUD.TORREJON "B"           RIVILLOS LIMONES 5 "A"           6-03-27 S
+ 1            TORRIJAS FC           RIVILLOS LIMONES 5 "B"           6-03-27 S
+ 1              DESCANSA            SEVERO TORREJON                  6-03-27 S
+ 1             VEREDILLAS           TORREJON SALA                    6-03-27 S
+ 1            LEON FELIPE           CIUD.TORREJON "A"                6-03-27 S
+ 1   TORREJON JUNCAL "B"            TORREJON JUNCAL "A"              6-03-27 S
+
+
+
+
+                                                                         Página. 3
+                              JORNADAS DEL CAMPEONATO
+Deporte: Futbol Sala
+Categoría: INFANTIL
+Competición: LIGA DE CAMPEÓN
+
+       Jornada Nº16                                          Campo   Fecha        Hora
+ 1   RIVILLOS LIMONES 5 "B"         RIVILLOS LIMONES 5 "A"           13-03-27 S
+ 1      SEVERO TORREJON             TORRIJAS FC                      13-03-27 S
+ 1         TORREJON SALA            DESCANSA                         13-03-27 S
+ 1      CIUD.TORREJON "A"           VEREDILLAS                       13-03-27 S
+ 1   TORREJON JUNCAL "A"            LEON FELIPE                      13-03-27 S
+ 1   TORREJON JUNCAL "B"            CIUD.TORREJON "B"                13-03-27 S
+
+       Jornada Nº17                                          Campo   Fecha        Hora
+ 1      CIUD.TORREJON "B"           RIVILLOS LIMONES 5 "B"           3-04-27 S
+ 1   RIVILLOS LIMONES 5 "A"         SEVERO TORREJON                  3-04-27 S
+ 1            TORRIJAS FC           TORREJON SALA                    3-04-27 S
+ 1              DESCANSA            CIUD.TORREJON "A"                3-04-27 S
+ 1             VEREDILLAS           TORREJON JUNCAL "A"              3-04-27 S
+ 1            LEON FELIPE           TORREJON JUNCAL "B"              3-04-27 S
+
+       Jornada Nº18                                          Campo   Fecha        Hora
+ 1      SEVERO TORREJON             RIVILLOS LIMONES 5 "B"           10-04-27 S
+ 1         TORREJON SALA            RIVILLOS LIMONES 5 "A"           10-04-27 S
+ 1      CIUD.TORREJON "A"           TORRIJAS FC                      10-04-27 S
+ 1   TORREJON JUNCAL "A"            DESCANSA                         10-04-27 S
+ 1   TORREJON JUNCAL "B"            VEREDILLAS                       10-04-27 S
+ 1            LEON FELIPE           CIUD.TORREJON "B"                10-04-27 S
+
+       Jornada Nº19                                          Campo   Fecha        Hora
+ 1      CIUD.TORREJON "B"           SEVERO TORREJON                  17-04-27 S
+ 1   RIVILLOS LIMONES 5 "B"         TORREJON SALA                    17-04-27 S
+ 1   RIVILLOS LIMONES 5 "A"         CIUD.TORREJON "A"                17-04-27 S
+ 1            TORRIJAS FC           TORREJON JUNCAL "A"              17-04-27 S
+ 1              DESCANSA            TORREJON JUNCAL "B"              17-04-27 S
+ 1             VEREDILLAS           LEON FELIPE                      17-04-27 S
+
+       Jornada Nº20                                          Campo   Fecha        Hora
+ 1         TORREJON SALA            SEVERO TORREJON                  24-04-27 S
+ 1      CIUD.TORREJON "A"           RIVILLOS LIMONES 5 "B"           24-04-27 S
+ 1   TORREJON JUNCAL "A"            RIVILLOS LIMONES 5 "A"           24-04-27 S
+ 1   TORREJON JUNCAL "B"            TORRIJAS FC                      24-04-27 S
+ 1            LEON FELIPE           DESCANSA                         24-04-27 S
+ 1             VEREDILLAS           CIUD.TORREJON "B"                24-04-27 S
+
+
+
+
+                                                                         Página. 4
+                              JORNADAS DEL CAMPEONATO
+Deporte: Futbol Sala
+Categoría: INFANTIL
+Competición: LIGA DE CAMPEÓN
+
+       Jornada Nº21                                          Campo   Fecha        Hora
+ 1      CIUD.TORREJON "B"           TORREJON SALA                    8-05-27 S
+ 1      SEVERO TORREJON             CIUD.TORREJON "A"                8-05-27 S
+ 1   RIVILLOS LIMONES 5 "B"         TORREJON JUNCAL "A"              8-05-27 S
+ 1   RIVILLOS LIMONES 5 "A"         TORREJON JUNCAL "B"              8-05-27 S
+ 1            TORRIJAS FC           LEON FELIPE                      8-05-27 S
+ 1              DESCANSA            VEREDILLAS                       8-05-27 S
+
+       Jornada Nº22                                          Campo   Fecha        Hora
+ 1      CIUD.TORREJON "A"           TORREJON SALA                    22-05-27 S
+ 1   TORREJON JUNCAL "A"            SEVERO TORREJON                  22-05-27 S
+ 1   TORREJON JUNCAL "B"            RIVILLOS LIMONES 5 "B"           22-05-27 S
+ 1            LEON FELIPE           RIVILLOS LIMONES 5 "A"           22-05-27 S
+ 1             VEREDILLAS           TORRIJAS FC                      22-05-27 S
+ 1              DESCANSA            CIUD.TORREJON "B"                22-05-27 S
+
+
+
+
+                                                                         Página. 5
+

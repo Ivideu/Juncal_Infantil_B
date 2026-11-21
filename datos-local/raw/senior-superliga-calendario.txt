@@ -1,0 +1,116 @@
+                            JORNADAS DEL CAMPEONATO
+Deporte: Futbol Sala
+Categoría: SENIOR SUPERLIGA
+Competición: CAMPEÓN DE INVIERNO
+
+       Jornada Nº1                                      Campo   Fecha        Hora
+ 1              DRIM TIM          WHOPPERCITOS                  17-10-26 S
+ 1          WAKANDITOS            F.S.RECIO                     17-10-26 S
+ 1             CIRCO F.S.         P.GALEON FLYNET               17-10-26 S
+ 1   NOCTRA TORREJON "A"          SAN CHURRITA VALLE            17-10-26 S
+ 1         COLEGIO JABY           JOGA BONITO                   17-10-26 S
+ 1 FEOS PERO CON GUSTO            AGAPE CASTILLO                17-10-26 S
+
+       Jornada Nº2                                      Campo   Fecha        Hora
+ 1        WHOPPERCITOS            FEOS PERO CON GUSTO           24-10-26 S
+ 1             F.S.RECIO          DRIM TIM                      24-10-26 S
+ 1       P.GALEON FLYNET          WAKANDITOS                    24-10-26 S
+ 1    SAN CHURRITA VALLE          CIRCO F.S.                    24-10-26 S
+ 1          JOGA BONITO           NOCTRA TORREJON "A"           24-10-26 S
+ 1       AGAPE CASTILLO           COLEGIO JABY                  24-10-26 S
+
+       Jornada Nº3                                      Campo   Fecha        Hora
+ 1        WHOPPERCITOS            F.S.RECIO                     7-11-26 S
+ 1              DRIM TIM          P.GALEON FLYNET               7-11-26 S
+ 1          WAKANDITOS            SAN CHURRITA VALLE            7-11-26 S
+ 1             CIRCO F.S.         JOGA BONITO                   7-11-26 S
+ 1   NOCTRA TORREJON "A"          AGAPE CASTILLO                7-11-26 S
+ 1 FEOS PERO CON GUSTO            COLEGIO JABY                  7-11-26 S
+
+       Jornada Nº4                                      Campo   Fecha        Hora
+ 1             F.S.RECIO          FEOS PERO CON GUSTO           14-11-26 S
+ 1       P.GALEON FLYNET          WHOPPERCITOS                  14-11-26 S
+ 1    SAN CHURRITA VALLE          DRIM TIM                      14-11-26 S
+ 1          JOGA BONITO           WAKANDITOS                    14-11-26 S
+ 1       AGAPE CASTILLO           CIRCO F.S.                    14-11-26 S
+ 1         COLEGIO JABY           NOCTRA TORREJON "A"           14-11-26 S
+
+       Jornada Nº5                                      Campo   Fecha        Hora
+ 1             F.S.RECIO          P.GALEON FLYNET               21-11-26 S
+ 1        WHOPPERCITOS            SAN CHURRITA VALLE            21-11-26 S
+ 1              DRIM TIM          JOGA BONITO                   21-11-26 S
+ 1          WAKANDITOS            AGAPE CASTILLO                21-11-26 S
+ 1             CIRCO F.S.         COLEGIO JABY                  21-11-26 S
+ 1 FEOS PERO CON GUSTO            NOCTRA TORREJON "A"           21-11-26 S
+
+
+
+
+                                                                    Página. 1
+                            JORNADAS DEL CAMPEONATO
+Deporte: Futbol Sala
+Categoría: SENIOR SUPERLIGA
+Competición: CAMPEÓN DE INVIERNO
+
+       Jornada Nº6                                      Campo   Fecha        Hora
+ 1       P.GALEON FLYNET          FEOS PERO CON GUSTO           28-11-26 S
+ 1    SAN CHURRITA VALLE          F.S.RECIO                     28-11-26 S
+ 1          JOGA BONITO           WHOPPERCITOS                  28-11-26 S
+ 1       AGAPE CASTILLO           DRIM TIM                      28-11-26 S
+ 1         COLEGIO JABY           WAKANDITOS                    28-11-26 S
+ 1   NOCTRA TORREJON "A"          CIRCO F.S.                    28-11-26 S
+
+       Jornada Nº7                                      Campo   Fecha        Hora
+ 1       P.GALEON FLYNET          SAN CHURRITA VALLE            12-12-26 S
+ 1             F.S.RECIO          JOGA BONITO                   12-12-26 S
+ 1        WHOPPERCITOS            AGAPE CASTILLO                12-12-26 S
+ 1              DRIM TIM          COLEGIO JABY                  12-12-26 S
+ 1          WAKANDITOS            NOCTRA TORREJON "A"           12-12-26 S
+ 1 FEOS PERO CON GUSTO            CIRCO F.S.                    12-12-26 S
+
+       Jornada Nº8                                      Campo   Fecha        Hora
+ 1    SAN CHURRITA VALLE          FEOS PERO CON GUSTO           19-12-26 S
+ 1          JOGA BONITO           P.GALEON FLYNET               19-12-26 S
+ 1       AGAPE CASTILLO           F.S.RECIO                     19-12-26 S
+ 1         COLEGIO JABY           WHOPPERCITOS                  19-12-26 S
+ 1   NOCTRA TORREJON "A"          DRIM TIM                      19-12-26 S
+ 1             CIRCO F.S.         WAKANDITOS                    19-12-26 S
+
+       Jornada Nº9                                      Campo   Fecha        Hora
+ 1    SAN CHURRITA VALLE          JOGA BONITO                   16-01-27 S
+ 1       P.GALEON FLYNET          AGAPE CASTILLO                16-01-27 S
+ 1             F.S.RECIO          COLEGIO JABY                  16-01-27 S
+ 1        WHOPPERCITOS            NOCTRA TORREJON "A"           16-01-27 S
+ 1              DRIM TIM          CIRCO F.S.                    16-01-27 S
+ 1 FEOS PERO CON GUSTO            WAKANDITOS                    16-01-27 S
+
+       Jornada Nº10                                     Campo   Fecha        Hora
+ 1          JOGA BONITO           FEOS PERO CON GUSTO           23-01-27 S
+ 1       AGAPE CASTILLO           SAN CHURRITA VALLE            23-01-27 S
+ 1         COLEGIO JABY           P.GALEON FLYNET               23-01-27 S
+ 1   NOCTRA TORREJON "A"          F.S.RECIO                     23-01-27 S
+ 1             CIRCO F.S.         WHOPPERCITOS                  23-01-27 S
+ 1          WAKANDITOS            DRIM TIM                      23-01-27 S
+
+
+
+
+                                                                    Página. 2
+                          JORNADAS DEL CAMPEONATO
+Deporte: Futbol Sala
+Categoría: SENIOR SUPERLIGA
+Competición: CAMPEÓN DE INVIERNO
+
+     Jornada Nº11                                     Campo   Fecha        Hora
+ 1         JOGA BONITO          AGAPE CASTILLO                30-01-27 S
+ 1   SAN CHURRITA VALLE         COLEGIO JABY                  30-01-27 S
+ 1     P.GALEON FLYNET          NOCTRA TORREJON "A"           30-01-27 S
+ 1            F.S.RECIO         CIRCO F.S.                    30-01-27 S
+ 1       WHOPPERCITOS           WAKANDITOS                    30-01-27 S
+ 1 FEOS PERO CON GUSTO          DRIM TIM                      30-01-27 S
+
+
+
+
+                                                                  Página. 3
+

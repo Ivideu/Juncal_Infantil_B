@@ -1,0 +1,183 @@
+{
+ "id": "prebenjamin",
+ "nombre": "Prebenjamín",
+ "actualizado": "2026-11-21T07:57:36Z",
+ "fuente": {
+  "calendario": [
+   "https://deportes.ayto-torrejon.es/sites/default/files/users/user355/CALENDARIO%20PREBENJAMIN%20%201%C2%AA%20FASE%202627.pdf"
+  ],
+  "jornada": [
+   "https://deportes.ayto-torrejon.es/sites/default/files/users/user355/HORARIOS%20PREBENJAMIN%20%2021NOVIEMBRE%20(1).pdf"
+  ]
+ },
+ "jornadas": [
+  {
+   "n": 1,
+   "descansa": "Rivillos Limones 5",
+   "partidos": [
+    {
+     "local": "T.Juncal Jaime Vera",
+     "visitante": "Cfs Barrio Del",
+     "campo": "J.GARBAJOSA",
+     "fecha": "2026-10-17",
+     "dia": "S",
+     "hora": "10:00"
+    },
+    {
+     "local": "Torr.Jucal Zarzuela",
+     "visitante": "Torrejon Sala \"A\"",
+     "campo": "NURIA FDEZ 3",
+     "fecha": "2026-10-17",
+     "dia": "S",
+     "hora": "11:00"
+    },
+    {
+     "local": "Torr.Juncal Severo",
+     "visitante": "Torrejon Sala \"B\"",
+     "campo": "J.GARBAJOSA",
+     "fecha": "2026-10-17",
+     "dia": "S",
+     "hora": "11:00"
+    },
+    {
+     "local": "Humanitas",
+     "visitante": "Ciudad de Torrejon",
+     "campo": "NURIA FDEZ 3",
+     "fecha": "2026-10-17",
+     "dia": "S",
+     "hora": "12:00"
+    }
+   ]
+  },
+  {
+   "n": 2,
+   "descansa": "Cfs Barrio Del",
+   "partidos": []
+  },
+  {
+   "n": 4,
+   "descansa": "Torrejon Sala \"B\"",
+   "partidos": []
+  },
+  {
+   "n": 5,
+   "descansa": "Ciudad de Torrejon",
+   "partidos": []
+  },
+  {
+   "n": 6,
+   "descansa": "Torr.Juncal Severo",
+   "partidos": []
+  },
+  {
+   "n": 7,
+   "descansa": "Torr.Jucal Zarzuela",
+   "partidos": []
+  },
+  {
+   "n": 8,
+   "descansa": "T.Juncal Jaime Vera",
+   "partidos": []
+  },
+  {
+   "n": 9,
+   "descansa": "Humanitas",
+   "partidos": []
+  },
+  {
+   "n": 10,
+   "descansa": "Rivillos Limones 5",
+   "partidos": []
+  },
+  {
+   "n": 11,
+   "descansa": "Cfs Barrio Del",
+   "partidos": []
+  },
+  {
+   "n": 13,
+   "descansa": "Torrejon Sala \"B\"",
+   "partidos": []
+  },
+  {
+   "n": 14,
+   "descansa": "Ciudad de Torrejon",
+   "partidos": []
+  },
+  {
+   "n": 16,
+   "descansa": "Torr.Jucal Zarzuela",
+   "partidos": []
+  },
+  {
+   "n": 18,
+   "descansa": "Humanitas",
+   "partidos": []
+  }
+ ],
+ "clasificacion": [],
+ "avisos": [
+  "Jornada 2: no sé separar equipos y campo en «RIVILLOS LIMONES 5         HUMANITAS» (columnas: 2)",
+  "Jornada 2: no sé separar equipos y campo en «TORREJON SALA \"A\"          T.JUNCAL JAIME VERA» (columnas: 2)",
+  "Jornada 2: no sé separar equipos y campo en «TORREJON SALA \"B\"          TORR.JUCAL ZARZUELA» (columnas: 2)",
+  "Jornada 2: no sé separar equipos y campo en «CIUDAD DE TORREJON           TORR.JUNCAL SEVERO» (columnas: 2)",
+  "Jornada 4: no sé separar equipos y campo en «CFS BARRIO DEL          HUMANITAS» (columnas: 2)",
+  "Jornada 4: no sé separar equipos y campo en «TORREJON SALA \"A\"          RIVILLOS LIMONES 5» (columnas: 2)",
+  "Jornada 4: no sé separar equipos y campo en «CIUDAD DE TORREJON           T.JUNCAL JAIME VERA» (columnas: 2)",
+  "Jornada 4: no sé separar equipos y campo en «TORR.JUNCAL SEVERO           TORR.JUCAL ZARZUELA» (columnas: 2)",
+  "Jornada 5: no sé separar equipos y campo en «CFS BARRIO DEL          TORREJON SALA \"A\"» (columnas: 2)",
+  "Jornada 5: no sé separar equipos y campo en «RIVILLOS LIMONES 5         TORREJON SALA \"B\"» (columnas: 2)",
+  "Jornada 5: no sé separar equipos y campo en «T.JUNCAL JAIME VERA         TORR.JUNCAL SEVERO» (columnas: 2)",
+  "Jornada 5: no sé separar equipos y campo en «HUMANITAS           TORR.JUCAL ZARZUELA» (columnas: 2)",
+  "Jornada 6: no sé separar equipos y campo en «TORREJON SALA \"A\"          HUMANITAS» (columnas: 2)",
+  "Jornada 6: no sé separar equipos y campo en «TORREJON SALA \"B\"          CFS BARRIO DEL» (columnas: 2)",
+  "Jornada 6: no sé separar equipos y campo en «CIUDAD DE TORREJON           RIVILLOS LIMONES 5» (columnas: 2)",
+  "Jornada 6: no sé separar equipos y campo en «TORR.JUCAL ZARZUELA          T.JUNCAL JAIME VERA» (columnas: 2)",
+  "Jornada 7: no sé separar equipos y campo en «TORREJON SALA \"A\"          TORREJON SALA \"B\"» (columnas: 2)",
+  "Jornada 7: no sé separar equipos y campo en «CFS BARRIO DEL          CIUDAD DE TORREJON» (columnas: 2)",
+  "Jornada 7: no sé separar equipos y campo en «RIVILLOS LIMONES 5         TORR.JUNCAL SEVERO» (columnas: 2)",
+  "Jornada 7: no sé separar equipos y campo en «HUMANITAS           T.JUNCAL JAIME VERA» (columnas: 2)",
+  "Jornada 8: no sé separar equipos y campo en «TORREJON SALA \"B\"          HUMANITAS» (columnas: 2)",
+  "Jornada 8: no sé separar equipos y campo en «CIUDAD DE TORREJON           TORREJON SALA \"A\"» (columnas: 2)",
+  "Jornada 8: no sé separar equipos y campo en «TORR.JUNCAL SEVERO           CFS BARRIO DEL» (columnas: 2)",
+  "Jornada 8: no sé separar equipos y campo en «TORR.JUCAL ZARZUELA          RIVILLOS LIMONES 5» (columnas: 2)",
+  "Jornada 9: no sé separar equipos y campo en «TORREJON SALA \"B\"          CIUDAD DE TORREJON» (columnas: 2)",
+  "Jornada 9: no sé separar equipos y campo en «TORREJON SALA \"A\"          TORR.JUNCAL SEVERO» (columnas: 2)",
+  "Jornada 9: no sé separar equipos y campo en «CFS BARRIO DEL          TORR.JUCAL ZARZUELA» (columnas: 2)",
+  "Jornada 9: no sé separar equipos y campo en «RIVILLOS LIMONES 5         T.JUNCAL JAIME VERA» (columnas: 2)",
+  "Jornada 10: no sé separar equipos y campo en «CFS BARRIO DEL          T.JUNCAL JAIME VERA» (columnas: 2)",
+  "Jornada 10: no sé separar equipos y campo en «TORREJON SALA \"A\"          TORR.JUCAL ZARZUELA» (columnas: 2)",
+  "Jornada 10: no sé separar equipos y campo en «TORREJON SALA \"B\"          TORR.JUNCAL SEVERO» (columnas: 2)",
+  "Jornada 10: no sé separar equipos y campo en «CIUDAD DE TORREJON           HUMANITAS» (columnas: 2)",
+  "Jornada 11: no sé separar equipos y campo en «HUMANITAS           RIVILLOS LIMONES 5» (columnas: 2)",
+  "Jornada 11: no sé separar equipos y campo en «T.JUNCAL JAIME VERA         TORREJON SALA \"A\"» (columnas: 2)",
+  "Jornada 11: no sé separar equipos y campo en «TORR.JUCAL ZARZUELA          TORREJON SALA \"B\"» (columnas: 2)",
+  "Jornada 11: no sé separar equipos y campo en «TORR.JUNCAL SEVERO           CIUDAD DE TORREJON» (columnas: 2)",
+  "Jornada 13: no sé separar equipos y campo en «HUMANITAS           CFS BARRIO DEL» (columnas: 2)",
+  "Jornada 13: no sé separar equipos y campo en «RIVILLOS LIMONES 5         TORREJON SALA \"A\"» (columnas: 2)",
+  "Jornada 13: no sé separar equipos y campo en «T.JUNCAL JAIME VERA         CIUDAD DE TORREJON» (columnas: 2)",
+  "Jornada 13: no sé separar equipos y campo en «TORR.JUCAL ZARZUELA          TORR.JUNCAL SEVERO» (columnas: 2)",
+  "Jornada 14: no sé separar equipos y campo en «TORREJON SALA \"A\"          CFS BARRIO DEL» (columnas: 2)",
+  "Jornada 14: no sé separar equipos y campo en «TORREJON SALA \"B\"          RIVILLOS LIMONES 5» (columnas: 2)",
+  "Jornada 14: no sé separar equipos y campo en «TORR.JUNCAL SEVERO           T.JUNCAL JAIME VERA» (columnas: 2)",
+  "Jornada 14: no sé separar equipos y campo en «TORR.JUCAL ZARZUELA          HUMANITAS» (columnas: 2)",
+  "Jornada 16: no sé separar equipos y campo en «TORREJON SALA \"B\"          TORREJON SALA \"A\"» (columnas: 2)",
+  "Jornada 16: no sé separar equipos y campo en «CIUDAD DE TORREJON           CFS BARRIO DEL» (columnas: 2)",
+  "Jornada 16: no sé separar equipos y campo en «TORR.JUNCAL SEVERO           RIVILLOS LIMONES 5» (columnas: 2)",
+  "Jornada 16: no sé separar equipos y campo en «T.JUNCAL JAIME VERA         HUMANITAS» (columnas: 2)",
+  "Jornada 18: no sé separar equipos y campo en «CIUDAD DE TORREJON           TORREJON SALA \"B\"» (columnas: 2)",
+  "Jornada 18: no sé separar equipos y campo en «TORR.JUNCAL SEVERO           TORREJON SALA \"A\"» (columnas: 2)",
+  "Jornada 18: no sé separar equipos y campo en «TORR.JUCAL ZARZUELA          CFS BARRIO DEL» (columnas: 2)",
+  "Jornada 18: no sé separar equipos y campo en «T.JUNCAL JAIME VERA         RIVILLOS LIMONES 5» (columnas: 2)"
+ ],
+ "equipos": [
+  "Cfs Barrio Del",
+  "Ciudad de Torrejon",
+  "Humanitas",
+  "T.Juncal Jaime Vera",
+  "Torr.Jucal Zarzuela",
+  "Torr.Juncal Severo",
+  "Torrejon Sala \"A\"",
+  "Torrejon Sala \"B\""
+ ]
+}

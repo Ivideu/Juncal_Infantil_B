@@ -1,0 +1,154 @@
+                              JORNADAS DEL CAMPEONATO
+Deporte: Futbol Sala
+Categoría: BENJAMIN
+Competición: LIGA DE CAMPEÓN
+
+       Jornada Nº1                                             Campo        Fecha        Hora
+ 1      ZARZUELA T.JUNCAL           RIVILLOS LIMONES 5 "A"   NURIA FDEZ 1   17-10-26 S 10:00
+ 1      TORREJON JUNCAL             RIVILLOS LIMONES 5 "B"   NURIA FDEZ 2   17-10-26 S 10:00
+ 1              HUMANITAS           SEVERO TORREJON          NURIA FDEZ 1   17-10-26 S 11:00
+ 1      CIUD.TORREJON "B"           TORREJON SALA "A"        NURIA FDEZ 3   17-10-26 S 10:00
+ 1      CIUD.TORREJON "A"           TORREJON SALA "B"        NURIA FDEZ 1   17-10-26 S 13:00
+
+       Jornada Nº2                                             Campo        Fecha        Hora
+ 1   RIVILLOS LIMONES 5 "A"         CIUD.TORREJON "A"                       24-10-26 S
+ 1   RIVILLOS LIMONES 5 "B"         ZARZUELA T.JUNCAL                       24-10-26 S
+ 1      SEVERO TORREJON             TORREJON JUNCAL                         24-10-26 S
+ 1      TORREJON SALA "A"           HUMANITAS                               24-10-26 S
+ 1      TORREJON SALA "B"           CIUD.TORREJON "B"                       24-10-26 S
+
+       Jornada Nº3                                             Campo        Fecha        Hora
+ 1   RIVILLOS LIMONES 5 "A"         RIVILLOS LIMONES 5 "B"                  7-11-26 S
+ 1      ZARZUELA T.JUNCAL           SEVERO TORREJON                         7-11-26 S
+ 1      TORREJON JUNCAL             TORREJON SALA "A"                       7-11-26 S
+ 1              HUMANITAS           TORREJON SALA "B"                       7-11-26 S
+ 1      CIUD.TORREJON "A"           CIUD.TORREJON "B"                       7-11-26 S
+
+       Jornada Nº4                                             Campo        Fecha        Hora
+ 1   RIVILLOS LIMONES 5 "B"         CIUD.TORREJON "A"                       14-11-26 S
+ 1      SEVERO TORREJON             RIVILLOS LIMONES 5 "A"                  14-11-26 S
+ 1      TORREJON SALA "A"           ZARZUELA T.JUNCAL                       14-11-26 S
+ 1      TORREJON SALA "B"           TORREJON JUNCAL                         14-11-26 S
+ 1      CIUD.TORREJON "B"           HUMANITAS                               14-11-26 S
+
+       Jornada Nº5                                             Campo        Fecha        Hora
+ 1   RIVILLOS LIMONES 5 "B"         SEVERO TORREJON                         21-11-26 S
+ 1   RIVILLOS LIMONES 5 "A"         TORREJON SALA "A"                       21-11-26 S
+ 1      ZARZUELA T.JUNCAL           TORREJON SALA "B"                       21-11-26 S
+ 1      TORREJON JUNCAL             CIUD.TORREJON "B"                       21-11-26 S
+ 1      CIUD.TORREJON "A"           HUMANITAS                               21-11-26 S
+
+       Jornada Nº6                                             Campo        Fecha        Hora
+ 1      SEVERO TORREJON             CIUD.TORREJON "A"                       28-11-26 S
+ 1      TORREJON SALA "A"           RIVILLOS LIMONES 5 "B"                  28-11-26 S
+ 1      TORREJON SALA "B"           RIVILLOS LIMONES 5 "A"                  28-11-26 S
+ 1      CIUD.TORREJON "B"           ZARZUELA T.JUNCAL                       28-11-26 S
+ 1              HUMANITAS           TORREJON JUNCAL                         28-11-26 S
+
+
+
+
+                                                                                Página. 1
+                              JORNADAS DEL CAMPEONATO
+Deporte: Futbol Sala
+Categoría: BENJAMIN
+Competición: LIGA DE CAMPEÓN
+
+       Jornada Nº7                                           Campo   Fecha        Hora
+ 1      SEVERO TORREJON             TORREJON SALA "A"                12-12-26 S
+ 1   RIVILLOS LIMONES 5 "B"         TORREJON SALA "B"                12-12-26 S
+ 1   RIVILLOS LIMONES 5 "A"         CIUD.TORREJON "B"                12-12-26 S
+ 1      ZARZUELA T.JUNCAL           HUMANITAS                        12-12-26 S
+ 1      CIUD.TORREJON "A"           TORREJON JUNCAL                  12-12-26 S
+
+       Jornada Nº8                                           Campo   Fecha        Hora
+ 1      TORREJON SALA "A"           CIUD.TORREJON "A"                19-12-26 S
+ 1      TORREJON SALA "B"           SEVERO TORREJON                  19-12-26 S
+ 1      CIUD.TORREJON "B"           RIVILLOS LIMONES 5 "B"           19-12-26 S
+ 1              HUMANITAS           RIVILLOS LIMONES 5 "A"           19-12-26 S
+ 1      TORREJON JUNCAL             ZARZUELA T.JUNCAL                19-12-26 S
+
+       Jornada Nº9                                           Campo   Fecha        Hora
+ 1      TORREJON SALA "A"           TORREJON SALA "B"                16-01-27 S
+ 1      SEVERO TORREJON             CIUD.TORREJON "B"                16-01-27 S
+ 1   RIVILLOS LIMONES 5 "B"         HUMANITAS                        16-01-27 S
+ 1   RIVILLOS LIMONES 5 "A"         TORREJON JUNCAL                  16-01-27 S
+ 1      CIUD.TORREJON "A"           ZARZUELA T.JUNCAL                16-01-27 S
+
+       Jornada Nº10                                          Campo   Fecha        Hora
+ 1   RIVILLOS LIMONES 5 "A"         ZARZUELA T.JUNCAL                23-01-27 S
+ 1   RIVILLOS LIMONES 5 "B"         TORREJON JUNCAL                  23-01-27 S
+ 1      SEVERO TORREJON             HUMANITAS                        23-01-27 S
+ 1      TORREJON SALA "A"           CIUD.TORREJON "B"                23-01-27 S
+ 1      TORREJON SALA "B"           CIUD.TORREJON "A"                23-01-27 S
+
+       Jornada Nº11                                          Campo   Fecha        Hora
+ 1      CIUD.TORREJON "A"           RIVILLOS LIMONES 5 "A"           30-01-27 S
+ 1      ZARZUELA T.JUNCAL           RIVILLOS LIMONES 5 "B"           30-01-27 S
+ 1      TORREJON JUNCAL             SEVERO TORREJON                  30-01-27 S
+ 1              HUMANITAS           TORREJON SALA "A"                30-01-27 S
+ 1      CIUD.TORREJON "B"           TORREJON SALA "B"                30-01-27 S
+
+       Jornada Nº12                                          Campo   Fecha        Hora
+ 1   RIVILLOS LIMONES 5 "B"         RIVILLOS LIMONES 5 "A"           6-02-27 S
+ 1      SEVERO TORREJON             ZARZUELA T.JUNCAL                6-02-27 S
+ 1      TORREJON SALA "A"           TORREJON JUNCAL                  6-02-27 S
+ 1      TORREJON SALA "B"           HUMANITAS                        6-02-27 S
+ 1      CIUD.TORREJON "B"           CIUD.TORREJON "A"                6-02-27 S
+
+
+
+
+                                                                         Página. 2
+                              JORNADAS DEL CAMPEONATO
+Deporte: Futbol Sala
+Categoría: BENJAMIN
+Competición: LIGA DE CAMPEÓN
+
+       Jornada Nº13                                          Campo   Fecha        Hora
+ 1      CIUD.TORREJON "A"           RIVILLOS LIMONES 5 "B"           20-02-27 S
+ 1   RIVILLOS LIMONES 5 "A"         SEVERO TORREJON                  20-02-27 S
+ 1      ZARZUELA T.JUNCAL           TORREJON SALA "A"                20-02-27 S
+ 1      TORREJON JUNCAL             TORREJON SALA "B"                20-02-27 S
+ 1              HUMANITAS           CIUD.TORREJON "B"                20-02-27 S
+
+       Jornada Nº14                                          Campo   Fecha        Hora
+ 1      SEVERO TORREJON             RIVILLOS LIMONES 5 "B"           27-02-27 S
+ 1      TORREJON SALA "A"           RIVILLOS LIMONES 5 "A"           27-02-27 S
+ 1      TORREJON SALA "B"           ZARZUELA T.JUNCAL                27-02-27 S
+ 1      CIUD.TORREJON "B"           TORREJON JUNCAL                  27-02-27 S
+ 1              HUMANITAS           CIUD.TORREJON "A"                27-02-27 S
+
+       Jornada Nº15                                          Campo   Fecha        Hora
+ 1      CIUD.TORREJON "A"           SEVERO TORREJON                  6-03-27 S
+ 1   RIVILLOS LIMONES 5 "B"         TORREJON SALA "A"                6-03-27 S
+ 1   RIVILLOS LIMONES 5 "A"         TORREJON SALA "B"                6-03-27 S
+ 1      ZARZUELA T.JUNCAL           CIUD.TORREJON "B"                6-03-27 S
+ 1      TORREJON JUNCAL             HUMANITAS                        6-03-27 S
+
+       Jornada Nº16                                          Campo   Fecha        Hora
+ 1      TORREJON SALA "A"           SEVERO TORREJON                  13-03-27 S
+ 1      TORREJON SALA "B"           RIVILLOS LIMONES 5 "B"           13-03-27 S
+ 1      CIUD.TORREJON "B"           RIVILLOS LIMONES 5 "A"           13-03-27 S
+ 1              HUMANITAS           ZARZUELA T.JUNCAL                13-03-27 S
+ 1      TORREJON JUNCAL             CIUD.TORREJON "A"                13-03-27 S
+
+       Jornada Nº17                                          Campo   Fecha        Hora
+ 1      CIUD.TORREJON "A"           TORREJON SALA "A"                3-04-27 S
+ 1      SEVERO TORREJON             TORREJON SALA "B"                3-04-27 S
+ 1   RIVILLOS LIMONES 5 "B"         CIUD.TORREJON "B"                3-04-27 S
+ 1   RIVILLOS LIMONES 5 "A"         HUMANITAS                        3-04-27 S
+ 1      ZARZUELA T.JUNCAL           TORREJON JUNCAL                  3-04-27 S
+
+       Jornada Nº18                                          Campo   Fecha        Hora
+ 1      TORREJON SALA "B"           TORREJON SALA "A"                10-04-27 S
+ 1      CIUD.TORREJON "B"           SEVERO TORREJON                  10-04-27 S
+ 1              HUMANITAS           RIVILLOS LIMONES 5 "B"           10-04-27 S
+ 1      TORREJON JUNCAL             RIVILLOS LIMONES 5 "A"           10-04-27 S
+ 1      ZARZUELA T.JUNCAL           CIUD.TORREJON "A"                10-04-27 S
+
+
+
+
+                                                                         Página. 3
+

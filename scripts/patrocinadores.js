@@ -7,21 +7,22 @@
    Los logos están en Images/patrocinadores/ */
 (function () {
   const DIRECCION = "izquierda";   // "izquierda": los logos avanzan hacia la izquierda · "derecha": hacia la derecha
-  const VELOCIDAD = 55;            // píxeles por segundo
+  const VELOCIDAD = 55;            // píxeles por segundo (ordenador)
+  const VELOCIDAD_MOVIL = 24;      // píxeles por segundo (móvil, hasta 600px de ancho)
   const RUTA = "Images/patrocinadores/";
-  const VERSION = "3";             // súbelo si cambias los logos, para que el navegador no use la versión antigua
+  const VERSION = "4";             // súbelo si cambias los logos, para que el navegador no use la versión antigua
 
   const SPONSORS = [
-    { name: "Ayuntamiento de Torrejón de Ardoz", img: "ayuntamiento.png", w: 744, h: 200,  logoH: 38, url: "https://www.ayto-torrejon.es/" },
+    { name: "Ayuntamiento de Torrejón de Ardoz", img: "ayuntamiento.png", w: 744, h: 200, logoH: 38, url: "https://www.ayto-torrejon.es/" },
     { name: "Asiem Servicios Jurídicos",         img: "asiem.png",        w: 616, h: 360, logoH: 46, url: "https://www.administracionfincastorrejon.es/" },
     { name: "Inmobiliaria Provan",               img: "provan.png",       w: 440, h: 360, logoH: 46, url: "https://www.provan.info/" },
     { name: "Hurtado, S.L.",                     img: "hurtado.png",      w: 520, h: 296, logoH: 44, url: "https://www.hurtadosl.es/" },
-    { name: "Gor2Bar",                           img: "gor2bar.png",      w: 512, h: 208,  logoH: 38, url: "https://www.instagram.com/gor2bartorrejon/" },
-    { name: "Lasercor",                          img: "lasercor.png",     w: 568, h: 192,  logoH: 36, url: "https://www.lasercor.com/" },
-    { name: "Cedecar",                           img: "cedecar.png",      w: 512, h: 176,  logoH: 34, url: "https://cedecar.com/" },
-    { name: "delaoliva",                         img: "delaoliva.png",    w: 496, h: 136,  logoH: 30, url: "https://delaoliva.com/" },
-    { name: "BBVA",                              img: "BBVA.png",         w: 496, h: 136,  logoH: 30, url: "https://www.bbva.com/" },
-    { name: "Cosmos Telecomunicaciones",         img: "cosmos.png",       w: 504, h: 184,  logoH: 38, url: "https://www.cosmos.tel/" }
+    { name: "Gor2Bar",                           img: "gor2bar.png",      w: 512, h: 208, logoH: 38, url: "https://www.instagram.com/gor2bartorrejon/" },
+    { name: "Lasercor",                          img: "lasercor.png",     w: 568, h: 192, logoH: 36, url: "https://www.lasercor.com/" },
+    { name: "Cedecar",                           img: "cedecar.png",      w: 512, h: 176, logoH: 34, url: "https://cedecar.com/" },
+    { name: "delaoliva",                         img: "delaoliva.png",    w: 496, h: 136, logoH: 30, url: "https://delaoliva.com/" },
+    { name: "BBVA",                              img: "BBVA.png",         w: 496, h: 136, logoH: 30, url: "https://www.bbva.com/" },
+    { name: "Cosmos Telecomunicaciones",         img: "cosmos.png",       w: 504, h: 184, logoH: 38, url: "https://www.cosmos.tel/" }
   ];
 
   const esc = t => String(t || "").replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
@@ -44,7 +45,6 @@
 
   const pista = barra.querySelector("#spTrack");
   const vista = barra.querySelector(".sp-view");
-  let repeticiones = 0;
 
   /* Repite el grupo las veces necesarias para que una mitad cubra todo el ancho: el bucle no deja huecos */
   function montar() {
@@ -56,31 +56,23 @@
     pista.appendChild(prueba);
     const ancho = prueba.offsetWidth || 1200;
     const n = Math.max(1, Math.ceil((vista.clientWidth || innerWidth) / ancho));
-    repeticiones = n;
     /* Primera mitad: accesible (el primer grupo es el real). Segunda mitad: copia oculta a lectores y teclado */
     const mitad = copia => `<div class="sp-half"${copia ? ' aria-hidden="true"' : ""}>${grupo(copia)}${Array.from({ length: n - 1 }, () => grupo(true)).join("")}</div>`;
     pista.innerHTML = mitad(false) + mitad(true);
-    pista.style.setProperty("--dur", Math.max(12, Math.round((ancho * n) / VELOCIDAD)) + "s");
+    const v = matchMedia("(max-width:600px)").matches ? VELOCIDAD_MOVIL : VELOCIDAD;
+    pista.style.setProperty("--dur", Math.max(12, Math.round((ancho * n) / v)) + "s");
   }
 
   montar();
   let t;
   addEventListener("resize", () => { clearTimeout(t); t = setTimeout(montar, 200); });
-  if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => { repeticiones = 0; montar(); });
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(montar);
 
-  /* Tras pinchar un logo (o al volver a la pestaña / desde caché) la barra siempre se reanuda */
-  function reanudar() {
-    if (document.activeElement && barra.contains(document.activeElement)) document.activeElement.blur();
+  /* Al volver con el botón "atrás" el navegador puede restaurar la página con la animación congelada: se reinicia */
+  addEventListener("pageshow", e => {
+    if (!e.persisted) return;
     pista.style.animation = "none";
-    void pista.offsetWidth;          /* fuerza el reinicio de la animación */
+    void pista.offsetWidth;
     pista.style.animation = "";
-  }
-  barra.addEventListener("click", e => {
-    const a = e.target.closest("a");
-    if (a) setTimeout(() => a.blur(), 0);
   });
-  addEventListener("pageshow", e => { if (e.persisted) reanudar(); });   /* vuelta con el botón "atrás" (bfcache) */
-  document.addEventListener("visibilitychange", () => { if (!document.hidden) reanudar(); });
-  addEventListener("focus", reanudar);                                    /* al volver desde la otra pestaña */
-
 })();

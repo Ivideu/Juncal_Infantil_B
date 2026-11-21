@@ -56,9 +56,11 @@
 /* Móvil: el panel se despliega como acordeón dentro del menú */
 @media(max-width:800px){
   .menu{max-height:calc(100vh - 68px);max-height:calc(100dvh - 68px);overflow-y:auto}
-  .dd{width:100%;display:flex;flex-direction:column;align-items:center}
-  .menu .dd-btn{width:auto;justify-content:center}   /* centrado, como el resto de opciones del menú */
-  .dd-panel{align-self:stretch}
+  /* Todas las opciones del menú (y el desplegable) centradas y del mismo ancho: el de todo el menú */
+  body .menu{align-items:stretch;text-align:center}
+  body .menu>a,body .menu .dd-btn,body .menu a.ig{display:flex;align-items:center;justify-content:center;width:100%;text-align:center}
+  body .menu a.ig{margin:6px 0 0}
+  .dd{width:100%;display:flex;flex-direction:column;align-items:stretch}
   .dd-panel,.dd.open .dd-panel{position:static;width:auto;transform:none;transform-origin:50% 0}
   .dd-panel{max-height:0;margin-top:0;padding:0 12px;overflow:hidden;border-width:0;transition:max-height .5s cubic-bezier(.2,1,.3,1),padding .4s,margin .4s,opacity .25s,visibility 0s .5s}
   .dd.open .dd-panel{max-height:520px;margin-top:8px;padding:14px 12px 12px;border-width:2px;transition:max-height .5s cubic-bezier(.2,1,.3,1),padding .4s,margin .4s,opacity .25s,visibility 0s}

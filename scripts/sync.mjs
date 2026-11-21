@@ -1,3 +1,5 @@
+// scripts/sync.mjs — OBSOLETO desde el 21/11/2026: Infantil B se sincroniza con scripts/sync-categorias.mjs, igual que el resto.
+// Se conserva solo como referencia; ningún workflow lo ejecuta ya.
 // scripts/sync.mjs — Node 20, sin dependencias
 // Lee la RFFM y escribe en Firebase:
 //   · TODOS los partidos: fecha, hora

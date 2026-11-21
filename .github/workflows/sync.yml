@@ -39,7 +39,7 @@ jobs:
           fallos=0
           for i in $(seq 1 $N); do
             ini=$(date +%s)
-            node scripts/sync.mjs || fallos=$((fallos+1))
+            SOLO=infantil-b node scripts/sync-categorias.mjs || fallos=$((fallos+1))
             if [ "$N" -gt 1 ]; then resto=$((3600-($(date +%s)-ini))); [ "$resto" -gt 0 ] && sleep "$resto"; fi
           done
           [ "$fallos" -eq 0 ] || echo "::warning::$fallos pasada(s) con error"

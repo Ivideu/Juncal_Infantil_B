@@ -1,6 +1,6 @@
 name: Sincronizar semana
 
-# Sincronización de TODAS las categorías (Infantil B incluido): jornada anterior (hasta 36 h tras su fin), actual y siguiente.
+# Sincronización de TODAS las categorías (Infantil B incluido, con el mismo script que el resto): jornada anterior (hasta 36 h tras su fin), actual y siguiente.
 # Tarda ~1-2 minutos. Calendario (hora de Madrid):
 #   · sábado 9:00 → martes 23:00: cada hora
 #   · miércoles, jueves y viernes: una sola ejecución al día, a las 9:00
@@ -13,7 +13,7 @@ on:
         type: boolean
         default: false
       solo:
-        description: "Id de una sola categoría del resto (opcional, ej. cadete-a). Infantil B se sincroniza siempre"
+        description: "Id de una sola categoría (opcional, ej. cadete-a o infantil-b)"
         required: false
   schedule:
     # UTC. Sáb-dom-lun-mar, cada hora al minuto 5 (los scripts filtran por hora de Madrid: sáb desde las 9:00, mar hasta las 23:30)
@@ -39,14 +39,7 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 20
-      - name: Infantil B
-        id: infantilb
-        continue-on-error: true
-        env:
-          FCM_SERVICE_ACCOUNT: ${{ secrets.FCM_SERVICE_ACCOUNT }}
-          SOLO_CERRADAS: "1"     # "1" = solo guarda resultados con el acta cerrada; "0" = en cuanto aparezcan
-        run: node scripts/sync.mjs
-      - name: Resto de categorías
+      - name: Todas las categorías (Infantil B incluido)
         id: resto
         continue-on-error: true
         env:
@@ -54,7 +47,7 @@ jobs:
           FCM_SERVICE_ACCOUNT: ${{ secrets.FCM_SERVICE_ACCOUNT }}   # avisos push por categoría (tema juncal-<id>)
         run: node scripts/sync-categorias.mjs
       - name: Comprobar resultado
-        if: ${{ steps.infantilb.outcome == 'failure' || steps.resto.outcome == 'failure' }}
+        if: ${{ steps.resto.outcome == 'failure' }}
         run: |
-          echo "::error::Fallo en: Infantil B=${{ steps.infantilb.outcome }} · resto=${{ steps.resto.outcome }}"
+          echo "::error::Fallo al sincronizar las categorías: ${{ steps.resto.outcome }}"
           exit 1

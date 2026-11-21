@@ -1,0 +1,41 @@
+name: Recuperar datos de Infantil B desde una copia
+
+# Compara Firebase con Backup/juncal-datos-aportados-20261121.json y AÑADE lo que falte (entrenos, goles, plantilla...).
+# No borra ni sobrescribe nada. Antes de tocar guarda una copia del estado actual en Backup/.
+on:
+  workflow_dispatch:
+  push:
+    paths: [".github/workflows/recuperar-datos.yml", "Backup/juncal-datos-aportados-20261121.json"]
+    branches: [main]
+concurrency:
+  group: sync-semana
+  cancel-in-progress: false
+permissions:
+  contents: write
+jobs:
+  recuperar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      FBKEY: ${{ secrets.FBKEY }}
+      FBMAIL: ${{ secrets.FBMAIL }}
+      FBPASS: ${{ secrets.FBPASS }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Copia del estado actual
+        run: node scripts/verificar-goles.mjs copia juncal "Backup/juncal-antes-de-recuperar-$(date -u +%Y%m%d-%H%M).json"
+      - name: Informe y recuperación
+        run: node scripts/restaurar-desde-copia.mjs juncal Backup/juncal-datos-aportados-20261121.json --aplicar 2>&1 | tee /tmp/informe.txt
+      - name: Guardar informe
+        if: always()
+        run: |
+          { echo "Recuperación — $(date -u +%FT%TZ)"; echo; cat /tmp/informe.txt; } > Backup/recuperacion-informe.txt
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add Backup
+          git diff --cached --quiet && exit 0
+          git commit -q -m "Recuperación de datos de Infantil B: informe"
+          for i in 1 2 3; do git pull -q --rebase -X theirs origin "${GITHUB_REF_NAME}" && git push -q && exit 0; sleep 5; done

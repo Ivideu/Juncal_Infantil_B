@@ -9,17 +9,17 @@
   const DIRECCION = "izquierda";   // "izquierda": los logos avanzan hacia la izquierda · "derecha": hacia la derecha
   const VELOCIDAD = 55;            // píxeles por segundo
   const RUTA = "Images/patrocinadores/";
-  const VERSION = "2";             // súbelo si cambias los logos, para que el navegador no use la versión antigua
+  const VERSION = "3";             // súbelo si cambias los logos, para que el navegador no use la versión antigua
 
   const SPONSORS = [
     { name: "Ayuntamiento de Torrejón de Ardoz", img: "ayuntamiento.png", w: 744, h: 200,  logoH: 38, url: "https://www.ayto-torrejon.es/" },
-    { name: "Asiem Servicios Jurídicos",         img: "asiem.png",        w: 616, h: 360, logoH: 46, url: "" },
-    { name: "Inmobiliaria Provan",               img: "provan.png",       w: 440, h: 360, logoH: 46, url: "" },
+    { name: "Asiem Servicios Jurídicos",         img: "asiem.png",        w: 616, h: 360, logoH: 46, url: "https://www.administracionfincastorrejon.es/" },
+    { name: "Inmobiliaria Provan",               img: "provan.png",       w: 440, h: 360, logoH: 46, url: "https://www.provan.info/" },
     { name: "Hurtado, S.L.",                     img: "hurtado.png",      w: 520, h: 296, logoH: 44, url: "" },
     { name: "Gor2Bar",                           img: "gor2bar.png",      w: 512, h: 208,  logoH: 38, url: "" },
     { name: "Lasercor",                          img: "lasercor.png",     w: 568, h: 192,  logoH: 36, url: "" },
     { name: "Cedecar",                           img: "cedecar.png",      w: 512, h: 176,  logoH: 34, url: "" },
-    { name: "delaoliva",                         img: "delaoliva.png",    w: 496, h: 136,  logoH: 30, url: "" },
+    { name: "delaoliva",                         img: "delaoliva.png",    w: 496, h: 136,  logoH: 30, url: "https://delaoliva.com/" },
     { name: "Cosmos Telecomunicaciones",         img: "cosmos.png",       w: 504, h: 184,  logoH: 38, url: "" }
   ];
 

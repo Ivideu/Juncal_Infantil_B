@@ -1,0 +1,208 @@
+p0 y=90-97 x=25-108 xref=21 w=83 txt='SEVERO T.AMARILLO' dig=''
+p0 y=90-97 x=170-213 xref=23 w=43 txt='DESCANSA' dig=''
+p0 y=102-109 x=23-110 xref=25 w=87 txt='RIVILLOS LIMONES "B"' dig=''
+p0 y=103-109 x=120-122 xref=31 w=2 txt='1' dig='1'
+p0 y=103-110 x=135-138 xref=29 w=3 txt='9' dig='9'
+p0 y=102-109 x=146-236 xref=27 w=90 txt='CIUDAD DE TORREJON' dig=''
+p0 y=114-121 x=33-99 xref=33 w=67 txt='TORREJON SALA' dig=''
+p0 y=116-121 x=120-123 xref=39 w=3 txt='7' dig='7'
+p0 y=116-121 x=135-138 xref=37 w=3 txt='5' dig='5'
+p0 y=114-121 x=151-233 xref=35 w=82 txt='ZARZUELA T.JUNCAL' dig=''
+p0 y=126-133 x=35-99 xref=41 w=65 txt='SEVERO T.ROJO' dig='0'
+p0 y=127-133 x=120-122 xref=31 w=2 txt='1' dig='1'
+p0 y=127-133 x=135-138 xref=45 w=3 txt='2' dig='2'
+p0 y=126-133 x=148-235 xref=43 w=87 txt='RIVILLOS LIMONES "A"' dig=''
+p0 y=138-145 x=44-90 xref=47 w=46 txt='HUMANITAS' dig=''
+p0 y=140-145 x=120-123 xref=53 w=4 txt='4' dig='4'
+p0 y=139-146 x=135-138 xref=51 w=3 txt='3' dig='3'
+p0 y=138-145 x=153-230 xref=49 w=77 txt='TORREJON JUNCAL' dig=''
+p0 y=561-568 x=45-88 xref=23 w=43 txt='DESCANSA' dig=''
+p0 y=561-568 x=158-225 xref=33 w=67 txt='TORREJON SALA' dig=''
+p0 y=575-582 x=23-110 xref=25 w=87 txt='RIVILLOS LIMONES "B"' dig=''
+p0 y=575-582 x=159-224 xref=41 w=65 txt='SEVERO T.ROJO' dig='0'
+p0 y=589-596 x=23-110 xref=43 w=87 txt='RIVILLOS LIMONES "A"' dig=''
+p0 y=589-596 x=150-233 xref=21 w=83 txt='SEVERO T.AMARILLO' dig=''
+p0 y=603-610 x=26-108 xref=35 w=82 txt='ZARZUELA T.JUNCAL' dig=''
+p0 y=603-610 x=169-215 xref=47 w=46 txt='HUMANITAS' dig=''
+p0 y=617-624 x=21-111 xref=27 w=90 txt='CIUDAD DE TORREJON' dig=''
+p0 y=617-624 x=153-230 xref=49 w=77 txt='TORREJON JUNCAL' dig=''
+--- texto
+y=14 x=243-347 CAMPEONATO:
+y=29 x=215-252 FASE
+y=29 x=255-327 CAMPEÓN
+y=29 x=330-380 ALEVIN
+y=53 x=244-299 Jornada
+y=53 x=303-318 Nº
+y=53 x=322-330 4
+y=72 x=110-158 Equipos
+y=74 x=248-286 Día/Mes
+y=72 x=312-352 Campo
+y=72 x=374-402 Hora
+y=72 x=467-513 Árbitros
+y=89 x=254-277 14/11
+y=101 x=254-277 14/11
+y=101 x=299-327 NURIA
+y=101 x=330-353 FDEZ
+y=101 x=356-361 1
+y=101 x=378-396 9:00
+y=113 x=254-277 14/11
+y=113 x=299-327 NURIA
+y=113 x=330-353 FDEZ
+y=113 x=356-361 2
+y=113 x=378-396 9:00
+y=125 x=254-277 14/11
+y=125 x=302-358 J.A.PARAISO
+y=125 x=376-398 15:00
+y=137 x=254-277 14/11
+y=137 x=302-358 J.A.PARAISO
+y=137 x=376-398 16:00
+y=149 x=116-192 CLASIFICACIÓN
+y=255 x=34-70 Nombre
+y=250 x=261-270 Sc
+y=250 x=278-288 PT
+y=252 x=314-329 Goleadores
+y=252 x=374-386 Porteros
+y=252 x=431-448 Deportividad
+y=252 x=494-501 Texto
+y=252 x=552-559 Nada
+y=257 x=132-136 J
+y=257 x=147-153 G
+y=257 x=168-174 E
+y=257 x=188-194 P
+y=257 x=203-214 GF
+y=257 x=221-234 GC
+y=257 x=237-250 DG
+y=268 x=25-29 1
+y=268 x=33-77 TORREJON
+y=268 x=79-100 SALA
+y=268 x=129-133 4
+y=268 x=148-152 3
+y=268 x=167-171 0
+y=268 x=186-190 1
+y=268 x=200-209 23
+y=268 x=219-228 13
+y=268 x=238-247 10
+y=268 x=281-285 9
+y=278 x=25-29 2
+y=278 x=33-80 HUMANITAS
+y=278 x=129-133 4
+y=278 x=148-152 3
+y=278 x=167-171 0
+y=278 x=186-190 1
+y=278 x=200-209 20
+y=278 x=219-228 13
+y=278 x=243-247 7
+y=278 x=281-285 9
+y=288 x=25-29 3
+y=288 x=33-69 RIVILLOS
+y=288 x=71-107 LIMONES
+y=288 x=129-133 3
+y=288 x=148-152 3
+y=288 x=167-171 0
+y=288 x=186-190 0
+y=288 x=200-209 15
+y=288 x=224-228 2
+y=288 x=238-247 13
+y=288 x=281-285 9
+y=298 x=25-29 4
+y=298 x=33-64 CIUDAD
+y=298 x=66-77 DE
+y=298 x=129-133 4
+y=298 x=148-152 2
+y=298 x=167-171 0
+y=298 x=186-190 2
+y=298 x=200-209 16
+y=298 x=220-229 11
+y=298 x=243-247 5
+y=298 x=281-285 6
+y=308 x=25-29 5
+y=308 x=33-67 SEVERO
+y=308 x=69-98 T.ROJO
+y=308 x=129-133 3
+y=308 x=148-152 2
+y=308 x=167-171 0
+y=308 x=186-190 1
+y=308 x=205-209 6
+y=308 x=224-228 4
+y=308 x=243-247 2
+y=308 x=281-285 6
+y=318 x=25-29 6
+y=318 x=33-67 SEVERO
+y=318 x=69-116 T.AMARILLO
+y=318 x=129-133 3
+y=318 x=148-152 2
+y=318 x=167-171 0
+y=318 x=186-190 1
+y=318 x=201-210 11
+y=318 x=219-228 15
+y=318 x=240-247 -4
+y=318 x=281-285 6
+y=328 x=25-29 7
+y=328 x=33-75 ZARZUELA
+y=328 x=77-115 T.JUNCAL
+y=328 x=129-133 4
+y=328 x=148-152 1
+y=328 x=167-171 0
+y=328 x=186-190 3
+y=328 x=201-210 11
+y=328 x=219-228 14
+y=328 x=240-247 -3
+y=328 x=281-285 3
+y=338 x=25-29 8
+y=338 x=33-77 TORREJON
+y=338 x=79-110 JUNCAL
+y=338 x=129-133 4
+y=338 x=148-152 0
+y=338 x=167-171 0
+y=338 x=186-190 4
+y=338 x=205-209 9
+y=338 x=219-228 20
+y=338 x=236-248 -11
+y=338 x=281-285 0
+y=348 x=25-29 9
+y=348 x=33-69 RIVILLOS
+y=348 x=71-107 LIMONES
+y=348 x=129-133 3
+y=348 x=148-152 0
+y=348 x=167-171 0
+y=348 x=186-190 3
+y=348 x=205-209 3
+y=348 x=219-228 22
+y=348 x=235-247 -19
+y=348 x=281-285 0
+y=398 x=314-329 Goleadores
+y=398 x=374-386 Porteros
+y=398 x=431-448 Deportividad
+y=398 x=494-501 Texto
+y=398 x=552-559 Nada
+y=540 x=193-281 Enfrentamientos
+y=540 x=284-297 de
+y=540 x=301-310 la
+y=540 x=313-353 jornada
+y=540 x=357-363 5
+y=560 x=253-276 21/11
+y=560 x=279-285 S
+y=574 x=253-276 21/11
+y=574 x=279-285 S
+y=574 x=299-327 NURIA
+y=574 x=330-353 FDEZ
+y=574 x=356-361 1
+y=574 x=378-396 9:00
+y=588 x=253-276 21/11
+y=588 x=279-285 S
+y=588 x=299-327 NURIA
+y=588 x=330-353 FDEZ
+y=588 x=356-361 2
+y=588 x=378-396 9:00
+y=602 x=253-276 21/11
+y=602 x=279-285 S
+y=602 x=299-327 NURIA
+y=602 x=330-353 FDEZ
+y=602 x=356-361 3
+y=602 x=378-396 9:00
+y=616 x=253-276 21/11
+y=616 x=279-285 S
+y=616 x=298-361 J.GARBAJOSA
+y=616 x=378-396 9:00
+/opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/site-packages/fitz/__init__.py:17: FutureWarning: The `fitz` API is deprecated and will be removed in future. Use `import pymupdf` instead.
+  warnings.warn(

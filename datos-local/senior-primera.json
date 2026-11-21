@@ -1,7 +1,7 @@
 {
  "id": "senior-primera",
  "nombre": "Senior Primera",
- "actualizado": "2026-11-21T11:58:58Z",
+ "actualizado": "2026-11-21T12:00:57Z",
  "fuente": {
   "calendario": [
    "https://deportes.ayto-torrejon.es/sites/default/files/users/user355/CALENDARIO%20PRIMERA%20CAMPEON%20DE%20INVIERNO%202627.pdf"
@@ -17,7 +17,7 @@
    "partidos": [
     {
      "local": "Zarzuela Manji",
-     "visitante": "la Humildad",
+     "visitante": "La Humildad",
      "campo": "",
      "fecha": "2026-10-17",
      "dia": "S",
@@ -70,7 +70,7 @@
    "descansa": null,
    "partidos": [
     {
-     "local": "la Humildad",
+     "local": "La Humildad",
      "visitante": "Taka Taka \"A\"",
      "campo": "",
      "fecha": "2026-10-24",
@@ -135,11 +135,13 @@
     },
     {
      "local": "Olympiacos Torrejon",
-     "visitante": "la Humildad",
-     "campo": "",
-     "fecha": "2026-11-14",
-     "dia": "S",
-     "hora": ""
+     "visitante": "La Humildad",
+     "campo": "J.GARBAJOSA",
+     "fecha": "2026-11-15",
+     "dia": "D",
+     "hora": "18:00",
+     "ga": 6,
+     "gb": 1
     },
     {
      "local": "Weder Broder \"A\"",
@@ -190,13 +192,13 @@
     {
      "local": "Carriche Verdental",
      "visitante": "Olympiacos Torrejon",
-     "campo": "",
-     "fecha": "2026-11-21",
-     "dia": "S",
-     "hora": ""
+     "campo": "NURIA FDEZ 2",
+     "fecha": "2026-11-22",
+     "dia": "D",
+     "hora": "19:00"
     },
     {
-     "local": "la Humildad",
+     "local": "La Humildad",
      "visitante": "Weder Broder \"A\"",
      "campo": "M-4",
      "fecha": "2026-11-22",
@@ -259,7 +261,7 @@
     },
     {
      "local": "Tiki Taka \"A\"",
-     "visitante": "la Humildad",
+     "visitante": "La Humildad",
      "campo": "",
      "fecha": "2026-11-28",
      "dia": "S",
@@ -312,7 +314,7 @@
      "hora": ""
     },
     {
-     "local": "la Humildad",
+     "local": "La Humildad",
      "visitante": "Incefor y.Vallecano",
      "campo": "",
      "fecha": "2026-12-12",
@@ -375,7 +377,7 @@
     },
     {
      "local": "Ñbñ",
-     "visitante": "la Humildad",
+     "visitante": "La Humildad",
      "campo": "",
      "fecha": "2026-12-19",
      "dia": "S",
@@ -428,7 +430,7 @@
      "hora": ""
     },
     {
-     "local": "la Humildad",
+     "local": "La Humildad",
      "visitante": "F.Sala Torrepista \"A\"",
      "campo": "",
      "fecha": "2027-01-16",
@@ -491,7 +493,7 @@
     },
     {
      "local": "Leon. de Montepinar",
-     "visitante": "la Humildad",
+     "visitante": "La Humildad",
      "campo": "",
      "fecha": "2027-01-23",
      "dia": "S",
@@ -544,7 +546,7 @@
      "hora": ""
     },
     {
-     "local": "la Humildad",
+     "local": "La Humildad",
      "visitante": "Raimon T.J.",
      "campo": "",
      "fecha": "2027-01-30",
@@ -685,7 +687,7 @@
   },
   {
    "pos": 11,
-   "equipo": "la Humildad",
+   "equipo": "La Humildad",
    "pj": 4,
    "g": 0,
    "e": 0,
@@ -708,14 +710,12 @@
    "pts": 0
   }
  ],
- "avisos": [
-  "Jornada 4: no reconozco los equipos «OLYMPIACOS» / «LA HUMILDAD»",
-  "Jornada 5: no reconozco los equipos «CARRICHE VERDENTAL» / «OLYMPIACOS»"
- ],
+ "avisos": [],
  "equipos": [
   "Carriche Verdental",
   "F.Sala Torrepista \"A\"",
   "Incefor y.Vallecano",
+  "La Humildad",
   "Leon. de Montepinar",
   "Olympiacos Torrejon",
   "Raimon T.J.",
@@ -723,7 +723,6 @@
   "Tiki Taka \"A\"",
   "Weder Broder \"A\"",
   "Zarzuela Manji",
-  "la Humildad",
   "Ñbñ"
  ]
 }

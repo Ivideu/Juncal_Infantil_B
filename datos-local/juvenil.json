@@ -1,7 +1,7 @@
 {
  "id": "juvenil",
  "nombre": "Juvenil",
- "actualizado": "2026-11-21T11:58:58Z",
+ "actualizado": "2026-11-21T12:00:57Z",
  "fuente": {
   "calendario": [
    "https://deportes.ayto-torrejon.es/sites/default/files/users/user355/CALENDARIO%20JUVENIL%20LIGA%20DE%20CAMPEON%20.2627.pdf",
@@ -43,7 +43,7 @@
     },
     {
      "local": "Birrareal FC",
-     "visitante": "la Bendicion",
+     "visitante": "La Bendicion",
      "campo": "NURIA FDEZ 2",
      "fecha": "2026-10-17",
      "dia": "S",
@@ -59,7 +59,7 @@
     },
     {
      "local": "Loquendocity FC",
-     "visitante": "el Cartel",
+     "visitante": "El Cartel",
      "campo": "NURIA FDEZ 3",
      "fecha": "2026-10-17",
      "dia": "S",
@@ -128,7 +128,7 @@
      "hora": ""
     },
     {
-     "local": "la Bendicion",
+     "local": "La Bendicion",
      "visitante": "Mk Urban Proyect FS",
      "campo": "",
      "fecha": "2026-10-24",
@@ -144,7 +144,7 @@
      "hora": ""
     },
     {
-     "local": "el Cartel",
+     "local": "El Cartel",
      "visitante": "Rivillos Limones 5",
      "campo": "",
      "fecha": "2026-10-24",
@@ -210,7 +210,7 @@
      "gb": 2
     },
     {
-     "local": "la Bendicion",
+     "local": "La Bendicion",
      "visitante": "Besacon Blin Blin",
      "campo": "NURIA FDEZ 2",
      "fecha": "2026-11-14",
@@ -230,7 +230,7 @@
      "gb": 4
     },
     {
-     "local": "el Cartel",
+     "local": "El Cartel",
      "visitante": "Mk Urban Proyect FS",
      "campo": "NURIA FDEZ 3",
      "fecha": "2026-11-14",
@@ -293,7 +293,7 @@
   },
   {
    "n": 5,
-   "descansa": "la Bendicion",
+   "descansa": "La Bendicion",
    "partidos": [
     {
      "local": "Poyato Bellaco",
@@ -313,7 +313,7 @@
     },
     {
      "local": "Sca",
-     "visitante": "el Cartel",
+     "visitante": "El Cartel",
      "campo": "NURIA FDEZ 1",
      "fecha": "2026-11-21",
      "dia": "S",
@@ -398,7 +398,7 @@
      "hora": ""
     },
     {
-     "local": "la Bendicion",
+     "local": "La Bendicion",
      "visitante": "Poyato Bellaco",
      "campo": "",
      "fecha": "2026-11-28",
@@ -406,7 +406,7 @@
      "hora": ""
     },
     {
-     "local": "el Cartel",
+     "local": "El Cartel",
      "visitante": "Besacon Blin Blin",
      "campo": "",
      "fecha": "2026-11-28",
@@ -465,7 +465,7 @@
   },
   {
    "n": 7,
-   "descansa": "el Cartel",
+   "descansa": "El Cartel",
    "partidos": [
     {
      "local": "Astom Birras",
@@ -477,7 +477,7 @@
     },
     {
      "local": "Mahouchester",
-     "visitante": "la Bendicion",
+     "visitante": "La Bendicion",
      "campo": "",
      "fecha": "2026-12-12",
      "dia": "S",
@@ -562,7 +562,7 @@
      "hora": ""
     },
     {
-     "local": "la Bendicion",
+     "local": "La Bendicion",
      "visitante": "Astom Birras",
      "campo": "",
      "fecha": "2026-12-19",
@@ -578,7 +578,7 @@
      "hora": ""
     },
     {
-     "local": "el Cartel",
+     "local": "El Cartel",
      "visitante": "Poyato Bellaco",
      "campo": "",
      "fecha": "2026-12-19",
@@ -641,7 +641,7 @@
    "partidos": [
     {
      "local": "Jack Nuniels",
-     "visitante": "la Bendicion",
+     "visitante": "La Bendicion",
      "campo": "",
      "fecha": "2027-01-16",
      "dia": "S",
@@ -657,7 +657,7 @@
     },
     {
      "local": "Mahouchester",
-     "visitante": "el Cartel",
+     "visitante": "El Cartel",
      "campo": "",
      "fecha": "2027-01-16",
      "dia": "S",
@@ -726,7 +726,7 @@
    "descansa": "Cardos FC.",
    "partidos": [
     {
-     "local": "la Bendicion",
+     "local": "La Bendicion",
      "visitante": "Flamango",
      "campo": "",
      "fecha": "2027-01-23",
@@ -742,7 +742,7 @@
      "hora": ""
     },
     {
-     "local": "el Cartel",
+     "local": "El Cartel",
      "visitante": "Astom Birras",
      "campo": "",
      "fecha": "2027-01-23",
@@ -812,7 +812,7 @@
    "descansa": "Torrejon Sala",
    "partidos": [
     {
-     "local": "la Bendicion",
+     "local": "La Bendicion",
      "visitante": "Coca Junior",
      "campo": "",
      "fecha": "2027-01-30",
@@ -821,7 +821,7 @@
     },
     {
      "local": "Jack Nuniels",
-     "visitante": "el Cartel",
+     "visitante": "El Cartel",
      "campo": "",
      "fecha": "2027-01-30",
      "dia": "S",
@@ -899,14 +899,14 @@
    "partidos": [
     {
      "local": "Coca Junior",
-     "visitante": "el Cartel",
+     "visitante": "El Cartel",
      "campo": "",
      "fecha": "2027-02-20",
      "dia": "S",
      "hora": ""
     },
     {
-     "local": "la Bendicion",
+     "local": "La Bendicion",
      "visitante": "Vodka Junior",
      "campo": "",
      "fecha": "2027-02-20",
@@ -984,7 +984,7 @@
    "descansa": "Bayern F.S.",
    "partidos": [
     {
-     "local": "el Cartel",
+     "local": "El Cartel",
      "visitante": "Flamango",
      "campo": "",
      "fecha": "2027-02-27",
@@ -1001,7 +1001,7 @@
     },
     {
      "local": "Sportium Bucarest",
-     "visitante": "la Bendicion",
+     "visitante": "La Bendicion",
      "campo": "",
      "fecha": "2027-02-27",
      "dia": "S",
@@ -1079,7 +1079,7 @@
     },
     {
      "local": "Sportium Bucarest",
-     "visitante": "el Cartel",
+     "visitante": "El Cartel",
      "campo": "",
      "fecha": "2027-03-13",
      "dia": "S",
@@ -1095,7 +1095,7 @@
     },
     {
      "local": "Torrejon Sala",
-     "visitante": "la Bendicion",
+     "visitante": "La Bendicion",
      "campo": "",
      "fecha": "2027-03-13",
      "dia": "S",
@@ -1173,7 +1173,7 @@
     },
     {
      "local": "Torrejon Sala",
-     "visitante": "el Cartel",
+     "visitante": "El Cartel",
      "campo": "",
      "fecha": "2027-04-10",
      "dia": "S",
@@ -1189,7 +1189,7 @@
     },
     {
      "local": "Severo T. Amarillo",
-     "visitante": "la Bendicion",
+     "visitante": "La Bendicion",
      "campo": "",
      "fecha": "2027-04-10",
      "dia": "S",
@@ -1258,7 +1258,7 @@
      "hora": ""
     },
     {
-     "local": "el Cartel",
+     "local": "El Cartel",
      "visitante": "Severo T.Rojo",
      "campo": "",
      "fecha": "2027-04-17",
@@ -1274,7 +1274,7 @@
      "hora": ""
     },
     {
-     "local": "la Bendicion",
+     "local": "La Bendicion",
      "visitante": "Bayern F.S.",
      "campo": "",
      "fecha": "2027-04-17",
@@ -1353,7 +1353,7 @@
     },
     {
      "local": "Severo T. Amarillo",
-     "visitante": "el Cartel",
+     "visitante": "El Cartel",
      "campo": "",
      "fecha": "2027-04-24",
      "dia": "S",
@@ -1369,7 +1369,7 @@
     },
     {
      "local": "Loquendocity FC",
-     "visitante": "la Bendicion",
+     "visitante": "La Bendicion",
      "campo": "",
      "fecha": "2027-04-24",
      "dia": "S",
@@ -1593,7 +1593,7 @@
   },
   {
    "pos": 16,
-   "equipo": "el Cartel",
+   "equipo": "El Cartel",
    "pj": 4,
    "g": 1,
    "e": 1,
@@ -1617,7 +1617,7 @@
   },
   {
    "pos": 18,
-   "equipo": "la Bendicion",
+   "equipo": "La Bendicion",
    "pj": 4,
    "g": 1,
    "e": 0,
@@ -1672,8 +1672,10 @@
   "Birrareal FC",
   "Cardos FC.",
   "Coca Junior",
+  "El Cartel",
   "Flamango",
   "Jack Nuniels",
+  "La Bendicion",
   "Loquendocity FC",
   "Mahouchester",
   "Mk Urban Proyect FS",
@@ -1684,8 +1686,6 @@
   "Severo T.Rojo",
   "Sportium Bucarest",
   "Torrejon Sala",
-  "Vodka Junior",
-  "el Cartel",
-  "la Bendicion"
+  "Vodka Junior"
  ]
 }

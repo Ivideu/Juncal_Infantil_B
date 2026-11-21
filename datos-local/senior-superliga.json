@@ -1,7 +1,7 @@
 {
  "id": "senior-superliga",
  "nombre": "Senior Superliga",
- "actualizado": "2026-11-21T11:58:58Z",
+ "actualizado": "2026-11-21T12:00:57Z",
  "fuente": {
   "calendario": [
    "https://deportes.ayto-torrejon.es/sites/default/files/users/user355/CALENDARIO%20SUPERLIGA%20CAMPE%C3%93N%20DE%20INVIERNO%202627.pdf"
@@ -126,10 +126,12 @@
     {
      "local": "F.S.Recio",
      "visitante": "Feos Pero Con Gusto",
-     "campo": "",
-     "fecha": "2026-11-14",
-     "dia": "S",
-     "hora": ""
+     "campo": "M-4",
+     "fecha": "2026-11-15",
+     "dia": "D",
+     "hora": "19:00",
+     "ga": 4,
+     "gb": 5
     },
     {
      "local": "P.Galeon Flynet",
@@ -230,10 +232,10 @@
     {
      "local": "Feos Pero Con Gusto",
      "visitante": "Noctra Torrejon \"A\"",
-     "campo": "",
-     "fecha": "2026-11-21",
-     "dia": "S",
-     "hora": ""
+     "campo": "NURIA FDEZ 3",
+     "fecha": "2026-11-22",
+     "dia": "D",
+     "hora": "15:00"
     }
    ]
   },
@@ -708,10 +710,7 @@
    "pts": 0
   }
  ],
- "avisos": [
-  "Jornada 4: no reconozco los equipos «F.S.RECIO» / «FEOS PERO CON»",
-  "Jornada 5: no reconozco los equipos «FEOS PERO CON» / «NOCTRA TORREJON \"A\"»"
- ],
+ "avisos": [],
  "equipos": [
   "Agape Castillo",
   "Circo F.S.",

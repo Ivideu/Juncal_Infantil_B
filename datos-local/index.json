@@ -1,5 +1,5 @@
 {
- "actualizado": "2026-11-21T11:58:58Z",
+ "actualizado": "2026-11-21T12:00:57Z",
  "categorias": [
   {
    "id": "senior-superliga",
@@ -7,10 +7,10 @@
    "equipos": 12,
    "jornadas": 10,
    "partidos": 60,
-   "jugados": 5,
+   "jugados": 6,
    "juncal": false,
-   "avisos": 2,
-   "actualizado": "2026-11-21T11:58:58Z"
+   "avisos": 0,
+   "actualizado": "2026-11-21T12:00:57Z"
   },
   {
    "id": "senior-preferente",
@@ -21,7 +21,7 @@
    "jugados": 6,
    "juncal": false,
    "avisos": 0,
-   "actualizado": "2026-11-21T11:58:58Z"
+   "actualizado": "2026-11-21T12:00:57Z"
   },
   {
    "id": "senior-primera",
@@ -29,10 +29,10 @@
    "equipos": 12,
    "jornadas": 10,
    "partidos": 60,
-   "jugados": 5,
+   "jugados": 6,
    "juncal": false,
-   "avisos": 2,
-   "actualizado": "2026-11-21T11:58:58Z"
+   "avisos": 0,
+   "actualizado": "2026-11-21T12:00:57Z"
   },
   {
    "id": "senior-segunda",
@@ -43,7 +43,7 @@
    "jugados": 6,
    "juncal": false,
    "avisos": 0,
-   "actualizado": "2026-11-21T11:58:58Z"
+   "actualizado": "2026-11-21T12:00:57Z"
   },
   {
    "id": "senior-tercera",
@@ -54,7 +54,7 @@
    "jugados": 4,
    "juncal": false,
    "avisos": 0,
-   "actualizado": "2026-11-21T11:58:58Z"
+   "actualizado": "2026-11-21T12:00:57Z"
   },
   {
    "id": "juvenil",
@@ -65,7 +65,7 @@
    "jugados": 10,
    "juncal": false,
    "avisos": 0,
-   "actualizado": "2026-11-21T11:58:58Z"
+   "actualizado": "2026-11-21T12:00:57Z"
   },
   {
    "id": "cadete",
@@ -76,7 +76,7 @@
    "jugados": 3,
    "juncal": true,
    "avisos": 0,
-   "actualizado": "2026-11-21T11:58:58Z"
+   "actualizado": "2026-11-21T12:00:57Z"
   },
   {
    "id": "infantil",
@@ -87,7 +87,7 @@
    "jugados": 5,
    "juncal": true,
    "avisos": 1,
-   "actualizado": "2026-11-21T11:58:58Z"
+   "actualizado": "2026-11-21T12:00:57Z"
   },
   {
    "id": "alevin",
@@ -98,7 +98,7 @@
    "jugados": 4,
    "juncal": true,
    "avisos": 0,
-   "actualizado": "2026-11-21T11:58:58Z"
+   "actualizado": "2026-11-21T12:00:57Z"
   },
   {
    "id": "benjamin",
@@ -109,7 +109,7 @@
    "jugados": 5,
    "juncal": true,
    "avisos": 0,
-   "actualizado": "2026-11-21T11:58:58Z"
+   "actualizado": "2026-11-21T12:00:57Z"
   },
   {
    "id": "prebenjamin",
@@ -120,7 +120,7 @@
    "jugados": 0,
    "juncal": true,
    "avisos": 0,
-   "actualizado": "2026-11-21T11:58:58Z"
+   "actualizado": "2026-11-21T12:00:57Z"
   }
  ]
 }

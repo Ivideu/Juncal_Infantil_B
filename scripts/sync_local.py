@@ -47,7 +47,8 @@ def bonito(s):
     """TORREJON JUNCAL "B" -> Torrejon Juncal "B"  (Title Case, con las partículas y siglas en su sitio)."""
     t = re.sub(r"\s+", " ", s).strip().title()
     t = re.sub(r"\b(Fc|Cf|Cd|Ud|Fs|Cb)\b", lambda m: m.group(1).upper(), t)
-    return re.sub(r"\b(De|Del|La|El|Y)\b(?!$)", lambda m: m.group(1).lower(), t).replace("\"a\"", "\"A\"")
+    t = re.sub(r"(?<=\s)(De|Del|La|El|Y)\b(?!$)", lambda m: m.group(1).lower(), t)
+    return t.replace("\"a\"", "\"A\"")
 
 
 def descargar(url):
@@ -239,6 +240,10 @@ def buscar_equipo(nombre, equipos):
     k = clave(nombre)
     for f in (clave, clave_sin_numeros):
         c = [e for e in equipos if f(e) == (k if f is clave else clave_sin_numeros(nombre))]
+        if len(c) == 1:
+            return c[0]
+    if len(k) >= 5:     # el PDF a veces corta el nombre («FEOS PERO CON» por «FEOS PERO CON GUSTO»)
+        c = [e for e in equipos if clave(e).startswith(k) or k.startswith(clave(e))]
         if len(c) == 1:
             return c[0]
     import difflib

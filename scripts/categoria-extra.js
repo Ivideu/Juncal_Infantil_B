@@ -1,5 +1,5 @@
 /* categoria-extra.js · se carga DESPUÉS del script principal de cada categoría.
-   Añade: cromos creados desde el admin (jugadores sobre la camiseta del 20 aniversario; entrenadores desde Images/Entrenadores), contraseña propia por categoría, barra inferior solo para el propietario. */
+   Añade: cromos creados desde el admin (jugadores de campo sobre la camiseta del 20 aniversario, porteros sobre Images/portero-trasera.jpg; entrenadores desde Images/Entrenadores), contraseña propia por categoría, barra inferior solo para el propietario. */
 (function(){
 const OWN=()=>document.body.classList.contains("owner");
 /* Páginas con el login nuevo (ventana con acceso de administrador, Jugadas y Pizarra): ese login manda; aquí no se sobrescribe. */
@@ -30,50 +30,62 @@ function cfg2(){const c=S.cfg;if(!c||CAT.me)return;
  (c.R||[]).forEach((s,i)=>{const[d,p]=s.split("|");J.push({n:i+1,d:d.split("-").reverse().join("-"),p:p.split(",").map(x=>x.split("-").map(Number))})});
  ME=+Object.keys(COD).find(k=>String(COD[k])===String(c.equipo||CAT.equipo))||0}
 
-/* ---------- Cromos de jugadores: nombre y número escritos sobre la camiseta del 20 aniversario ---------- */
+/* ---------- Cromos de jugadores: nombre y número escritos sobre la camiseta (campo) o sobre la equipación de portero ---------- */
 const POS={portero:"PORTERO",cierre:"CIERRE",ala:"ALA",pivot:"PÍVOT",entrenador:"ENTRENADOR"};
 const BLANK="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==";
 const RAIZ=CROMOS_DIR.replace(/Cromos\/$/,"");                       // raíz de la web vista desde esta página (normalmente "../")
 const rutaImg=p=>RAIZ+p.split("/").map(encodeURIComponent).join("/"); // "Images/Entrenadores/Ivan.jpg" -> URL
 
-/* ===== Cromo = camiseta trasera 20 aniversario ===== */
+/* ===== Cromo = camiseta trasera 20 aniversario (jugadores de campo) ===== */
 const BASE={img:null};let memo={};
 const refresca=()=>{memo={};render()};
 (function(){const r=[RAIZ+"Cromos/camiseta-base.jpg",RAIZ+"Images/camiseta-base.jpg"];let n=0;const i=new Image();
  i.onload=()=>{BASE.img=i;refresca()};i.onerror=()=>{if(++n<r.length)i.src=r[n]};i.src=r[0]})();
+/* ===== Cromo de portero = Images/portero-trasera.jpg (si no carga, se usa la camiseta de campo) ===== */
+const BPOR={img:null};
+(function(){const r=[RAIZ+"Images/portero-trasera.jpg",RAIZ+"images/portero-trasera.jpg"];let n=0;const i=new Image();
+ i.onload=()=>{BPOR.img=i;refresca()};i.onerror=()=>{if(++n<r.length)i.src=r[n]};i.src=r[0]})();
 /* Tipografías (Google Fonts): nombre = Knewave (pincel deportivo), dorsal = Russo One. Se re-dibuja cuando terminan de cargar */
 (function(){const l=document.createElement("link");l.rel="stylesheet";l.href="https://fonts.googleapis.com/css2?family=Knewave&family=Russo+One&family=Fredoka:wght@700&display=swap";
  l.onload=()=>Promise.all([document.fonts.load('60px "Knewave"',"ABCÑÓ"),document.fonts.load('700 360px "Fredoka"',"0123456789")]).then(refresca).catch(()=>{});
  document.head.appendChild(l)})();
 /* Texto distinto del nombre en la camiseta (opcional): CAM_TXT["Ivan"]="I.BLASCO" */
 const CAM_TXT=window.CAM_TXT||(window.CAM_TXT={});
-/* Posiciones sobre la imagen original de 992x1072 */
+/* Posiciones sobre la imagen escalada a 992 px de ancho (en la camiseta de campo, 992x1072).
+   col = color del nombre; fill = relleno del dorsal; edge = línea exterior del dorsal; navy = sombra y línea interior del dorsal */
 const CAM={out:640,
- nom:{font:'"Knewave","Permanent Marker","Impact",sans-serif',cx:492,base:326,cap:66,maxW:400,sx:.92,skew:0},
- num:{font:'700 {s}px "Fredoka","Russo One","Barlow Condensed","Impact",sans-serif',cx:497,base:622,size:360,maxW:340,skew:-.06,navy:"#14308f"}};
+ nom:{font:'"Knewave","Permanent Marker","Impact",sans-serif',cx:492,base:326,cap:66,maxW:400,sx:.92,skew:0,col:"#fff"},
+ num:{font:'700 {s}px "Fredoka","Russo One","Barlow Condensed","Impact",sans-serif',cx:497,base:622,size:360,maxW:340,skew:-.06,navy:"#14308f",fill:"#fff",edge:"#fff"}};
+/* Portero: AJUSTA AQUÍ las posiciones y colores para portero-trasera.jpg (se escala a 992 px de ancho; el alto sale de sus proporciones).
+   Ahora son una copia de los de la camiseta de campo: cx/base = centro y línea base del texto; cap/size = tamaño del nombre/dorsal. */
+const CAMP={out:640,
+ nom:{font:'"Knewave","Permanent Marker","Impact",sans-serif',cx:492,base:326,cap:66,maxW:400,sx:.92,skew:0,col:"#fff"},
+ num:{font:'700 {s}px "Fredoka","Russo One","Barlow Condensed","Impact",sans-serif',cx:497,base:622,size:360,maxW:340,skew:-.06,navy:"#14308f",fill:"#fff",edge:"#fff"}};
 function cromoImg(c){
- if(!BASE.img)return BLANK;
- const key=JSON.stringify([c.id,c.name,c.num,c.coach,CAM_TXT[c.name]||""]);
+ const por=!c.coach&&c.pos==="portero"&&!!BPOR.img,img=por?BPOR.img:BASE.img;
+ if(!img)return BLANK;
+ const Z=por?CAMP:CAM,W=992,H=por?Math.round(992*img.naturalHeight/img.naturalWidth):1072;
+ const key=JSON.stringify([c.id,c.name,c.num,c.coach,CAM_TXT[c.name]||"",por?"P":"J"]);
  if(memo[key])return memo[key];
- const k=CAM.out/992,cv=document.createElement("canvas");cv.width=CAM.out;cv.height=Math.round(1072*k);
- const g=cv.getContext("2d");g.scale(k,k);g.drawImage(BASE.img,0,0,992,1072);
+ const k=Z.out/W,cv=document.createElement("canvas");cv.width=Z.out;cv.height=Math.round(H*k);
+ const g=cv.getContext("2d");g.scale(k,k);g.drawImage(img,0,0,W,H);
  g.textAlign="center";g.textBaseline="alphabetic";g.lineJoin="round";
- /* Nombre: pincel condensado, blanco, con sombra suave; se encoge solo si es largo */
+ /* Nombre: pincel condensado, con sombra suave; se encoge solo si es largo */
  const t=String(CAM_TXT[c.name]||c.name||"").toUpperCase();
- if(t){const n=CAM.nom;let s=n.cap/.74;g.font=s+"px "+n.font;const w=g.measureText(t).width*n.sx;if(w>n.maxW){s*=n.maxW/w;g.font=s+"px "+n.font}
+ if(t){const n=Z.nom;let s=n.cap/.74;g.font=s+"px "+n.font;const w=g.measureText(t).width*n.sx;if(w>n.maxW){s*=n.maxW/w;g.font=s+"px "+n.font}
   g.save();g.translate(n.cx,n.base);g.transform(n.sx,0,n.skew*n.sx,1,0,0);
-  g.fillStyle="#fff";g.shadowColor="rgba(8,20,70,.6)";g.shadowBlur=5;g.shadowOffsetY=3;g.fillText(t,0,0);g.restore()}
- /* Dorsal: sombra azul, línea blanca exterior, línea azul y relleno blanco (doble línea como la camiseta) */
+  g.fillStyle=n.col||"#fff";g.shadowColor="rgba(8,20,70,.6)";g.shadowBlur=5;g.shadowOffsetY=3;g.fillText(t,0,0);g.restore()}
+ /* Dorsal: sombra, línea exterior, línea interior y relleno (doble línea como la camiseta) */
  const d=c.coach?"":String(c.num||"").trim();
- if(d){const n=CAM.num;let s=n.size;g.font=n.font.replace("{s}",s);const w=g.measureText(d).width;if(w>n.maxW){s*=n.maxW/w;g.font=n.font.replace("{s}",s)}
+ if(d){const n=Z.num;let s=n.size;g.font=n.font.replace("{s}",s);const w=g.measureText(d).width;if(w>n.maxW){s*=n.maxW/w;g.font=n.font.replace("{s}",s)}
   g.save();g.translate(n.cx,n.base);g.transform(1,0,n.skew,1,0,0);g.lineJoin="round";
   g.fillStyle=n.navy;g.strokeStyle=n.navy;g.lineWidth=s*.06;g.fillText(d,14,14);g.strokeText(d,14,14);   // sombra
-  g.strokeStyle="#fff";g.lineWidth=s*.075;g.strokeText(d,0,0);                                          // línea blanca exterior
-  g.strokeStyle=n.navy;g.lineWidth=s*.04;g.strokeText(d,0,0);                                            // línea azul
-  g.fillStyle="#fff";g.fillText(d,0,0);g.restore()}
+  g.strokeStyle=n.edge||"#fff";g.lineWidth=s*.075;g.strokeText(d,0,0);                                  // línea exterior
+  g.strokeStyle=n.navy;g.lineWidth=s*.04;g.strokeText(d,0,0);                                            // línea interior
+  g.fillStyle=n.fill||"#fff";g.fillText(d,0,0);g.restore()}
  return memo[key]=cv.toDataURL("image/jpeg",.9)}
 
-/* Entrenador con imagen propia (c.img) -> se muestra tal cual; el resto se dibuja sobre la camiseta */
+/* Entrenador con imagen propia (c.img) -> se muestra tal cual; el resto se dibuja sobre la camiseta (portero: sobre portero-trasera.jpg) */
 function buildCromos(){CROMOS.length=0;
  (S.cromos||[]).forEach(c=>CROMOS.push({file:"g_"+c.id,key:"g_"+c.id,name:c.name,num:c.num||"",pos:c.pos,coach:!!c.coach,src:(c.coach&&c.img)?rutaImg(c.img):cromoImg(c)}));
  CROMOS.sort((a,b)=>a.coach-b.coach||(a.pos==="portero"?0:1)-(b.pos==="portero"?0:1)||(+a.num||0)-(+b.num||0))}
@@ -163,7 +175,7 @@ function cromoForm(){
  return`<div class="card"><h2 style="font-size:1.5rem;color:#0f2a6b">${ec?"Editar cromo":PRE?"Cromo de "+esc(PRE.name):"Crear cromo"}</h2>
  <div class="ed" style="display:flex"><span id="cn_pl" style="display:${co?"none":"contents"}"><input id="cn_name" placeholder="Nombre (sin apellido)" value="${esc(co?"":v.name)}"><input id="cn_num" class="g" type="number" min="0" max="99" placeholder="Nº" value="${esc(v.num)}"></span><span id="cn_co" style="display:${co?"contents":"none"}">${picker}</span><select id="cn_pos" onchange="cnPos(this.value)">${opts}</select></div>
  <div class="ed" style="display:flex"><button class="on" onclick="addCromo()">${mod?"💾 Guardar cambios":"＋ Crear cromo"}</button>${mod?'<button onclick="cancelCromo()">Cancelar</button>':""}</div>
- <small class="gap" style="display:block;margin-top:6px">Jugadores: el nombre y el número se escriben solos sobre Cromos/camiseta-base.jpg. Entrenadores: se elige uno de Images/Entrenadores.</small>
+ <small class="gap" style="display:block;margin-top:6px">Jugadores: el nombre y el número se escriben solos sobre Cromos/camiseta-base.jpg (porteros: sobre Images/portero-trasera.jpg). Entrenadores: se elige uno de Images/Entrenadores.</small>
  <div class="cvsum">${L||'<small class="gap">Aún no hay cromos.</small>'}</div></div>`}
 /* Cuerpo técnico dentro de la pestaña Plantilla */
 function cuerpoTecnico(){

@@ -43,13 +43,13 @@ const refresca=()=>{memo={};render()};
  i.onload=()=>{BASE.img=i;refresca()};i.onerror=()=>{if(++n<r.length)i.src=r[n]};i.src=r[0]})();
 /* Tipografía del nombre: pincel (Permanent Marker). El dorsal usa Barlow Condensed, que la página ya carga */
 document.head.insertAdjacentHTML("beforeend",'<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap">');
-if(document.fonts&&document.fonts.load)Promise.all([document.fonts.load('92px "Permanent Marker"',"ABC"),document.fonts.load('800 445px "Barlow Condensed"',"0123456789")]).then(refresca).catch(()=>{});
+if(document.fonts&&document.fonts.load)Promise.all([document.fonts.load('92px "Permanent Marker"',"ABC"),document.fonts.load('700 430px "Barlow Condensed"',"0123456789")]).then(refresca).catch(()=>{});
 /* Texto distinto del nombre en la camiseta (opcional): CAM_TXT["Ivan"]="I.BLASCO" */
 const CAM_TXT=window.CAM_TXT||(window.CAM_TXT={});
 /* Posiciones sobre la imagen original de 992x1072 */
 const CAM={out:640,
- nom:{font:'"Permanent Marker","Impact",sans-serif',cx:492,base:322,cap:92,maxW:560},
- num:{font:'800 {s}px "Barlow Condensed","Impact",sans-serif',cx:497,base:650,size:445,maxW:430,skew:-.1,navy:"#14308f"}};
+ nom:{font:'"Permanent Marker","Impact",sans-serif',cx:492,base:326,cap:60,maxW:380,sx:.8,skew:-.1},
+ num:{font:'700 {s}px "Barlow Condensed","Impact",sans-serif',cx:497,base:652,size:430,maxW:400,skew:-.08,navy:"#14308f"}};
 function cromoImg(c){
  if(!BASE.img)return BLANK;
  const key=JSON.stringify([c.id,c.name,c.num,c.coach,CAM_TXT[c.name]||""]);
@@ -57,14 +57,19 @@ function cromoImg(c){
  const k=CAM.out/992,cv=document.createElement("canvas");cv.width=CAM.out;cv.height=Math.round(1072*k);
  const g=cv.getContext("2d");g.scale(k,k);g.drawImage(BASE.img,0,0,992,1072);
  g.textAlign="center";g.textBaseline="alphabetic";g.lineJoin="round";
+ /* Nombre: pincel condensado, blanco, con sombra suave; se encoge solo si es largo */
  const t=String(CAM_TXT[c.name]||c.name||"").toUpperCase();
- if(t){const n=CAM.nom;let s=n.cap/.72;g.font=s+"px "+n.font;const w=g.measureText(t).width;if(w>n.maxW){s*=n.maxW/w;g.font=s+"px "+n.font}
-  g.fillStyle="#fff";g.shadowColor="rgba(8,20,70,.55)";g.shadowBlur=6;g.shadowOffsetY=3;g.fillText(t,n.cx,n.base);g.shadowColor="transparent"}
+ if(t){const n=CAM.nom;let s=n.cap/.74;g.font=s+"px "+n.font;const w=g.measureText(t).width*n.sx;if(w>n.maxW){s*=n.maxW/w;g.font=s+"px "+n.font}
+  g.save();g.translate(n.cx,n.base);g.transform(n.sx,0,n.skew*n.sx,1,0,0);
+  g.fillStyle="#fff";g.shadowColor="rgba(8,20,70,.6)";g.shadowBlur=5;g.shadowOffsetY=3;g.fillText(t,0,0);g.restore()}
+ /* Dorsal: sombra azul, línea blanca exterior, línea azul y relleno blanco (doble línea como la camiseta) */
  const d=c.coach?"":String(c.num||"").trim();
  if(d){const n=CAM.num;let s=n.size;g.font=n.font.replace("{s}",s);const w=g.measureText(d).width;if(w>n.maxW){s*=n.maxW/w;g.font=n.font.replace("{s}",s)}
   g.save();g.translate(n.cx,n.base);g.transform(1,0,n.skew,1,0,0);
-  g.fillStyle=n.navy;g.fillText(d,13,13);g.fillStyle="#fff";g.fillText(d,0,0);
-  g.strokeStyle=n.navy;g.lineWidth=Math.max(4,s*.014);g.strokeText(d,0,0);g.restore()}
+  g.fillStyle=n.navy;g.strokeStyle=n.navy;g.lineWidth=s*.06;g.fillText(d,14,14);g.strokeText(d,14,14);   // sombra
+  g.strokeStyle="#fff";g.lineWidth=s*.075;g.strokeText(d,0,0);                                          // línea blanca exterior
+  g.strokeStyle=n.navy;g.lineWidth=s*.04;g.strokeText(d,0,0);                                            // línea azul
+  g.fillStyle="#fff";g.fillText(d,0,0);g.restore()}
  return memo[key]=cv.toDataURL("image/jpeg",.9)}
 
 /* Entrenador con imagen propia (c.img) -> se muestra tal cual; el resto se dibuja sobre la camiseta */

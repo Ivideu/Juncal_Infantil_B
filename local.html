@@ -59,6 +59,32 @@ main{padding:92px 0 56px}
 footer{padding:40px 0;border-top:1px solid rgba(255,255,255,.35);color:#fff;font-size:.9rem;text-align:center;text-shadow:var(--sh)}
 footer a{color:var(--ye);font-weight:700}
 
+/* EQUIPOS: TARJETAS COMPACTAS, TODAS IGUALES (AZUL + AMARILLO DEL CLUB) */
+.cats{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));grid-template-rows:repeat(2,auto);grid-auto-flow:column;gap:12px}
+.cat{--c1:#1e4fd8;--c2:#0b1f66;container-type:inline-size;position:relative;display:flex;flex-direction:column;justify-content:flex-end;gap:3px;min-height:116px;padding:14px 14px;overflow:hidden;border:2px solid rgba(255,255,255,.9);border-radius:16px;color:#fff;background:linear-gradient(225deg,#ffd23f 0%,#f2b705 14%,#4f86ee 42%,var(--c1) 62%,var(--c2) 100%);box-shadow:0 6px 18px rgba(8,18,53,.35);animation:catIn .5s both;animation-delay:calc(var(--i,0)*60ms);transition:transform .25s cubic-bezier(.2,1.3,.4,1),box-shadow .25s}
+.cat::before{content:"";position:absolute;right:-10px;bottom:-14px;width:92px;height:92px;background:url("Images/escudo.png") center/contain no-repeat;opacity:.2;transform:rotate(-12deg);pointer-events:none;transition:transform .35s,opacity .35s}
+.cat::after{content:"";position:absolute;inset:0;background:linear-gradient(110deg,transparent 35%,rgba(255,255,255,.45) 50%,transparent 65%);transform:translateX(-120%);transition:transform .6s;pointer-events:none}
+.cat:hover{transform:translateY(-6px) rotate(-1.2deg) scale(1.03);box-shadow:0 14px 30px rgba(8,18,53,.5)}
+.cat:hover::before{transform:rotate(0) scale(1.15);opacity:.35}
+.cat:hover::after{transform:translateX(120%)}
+.cat:focus-visible{outline:3px solid var(--ye);outline-offset:3px}
+.cat .age{position:relative;z-index:1;display:block;overflow:hidden;color:rgba(255,255,255,.95);font-size:min(.85rem,8cqw);font-weight:700;letter-spacing:.04em;line-height:1.15;text-transform:uppercase;text-shadow:0 1px 3px rgba(0,0,0,.45);white-space:normal}
+.cat h3{position:relative;z-index:1;color:#fff;font-size:min(1.9rem,16cqw);font-weight:800;font-style:italic;letter-spacing:.01em;line-height:1;text-shadow:0 2px 6px rgba(0,0,0,.4);white-space:nowrap}
+.cat h3 em{color:var(--ye);font-style:inherit}
+.cat .go{position:absolute;top:8px;right:8px;z-index:1;display:grid;place-items:center;width:28px;height:28px;border-radius:50%;color:var(--ye);background:#0b1f66;font-weight:800;transform:translateX(8px);opacity:0;transition:transform .25s,opacity .25s}
+.cat:hover .go,.cat:focus-visible .go{transform:none;opacity:1}
+.cat.sin{cursor:default;filter:grayscale(.6)}
+@keyframes catIn{from{opacity:0;transform:translateY(16px) scale(.96)}}
+
+/* LOCAL: parrilla de categorías en dos grupos */
+.grp{margin:30px 0 12px;color:#fff;font:800 1.25rem/1 "Barlow Condensed",sans-serif;letter-spacing:.24em;text-transform:uppercase;text-shadow:var(--sh)}
+.grp:first-of-type{margin-top:0}
+.grp::after{content:"";display:block;width:56px;height:3px;margin-top:8px;border-radius:3px;background:var(--ye)}
+.cats.c5,.cats.c6{grid-template-rows:none;grid-auto-flow:row}
+.cats.c5{grid-template-columns:repeat(5,minmax(0,1fr))}
+.cats.c6{grid-template-columns:repeat(6,minmax(0,1fr))}
+.srcnote{max-width:720px;margin-top:34px;color:#fff;font-size:.85rem;text-shadow:var(--sh)}
+@media(max-width:800px){.cats.c5,.cats.c6{grid-template-columns:repeat(2,minmax(0,1fr))}}
 
 /* DISEÑO RESPONSIVE */
 @media(max-width:800px){
@@ -126,14 +152,9 @@ footer a{color:var(--ye);font-weight:700}
     <div class="pgb"></div>
     <p><a href="index.html" class="back">← Volver al inicio</a></p><br>
     <h2>Equipos <span>locales</span></h2>
-    <p class="sub">Los equipos y competiciones locales de la escuela.</p>
-    <div class="soon">
-      <img src="Images/escudo.png" alt="">
-      <div>
-        <h3>Próximamente</h3>
-        <p>Estamos preparando esta sección. Mientras tanto, puedes ver nuestros equipos en <a href="federado.html" style="text-decoration:underline;text-underline-offset:3px;font-weight:700">la sección Federado</a>.</p>
-      </div>
-    </div>
+    <p class="sub">Competición local de Torrejón de Ardoz: elige tu categoría para ver jornadas, dónde se juega, resultados y clasificación.</p>
+    <div id="catGrid"></div>
+    <p class="srcnote">Datos del <a href="https://deportes.ayto-torrejon.es/campeonatos-locales" target="_blank" rel="noopener" style="color:var(--ye);font-weight:700">Ayuntamiento de Torrejón de Ardoz</a>. Los resultados son meramente informativos; los oficiales son los que publica la organización.</p>
   </div>
 </main>
 
@@ -162,6 +183,24 @@ $("#menu").onclick = e => {
   $("#burger").setAttribute("aria-expanded", "false");
 };
 
+/* @@JSLOCAL */
+/* COMPETICIÓN LOCAL: 11 categorías de fútbol sala. Los datos los genera scripts/sync_local.py (PDF del Ayuntamiento) */
+const GRUPOS = [
+  { t: "Senior", cls: "c5", c: [["senior-superliga", "Superliga"], ["senior-preferente", "Preferente"], ["senior-primera", "Primera"], ["senior-segunda", "Segunda"], ["senior-tercera", "Tercera"]] },
+  { t: "Base", cls: "c6", c: [["juvenil", "Juvenil"], ["cadete", "Cadete"], ["infantil", "Infantil"], ["alevin", "Alevín"], ["benjamin", "Benjamín"], ["prebenjamin", "Prebenjamín"]] }
+];
+function pintar(idx) {
+  let i = 0;
+  $("#catGrid").innerHTML = GRUPOS.map(g => `<h3 class="grp">${g.t}</h3><div class="cats ${g.cls}">${g.c.map(([id, nombre]) => {
+    const d = idx[id];
+    const info = g.t + (d && d.equipos ? ` · ${d.equipos} equipos` : "") + (d && d.juncal ? " · Juncal" : "");
+    return `<a class="cat" data-l="" style="--i:${i++}" href="local-categoria.html?c=${esc(id)}" aria-label="${esc(nombre)}"><span class="age">${esc(info)}</span><h3>${esc(nombre)}</h3><span class="go" aria-hidden="true">→</span></a>`;
+  }).join("")}</div>`).join("");
+}
+pintar({});
+fetch("datos-local/index.json", { cache: "no-cache" }).then(r => r.ok ? r.json() : null)
+  .then(d => { if (d) pintar(Object.fromEntries(d.categorias.map(c => [c.id, c]))); }).catch(() => {});
+/* @@/JSLOCAL */
 </script>
 <script src="scripts/menu-equipos.js"></script>
 <script src="scripts/patrocinadores.js"></script>

@@ -1,0 +1,41 @@
+name: Sincronizar competición local
+
+# Lee los PDF de «Campeonatos Locales» del Ayuntamiento de Torrejón de Ardoz (fútbol sala, 11 categorías)
+# y guarda jornadas, campos, resultados y clasificación en datos-local/*.json (los lee local.html).
+# Los PDF se renuevan cada semana (horarios definitivos los viernes a las 14:00), así que se revisa cada 3 horas.
+# Manual: Actions → «Sincronizar competición local» → Run workflow (opcional: id de una sola categoría, ej. infantil).
+on:
+  workflow_dispatch:
+    inputs:
+      solo:
+        description: "Id de una sola categoría (opcional, ej. infantil)"
+        required: false
+  schedule:
+    - cron: "20 */3 * * *"
+concurrency:
+  group: sync-local
+  cancel-in-progress: false
+permissions:
+  contents: write
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Instalar pdftotext
+        run: command -v pdftotext >/dev/null || (sudo apt-get update -qq && sudo apt-get install -y -qq poppler-utils)
+      - name: Leer los PDF del Ayuntamiento
+        run: python3 scripts/sync_local.py "${{ github.event.inputs.solo }}"
+      - name: Guardar los datos
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add datos-local
+          if git diff --cached --quiet -- datos-local; then echo "Sin cambios"; exit 0; fi
+          git commit -m "Competición local: datos actualizados"
+          for i in 1 2 3; do git pull --rebase -X theirs origin "${GITHUB_REF_NAME}" && git push && exit 0; sleep 5; done
+          exit 1

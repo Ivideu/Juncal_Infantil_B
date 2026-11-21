@@ -236,6 +236,55 @@ button.fch:focus-visible{outline:3px solid var(--ye);outline-offset:3px}
 /* PIE DE PÁGINA Y ANIMACIONES */
 footer{padding:40px 0;border-top:1px solid rgba(255,255,255,.35);color:#fff;font-size:.9rem;text-align:center;text-shadow:var(--sh)}
 footer a{color:var(--ye);font-weight:700}
+/* PROYECTO DEPORTIVO 26/27 (dentro de La escuela) */
+.pj{padding:8px 0 56px;color:#fff}
+.pj .wrap{max-width:1100px}
+.pj-k{display:inline-block;margin-bottom:6px;padding:5px 14px;border-radius:99px;background:var(--ye);color:#0a0f1e;font:800 .8rem/1 Barlow,sans-serif;letter-spacing:.14em;text-transform:uppercase}
+.pj h3.pj-t{margin:26px 0 14px;font:800 clamp(1.6rem,3.6vw,2.2rem)/1.1 "Barlow Condensed",sans-serif;text-transform:uppercase;text-shadow:var(--sh)}
+.pj h3.pj-t span{color:var(--ye)}
+.pj-g{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.22);border-radius:20px;-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);box-shadow:0 8px 28px rgba(8,18,53,.3)}
+.pj-nums{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:22px}
+.pj-n{padding:18px 10px;text-align:center}
+.pj-n b{display:block;color:var(--ye);font:800 clamp(2.2rem,6vw,3.4rem)/1 "Barlow Condensed",sans-serif;text-shadow:0 2px 0 #0f2a78}
+.pj-n span{font-weight:600;font-size:.92rem;opacity:.95}
+.pj-lema{margin:22px 0 0;padding:22px 24px;border-left:6px solid var(--ye);font:700 clamp(1.15rem,2.6vw,1.5rem)/1.3 Barlow,sans-serif;text-shadow:var(--sh)}
+.pj-lema small{display:block;margin-top:8px;font:500 .95rem/1.4 Barlow,sans-serif;opacity:.92}
+.pj-tl{display:flex;gap:14px;overflow-x:auto;padding:14px 2px 16px;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch}
+.pj-tl::-webkit-scrollbar{height:6px}.pj-tl::-webkit-scrollbar-thumb{background:rgba(255,255,255,.4);border-radius:9px}
+.pj-hi{position:relative;flex:0 0 230px;scroll-snap-align:start;padding:18px 16px 16px;transition:transform .25s}
+.pj-hi:hover{transform:translateY(-5px)}
+.pj-hi::before{content:"";position:absolute;left:16px;top:-6px;width:14px;height:14px;border-radius:50%;background:var(--ye);box-shadow:0 0 0 4px rgba(255,210,63,.3)}
+.pj-hi em{display:block;color:var(--ye);font:800 2rem/1 "Barlow Condensed",sans-serif;font-style:normal}
+.pj-hi p{margin:6px 0 0;font-size:.95rem;line-height:1.35}
+.pj-hi.now{background:linear-gradient(135deg,rgba(255,210,63,.95),rgba(255,170,30,.95));color:#0a0f1e}
+.pj-hi.now em{color:#0f2a78}
+.pj-ph{display:flex;gap:8px;padding:6px;border-radius:99px;width:fit-content;max-width:100%;margin-bottom:14px}
+.pj-ph button{border:0;border-radius:99px;padding:11px 20px;color:#fff;background:transparent;font:700 .95rem Barlow,sans-serif;cursor:pointer;transition:background .2s,color .2s}
+.pj-ph button[aria-selected=true]{background:var(--ye);color:#0a0f1e;box-shadow:0 3px 10px rgba(0,0,0,.25)}
+.pj-fase{padding:22px 24px;min-height:120px;animation:pjIn .35s}
+.pj-fase h4{margin:0 0 6px;color:var(--ye);font:800 1.5rem "Barlow Condensed",sans-serif;text-transform:uppercase}
+.pj-fase p{margin:0;max-width:760px}
+@keyframes pjIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.pj-val{display:flex;flex-wrap:wrap;gap:10px}
+.pj-val span{padding:10px 16px;border-radius:99px;font-weight:700;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.3);transition:transform .2s,background .2s,color .2s;cursor:default}
+.pj-val span:hover{transform:translateY(-3px) scale(1.04);background:var(--ye);color:#0a0f1e}
+.pj-two{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.pj-dir,.pj-sol{padding:22px 24px}
+.pj-dir h4,.pj-sol h4{margin:0 0 2px;font:800 1.5rem "Barlow Condensed",sans-serif;text-transform:uppercase}
+.pj-rol{color:var(--ye);font-weight:700;font-size:.9rem;letter-spacing:.08em;text-transform:uppercase}
+.pj-dir ul{margin:12px 0 0;padding-left:18px}.pj-dir li{margin:4px 0}
+.pj-sol .big{display:block;margin:6px 0;color:var(--ye);font:800 3rem/1 "Barlow Condensed",sans-serif}
+.pj-sol p{margin:6px 0 0}
+.pj-com{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px}
+.pj-com span{padding:9px 15px;border-radius:12px;background:rgba(0,0,0,.22);font-size:.92rem}
+.pj-com b{color:var(--ye)}
+@media(max-width:800px){
+  .pj-nums{grid-template-columns:repeat(2,1fr)}
+  .pj-two{grid-template-columns:1fr}
+  .pj-ph{width:100%;overflow-x:auto}.pj-ph button{flex:1;white-space:nowrap;padding:10px 6px;font-size:.82rem}
+  .pj-hi{flex-basis:78%}
+}
+@media(prefers-reduced-motion:reduce){.pj-hi,.pj-val span,.pj-fase{animation:none;transition:none}}
 .rv{opacity:0;transform:translateY(30px);transition:opacity .7s,transform .7s}
 .rv.in{opacity:1;transform:none}
 
@@ -341,8 +390,8 @@ footer a{color:var(--ye);font-weight:700}
                 <div>
                   <h3>Pasión por el juego</h3>
                   <div class="cnt" id="stats">
-                    <span><b data-n="10">0</b> equipos</span>
-                    <span><b data-n="120">0</b> jugadores</span>
+                    <span><b data-n="24">0</b> equipos</span>
+                    <span><b data-n="350">0</b> jugadores</span>
                     <span><b data-n="10">0</b> entrenadores</span>
                   </div>
                 </div>
@@ -362,7 +411,7 @@ footer a{color:var(--ye);font-weight:700}
                 <i><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 21h8M12 17v4M7 4h10v5a5 5 0 0 1-10 0z"></path><path d="M17 5h3v2a3 3 0 0 1-3 3M7 5H4v2a3 3 0 0 0 3 3"></path></svg></i>
                 <div>
                   <h3>Competimos juntos</h3>
-                  <p>Ligas federadas desde Alevín hasta Aficionado.</p>
+                  <p>Ligas federadas desde Alevín hasta Senior y competición local.</p>
                 </div>
               </div>
 
@@ -382,6 +431,74 @@ footer a{color:var(--ye);font-weight:700}
             <img src="Images/escuela-equipaciones.jpg" alt="Equipaciones del Torrejón Juncal, temporada 26/27">
           </div>
 
+        </div>
+      </div>
+    </div>
+
+    <!-- PROYECTO DEPORTIVO 2026-2027 -->
+    <div class="pj" id="proyecto">
+      <div class="wrap">
+        <div class="rv">
+          <span class="pj-k">Proyecto deportivo 2026-2027</span>
+          <h2>Más que un <span>club</span></h2>
+          <div class="pj-nums" id="pjNums">
+            <div class="pj-g pj-n"><b data-n="2007">0</b><span>año de fundación</span></div>
+            <div class="pj-g pj-n"><b data-n="24">0</b><span>equipos: 12 federados y 12 locales</span></div>
+            <div class="pj-g pj-n"><b data-n="350" data-plus="1">0</b><span>niñ@s compitiendo</span></div>
+            <div class="pj-g pj-n"><b data-n="100" data-plus="1">0</b><span>peques jugando en los colegios</span></div>
+          </div>
+          <p class="pj-lema pj-g">El resultado no es nuestro objetivo: lo es la formación.
+            <small>Queremos que cada jugador llegue a la edad senior (19 años) con la mejor preparación posible, deportiva y personal.</small></p>
+        </div>
+
+        <h3 class="pj-t rv">Nuestra <span>historia</span></h3>
+        <div class="pj-tl rv" tabindex="0" aria-label="Línea del tiempo del club">
+          <div class="pj-g pj-hi"><em>2005</em><p>Un grupo de padres funda el club para que sus hijos puedan entrenar. Un solo equipo de benjamines en la liga local.</p></div>
+          <div class="pj-g pj-hi"><em>2006</em><p>Llegan los alevines. Desde ahí, cada año un equipo más.</p></div>
+          <div class="pj-g pj-hi"><em>2007</em><p>Votación democrática del nombre: nace el Club Torrejón Juncal C.D., con estatutos y junta directiva.</p></div>
+          <div class="pj-g pj-hi"><em>2008</em><p>El 7 de marzo queda registrado en la Comunidad de Madrid.</p></div>
+          <div class="pj-g pj-hi"><em>2015</em><p>El Ayuntamiento de Torrejón de Ardoz nos reconoce como Escuela Deportiva.</p></div>
+          <div class="pj-g pj-hi"><em>Hoy</em><p>20 equipos: 8 federados y 12 locales. 300 niñ@s compitiendo y más de 100 en los colegios CEIP Uno de Mayo, La Zarzuela y Jaime Vera.</p></div>
+          <div class="pj-g pj-hi now"><em>26/27</em><p>Crecemos: 12 equipos federados (2 alevines, 2 infantiles, 2 cadetes, 3 juveniles y 2 senior) y 12 locales.</p></div>
+        </div>
+
+        <h3 class="pj-t rv">Cómo <span>trabajamos</span></h3>
+        <div class="rv">
+          <div class="pj-g pj-ph" role="tablist" id="pjPh">
+            <button type="button" role="tab" aria-selected="true" data-f="0">Iniciación</button>
+            <button type="button" role="tab" aria-selected="false" data-f="1">Desarrollo</button>
+            <button type="button" role="tab" aria-selected="false" data-f="2">Consolidación</button>
+          </div>
+          <div class="pj-g pj-fase" id="pjFase" aria-live="polite"></div>
+        </div>
+
+        <h3 class="pj-t rv">Lo que <span>buscamos</span></h3>
+        <div class="pj-val rv">
+          <span>Respeto al rival, al árbitro y al público</span><span>Cooperación</span><span>Compañerismo</span><span>Juego limpio</span><span>Tolerancia</span><span>Actitud positiva</span><span>Entender la victoria y la derrota</span><span>Hábitos saludables</span><span>Formación de entrenadores</span>
+        </div>
+
+        <div class="pj-two rv" style="margin-top:26px">
+          <div class="pj-g pj-dir">
+            <span class="pj-rol">Director deportivo</span>
+            <h4>Javier Triguero Ortiz</h4>
+            <ul>
+              <li>Ex jugador profesional e internacional absoluto con la Selección Española de fútbol sala.</li>
+              <li>Entrenador nacional de nivel III y seleccionador de Madrid Sub-14, 16 y 19.</li>
+              <li>Vocal de entrenadores del Comité de Entrenadores de la RFFM.</li>
+            </ul>
+          </div>
+          <div class="pj-g pj-sol">
+            <span class="pj-rol">Acciones solidarias</span>
+            <span class="big">3 años</span>
+            <h4>Torneo 1 kilo / 1 litro</h4>
+            <p>Recogida de alimentos con la Asociación Cien por Cien Vida. Este año también, junto a UNOENTRECIENMIL.ORG, goles contra el cáncer infantil.</p>
+          </div>
+        </div>
+
+        <div class="pj-com rv">
+          <span><b>Presidente</b> · Antonio López Carmona</span>
+          <span><b>Coordinadores</b> · José Manuel Martínez Sánchez y Adrián López Alonso</span>
+          <span>Todos nuestros monitores tienen titulación</span>
         </div>
       </div>
     </div>
@@ -883,6 +1000,26 @@ const so = new IntersectionObserver(ents => ents.forEach(e => {
   so.unobserve(e.target);
 }), { threshold: .3 });
 document.querySelectorAll("#stats").forEach(el => so.observe(el));
+
+/* PROYECTO 26/27: fases y contadores */
+(function(){
+  const F=[
+    ["Fase de iniciación","Durante los primeros meses los niñ@s toman contacto con el deporte y lo universalizan: conocen su organización, normas, pasos y técnicas para disfrutar y poder decidir qué deportes practicar."],
+    ["Fase de desarrollo","Ponemos en práctica lo aprendido y profundizamos en la actividad deportiva, con competiciones internas y externas. Se promueve la conciencia de equipo (cooperación) y el juego limpio, un deporte sin violencia."],
+    ["Fase de consolidación","Se aplica la práctica deportiva en todos los ámbitos: el patio del colegio, la vida diaria, con los iguales. Que sepan globalizar lo aprendido y desarrollar los valores positivos del deporte a nivel personal, social y cultural."]
+  ];
+  const box=document.getElementById("pjFase"),tabs=document.querySelectorAll("#pjPh button");
+  if(!box)return;
+  let n=0,user=false;
+  const pon=i=>{n=i;box.innerHTML="<h4>"+F[i][0]+"</h4><p>"+F[i][1]+"</p>";tabs.forEach((b,k)=>b.setAttribute("aria-selected",k===i))};
+  tabs.forEach(b=>b.onclick=()=>{user=true;pon(+b.dataset.f)});pon(0);
+  setInterval(()=>{const r=box.getBoundingClientRect();if(!user&&!document.hidden&&r.top<innerHeight&&r.bottom>0)pon((n+1)%3)},6000);
+  const nums=document.getElementById("pjNums");
+  if(nums){const o=new IntersectionObserver(es=>es.forEach(e=>{if(!e.isIntersecting)return;
+    e.target.querySelectorAll("[data-n]").forEach(b=>{const t=+b.dataset.n,t0=performance.now();
+      const f=now=>{const p=Math.min(1,(now-t0)/1400);b.textContent=Math.round(t*(1-Math.pow(1-p,3)))+(p===1&&b.dataset.plus?"+":"");if(p<1)requestAnimationFrame(f)};requestAnimationFrame(f)});
+    o.unobserve(e.target)}),{threshold:.4});o.observe(nums)}
+})();
 
 /* TECLA ESCAPE */
 addEventListener("keydown", e => {

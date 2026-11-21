@@ -17,7 +17,7 @@ jobs:
           python3 - <<'PY'
           import sys
 
-          HTML = "InfantilB.html"          # cambia la ruta si está en otra carpeta
+          HTML = "Categorias/InfantilB.html"          # cambia la ruta si está en otra carpeta
           JS   = "scripts/infantilb-extra.js"
           INI  = "<!-- infantilb-extra:inicio -->"
           FIN  = "<!-- infantilb-extra:fin -->"

@@ -24,7 +24,7 @@
     { name: "Cosmos Telecomunicaciones",         img: "cosmos.png",       w: 504, h: 184,  logoH: 38, url: "https://www.cosmos.tel/" }
   ];
 
-  const esc = t => String(t || "").replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"": "&quot;" }[c]));
+  const esc = t => String(t || "").replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
 
   function item(s, copia) {
     const img = `<img src="${RUTA + esc(s.img)}?v=${VERSION}" alt="${copia ? "" : esc(s.name)}" width="${s.w}" height="${s.h}" decoding="async" draggable="false" style="--h:${s.logoH}px">`;

@@ -6,6 +6,10 @@ on:
 permissions:
   contents: write
 
+env:
+  HTML: Categorias/InfantilB.html        # cambia la ruta solo aquí
+  JS: scripts/infantilb-extra.js
+
 jobs:
   inyectar:
     runs-on: ubuntu-latest
@@ -15,10 +19,10 @@ jobs:
       - name: Inyectar el script en InfantilB.html
         run: |
           python3 - <<'PY'
-          import sys
+          import os, sys
 
-          HTML = "Categorias/InfantilB.html"          # cambia la ruta si está en otra carpeta
-          JS   = "scripts/infantilb-extra.js"
+          HTML = os.environ["HTML"]
+          JS   = os.environ["JS"]
           INI  = "<!-- infantilb-extra:inicio -->"
           FIN  = "<!-- infantilb-extra:fin -->"
 
@@ -51,6 +55,6 @@ jobs:
           fi
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add InfantilB.html
+          git add "$HTML"
           git commit -m "Aplicar infantilb-extra (cromos camiseta y selector de goleador)"
           git push

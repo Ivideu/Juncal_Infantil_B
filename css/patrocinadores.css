@@ -16,7 +16,10 @@ body.has-spons{padding-bottom:var(--spons-h,72px)}
 /* Pista en movimiento: dos mitades idénticas y se desplaza -50% en bucle */
 #spons .sp-track{display:flex;align-items:center;width:max-content;height:100%;animation:spMove var(--dur,40s) linear infinite;will-change:transform}
 #spons.sp-der .sp-track{animation-direction:reverse}
-#spons:hover .sp-track,#spons:focus-within .sp-track{animation-play-state:paused}
+@media (hover:hover) and (pointer:fine){
+  #spons:hover .sp-track{animation-play-state:paused}
+}
+#spons .sp-it:focus:not(:focus-visible){outline:none}
 @keyframes spMove{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 
 #spons .sp-half,#spons .sp-grp{display:flex;align-items:center}

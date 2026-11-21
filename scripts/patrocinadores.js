@@ -67,4 +67,20 @@
   let t;
   addEventListener("resize", () => { clearTimeout(t); t = setTimeout(montar, 200); });
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => { repeticiones = 0; montar(); });
+
+  /* Tras pinchar un logo (o al volver a la pestaña / desde caché) la barra siempre se reanuda */
+  function reanudar() {
+    if (document.activeElement && barra.contains(document.activeElement)) document.activeElement.blur();
+    pista.style.animation = "none";
+    void pista.offsetWidth;          /* fuerza el reinicio de la animación */
+    pista.style.animation = "";
+  }
+  barra.addEventListener("click", e => {
+    const a = e.target.closest("a");
+    if (a) setTimeout(() => a.blur(), 0);
+  });
+  addEventListener("pageshow", e => { if (e.persisted) reanudar(); });   /* vuelta con el botón "atrás" (bfcache) */
+  document.addEventListener("visibilitychange", () => { if (!document.hidden) reanudar(); });
+  addEventListener("focus", reanudar);                                    /* al volver desde la otra pestaña */
+
 })();

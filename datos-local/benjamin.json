@@ -1,7 +1,7 @@
 {
  "id": "benjamin",
  "nombre": "Benjamín",
- "actualizado": "2026-11-21T07:57:36Z",
+ "actualizado": "2026-11-21T11:58:58Z",
  "fuente": {
   "calendario": [
    "https://deportes.ayto-torrejon.es/sites/default/files/users/user355/CALENDARIO%20BENJAMIN%20LIGA%20DE%20CAMPEON%20.2627.pdf"
@@ -54,6 +54,614 @@
      "fecha": "2026-10-17",
      "dia": "S",
      "hora": "13:00"
+    }
+   ]
+  },
+  {
+   "n": 2,
+   "descansa": null,
+   "partidos": [
+    {
+     "local": "Rivillos Limones 5 \"A\"",
+     "visitante": "Ciud.Torrejon \"A\"",
+     "campo": "",
+     "fecha": "2026-10-24",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Rivillos Limones 5 \"B\"",
+     "visitante": "Zarzuela T.Juncal",
+     "campo": "",
+     "fecha": "2026-10-24",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Severo Torrejon",
+     "visitante": "Torrejon Juncal",
+     "campo": "",
+     "fecha": "2026-10-24",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Torrejon Sala \"A\"",
+     "visitante": "Humanitas",
+     "campo": "",
+     "fecha": "2026-10-24",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Torrejon Sala \"B\"",
+     "visitante": "Ciud.Torrejon \"B\"",
+     "campo": "",
+     "fecha": "2026-10-24",
+     "dia": "S",
+     "hora": ""
+    }
+   ]
+  },
+  {
+   "n": 4,
+   "descansa": null,
+   "partidos": [
+    {
+     "local": "Rivillos Limones 5 \"B\"",
+     "visitante": "Ciud.Torrejon \"A\"",
+     "campo": "NURIA FDEZ 1",
+     "fecha": "2026-11-14",
+     "dia": "S",
+     "hora": "10:00",
+     "ga": 0,
+     "gb": 9
+    },
+    {
+     "local": "Severo Torrejon",
+     "visitante": "Rivillos Limones 5 \"A\"",
+     "campo": "NURIA FDEZ 3",
+     "fecha": "2026-11-14",
+     "dia": "S",
+     "hora": "14:00",
+     "ga": 2,
+     "gb": 5
+    },
+    {
+     "local": "Torrejon Sala \"A\"",
+     "visitante": "Zarzuela T.Juncal",
+     "campo": "NURIA FDEZ 1",
+     "fecha": "2026-11-14",
+     "dia": "S",
+     "hora": "13:00",
+     "ga": 2,
+     "gb": 6
+    },
+    {
+     "local": "Torrejon Sala \"B\"",
+     "visitante": "Torrejon Juncal",
+     "campo": "NURIA FDEZ 2",
+     "fecha": "2026-11-14",
+     "dia": "S",
+     "hora": "10:00",
+     "ga": 0,
+     "gb": 8
+    },
+    {
+     "local": "Ciud.Torrejon \"B\"",
+     "visitante": "Humanitas",
+     "campo": "NURIA FDEZ 2",
+     "fecha": "2026-11-14",
+     "dia": "S",
+     "hora": "11:00",
+     "ga": 10,
+     "gb": 3
+    }
+   ]
+  },
+  {
+   "n": 5,
+   "descansa": null,
+   "partidos": [
+    {
+     "local": "Rivillos Limones 5 \"B\"",
+     "visitante": "Severo Torrejon",
+     "campo": "NURIA FDEZ 3",
+     "fecha": "2026-11-22",
+     "dia": "D",
+     "hora": "14:00"
+    },
+    {
+     "local": "Rivillos Limones 5 \"A\"",
+     "visitante": "Torrejon Sala \"A\"",
+     "campo": "NURIA FDEZ 1",
+     "fecha": "2026-11-22",
+     "dia": "D",
+     "hora": "10:00"
+    },
+    {
+     "local": "Zarzuela T.Juncal",
+     "visitante": "Torrejon Sala \"B\"",
+     "campo": "NURIA FDEZ 2",
+     "fecha": "2026-11-22",
+     "dia": "D",
+     "hora": "11:00"
+    },
+    {
+     "local": "Torrejon Juncal",
+     "visitante": "Ciud.Torrejon \"B\"",
+     "campo": "NURIA FDEZ 2",
+     "fecha": "2026-11-22",
+     "dia": "D",
+     "hora": "13:00"
+    },
+    {
+     "local": "Ciud.Torrejon \"A\"",
+     "visitante": "Humanitas",
+     "campo": "NURIA FDEZ 1",
+     "fecha": "2026-11-22",
+     "dia": "D",
+     "hora": "11:00"
+    }
+   ]
+  },
+  {
+   "n": 6,
+   "descansa": null,
+   "partidos": [
+    {
+     "local": "Severo Torrejon",
+     "visitante": "Ciud.Torrejon \"A\"",
+     "campo": "",
+     "fecha": "2026-11-28",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Torrejon Sala \"A\"",
+     "visitante": "Rivillos Limones 5 \"B\"",
+     "campo": "",
+     "fecha": "2026-11-28",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Torrejon Sala \"B\"",
+     "visitante": "Rivillos Limones 5 \"A\"",
+     "campo": "",
+     "fecha": "2026-11-28",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Ciud.Torrejon \"B\"",
+     "visitante": "Zarzuela T.Juncal",
+     "campo": "",
+     "fecha": "2026-11-28",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Humanitas",
+     "visitante": "Torrejon Juncal",
+     "campo": "",
+     "fecha": "2026-11-28",
+     "dia": "S",
+     "hora": ""
+    }
+   ]
+  },
+  {
+   "n": 7,
+   "descansa": null,
+   "partidos": [
+    {
+     "local": "Severo Torrejon",
+     "visitante": "Torrejon Sala \"A\"",
+     "campo": "",
+     "fecha": "2026-12-12",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Rivillos Limones 5 \"B\"",
+     "visitante": "Torrejon Sala \"B\"",
+     "campo": "",
+     "fecha": "2026-12-12",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Rivillos Limones 5 \"A\"",
+     "visitante": "Ciud.Torrejon \"B\"",
+     "campo": "",
+     "fecha": "2026-12-12",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Zarzuela T.Juncal",
+     "visitante": "Humanitas",
+     "campo": "",
+     "fecha": "2026-12-12",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Ciud.Torrejon \"A\"",
+     "visitante": "Torrejon Juncal",
+     "campo": "",
+     "fecha": "2026-12-12",
+     "dia": "S",
+     "hora": ""
+    }
+   ]
+  },
+  {
+   "n": 8,
+   "descansa": null,
+   "partidos": [
+    {
+     "local": "Torrejon Sala \"A\"",
+     "visitante": "Ciud.Torrejon \"A\"",
+     "campo": "",
+     "fecha": "2026-12-19",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Torrejon Sala \"B\"",
+     "visitante": "Severo Torrejon",
+     "campo": "",
+     "fecha": "2026-12-19",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Ciud.Torrejon \"B\"",
+     "visitante": "Rivillos Limones 5 \"B\"",
+     "campo": "",
+     "fecha": "2026-12-19",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Humanitas",
+     "visitante": "Rivillos Limones 5 \"A\"",
+     "campo": "",
+     "fecha": "2026-12-19",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Torrejon Juncal",
+     "visitante": "Zarzuela T.Juncal",
+     "campo": "",
+     "fecha": "2026-12-19",
+     "dia": "S",
+     "hora": ""
+    }
+   ]
+  },
+  {
+   "n": 9,
+   "descansa": null,
+   "partidos": [
+    {
+     "local": "Torrejon Sala \"A\"",
+     "visitante": "Torrejon Sala \"B\"",
+     "campo": "",
+     "fecha": "2027-01-16",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Severo Torrejon",
+     "visitante": "Ciud.Torrejon \"B\"",
+     "campo": "",
+     "fecha": "2027-01-16",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Rivillos Limones 5 \"B\"",
+     "visitante": "Humanitas",
+     "campo": "",
+     "fecha": "2027-01-16",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Rivillos Limones 5 \"A\"",
+     "visitante": "Torrejon Juncal",
+     "campo": "",
+     "fecha": "2027-01-16",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Ciud.Torrejon \"A\"",
+     "visitante": "Zarzuela T.Juncal",
+     "campo": "",
+     "fecha": "2027-01-16",
+     "dia": "S",
+     "hora": ""
+    }
+   ]
+  },
+  {
+   "n": 10,
+   "descansa": null,
+   "partidos": [
+    {
+     "local": "Rivillos Limones 5 \"A\"",
+     "visitante": "Zarzuela T.Juncal",
+     "campo": "",
+     "fecha": "2027-01-23",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Rivillos Limones 5 \"B\"",
+     "visitante": "Torrejon Juncal",
+     "campo": "",
+     "fecha": "2027-01-23",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Severo Torrejon",
+     "visitante": "Humanitas",
+     "campo": "",
+     "fecha": "2027-01-23",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Torrejon Sala \"A\"",
+     "visitante": "Ciud.Torrejon \"B\"",
+     "campo": "",
+     "fecha": "2027-01-23",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Torrejon Sala \"B\"",
+     "visitante": "Ciud.Torrejon \"A\"",
+     "campo": "",
+     "fecha": "2027-01-23",
+     "dia": "S",
+     "hora": ""
+    }
+   ]
+  },
+  {
+   "n": 11,
+   "descansa": null,
+   "partidos": [
+    {
+     "local": "Ciud.Torrejon \"A\"",
+     "visitante": "Rivillos Limones 5 \"A\"",
+     "campo": "",
+     "fecha": "2027-01-30",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Zarzuela T.Juncal",
+     "visitante": "Rivillos Limones 5 \"B\"",
+     "campo": "",
+     "fecha": "2027-01-30",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Torrejon Juncal",
+     "visitante": "Severo Torrejon",
+     "campo": "",
+     "fecha": "2027-01-30",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Humanitas",
+     "visitante": "Torrejon Sala \"A\"",
+     "campo": "",
+     "fecha": "2027-01-30",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Ciud.Torrejon \"B\"",
+     "visitante": "Torrejon Sala \"B\"",
+     "campo": "",
+     "fecha": "2027-01-30",
+     "dia": "S",
+     "hora": ""
+    }
+   ]
+  },
+  {
+   "n": 13,
+   "descansa": null,
+   "partidos": [
+    {
+     "local": "Ciud.Torrejon \"A\"",
+     "visitante": "Rivillos Limones 5 \"B\"",
+     "campo": "",
+     "fecha": "2027-02-20",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Rivillos Limones 5 \"A\"",
+     "visitante": "Severo Torrejon",
+     "campo": "",
+     "fecha": "2027-02-20",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Zarzuela T.Juncal",
+     "visitante": "Torrejon Sala \"A\"",
+     "campo": "",
+     "fecha": "2027-02-20",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Torrejon Juncal",
+     "visitante": "Torrejon Sala \"B\"",
+     "campo": "",
+     "fecha": "2027-02-20",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Humanitas",
+     "visitante": "Ciud.Torrejon \"B\"",
+     "campo": "",
+     "fecha": "2027-02-20",
+     "dia": "S",
+     "hora": ""
+    }
+   ]
+  },
+  {
+   "n": 14,
+   "descansa": null,
+   "partidos": [
+    {
+     "local": "Severo Torrejon",
+     "visitante": "Rivillos Limones 5 \"B\"",
+     "campo": "",
+     "fecha": "2027-02-27",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Torrejon Sala \"A\"",
+     "visitante": "Rivillos Limones 5 \"A\"",
+     "campo": "",
+     "fecha": "2027-02-27",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Torrejon Sala \"B\"",
+     "visitante": "Zarzuela T.Juncal",
+     "campo": "",
+     "fecha": "2027-02-27",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Ciud.Torrejon \"B\"",
+     "visitante": "Torrejon Juncal",
+     "campo": "",
+     "fecha": "2027-02-27",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Humanitas",
+     "visitante": "Ciud.Torrejon \"A\"",
+     "campo": "",
+     "fecha": "2027-02-27",
+     "dia": "S",
+     "hora": ""
+    }
+   ]
+  },
+  {
+   "n": 16,
+   "descansa": null,
+   "partidos": [
+    {
+     "local": "Torrejon Sala \"A\"",
+     "visitante": "Severo Torrejon",
+     "campo": "",
+     "fecha": "2027-03-13",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Torrejon Sala \"B\"",
+     "visitante": "Rivillos Limones 5 \"B\"",
+     "campo": "",
+     "fecha": "2027-03-13",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Ciud.Torrejon \"B\"",
+     "visitante": "Rivillos Limones 5 \"A\"",
+     "campo": "",
+     "fecha": "2027-03-13",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Humanitas",
+     "visitante": "Zarzuela T.Juncal",
+     "campo": "",
+     "fecha": "2027-03-13",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Torrejon Juncal",
+     "visitante": "Ciud.Torrejon \"A\"",
+     "campo": "",
+     "fecha": "2027-03-13",
+     "dia": "S",
+     "hora": ""
+    }
+   ]
+  },
+  {
+   "n": 18,
+   "descansa": null,
+   "partidos": [
+    {
+     "local": "Torrejon Sala \"B\"",
+     "visitante": "Torrejon Sala \"A\"",
+     "campo": "",
+     "fecha": "2027-04-10",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Ciud.Torrejon \"B\"",
+     "visitante": "Severo Torrejon",
+     "campo": "",
+     "fecha": "2027-04-10",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Humanitas",
+     "visitante": "Rivillos Limones 5 \"B\"",
+     "campo": "",
+     "fecha": "2027-04-10",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Torrejon Juncal",
+     "visitante": "Rivillos Limones 5 \"A\"",
+     "campo": "",
+     "fecha": "2027-04-10",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Zarzuela T.Juncal",
+     "visitante": "Ciud.Torrejon \"A\"",
+     "campo": "",
+     "fecha": "2027-04-10",
+     "dia": "S",
+     "hora": ""
     }
    ]
   }
@@ -133,7 +741,7 @@
   },
   {
    "pos": 7,
-   "equipo": "Rivillos Limones",
+   "equipo": "Rivillos Limones 5 \"A\"",
    "pj": 4,
    "g": 2,
    "e": 0,
@@ -157,7 +765,7 @@
   },
   {
    "pos": 9,
-   "equipo": "Rivillos Limones",
+   "equipo": "Rivillos Limones 5 \"B\"",
    "pj": 4,
    "g": 0,
    "e": 0,
@@ -180,73 +788,7 @@
    "pts": 0
   }
  ],
- "avisos": [
-  "Jornada 2: no sé separar equipos y campo en «RIVILLOS LIMONES 5 \"A\"         CIUD.TORREJON \"A\"» (columnas: 2)",
-  "Jornada 2: no sé separar equipos y campo en «RIVILLOS LIMONES 5 \"B\"         ZARZUELA T.JUNCAL» (columnas: 2)",
-  "Jornada 2: no sé separar equipos y campo en «SEVERO TORREJON             TORREJON JUNCAL» (columnas: 2)",
-  "Jornada 2: no sé separar equipos y campo en «TORREJON SALA \"A\"           HUMANITAS» (columnas: 2)",
-  "Jornada 2: no sé separar equipos y campo en «TORREJON SALA \"B\"           CIUD.TORREJON \"B\"» (columnas: 2)",
-  "Jornada 4: no sé separar equipos y campo en «RIVILLOS LIMONES 5 \"B\"         CIUD.TORREJON \"A\"» (columnas: 2)",
-  "Jornada 4: no sé separar equipos y campo en «SEVERO TORREJON             RIVILLOS LIMONES 5 \"A\"» (columnas: 2)",
-  "Jornada 4: no sé separar equipos y campo en «TORREJON SALA \"A\"           ZARZUELA T.JUNCAL» (columnas: 2)",
-  "Jornada 4: no sé separar equipos y campo en «TORREJON SALA \"B\"           TORREJON JUNCAL» (columnas: 2)",
-  "Jornada 4: no sé separar equipos y campo en «CIUD.TORREJON \"B\"           HUMANITAS» (columnas: 2)",
-  "Jornada 5: no sé separar equipos y campo en «RIVILLOS LIMONES 5 \"B\"         SEVERO TORREJON» (columnas: 2)",
-  "Jornada 5: no sé separar equipos y campo en «RIVILLOS LIMONES 5 \"A\"         TORREJON SALA \"A\"» (columnas: 2)",
-  "Jornada 5: no sé separar equipos y campo en «ZARZUELA T.JUNCAL           TORREJON SALA \"B\"» (columnas: 2)",
-  "Jornada 5: no sé separar equipos y campo en «TORREJON JUNCAL             CIUD.TORREJON \"B\"» (columnas: 2)",
-  "Jornada 5: no sé separar equipos y campo en «CIUD.TORREJON \"A\"           HUMANITAS» (columnas: 2)",
-  "Jornada 6: no sé separar equipos y campo en «SEVERO TORREJON             CIUD.TORREJON \"A\"» (columnas: 2)",
-  "Jornada 6: no sé separar equipos y campo en «TORREJON SALA \"A\"           RIVILLOS LIMONES 5 \"B\"» (columnas: 2)",
-  "Jornada 6: no sé separar equipos y campo en «TORREJON SALA \"B\"           RIVILLOS LIMONES 5 \"A\"» (columnas: 2)",
-  "Jornada 6: no sé separar equipos y campo en «CIUD.TORREJON \"B\"           ZARZUELA T.JUNCAL» (columnas: 2)",
-  "Jornada 6: no sé separar equipos y campo en «HUMANITAS           TORREJON JUNCAL» (columnas: 2)",
-  "Jornada 7: no sé separar equipos y campo en «SEVERO TORREJON             TORREJON SALA \"A\"» (columnas: 2)",
-  "Jornada 7: no sé separar equipos y campo en «RIVILLOS LIMONES 5 \"B\"         TORREJON SALA \"B\"» (columnas: 2)",
-  "Jornada 7: no sé separar equipos y campo en «RIVILLOS LIMONES 5 \"A\"         CIUD.TORREJON \"B\"» (columnas: 2)",
-  "Jornada 7: no sé separar equipos y campo en «ZARZUELA T.JUNCAL           HUMANITAS» (columnas: 2)",
-  "Jornada 7: no sé separar equipos y campo en «CIUD.TORREJON \"A\"           TORREJON JUNCAL» (columnas: 2)",
-  "Jornada 8: no sé separar equipos y campo en «TORREJON SALA \"A\"           CIUD.TORREJON \"A\"» (columnas: 2)",
-  "Jornada 8: no sé separar equipos y campo en «TORREJON SALA \"B\"           SEVERO TORREJON» (columnas: 2)",
-  "Jornada 8: no sé separar equipos y campo en «CIUD.TORREJON \"B\"           RIVILLOS LIMONES 5 \"B\"» (columnas: 2)",
-  "Jornada 8: no sé separar equipos y campo en «HUMANITAS           RIVILLOS LIMONES 5 \"A\"» (columnas: 2)",
-  "Jornada 8: no sé separar equipos y campo en «TORREJON JUNCAL             ZARZUELA T.JUNCAL» (columnas: 2)",
-  "Jornada 9: no sé separar equipos y campo en «TORREJON SALA \"A\"           TORREJON SALA \"B\"» (columnas: 2)",
-  "Jornada 9: no sé separar equipos y campo en «SEVERO TORREJON             CIUD.TORREJON \"B\"» (columnas: 2)",
-  "Jornada 9: no sé separar equipos y campo en «RIVILLOS LIMONES 5 \"B\"         HUMANITAS» (columnas: 2)",
-  "Jornada 9: no sé separar equipos y campo en «RIVILLOS LIMONES 5 \"A\"         TORREJON JUNCAL» (columnas: 2)",
-  "Jornada 9: no sé separar equipos y campo en «CIUD.TORREJON \"A\"           ZARZUELA T.JUNCAL» (columnas: 2)",
-  "Jornada 10: no sé separar equipos y campo en «RIVILLOS LIMONES 5 \"A\"         ZARZUELA T.JUNCAL» (columnas: 2)",
-  "Jornada 10: no sé separar equipos y campo en «RIVILLOS LIMONES 5 \"B\"         TORREJON JUNCAL» (columnas: 2)",
-  "Jornada 10: no sé separar equipos y campo en «SEVERO TORREJON             HUMANITAS» (columnas: 2)",
-  "Jornada 10: no sé separar equipos y campo en «TORREJON SALA \"A\"           CIUD.TORREJON \"B\"» (columnas: 2)",
-  "Jornada 10: no sé separar equipos y campo en «TORREJON SALA \"B\"           CIUD.TORREJON \"A\"» (columnas: 2)",
-  "Jornada 11: no sé separar equipos y campo en «CIUD.TORREJON \"A\"           RIVILLOS LIMONES 5 \"A\"» (columnas: 2)",
-  "Jornada 11: no sé separar equipos y campo en «ZARZUELA T.JUNCAL           RIVILLOS LIMONES 5 \"B\"» (columnas: 2)",
-  "Jornada 11: no sé separar equipos y campo en «TORREJON JUNCAL             SEVERO TORREJON» (columnas: 2)",
-  "Jornada 11: no sé separar equipos y campo en «HUMANITAS           TORREJON SALA \"A\"» (columnas: 2)",
-  "Jornada 11: no sé separar equipos y campo en «CIUD.TORREJON \"B\"           TORREJON SALA \"B\"» (columnas: 2)",
-  "Jornada 13: no sé separar equipos y campo en «CIUD.TORREJON \"A\"           RIVILLOS LIMONES 5 \"B\"» (columnas: 2)",
-  "Jornada 13: no sé separar equipos y campo en «RIVILLOS LIMONES 5 \"A\"         SEVERO TORREJON» (columnas: 2)",
-  "Jornada 13: no sé separar equipos y campo en «ZARZUELA T.JUNCAL           TORREJON SALA \"A\"» (columnas: 2)",
-  "Jornada 13: no sé separar equipos y campo en «TORREJON JUNCAL             TORREJON SALA \"B\"» (columnas: 2)",
-  "Jornada 13: no sé separar equipos y campo en «HUMANITAS           CIUD.TORREJON \"B\"» (columnas: 2)",
-  "Jornada 14: no sé separar equipos y campo en «SEVERO TORREJON             RIVILLOS LIMONES 5 \"B\"» (columnas: 2)",
-  "Jornada 14: no sé separar equipos y campo en «TORREJON SALA \"A\"           RIVILLOS LIMONES 5 \"A\"» (columnas: 2)",
-  "Jornada 14: no sé separar equipos y campo en «TORREJON SALA \"B\"           ZARZUELA T.JUNCAL» (columnas: 2)",
-  "Jornada 14: no sé separar equipos y campo en «CIUD.TORREJON \"B\"           TORREJON JUNCAL» (columnas: 2)",
-  "Jornada 14: no sé separar equipos y campo en «HUMANITAS           CIUD.TORREJON \"A\"» (columnas: 2)",
-  "Jornada 16: no sé separar equipos y campo en «TORREJON SALA \"A\"           SEVERO TORREJON» (columnas: 2)",
-  "Jornada 16: no sé separar equipos y campo en «TORREJON SALA \"B\"           RIVILLOS LIMONES 5 \"B\"» (columnas: 2)",
-  "Jornada 16: no sé separar equipos y campo en «CIUD.TORREJON \"B\"           RIVILLOS LIMONES 5 \"A\"» (columnas: 2)",
-  "Jornada 16: no sé separar equipos y campo en «HUMANITAS           ZARZUELA T.JUNCAL» (columnas: 2)",
-  "Jornada 16: no sé separar equipos y campo en «TORREJON JUNCAL             CIUD.TORREJON \"A\"» (columnas: 2)",
-  "Jornada 18: no sé separar equipos y campo en «TORREJON SALA \"B\"           TORREJON SALA \"A\"» (columnas: 2)",
-  "Jornada 18: no sé separar equipos y campo en «CIUD.TORREJON \"B\"           SEVERO TORREJON» (columnas: 2)",
-  "Jornada 18: no sé separar equipos y campo en «HUMANITAS           RIVILLOS LIMONES 5 \"B\"» (columnas: 2)",
-  "Jornada 18: no sé separar equipos y campo en «TORREJON JUNCAL             RIVILLOS LIMONES 5 \"A\"» (columnas: 2)",
-  "Jornada 18: no sé separar equipos y campo en «ZARZUELA T.JUNCAL           CIUD.TORREJON \"A\"» (columnas: 2)"
- ],
+ "avisos": [],
  "equipos": [
   "Ciud.Torrejon \"A\"",
   "Ciud.Torrejon \"B\"",

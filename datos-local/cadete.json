@@ -1,7 +1,7 @@
 {
  "id": "cadete",
  "nombre": "Cadete",
- "actualizado": "2026-11-21T07:57:36Z",
+ "actualizado": "2026-11-21T11:58:58Z",
  "fuente": {
   "calendario": [
    "https://deportes.ayto-torrejon.es/sites/default/files/users/user355/CALENDARIO%20CADETE%20CAMPEON%20DE%20INVIERNO%20.2627.pdf"
@@ -44,27 +44,158 @@
   {
    "n": 2,
    "descansa": "Rivillos Limones 5 \"B\"",
-   "partidos": []
+   "partidos": [
+    {
+     "local": "Rivillos Limones 5 \"A\"",
+     "visitante": "Ciud.Torrejon \"B\"",
+     "campo": "",
+     "fecha": "2026-10-24",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Severo Torrejon",
+     "visitante": "Leon Felipe",
+     "campo": "",
+     "fecha": "2026-10-24",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Ciud.Torrejon \"A\"",
+     "visitante": "Torrejon Juncal",
+     "campo": "",
+     "fecha": "2026-10-24",
+     "dia": "S",
+     "hora": ""
+    }
+   ]
   },
   {
    "n": 4,
    "descansa": "Ciud.Torrejon \"A\"",
-   "partidos": []
+   "partidos": [
+    {
+     "local": "Rivillos Limones 5 \"B\"",
+     "visitante": "Ciud.Torrejon \"B\"",
+     "campo": "NURIA FDEZ 1",
+     "fecha": "2026-11-15",
+     "dia": "D",
+     "hora": "14:00",
+     "ga": 0,
+     "gb": 4
+    },
+    {
+     "local": "Severo Torrejon",
+     "visitante": "Rivillos Limones 5 \"A\"",
+     "campo": "NURIA FDEZ 2",
+     "fecha": "2026-11-15",
+     "dia": "D",
+     "hora": "10:00",
+     "ga": 2,
+     "gb": 1
+    },
+    {
+     "local": "Torrejon Juncal",
+     "visitante": "Leon Felipe",
+     "campo": "NURIA FDEZ 2",
+     "fecha": "2026-11-15",
+     "dia": "D",
+     "hora": "13:00",
+     "ga": 2,
+     "gb": 6
+    }
+   ]
   },
   {
    "n": 5,
    "descansa": "Torrejon Juncal",
-   "partidos": []
+   "partidos": [
+    {
+     "local": "Rivillos Limones 5 \"B\"",
+     "visitante": "Severo Torrejon",
+     "campo": "NURIA FDEZ 2",
+     "fecha": "2026-11-22",
+     "dia": "D",
+     "hora": "14:00"
+    },
+    {
+     "local": "Rivillos Limones 5 \"A\"",
+     "visitante": "Ciud.Torrejon \"A\"",
+     "campo": "NURIA FDEZ 2",
+     "fecha": "2026-11-22",
+     "dia": "D",
+     "hora": "10:00"
+    },
+    {
+     "local": "Ciud.Torrejon \"B\"",
+     "visitante": "Leon Felipe",
+     "campo": "NURIA FDEZ 1",
+     "fecha": "2026-11-22",
+     "dia": "D",
+     "hora": "14:00"
+    }
+   ]
   },
   {
    "n": 6,
    "descansa": "Leon Felipe",
-   "partidos": []
+   "partidos": [
+    {
+     "local": "Severo Torrejon",
+     "visitante": "Ciud.Torrejon \"B\"",
+     "campo": "",
+     "fecha": "2026-11-28",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Ciud.Torrejon \"A\"",
+     "visitante": "Rivillos Limones 5 \"B\"",
+     "campo": "",
+     "fecha": "2026-11-28",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Torrejon Juncal",
+     "visitante": "Rivillos Limones 5 \"A\"",
+     "campo": "",
+     "fecha": "2026-11-28",
+     "dia": "S",
+     "hora": ""
+    }
+   ]
   },
   {
    "n": 7,
    "descansa": "Ciud.Torrejon \"B\"",
-   "partidos": []
+   "partidos": [
+    {
+     "local": "Severo Torrejon",
+     "visitante": "Ciud.Torrejon \"A\"",
+     "campo": "",
+     "fecha": "2026-12-12",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Rivillos Limones 5 \"B\"",
+     "visitante": "Torrejon Juncal",
+     "campo": "",
+     "fecha": "2026-12-12",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Rivillos Limones 5 \"A\"",
+     "visitante": "Leon Felipe",
+     "campo": "",
+     "fecha": "2026-12-12",
+     "dia": "S",
+     "hora": ""
+    }
+   ]
   }
  ],
  "clasificacion": [
@@ -106,7 +237,7 @@
   },
   {
    "pos": 4,
-   "equipo": "Rivillos Limones",
+   "equipo": "Rivillos Limones 5 \"A\"",
    "pj": 3,
    "g": 1,
    "e": 1,
@@ -142,7 +273,7 @@
   },
   {
    "pos": 7,
-   "equipo": "Rivillos Limones",
+   "equipo": "Rivillos Limones 5 \"B\"",
    "pj": 3,
    "g": 0,
    "e": 0,
@@ -153,27 +284,12 @@
    "pts": 0
   }
  ],
- "avisos": [
-  "Jornada 2: no sé separar equipos y campo en «RIVILLOS LIMONES 5 \"A\"         CIUD.TORREJON \"B\"» (columnas: 2)",
-  "Jornada 2: no sé separar equipos y campo en «SEVERO TORREJON             LEON FELIPE» (columnas: 2)",
-  "Jornada 2: no sé separar equipos y campo en «CIUD.TORREJON \"A\"           TORREJON JUNCAL» (columnas: 2)",
-  "Jornada 4: no sé separar equipos y campo en «RIVILLOS LIMONES 5 \"B\"         CIUD.TORREJON \"B\"» (columnas: 2)",
-  "Jornada 4: no sé separar equipos y campo en «SEVERO TORREJON             RIVILLOS LIMONES 5 \"A\"» (columnas: 2)",
-  "Jornada 4: no sé separar equipos y campo en «TORREJON JUNCAL             LEON FELIPE» (columnas: 2)",
-  "Jornada 5: no sé separar equipos y campo en «RIVILLOS LIMONES 5 \"B\"         SEVERO TORREJON» (columnas: 2)",
-  "Jornada 5: no sé separar equipos y campo en «RIVILLOS LIMONES 5 \"A\"         CIUD.TORREJON \"A\"» (columnas: 2)",
-  "Jornada 5: no sé separar equipos y campo en «CIUD.TORREJON \"B\"           LEON FELIPE» (columnas: 2)",
-  "Jornada 6: no sé separar equipos y campo en «SEVERO TORREJON             CIUD.TORREJON \"B\"» (columnas: 2)",
-  "Jornada 6: no sé separar equipos y campo en «CIUD.TORREJON \"A\"           RIVILLOS LIMONES 5 \"B\"» (columnas: 2)",
-  "Jornada 6: no sé separar equipos y campo en «TORREJON JUNCAL             RIVILLOS LIMONES 5 \"A\"» (columnas: 2)",
-  "Jornada 7: no sé separar equipos y campo en «SEVERO TORREJON             CIUD.TORREJON \"A\"» (columnas: 2)",
-  "Jornada 7: no sé separar equipos y campo en «RIVILLOS LIMONES 5 \"B\"         TORREJON JUNCAL» (columnas: 2)",
-  "Jornada 7: no sé separar equipos y campo en «RIVILLOS LIMONES 5 \"A\"         LEON FELIPE» (columnas: 2)"
- ],
+ "avisos": [],
  "equipos": [
   "Ciud.Torrejon \"A\"",
   "Ciud.Torrejon \"B\"",
   "Leon Felipe",
+  "Rivillos Limones 5 \"A\"",
   "Rivillos Limones 5 \"B\"",
   "Severo Torrejon",
   "Torrejon Juncal"

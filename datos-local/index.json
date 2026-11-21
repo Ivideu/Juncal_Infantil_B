@@ -1,126 +1,126 @@
 {
- "actualizado": "2026-11-21T07:57:36Z",
+ "actualizado": "2026-11-21T11:58:58Z",
  "categorias": [
   {
    "id": "senior-superliga",
    "nombre": "Senior Superliga",
-   "equipos": 0,
-   "jornadas": 0,
-   "partidos": 0,
-   "jugados": 0,
+   "equipos": 12,
+   "jornadas": 10,
+   "partidos": 60,
+   "jugados": 5,
    "juncal": false,
-   "avisos": 60,
-   "actualizado": "2026-11-21T07:57:36Z"
+   "avisos": 2,
+   "actualizado": "2026-11-21T11:58:58Z"
   },
   {
    "id": "senior-preferente",
    "nombre": "Senior Preferente",
-   "equipos": 0,
-   "jornadas": 0,
-   "partidos": 0,
-   "jugados": 0,
+   "equipos": 12,
+   "jornadas": 10,
+   "partidos": 60,
+   "jugados": 6,
    "juncal": false,
-   "avisos": 60,
-   "actualizado": "2026-11-21T07:57:36Z"
+   "avisos": 0,
+   "actualizado": "2026-11-21T11:58:58Z"
   },
   {
    "id": "senior-primera",
    "nombre": "Senior Primera",
-   "equipos": 0,
-   "jornadas": 0,
-   "partidos": 0,
-   "jugados": 0,
+   "equipos": 12,
+   "jornadas": 10,
+   "partidos": 60,
+   "jugados": 5,
    "juncal": false,
-   "avisos": 1,
-   "actualizado": "2026-11-21T07:57:36Z"
+   "avisos": 2,
+   "actualizado": "2026-11-21T11:58:58Z"
   },
   {
    "id": "senior-segunda",
    "nombre": "Senior Segunda",
-   "equipos": 0,
-   "jornadas": 0,
-   "partidos": 0,
-   "jugados": 0,
+   "equipos": 12,
+   "jornadas": 10,
+   "partidos": 60,
+   "jugados": 6,
    "juncal": false,
-   "avisos": 60,
-   "actualizado": "2026-11-21T07:57:36Z"
+   "avisos": 0,
+   "actualizado": "2026-11-21T11:58:58Z"
   },
   {
    "id": "senior-tercera",
    "nombre": "Senior Tercera",
-   "equipos": 0,
+   "equipos": 11,
    "jornadas": 10,
-   "partidos": 0,
-   "jugados": 0,
+   "partidos": 50,
+   "jugados": 4,
    "juncal": false,
-   "avisos": 50,
-   "actualizado": "2026-11-21T07:57:36Z"
+   "avisos": 0,
+   "actualizado": "2026-11-21T11:58:58Z"
   },
   {
    "id": "juvenil",
    "nombre": "Juvenil",
-   "equipos": 20,
+   "equipos": 21,
    "jornadas": 16,
-   "partidos": 10,
-   "jugados": 0,
+   "partidos": 160,
+   "jugados": 10,
    "juncal": false,
-   "avisos": 149,
-   "actualizado": "2026-11-21T07:57:36Z"
+   "avisos": 0,
+   "actualizado": "2026-11-21T11:58:58Z"
   },
   {
    "id": "cadete",
    "nombre": "Cadete",
-   "equipos": 6,
+   "equipos": 7,
    "jornadas": 6,
-   "partidos": 3,
-   "jugados": 0,
+   "partidos": 18,
+   "jugados": 3,
    "juncal": true,
-   "avisos": 15,
-   "actualizado": "2026-11-21T07:57:36Z"
+   "avisos": 0,
+   "actualizado": "2026-11-21T11:58:58Z"
   },
   {
    "id": "infantil",
    "nombre": "Infantil",
-   "equipos": 10,
+   "equipos": 11,
    "jornadas": 17,
-   "partidos": 5,
-   "jugados": 0,
+   "partidos": 85,
+   "jugados": 5,
    "juncal": true,
-   "avisos": 80,
-   "actualizado": "2026-11-21T07:57:36Z"
+   "avisos": 1,
+   "actualizado": "2026-11-21T11:58:58Z"
   },
   {
    "id": "alevin",
    "nombre": "Alevín",
-   "equipos": 8,
+   "equipos": 9,
    "jornadas": 14,
-   "partidos": 4,
-   "jugados": 0,
+   "partidos": 56,
+   "jugados": 4,
    "juncal": true,
-   "avisos": 52,
-   "actualizado": "2026-11-21T07:57:36Z"
+   "avisos": 0,
+   "actualizado": "2026-11-21T11:58:58Z"
   },
   {
    "id": "benjamin",
    "nombre": "Benjamín",
    "equipos": 10,
-   "jornadas": 1,
-   "partidos": 5,
-   "jugados": 0,
+   "jornadas": 14,
+   "partidos": 70,
+   "jugados": 5,
    "juncal": true,
-   "avisos": 65,
-   "actualizado": "2026-11-21T07:57:36Z"
+   "avisos": 0,
+   "actualizado": "2026-11-21T11:58:58Z"
   },
   {
    "id": "prebenjamin",
    "nombre": "Prebenjamín",
-   "equipos": 8,
+   "equipos": 9,
    "jornadas": 14,
-   "partidos": 4,
+   "partidos": 56,
    "jugados": 0,
    "juncal": true,
-   "avisos": 52,
-   "actualizado": "2026-11-21T07:57:36Z"
+   "avisos": 0,
+   "actualizado": "2026-11-21T11:58:58Z"
   }
  ]
 }

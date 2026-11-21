@@ -1,117 +1,631 @@
 {
  "id": "senior-tercera",
  "nombre": "Senior Tercera",
- "actualizado": "2026-11-21T07:57:36Z",
+ "actualizado": "2026-11-21T11:58:58Z",
  "fuente": {
   "calendario": [
    "https://deportes.ayto-torrejon.es/sites/default/files/users/user355/CALENDARIO%20TERCERA%20CAMPEON%20DE%20INVIERNO%20.2627.pdf"
   ],
-  "jornada": []
+  "jornada": [
+   "https://deportes.ayto-torrejon.es/sites/default/files/users/user355/HORARIOS%20TERCERA%20%20SENIOR%2021%20Y%2022%20NOVIEMBRE.pdf"
+  ]
  },
  "jornadas": [
   {
    "n": 1,
    "descansa": "Vermeer",
-   "partidos": []
+   "partidos": [
+    {
+     "local": "Taka Taka \"B\"",
+     "visitante": "Noctra Torrejon \"B\"",
+     "campo": "",
+     "fecha": "2026-10-17",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Borussia Donuts",
+     "visitante": "Adn Futsal",
+     "campo": "",
+     "fecha": "2026-10-17",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Class Hairsalon",
+     "visitante": "Torrejon Hortaleza",
+     "campo": "",
+     "fecha": "2026-10-17",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Real Fachadolid",
+     "visitante": "Fifita",
+     "campo": "",
+     "fecha": "2026-10-17",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Limoneta Og",
+     "visitante": "Aguilas Team",
+     "campo": "",
+     "fecha": "2026-10-17",
+     "dia": "S",
+     "hora": ""
+    }
+   ]
   },
   {
    "n": 2,
    "descansa": "Noctra Torrejon \"B\"",
-   "partidos": []
+   "partidos": [
+    {
+     "local": "Vermeer",
+     "visitante": "Limoneta Og",
+     "campo": "",
+     "fecha": "2026-10-24",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Adn Futsal",
+     "visitante": "Taka Taka \"B\"",
+     "campo": "",
+     "fecha": "2026-10-24",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Torrejon Hortaleza",
+     "visitante": "Borussia Donuts",
+     "campo": "",
+     "fecha": "2026-10-24",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Fifita",
+     "visitante": "Class Hairsalon",
+     "campo": "",
+     "fecha": "2026-10-24",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Aguilas Team",
+     "visitante": "Real Fachadolid",
+     "campo": "",
+     "fecha": "2026-10-24",
+     "dia": "S",
+     "hora": ""
+    }
+   ]
   },
   {
    "n": 4,
    "descansa": "Torrejon Hortaleza",
-   "partidos": []
+   "partidos": [
+    {
+     "local": "Noctra Torrejon \"B\"",
+     "visitante": "Limoneta Og",
+     "campo": "NURIA FDEZ 3",
+     "fecha": "2026-11-15",
+     "dia": "D",
+     "hora": "17:00",
+     "ga": 4,
+     "gb": 0
+    },
+    {
+     "local": "Adn Futsal",
+     "visitante": "Vermeer",
+     "campo": "JAVI LIMONES",
+     "fecha": "2026-11-15",
+     "dia": "D",
+     "hora": "11:00",
+     "ga": 5,
+     "gb": 2
+    },
+    {
+     "local": "Fifita",
+     "visitante": "Taka Taka \"B\"",
+     "campo": "M-4",
+     "fecha": "2026-11-15",
+     "dia": "D",
+     "hora": "18:00",
+     "ga": 4,
+     "gb": 1
+    },
+    {
+     "local": "Aguilas Team",
+     "visitante": "Borussia Donuts",
+     "campo": "NURIA FDEZ 2",
+     "fecha": "2026-11-15",
+     "dia": "D",
+     "hora": "19:00"
+    },
+    {
+     "local": "Real Fachadolid",
+     "visitante": "Class Hairsalon",
+     "campo": "NURIA FDEZ 3",
+     "fecha": "2026-11-15",
+     "dia": "D",
+     "hora": "18:00",
+     "ga": 3,
+     "gb": 4
+    }
+   ]
   },
   {
    "n": 5,
    "descansa": "Fifita",
-   "partidos": []
+   "partidos": [
+    {
+     "local": "Noctra Torrejon \"B\"",
+     "visitante": "Adn Futsal",
+     "campo": "JAVI LIMONES",
+     "fecha": "2026-11-22",
+     "dia": "D",
+     "hora": "10:00"
+    },
+    {
+     "local": "Vermeer",
+     "visitante": "Torrejon Hortaleza",
+     "campo": "NURIA FDEZ 3",
+     "fecha": "2026-11-22",
+     "dia": "D",
+     "hora": "17:00"
+    },
+    {
+     "local": "Taka Taka \"B\"",
+     "visitante": "Aguilas Team",
+     "campo": "J.GARBAJOSA",
+     "fecha": "2026-11-22",
+     "dia": "D",
+     "hora": "15:00"
+    },
+    {
+     "local": "Borussia Donuts",
+     "visitante": "Real Fachadolid",
+     "campo": "NURIA FDEZ 2",
+     "fecha": "2026-11-22",
+     "dia": "D",
+     "hora": "18:00"
+    },
+    {
+     "local": "Limoneta Og",
+     "visitante": "Class Hairsalon",
+     "campo": "NURIA FDEZ 3",
+     "fecha": "2026-11-22",
+     "dia": "D",
+     "hora": "16:00"
+    }
+   ]
   },
   {
    "n": 6,
    "descansa": "Aguilas Team",
-   "partidos": []
+   "partidos": [
+    {
+     "local": "Adn Futsal",
+     "visitante": "Limoneta Og",
+     "campo": "",
+     "fecha": "2026-11-28",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Torrejon Hortaleza",
+     "visitante": "Noctra Torrejon \"B\"",
+     "campo": "",
+     "fecha": "2026-11-28",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Fifita",
+     "visitante": "Vermeer",
+     "campo": "",
+     "fecha": "2026-11-28",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Real Fachadolid",
+     "visitante": "Taka Taka \"B\"",
+     "campo": "",
+     "fecha": "2026-11-28",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Class Hairsalon",
+     "visitante": "Borussia Donuts",
+     "campo": "",
+     "fecha": "2026-11-28",
+     "dia": "S",
+     "hora": ""
+    }
+   ]
   },
   {
    "n": 7,
    "descansa": "Real Fachadolid",
-   "partidos": []
+   "partidos": [
+    {
+     "local": "Adn Futsal",
+     "visitante": "Torrejon Hortaleza",
+     "campo": "",
+     "fecha": "2026-12-12",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Noctra Torrejon \"B\"",
+     "visitante": "Fifita",
+     "campo": "",
+     "fecha": "2026-12-12",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Vermeer",
+     "visitante": "Aguilas Team",
+     "campo": "",
+     "fecha": "2026-12-12",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Taka Taka \"B\"",
+     "visitante": "Class Hairsalon",
+     "campo": "",
+     "fecha": "2026-12-12",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Limoneta Og",
+     "visitante": "Borussia Donuts",
+     "campo": "",
+     "fecha": "2026-12-12",
+     "dia": "S",
+     "hora": ""
+    }
+   ]
   },
   {
    "n": 8,
    "descansa": "Class Hairsalon",
-   "partidos": []
+   "partidos": [
+    {
+     "local": "Torrejon Hortaleza",
+     "visitante": "Limoneta Og",
+     "campo": "",
+     "fecha": "2026-12-19",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Fifita",
+     "visitante": "Adn Futsal",
+     "campo": "",
+     "fecha": "2026-12-19",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Aguilas Team",
+     "visitante": "Noctra Torrejon \"B\"",
+     "campo": "",
+     "fecha": "2026-12-19",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Real Fachadolid",
+     "visitante": "Vermeer",
+     "campo": "",
+     "fecha": "2026-12-19",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Borussia Donuts",
+     "visitante": "Taka Taka \"B\"",
+     "campo": "",
+     "fecha": "2026-12-19",
+     "dia": "S",
+     "hora": ""
+    }
+   ]
   },
   {
    "n": 9,
    "descansa": "Borussia Donuts",
-   "partidos": []
+   "partidos": [
+    {
+     "local": "Torrejon Hortaleza",
+     "visitante": "Fifita",
+     "campo": "",
+     "fecha": "2027-01-16",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Adn Futsal",
+     "visitante": "Aguilas Team",
+     "campo": "",
+     "fecha": "2027-01-16",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Noctra Torrejon \"B\"",
+     "visitante": "Real Fachadolid",
+     "campo": "",
+     "fecha": "2027-01-16",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Vermeer",
+     "visitante": "Class Hairsalon",
+     "campo": "",
+     "fecha": "2027-01-16",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Limoneta Og",
+     "visitante": "Taka Taka \"B\"",
+     "campo": "",
+     "fecha": "2027-01-16",
+     "dia": "S",
+     "hora": ""
+    }
+   ]
   },
   {
    "n": 10,
    "descansa": "Taka Taka \"B\"",
-   "partidos": []
+   "partidos": [
+    {
+     "local": "Fifita",
+     "visitante": "Limoneta Og",
+     "campo": "",
+     "fecha": "2027-01-23",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Aguilas Team",
+     "visitante": "Torrejon Hortaleza",
+     "campo": "",
+     "fecha": "2027-01-23",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Real Fachadolid",
+     "visitante": "Adn Futsal",
+     "campo": "",
+     "fecha": "2027-01-23",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Class Hairsalon",
+     "visitante": "Noctra Torrejon \"B\"",
+     "campo": "",
+     "fecha": "2027-01-23",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Borussia Donuts",
+     "visitante": "Vermeer",
+     "campo": "",
+     "fecha": "2027-01-23",
+     "dia": "S",
+     "hora": ""
+    }
+   ]
   },
   {
    "n": 11,
    "descansa": "Limoneta Og",
-   "partidos": []
+   "partidos": [
+    {
+     "local": "Fifita",
+     "visitante": "Aguilas Team",
+     "campo": "",
+     "fecha": "2027-01-30",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Torrejon Hortaleza",
+     "visitante": "Real Fachadolid",
+     "campo": "",
+     "fecha": "2027-01-30",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Adn Futsal",
+     "visitante": "Class Hairsalon",
+     "campo": "",
+     "fecha": "2027-01-30",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Noctra Torrejon \"B\"",
+     "visitante": "Borussia Donuts",
+     "campo": "",
+     "fecha": "2027-01-30",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Vermeer",
+     "visitante": "Taka Taka \"B\"",
+     "campo": "",
+     "fecha": "2027-01-30",
+     "dia": "S",
+     "hora": ""
+    }
+   ]
   }
  ],
- "clasificacion": [],
- "avisos": [
-  "Jornada 1: no sé separar equipos y campo en «TAKA TAKA \"B\"           NOCTRA TORREJON \"B\"» (columnas: 2)",
-  "Jornada 1: no sé separar equipos y campo en «BORUSSIA DONUTS             ADN FUTSAL» (columnas: 2)",
-  "Jornada 1: no sé separar equipos y campo en «CLASS HAIRSALON             TORREJON HORTALEZA» (columnas: 2)",
-  "Jornada 1: no sé separar equipos y campo en «REAL FACHADOLID             FIFITA» (columnas: 2)",
-  "Jornada 1: no sé separar equipos y campo en «LIMONETA OG             AGUILAS TEAM» (columnas: 2)",
-  "Jornada 2: no sé separar equipos y campo en «VERMEER              LIMONETA OG» (columnas: 2)",
-  "Jornada 2: no sé separar equipos y campo en «ADN FUTSAL             TAKA TAKA \"B\"» (columnas: 2)",
-  "Jornada 2: no sé separar equipos y campo en «TORREJON HORTALEZA             BORUSSIA DONUTS» (columnas: 2)",
-  "Jornada 2: no sé separar equipos y campo en «FIFITA         CLASS HAIRSALON» (columnas: 2)",
-  "Jornada 2: no sé separar equipos y campo en «AGUILAS TEAM             REAL FACHADOLID» (columnas: 2)",
-  "Jornada 4: no sé separar equipos y campo en «NOCTRA TORREJON \"B\"            LIMONETA OG» (columnas: 2)",
-  "Jornada 4: no sé separar equipos y campo en «ADN FUTSAL             VERMEER» (columnas: 2)",
-  "Jornada 4: no sé separar equipos y campo en «FIFITA         TAKA TAKA \"B\"» (columnas: 2)",
-  "Jornada 4: no sé separar equipos y campo en «AGUILAS TEAM             BORUSSIA DONUTS» (columnas: 2)",
-  "Jornada 4: no sé separar equipos y campo en «REAL FACHADOLID             CLASS HAIRSALON» (columnas: 2)",
-  "Jornada 5: no sé separar equipos y campo en «NOCTRA TORREJON \"B\"            ADN FUTSAL» (columnas: 2)",
-  "Jornada 5: no sé separar equipos y campo en «VERMEER              TORREJON HORTALEZA» (columnas: 2)",
-  "Jornada 5: no sé separar equipos y campo en «TAKA TAKA \"B\"           AGUILAS TEAM» (columnas: 2)",
-  "Jornada 5: no sé separar equipos y campo en «BORUSSIA DONUTS             REAL FACHADOLID» (columnas: 2)",
-  "Jornada 5: no sé separar equipos y campo en «LIMONETA OG             CLASS HAIRSALON» (columnas: 2)",
-  "Jornada 6: no sé separar equipos y campo en «ADN FUTSAL             LIMONETA OG» (columnas: 2)",
-  "Jornada 6: no sé separar equipos y campo en «TORREJON HORTALEZA             NOCTRA TORREJON \"B\"» (columnas: 2)",
-  "Jornada 6: no sé separar equipos y campo en «FIFITA         VERMEER» (columnas: 2)",
-  "Jornada 6: no sé separar equipos y campo en «REAL FACHADOLID             TAKA TAKA \"B\"» (columnas: 2)",
-  "Jornada 6: no sé separar equipos y campo en «CLASS HAIRSALON             BORUSSIA DONUTS» (columnas: 2)",
-  "Jornada 7: no sé separar equipos y campo en «ADN FUTSAL             TORREJON HORTALEZA» (columnas: 2)",
-  "Jornada 7: no sé separar equipos y campo en «NOCTRA TORREJON \"B\"            FIFITA» (columnas: 2)",
-  "Jornada 7: no sé separar equipos y campo en «VERMEER              AGUILAS TEAM» (columnas: 2)",
-  "Jornada 7: no sé separar equipos y campo en «TAKA TAKA \"B\"           CLASS HAIRSALON» (columnas: 2)",
-  "Jornada 7: no sé separar equipos y campo en «LIMONETA OG             BORUSSIA DONUTS» (columnas: 2)",
-  "Jornada 8: no sé separar equipos y campo en «TORREJON HORTALEZA             LIMONETA OG» (columnas: 2)",
-  "Jornada 8: no sé separar equipos y campo en «FIFITA         ADN FUTSAL» (columnas: 2)",
-  "Jornada 8: no sé separar equipos y campo en «AGUILAS TEAM             NOCTRA TORREJON \"B\"» (columnas: 2)",
-  "Jornada 8: no sé separar equipos y campo en «REAL FACHADOLID             VERMEER» (columnas: 2)",
-  "Jornada 8: no sé separar equipos y campo en «BORUSSIA DONUTS             TAKA TAKA \"B\"» (columnas: 2)",
-  "Jornada 9: no sé separar equipos y campo en «TORREJON HORTALEZA             FIFITA» (columnas: 2)",
-  "Jornada 9: no sé separar equipos y campo en «ADN FUTSAL             AGUILAS TEAM» (columnas: 2)",
-  "Jornada 9: no sé separar equipos y campo en «NOCTRA TORREJON \"B\"            REAL FACHADOLID» (columnas: 2)",
-  "Jornada 9: no sé separar equipos y campo en «VERMEER              CLASS HAIRSALON» (columnas: 2)",
-  "Jornada 9: no sé separar equipos y campo en «LIMONETA OG             TAKA TAKA \"B\"» (columnas: 2)",
-  "Jornada 10: no sé separar equipos y campo en «FIFITA         LIMONETA OG» (columnas: 2)",
-  "Jornada 10: no sé separar equipos y campo en «AGUILAS TEAM             TORREJON HORTALEZA» (columnas: 2)",
-  "Jornada 10: no sé separar equipos y campo en «REAL FACHADOLID             ADN FUTSAL» (columnas: 2)",
-  "Jornada 10: no sé separar equipos y campo en «CLASS HAIRSALON             NOCTRA TORREJON \"B\"» (columnas: 2)",
-  "Jornada 10: no sé separar equipos y campo en «BORUSSIA DONUTS             VERMEER» (columnas: 2)",
-  "Jornada 11: no sé separar equipos y campo en «FIFITA         AGUILAS TEAM» (columnas: 2)",
-  "Jornada 11: no sé separar equipos y campo en «TORREJON HORTALEZA          REAL FACHADOLID» (columnas: 2)",
-  "Jornada 11: no sé separar equipos y campo en «ADN FUTSAL          CLASS HAIRSALON» (columnas: 2)",
-  "Jornada 11: no sé separar equipos y campo en «NOCTRA TORREJON \"B\"         BORUSSIA DONUTS» (columnas: 2)",
-  "Jornada 11: no sé separar equipos y campo en «VERMEER           TAKA TAKA \"B\"» (columnas: 2)"
+ "clasificacion": [
+  {
+   "pos": 1,
+   "equipo": "Fifita",
+   "pj": 4,
+   "g": 3,
+   "e": 1,
+   "p": 0,
+   "gf": 14,
+   "gc": 7,
+   "dg": 7,
+   "pts": 10
+  },
+  {
+   "pos": 2,
+   "equipo": "Limoneta Og",
+   "pj": 4,
+   "g": 3,
+   "e": 0,
+   "p": 1,
+   "gf": 13,
+   "gc": 5,
+   "dg": 8,
+   "pts": 9
+  },
+  {
+   "pos": 3,
+   "equipo": "Noctra Torrejon \"B\"",
+   "pj": 3,
+   "g": 2,
+   "e": 1,
+   "p": 0,
+   "gf": 12,
+   "gc": 5,
+   "dg": 7,
+   "pts": 7
+  },
+  {
+   "pos": 4,
+   "equipo": "Class Hairsalon",
+   "pj": 4,
+   "g": 2,
+   "e": 1,
+   "p": 1,
+   "gf": 12,
+   "gc": 11,
+   "dg": 1,
+   "pts": 7
+  },
+  {
+   "pos": 5,
+   "equipo": "Borussia Donuts",
+   "pj": 3,
+   "g": 2,
+   "e": 0,
+   "p": 1,
+   "gf": 11,
+   "gc": 8,
+   "dg": 3,
+   "pts": 6
+  },
+  {
+   "pos": 6,
+   "equipo": "Adn Futsal",
+   "pj": 3,
+   "g": 2,
+   "e": 0,
+   "p": 1,
+   "gf": 7,
+   "gc": 7,
+   "dg": 0,
+   "pts": 6
+  },
+  {
+   "pos": 7,
+   "equipo": "Aguilas Team",
+   "pj": 3,
+   "g": 2,
+   "e": 0,
+   "p": 1,
+   "gf": 7,
+   "gc": 6,
+   "dg": 1,
+   "pts": 6
+  },
+  {
+   "pos": 8,
+   "equipo": "Taka Taka \"B\"",
+   "pj": 4,
+   "g": 1,
+   "e": 1,
+   "p": 2,
+   "gf": 6,
+   "gc": 8,
+   "dg": -2,
+   "pts": 4
+  },
+  {
+   "pos": 9,
+   "equipo": "Torrejon Hortaleza",
+   "pj": 3,
+   "g": 0,
+   "e": 0,
+   "p": 3,
+   "gf": 6,
+   "gc": 10,
+   "dg": -4,
+   "pts": 0
+  },
+  {
+   "pos": 10,
+   "equipo": "Vermeer",
+   "pj": 3,
+   "g": 0,
+   "e": 0,
+   "p": 3,
+   "gf": 5,
+   "gc": 15,
+   "dg": -10,
+   "pts": 0
+  },
+  {
+   "pos": 11,
+   "equipo": "Real Fachadolid",
+   "pj": 4,
+   "g": 0,
+   "e": 0,
+   "p": 4,
+   "gf": 5,
+   "gc": 16,
+   "dg": -11,
+   "pts": 0
+  }
  ],
- "equipos": []
+ "avisos": [],
+ "equipos": [
+  "Adn Futsal",
+  "Aguilas Team",
+  "Borussia Donuts",
+  "Class Hairsalon",
+  "Fifita",
+  "Limoneta Og",
+  "Noctra Torrejon \"B\"",
+  "Real Fachadolid",
+  "Taka Taka \"B\"",
+  "Torrejon Hortaleza",
+  "Vermeer"
+ ]
 }

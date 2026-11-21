@@ -1,7 +1,7 @@
 {
  "id": "infantil",
  "nombre": "Infantil",
- "actualizado": "2026-11-21T07:57:36Z",
+ "actualizado": "2026-11-21T11:58:58Z",
  "fuente": {
   "calendario": [
    "https://deportes.ayto-torrejon.es/sites/default/files/users/user355/CALENDARIO%20INFANTI%20LIGA%20DE%20CAMPE%C3%93N%202627.pdf"
@@ -60,82 +60,748 @@
   {
    "n": 2,
    "descansa": "Rivillos Limones 5 \"A\"",
-   "partidos": []
+   "partidos": [
+    {
+     "local": "Torrijas FC",
+     "visitante": "Ciud.Torrejon \"B\"",
+     "campo": "",
+     "fecha": "2026-10-24",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Rivillos Limones 5 \"B\"",
+     "visitante": "Veredillas",
+     "campo": "",
+     "fecha": "2026-10-24",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Severo Torrejon",
+     "visitante": "Leon Felipe",
+     "campo": "",
+     "fecha": "2026-10-24",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Torrejon Sala",
+     "visitante": "Torrejon Juncal \"B\"",
+     "campo": "",
+     "fecha": "2026-10-24",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Ciud.Torrejon \"A\"",
+     "visitante": "Torrejon Juncal \"A\"",
+     "campo": "",
+     "fecha": "2026-10-24",
+     "dia": "S",
+     "hora": ""
+    }
+   ]
   },
   {
    "n": 4,
    "descansa": "Severo Torrejon",
-   "partidos": []
+   "partidos": [
+    {
+     "local": "Rivillos Limones 5 \"A\"",
+     "visitante": "Ciud.Torrejon \"B\"",
+     "campo": "NURIA FDEZ 1",
+     "fecha": "2026-11-14",
+     "dia": "S",
+     "hora": "14:00",
+     "ga": 1,
+     "gb": 11
+    },
+    {
+     "local": "Rivillos Limones 5 \"B\"",
+     "visitante": "Torrijas FC",
+     "campo": "NURIA FDEZ 2",
+     "fecha": "2026-11-14",
+     "dia": "S",
+     "hora": "15:00",
+     "ga": 1,
+     "gb": 7
+    },
+    {
+     "local": "Torrejon Sala",
+     "visitante": "Veredillas",
+     "campo": "NURIA FDEZ 2",
+     "fecha": "2026-11-14",
+     "dia": "S",
+     "hora": "14:00",
+     "ga": 1,
+     "gb": 3
+    },
+    {
+     "local": "Ciud.Torrejon \"A\"",
+     "visitante": "Leon Felipe",
+     "campo": "NURIA FDEZ 2",
+     "fecha": "2026-11-15",
+     "dia": "D",
+     "hora": "14:00",
+     "ga": 0,
+     "gb": 4
+    },
+    {
+     "local": "Torrejon Juncal \"A\"",
+     "visitante": "Torrejon Juncal \"B\"",
+     "campo": "NURIA FDEZ 1",
+     "fecha": "2026-11-14",
+     "dia": "S",
+     "hora": "15:00",
+     "ga": 5,
+     "gb": 3
+    }
+   ]
   },
   {
    "n": 5,
    "descansa": "Torrejon Sala",
-   "partidos": []
+   "partidos": [
+    {
+     "local": "Rivillos Limones 5 \"A\"",
+     "visitante": "Rivillos Limones 5 \"B\"",
+     "campo": "NURIA FDEZ 1",
+     "fecha": "2026-11-22",
+     "dia": "D",
+     "hora": "9:00"
+    },
+    {
+     "local": "Torrijas FC",
+     "visitante": "Severo Torrejon",
+     "campo": "NURIA FDEZ 2",
+     "fecha": "2026-11-22",
+     "dia": "D",
+     "hora": "9:00"
+    },
+    {
+     "local": "Veredillas",
+     "visitante": "Ciud.Torrejon \"A\"",
+     "campo": "JAVI LIMONES",
+     "fecha": "2026-11-22",
+     "dia": "D",
+     "hora": "9:00"
+    },
+    {
+     "local": "Leon Felipe",
+     "visitante": "Torrejon Juncal \"A\"",
+     "campo": "NURIA FDEZ 1",
+     "fecha": "2026-11-22",
+     "dia": "D",
+     "hora": "15:00"
+    },
+    {
+     "local": "Ciud.Torrejon \"B\"",
+     "visitante": "Torrejon Juncal \"B\"",
+     "campo": "J.GARBAJOSA",
+     "fecha": "2026-11-22",
+     "dia": "D",
+     "hora": "9:00"
+    }
+   ]
   },
   {
    "n": 6,
    "descansa": "Ciud.Torrejon \"A\"",
-   "partidos": []
+   "partidos": [
+    {
+     "local": "Rivillos Limones 5 \"B\"",
+     "visitante": "Ciud.Torrejon \"B\"",
+     "campo": "",
+     "fecha": "2026-11-28",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Severo Torrejon",
+     "visitante": "Rivillos Limones 5 \"A\"",
+     "campo": "",
+     "fecha": "2026-11-28",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Torrejon Sala",
+     "visitante": "Torrijas FC",
+     "campo": "",
+     "fecha": "2026-11-28",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Torrejon Juncal \"A\"",
+     "visitante": "Veredillas",
+     "campo": "",
+     "fecha": "2026-11-28",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Torrejon Juncal \"B\"",
+     "visitante": "Leon Felipe",
+     "campo": "",
+     "fecha": "2026-11-28",
+     "dia": "S",
+     "hora": ""
+    }
+   ]
   },
   {
    "n": 7,
    "descansa": "Torrejon Juncal \"A\"",
-   "partidos": []
+   "partidos": [
+    {
+     "local": "Rivillos Limones 5 \"B\"",
+     "visitante": "Severo Torrejon",
+     "campo": "",
+     "fecha": "2026-12-12",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Rivillos Limones 5 \"A\"",
+     "visitante": "Torrejon Sala",
+     "campo": "",
+     "fecha": "2026-12-12",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Torrijas FC",
+     "visitante": "Ciud.Torrejon \"A\"",
+     "campo": "",
+     "fecha": "2026-12-12",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Veredillas",
+     "visitante": "Torrejon Juncal \"B\"",
+     "campo": "",
+     "fecha": "2026-12-12",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Ciud.Torrejon \"B\"",
+     "visitante": "Leon Felipe",
+     "campo": "",
+     "fecha": "2026-12-12",
+     "dia": "S",
+     "hora": ""
+    }
+   ]
   },
   {
    "n": 8,
    "descansa": "Torrejon Juncal \"B\"",
-   "partidos": []
+   "partidos": [
+    {
+     "local": "Severo Torrejon",
+     "visitante": "Ciud.Torrejon \"B\"",
+     "campo": "",
+     "fecha": "2026-12-19",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Torrejon Sala",
+     "visitante": "Rivillos Limones 5 \"B\"",
+     "campo": "",
+     "fecha": "2026-12-19",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Ciud.Torrejon \"A\"",
+     "visitante": "Rivillos Limones 5 \"A\"",
+     "campo": "",
+     "fecha": "2026-12-19",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Torrejon Juncal \"A\"",
+     "visitante": "Torrijas FC",
+     "campo": "",
+     "fecha": "2026-12-19",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Leon Felipe",
+     "visitante": "Veredillas",
+     "campo": "",
+     "fecha": "2026-12-19",
+     "dia": "S",
+     "hora": ""
+    }
+   ]
   },
   {
    "n": 9,
    "descansa": "Leon Felipe",
-   "partidos": []
+   "partidos": [
+    {
+     "local": "Severo Torrejon",
+     "visitante": "Torrejon Sala",
+     "campo": "",
+     "fecha": "2027-01-16",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Rivillos Limones 5 \"B\"",
+     "visitante": "Ciud.Torrejon \"A\"",
+     "campo": "",
+     "fecha": "2027-01-16",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Rivillos Limones 5 \"A\"",
+     "visitante": "Torrejon Juncal \"A\"",
+     "campo": "",
+     "fecha": "2027-01-16",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Torrijas FC",
+     "visitante": "Torrejon Juncal \"B\"",
+     "campo": "",
+     "fecha": "2027-01-16",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Ciud.Torrejon \"B\"",
+     "visitante": "Veredillas",
+     "campo": "",
+     "fecha": "2027-01-16",
+     "dia": "S",
+     "hora": ""
+    }
+   ]
   },
   {
    "n": 10,
    "descansa": "Veredillas",
-   "partidos": []
+   "partidos": [
+    {
+     "local": "Torrejon Sala",
+     "visitante": "Ciud.Torrejon \"B\"",
+     "campo": "",
+     "fecha": "2027-01-23",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Ciud.Torrejon \"A\"",
+     "visitante": "Severo Torrejon",
+     "campo": "",
+     "fecha": "2027-01-23",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Torrejon Juncal \"A\"",
+     "visitante": "Rivillos Limones 5 \"B\"",
+     "campo": "",
+     "fecha": "2027-01-23",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Torrejon Juncal \"B\"",
+     "visitante": "Rivillos Limones 5 \"A\"",
+     "campo": "",
+     "fecha": "2027-01-23",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Leon Felipe",
+     "visitante": "Torrijas FC",
+     "campo": "",
+     "fecha": "2027-01-23",
+     "dia": "S",
+     "hora": ""
+    }
+   ]
   },
   {
    "n": 11,
    "descansa": "Ciud.Torrejon \"B\"",
-   "partidos": []
+   "partidos": [
+    {
+     "local": "Torrejon Sala",
+     "visitante": "Ciud.Torrejon \"A\"",
+     "campo": "",
+     "fecha": "2027-01-30",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Severo Torrejon",
+     "visitante": "Torrejon Juncal \"A\"",
+     "campo": "",
+     "fecha": "2027-01-30",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Rivillos Limones 5 \"B\"",
+     "visitante": "Torrejon Juncal \"B\"",
+     "campo": "",
+     "fecha": "2027-01-30",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Rivillos Limones 5 \"A\"",
+     "visitante": "Leon Felipe",
+     "campo": "",
+     "fecha": "2027-01-30",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Torrijas FC",
+     "visitante": "Veredillas",
+     "campo": "",
+     "fecha": "2027-01-30",
+     "dia": "S",
+     "hora": ""
+    }
+   ]
   },
   {
    "n": 13,
    "descansa": "Rivillos Limones 5 \"A\"",
-   "partidos": []
+   "partidos": [
+    {
+     "local": "Ciud.Torrejon \"B\"",
+     "visitante": "Torrijas FC",
+     "campo": "",
+     "fecha": "2027-02-20",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Veredillas",
+     "visitante": "Rivillos Limones 5 \"B\"",
+     "campo": "",
+     "fecha": "2027-02-20",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Leon Felipe",
+     "visitante": "Severo Torrejon",
+     "campo": "",
+     "fecha": "2027-02-20",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Torrejon Juncal \"B\"",
+     "visitante": "Torrejon Sala",
+     "campo": "",
+     "fecha": "2027-02-20",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Torrejon Juncal \"A\"",
+     "visitante": "Ciud.Torrejon \"A\"",
+     "campo": "",
+     "fecha": "2027-02-20",
+     "dia": "S",
+     "hora": ""
+    }
+   ]
   },
   {
    "n": 14,
    "descansa": "Rivillos Limones 5 \"B\"",
-   "partidos": []
+   "partidos": [
+    {
+     "local": "Rivillos Limones 5 \"A\"",
+     "visitante": "Torrijas FC",
+     "campo": "",
+     "fecha": "2027-02-27",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Severo Torrejon",
+     "visitante": "Veredillas",
+     "campo": "",
+     "fecha": "2027-02-27",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Torrejon Sala",
+     "visitante": "Leon Felipe",
+     "campo": "",
+     "fecha": "2027-02-27",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Ciud.Torrejon \"A\"",
+     "visitante": "Torrejon Juncal \"B\"",
+     "campo": "",
+     "fecha": "2027-02-27",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Torrejon Juncal \"A\"",
+     "visitante": "Ciud.Torrejon \"B\"",
+     "campo": "",
+     "fecha": "2027-02-27",
+     "dia": "S",
+     "hora": ""
+    }
+   ]
   },
   {
    "n": 16,
    "descansa": "Torrejon Sala",
-   "partidos": []
+   "partidos": [
+    {
+     "local": "Rivillos Limones 5 \"B\"",
+     "visitante": "Rivillos Limones 5 \"A\"",
+     "campo": "",
+     "fecha": "2027-03-13",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Severo Torrejon",
+     "visitante": "Torrijas FC",
+     "campo": "",
+     "fecha": "2027-03-13",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Ciud.Torrejon \"A\"",
+     "visitante": "Veredillas",
+     "campo": "",
+     "fecha": "2027-03-13",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Torrejon Juncal \"A\"",
+     "visitante": "Leon Felipe",
+     "campo": "",
+     "fecha": "2027-03-13",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Torrejon Juncal \"B\"",
+     "visitante": "Ciud.Torrejon \"B\"",
+     "campo": "",
+     "fecha": "2027-03-13",
+     "dia": "S",
+     "hora": ""
+    }
+   ]
   },
   {
    "n": 18,
    "descansa": "Torrejon Juncal \"A\"",
-   "partidos": []
+   "partidos": [
+    {
+     "local": "Severo Torrejon",
+     "visitante": "Rivillos Limones 5 \"B\"",
+     "campo": "",
+     "fecha": "2027-04-10",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Torrejon Sala",
+     "visitante": "Rivillos Limones 5 \"A\"",
+     "campo": "",
+     "fecha": "2027-04-10",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Ciud.Torrejon \"A\"",
+     "visitante": "Torrijas FC",
+     "campo": "",
+     "fecha": "2027-04-10",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Torrejon Juncal \"B\"",
+     "visitante": "Veredillas",
+     "campo": "",
+     "fecha": "2027-04-10",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Leon Felipe",
+     "visitante": "Ciud.Torrejon \"B\"",
+     "campo": "",
+     "fecha": "2027-04-10",
+     "dia": "S",
+     "hora": ""
+    }
+   ]
   },
   {
    "n": 19,
    "descansa": "Torrejon Juncal \"B\"",
-   "partidos": []
+   "partidos": [
+    {
+     "local": "Ciud.Torrejon \"B\"",
+     "visitante": "Severo Torrejon",
+     "campo": "",
+     "fecha": "2027-04-17",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Rivillos Limones 5 \"B\"",
+     "visitante": "Torrejon Sala",
+     "campo": "",
+     "fecha": "2027-04-17",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Rivillos Limones 5 \"A\"",
+     "visitante": "Ciud.Torrejon \"A\"",
+     "campo": "",
+     "fecha": "2027-04-17",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Torrijas FC",
+     "visitante": "Torrejon Juncal \"A\"",
+     "campo": "",
+     "fecha": "2027-04-17",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Veredillas",
+     "visitante": "Leon Felipe",
+     "campo": "",
+     "fecha": "2027-04-17",
+     "dia": "S",
+     "hora": ""
+    }
+   ]
   },
   {
    "n": 20,
    "descansa": "Leon Felipe",
-   "partidos": []
+   "partidos": [
+    {
+     "local": "Torrejon Sala",
+     "visitante": "Severo Torrejon",
+     "campo": "",
+     "fecha": "2027-04-24",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Ciud.Torrejon \"A\"",
+     "visitante": "Rivillos Limones 5 \"B\"",
+     "campo": "",
+     "fecha": "2027-04-24",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Torrejon Juncal \"A\"",
+     "visitante": "Rivillos Limones 5 \"A\"",
+     "campo": "",
+     "fecha": "2027-04-24",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Torrejon Juncal \"B\"",
+     "visitante": "Torrijas FC",
+     "campo": "",
+     "fecha": "2027-04-24",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Veredillas",
+     "visitante": "Ciud.Torrejon \"B\"",
+     "campo": "",
+     "fecha": "2027-04-24",
+     "dia": "S",
+     "hora": ""
+    }
+   ]
   },
   {
    "n": 22,
    "descansa": "Ciud.Torrejon \"B\"",
-   "partidos": []
+   "partidos": [
+    {
+     "local": "Ciud.Torrejon \"A\"",
+     "visitante": "Torrejon Sala",
+     "campo": "",
+     "fecha": "2027-05-22",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Torrejon Juncal \"A\"",
+     "visitante": "Severo Torrejon",
+     "campo": "",
+     "fecha": "2027-05-22",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Torrejon Juncal \"B\"",
+     "visitante": "Rivillos Limones 5 \"B\"",
+     "campo": "",
+     "fecha": "2027-05-22",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Leon Felipe",
+     "visitante": "Rivillos Limones 5 \"A\"",
+     "campo": "",
+     "fecha": "2027-05-22",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Veredillas",
+     "visitante": "Torrijas FC",
+     "campo": "",
+     "fecha": "2027-05-22",
+     "dia": "S",
+     "hora": ""
+    }
+   ]
   }
  ],
  "clasificacion": [
@@ -225,7 +891,7 @@
   },
   {
    "pos": 8,
-   "equipo": "Torrejon Juncal",
+   "equipo": "Torrejon Juncal \"A\"",
    "pj": 4,
    "g": 1,
    "e": 0,
@@ -261,7 +927,7 @@
   },
   {
    "pos": 11,
-   "equipo": "Torrejon Juncal",
+   "equipo": "Torrejon Juncal \"B\"",
    "pj": 4,
    "g": 0,
    "e": 0,
@@ -273,86 +939,7 @@
   }
  ],
  "avisos": [
-  "Jornada 2: no sé separar equipos y campo en «TORRIJAS FC           CIUD.TORREJON \"B\"» (columnas: 2)",
-  "Jornada 2: no sé separar equipos y campo en «RIVILLOS LIMONES 5 \"B\"         VEREDILLAS» (columnas: 2)",
-  "Jornada 2: no sé separar equipos y campo en «SEVERO TORREJON             LEON FELIPE» (columnas: 2)",
-  "Jornada 2: no sé separar equipos y campo en «TORREJON SALA            TORREJON JUNCAL \"B\"» (columnas: 2)",
-  "Jornada 2: no sé separar equipos y campo en «CIUD.TORREJON \"A\"           TORREJON JUNCAL \"A\"» (columnas: 2)",
-  "Jornada 4: no sé separar equipos y campo en «RIVILLOS LIMONES 5 \"A\"         CIUD.TORREJON \"B\"» (columnas: 2)",
-  "Jornada 4: no sé separar equipos y campo en «RIVILLOS LIMONES 5 \"B\"         TORRIJAS FC» (columnas: 2)",
-  "Jornada 4: no sé separar equipos y campo en «TORREJON SALA            VEREDILLAS» (columnas: 2)",
-  "Jornada 4: no sé separar equipos y campo en «CIUD.TORREJON \"A\"           LEON FELIPE» (columnas: 2)",
-  "Jornada 4: no sé separar equipos y campo en «TORREJON JUNCAL \"A\"            TORREJON JUNCAL \"B\"» (columnas: 2)",
-  "Jornada 5: no sé separar equipos y campo en «RIVILLOS LIMONES 5 \"A\"         RIVILLOS LIMONES 5 \"B\"» (columnas: 2)",
-  "Jornada 5: no sé separar equipos y campo en «TORRIJAS FC           SEVERO TORREJON» (columnas: 2)",
-  "Jornada 5: no sé separar equipos y campo en «VEREDILLAS           CIUD.TORREJON \"A\"» (columnas: 2)",
-  "Jornada 5: no sé separar equipos y campo en «LEON FELIPE           TORREJON JUNCAL \"A\"» (columnas: 2)",
-  "Jornada 5: no sé separar equipos y campo en «CIUD.TORREJON \"B\"           TORREJON JUNCAL \"B\"» (columnas: 2)",
-  "Jornada 6: no sé separar equipos y campo en «RIVILLOS LIMONES 5 \"B\"         CIUD.TORREJON \"B\"» (columnas: 2)",
-  "Jornada 6: no sé separar equipos y campo en «SEVERO TORREJON             RIVILLOS LIMONES 5 \"A\"» (columnas: 2)",
-  "Jornada 6: no sé separar equipos y campo en «TORREJON SALA            TORRIJAS FC» (columnas: 2)",
-  "Jornada 6: no sé separar equipos y campo en «TORREJON JUNCAL \"A\"            VEREDILLAS» (columnas: 2)",
-  "Jornada 6: no sé separar equipos y campo en «TORREJON JUNCAL \"B\"            LEON FELIPE» (columnas: 2)",
-  "Jornada 7: no sé separar equipos y campo en «RIVILLOS LIMONES 5 \"B\"         SEVERO TORREJON» (columnas: 2)",
-  "Jornada 7: no sé separar equipos y campo en «RIVILLOS LIMONES 5 \"A\"         TORREJON SALA» (columnas: 2)",
-  "Jornada 7: no sé separar equipos y campo en «TORRIJAS FC           CIUD.TORREJON \"A\"» (columnas: 2)",
-  "Jornada 7: no sé separar equipos y campo en «VEREDILLAS           TORREJON JUNCAL \"B\"» (columnas: 2)",
-  "Jornada 7: no sé separar equipos y campo en «CIUD.TORREJON \"B\"           LEON FELIPE» (columnas: 2)",
-  "Jornada 8: no sé separar equipos y campo en «SEVERO TORREJON             CIUD.TORREJON \"B\"» (columnas: 2)",
-  "Jornada 8: no sé separar equipos y campo en «TORREJON SALA            RIVILLOS LIMONES 5 \"B\"» (columnas: 2)",
-  "Jornada 8: no sé separar equipos y campo en «CIUD.TORREJON \"A\"           RIVILLOS LIMONES 5 \"A\"» (columnas: 2)",
-  "Jornada 8: no sé separar equipos y campo en «TORREJON JUNCAL \"A\"            TORRIJAS FC» (columnas: 2)",
-  "Jornada 8: no sé separar equipos y campo en «LEON FELIPE           VEREDILLAS» (columnas: 2)",
-  "Jornada 9: no sé separar equipos y campo en «SEVERO TORREJON             TORREJON SALA» (columnas: 2)",
-  "Jornada 9: no sé separar equipos y campo en «RIVILLOS LIMONES 5 \"B\"         CIUD.TORREJON \"A\"» (columnas: 2)",
-  "Jornada 9: no sé separar equipos y campo en «RIVILLOS LIMONES 5 \"A\"         TORREJON JUNCAL \"A\"» (columnas: 2)",
-  "Jornada 9: no sé separar equipos y campo en «TORRIJAS FC           TORREJON JUNCAL \"B\"» (columnas: 2)",
-  "Jornada 9: no sé separar equipos y campo en «CIUD.TORREJON \"B\"           VEREDILLAS» (columnas: 2)",
-  "Jornada 10: no sé separar equipos y campo en «TORREJON SALA            CIUD.TORREJON \"B\"» (columnas: 2)",
-  "Jornada 10: no sé separar equipos y campo en «CIUD.TORREJON \"A\"           SEVERO TORREJON» (columnas: 2)",
-  "Jornada 10: no sé separar equipos y campo en «TORREJON JUNCAL \"A\"            RIVILLOS LIMONES 5 \"B\"» (columnas: 2)",
-  "Jornada 10: no sé separar equipos y campo en «TORREJON JUNCAL \"B\"            RIVILLOS LIMONES 5 \"A\"» (columnas: 2)",
-  "Jornada 10: no sé separar equipos y campo en «LEON FELIPE           TORRIJAS FC» (columnas: 2)",
-  "Jornada 11: no sé separar equipos y campo en «TORREJON SALA            CIUD.TORREJON \"A\"» (columnas: 2)",
-  "Jornada 11: no sé separar equipos y campo en «SEVERO TORREJON             TORREJON JUNCAL \"A\"» (columnas: 2)",
-  "Jornada 11: no sé separar equipos y campo en «RIVILLOS LIMONES 5 \"B\"         TORREJON JUNCAL \"B\"» (columnas: 2)",
-  "Jornada 11: no sé separar equipos y campo en «RIVILLOS LIMONES 5 \"A\"         LEON FELIPE» (columnas: 2)",
-  "Jornada 11: no sé separar equipos y campo en «TORRIJAS FC           VEREDILLAS» (columnas: 2)",
-  "Jornada 13: no sé separar equipos y campo en «CIUD.TORREJON \"B\"           TORRIJAS FC» (columnas: 2)",
-  "Jornada 13: no sé separar equipos y campo en «VEREDILLAS           RIVILLOS LIMONES 5 \"B\"» (columnas: 2)",
-  "Jornada 13: no sé separar equipos y campo en «LEON FELIPE           SEVERO TORREJON» (columnas: 2)",
-  "Jornada 13: no sé separar equipos y campo en «TORREJON JUNCAL \"B\"            TORREJON SALA» (columnas: 2)",
-  "Jornada 13: no sé separar equipos y campo en «TORREJON JUNCAL \"A\"            CIUD.TORREJON \"A\"» (columnas: 2)",
-  "Jornada 14: no sé separar equipos y campo en «RIVILLOS LIMONES 5 \"A\"         TORRIJAS FC» (columnas: 2)",
-  "Jornada 14: no sé separar equipos y campo en «SEVERO TORREJON             VEREDILLAS» (columnas: 2)",
-  "Jornada 14: no sé separar equipos y campo en «TORREJON SALA            LEON FELIPE» (columnas: 2)",
-  "Jornada 14: no sé separar equipos y campo en «CIUD.TORREJON \"A\"           TORREJON JUNCAL \"B\"» (columnas: 2)",
-  "Jornada 14: no sé separar equipos y campo en «TORREJON JUNCAL \"A\"            CIUD.TORREJON \"B\"» (columnas: 2)",
-  "Jornada 16: no sé separar equipos y campo en «RIVILLOS LIMONES 5 \"B\"         RIVILLOS LIMONES 5 \"A\"» (columnas: 2)",
-  "Jornada 16: no sé separar equipos y campo en «SEVERO TORREJON             TORRIJAS FC» (columnas: 2)",
-  "Jornada 16: no sé separar equipos y campo en «CIUD.TORREJON \"A\"           VEREDILLAS» (columnas: 2)",
-  "Jornada 16: no sé separar equipos y campo en «TORREJON JUNCAL \"A\"            LEON FELIPE» (columnas: 2)",
-  "Jornada 16: no sé separar equipos y campo en «TORREJON JUNCAL \"B\"            CIUD.TORREJON \"B\"» (columnas: 2)",
-  "Jornada 18: no sé separar equipos y campo en «SEVERO TORREJON             RIVILLOS LIMONES 5 \"B\"» (columnas: 2)",
-  "Jornada 18: no sé separar equipos y campo en «TORREJON SALA            RIVILLOS LIMONES 5 \"A\"» (columnas: 2)",
-  "Jornada 18: no sé separar equipos y campo en «CIUD.TORREJON \"A\"           TORRIJAS FC» (columnas: 2)",
-  "Jornada 18: no sé separar equipos y campo en «TORREJON JUNCAL \"B\"            VEREDILLAS» (columnas: 2)",
-  "Jornada 18: no sé separar equipos y campo en «LEON FELIPE           CIUD.TORREJON \"B\"» (columnas: 2)",
-  "Jornada 19: no sé separar equipos y campo en «CIUD.TORREJON \"B\"           SEVERO TORREJON» (columnas: 2)",
-  "Jornada 19: no sé separar equipos y campo en «RIVILLOS LIMONES 5 \"B\"         TORREJON SALA» (columnas: 2)",
-  "Jornada 19: no sé separar equipos y campo en «RIVILLOS LIMONES 5 \"A\"         CIUD.TORREJON \"A\"» (columnas: 2)",
-  "Jornada 19: no sé separar equipos y campo en «TORRIJAS FC           TORREJON JUNCAL \"A\"» (columnas: 2)",
-  "Jornada 19: no sé separar equipos y campo en «VEREDILLAS           LEON FELIPE» (columnas: 2)",
-  "Jornada 20: no sé separar equipos y campo en «TORREJON SALA            SEVERO TORREJON» (columnas: 2)",
-  "Jornada 20: no sé separar equipos y campo en «CIUD.TORREJON \"A\"           RIVILLOS LIMONES 5 \"B\"» (columnas: 2)",
-  "Jornada 20: no sé separar equipos y campo en «TORREJON JUNCAL \"A\"            RIVILLOS LIMONES 5 \"A\"» (columnas: 2)",
-  "Jornada 20: no sé separar equipos y campo en «TORREJON JUNCAL \"B\"            TORRIJAS FC» (columnas: 2)",
-  "Jornada 20: no sé separar equipos y campo en «VEREDILLAS           CIUD.TORREJON \"B\"» (columnas: 2)",
-  "Jornada 22: no sé separar equipos y campo en «CIUD.TORREJON \"A\"           TORREJON SALA» (columnas: 2)",
-  "Jornada 22: no sé separar equipos y campo en «TORREJON JUNCAL \"A\"            SEVERO TORREJON» (columnas: 2)",
-  "Jornada 22: no sé separar equipos y campo en «TORREJON JUNCAL \"B\"            RIVILLOS LIMONES 5 \"B\"» (columnas: 2)",
-  "Jornada 22: no sé separar equipos y campo en «LEON FELIPE           RIVILLOS LIMONES 5 \"A\"» (columnas: 2)",
-  "Jornada 22: no sé separar equipos y campo en «VEREDILLAS           TORRIJAS FC» (columnas: 2)"
+  "Clasificación: no puedo distinguir entre Rivillos Limones 5 \"A\", Rivillos Limones 5 \"B\" con los resultados conocidos"
  ],
  "equipos": [
   "Ciud.Torrejon \"A\"",
@@ -364,6 +951,7 @@
   "Torrejon Juncal \"A\"",
   "Torrejon Juncal \"B\"",
   "Torrejon Sala",
+  "Torrijas FC",
   "Veredillas"
  ]
 }

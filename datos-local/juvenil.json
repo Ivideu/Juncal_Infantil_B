@@ -1,7 +1,7 @@
 {
  "id": "juvenil",
  "nombre": "Juvenil",
- "actualizado": "2026-11-21T07:57:36Z",
+ "actualizado": "2026-11-21T11:58:58Z",
  "fuente": {
   "calendario": [
    "https://deportes.ayto-torrejon.es/sites/default/files/users/user355/CALENDARIO%20JUVENIL%20LIGA%20DE%20CAMPEON%20.2627.pdf",
@@ -102,83 +102,1318 @@
   {
    "n": 2,
    "descansa": "Mahouchester",
-   "partidos": []
+   "partidos": [
+    {
+     "local": "Poyato Bellaco",
+     "visitante": "Flamango",
+     "campo": "",
+     "fecha": "2026-10-24",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Astom Birras",
+     "visitante": "Besacon Blin Blin",
+     "campo": "",
+     "fecha": "2026-10-24",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Jack Nuniels",
+     "visitante": "Sca",
+     "campo": "",
+     "fecha": "2026-10-24",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "la Bendicion",
+     "visitante": "Mk Urban Proyect FS",
+     "campo": "",
+     "fecha": "2026-10-24",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Coca Junior",
+     "visitante": "Birrareal FC",
+     "campo": "",
+     "fecha": "2026-10-24",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "el Cartel",
+     "visitante": "Rivillos Limones 5",
+     "campo": "",
+     "fecha": "2026-10-24",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Vodka Junior",
+     "visitante": "Loquendocity FC",
+     "campo": "",
+     "fecha": "2026-10-24",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Sportium Bucarest",
+     "visitante": "Bayern F.S.",
+     "campo": "",
+     "fecha": "2026-10-24",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Cardos FC.",
+     "visitante": "Severo T. Amarillo",
+     "campo": "",
+     "fecha": "2026-10-24",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Torrejon Sala",
+     "visitante": "Severo T.Rojo",
+     "campo": "",
+     "fecha": "2026-10-24",
+     "dia": "S",
+     "hora": ""
+    }
+   ]
   },
   {
    "n": 4,
    "descansa": "Jack Nuniels",
-   "partidos": []
+   "partidos": [
+    {
+     "local": "Mahouchester",
+     "visitante": "Flamango",
+     "campo": "NURIA FDEZ 1",
+     "fecha": "2026-11-14",
+     "dia": "S",
+     "hora": "16:00",
+     "ga": 3,
+     "gb": 2
+    },
+    {
+     "local": "Astom Birras",
+     "visitante": "Poyato Bellaco",
+     "campo": "NURIA FDEZ 3",
+     "fecha": "2026-11-14",
+     "dia": "S",
+     "hora": "15:00",
+     "ga": 5,
+     "gb": 2
+    },
+    {
+     "local": "la Bendicion",
+     "visitante": "Besacon Blin Blin",
+     "campo": "NURIA FDEZ 2",
+     "fecha": "2026-11-14",
+     "dia": "S",
+     "hora": "19:00",
+     "ga": 0,
+     "gb": 7
+    },
+    {
+     "local": "Coca Junior",
+     "visitante": "Sca",
+     "campo": "NURIA FDEZ 3",
+     "fecha": "2026-11-14",
+     "dia": "S",
+     "hora": "16:00",
+     "ga": 3,
+     "gb": 4
+    },
+    {
+     "local": "el Cartel",
+     "visitante": "Mk Urban Proyect FS",
+     "campo": "NURIA FDEZ 3",
+     "fecha": "2026-11-14",
+     "dia": "S",
+     "hora": "17:00",
+     "ga": 3,
+     "gb": 4
+    },
+    {
+     "local": "Vodka Junior",
+     "visitante": "Birrareal FC",
+     "campo": "NURIA FDEZ 1",
+     "fecha": "2026-11-14",
+     "dia": "S",
+     "hora": "17:00",
+     "ga": 0,
+     "gb": 1
+    },
+    {
+     "local": "Sportium Bucarest",
+     "visitante": "Rivillos Limones 5",
+     "campo": "NURIA FDEZ 2",
+     "fecha": "2026-11-14",
+     "dia": "S",
+     "hora": "20:00",
+     "ga": 2,
+     "gb": 1
+    },
+    {
+     "local": "Cardos FC.",
+     "visitante": "Loquendocity FC",
+     "campo": "NURIA FDEZ 3",
+     "fecha": "2026-11-14",
+     "dia": "S",
+     "hora": "19:00",
+     "ga": 2,
+     "gb": 7
+    },
+    {
+     "local": "Torrejon Sala",
+     "visitante": "Bayern F.S.",
+     "campo": "NURIA FDEZ 3",
+     "fecha": "2026-11-14",
+     "dia": "S",
+     "hora": "20:00",
+     "ga": 3,
+     "gb": 6
+    },
+    {
+     "local": "Severo T.Rojo",
+     "visitante": "Severo T. Amarillo",
+     "campo": "NURIA FDEZ 3",
+     "fecha": "2026-11-14",
+     "dia": "S",
+     "hora": "18:00",
+     "ga": 2,
+     "gb": 0
+    }
+   ]
   },
   {
    "n": 5,
    "descansa": "la Bendicion",
-   "partidos": []
+   "partidos": [
+    {
+     "local": "Poyato Bellaco",
+     "visitante": "Jack Nuniels",
+     "campo": "NURIA FDEZ 2",
+     "fecha": "2026-11-21",
+     "dia": "S",
+     "hora": "14:00"
+    },
+    {
+     "local": "Besacon Blin Blin",
+     "visitante": "Coca Junior",
+     "campo": "NURIA FDEZ 1",
+     "fecha": "2026-11-21",
+     "dia": "S",
+     "hora": "17:00"
+    },
+    {
+     "local": "Sca",
+     "visitante": "el Cartel",
+     "campo": "NURIA FDEZ 1",
+     "fecha": "2026-11-21",
+     "dia": "S",
+     "hora": "15:00"
+    },
+    {
+     "local": "Mk Urban Proyect FS",
+     "visitante": "Vodka Junior",
+     "campo": "NURIA FDEZ 2",
+     "fecha": "2026-11-21",
+     "dia": "S",
+     "hora": "15:00"
+    },
+    {
+     "local": "Birrareal FC",
+     "visitante": "Sportium Bucarest",
+     "campo": "NURIA FDEZ 2",
+     "fecha": "2026-11-21",
+     "dia": "S",
+     "hora": "16:00"
+    },
+    {
+     "local": "Rivillos Limones 5",
+     "visitante": "Cardos FC.",
+     "campo": "NURIA FDEZ 2",
+     "fecha": "2026-11-21",
+     "dia": "S",
+     "hora": "17:00"
+    },
+    {
+     "local": "Loquendocity FC",
+     "visitante": "Torrejon Sala",
+     "campo": "NURIA FDEZ 3",
+     "fecha": "2026-11-21",
+     "dia": "S",
+     "hora": "18:00"
+    },
+    {
+     "local": "Bayern F.S.",
+     "visitante": "Severo T.Rojo",
+     "campo": "NURIA FDEZ 3",
+     "fecha": "2026-11-21",
+     "dia": "S",
+     "hora": "16:00"
+    },
+    {
+     "local": "Flamango",
+     "visitante": "Severo T. Amarillo",
+     "campo": "NURIA FDEZ 3",
+     "fecha": "2026-11-21",
+     "dia": "S",
+     "hora": "17:00"
+    },
+    {
+     "local": "Mahouchester",
+     "visitante": "Astom Birras",
+     "campo": "NURIA FDEZ 1",
+     "fecha": "2026-11-21",
+     "dia": "S",
+     "hora": "16:00"
+    }
+   ]
   },
   {
    "n": 6,
    "descansa": "Coca Junior",
-   "partidos": []
+   "partidos": [
+    {
+     "local": "Astom Birras",
+     "visitante": "Flamango",
+     "campo": "",
+     "fecha": "2026-11-28",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Jack Nuniels",
+     "visitante": "Mahouchester",
+     "campo": "",
+     "fecha": "2026-11-28",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "la Bendicion",
+     "visitante": "Poyato Bellaco",
+     "campo": "",
+     "fecha": "2026-11-28",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "el Cartel",
+     "visitante": "Besacon Blin Blin",
+     "campo": "",
+     "fecha": "2026-11-28",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Vodka Junior",
+     "visitante": "Sca",
+     "campo": "",
+     "fecha": "2026-11-28",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Sportium Bucarest",
+     "visitante": "Mk Urban Proyect FS",
+     "campo": "",
+     "fecha": "2026-11-28",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Cardos FC.",
+     "visitante": "Birrareal FC",
+     "campo": "",
+     "fecha": "2026-11-28",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Torrejon Sala",
+     "visitante": "Rivillos Limones 5",
+     "campo": "",
+     "fecha": "2026-11-28",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Severo T.Rojo",
+     "visitante": "Loquendocity FC",
+     "campo": "",
+     "fecha": "2026-11-28",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Severo T. Amarillo",
+     "visitante": "Bayern F.S.",
+     "campo": "",
+     "fecha": "2026-11-28",
+     "dia": "S",
+     "hora": ""
+    }
+   ]
   },
   {
    "n": 7,
    "descansa": "el Cartel",
-   "partidos": []
+   "partidos": [
+    {
+     "local": "Astom Birras",
+     "visitante": "Jack Nuniels",
+     "campo": "",
+     "fecha": "2026-12-12",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Mahouchester",
+     "visitante": "la Bendicion",
+     "campo": "",
+     "fecha": "2026-12-12",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Poyato Bellaco",
+     "visitante": "Coca Junior",
+     "campo": "",
+     "fecha": "2026-12-12",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Besacon Blin Blin",
+     "visitante": "Vodka Junior",
+     "campo": "",
+     "fecha": "2026-12-12",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Sca",
+     "visitante": "Sportium Bucarest",
+     "campo": "",
+     "fecha": "2026-12-12",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Mk Urban Proyect FS",
+     "visitante": "Cardos FC.",
+     "campo": "",
+     "fecha": "2026-12-12",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Birrareal FC",
+     "visitante": "Torrejon Sala",
+     "campo": "",
+     "fecha": "2026-12-12",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Rivillos Limones 5",
+     "visitante": "Severo T.Rojo",
+     "campo": "",
+     "fecha": "2026-12-12",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Loquendocity FC",
+     "visitante": "Severo T. Amarillo",
+     "campo": "",
+     "fecha": "2026-12-12",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Flamango",
+     "visitante": "Bayern F.S.",
+     "campo": "",
+     "fecha": "2026-12-12",
+     "dia": "S",
+     "hora": ""
+    }
+   ]
   },
   {
    "n": 8,
    "descansa": "Vodka Junior",
-   "partidos": []
+   "partidos": [
+    {
+     "local": "Jack Nuniels",
+     "visitante": "Flamango",
+     "campo": "",
+     "fecha": "2026-12-19",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "la Bendicion",
+     "visitante": "Astom Birras",
+     "campo": "",
+     "fecha": "2026-12-19",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Coca Junior",
+     "visitante": "Mahouchester",
+     "campo": "",
+     "fecha": "2026-12-19",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "el Cartel",
+     "visitante": "Poyato Bellaco",
+     "campo": "",
+     "fecha": "2026-12-19",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Sportium Bucarest",
+     "visitante": "Besacon Blin Blin",
+     "campo": "",
+     "fecha": "2026-12-19",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Cardos FC.",
+     "visitante": "Sca",
+     "campo": "",
+     "fecha": "2026-12-19",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Torrejon Sala",
+     "visitante": "Mk Urban Proyect FS",
+     "campo": "",
+     "fecha": "2026-12-19",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Severo T.Rojo",
+     "visitante": "Birrareal FC",
+     "campo": "",
+     "fecha": "2026-12-19",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Severo T. Amarillo",
+     "visitante": "Rivillos Limones 5",
+     "campo": "",
+     "fecha": "2026-12-19",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Bayern F.S.",
+     "visitante": "Loquendocity FC",
+     "campo": "",
+     "fecha": "2026-12-19",
+     "dia": "S",
+     "hora": ""
+    }
+   ]
   },
   {
    "n": 9,
    "descansa": "Sportium Bucarest",
-   "partidos": []
+   "partidos": [
+    {
+     "local": "Jack Nuniels",
+     "visitante": "la Bendicion",
+     "campo": "",
+     "fecha": "2027-01-16",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Astom Birras",
+     "visitante": "Coca Junior",
+     "campo": "",
+     "fecha": "2027-01-16",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Mahouchester",
+     "visitante": "el Cartel",
+     "campo": "",
+     "fecha": "2027-01-16",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Poyato Bellaco",
+     "visitante": "Vodka Junior",
+     "campo": "",
+     "fecha": "2027-01-16",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Besacon Blin Blin",
+     "visitante": "Cardos FC.",
+     "campo": "",
+     "fecha": "2027-01-16",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Sca",
+     "visitante": "Torrejon Sala",
+     "campo": "",
+     "fecha": "2027-01-16",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Mk Urban Proyect FS",
+     "visitante": "Severo T.Rojo",
+     "campo": "",
+     "fecha": "2027-01-16",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Birrareal FC",
+     "visitante": "Severo T. Amarillo",
+     "campo": "",
+     "fecha": "2027-01-16",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Rivillos Limones 5",
+     "visitante": "Bayern F.S.",
+     "campo": "",
+     "fecha": "2027-01-16",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Flamango",
+     "visitante": "Loquendocity FC",
+     "campo": "",
+     "fecha": "2027-01-16",
+     "dia": "S",
+     "hora": ""
+    }
+   ]
   },
   {
    "n": 10,
    "descansa": "Cardos FC.",
-   "partidos": []
+   "partidos": [
+    {
+     "local": "la Bendicion",
+     "visitante": "Flamango",
+     "campo": "",
+     "fecha": "2027-01-23",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Coca Junior",
+     "visitante": "Jack Nuniels",
+     "campo": "",
+     "fecha": "2027-01-23",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "el Cartel",
+     "visitante": "Astom Birras",
+     "campo": "",
+     "fecha": "2027-01-23",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Vodka Junior",
+     "visitante": "Mahouchester",
+     "campo": "",
+     "fecha": "2027-01-23",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Sportium Bucarest",
+     "visitante": "Poyato Bellaco",
+     "campo": "",
+     "fecha": "2027-01-23",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Torrejon Sala",
+     "visitante": "Besacon Blin Blin",
+     "campo": "",
+     "fecha": "2027-01-23",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Severo T.Rojo",
+     "visitante": "Sca",
+     "campo": "",
+     "fecha": "2027-01-23",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Severo T. Amarillo",
+     "visitante": "Mk Urban Proyect FS",
+     "campo": "",
+     "fecha": "2027-01-23",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Bayern F.S.",
+     "visitante": "Birrareal FC",
+     "campo": "",
+     "fecha": "2027-01-23",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Loquendocity FC",
+     "visitante": "Rivillos Limones 5",
+     "campo": "",
+     "fecha": "2027-01-23",
+     "dia": "S",
+     "hora": ""
+    }
+   ]
   },
   {
    "n": 11,
    "descansa": "Torrejon Sala",
-   "partidos": []
+   "partidos": [
+    {
+     "local": "la Bendicion",
+     "visitante": "Coca Junior",
+     "campo": "",
+     "fecha": "2027-01-30",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Jack Nuniels",
+     "visitante": "el Cartel",
+     "campo": "",
+     "fecha": "2027-01-30",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Astom Birras",
+     "visitante": "Vodka Junior",
+     "campo": "",
+     "fecha": "2027-01-30",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Mahouchester",
+     "visitante": "Sportium Bucarest",
+     "campo": "",
+     "fecha": "2027-01-30",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Poyato Bellaco",
+     "visitante": "Cardos FC.",
+     "campo": "",
+     "fecha": "2027-01-30",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Besacon Blin Blin",
+     "visitante": "Severo T.Rojo",
+     "campo": "",
+     "fecha": "2027-01-30",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Sca",
+     "visitante": "Severo T. Amarillo",
+     "campo": "",
+     "fecha": "2027-01-30",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Mk Urban Proyect FS",
+     "visitante": "Bayern F.S.",
+     "campo": "",
+     "fecha": "2027-01-30",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Birrareal FC",
+     "visitante": "Loquendocity FC",
+     "campo": "",
+     "fecha": "2027-01-30",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Flamango",
+     "visitante": "Rivillos Limones 5",
+     "campo": "",
+     "fecha": "2027-01-30",
+     "dia": "S",
+     "hora": ""
+    }
+   ]
   },
   {
    "n": 13,
    "descansa": "Severo T. Amarillo",
-   "partidos": []
+   "partidos": [
+    {
+     "local": "Coca Junior",
+     "visitante": "el Cartel",
+     "campo": "",
+     "fecha": "2027-02-20",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "la Bendicion",
+     "visitante": "Vodka Junior",
+     "campo": "",
+     "fecha": "2027-02-20",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Jack Nuniels",
+     "visitante": "Sportium Bucarest",
+     "campo": "",
+     "fecha": "2027-02-20",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Astom Birras",
+     "visitante": "Cardos FC.",
+     "campo": "",
+     "fecha": "2027-02-20",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Mahouchester",
+     "visitante": "Torrejon Sala",
+     "campo": "",
+     "fecha": "2027-02-20",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Poyato Bellaco",
+     "visitante": "Severo T.Rojo",
+     "campo": "",
+     "fecha": "2027-02-20",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Besacon Blin Blin",
+     "visitante": "Bayern F.S.",
+     "campo": "",
+     "fecha": "2027-02-20",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Sca",
+     "visitante": "Loquendocity FC",
+     "campo": "",
+     "fecha": "2027-02-20",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Mk Urban Proyect FS",
+     "visitante": "Rivillos Limones 5",
+     "campo": "",
+     "fecha": "2027-02-20",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Flamango",
+     "visitante": "Birrareal FC",
+     "campo": "",
+     "fecha": "2027-02-20",
+     "dia": "S",
+     "hora": ""
+    }
+   ]
   },
   {
    "n": 14,
    "descansa": "Bayern F.S.",
-   "partidos": []
+   "partidos": [
+    {
+     "local": "el Cartel",
+     "visitante": "Flamango",
+     "campo": "",
+     "fecha": "2027-02-27",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Vodka Junior",
+     "visitante": "Coca Junior",
+     "campo": "",
+     "fecha": "2027-02-27",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Sportium Bucarest",
+     "visitante": "la Bendicion",
+     "campo": "",
+     "fecha": "2027-02-27",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Cardos FC.",
+     "visitante": "Jack Nuniels",
+     "campo": "",
+     "fecha": "2027-02-27",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Torrejon Sala",
+     "visitante": "Astom Birras",
+     "campo": "",
+     "fecha": "2027-02-27",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Severo T.Rojo",
+     "visitante": "Mahouchester",
+     "campo": "",
+     "fecha": "2027-02-27",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Severo T. Amarillo",
+     "visitante": "Poyato Bellaco",
+     "campo": "",
+     "fecha": "2027-02-27",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Loquendocity FC",
+     "visitante": "Besacon Blin Blin",
+     "campo": "",
+     "fecha": "2027-02-27",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Rivillos Limones 5",
+     "visitante": "Sca",
+     "campo": "",
+     "fecha": "2027-02-27",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Birrareal FC",
+     "visitante": "Mk Urban Proyect FS",
+     "campo": "",
+     "fecha": "2027-02-27",
+     "dia": "S",
+     "hora": ""
+    }
+   ]
   },
   {
    "n": 16,
    "descansa": "Rivillos Limones 5",
-   "partidos": []
+   "partidos": [
+    {
+     "local": "Vodka Junior",
+     "visitante": "Flamango",
+     "campo": "",
+     "fecha": "2027-03-13",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Sportium Bucarest",
+     "visitante": "el Cartel",
+     "campo": "",
+     "fecha": "2027-03-13",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Cardos FC.",
+     "visitante": "Coca Junior",
+     "campo": "",
+     "fecha": "2027-03-13",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Torrejon Sala",
+     "visitante": "la Bendicion",
+     "campo": "",
+     "fecha": "2027-03-13",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Severo T.Rojo",
+     "visitante": "Jack Nuniels",
+     "campo": "",
+     "fecha": "2027-03-13",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Severo T. Amarillo",
+     "visitante": "Astom Birras",
+     "campo": "",
+     "fecha": "2027-03-13",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Bayern F.S.",
+     "visitante": "Mahouchester",
+     "campo": "",
+     "fecha": "2027-03-13",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Loquendocity FC",
+     "visitante": "Poyato Bellaco",
+     "campo": "",
+     "fecha": "2027-03-13",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Birrareal FC",
+     "visitante": "Besacon Blin Blin",
+     "campo": "",
+     "fecha": "2027-03-13",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Mk Urban Proyect FS",
+     "visitante": "Sca",
+     "campo": "",
+     "fecha": "2027-03-13",
+     "dia": "S",
+     "hora": ""
+    }
+   ]
   },
   {
    "n": 18,
    "descansa": "Mk Urban Proyect FS",
-   "partidos": []
+   "partidos": [
+    {
+     "local": "Sportium Bucarest",
+     "visitante": "Flamango",
+     "campo": "",
+     "fecha": "2027-04-10",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Cardos FC.",
+     "visitante": "Vodka Junior",
+     "campo": "",
+     "fecha": "2027-04-10",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Torrejon Sala",
+     "visitante": "el Cartel",
+     "campo": "",
+     "fecha": "2027-04-10",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Severo T.Rojo",
+     "visitante": "Coca Junior",
+     "campo": "",
+     "fecha": "2027-04-10",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Severo T. Amarillo",
+     "visitante": "la Bendicion",
+     "campo": "",
+     "fecha": "2027-04-10",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Bayern F.S.",
+     "visitante": "Jack Nuniels",
+     "campo": "",
+     "fecha": "2027-04-10",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Loquendocity FC",
+     "visitante": "Astom Birras",
+     "campo": "",
+     "fecha": "2027-04-10",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Rivillos Limones 5",
+     "visitante": "Mahouchester",
+     "campo": "",
+     "fecha": "2027-04-10",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Birrareal FC",
+     "visitante": "Poyato Bellaco",
+     "campo": "",
+     "fecha": "2027-04-10",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Sca",
+     "visitante": "Besacon Blin Blin",
+     "campo": "",
+     "fecha": "2027-04-10",
+     "dia": "S",
+     "hora": ""
+    }
+   ]
   },
   {
    "n": 19,
    "descansa": "Sca",
-   "partidos": []
+   "partidos": [
+    {
+     "local": "Sportium Bucarest",
+     "visitante": "Cardos FC.",
+     "campo": "",
+     "fecha": "2027-04-17",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Vodka Junior",
+     "visitante": "Torrejon Sala",
+     "campo": "",
+     "fecha": "2027-04-17",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "el Cartel",
+     "visitante": "Severo T.Rojo",
+     "campo": "",
+     "fecha": "2027-04-17",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Coca Junior",
+     "visitante": "Severo T. Amarillo",
+     "campo": "",
+     "fecha": "2027-04-17",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "la Bendicion",
+     "visitante": "Bayern F.S.",
+     "campo": "",
+     "fecha": "2027-04-17",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Jack Nuniels",
+     "visitante": "Loquendocity FC",
+     "campo": "",
+     "fecha": "2027-04-17",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Astom Birras",
+     "visitante": "Rivillos Limones 5",
+     "campo": "",
+     "fecha": "2027-04-17",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Mahouchester",
+     "visitante": "Birrareal FC",
+     "campo": "",
+     "fecha": "2027-04-17",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Poyato Bellaco",
+     "visitante": "Mk Urban Proyect FS",
+     "campo": "",
+     "fecha": "2027-04-17",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Flamango",
+     "visitante": "Besacon Blin Blin",
+     "campo": "",
+     "fecha": "2027-04-17",
+     "dia": "S",
+     "hora": ""
+    }
+   ]
   },
   {
    "n": 20,
    "descansa": "Besacon Blin Blin",
-   "partidos": []
+   "partidos": [
+    {
+     "local": "Cardos FC.",
+     "visitante": "Flamango",
+     "campo": "",
+     "fecha": "2027-04-24",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Torrejon Sala",
+     "visitante": "Sportium Bucarest",
+     "campo": "",
+     "fecha": "2027-04-24",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Severo T.Rojo",
+     "visitante": "Vodka Junior",
+     "campo": "",
+     "fecha": "2027-04-24",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Severo T. Amarillo",
+     "visitante": "el Cartel",
+     "campo": "",
+     "fecha": "2027-04-24",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Bayern F.S.",
+     "visitante": "Coca Junior",
+     "campo": "",
+     "fecha": "2027-04-24",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Loquendocity FC",
+     "visitante": "la Bendicion",
+     "campo": "",
+     "fecha": "2027-04-24",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Rivillos Limones 5",
+     "visitante": "Jack Nuniels",
+     "campo": "",
+     "fecha": "2027-04-24",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Birrareal FC",
+     "visitante": "Astom Birras",
+     "campo": "",
+     "fecha": "2027-04-24",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Mk Urban Proyect FS",
+     "visitante": "Mahouchester",
+     "campo": "",
+     "fecha": "2027-04-24",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Sca",
+     "visitante": "Poyato Bellaco",
+     "campo": "",
+     "fecha": "2027-04-24",
+     "dia": "S",
+     "hora": ""
+    }
+   ]
   }
  ],
  "clasificacion": [
   {
    "pos": 1,
-   "equipo": "Sportium",
+   "equipo": "Sportium Bucarest",
    "pj": 4,
    "g": 4,
    "e": 0,
@@ -333,6 +1568,18 @@
    "pts": 4
   },
   {
+   "pos": 14,
+   "equipo": "Flamango",
+   "pj": 4,
+   "g": 1,
+   "e": 1,
+   "p": 2,
+   "gf": 8,
+   "gc": 9,
+   "dg": -1,
+   "pts": 4
+  },
+  {
    "pos": 15,
    "equipo": "Cardos FC.",
    "pj": 4,
@@ -406,7 +1653,7 @@
   },
   {
    "pos": 21,
-   "equipo": "Severo T.",
+   "equipo": "Severo T. Amarillo",
    "pj": 4,
    "g": 0,
    "e": 0,
@@ -417,157 +1664,7 @@
    "pts": 0
   }
  ],
- "avisos": [
-  "Jornada 2: no sé separar equipos y campo en «POYATO BELLACO              FLAMANGO» (columnas: 2)",
-  "Jornada 2: no sé separar equipos y campo en «ASTOM BIRRAS             BESACON BLIN BLIN» (columnas: 2)",
-  "Jornada 2: no sé separar equipos y campo en «JACK NUNIELS             SCA» (columnas: 2)",
-  "Jornada 2: no sé separar equipos y campo en «LA BENDICION            MK urban proyect fs» (columnas: 2)",
-  "Jornada 2: no sé separar equipos y campo en «COCA JUNIOR             BIRRAREAL FC» (columnas: 2)",
-  "Jornada 2: no sé separar equipos y campo en «EL CARTEL            RIVILLOS LIMONES 5» (columnas: 2)",
-  "Jornada 2: no sé separar equipos y campo en «VODKA JUNIOR             LOQUENDOCITY FC» (columnas: 2)",
-  "Jornada 2: no sé separar equipos y campo en «SPORTIUM BUCAREST              BAYERN F.S.» (columnas: 2)",
-  "Jornada 2: no sé separar equipos y campo en «CARDOS FC.             SEVERO T. AMARILLO» (columnas: 2)",
-  "Jornada 2: no sé separar equipos y campo en «TORREJON SALA              SEVERO T.ROJO» (columnas: 2)",
-  "Jornada 4: no sé separar equipos y campo en «MAHOUCHESTER                FLAMANGO» (columnas: 2)",
-  "Jornada 4: no sé separar equipos y campo en «ASTOM BIRRAS             POYATO BELLACO» (columnas: 2)",
-  "Jornada 4: no sé separar equipos y campo en «LA BENDICION            BESACON BLIN BLIN» (columnas: 2)",
-  "Jornada 4: no sé separar equipos y campo en «COCA JUNIOR             SCA» (columnas: 2)",
-  "Jornada 4: no sé separar equipos y campo en «EL CARTEL            MK urban proyect fs» (columnas: 2)",
-  "Jornada 4: no sé separar equipos y campo en «VODKA JUNIOR             BIRRAREAL FC» (columnas: 2)",
-  "Jornada 4: no sé separar equipos y campo en «SPORTIUM BUCAREST              RIVILLOS LIMONES 5» (columnas: 2)",
-  "Jornada 4: no sé separar equipos y campo en «CARDOS FC.             LOQUENDOCITY FC» (columnas: 2)",
-  "Jornada 4: no sé separar equipos y campo en «TORREJON SALA              BAYERN F.S.» (columnas: 2)",
-  "Jornada 4: no sé separar equipos y campo en «SEVERO T.ROJO             SEVERO T. AMARILLO» (columnas: 2)",
-  "Jornada 5: no sé separar equipos y campo en «POYATO BELLACO              JACK NUNIELS» (columnas: 2)",
-  "Jornada 5: no sé separar equipos y campo en «BESACON BLIN BLIN             COCA JUNIOR» (columnas: 2)",
-  "Jornada 5: no sé separar equipos y campo en «SCA           EL CARTEL» (columnas: 2)",
-  "Jornada 5: no sé separar equipos y campo en «MK urban proyect fs         VODKA JUNIOR» (columnas: 2)",
-  "Jornada 5: no sé separar equipos y campo en «BIRRAREAL FC             SPORTIUM BUCAREST» (columnas: 2)",
-  "Jornada 5: no sé separar equipos y campo en «RIVILLOS LIMONES 5            CARDOS FC.» (columnas: 2)",
-  "Jornada 5: no sé separar equipos y campo en «LOQUENDOCITY FC              TORREJON SALA» (columnas: 2)",
-  "Jornada 5: no sé separar equipos y campo en «BAYERN F.S.            SEVERO T.ROJO» (columnas: 2)",
-  "Jornada 5: no sé separar equipos y campo en «FLAMANGO             SEVERO T. AMARILLO» (columnas: 2)",
-  "Jornada 6: no sé separar equipos y campo en «ASTOM BIRRAS             FLAMANGO» (columnas: 2)",
-  "Jornada 6: no sé separar equipos y campo en «JACK NUNIELS             MAHOUCHESTER» (columnas: 2)",
-  "Jornada 6: no sé separar equipos y campo en «LA BENDICION            POYATO BELLACO» (columnas: 2)",
-  "Jornada 6: no sé separar equipos y campo en «EL CARTEL            BESACON BLIN BLIN» (columnas: 2)",
-  "Jornada 6: no sé separar equipos y campo en «VODKA JUNIOR             SCA» (columnas: 2)",
-  "Jornada 6: no sé separar equipos y campo en «SPORTIUM BUCAREST              MK urban proyect fs» (columnas: 2)",
-  "Jornada 6: no sé separar equipos y campo en «CARDOS FC.             BIRRAREAL FC» (columnas: 2)",
-  "Jornada 6: no sé separar equipos y campo en «TORREJON SALA              RIVILLOS LIMONES 5» (columnas: 2)",
-  "Jornada 6: no sé separar equipos y campo en «SEVERO T.ROJO             LOQUENDOCITY FC» (columnas: 2)",
-  "Jornada 6: no sé separar equipos y campo en «SEVERO T. AMARILLO             BAYERN F.S.» (columnas: 2)",
-  "Jornada 7: no sé separar equipos y campo en «ASTOM BIRRAS             JACK NUNIELS» (columnas: 2)",
-  "Jornada 7: no sé separar equipos y campo en «MAHOUCHESTER                LA BENDICION» (columnas: 2)",
-  "Jornada 7: no sé separar equipos y campo en «POYATO BELLACO              COCA JUNIOR» (columnas: 2)",
-  "Jornada 7: no sé separar equipos y campo en «BESACON BLIN BLIN             VODKA JUNIOR» (columnas: 2)",
-  "Jornada 7: no sé separar equipos y campo en «SCA           SPORTIUM BUCAREST» (columnas: 2)",
-  "Jornada 7: no sé separar equipos y campo en «MK urban proyect fs         CARDOS FC.» (columnas: 2)",
-  "Jornada 7: no sé separar equipos y campo en «BIRRAREAL FC             TORREJON SALA» (columnas: 2)",
-  "Jornada 7: no sé separar equipos y campo en «RIVILLOS LIMONES 5            SEVERO T.ROJO» (columnas: 2)",
-  "Jornada 7: no sé separar equipos y campo en «LOQUENDOCITY FC              SEVERO T. AMARILLO» (columnas: 2)",
-  "Jornada 7: no sé separar equipos y campo en «FLAMANGO             BAYERN F.S.» (columnas: 2)",
-  "Jornada 8: no sé separar equipos y campo en «JACK NUNIELS             FLAMANGO» (columnas: 2)",
-  "Jornada 8: no sé separar equipos y campo en «LA BENDICION            ASTOM BIRRAS» (columnas: 2)",
-  "Jornada 8: no sé separar equipos y campo en «COCA JUNIOR             MAHOUCHESTER» (columnas: 2)",
-  "Jornada 8: no sé separar equipos y campo en «EL CARTEL            POYATO BELLACO» (columnas: 2)",
-  "Jornada 8: no sé separar equipos y campo en «SPORTIUM BUCAREST              BESACON BLIN BLIN» (columnas: 2)",
-  "Jornada 8: no sé separar equipos y campo en «CARDOS FC.             SCA» (columnas: 2)",
-  "Jornada 8: no sé separar equipos y campo en «TORREJON SALA              MK urban proyect fs» (columnas: 2)",
-  "Jornada 8: no sé separar equipos y campo en «SEVERO T.ROJO             BIRRAREAL FC» (columnas: 2)",
-  "Jornada 8: no sé separar equipos y campo en «SEVERO T. AMARILLO             RIVILLOS LIMONES 5» (columnas: 2)",
-  "Jornada 8: no sé separar equipos y campo en «BAYERN F.S.            LOQUENDOCITY FC» (columnas: 2)",
-  "Jornada 9: no sé separar equipos y campo en «JACK NUNIELS             LA BENDICION» (columnas: 2)",
-  "Jornada 9: no sé separar equipos y campo en «ASTOM BIRRAS             COCA JUNIOR» (columnas: 2)",
-  "Jornada 9: no sé separar equipos y campo en «MAHOUCHESTER                EL CARTEL» (columnas: 2)",
-  "Jornada 9: no sé separar equipos y campo en «POYATO BELLACO              VODKA JUNIOR» (columnas: 2)",
-  "Jornada 9: no sé separar equipos y campo en «BESACON BLIN BLIN             CARDOS FC.» (columnas: 2)",
-  "Jornada 9: no sé separar equipos y campo en «SCA           TORREJON SALA» (columnas: 2)",
-  "Jornada 9: no sé separar equipos y campo en «MK urban proyect fs         SEVERO T.ROJO» (columnas: 2)",
-  "Jornada 9: no sé separar equipos y campo en «BIRRAREAL FC             SEVERO T. AMARILLO» (columnas: 2)",
-  "Jornada 9: no sé separar equipos y campo en «RIVILLOS LIMONES 5            BAYERN F.S.» (columnas: 2)",
-  "Jornada 9: no sé separar equipos y campo en «FLAMANGO             LOQUENDOCITY FC» (columnas: 2)",
-  "Jornada 10: no sé separar equipos y campo en «LA BENDICION            FLAMANGO» (columnas: 2)",
-  "Jornada 10: no sé separar equipos y campo en «COCA JUNIOR             JACK NUNIELS» (columnas: 2)",
-  "Jornada 10: no sé separar equipos y campo en «EL CARTEL            ASTOM BIRRAS» (columnas: 2)",
-  "Jornada 10: no sé separar equipos y campo en «VODKA JUNIOR             MAHOUCHESTER» (columnas: 2)",
-  "Jornada 10: no sé separar equipos y campo en «SPORTIUM BUCAREST              POYATO BELLACO» (columnas: 2)",
-  "Jornada 10: no sé separar equipos y campo en «TORREJON SALA              BESACON BLIN BLIN» (columnas: 2)",
-  "Jornada 10: no sé separar equipos y campo en «SEVERO T.ROJO             SCA» (columnas: 2)",
-  "Jornada 10: no sé separar equipos y campo en «SEVERO T. AMARILLO             MK urban proyect fs» (columnas: 2)",
-  "Jornada 10: no sé separar equipos y campo en «BAYERN F.S.            BIRRAREAL FC» (columnas: 2)",
-  "Jornada 10: no sé separar equipos y campo en «LOQUENDOCITY FC              RIVILLOS LIMONES 5» (columnas: 2)",
-  "Jornada 11: no sé separar equipos y campo en «LA BENDICION            COCA JUNIOR» (columnas: 2)",
-  "Jornada 11: no sé separar equipos y campo en «JACK NUNIELS             EL CARTEL» (columnas: 2)",
-  "Jornada 11: no sé separar equipos y campo en «ASTOM BIRRAS             VODKA JUNIOR» (columnas: 2)",
-  "Jornada 11: no sé separar equipos y campo en «MAHOUCHESTER                SPORTIUM BUCAREST» (columnas: 2)",
-  "Jornada 11: no sé separar equipos y campo en «POYATO BELLACO              CARDOS FC.» (columnas: 2)",
-  "Jornada 11: no sé separar equipos y campo en «BESACON BLIN BLIN             SEVERO T.ROJO» (columnas: 2)",
-  "Jornada 11: no sé separar equipos y campo en «SCA           SEVERO T. AMARILLO» (columnas: 2)",
-  "Jornada 11: no sé separar equipos y campo en «MK urban proyect fs         BAYERN F.S.» (columnas: 2)",
-  "Jornada 11: no sé separar equipos y campo en «BIRRAREAL FC             LOQUENDOCITY FC» (columnas: 2)",
-  "Jornada 11: no sé separar equipos y campo en «FLAMANGO             RIVILLOS LIMONES 5» (columnas: 2)",
-  "Jornada 13: no sé separar equipos y campo en «COCA JUNIOR             EL CARTEL» (columnas: 2)",
-  "Jornada 13: no sé separar equipos y campo en «LA BENDICION            VODKA JUNIOR» (columnas: 2)",
-  "Jornada 13: no sé separar equipos y campo en «JACK NUNIELS             SPORTIUM BUCAREST» (columnas: 2)",
-  "Jornada 13: no sé separar equipos y campo en «ASTOM BIRRAS             CARDOS FC.» (columnas: 2)",
-  "Jornada 13: no sé separar equipos y campo en «MAHOUCHESTER                TORREJON SALA» (columnas: 2)",
-  "Jornada 13: no sé separar equipos y campo en «POYATO BELLACO              SEVERO T.ROJO» (columnas: 2)",
-  "Jornada 13: no sé separar equipos y campo en «BESACON BLIN BLIN             BAYERN F.S.» (columnas: 2)",
-  "Jornada 13: no sé separar equipos y campo en «SCA           LOQUENDOCITY FC» (columnas: 2)",
-  "Jornada 13: no sé separar equipos y campo en «MK urban proyect fs         RIVILLOS LIMONES 5» (columnas: 2)",
-  "Jornada 13: no sé separar equipos y campo en «FLAMANGO             BIRRAREAL FC» (columnas: 2)",
-  "Jornada 14: no sé separar equipos y campo en «EL CARTEL            FLAMANGO» (columnas: 2)",
-  "Jornada 14: no sé separar equipos y campo en «VODKA JUNIOR             COCA JUNIOR» (columnas: 2)",
-  "Jornada 14: no sé separar equipos y campo en «SPORTIUM BUCAREST              LA BENDICION» (columnas: 2)",
-  "Jornada 14: no sé separar equipos y campo en «CARDOS FC.             JACK NUNIELS» (columnas: 2)",
-  "Jornada 14: no sé separar equipos y campo en «TORREJON SALA              ASTOM BIRRAS» (columnas: 2)",
-  "Jornada 14: no sé separar equipos y campo en «SEVERO T.ROJO             MAHOUCHESTER» (columnas: 2)",
-  "Jornada 14: no sé separar equipos y campo en «SEVERO T. AMARILLO             POYATO BELLACO» (columnas: 2)",
-  "Jornada 14: no sé separar equipos y campo en «LOQUENDOCITY FC              BESACON BLIN BLIN» (columnas: 2)",
-  "Jornada 14: no sé separar equipos y campo en «RIVILLOS LIMONES 5            SCA» (columnas: 2)",
-  "Jornada 14: no sé separar equipos y campo en «BIRRAREAL FC             MK urban proyect fs» (columnas: 2)",
-  "Jornada 16: no sé separar equipos y campo en «VODKA JUNIOR             FLAMANGO» (columnas: 2)",
-  "Jornada 16: no sé separar equipos y campo en «SPORTIUM BUCAREST              EL CARTEL» (columnas: 2)",
-  "Jornada 16: no sé separar equipos y campo en «CARDOS FC.             COCA JUNIOR» (columnas: 2)",
-  "Jornada 16: no sé separar equipos y campo en «TORREJON SALA              LA BENDICION» (columnas: 2)",
-  "Jornada 16: no sé separar equipos y campo en «SEVERO T.ROJO             JACK NUNIELS» (columnas: 2)",
-  "Jornada 16: no sé separar equipos y campo en «SEVERO T. AMARILLO             ASTOM BIRRAS» (columnas: 2)",
-  "Jornada 16: no sé separar equipos y campo en «BAYERN F.S.            MAHOUCHESTER» (columnas: 2)",
-  "Jornada 16: no sé separar equipos y campo en «LOQUENDOCITY FC              POYATO BELLACO» (columnas: 2)",
-  "Jornada 16: no sé separar equipos y campo en «BIRRAREAL FC             BESACON BLIN BLIN» (columnas: 2)",
-  "Jornada 16: no sé separar equipos y campo en «MK urban proyect fs         SCA» (columnas: 2)",
-  "Jornada 18: no sé separar equipos y campo en «SPORTIUM BUCAREST              FLAMANGO» (columnas: 2)",
-  "Jornada 18: no sé separar equipos y campo en «CARDOS FC.             VODKA JUNIOR» (columnas: 2)",
-  "Jornada 18: no sé separar equipos y campo en «TORREJON SALA              EL CARTEL» (columnas: 2)",
-  "Jornada 18: no sé separar equipos y campo en «SEVERO T.ROJO             COCA JUNIOR» (columnas: 2)",
-  "Jornada 18: no sé separar equipos y campo en «SEVERO T. AMARILLO             LA BENDICION» (columnas: 2)",
-  "Jornada 18: no sé separar equipos y campo en «BAYERN F.S.            JACK NUNIELS» (columnas: 2)",
-  "Jornada 18: no sé separar equipos y campo en «LOQUENDOCITY FC              ASTOM BIRRAS» (columnas: 2)",
-  "Jornada 18: no sé separar equipos y campo en «RIVILLOS LIMONES 5            MAHOUCHESTER» (columnas: 2)",
-  "Jornada 18: no sé separar equipos y campo en «BIRRAREAL FC             POYATO BELLACO» (columnas: 2)",
-  "Jornada 18: no sé separar equipos y campo en «SCA           BESACON BLIN BLIN» (columnas: 2)",
-  "Jornada 19: no sé separar equipos y campo en «SPORTIUM BUCAREST              CARDOS FC.» (columnas: 2)",
-  "Jornada 19: no sé separar equipos y campo en «VODKA JUNIOR             TORREJON SALA» (columnas: 2)",
-  "Jornada 19: no sé separar equipos y campo en «EL CARTEL            SEVERO T.ROJO» (columnas: 2)",
-  "Jornada 19: no sé separar equipos y campo en «COCA JUNIOR             SEVERO T. AMARILLO» (columnas: 2)",
-  "Jornada 19: no sé separar equipos y campo en «LA BENDICION            BAYERN F.S.» (columnas: 2)",
-  "Jornada 19: no sé separar equipos y campo en «JACK NUNIELS             LOQUENDOCITY FC» (columnas: 2)",
-  "Jornada 19: no sé separar equipos y campo en «ASTOM BIRRAS             RIVILLOS LIMONES 5» (columnas: 2)",
-  "Jornada 19: no sé separar equipos y campo en «MAHOUCHESTER                BIRRAREAL FC» (columnas: 2)",
-  "Jornada 19: no sé separar equipos y campo en «POYATO BELLACO              MK urban proyect fs» (columnas: 2)",
-  "Jornada 19: no sé separar equipos y campo en «FLAMANGO             BESACON BLIN BLIN» (columnas: 2)",
-  "Jornada 20: no sé separar equipos y campo en «CARDOS FC.             FLAMANGO» (columnas: 2)",
-  "Jornada 20: no sé separar equipos y campo en «TORREJON SALA              SPORTIUM BUCAREST» (columnas: 2)",
-  "Jornada 20: no sé separar equipos y campo en «SEVERO T.ROJO             VODKA JUNIOR» (columnas: 2)",
-  "Jornada 20: no sé separar equipos y campo en «SEVERO T. AMARILLO             EL CARTEL» (columnas: 2)",
-  "Jornada 20: no sé separar equipos y campo en «BAYERN F.S.            COCA JUNIOR» (columnas: 2)",
-  "Jornada 20: no sé separar equipos y campo en «LOQUENDOCITY FC              LA BENDICION» (columnas: 2)",
-  "Jornada 20: no sé separar equipos y campo en «RIVILLOS LIMONES 5            JACK NUNIELS» (columnas: 2)",
-  "Jornada 20: no sé separar equipos y campo en «BIRRAREAL FC             ASTOM BIRRAS» (columnas: 2)",
-  "Jornada 20: no sé separar equipos y campo en «MK urban proyect fs         MAHOUCHESTER» (columnas: 2)",
-  "Jornada 20: no sé separar equipos y campo en «SCA           POYATO BELLACO» (columnas: 2)"
- ],
+ "avisos": [],
  "equipos": [
   "Astom Birras",
   "Bayern F.S.",
@@ -580,6 +1677,7 @@
   "Loquendocity FC",
   "Mahouchester",
   "Mk Urban Proyect FS",
+  "Poyato Bellaco",
   "Rivillos Limones 5",
   "Sca",
   "Severo T. Amarillo",

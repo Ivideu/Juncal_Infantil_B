@@ -1,0 +1,116 @@
+                              JORNADAS DEL CAMPEONATO
+Deporte: Futbol Sala
+Categoría: SENIOR PRIMERA
+Competición: CAMPEÓN DE INVIERNO
+
+       Jornada Nº1                                          Campo   Fecha        Hora
+ 1        ZARZUELA MANJI            LA HUMILDAD                     17-10-26 S
+ 1             RAIMON T.J.          CARRICHE VERDENTAL              17-10-26 S
+ 1   LEON. DE MONTEPINAR            OLYMPIACOS TORREJON             17-10-26 S
+ 1   F.SALA TORREPISTA "A"          WEDER BRODER "A"                17-10-26 S
+ 1                    ÑBÑ           TIKI TAKA "A"                   17-10-26 S
+ 1           TAKA TAKA "A"          INCEFOR Y.VALLECANO             17-10-26 S
+
+       Jornada Nº2                                          Campo   Fecha        Hora
+ 1           LA HUMILDAD            TAKA TAKA "A"                   24-10-26 S
+ 1   CARRICHE VERDENTAL             ZARZUELA MANJI                  24-10-26 S
+ 1 OLYMPIACOS TORREJON              RAIMON T.J.                     24-10-26 S
+ 1     WEDER BRODER "A"             LEON. DE MONTEPINAR             24-10-26 S
+ 1            TIKI TAKA "A"         F.SALA TORREPISTA "A"           24-10-26 S
+ 1   INCEFOR Y.VALLECANO            ÑBÑ                             24-10-26 S
+
+       Jornada Nº3                                          Campo   Fecha        Hora
+ 1           LA HUMILDAD            CARRICHE VERDENTAL              7-11-26 S
+ 1        ZARZUELA MANJI            OLYMPIACOS TORREJON             7-11-26 S
+ 1             RAIMON T.J.          WEDER BRODER "A"                7-11-26 S
+ 1   LEON. DE MONTEPINAR            TIKI TAKA "A"                   7-11-26 S
+ 1   F.SALA TORREPISTA "A"          INCEFOR Y.VALLECANO             7-11-26 S
+ 1           TAKA TAKA "A"          ÑBÑ                             7-11-26 S
+
+       Jornada Nº4                                          Campo   Fecha        Hora
+ 1   CARRICHE VERDENTAL             TAKA TAKA "A"                   14-11-26 S
+ 1 OLYMPIACOS TORREJON              LA HUMILDAD                     14-11-26 S
+ 1     WEDER BRODER "A"             ZARZUELA MANJI                  14-11-26 S
+ 1            TIKI TAKA "A"         RAIMON T.J.                     14-11-26 S
+ 1   INCEFOR Y.VALLECANO            LEON. DE MONTEPINAR             14-11-26 S
+ 1                    ÑBÑ           F.SALA TORREPISTA "A"           14-11-26 S
+
+       Jornada Nº5                                          Campo   Fecha        Hora
+ 1   CARRICHE VERDENTAL             OLYMPIACOS TORREJON             21-11-26 S
+ 1           LA HUMILDAD            WEDER BRODER "A"                21-11-26 S
+ 1        ZARZUELA MANJI            TIKI TAKA "A"                   21-11-26 S
+ 1             RAIMON T.J.          INCEFOR Y.VALLECANO             21-11-26 S
+ 1   LEON. DE MONTEPINAR            ÑBÑ                             21-11-26 S
+ 1           TAKA TAKA "A"          F.SALA TORREPISTA "A"           21-11-26 S
+
+
+
+
+                                                                        Página. 1
+                              JORNADAS DEL CAMPEONATO
+Deporte: Futbol Sala
+Categoría: SENIOR PRIMERA
+Competición: CAMPEÓN DE INVIERNO
+
+       Jornada Nº6                                          Campo   Fecha        Hora
+ 1 OLYMPIACOS TORREJON              TAKA TAKA "A"                   28-11-26 S
+ 1     WEDER BRODER "A"             CARRICHE VERDENTAL              28-11-26 S
+ 1            TIKI TAKA "A"         LA HUMILDAD                     28-11-26 S
+ 1   INCEFOR Y.VALLECANO            ZARZUELA MANJI                  28-11-26 S
+ 1                    ÑBÑ           RAIMON T.J.                     28-11-26 S
+ 1   F.SALA TORREPISTA "A"          LEON. DE MONTEPINAR             28-11-26 S
+
+       Jornada Nº7                                          Campo   Fecha        Hora
+ 1 OLYMPIACOS TORREJON              WEDER BRODER "A"                12-12-26 S
+ 1   CARRICHE VERDENTAL             TIKI TAKA "A"                   12-12-26 S
+ 1           LA HUMILDAD            INCEFOR Y.VALLECANO             12-12-26 S
+ 1        ZARZUELA MANJI            ÑBÑ                             12-12-26 S
+ 1             RAIMON T.J.          F.SALA TORREPISTA "A"           12-12-26 S
+ 1           TAKA TAKA "A"          LEON. DE MONTEPINAR             12-12-26 S
+
+       Jornada Nº8                                          Campo   Fecha        Hora
+ 1     WEDER BRODER "A"             TAKA TAKA "A"                   19-12-26 S
+ 1            TIKI TAKA "A"         OLYMPIACOS TORREJON             19-12-26 S
+ 1   INCEFOR Y.VALLECANO            CARRICHE VERDENTAL              19-12-26 S
+ 1                    ÑBÑ           LA HUMILDAD                     19-12-26 S
+ 1   F.SALA TORREPISTA "A"          ZARZUELA MANJI                  19-12-26 S
+ 1   LEON. DE MONTEPINAR            RAIMON T.J.                     19-12-26 S
+
+       Jornada Nº9                                          Campo   Fecha        Hora
+ 1     WEDER BRODER "A"             TIKI TAKA "A"                   16-01-27 S
+ 1 OLYMPIACOS TORREJON              INCEFOR Y.VALLECANO             16-01-27 S
+ 1   CARRICHE VERDENTAL             ÑBÑ                             16-01-27 S
+ 1           LA HUMILDAD            F.SALA TORREPISTA "A"           16-01-27 S
+ 1        ZARZUELA MANJI            LEON. DE MONTEPINAR             16-01-27 S
+ 1           TAKA TAKA "A"          RAIMON T.J.                     16-01-27 S
+
+       Jornada Nº10                                         Campo   Fecha        Hora
+ 1            TIKI TAKA "A"         TAKA TAKA "A"                   23-01-27 S
+ 1   INCEFOR Y.VALLECANO            WEDER BRODER "A"                23-01-27 S
+ 1                    ÑBÑ           OLYMPIACOS TORREJON             23-01-27 S
+ 1   F.SALA TORREPISTA "A"          CARRICHE VERDENTAL              23-01-27 S
+ 1   LEON. DE MONTEPINAR            LA HUMILDAD                     23-01-27 S
+ 1             RAIMON T.J.          ZARZUELA MANJI                  23-01-27 S
+
+
+
+
+                                                                        Página. 2
+                             JORNADAS DEL CAMPEONATO
+Deporte: Futbol Sala
+Categoría: SENIOR PRIMERA
+Competición: CAMPEÓN DE INVIERNO
+
+      Jornada Nº11                                         Campo   Fecha        Hora
+ 1           TIKI TAKA "A"         INCEFOR Y.VALLECANO             30-01-27 S
+ 1     WEDER BRODER "A"            ÑBÑ                             30-01-27 S
+ 1 OLYMPIACOS TORREJON             F.SALA TORREPISTA "A"           30-01-27 S
+ 1   CARRICHE VERDENTAL            LEON. DE MONTEPINAR             30-01-27 S
+ 1          LA HUMILDAD            RAIMON T.J.                     30-01-27 S
+ 1          TAKA TAKA "A"          ZARZUELA MANJI                  30-01-27 S
+
+
+
+
+                                                                       Página. 3
+

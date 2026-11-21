@@ -1,76 +1,729 @@
 {
  "id": "senior-superliga",
  "nombre": "Senior Superliga",
- "actualizado": "2026-11-21T07:57:36Z",
+ "actualizado": "2026-11-21T11:58:58Z",
  "fuente": {
   "calendario": [
    "https://deportes.ayto-torrejon.es/sites/default/files/users/user355/CALENDARIO%20SUPERLIGA%20CAMPE%C3%93N%20DE%20INVIERNO%202627.pdf"
   ],
-  "jornada": []
+  "jornada": [
+   "https://deportes.ayto-torrejon.es/sites/default/files/users/user355/HORARIOS%20SUPERLIGA%20SENIOR%2021%20Y%2022%20NOVIEMBRE.pdf"
+  ]
  },
- "jornadas": [],
- "clasificacion": [],
- "avisos": [
-  "Jornada 1: no sé separar equipos y campo en «DRIM TIM          WHOPPERCITOS» (columnas: 2)",
-  "Jornada 1: no sé separar equipos y campo en «WAKANDITOS            F.S.RECIO» (columnas: 2)",
-  "Jornada 1: no sé separar equipos y campo en «CIRCO F.S.         P.GALEON FLYNET» (columnas: 2)",
-  "Jornada 1: no sé separar equipos y campo en «NOCTRA TORREJON \"A\"          SAN CHURRITA VALLE» (columnas: 2)",
-  "Jornada 1: no sé separar equipos y campo en «COLEGIO JABY           JOGA BONITO» (columnas: 2)",
-  "Jornada 1: no sé separar equipos y campo en «FEOS PERO CON GUSTO            AGAPE CASTILLO» (columnas: 2)",
-  "Jornada 2: no sé separar equipos y campo en «WHOPPERCITOS            FEOS PERO CON GUSTO» (columnas: 2)",
-  "Jornada 2: no sé separar equipos y campo en «F.S.RECIO          DRIM TIM» (columnas: 2)",
-  "Jornada 2: no sé separar equipos y campo en «P.GALEON FLYNET          WAKANDITOS» (columnas: 2)",
-  "Jornada 2: no sé separar equipos y campo en «SAN CHURRITA VALLE          CIRCO F.S.» (columnas: 2)",
-  "Jornada 2: no sé separar equipos y campo en «JOGA BONITO           NOCTRA TORREJON \"A\"» (columnas: 2)",
-  "Jornada 2: no sé separar equipos y campo en «AGAPE CASTILLO           COLEGIO JABY» (columnas: 2)",
-  "Jornada 4: no sé separar equipos y campo en «F.S.RECIO          FEOS PERO CON GUSTO» (columnas: 2)",
-  "Jornada 4: no sé separar equipos y campo en «P.GALEON FLYNET          WHOPPERCITOS» (columnas: 2)",
-  "Jornada 4: no sé separar equipos y campo en «SAN CHURRITA VALLE          DRIM TIM» (columnas: 2)",
-  "Jornada 4: no sé separar equipos y campo en «JOGA BONITO           WAKANDITOS» (columnas: 2)",
-  "Jornada 4: no sé separar equipos y campo en «AGAPE CASTILLO           CIRCO F.S.» (columnas: 2)",
-  "Jornada 4: no sé separar equipos y campo en «COLEGIO JABY           NOCTRA TORREJON \"A\"» (columnas: 2)",
-  "Jornada 5: no sé separar equipos y campo en «F.S.RECIO          P.GALEON FLYNET» (columnas: 2)",
-  "Jornada 5: no sé separar equipos y campo en «WHOPPERCITOS            SAN CHURRITA VALLE» (columnas: 2)",
-  "Jornada 5: no sé separar equipos y campo en «DRIM TIM          JOGA BONITO» (columnas: 2)",
-  "Jornada 5: no sé separar equipos y campo en «WAKANDITOS            AGAPE CASTILLO» (columnas: 2)",
-  "Jornada 5: no sé separar equipos y campo en «CIRCO F.S.         COLEGIO JABY» (columnas: 2)",
-  "Jornada 5: no sé separar equipos y campo en «FEOS PERO CON GUSTO            NOCTRA TORREJON \"A\"» (columnas: 2)",
-  "Jornada 6: no sé separar equipos y campo en «P.GALEON FLYNET          FEOS PERO CON GUSTO» (columnas: 2)",
-  "Jornada 6: no sé separar equipos y campo en «SAN CHURRITA VALLE          F.S.RECIO» (columnas: 2)",
-  "Jornada 6: no sé separar equipos y campo en «JOGA BONITO           WHOPPERCITOS» (columnas: 2)",
-  "Jornada 6: no sé separar equipos y campo en «AGAPE CASTILLO           DRIM TIM» (columnas: 2)",
-  "Jornada 6: no sé separar equipos y campo en «COLEGIO JABY           WAKANDITOS» (columnas: 2)",
-  "Jornada 6: no sé separar equipos y campo en «NOCTRA TORREJON \"A\"          CIRCO F.S.» (columnas: 2)",
-  "Jornada 7: no sé separar equipos y campo en «P.GALEON FLYNET          SAN CHURRITA VALLE» (columnas: 2)",
-  "Jornada 7: no sé separar equipos y campo en «F.S.RECIO          JOGA BONITO» (columnas: 2)",
-  "Jornada 7: no sé separar equipos y campo en «WHOPPERCITOS            AGAPE CASTILLO» (columnas: 2)",
-  "Jornada 7: no sé separar equipos y campo en «DRIM TIM          COLEGIO JABY» (columnas: 2)",
-  "Jornada 7: no sé separar equipos y campo en «WAKANDITOS            NOCTRA TORREJON \"A\"» (columnas: 2)",
-  "Jornada 7: no sé separar equipos y campo en «FEOS PERO CON GUSTO            CIRCO F.S.» (columnas: 2)",
-  "Jornada 8: no sé separar equipos y campo en «SAN CHURRITA VALLE          FEOS PERO CON GUSTO» (columnas: 2)",
-  "Jornada 8: no sé separar equipos y campo en «JOGA BONITO           P.GALEON FLYNET» (columnas: 2)",
-  "Jornada 8: no sé separar equipos y campo en «AGAPE CASTILLO           F.S.RECIO» (columnas: 2)",
-  "Jornada 8: no sé separar equipos y campo en «COLEGIO JABY           WHOPPERCITOS» (columnas: 2)",
-  "Jornada 8: no sé separar equipos y campo en «NOCTRA TORREJON \"A\"          DRIM TIM» (columnas: 2)",
-  "Jornada 8: no sé separar equipos y campo en «CIRCO F.S.         WAKANDITOS» (columnas: 2)",
-  "Jornada 9: no sé separar equipos y campo en «SAN CHURRITA VALLE          JOGA BONITO» (columnas: 2)",
-  "Jornada 9: no sé separar equipos y campo en «P.GALEON FLYNET          AGAPE CASTILLO» (columnas: 2)",
-  "Jornada 9: no sé separar equipos y campo en «F.S.RECIO          COLEGIO JABY» (columnas: 2)",
-  "Jornada 9: no sé separar equipos y campo en «WHOPPERCITOS            NOCTRA TORREJON \"A\"» (columnas: 2)",
-  "Jornada 9: no sé separar equipos y campo en «DRIM TIM          CIRCO F.S.» (columnas: 2)",
-  "Jornada 9: no sé separar equipos y campo en «FEOS PERO CON GUSTO            WAKANDITOS» (columnas: 2)",
-  "Jornada 10: no sé separar equipos y campo en «JOGA BONITO           FEOS PERO CON GUSTO» (columnas: 2)",
-  "Jornada 10: no sé separar equipos y campo en «AGAPE CASTILLO           SAN CHURRITA VALLE» (columnas: 2)",
-  "Jornada 10: no sé separar equipos y campo en «COLEGIO JABY           P.GALEON FLYNET» (columnas: 2)",
-  "Jornada 10: no sé separar equipos y campo en «NOCTRA TORREJON \"A\"          F.S.RECIO» (columnas: 2)",
-  "Jornada 10: no sé separar equipos y campo en «CIRCO F.S.         WHOPPERCITOS» (columnas: 2)",
-  "Jornada 10: no sé separar equipos y campo en «WAKANDITOS            DRIM TIM» (columnas: 2)",
-  "Jornada 11: no sé separar equipos y campo en «JOGA BONITO          AGAPE CASTILLO» (columnas: 2)",
-  "Jornada 11: no sé separar equipos y campo en «SAN CHURRITA VALLE         COLEGIO JABY» (columnas: 2)",
-  "Jornada 11: no sé separar equipos y campo en «P.GALEON FLYNET          NOCTRA TORREJON \"A\"» (columnas: 2)",
-  "Jornada 11: no sé separar equipos y campo en «F.S.RECIO         CIRCO F.S.» (columnas: 2)",
-  "Jornada 11: no sé separar equipos y campo en «WHOPPERCITOS           WAKANDITOS» (columnas: 2)",
-  "Jornada 11: no sé separar equipos y campo en «FEOS PERO CON GUSTO          DRIM TIM» (columnas: 2)"
+ "jornadas": [
+  {
+   "n": 1,
+   "descansa": null,
+   "partidos": [
+    {
+     "local": "Drim Tim",
+     "visitante": "Whoppercitos",
+     "campo": "",
+     "fecha": "2026-10-17",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Wakanditos",
+     "visitante": "F.S.Recio",
+     "campo": "",
+     "fecha": "2026-10-17",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Circo F.S.",
+     "visitante": "P.Galeon Flynet",
+     "campo": "",
+     "fecha": "2026-10-17",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Noctra Torrejon \"A\"",
+     "visitante": "San Churrita Valle",
+     "campo": "",
+     "fecha": "2026-10-17",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Colegio Jaby",
+     "visitante": "Joga Bonito",
+     "campo": "",
+     "fecha": "2026-10-17",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Feos Pero Con Gusto",
+     "visitante": "Agape Castillo",
+     "campo": "",
+     "fecha": "2026-10-17",
+     "dia": "S",
+     "hora": ""
+    }
+   ]
+  },
+  {
+   "n": 2,
+   "descansa": null,
+   "partidos": [
+    {
+     "local": "Whoppercitos",
+     "visitante": "Feos Pero Con Gusto",
+     "campo": "",
+     "fecha": "2026-10-24",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "F.S.Recio",
+     "visitante": "Drim Tim",
+     "campo": "",
+     "fecha": "2026-10-24",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "P.Galeon Flynet",
+     "visitante": "Wakanditos",
+     "campo": "",
+     "fecha": "2026-10-24",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "San Churrita Valle",
+     "visitante": "Circo F.S.",
+     "campo": "",
+     "fecha": "2026-10-24",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Joga Bonito",
+     "visitante": "Noctra Torrejon \"A\"",
+     "campo": "",
+     "fecha": "2026-10-24",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Agape Castillo",
+     "visitante": "Colegio Jaby",
+     "campo": "",
+     "fecha": "2026-10-24",
+     "dia": "S",
+     "hora": ""
+    }
+   ]
+  },
+  {
+   "n": 4,
+   "descansa": null,
+   "partidos": [
+    {
+     "local": "F.S.Recio",
+     "visitante": "Feos Pero Con Gusto",
+     "campo": "",
+     "fecha": "2026-11-14",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "P.Galeon Flynet",
+     "visitante": "Whoppercitos",
+     "campo": "M-4",
+     "fecha": "2026-11-15",
+     "dia": "D",
+     "hora": "20:00",
+     "ga": 5,
+     "gb": 6
+    },
+    {
+     "local": "San Churrita Valle",
+     "visitante": "Drim Tim",
+     "campo": "J.A.PARAISO",
+     "fecha": "2026-11-15",
+     "dia": "D",
+     "hora": "17:00",
+     "ga": 4,
+     "gb": 1
+    },
+    {
+     "local": "Joga Bonito",
+     "visitante": "Wakanditos",
+     "campo": "J.A.PARAISO",
+     "fecha": "2026-11-15",
+     "dia": "D",
+     "hora": "12:00",
+     "ga": 9,
+     "gb": 0
+    },
+    {
+     "local": "Agape Castillo",
+     "visitante": "Circo F.S.",
+     "campo": "JAVI LIMONES",
+     "fecha": "2026-11-14",
+     "dia": "S",
+     "hora": "20:00",
+     "ga": 1,
+     "gb": 5
+    },
+    {
+     "local": "Colegio Jaby",
+     "visitante": "Noctra Torrejon \"A\"",
+     "campo": "JAVI LIMONES",
+     "fecha": "2026-11-14",
+     "dia": "S",
+     "hora": "19:00",
+     "ga": 11,
+     "gb": 5
+    }
+   ]
+  },
+  {
+   "n": 5,
+   "descansa": null,
+   "partidos": [
+    {
+     "local": "F.S.Recio",
+     "visitante": "P.Galeon Flynet",
+     "campo": "NURIA FDEZ 3",
+     "fecha": "2026-11-22",
+     "dia": "D",
+     "hora": "19:00"
+    },
+    {
+     "local": "Whoppercitos",
+     "visitante": "San Churrita Valle",
+     "campo": "NURIA FDEZ 3",
+     "fecha": "2026-11-21",
+     "dia": "S",
+     "hora": "19:00"
+    },
+    {
+     "local": "Drim Tim",
+     "visitante": "Joga Bonito",
+     "campo": "NURIA FDEZ 3",
+     "fecha": "2026-11-22",
+     "dia": "D",
+     "hora": "18:00"
+    },
+    {
+     "local": "Wakanditos",
+     "visitante": "Agape Castillo",
+     "campo": "J.A.PARAISO",
+     "fecha": "2026-11-22",
+     "dia": "D",
+     "hora": "16:00"
+    },
+    {
+     "local": "Circo F.S.",
+     "visitante": "Colegio Jaby",
+     "campo": "M-4",
+     "fecha": "2026-11-22",
+     "dia": "D",
+     "hora": "16:00"
+    },
+    {
+     "local": "Feos Pero Con Gusto",
+     "visitante": "Noctra Torrejon \"A\"",
+     "campo": "",
+     "fecha": "2026-11-21",
+     "dia": "S",
+     "hora": ""
+    }
+   ]
+  },
+  {
+   "n": 6,
+   "descansa": null,
+   "partidos": [
+    {
+     "local": "P.Galeon Flynet",
+     "visitante": "Feos Pero Con Gusto",
+     "campo": "",
+     "fecha": "2026-11-28",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "San Churrita Valle",
+     "visitante": "F.S.Recio",
+     "campo": "",
+     "fecha": "2026-11-28",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Joga Bonito",
+     "visitante": "Whoppercitos",
+     "campo": "",
+     "fecha": "2026-11-28",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Agape Castillo",
+     "visitante": "Drim Tim",
+     "campo": "",
+     "fecha": "2026-11-28",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Colegio Jaby",
+     "visitante": "Wakanditos",
+     "campo": "",
+     "fecha": "2026-11-28",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Noctra Torrejon \"A\"",
+     "visitante": "Circo F.S.",
+     "campo": "",
+     "fecha": "2026-11-28",
+     "dia": "S",
+     "hora": ""
+    }
+   ]
+  },
+  {
+   "n": 7,
+   "descansa": null,
+   "partidos": [
+    {
+     "local": "P.Galeon Flynet",
+     "visitante": "San Churrita Valle",
+     "campo": "",
+     "fecha": "2026-12-12",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "F.S.Recio",
+     "visitante": "Joga Bonito",
+     "campo": "",
+     "fecha": "2026-12-12",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Whoppercitos",
+     "visitante": "Agape Castillo",
+     "campo": "",
+     "fecha": "2026-12-12",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Drim Tim",
+     "visitante": "Colegio Jaby",
+     "campo": "",
+     "fecha": "2026-12-12",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Wakanditos",
+     "visitante": "Noctra Torrejon \"A\"",
+     "campo": "",
+     "fecha": "2026-12-12",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Feos Pero Con Gusto",
+     "visitante": "Circo F.S.",
+     "campo": "",
+     "fecha": "2026-12-12",
+     "dia": "S",
+     "hora": ""
+    }
+   ]
+  },
+  {
+   "n": 8,
+   "descansa": null,
+   "partidos": [
+    {
+     "local": "San Churrita Valle",
+     "visitante": "Feos Pero Con Gusto",
+     "campo": "",
+     "fecha": "2026-12-19",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Joga Bonito",
+     "visitante": "P.Galeon Flynet",
+     "campo": "",
+     "fecha": "2026-12-19",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Agape Castillo",
+     "visitante": "F.S.Recio",
+     "campo": "",
+     "fecha": "2026-12-19",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Colegio Jaby",
+     "visitante": "Whoppercitos",
+     "campo": "",
+     "fecha": "2026-12-19",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Noctra Torrejon \"A\"",
+     "visitante": "Drim Tim",
+     "campo": "",
+     "fecha": "2026-12-19",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Circo F.S.",
+     "visitante": "Wakanditos",
+     "campo": "",
+     "fecha": "2026-12-19",
+     "dia": "S",
+     "hora": ""
+    }
+   ]
+  },
+  {
+   "n": 9,
+   "descansa": null,
+   "partidos": [
+    {
+     "local": "San Churrita Valle",
+     "visitante": "Joga Bonito",
+     "campo": "",
+     "fecha": "2027-01-16",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "P.Galeon Flynet",
+     "visitante": "Agape Castillo",
+     "campo": "",
+     "fecha": "2027-01-16",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "F.S.Recio",
+     "visitante": "Colegio Jaby",
+     "campo": "",
+     "fecha": "2027-01-16",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Whoppercitos",
+     "visitante": "Noctra Torrejon \"A\"",
+     "campo": "",
+     "fecha": "2027-01-16",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Drim Tim",
+     "visitante": "Circo F.S.",
+     "campo": "",
+     "fecha": "2027-01-16",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Feos Pero Con Gusto",
+     "visitante": "Wakanditos",
+     "campo": "",
+     "fecha": "2027-01-16",
+     "dia": "S",
+     "hora": ""
+    }
+   ]
+  },
+  {
+   "n": 10,
+   "descansa": null,
+   "partidos": [
+    {
+     "local": "Joga Bonito",
+     "visitante": "Feos Pero Con Gusto",
+     "campo": "",
+     "fecha": "2027-01-23",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Agape Castillo",
+     "visitante": "San Churrita Valle",
+     "campo": "",
+     "fecha": "2027-01-23",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Colegio Jaby",
+     "visitante": "P.Galeon Flynet",
+     "campo": "",
+     "fecha": "2027-01-23",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Noctra Torrejon \"A\"",
+     "visitante": "F.S.Recio",
+     "campo": "",
+     "fecha": "2027-01-23",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Circo F.S.",
+     "visitante": "Whoppercitos",
+     "campo": "",
+     "fecha": "2027-01-23",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Wakanditos",
+     "visitante": "Drim Tim",
+     "campo": "",
+     "fecha": "2027-01-23",
+     "dia": "S",
+     "hora": ""
+    }
+   ]
+  },
+  {
+   "n": 11,
+   "descansa": null,
+   "partidos": [
+    {
+     "local": "Joga Bonito",
+     "visitante": "Agape Castillo",
+     "campo": "",
+     "fecha": "2027-01-30",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "San Churrita Valle",
+     "visitante": "Colegio Jaby",
+     "campo": "",
+     "fecha": "2027-01-30",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "P.Galeon Flynet",
+     "visitante": "Noctra Torrejon \"A\"",
+     "campo": "",
+     "fecha": "2027-01-30",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "F.S.Recio",
+     "visitante": "Circo F.S.",
+     "campo": "",
+     "fecha": "2027-01-30",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Whoppercitos",
+     "visitante": "Wakanditos",
+     "campo": "",
+     "fecha": "2027-01-30",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Feos Pero Con Gusto",
+     "visitante": "Drim Tim",
+     "campo": "",
+     "fecha": "2027-01-30",
+     "dia": "S",
+     "hora": ""
+    }
+   ]
+  }
  ],
- "equipos": []
+ "clasificacion": [
+  {
+   "pos": 1,
+   "equipo": "Colegio Jaby",
+   "pj": 4,
+   "g": 3,
+   "e": 1,
+   "p": 0,
+   "gf": 23,
+   "gc": 12,
+   "dg": 11,
+   "pts": 10
+  },
+  {
+   "pos": 2,
+   "equipo": "San Churrita Valle",
+   "pj": 4,
+   "g": 3,
+   "e": 1,
+   "p": 0,
+   "gf": 19,
+   "gc": 10,
+   "dg": 9,
+   "pts": 10
+  },
+  {
+   "pos": 3,
+   "equipo": "Feos Pero Con Gusto",
+   "pj": 4,
+   "g": 3,
+   "e": 0,
+   "p": 1,
+   "gf": 14,
+   "gc": 14,
+   "dg": 0,
+   "pts": 9
+  },
+  {
+   "pos": 4,
+   "equipo": "Whoppercitos",
+   "pj": 4,
+   "g": 3,
+   "e": 0,
+   "p": 1,
+   "gf": 15,
+   "gc": 12,
+   "dg": 3,
+   "pts": 9
+  },
+  {
+   "pos": 5,
+   "equipo": "Joga Bonito",
+   "pj": 4,
+   "g": 3,
+   "e": 0,
+   "p": 1,
+   "gf": 23,
+   "gc": 7,
+   "dg": 16,
+   "pts": 9
+  },
+  {
+   "pos": 6,
+   "equipo": "F.S.Recio",
+   "pj": 4,
+   "g": 2,
+   "e": 0,
+   "p": 2,
+   "gf": 15,
+   "gc": 11,
+   "dg": 4,
+   "pts": 6
+  },
+  {
+   "pos": 7,
+   "equipo": "P.Galeon Flynet",
+   "pj": 4,
+   "g": 2,
+   "e": 0,
+   "p": 2,
+   "gf": 15,
+   "gc": 16,
+   "dg": -1,
+   "pts": 6
+  },
+  {
+   "pos": 8,
+   "equipo": "Circo F.S.",
+   "pj": 4,
+   "g": 1,
+   "e": 1,
+   "p": 2,
+   "gf": 16,
+   "gc": 15,
+   "dg": 1,
+   "pts": 4
+  },
+  {
+   "pos": 9,
+   "equipo": "Drim Tim",
+   "pj": 4,
+   "g": 1,
+   "e": 0,
+   "p": 3,
+   "gf": 11,
+   "gc": 14,
+   "dg": -3,
+   "pts": 3
+  },
+  {
+   "pos": 10,
+   "equipo": "Noctra Torrejon \"A\"",
+   "pj": 4,
+   "g": 1,
+   "e": 0,
+   "p": 3,
+   "gf": 13,
+   "gc": 25,
+   "dg": -12,
+   "pts": 3
+  },
+  {
+   "pos": 11,
+   "equipo": "Agape Castillo",
+   "pj": 4,
+   "g": 0,
+   "e": 1,
+   "p": 3,
+   "gf": 5,
+   "gc": 15,
+   "dg": -10,
+   "pts": 1
+  },
+  {
+   "pos": 12,
+   "equipo": "Wakanditos",
+   "pj": 4,
+   "g": 0,
+   "e": 0,
+   "p": 4,
+   "gf": 6,
+   "gc": 24,
+   "dg": -18,
+   "pts": 0
+  }
+ ],
+ "avisos": [
+  "Jornada 4: no reconozco los equipos «F.S.RECIO» / «FEOS PERO CON»",
+  "Jornada 5: no reconozco los equipos «FEOS PERO CON» / «NOCTRA TORREJON \"A\"»"
+ ],
+ "equipos": [
+  "Agape Castillo",
+  "Circo F.S.",
+  "Colegio Jaby",
+  "Drim Tim",
+  "F.S.Recio",
+  "Feos Pero Con Gusto",
+  "Joga Bonito",
+  "Noctra Torrejon \"A\"",
+  "P.Galeon Flynet",
+  "San Churrita Valle",
+  "Wakanditos",
+  "Whoppercitos"
+ ]
 }

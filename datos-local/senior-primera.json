@@ -1,15 +1,729 @@
 {
  "id": "senior-primera",
  "nombre": "Senior Primera",
- "actualizado": "2026-11-21T07:57:36Z",
+ "actualizado": "2026-11-21T11:58:58Z",
  "fuente": {
-  "calendario": [],
-  "jornada": []
+  "calendario": [
+   "https://deportes.ayto-torrejon.es/sites/default/files/users/user355/CALENDARIO%20PRIMERA%20CAMPEON%20DE%20INVIERNO%202627.pdf"
+  ],
+  "jornada": [
+   "https://deportes.ayto-torrejon.es/sites/default/files/users/user355/HORARIOS%20PRIMERA%20%20SENIOR%2021%20Y%2022%20NOVIEMBRE.pdf"
+  ]
  },
- "jornadas": [],
- "clasificacion": [],
- "avisos": [
-  "No he encontrado el PDF de calendario en la web del Ayuntamiento."
+ "jornadas": [
+  {
+   "n": 1,
+   "descansa": null,
+   "partidos": [
+    {
+     "local": "Zarzuela Manji",
+     "visitante": "la Humildad",
+     "campo": "",
+     "fecha": "2026-10-17",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Raimon T.J.",
+     "visitante": "Carriche Verdental",
+     "campo": "",
+     "fecha": "2026-10-17",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Leon. de Montepinar",
+     "visitante": "Olympiacos Torrejon",
+     "campo": "",
+     "fecha": "2026-10-17",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "F.Sala Torrepista \"A\"",
+     "visitante": "Weder Broder \"A\"",
+     "campo": "",
+     "fecha": "2026-10-17",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Ñbñ",
+     "visitante": "Tiki Taka \"A\"",
+     "campo": "",
+     "fecha": "2026-10-17",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Taka Taka \"A\"",
+     "visitante": "Incefor y.Vallecano",
+     "campo": "",
+     "fecha": "2026-10-17",
+     "dia": "S",
+     "hora": ""
+    }
+   ]
+  },
+  {
+   "n": 2,
+   "descansa": null,
+   "partidos": [
+    {
+     "local": "la Humildad",
+     "visitante": "Taka Taka \"A\"",
+     "campo": "",
+     "fecha": "2026-10-24",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Carriche Verdental",
+     "visitante": "Zarzuela Manji",
+     "campo": "",
+     "fecha": "2026-10-24",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Olympiacos Torrejon",
+     "visitante": "Raimon T.J.",
+     "campo": "",
+     "fecha": "2026-10-24",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Weder Broder \"A\"",
+     "visitante": "Leon. de Montepinar",
+     "campo": "",
+     "fecha": "2026-10-24",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Tiki Taka \"A\"",
+     "visitante": "F.Sala Torrepista \"A\"",
+     "campo": "",
+     "fecha": "2026-10-24",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Incefor y.Vallecano",
+     "visitante": "Ñbñ",
+     "campo": "",
+     "fecha": "2026-10-24",
+     "dia": "S",
+     "hora": ""
+    }
+   ]
+  },
+  {
+   "n": 4,
+   "descansa": null,
+   "partidos": [
+    {
+     "local": "Carriche Verdental",
+     "visitante": "Taka Taka \"A\"",
+     "campo": "J.GARBAJOSA",
+     "fecha": "2026-11-15",
+     "dia": "D",
+     "hora": "13:00",
+     "ga": 2,
+     "gb": 8
+    },
+    {
+     "local": "Olympiacos Torrejon",
+     "visitante": "la Humildad",
+     "campo": "",
+     "fecha": "2026-11-14",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Weder Broder \"A\"",
+     "visitante": "Zarzuela Manji",
+     "campo": "J.GARBAJOSA",
+     "fecha": "2026-11-15",
+     "dia": "D",
+     "hora": "15:00",
+     "ga": 2,
+     "gb": 9
+    },
+    {
+     "local": "Tiki Taka \"A\"",
+     "visitante": "Raimon T.J.",
+     "campo": "J.A.PARAISO",
+     "fecha": "2026-11-15",
+     "dia": "D",
+     "hora": "15:00",
+     "ga": 3,
+     "gb": 2
+    },
+    {
+     "local": "Incefor y.Vallecano",
+     "visitante": "Leon. de Montepinar",
+     "campo": "J.A.PARAISO",
+     "fecha": "2026-11-15",
+     "dia": "D",
+     "hora": "16:00",
+     "ga": 6,
+     "gb": 2
+    },
+    {
+     "local": "Ñbñ",
+     "visitante": "F.Sala Torrepista \"A\"",
+     "campo": "J.GARBAJOSA",
+     "fecha": "2026-11-15",
+     "dia": "D",
+     "hora": "20:00",
+     "ga": 3,
+     "gb": 5
+    }
+   ]
+  },
+  {
+   "n": 5,
+   "descansa": null,
+   "partidos": [
+    {
+     "local": "Carriche Verdental",
+     "visitante": "Olympiacos Torrejon",
+     "campo": "",
+     "fecha": "2026-11-21",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "la Humildad",
+     "visitante": "Weder Broder \"A\"",
+     "campo": "M-4",
+     "fecha": "2026-11-22",
+     "dia": "D",
+     "hora": "18:00"
+    },
+    {
+     "local": "Zarzuela Manji",
+     "visitante": "Tiki Taka \"A\"",
+     "campo": "J.A.PARAISO",
+     "fecha": "2026-11-22",
+     "dia": "D",
+     "hora": "14:00"
+    },
+    {
+     "local": "Raimon T.J.",
+     "visitante": "Incefor y.Vallecano",
+     "campo": "NURIA FDEZ 1",
+     "fecha": "2026-11-22",
+     "dia": "D",
+     "hora": "17:00"
+    },
+    {
+     "local": "Leon. de Montepinar",
+     "visitante": "Ñbñ",
+     "campo": "NURIA FDEZ 2",
+     "fecha": "2026-11-22",
+     "dia": "D",
+     "hora": "20:00"
+    },
+    {
+     "local": "Taka Taka \"A\"",
+     "visitante": "F.Sala Torrepista \"A\"",
+     "campo": "NURIA FDEZ 3",
+     "fecha": "2026-11-22",
+     "dia": "D",
+     "hora": "20:00"
+    }
+   ]
+  },
+  {
+   "n": 6,
+   "descansa": null,
+   "partidos": [
+    {
+     "local": "Olympiacos Torrejon",
+     "visitante": "Taka Taka \"A\"",
+     "campo": "",
+     "fecha": "2026-11-28",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Weder Broder \"A\"",
+     "visitante": "Carriche Verdental",
+     "campo": "",
+     "fecha": "2026-11-28",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Tiki Taka \"A\"",
+     "visitante": "la Humildad",
+     "campo": "",
+     "fecha": "2026-11-28",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Incefor y.Vallecano",
+     "visitante": "Zarzuela Manji",
+     "campo": "",
+     "fecha": "2026-11-28",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Ñbñ",
+     "visitante": "Raimon T.J.",
+     "campo": "",
+     "fecha": "2026-11-28",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "F.Sala Torrepista \"A\"",
+     "visitante": "Leon. de Montepinar",
+     "campo": "",
+     "fecha": "2026-11-28",
+     "dia": "S",
+     "hora": ""
+    }
+   ]
+  },
+  {
+   "n": 7,
+   "descansa": null,
+   "partidos": [
+    {
+     "local": "Olympiacos Torrejon",
+     "visitante": "Weder Broder \"A\"",
+     "campo": "",
+     "fecha": "2026-12-12",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Carriche Verdental",
+     "visitante": "Tiki Taka \"A\"",
+     "campo": "",
+     "fecha": "2026-12-12",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "la Humildad",
+     "visitante": "Incefor y.Vallecano",
+     "campo": "",
+     "fecha": "2026-12-12",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Zarzuela Manji",
+     "visitante": "Ñbñ",
+     "campo": "",
+     "fecha": "2026-12-12",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Raimon T.J.",
+     "visitante": "F.Sala Torrepista \"A\"",
+     "campo": "",
+     "fecha": "2026-12-12",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Taka Taka \"A\"",
+     "visitante": "Leon. de Montepinar",
+     "campo": "",
+     "fecha": "2026-12-12",
+     "dia": "S",
+     "hora": ""
+    }
+   ]
+  },
+  {
+   "n": 8,
+   "descansa": null,
+   "partidos": [
+    {
+     "local": "Weder Broder \"A\"",
+     "visitante": "Taka Taka \"A\"",
+     "campo": "",
+     "fecha": "2026-12-19",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Tiki Taka \"A\"",
+     "visitante": "Olympiacos Torrejon",
+     "campo": "",
+     "fecha": "2026-12-19",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Incefor y.Vallecano",
+     "visitante": "Carriche Verdental",
+     "campo": "",
+     "fecha": "2026-12-19",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Ñbñ",
+     "visitante": "la Humildad",
+     "campo": "",
+     "fecha": "2026-12-19",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "F.Sala Torrepista \"A\"",
+     "visitante": "Zarzuela Manji",
+     "campo": "",
+     "fecha": "2026-12-19",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Leon. de Montepinar",
+     "visitante": "Raimon T.J.",
+     "campo": "",
+     "fecha": "2026-12-19",
+     "dia": "S",
+     "hora": ""
+    }
+   ]
+  },
+  {
+   "n": 9,
+   "descansa": null,
+   "partidos": [
+    {
+     "local": "Weder Broder \"A\"",
+     "visitante": "Tiki Taka \"A\"",
+     "campo": "",
+     "fecha": "2027-01-16",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Olympiacos Torrejon",
+     "visitante": "Incefor y.Vallecano",
+     "campo": "",
+     "fecha": "2027-01-16",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Carriche Verdental",
+     "visitante": "Ñbñ",
+     "campo": "",
+     "fecha": "2027-01-16",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "la Humildad",
+     "visitante": "F.Sala Torrepista \"A\"",
+     "campo": "",
+     "fecha": "2027-01-16",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Zarzuela Manji",
+     "visitante": "Leon. de Montepinar",
+     "campo": "",
+     "fecha": "2027-01-16",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Taka Taka \"A\"",
+     "visitante": "Raimon T.J.",
+     "campo": "",
+     "fecha": "2027-01-16",
+     "dia": "S",
+     "hora": ""
+    }
+   ]
+  },
+  {
+   "n": 10,
+   "descansa": null,
+   "partidos": [
+    {
+     "local": "Tiki Taka \"A\"",
+     "visitante": "Taka Taka \"A\"",
+     "campo": "",
+     "fecha": "2027-01-23",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Incefor y.Vallecano",
+     "visitante": "Weder Broder \"A\"",
+     "campo": "",
+     "fecha": "2027-01-23",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Ñbñ",
+     "visitante": "Olympiacos Torrejon",
+     "campo": "",
+     "fecha": "2027-01-23",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "F.Sala Torrepista \"A\"",
+     "visitante": "Carriche Verdental",
+     "campo": "",
+     "fecha": "2027-01-23",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Leon. de Montepinar",
+     "visitante": "la Humildad",
+     "campo": "",
+     "fecha": "2027-01-23",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Raimon T.J.",
+     "visitante": "Zarzuela Manji",
+     "campo": "",
+     "fecha": "2027-01-23",
+     "dia": "S",
+     "hora": ""
+    }
+   ]
+  },
+  {
+   "n": 11,
+   "descansa": null,
+   "partidos": [
+    {
+     "local": "Tiki Taka \"A\"",
+     "visitante": "Incefor y.Vallecano",
+     "campo": "",
+     "fecha": "2027-01-30",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Weder Broder \"A\"",
+     "visitante": "Ñbñ",
+     "campo": "",
+     "fecha": "2027-01-30",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Olympiacos Torrejon",
+     "visitante": "F.Sala Torrepista \"A\"",
+     "campo": "",
+     "fecha": "2027-01-30",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Carriche Verdental",
+     "visitante": "Leon. de Montepinar",
+     "campo": "",
+     "fecha": "2027-01-30",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "la Humildad",
+     "visitante": "Raimon T.J.",
+     "campo": "",
+     "fecha": "2027-01-30",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Taka Taka \"A\"",
+     "visitante": "Zarzuela Manji",
+     "campo": "",
+     "fecha": "2027-01-30",
+     "dia": "S",
+     "hora": ""
+    }
+   ]
+  }
  ],
- "equipos": []
+ "clasificacion": [
+  {
+   "pos": 1,
+   "equipo": "Zarzuela Manji",
+   "pj": 4,
+   "g": 4,
+   "e": 0,
+   "p": 0,
+   "gf": 22,
+   "gc": 7,
+   "dg": 15,
+   "pts": 12
+  },
+  {
+   "pos": 2,
+   "equipo": "Taka Taka \"A\"",
+   "pj": 4,
+   "g": 4,
+   "e": 0,
+   "p": 0,
+   "gf": 20,
+   "gc": 7,
+   "dg": 13,
+   "pts": 12
+  },
+  {
+   "pos": 3,
+   "equipo": "F.Sala Torrepista \"A\"",
+   "pj": 4,
+   "g": 3,
+   "e": 1,
+   "p": 0,
+   "gf": 14,
+   "gc": 8,
+   "dg": 6,
+   "pts": 10
+  },
+  {
+   "pos": 4,
+   "equipo": "Olympiacos Torrejon",
+   "pj": 4,
+   "g": 3,
+   "e": 0,
+   "p": 1,
+   "gf": 21,
+   "gc": 8,
+   "dg": 13,
+   "pts": 9
+  },
+  {
+   "pos": 5,
+   "equipo": "Ñbñ",
+   "pj": 4,
+   "g": 2,
+   "e": 0,
+   "p": 2,
+   "gf": 16,
+   "gc": 17,
+   "dg": -1,
+   "pts": 6
+  },
+  {
+   "pos": 6,
+   "equipo": "Tiki Taka \"A\"",
+   "pj": 4,
+   "g": 2,
+   "e": 0,
+   "p": 2,
+   "gf": 13,
+   "gc": 13,
+   "dg": 0,
+   "pts": 6
+  },
+  {
+   "pos": 7,
+   "equipo": "Weder Broder \"A\"",
+   "pj": 4,
+   "g": 2,
+   "e": 0,
+   "p": 2,
+   "gf": 15,
+   "gc": 16,
+   "dg": -1,
+   "pts": 6
+  },
+  {
+   "pos": 8,
+   "equipo": "Carriche Verdental",
+   "pj": 4,
+   "g": 2,
+   "e": 0,
+   "p": 2,
+   "gf": 14,
+   "gc": 15,
+   "dg": -1,
+   "pts": 6
+  },
+  {
+   "pos": 9,
+   "equipo": "Incefor y.Vallecano",
+   "pj": 4,
+   "g": 1,
+   "e": 1,
+   "p": 2,
+   "gf": 12,
+   "gc": 14,
+   "dg": -2,
+   "pts": 4
+  },
+  {
+   "pos": 10,
+   "equipo": "Leon. de Montepinar",
+   "pj": 4,
+   "g": 0,
+   "e": 0,
+   "p": 4,
+   "gf": 13,
+   "gc": 23,
+   "dg": -10,
+   "pts": 0
+  },
+  {
+   "pos": 11,
+   "equipo": "la Humildad",
+   "pj": 4,
+   "g": 0,
+   "e": 0,
+   "p": 4,
+   "gf": 5,
+   "gc": 16,
+   "dg": -11,
+   "pts": 0
+  },
+  {
+   "pos": 12,
+   "equipo": "Raimon T.J.",
+   "pj": 4,
+   "g": 0,
+   "e": 0,
+   "p": 4,
+   "gf": 2,
+   "gc": 23,
+   "dg": -21,
+   "pts": 0
+  }
+ ],
+ "avisos": [
+  "Jornada 4: no reconozco los equipos «OLYMPIACOS» / «LA HUMILDAD»",
+  "Jornada 5: no reconozco los equipos «CARRICHE VERDENTAL» / «OLYMPIACOS»"
+ ],
+ "equipos": [
+  "Carriche Verdental",
+  "F.Sala Torrepista \"A\"",
+  "Incefor y.Vallecano",
+  "Leon. de Montepinar",
+  "Olympiacos Torrejon",
+  "Raimon T.J.",
+  "Taka Taka \"A\"",
+  "Tiki Taka \"A\"",
+  "Weder Broder \"A\"",
+  "Zarzuela Manji",
+  "la Humildad",
+  "Ñbñ"
+ ]
 }

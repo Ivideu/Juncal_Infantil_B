@@ -75,6 +75,8 @@ def diagnostico(cid, i, datos):
     for cmd in (["pdffonts", ruta], ["pdfimages", "-list", ruta], ["pdftotext", "-raw", ruta, "-"], ["pdftotext", "-bbox-layout", "-f", "1", "-l", "1", ruta, "-"]):
         r = subprocess.run(cmd, capture_output=True, text=True)
         info.append("### " + " ".join(cmd[:2]) + "\n" + (r.stdout[:6000] or r.stderr[:500]))
+    r = subprocess.run([sys.executable, os.path.join(os.path.dirname(os.path.abspath(__file__)), "ocr_jornada.py"), ruta], capture_output=True, text=True)
+    open(os.path.join(SALIDA, "raw", f"diag-{cid}-jornada{i or ''}-imgs.txt"), "w", encoding="utf-8").write(r.stdout + r.stderr[-2000:])
     png = os.path.join(d, f"{cid}-jornada{i or ''}")
     subprocess.run(["pdftoppm", "-r", "200", "-png", "-singlefile", ruta, png])
     r = subprocess.run(["tesseract", png + ".png", "-", "--psm", "6", "-l", "spa"], capture_output=True, text=True)

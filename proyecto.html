@@ -145,6 +145,27 @@ footer a{color:var(--ye);font-weight:700}
 .pj-tx{padding:22px 24px}.pj-tx p{margin:0 0 10px}.pj-tx p:last-child{margin:0}.pj-tx b{color:var(--ye)}
 .pj-ev{display:grid;grid-template-columns:1fr 1fr;gap:16px}
 @media(max-width:800px){.pj-ob,.pj-ev{grid-template-columns:1fr}}
+/* LECTURA: tarjetas informativas (no son botones) */
+.pj-lee{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.pj-c{position:relative;padding:20px 20px 18px;overflow:hidden;cursor:default}
+.pj-c::after{content:"";position:absolute;right:-18px;bottom:-18px;width:90px;height:90px;border-radius:50%;background:radial-gradient(circle,rgba(255,210,63,.28),transparent 70%)}
+.pj-c i{display:grid;place-items:center;width:44px;height:44px;margin-bottom:10px;border-radius:14px;background:var(--ye);color:#0f2a78;font:800 1.25rem "Barlow Condensed",sans-serif;font-style:normal;box-shadow:0 4px 10px rgba(0,0,0,.25)}
+.pj-c h4{margin:0 0 4px;font:800 1.3rem/1.1 "Barlow Condensed",sans-serif;text-transform:uppercase}
+.pj-c p{margin:0;font-size:.95rem;line-height:1.4;opacity:.95}
+.pj-c.ob h4{font-size:1.05rem}
+/* controles de la historia y fases */
+.pj-hd{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:26px 0 14px}
+.pj-hd h3.pj-t{margin:0}
+.pj-arr{display:flex;gap:10px}
+.pj-arr button,.pj-nx{display:grid;place-items:center;border:2px solid rgba(255,255,255,.85);color:#fff;background:linear-gradient(135deg,#1e4fd8,#0b1f66);cursor:pointer;box-shadow:0 4px 12px rgba(8,18,53,.4);transition:transform .2s,background .2s,color .2s,opacity .2s}
+.pj-arr button{width:48px;height:48px;border-radius:50%;font-size:1.4rem;font-weight:800}
+.pj-arr button:hover:not(:disabled),.pj-nx:hover{transform:translateY(-2px);background:var(--ye);color:#0a0f1e}
+.pj-arr button:disabled{opacity:.35;cursor:default}
+.pj-nx{display:inline-flex;margin-top:16px;padding:10px 20px;border-radius:99px;font-weight:700}
+.pj-tl{scrollbar-width:none}.pj-tl::-webkit-scrollbar{display:none}
+.pj-lee.o4{grid-template-columns:repeat(4,1fr)}
+@media(max-width:1000px){.pj-lee.o4{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:800px){.pj-lee,.pj-lee.o4{grid-template-columns:1fr}}
 </style>
 <link rel="stylesheet" href="css/menu-equipos.css">
 <link rel="stylesheet" href="css/patrocinadores.css">
@@ -216,8 +237,9 @@ footer a{color:var(--ye);font-weight:700}
             <small>Queremos que cada jugador llegue a la edad senior (19 años) con la mejor preparación posible, deportiva y personal.</small></p>
         </div>
 
-        <h3 class="pj-t rv">Nuestra <span>historia</span></h3>
-        <div class="pj-tl rv" tabindex="0" aria-label="Línea del tiempo del club">
+        <div class="pj-hd rv"><h3 class="pj-t">Nuestra <span>historia</span></h3>
+          <div class="pj-arr"><button type="button" id="tlPrev" aria-label="Anterior" disabled>←</button><button type="button" id="tlNext" aria-label="Siguiente">→</button></div></div>
+        <div class="pj-tl rv" id="pjTl" tabindex="0" aria-label="Línea del tiempo del club">
           <div class="pj-g pj-hi"><em>2005</em><p>Un grupo de padres funda el club para que sus hijos puedan entrenar. Un solo equipo de benjamines en la liga local.</p></div>
           <div class="pj-g pj-hi"><em>2006</em><p>Llegan los alevines. Desde ahí, cada año un equipo más.</p></div>
           <div class="pj-g pj-hi"><em>2007</em><p>Votación democrática del nombre: nace el Club Torrejón Juncal C.D., con estatutos y junta directiva.</p></div>
@@ -235,23 +257,32 @@ footer a{color:var(--ye);font-weight:700}
             <button type="button" role="tab" aria-selected="false" data-f="2">Consolidación</button>
           </div>
           <div class="pj-g pj-fase" id="pjFase" aria-live="polite"></div>
+          <button type="button" class="pj-nx" id="pjNx">Siguiente fase →</button>
         </div>
 
         <h3 class="pj-t rv">Lo que <span>buscamos</span></h3>
-        <div class="pj-val rv">
-          <span>Respeto al rival, al árbitro y al público</span><span>Cooperación</span><span>Compañerismo</span><span>Juego limpio</span><span>Tolerancia</span><span>Actitud positiva</span><span>Entender la victoria y la derrota</span><span>Hábitos saludables</span><span>Formación de entrenadores</span>
+        <div class="pj-lee rv">
+          <div class="pj-g pj-c"><i aria-hidden="true">🤝</i><h4>Respeto</h4><p>Al rival, al árbitro y al público, dentro y fuera de la pista.</p></div>
+          <div class="pj-g pj-c"><i aria-hidden="true">👥</i><h4>Cooperación</h4><p>Aprender a jugar juntos: la conciencia de equipo es lo primero.</p></div>
+          <div class="pj-g pj-c"><i aria-hidden="true">💛</i><h4>Compañerismo</h4><p>Un ambiente donde todos suman y nadie se queda atrás.</p></div>
+          <div class="pj-g pj-c"><i aria-hidden="true">⚖️</i><h4>Juego limpio</h4><p>Un deporte sin violencia y con respeto a las normas.</p></div>
+          <div class="pj-g pj-c"><i aria-hidden="true">🌍</i><h4>Tolerancia</h4><p>Convivir con iguales distintos y aprender de todos.</p></div>
+          <div class="pj-g pj-c"><i aria-hidden="true">⚡</i><h4>Actitud positiva</h4><p>Con compañeros, entrenador y con los entrenamientos.</p></div>
+          <div class="pj-g pj-c"><i aria-hidden="true">🏆</i><h4>Ganar y perder</h4><p>Entender la victoria y la derrota de forma correcta.</p></div>
+          <div class="pj-g pj-c"><i aria-hidden="true">❤️</i><h4>Hábitos saludables</h4><p>El deporte como hábito que mejora la salud y la integración.</p></div>
+          <div class="pj-g pj-c"><i aria-hidden="true">🎓</i><h4>Entrenadores formados</h4><p>Formación interna y externa de monitores y entrenadores.</p></div>
         </div>
 
         <h3 class="pj-t rv">Nuestros <span>objetivos</span></h3>
-        <div class="pj-ob rv">
-          <div class="pj-g">Mejorar las capacidades coordinativas generales</div>
-          <div class="pj-g">Aprender con juegos de cooperación y oposición</div>
-          <div class="pj-g">Iniciar las capacidades específicas básicas del fútbol sala</div>
-          <div class="pj-g">Interpretar la derrota y la victoria de forma correcta</div>
-          <div class="pj-g">Respeto al adversario, al árbitro y al público</div>
-          <div class="pj-g">Potenciar los hábitos deportivos de buen grado</div>
-          <div class="pj-g">Actitud positiva hacia compañeros, entrenador y entrenamientos</div>
-          <div class="pj-g">Conocer el desarrollo del juego</div>
+        <div class="pj-lee o4 rv">
+          <div class="pj-g pj-c ob"><i aria-hidden="true">1</i><h4>Coordinación</h4><p>Mejorar las capacidades coordinativas generales.</p></div>
+          <div class="pj-g pj-c ob"><i aria-hidden="true">2</i><h4>Cooperar y oponerse</h4><p>Aprender con juegos de cooperación y oposición.</p></div>
+          <div class="pj-g pj-c ob"><i aria-hidden="true">3</i><h4>Base del fútbol sala</h4><p>Iniciar las capacidades específicas básicas del fútbol sala.</p></div>
+          <div class="pj-g pj-c ob"><i aria-hidden="true">4</i><h4>Victoria y derrota</h4><p>Interpretarlas de forma correcta.</p></div>
+          <div class="pj-g pj-c ob"><i aria-hidden="true">5</i><h4>Respeto</h4><p>Al adversario, al árbitro y al público.</p></div>
+          <div class="pj-g pj-c ob"><i aria-hidden="true">6</i><h4>Hábitos deportivos</h4><p>Valorar y potenciar los hábitos deportivos de buen grado.</p></div>
+          <div class="pj-g pj-c ob"><i aria-hidden="true">7</i><h4>Actitud</h4><p>Positiva y de respeto a compañeros, entrenador y entrenamientos.</p></div>
+          <div class="pj-g pj-c ob"><i aria-hidden="true">8</i><h4>El juego</h4><p>Conocer el desarrollo del juego.</p></div>
         </div>
         <div class="pj-g pj-tx rv" style="margin-top:12px">
           <p><b>No buscamos resultados.</b> El deporte federado suele ir unido a conseguir buenas posiciones, pero ese no es el objetivo de la Escuela. A través de la formación se intenta que lleguen con la mejor preparación posible a edades próximas a categoría senior (19 años). Los objetivos se fijan con cada jugador y cada equipo según sus características y su progresión.</p>
@@ -337,10 +368,15 @@ document.querySelectorAll(".rv").forEach(el => io.observe(el));
   ];
   const box=document.getElementById("pjFase"),tabs=document.querySelectorAll("#pjPh button");
   if(!box)return;
-  let n=0,user=false;
+  let n=0;
   const pon=i=>{n=i;box.innerHTML="<h4>"+F[i][0]+"</h4><p>"+F[i][1]+"</p>";tabs.forEach((b,k)=>b.setAttribute("aria-selected",k===i))};
-  tabs.forEach(b=>b.onclick=()=>{user=true;pon(+b.dataset.f)});pon(0);
-  setInterval(()=>{const r=box.getBoundingClientRect();if(!user&&!document.hidden&&r.top<innerHeight&&r.bottom>0)pon((n+1)%3)},6000);
+  tabs.forEach(b=>b.onclick=()=>pon(+b.dataset.f));pon(0);
+  const nx=document.getElementById("pjNx");if(nx)nx.onclick=()=>pon((n+1)%3);
+  const tl=document.getElementById("pjTl"),pv=document.getElementById("tlPrev"),nt=document.getElementById("tlNext");
+  if(tl){const paso=()=>(tl.querySelector(".pj-hi").offsetWidth+14)*(innerWidth<800?1:2);
+    const est=()=>{pv.disabled=tl.scrollLeft<4;nt.disabled=tl.scrollLeft+tl.clientWidth>=tl.scrollWidth-4};
+    pv.onclick=()=>tl.scrollBy({left:-paso(),behavior:"smooth"});nt.onclick=()=>tl.scrollBy({left:paso(),behavior:"smooth"});
+    tl.addEventListener("scroll",est,{passive:true});addEventListener("resize",est);est()}
   const nums=document.getElementById("pjNums");
   if(nums){const o=new IntersectionObserver(es=>es.forEach(e=>{if(!e.isIntersecting)return;
     e.target.querySelectorAll("[data-n]").forEach(b=>{const t=+b.dataset.n,t0=performance.now();

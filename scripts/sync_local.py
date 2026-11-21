@@ -66,6 +66,18 @@ def pdf_a_texto(datos):
         os.unlink(ruta)
 
 
+def diagnostico(cid, i, datos):
+    """Solo con DIAG=1: guarda el PDF y varias lecturas para ver dónde están los nombres y marcadores."""
+    d = os.path.join(SALIDA, "raw", "pdf"); os.makedirs(d, exist_ok=True)
+    ruta = os.path.join(d, f"{cid}-jornada{i or ''}.pdf")
+    open(ruta, "wb").write(datos)
+    info = []
+    for cmd in (["pdffonts", ruta], ["pdfimages", "-list", ruta], ["pdftotext", "-raw", ruta, "-"], ["pdftotext", "-bbox-layout", "-f", "1", "-l", "1", ruta, "-"]):
+        r = subprocess.run(cmd, capture_output=True, text=True)
+        info.append("### " + " ".join(cmd[:2]) + "\n" + (r.stdout[:6000] or r.stderr[:500]))
+    open(os.path.join(SALIDA, "raw", f"diag-{cid}-jornada{i or ''}.txt"), "w", encoding="utf-8").write("\n".join(info))
+
+
 def descubrir_enlaces():
     pagina = descargar(PAGINA).decode("utf-8", "replace")
     enlaces = []
@@ -246,7 +258,9 @@ def main():
                 open(os.path.join(SALIDA, "raw", f"{cid}-calendario.txt"), "w", encoding="utf-8").write(t)
             textos_jor = []
             for i, u in enumerate(jor_u):
-                t = pdf_a_texto(descargar(u)); textos_jor.append(t)
+                dat = descargar(u)
+                if os.environ.get("DIAG"): diagnostico(cid, i, dat)
+                t = pdf_a_texto(dat); textos_jor.append(t)
                 open(os.path.join(SALIDA, "raw", f"{cid}-jornada{i or ''}.txt"), "w", encoding="utf-8").write(t)
         except Exception as e:      # un PDF caído no debe tumbar las demás categorías
             out["avisos"].append(f"Error al leer los PDF: {e}")

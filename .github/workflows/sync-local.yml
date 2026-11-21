@@ -5,6 +5,9 @@ name: Sincronizar competición local
 # Los PDF se renuevan cada semana (horarios definitivos los viernes a las 14:00), así que se revisa cada 3 horas.
 # Manual: Actions → «Sincronizar competición local» → Run workflow (opcional: id de una sola categoría, ej. infantil).
 on:
+  push:
+    paths: ["scripts/sync_local.py", ".github/workflows/sync-local.yml"]
+    branches: [main]
   workflow_dispatch:
     inputs:
       solo:
@@ -29,6 +32,8 @@ jobs:
       - name: Instalar pdftotext
         run: command -v pdftotext >/dev/null || (sudo apt-get update -qq && sudo apt-get install -y -qq poppler-utils)
       - name: Leer los PDF del Ayuntamiento
+        env:
+          DIAG: ${{ github.event_name == 'push' && '1' || '' }}
         run: python3 scripts/sync_local.py "${{ github.event.inputs.solo }}"
       - name: Guardar los datos
         run: |

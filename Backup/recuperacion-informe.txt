@@ -1,0 +1,42 @@
+Recuperación — 2026-11-21T12:47:27Z
+
+EN FIREBASE AHORA: u, m, pl, dn, av, pos, estado, off, cp, px, ent, cfg, cromos
+ · entrenos (fechas): 2026-11-11, 2026-11-12, 2026-11-18, 2026-11-19
+ · jugadores en plantilla: 14 · partidos: 111
+EN LA COPIA: u, m, pl, dn, av, pos, estado, off, cp, px, ent · entrenos: 2026-11-11, 2026-11-12, 2026-11-18, 2026-11-19
+FALTAN EN FIREBASE:
++ pl/x · 1-Rubén
++ pl/x · 10-Alex
++ pl/x · 11-Edu
++ pl/x · 15-Gabriel
++ pl/x · 18-Héctor
++ pl/x · 2-Manu
++ pl/x · 5-Erik
++ pl/x · 6-Nico
++ pl/x · 7-Izan
++ pl/x · 8-Joel
++ pl/x · 89-Pablo
++ pl/x · 99-Marcos
++ dn/x/99-Marcos
++ off/x/8-Joel
++ m/1_10/g/6-Nico
++ m/1_10/g/2-Manu
++ m/1_10/gm/6-Nico
++ m/1_10/gm/2-Manu
++ m/2_7/g/2-Manu
++ m/2_7/g/7-Izan
++ m/2_7/gm/2-Manu
++ m/2_7/gm/7-Izan
++ m/3_10/g/6-Nico
++ m/3_10/gm/6-Nico
++ m/4_11/g/7-Izan
++ m/4_11/gm/7-Izan
++ m/5_10/g/2-Manu
++ m/5_10/g/18-Héctor
++ m/5_10/g/10-Alex
++ m/5_10/g/15-Gabriel
++ m/5_10/gm/2-Manu
++ m/5_10/gm/18-Héctor
++ m/5_10/gm/10-Alex
++ m/5_10/gm/15-Gabriel
+✓ RECUPERADO: 34 datos añadidos

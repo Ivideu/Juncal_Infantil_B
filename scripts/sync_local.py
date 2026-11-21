@@ -22,7 +22,7 @@ SALIDA = os.path.join(RAIZ, "datos-local")
 CATEGORIAS = [
     ("senior-superliga", "Senior Superliga", ["SUPERLIGA"]),
     ("senior-preferente", "Senior Preferente", ["PREFERENTE"]),
-    ("senior-primera", "Senior Primera", ["PRIMERA", "SENIOR"]),
+    ("senior-primera", "Senior Primera", ["PRIMERA"]),
     ("senior-segunda", "Senior Segunda", ["SEGUNDA"]),
     ("senior-tercera", "Senior Tercera", ["TERCERA"]),
     ("juvenil", "Juvenil", ["JUVENIL"]),
@@ -33,7 +33,7 @@ CATEGORIAS = [
     ("prebenjamin", "Prebenjamín", ["PREBENJAMIN"]),
 ]
 # Cosas que NO son fútbol sala (la misma página mezcla fútbol 7, baloncesto y voleibol)
-EXCLUIR = ["F7", "DIV", "G.A", "G.B", "VOLEY", "LOCAL", "BASKET", "SENIOR 1", "SENIOR 2", "SENIOR 3", "SENIOR 4", "SENIOR 5"]
+EXCLUIR = ["F7", "DIV", "G.A", "G.B", "VOLEY", "LOCAL", "BASKET", "CLASIFICACION"]
 
 
 def fold(s):
@@ -154,8 +154,9 @@ def parse_calendario(texto):
                     otro = re.sub(r"^\s*DESCANSA\s+|\s+DESCANSA\s*$", "", cuerpo.strip(), flags=re.I)
                 descansa = bonito(otro)
                 continue
-            if len(partes) == 3:
-                partidos.append({"local": bonito(partes[0]), "visitante": bonito(partes[1]), "campo": partes[2].strip(),
+            if len(partes) in (2, 3):
+                partidos.append({"local": bonito(partes[0]), "visitante": bonito(partes[1]),
+                                 "campo": partes[2].strip() if len(partes) == 3 else "",
                                  "fecha": fecha, "dia": dia, "hora": hora or ""})
             else:
                 avisos.append(f"Jornada {n}: no sé separar equipos y campo en «{cuerpo.strip()[:100]}» (columnas: {len(partes)})")
@@ -165,7 +166,7 @@ def parse_calendario(texto):
 
 
 # ---------------------------------------------------------------- clasificación
-RE_CLAS = re.compile(r"^\s*(\d{1,2})\s+(.+?)\s+(\d+)\s+(\d+)\s+(\d+)\s+(\d+)\s+(\d+)\s+(\d+)\s+(-?\d+)\s+(\d+)\s*$")
+RE_CLAS = re.compile(r"^\s*(\d{1,2})\s+(.+?)\s+(\d+)\s+(\d+)\s+(\d+)\s+(\d+)\s+(\d+)\s+(\d+)\s+(-?\d+)(?:\s+(\d+))?\s*$")
 
 
 def parse_clasificacion(texto):
@@ -174,6 +175,8 @@ def parse_clasificacion(texto):
         m = RE_CLAS.match(l)
         if m:
             pos, eq, pj, g, e, p, gf, gc, dg, pts = m.groups()
+            if pts is None:     # a veces el PDF coloca los puntos en otra línea: 3 por victoria y 1 por empate
+                pts = 3 * int(g) + int(e)
             filas.append({"pos": int(pos), "equipo": bonito(eq.strip()), "pj": int(pj), "g": int(g), "e": int(e), "p": int(p),
                           "gf": int(gf), "gc": int(gc), "dg": int(dg), "pts": int(pts)})
     # Si el PDF repite la tabla, nos quedamos con la primera completa
@@ -222,6 +225,137 @@ def aplicar_resultados(jornadas, resultados):
     return sueltos
 
 
+# ---------------------------------------------------------------- nombres de equipos y PDF de jornada
+def clave(s):
+    return re.sub(r"[^A-Z0-9]", "", fold(s))
+
+
+def clave_sin_numeros(s):
+    return clave(re.sub(r"\b\d+\b", " ", fold(s)))
+
+
+def buscar_equipo(nombre, equipos):
+    """Empareja el nombre leído del PDF (OCR) con el del calendario."""
+    k = clave(nombre)
+    for f in (clave, clave_sin_numeros):
+        c = [e for e in equipos if f(e) == (k if f is clave else clave_sin_numeros(nombre))]
+        if len(c) == 1:
+            return c[0]
+    import difflib
+    ks = {clave(e): e for e in equipos}
+    m = difflib.get_close_matches(k, list(ks), n=2, cutoff=0.86)
+    if m and (len(m) == 1 or difflib.SequenceMatcher(None, k, m[0]).ratio() - difflib.SequenceMatcher(None, k, m[1]).ratio() > 0.04):
+        return ks[m[0]]
+    return None
+
+
+def aplicar_jornada_ocr(jornadas, bloque, con_marcador, avisos):
+    """Pasa a los partidos del calendario la fecha, campo, hora y (si ya se jugó) el marcador del PDF de jornada."""
+    n = bloque.get("n")
+    j = next((x for x in jornadas if x["n"] == n), None)
+    if not j:
+        avisos.append(f"El PDF de jornada habla de la jornada {n}, que no está en el calendario")
+        return
+    equipos = sorted({p[k] for x in jornadas for p in x["partidos"] for k in ("local", "visitante")} | {x["descansa"] for x in jornadas if x["descansa"]})
+    for f in bloque["filas"]:
+        if len(f["equipos"]) != 2 or any(fold(e) == "DESCANSA" for e in f["equipos"]):
+            continue
+        a, b = (buscar_equipo(e, equipos) for e in f["equipos"])
+        if not a or not b:
+            avisos.append(f"Jornada {n}: no reconozco los equipos «{f['equipos'][0]}» / «{f['equipos'][1]}»")
+            continue
+        p = next((x for x in j["partidos"] if (x["local"], x["visitante"]) in ((a, b), (b, a))), None)
+        if not p:       # el PDF de jornada manda: si el calendario no traía esa fila (p. ej. sin fecha), se añade
+            anio = next((x["fecha"][:4] for x in j["partidos"] if x.get("fecha")), str(datetime.now().year))
+            p = {"local": a, "visitante": b, "campo": "", "fecha": f"{anio}-01-01", "dia": "", "hora": ""}
+            j["partidos"].append(p)
+        if f["campo"]: p["campo"] = f["campo"]
+        if f["hora"]: p["hora"] = f["hora"]
+        if f["fecha"]:
+            d, m = f["fecha"].split("/")
+            p["fecha"] = f"{p['fecha'][:4]}-{m}-{d}"
+            try: p["dia"] = "LMXJVSD"[datetime(int(p["fecha"][:4]), int(m), int(d)).weekday()]
+            except ValueError: pass
+        if con_marcador and "ga" in f:
+            if p["local"] == a: p["ga"], p["gb"] = f["ga"], f["gb"]
+            else: p["ga"], p["gb"] = f["gb"], f["ga"]
+            if f.get("dudoso"):
+                avisos.append(f"Jornada {n}: el marcador {a} {f['ga']}-{f['gb']} {b} se ha leído con dudas")
+
+
+def aplicar_jornada_texto(jornadas, texto_jornadas):
+    """PDF de horarios con texto normal (p. ej. Prebenjamín): sobrescribe campo y hora de esa jornada."""
+    for j in texto_jornadas:
+        dest = next((x for x in jornadas if x["n"] == j["n"]), None)
+        if not dest:
+            continue
+        for q in j["partidos"]:
+            for p in dest["partidos"]:
+                if clave_sin_numeros(p["local"]) == clave_sin_numeros(q["local"]) and clave_sin_numeros(p["visitante"]) == clave_sin_numeros(q["visitante"]):
+                    for k in ("campo", "hora", "fecha", "dia"):
+                        if q.get(k): p[k] = q[k]
+
+
+def conservar_resultados(jornadas, anterior):
+    """El PDF solo trae el último resultado: se conservan los de semanas anteriores guardados en el JSON previo."""
+    viejos = {}
+    for j in anterior.get("jornadas", []):
+        for p in j["partidos"]:
+            if "ga" in p:
+                viejos[(j["n"], p["local"], p["visitante"])] = (p["ga"], p["gb"])
+    for j in jornadas:
+        for p in j["partidos"]:
+            if "ga" not in p and (j["n"], p["local"], p["visitante"]) in viejos:
+                p["ga"], p["gb"] = viejos[(j["n"], p["local"], p["visitante"])]
+
+
+def completar_nombres(clasif, jornadas, avisos):
+    """La clasificación del PDF corta los nombres («Torrejon Juncal» sin A/B). Se recuperan con el calendario y los resultados conocidos."""
+    equipos = sorted({p[k] for x in jornadas for p in x["partidos"] for k in ("local", "visitante")} | {x["descansa"] for x in jornadas if x["descansa"]})
+    if not equipos:
+        return
+    reclamados, pendientes = set(), []
+    for fila in clasif:
+        ex = [e for e in equipos if clave(e) == clave(fila["equipo"]) and e not in reclamados]
+        if ex:
+            fila["equipo"] = ex[0]; reclamados.add(ex[0])
+        else:
+            pendientes.append(fila)
+    grupos = {}
+    for fila in pendientes:
+        cands = tuple(e for e in equipos if e not in reclamados and clave(e).startswith(clave(fila["equipo"])))
+        grupos.setdefault(cands, []).append(fila)
+    # estadísticas ya conocidas por equipo (de los marcadores guardados)
+    est = {}
+    for x in jornadas:
+        for p in x["partidos"]:
+            if "ga" not in p: continue
+            for e, gf, gc in ((p["local"], p["ga"], p["gb"]), (p["visitante"], p["gb"], p["ga"])):
+                s_ = est.setdefault(e, {"pj": 0, "g": 0, "e": 0, "p": 0, "gf": 0, "gc": 0})
+                s_["pj"] += 1; s_["gf"] += gf; s_["gc"] += gc
+                s_["g" if gf > gc else "p" if gf < gc else "e"] += 1
+    def fallos(fila, e):
+        s_ = est.get(e, {})
+        return sum(1 for k in ("pj", "g", "e", "p", "gf", "gc") if s_.get(k, 0) > fila[k])
+    import itertools
+    for cands, filas in grupos.items():
+        if len(cands) == 1 and len(filas) == 1:
+            filas[0]["equipo"] = cands[0]; reclamados.add(cands[0]); continue
+        if not cands or len(cands) != len(filas) or len(filas) > 4:
+            for f in filas: f["equipo"] = bonito(f["equipo"])
+            if len(filas) > 1: avisos.append(f"Clasificación: no puedo distinguir «{filas[0]['equipo']}» ({len(filas)} equipos con el mismo nombre)")
+            continue
+        puntos = []
+        for perm in itertools.permutations(cands):
+            puntos.append((sum(fallos(f, e) for f, e in zip(filas, perm)), perm))
+        puntos.sort(key=lambda x: x[0])
+        if len(puntos) > 1 and puntos[0][0] == puntos[1][0]:
+            for f in filas: f["equipo"] = bonito(f["equipo"])
+            avisos.append(f"Clasificación: no puedo distinguir entre {', '.join(cands)} con los resultados conocidos")
+        else:
+            for f, e in zip(filas, puntos[0][1]): f["equipo"] = e
+
+
 # ---------------------------------------------------------------- principal
 def sin_fecha(o):
     if isinstance(o, dict):
@@ -247,6 +381,7 @@ def main():
     os.makedirs(os.path.join(SALIDA, "raw"), exist_ok=True)
     enlaces = descubrir_enlaces()
     print(f"{len(enlaces)} PDF en la página")
+    open(os.path.join(SALIDA, "raw", "enlaces.txt"), "w", encoding="utf-8").write("\n".join(unquote(e) for e in enlaces))
     ahora = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
     indice, fallos = [], 0
     for cid, nombre, palabras in CATEGORIAS:
@@ -258,31 +393,47 @@ def main():
         if not cal_u:
             out["avisos"].append("No he encontrado el PDF de calendario en la web del Ayuntamiento.")
         try:
-            textos_cal = []
+            anterior = json.load(open(os.path.join(SALIDA, cid + ".json"), encoding="utf-8"))
+        except (OSError, ValueError):
+            anterior = {}
+        textos_cal, textos_jor, pdfs_jor = [], [], []
+        try:
             for i, u in enumerate(cal_u[:1]):
                 t = pdf_a_texto(descargar(u)); textos_cal.append(t)
                 open(os.path.join(SALIDA, "raw", f"{cid}-calendario.txt"), "w", encoding="utf-8").write(t)
-            textos_jor = []
             for i, u in enumerate(jor_u):
                 dat = descargar(u)
                 if os.environ.get("DIAG"): diagnostico(cid, i, dat)
-                t = pdf_a_texto(dat); textos_jor.append(t)
+                t = pdf_a_texto(dat); textos_jor.append(t); pdfs_jor.append(dat)
                 open(os.path.join(SALIDA, "raw", f"{cid}-jornada{i or ''}.txt"), "w", encoding="utf-8").write(t)
         except Exception as e:      # un PDF caído no debe tumbar las demás categorías
             out["avisos"].append(f"Error al leer los PDF: {e}")
             fallos += 1
-            textos_cal, textos_jor = [], []
         for t in textos_cal:
             out["jornadas"], av = parse_calendario(t)
             out["avisos"] += av
-        for t in textos_jor:
+        conservar_resultados(out["jornadas"], anterior)
+        for t, dat in zip(textos_jor, pdfs_jor):
             if not out["clasificacion"]:
                 out["clasificacion"] = parse_clasificacion(t)
-        sueltos = []
-        for t in textos_jor:
-            sueltos += aplicar_resultados(out["jornadas"], parse_resultados(t))
-        if sueltos:
-            out["avisos"].append(f"{len(sueltos)} resultados que no he podido unir a un partido (ver raw/)")
+            if "nfrentamientos" in t:        # PDF «Jornada y Clasificación»: nombres y marcadores son imágenes -> OCR
+                try:
+                    with tempfile.NamedTemporaryFile(suffix=".pdf", delete=False) as f:
+                        f.write(dat); ruta = f.name
+                    sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+                    import ocr_jornada
+                    res = ocr_jornada.leer(ruta)
+                    aplicar_jornada_ocr(out["jornadas"], res["prev"], True, out["avisos"])
+                    aplicar_jornada_ocr(out["jornadas"], res["next"], False, out["avisos"])
+                except Exception as e:
+                    out["avisos"].append(f"No he podido leer las imágenes del PDF de jornada: {e}")
+                finally:
+                    try: os.unlink(ruta)
+                    except Exception: pass
+            else:                             # PDF de horarios con texto normal
+                js, av = parse_calendario(t)
+                aplicar_jornada_texto(out["jornadas"], js)
+        completar_nombres(out["clasificacion"], out["jornadas"], out["avisos"])
         equipos = sorted({p[k] for j in out["jornadas"] for p in j["partidos"] for k in ("local", "visitante")})
         n_part = sum(len(j["partidos"]) for j in out["jornadas"])
         jug = sum(1 for j in out["jornadas"] for p in j["partidos"] if "ga" in p)

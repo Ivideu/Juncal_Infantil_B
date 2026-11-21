@@ -1,0 +1,11 @@
+Migración Infantil B — 2026-11-21T12:20:51Z
+
+Copia de «juncal» guardada en Backup/juncal-20261121-1217.json · partidos: 46 · goles de jugadores: 11
+
+Configuración cargada desde: /home/runner/work/Juncal_Infantil_B/Juncal_Infantil_B/scripts/categorias.json
+Categorías: infantil-b
+[infantil-b] jornadas leídas: 22 · modo: completo
+[infantil-b] equipo propio: 24193914 → id 10 (Escuela Torrejon Juncal F.S. 'b') · jornadas en el calendario: 22
+[infantil-b] cambios guardados: 192
+
+✓ Todo igual: goles de jugadores 11 → 11, plantilla y directos intactos (partidos nuevos con fecha/hora/resultado: 65).

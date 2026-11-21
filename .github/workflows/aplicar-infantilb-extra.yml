@@ -1,0 +1,56 @@
+name: Aplicar infantilb-extra a InfantilB.html
+
+on:
+  workflow_dispatch:   # se lanza a mano desde la pestaña Actions
+
+permissions:
+  contents: write
+
+jobs:
+  inyectar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Inyectar el script en InfantilB.html
+        run: |
+          python3 - <<'PY'
+          import sys
+
+          HTML = "InfantilB.html"          # cambia la ruta si está en otra carpeta
+          JS   = "scripts/infantilb-extra.js"
+          INI  = "<!-- infantilb-extra:inicio -->"
+          FIN  = "<!-- infantilb-extra:fin -->"
+
+          html = open(HTML, encoding="utf-8").read()
+          js   = open(JS, encoding="utf-8").read()
+
+          if INI in html:
+              print("Ya estaba aplicado. No se cambia nada.")
+              sys.exit(0)
+
+          if "</script>" in js.lower():
+              sys.exit("El JS contiene </script>; no se puede inyectar de forma segura.")
+
+          bloque = f"{INI}\n<script>\n{js}\n</script>\n{FIN}\n"
+
+          i = html.lower().rfind("</body>")
+          if i == -1:
+              sys.exit("No se encontró </body> en el HTML.")
+
+          html = html[:i] + bloque + html[i:]
+          open(HTML, "w", encoding="utf-8").write(html)
+          print("Script inyectado.")
+          PY
+
+      - name: Commit y push si hubo cambios
+        run: |
+          if git diff --quiet; then
+            echo "Sin cambios."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add InfantilB.html
+          git commit -m "Aplicar infantilb-extra (cromos camiseta y selector de goleador)"
+          git push

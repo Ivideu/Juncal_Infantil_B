@@ -305,6 +305,12 @@ select{font:inherit;background:var(--bg);color:var(--tx);border:1px solid var(--
 .cvc.si .cvb .s{background:#22c55e;color:#fff;opacity:1;box-shadow:0 4px 14px #22c55e66}
 .cvc.no .cvb .n{background:#ef4444;color:#fff;opacity:1;box-shadow:0 4px 14px #ef444466}
 .cvb button:active{transform:scale(.96)}
+/* Titular / Suplente (solo entrenador y admin) */
+.cvb.rol button{font-size:.95rem;letter-spacing:.03em}
+.cvb.rol .t{border-color:#2f7bff;color:#1d4fd8}
+.cvb.rol .u{border-color:#f59e0b;color:#b45309}
+.cvb.rol .t.act{background:#2f7bff;color:#fff;opacity:1;box-shadow:0 4px 14px #2f7bff66}
+.cvb.rol .u.act{background:#f59e0b;color:#fff;opacity:1;box-shadow:0 4px 14px #f59e0b66}
 
 /* ===== Pestaña Jugadores: cabeceras, etiqueta y modo solo lectura ===== */
 .cvhd{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:18px 0 10px}
@@ -721,7 +727,7 @@ const J=R.map((s,i)=>{const[d,p]=s.split("|");return{n:i+1,d:d.split("-").revers
 const API=""; // 
 const FB="https://juncal-f0b64-default-rtdb.europe-west1.firebasedatabase.app",FBKEY="AIzaSyDXqBUkie30z_Cmyj__ayhzGYyYxZMrB3Q",FBMAIL="ivanblasco81@hotmail.com"; // Firebase en tiempo real configurado
 let S={u:0,m:{},pl:[]};
-const fix=()=>{S.m=S.m||{};S.pl=S.pl||[];S.dn=S.dn||{};S.off=S.off||{};S.cp=S.cp||[];S.ent=S.ent||{};S.cp.forEach(c=>{T[100+c.id]=[c.rv,c.pav||c.rv]})};
+const fix=()=>{S.m=S.m||{};S.pl=S.pl||[];S.dn=S.dn||{};S.off=S.off||{};S.cp=S.cp||[];S.ent=S.ent||{};S.rol=S.rol||{};S.cp.forEach(c=>{T[100+c.id]=[c.rv,c.pav||c.rv]})};
 const isOff=p=>!!(S.off&&S.off[p]);
 let CACHE=null;try{CACHE=JSON.parse(localStorage.getItem("juncal_"+CAT.node))}catch(e){}
 if(!API&&CACHE)S=CACHE;fix();let loading=!!(API||FB);
@@ -774,7 +780,7 @@ function remG(j,h,i){const m=S.m[j+"_"+h],k=Object.keys(m.g)[i];if(--m.g[k]<1)de
 function addP(){document.getElementById("np").value.split(/[,\n]/).map(x=>x.trim()).filter(Boolean).forEach(x=>{const r=x.match(/^#?(\d{1,2})[\s.\-–]+(.+)$/),n=(r?r[2]:x).trim().replace(/[.$#\[\]\/]/g,"");if(!S.pl.includes(n))S.pl.push(n);if(r)S.dn[n]=r[1]});S.pl.sort((a,b)=>a.localeCompare(b));save()}
 function setDn(i,v){const n=S.pl[i];if(v==="")delete S.dn[n];else S.dn[n]=String(v);save()}
 function togP(i){const n=S.pl[i];if(!n)return;S.off=S.off||{};if(S.off[n])delete S.off[n];else S.off[n]=1;save()}
-function delP(i){const n=S.pl[i];if(confirm("¿Eliminar a "+n+" de la plantilla?")){delete S.dn[n];if(S.off)delete S.off[n];if(S.estado)delete S.estado["p_"+n];S.pl.splice(i,1);save()}}
+function delP(i){const n=S.pl[i];if(confirm("¿Eliminar a "+n+" de la plantilla?")){delete S.dn[n];if(S.off)delete S.off[n];if(S.estado)delete S.estado["p_"+n];if(S.rol)delete S.rol["p_"+n];S.pl.splice(i,1);save()}}
 function card(r,h,a,i){
  const m=M(r.n,h),d=m.d||r.d,me=h==ME||a==ME,pl=done(m);
  if(!h||!a){const id=h||a;return`<div class="card rest ${id==ME?'me':''}" style="--i:${i}"><div class="top"><span>${id==ME?`<b>Jornada ${r.n}</b> · <span class="dt">${fmt(r.d)}</span>`:nm(id)}</span></div><div class="tm">${bd(0)} Descansa esta jornada</div></div>`}
@@ -1101,6 +1107,8 @@ const CROMOS=CROMOS_FILES.map(f=>{const k=f.replace(/\.png$/i,""),p=k.split("_")
 const cSrc=c=>c.src||CROMOS_DIR+encodeURIComponent(c.file);
 const cEst=c=>(S.estado&&S.estado[c.key])||"convocado";
 function setCon(k,v){if(!E())return;S.estado=S.estado||{};S.estado[k]=v;save()}
+/* Titular / Suplente: solo entrenador/admin. Pulsar otra vez el mismo botón lo desmarca */
+function setRol(k,v){if(!E())return;S.rol=S.rol||{};if(S.rol[k]===v)delete S.rol[k];else S.rol[k]=v;save()}
 function renderJug(){
  const ed=E(),jug=jugList(),tec=CROMOS.filter(c=>c.coach),nx=nextM(),nm_=nx?M(nx.r.n,nx.h):{};
  const tit=nx?`Jugadores convocados para ${lab(nx.r)}`:"Jugadores convocados",
@@ -1109,10 +1117,12 @@ function renderJug(){
   lab=[c.num?"#"+c.num:"",POSN[c.pos]||c.pos||""].filter(Boolean).map(esc).join(" · "),
   sw=ed?`<div class="cvb"><button class="s" aria-pressed="${st}" aria-label="${esc(c.name)} convocado" data-k="${k}" onclick="setCon(this.dataset.k,'convocado')">SÍ</button><button class="n" aria-pressed="${!st}" aria-label="${esc(c.name)} no convocado" data-k="${k}" onclick="setCon(this.dataset.k,'descartado')">NO</button></div>`
    :`<div class="cvst ${st?"s":"n"}" role="img" aria-label="${esc(c.name)}: ${st?"convocado":"no convocado"}">${st?"SÍ CONVOCADO":"NO CONVOCADO"}</div>`,
+  rl=(S.rol||{})[c.key],
+  rol=ed&&!c.coach&&st?`<div class="cvl">ALINEACIÓN</div><div class="cvb rol"><button class="t ${rl==="t"?"act":""}" aria-pressed="${rl==="t"}" aria-label="${esc(c.name)} titular" data-k="${k}" onclick="setRol(this.dataset.k,'t')">TITULAR</button><button class="u ${rl==="s"?"act":""}" aria-pressed="${rl==="s"}" aria-label="${esc(c.name)} suplente" data-k="${k}" onclick="setRol(this.dataset.k,'s')">SUPLENTE</button></div>`:"",
   im=c.extra?`<div class="cvph" aria-hidden="true">${shirt(c.num,"#2f7bff")}</div>`:`<img src="${cSrc(c)}" alt="Cromo de ${esc(c.name)}" loading="lazy" onclick="openCromo('${esc(c.file)}')">`;
-  return`<div class="cvc ${st?"si":"no"}">${im}<div class="cvname"><b>${esc(c.name)}</b><span class="gap">${lab}</span></div>${ed?`<div class="cvl">CONVOCADO</div>`:""}${sw}</div>`};
+  return`<div class="cvc ${st?"si":"no"}">${im}<div class="cvname"><b>${esc(c.name)}</b><span class="gap">${lab}</span></div>${ed?`<div class="cvl">CONVOCADO</div>`:""}${sw}${rol}</div>`};
  const sec=(t,l)=>{const n=l.filter(c=>cEst(c)==="convocado").length;return`<div class="cvhd"><h2>${t}</h2><span class="cvs">✓ ${n}</span><span class="cvs x">✕ ${l.length-n}</span></div><div class="cvg">${l.map(tile).join("")}</div>`};
- return`<div class="card"><h2 style="font-size:1.6rem;color:#0f2a6b;line-height:1.1">${tit}</h2><div class="cvsub">${sub}</div>${ed?'<small class="gap">Pulsa SÍ o NO en cada persona para cambiar la convocatoria.</small>':""}</div>`
+ return`<div class="card"><h2 style="font-size:1.6rem;color:#0f2a6b;line-height:1.1">${tit}</h2><div class="cvsub">${sub}</div>${ed?'<small class="gap">Pulsa SÍ o NO en cada persona para cambiar la convocatoria. En los convocados puedes marcar Titular o Suplente.</small>':""}</div>`
   +sec("Jugadores",jug)+sec("Cuerpo técnico",tec)}
 function openCromo(f){
  const c=CROMOS.find(x=>x.file===f);if(!c)return;

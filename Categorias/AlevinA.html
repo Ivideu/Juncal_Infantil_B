@@ -486,6 +486,9 @@ header.site-banner .dl {
 #pzbar .fsx{display:flex;flex:1 1 300px;min-width:0;align-items:center;gap:8px}
 #pzf.fsp #pzbar .fsx{display:flex}
 #pzbar #ptit2{flex:0 1 260px;width:auto;min-width:90px;padding:6px 10px;min-height:36px;border:2px solid #7aa9ff;border-radius:8px;background:#fff;color:#0b2a6f;font-weight:600}
+#pzbar #paut2{flex:0 1 150px;width:auto;min-width:90px;padding:6px 8px;min-height:36px;border:2px solid #7aa9ff;border-radius:8px;background:#fff;color:#0b2a6f;font-weight:600}
+#pzbar #paut2:focus{outline:3px solid #ffd23f;outline-offset:1px}
+.pj .au{color:#0f2a6b;font-weight:700}
 #pzbar #ptit2::placeholder{color:#6b7aa6;font-weight:400}
 #pzbar #ptit2:focus{outline:3px solid #ffd23f;outline-offset:1px}
 #pzbar #pbtn2{background:var(--ye);border-color:var(--ye);color:#0b2a6f;white-space:nowrap}
@@ -624,6 +627,7 @@ header.site-banner .dl {
 /* ===== /HERO_LOBO ===== */
 </style>
 <script>const CAT={"nombre": "Torrejón Juncal Alevín A", "corto": "Alevín A", "liga": "Alevín FS · Grupo 3", "node": "cat-alevin-a", "email": "alevin-a@torrejonjuncal.es", "grupo": "28105877", "equipo": "19691198", "me": 0};</script>
+<script src="../scripts/entrenadores-lista.js"></script>
 </head>
 <body>
 <div id="bg" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
@@ -648,11 +652,11 @@ header.site-banner .dl {
 <main id="app"></main>
 <!-- Pizarra del entrenador (fuera de #app para que no se reinicie al refrescar la página) -->
 <div id="pizW" hidden>
- <div id="pzf"><div id="pzbar"><span class="fsx"><input id="ptit2" maxlength="60" placeholder="Título de la jugada" aria-label="Título de la jugada"><button type="button" id="pbtn2">⏺ Grabar y publicar</button><span id="pst2" role="status"></span></span></div></div>
+ <div id="pzf"><div id="pzbar"><span class="fsx"><input id="ptit2" maxlength="60" placeholder="Título de la jugada" aria-label="Título de la jugada"><select id="paut2" aria-label="Quién crea la jugada"></select><button type="button" id="pbtn2">⏺ Grabar y publicar</button><span id="pst2" role="status"></span></span></div></div>
  <div class="card" hidden style="display:none">
   <div class="pubr">
    <div style="flex:1;min-width:200px"><label for="ptit" style="margin-top:0">Título de la jugada</label><input id="ptit" maxlength="60" placeholder="Ej.: Saque de esquina en corto"></div>
-   <button class="on" id="pbtn">⏺ Grabar y publicar</button>
+   <select id="paut" hidden></select><button class="on" id="pbtn">⏺ Grabar y publicar</button>
   </div>
   <div id="pst" class="gap">Crea los pasos en la pizarra y pulsa «Grabar y publicar». Verás el vídeo antes de enviarlo.</div>
  </div>
@@ -661,7 +665,7 @@ header.site-banner .dl {
 <!-- -->
 </div>
 <div id="adm">
- <button id="admT" type="button" aria-expanded="false" aria-label="Mostrar u ocultar la barra de administración"><span>▼</span></button>
+ <button id="admT" type="button" aria-expanded="false" aria-label="Mostrar u ocultar la barra de entrenador"><span>▼</span></button>
  <span id="st" class="gap"></span>
  <button id="tbtn" onclick="toggleTest()">🧪 Partido de prueba</button>
  <button id="tout" onclick="toggleTest()" style="display:none">✕ Salir de la prueba</button>
@@ -678,12 +682,12 @@ header.site-banner .dl {
  <form class="card" id="fLog" autocomplete="on">
   <h2 style="font-size:1.7rem;color:#0f2a6b">🔒 Acceso entrenadores</h2>
   <p class="gap">Equipo: <b id="lgCat"></b></p>
-  <div id="lgAdm" hidden><label for="lgMail">Correo de administrador</label><input id="lgMail" type="email" autocomplete="username" placeholder="correo@ejemplo.com"></div>
+  <div id="lgAdm" hidden><label for="lgMail">Correo de entrenador</label><input id="lgMail" type="email" autocomplete="username" placeholder="correo@ejemplo.com"></div>
   <label for="lgPw">Contraseña</label>
   <input id="lgPw" type="password" autocomplete="current-password" required>
   <div id="lgErr" hidden></div>
   <div class="ctl"><button type="submit" class="on" id="lgGo">Entrar</button><button type="button" id="lgX">Cancelar</button></div>
-  <p style="margin-top:12px;font-size:.9rem"><a href="#" id="lgTog">Acceso de administración del club</a></p>
+  <p style="margin-top:12px;font-size:.9rem"><a href="#" id="lgTog">Entrar con correo de entrenador</a></p>
  </form>
 </div>
 
@@ -1175,7 +1179,7 @@ function closeLogin(){$q("#mLog").hidden=true}
 function unlock(){openLogin()}
 $q("#lgX").onclick=closeLogin;
 $q("#mLog").addEventListener("click",e=>{if(e.target.id==="mLog")closeLogin()});
-$q("#lgTog").onclick=e=>{e.preventDefault();const a=$q("#lgAdm");a.hidden=!a.hidden;$q("#lgTog").textContent=a.hidden?"Acceso de administración del club":"Acceso de entrenador del equipo"};
+$q("#lgTog").onclick=e=>{e.preventDefault();const a=$q("#lgAdm");a.hidden=!a.hidden;$q("#lgTog").textContent=a.hidden?"Entrar con correo de entrenador":"Entrar con la contraseña del equipo"};
 /* Prueba primero la cuenta del equipo y, si no, la cuenta de siempre */
 async function doLogin(pw,mail){
  const tries=mail?[mail]:[TEAM_MAIL,FBMAIL];
@@ -1271,23 +1275,26 @@ const fileB64=blob=>new Promise((res,rej)=>{const f=new FileReader();f.onload=()
 function b64Blob(s,mime){const bin=atob(s),u=new Uint8Array(bin.length);for(let i=0;i<bin.length;i++)u[i]=bin.charCodeAt(i);return new Blob([u],{type:mime||"video/webm"})}
 
 let PL=null,PLloading=false;
+const ALLC=window.CATS_PIZ||[[CATK,CAT_NAME]],catN=id=>(ALLC.find(c=>c[0]===id)||[id,id])[1];
 async function loadPlays(){
- PLloading=true;
- let arch=[],bo={},me={};
- try{const r=await fetch(BASE+"Pizarra/"+CATK+"/index.json?"+Date.now());if(r.ok){const a=await r.json();if(Array.isArray(a))arch=a}}catch(e){}
- try{bo=await fbGet("pizarra_borrar/"+CATK)||{}}catch(e){}
- try{me=await fbGet("pizarra_meta/"+CATK)||{}}catch(e){}
- const ids=new Set(arch.map(j=>j.id)),out=[];
- arch.filter(j=>!bo[j.id]).forEach(j=>out.push({id:j.id,t:j.titulo,d:j.fecha,f:j}));
- Object.keys(me).filter(k=>!ids.has(k)&&!bo[k]).forEach(k=>out.push({id:k,t:me[k].titulo,d:me[k].ts,p:1}));
+ PLloading=true;const out=[];
+ await Promise.all(ALLC.map(async([k])=>{
+  let arch=[],bo={},me={};
+  try{const r=await fetch(BASE+"Pizarra/"+k+"/index.json?"+Date.now());if(r.ok){const a=await r.json();if(Array.isArray(a))arch=a}}catch(e){}
+  try{bo=await fbGet("pizarra_borrar/"+k)||{}}catch(e){}
+  try{me=await fbGet("pizarra_meta/"+k)||{}}catch(e){}
+  const ids=new Set(arch.map(j=>j.id));
+  arch.filter(j=>!bo[j.id]).forEach(j=>out.push({id:j.id,c:k,t:j.titulo,d:j.fecha,a:j.autor||"",f:j}));
+  Object.keys(me).filter(x=>!ids.has(x)&&!bo[x]).forEach(x=>out.push({id:x,c:k,t:me[x].titulo,d:me[x].ts,a:me[x].autor||"",p:1}))}));
  out.sort((a,b)=>String(b.d).localeCompare(String(a.d)));
  PL=out;PLloading=false;
  if(tab=="jug")render()}
+const puedeBorrar=j=>j.c===CATK||ACC===FBMAIL;
 function renderPlays(){
  if(PL===null){if(!PLloading)loadPlays();return`<div class="empty">Cargando jugadas…</div>`}
- const ed=E(),head=`<div class="card"><h2 style="font-size:1.6rem;color:#0f2a6b;line-height:1.1">🎬 Jugadas ${CAT_NAME}</h2><div class="cvsub">Vídeos de las jugadas que trabaja el equipo.</div></div>`;
+ const ed=E(),head=`<div class="card"><h2 style="font-size:1.6rem;color:#0f2a6b;line-height:1.1">🎬 Jugadas</h2><div class="cvsub">Las jugadas de todos los entrenadores del club, de todas las categorías.</div></div>`;
  if(!PL.length)return head+`<div class="empty">🎬 Todavía no hay jugadas publicadas.</div>`;
- return head+`<div class="pjg">`+PL.map((j,i)=>`<div class="card pj">${j.f?`<video controls preload="metadata" playsinline src="${BASE}Pizarra/${CATK}/${esc(j.f.video)}#t=0.1"></video>`:`<button class="pjv" data-pv="${i}" aria-label="Ver ${esc(j.t)}">▶</button>`}<h3>${esc(j.t)}</h3><small class="gap">${esc(fch(j.d))}</small>${ed?`<div class="ctl" style="justify-content:flex-start"><button data-pe="${i}">✎ Editar</button><button data-pb="${i}">🗑 Borrar</button></div>`:""}</div>`).join("")+`</div>`}
+ return head+`<div class="pjg">`+PL.map((j,i)=>`<div class="card pj">${j.f?`<video controls preload="metadata" playsinline src="${BASE}Pizarra/${esc(j.c)}/${esc(j.f.video)}#t=0.1"></video>`:`<button class="pjv" data-pv="${i}" aria-label="Ver ${esc(j.t)}">▶</button>`}<h3>${esc(j.t)}</h3><small class="gap">${esc(fch(j.d))}${j.a?` · <span class="au">${esc(j.a)}</span>`:""} · ${esc(catN(j.c))}</small>${ed?`<div class="ctl" style="justify-content:flex-start"><button data-pe="${i}">✎ Editar</button>${puedeBorrar(j)?`<button data-pb="${i}">🗑 Borrar</button>`:""}</div>`:""}</div>`).join("")+`</div>`}
 $q("#app").addEventListener("click",e=>{
  const b=e.target.closest("[data-pv],[data-pe],[data-pb]");if(!b)return;
  if(b.dataset.pv!==undefined)verPend(+b.dataset.pv);
@@ -1309,25 +1316,25 @@ $q("#vEd").onclick=()=>{if(!ver||!ver.ses){toast("No se pudo abrir esa jugada");
 async function verPend(i){
  const j=PL[i];if(!j)return;toast("Cargando vídeo…");
  try{
-  const d=await fbGet("pizarra_cola/"+CATK+"/"+j.id);
+  const d=await fbGet("pizarra_cola/"+j.c+"/"+j.id);
   if(!d||!d.video)throw new Error("nv");
   let ses=null;try{ses=JSON.parse(d.sesion)}catch(e){}
-  openVer(j.t,CAT_NAME+" · "+fch(j.d),URL.createObjectURL(b64Blob(d.video,d.mime)),ses)
+  openVer(j.t,catN(j.c)+(j.a?" · "+j.a:"")+" · "+fch(j.d),URL.createObjectURL(b64Blob(d.video,d.mime)),ses)
  }catch(e){toast(e.message==="nv"?"Esta jugada ya se archivó: vuelve a entrar en Jugadas.":"No se pudo cargar el vídeo")}}
 async function editPl(i){
  const j=PL[i];if(!j)return;
  try{
   let ses;
-  if(j.f){const r=await fetch(BASE+"Pizarra/"+CATK+"/"+j.f.sesion+"?"+Date.now());if(!r.ok)throw 0;ses=await r.json()}
-  else{const d=await fbGet("pizarra_cola/"+CATK+"/"+j.id);ses=JSON.parse(d.sesion)}
+  if(j.f){const r=await fetch(BASE+"Pizarra/"+j.c+"/"+j.f.sesion+"?"+Date.now());if(!r.ok)throw 0;ses=await r.json()}
+  else{const d=await fbGet("pizarra_cola/"+j.c+"/"+j.id);ses=JSON.parse(d.sesion)}
   toPiz(ses,j.t)
  }catch(e){toast("No se pudo abrir esa jugada")}}
 async function delPl(i){
- const j=PL[i];if(!j)return;
+ const j=PL[i];if(!j||!puedeBorrar(j))return;
  if(!confirm("¿Borrar la jugada «"+j.t+"»? Los jugadores dejarán de verla."))return;
  try{
-  if(j.f)await fbApi("pizarra_borrar/"+CATK+"/"+j.id,"PUT",true);
-  else{await fbApi("pizarra_cola/"+CATK+"/"+j.id,"DELETE");await fbApi("pizarra_meta/"+CATK+"/"+j.id,"DELETE")}
+  if(j.f)await fbApi("pizarra_borrar/"+j.c+"/"+j.id,"PUT",true);
+  else{await fbApi("pizarra_cola/"+j.c+"/"+j.id,"DELETE");await fbApi("pizarra_meta/"+j.c+"/"+j.id,"DELETE")}
   PL.splice(i,1);render();toast("Jugada borrada")
  }catch(e){toast("No se pudo borrar")}}
 
@@ -1380,6 +1387,11 @@ function setPzFS(on){
  fsLayout(on);setTimeout(()=>{if(PFS===on)fsLayout(on);ajusta()},150)}
 window.togPzFS=()=>setPzFS(!PFS);
 function setPSt(t){document.querySelector("#pst").textContent=t;document.querySelector("#pst2").textContent=t;document.querySelector("#ptit2").value=document.querySelector("#ptit").value}
+(()=>{const L=(window.ENTRENADORES||[]),h='<option value="">¿Quién la crea?</option>'+L.map(n=>`<option>${esc(n)}</option>`).join("");
+ let g="";try{g=localStorage.getItem("pzAut")||""}catch(e){}
+ ["#paut","#paut2"].forEach(i=>{const e=document.querySelector(i);e.innerHTML=h;if(L.includes(g))e.value=g});
+ const sy=v=>{document.querySelector("#paut").value=v;document.querySelector("#paut2").value=v;try{localStorage.setItem("pzAut",v)}catch(e){}};
+ document.querySelector("#paut2").onchange=e=>sy(e.target.value)})();
 document.querySelector("#ptit2").oninput=e=>{document.querySelector("#ptit").value=e.target.value};
 document.querySelector("#pbtn2").onclick=()=>{if(document.querySelector("#pbtn").disabled)return;document.querySelector("#ptit").value=document.querySelector("#ptit2").value;document.querySelector("#pbtn").onclick()};
 function toPiz(ses,titulo){pzQ={ses,titulo};tab="piz";render();flushPz()}
@@ -1392,13 +1404,14 @@ $q("#pbtn").onclick=async()=>{
  if(!pz){toast("La pizarra aún no ha cargado");return}
  if(pz.playing){pz.stop();return}
  if(titulo.length<3){toast("Escribe un título para la jugada");document.getElementById("ptit2").focus();return}
+ if(!$q("#paut").value){toast("Elige quién crea la jugada");document.getElementById("paut2").focus();return}
  if(pz.steps<2){toast("Crea al menos 2 pasos en la pizarra");return}
  const b=$q("#pbtn");b.disabled=true;setPSt("Grabando… no cambies de pestaña hasta que termine.");
  try{
   const r=await pz.recordBlob();
   if(r.blob.size<2000)throw new Error("El vídeo salió vacío. Inténtalo de nuevo con la pestaña a la vista.");
-  rec={...r,titulo};
-  $q("#mT").textContent=titulo;
+  rec={...r,titulo,autor:$q("#paut").value};
+  $q("#mT").textContent=titulo+" · "+rec.autor;
   $q("#mI").textContent=CAT_NAME+" · "+(r.blob.size/1048576).toFixed(1)+" MB · "+r.ext.toUpperCase();
   const v=$q("#mV");if(v.src)URL.revokeObjectURL(v.src);v.src=URL.createObjectURL(r.blob);
   $q("#mPub").disabled=false;$q("#mPrev").hidden=false;setPSt("Vídeo listo. Revísalo y publícalo.")
@@ -1415,8 +1428,8 @@ $q("#mPub").onclick=async()=>{
   const d=new Date(),id=d.getFullYear()+pad(d.getMonth()+1)+pad(d.getDate())+"-"+pad(d.getHours())+pad(d.getMinutes())+pad(d.getSeconds())+"-"+slug(rec.titulo);
   const sesion=JSON.stringify(PZ().getSession());
   setPSt("Enviando…");
-  await fbApi("pizarra_cola/"+CATK+"/"+id,"PUT",{id,titulo:rec.titulo,fecha:d.toISOString(),ext:rec.ext,mime:rec.mime,video:data,sesion});
-  await fbApi("pizarra_meta/"+CATK+"/"+id,"PUT",{titulo:rec.titulo,ts:d.toISOString(),ext:rec.ext,mime:rec.mime});
+  await fbApi("pizarra_cola/"+CATK+"/"+id,"PUT",{id,titulo:rec.titulo,autor:rec.autor,fecha:d.toISOString(),ext:rec.ext,mime:rec.mime,video:data,sesion});
+  await fbApi("pizarra_meta/"+CATK+"/"+id,"PUT",{titulo:rec.titulo,autor:rec.autor,ts:d.toISOString(),ext:rec.ext,mime:rec.mime});
   $q("#mPrev").hidden=true;$q("#mV").pause();rec=null;$q("#ptit").value="";PL=null;
   setPSt("✔ Publicada. Los jugadores ya la ven en la pestaña Jugadas; se archiva en el repositorio en unos minutos.");
   toast("Jugada publicada en "+CAT_NAME)

@@ -80,7 +80,7 @@ h2.sec{font-size:15px;margin:18px 0 8px;letter-spacing:.04em;text-transform:uppe
       <label for="eq">Equipo</label>
       <select id="eq"></select>
       <div id="admBox" hidden>
-        <label for="adm">Correo de administrador</label>
+        <label for="adm">Correo de entrenador</label>
         <input id="adm" type="email" autocomplete="username" placeholder="correo@ejemplo.com">
       </div>
       <label for="pw">Contraseña</label>
@@ -111,6 +111,7 @@ h2.sec{font-size:15px;margin:18px 0 8px;letter-spacing:.04em;text-transform:uppe
         <div class="row">
           <div><label for="tit" style="margin-top:0">Título de la jugada</label>
             <input id="tit" maxlength="60" placeholder="Ej.: Saque de esquina en corto"></div>
+          <div><label for="aut" style="margin-top:0">¿Quién la crea?</label><select id="aut"></select></div>
           <button class="primary" id="bpub">⏺ Grabar y publicar</button>
         </div>
         <div class="st" id="st">Crea los pasos en la pizarra y pulsa «Grabar y publicar». Verás el vídeo antes de enviarlo.</div>
@@ -154,6 +155,7 @@ h2.sec{font-size:15px;margin:18px 0 8px;letter-spacing:.04em;text-transform:uppe
 </div>
 <div id="toast" role="status"></div>
 
+<script src="./scripts/entrenadores-lista.js"></script>
 <script>
 (()=>{
 "use strict";
@@ -226,7 +228,7 @@ $("#lnkCat").addEventListener("click",()=>{
 });
 /* ---------- login ---------- */
 const eqSel=$("#eq");
-eqSel.innerHTML=CATS.map(c=>`<option value="${c[0]}">${esc(c[1])}</option>`).join("")+'<option value="_admin">Administración del club</option>';
+eqSel.innerHTML=CATS.map(c=>`<option value="${c[0]}">${esc(c[1])}</option>`).join("")+'<option value="_admin">Entrenador (acceso con correo)</option>';
 eqSel.value=LS.get("pzEq")||CATS[0][0];
 const admSync=()=>{$("#admBox").hidden=eqSel.value!=="_admin"};
 eqSel.onchange=admSync;admSync();
@@ -282,6 +284,7 @@ fr.addEventListener("load",()=>{
 let rec=null; // {blob,ext,mime,titulo}
 const slug=s=>s.normalize("NFD").replace(/[̀-ͯ]/g,"").toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-+|-+$/g,"").slice(0,40)||"jugada";
 const pad=n=>String(n).padStart(2,"0");
+(()=>{const L=window.ENTRENADORES||[],e=document.getElementById("aut");e.innerHTML='<option value="">Elige…</option>'+L.map(n=>`<option>${esc(n)}</option>`).join("");try{const g=localStorage.getItem("pzAut");if(L.includes(g))e.value=g}catch(x){}e.onchange=()=>{try{localStorage.setItem("pzAut",e.value)}catch(x){}}})();
 function setSt(t){$("#st").textContent=t}
 
 $("#bpub").onclick=async()=>{
@@ -290,12 +293,13 @@ $("#bpub").onclick=async()=>{
   if(!pz){toast("La pizarra aún no ha cargado");return}
   if(pz.playing){pz.stop();return}
   if(titulo.length<3){toast("Escribe un título para la jugada");$("#tit").focus();return}
+  if(!$("#aut").value){toast("Elige quién crea la jugada");$("#aut").focus();return}
   if(pz.steps<2){toast("Crea al menos 2 pasos en la pizarra");return}
   const b=$("#bpub");b.disabled=true;setSt("Grabando… no cambies de pestaña hasta que termine.");
   try{
     const r=await pz.recordBlob();
     if(r.blob.size<2000)throw new Error("El vídeo salió vacío. Inténtalo de nuevo con la pestaña a la vista.");
-    rec={...r,titulo};
+    rec={...r,titulo,autor:$("#aut").value};
     $("#mT").textContent=titulo;
     $("#mI").textContent=catName(cat)+" · "+(r.blob.size/1048576).toFixed(1)+" MB · "+r.ext.toUpperCase();
     const v=$("#mV");if(v.src)URL.revokeObjectURL(v.src);v.src=URL.createObjectURL(r.blob);
@@ -320,8 +324,8 @@ $("#mPub").onclick=async()=>{
     const d=new Date(),id=d.getFullYear()+pad(d.getMonth()+1)+pad(d.getDate())+"-"+pad(d.getHours())+pad(d.getMinutes())+pad(d.getSeconds())+"-"+slug(rec.titulo);
     const sesion=JSON.stringify(PZ().getSession());
     setSt("Enviando…");
-    await api("pizarra_cola/"+cat+"/"+id,"PUT",{id,titulo:rec.titulo,fecha:d.toISOString(),ext:rec.ext,mime:rec.mime,video:data,sesion});
-    await api("pizarra_meta/"+cat+"/"+id,"PUT",{titulo:rec.titulo,ts:d.toISOString(),ext:rec.ext,mime:rec.mime});
+    await api("pizarra_cola/"+cat+"/"+id,"PUT",{id,titulo:rec.titulo,autor:rec.autor,fecha:d.toISOString(),ext:rec.ext,mime:rec.mime,video:data,sesion});
+    await api("pizarra_meta/"+cat+"/"+id,"PUT",{titulo:rec.titulo,autor:rec.autor,ts:d.toISOString(),ext:rec.ext,mime:rec.mime});
     $("#mPrev").hidden=true;$("#mV").pause();rec=null;$("#tit").value="";
     setSt("✔ Publicada. Los jugadores ya la ven; se archiva en el repositorio (carpeta Pizarra) en unos minutos.");
     toast("Jugada publicada en "+catName(cat));
@@ -374,7 +378,7 @@ async function cargarJugadas(){
     const m=await api("pizarra_meta/"+mine);
     if(mine!==cat)return;
     const ks=Object.keys(m||{});
-    pend.innerHTML=ks.length?ks.map(k=>`<div class="pend"><span>✔ <b>${esc(m[k].titulo)}</b> <small>${esc(fecha(m[k].ts))} · ya visible para los jugadores</small></span><div class="a"><button data-bv="${esc(k)}">▶ Ver</button><button class="danger" data-bp="${esc(k)}">🗑 Borrar</button></div></div>`).join(""):'<div class="empty">Nada en proceso.</div>';
+    pend.innerHTML=ks.length?ks.map(k=>`<div class="pend"><span>✔ <b>${esc(m[k].titulo)}</b> <small>${esc(fecha(m[k].ts))}${m[k].autor?" · "+esc(m[k].autor):""} · ya visible para los jugadores</small></span><div class="a"><button data-bv="${esc(k)}">▶ Ver</button><button class="danger" data-bp="${esc(k)}">🗑 Borrar</button></div></div>`).join(""):'<div class="empty">Nada en proceso.</div>';
   }catch(e){pend.innerHTML='<div class="empty">No se pudieron leer las pendientes.</div>'}
   try{
     const r=await fetch("./Pizarra/"+mine+"/index.json?"+Date.now());
@@ -382,7 +386,7 @@ async function cargarJugadas(){
   }catch(e){pubs=[]}
   try{const bo=await api("pizarra_borrar/"+mine)||{};pubs=pubs.filter(j=>!bo[j.id])}catch(e){}
   if(mine!==cat)return;
-  box.innerHTML=pubs.length?pubs.map((j,i)=>`<div class="it"><video controls preload="metadata" playsinline src="./Pizarra/${esc(mine)}/${esc(j.video)}#t=0.1"></video><div class="b"><h3>${esc(j.titulo)}</h3><small>${esc(fecha(j.fecha))}</small><div class="a"><button data-vw="${i}">▶ Ver</button><button data-ed="${i}">✎ Editar</button><button class="danger" data-bo="${i}">🗑 Borrar</button></div></div></div>`).join(""):'<div class="empty">Todavía no hay jugadas publicadas en esta categoría.</div>';
+  box.innerHTML=pubs.length?pubs.map((j,i)=>`<div class="it"><video controls preload="metadata" playsinline src="./Pizarra/${esc(mine)}/${esc(j.video)}#t=0.1"></video><div class="b"><h3>${esc(j.titulo)}</h3><small>${esc(fecha(j.fecha))}${j.autor?" · "+esc(j.autor):""}</small><div class="a"><button data-vw="${i}">▶ Ver</button><button data-ed="${i}">✎ Editar</button><button class="danger" data-bo="${i}">🗑 Borrar</button></div></div></div>`).join(""):'<div class="empty">Todavía no hay jugadas publicadas en esta categoría.</div>';
 }
 // Si un vídeo archivado no carga, se avisa en vez de dejar un recuadro negro
 $("#pubs").addEventListener("error",e=>{

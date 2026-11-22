@@ -84,6 +84,7 @@ async function publicar() {
         idx.push({
           id: key,
           titulo: String(it.titulo || "Jugada").slice(0, 80),
+          autor: String(it.autor || "").slice(0, 30),
           fecha: isNaN(Date.parse(it.fecha)) ? new Date().toISOString() : new Date(it.fecha).toISOString(),
           video: `${key}.${ext}`,
           sesion: sesion ? `${key}.json` : "",

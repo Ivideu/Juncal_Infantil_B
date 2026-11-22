@@ -75,15 +75,15 @@ async function elige(id){
     fj("pizarra_meta/"+id),fj("pizarra_borrar/"+id)]);
   if(mine!==cat)return;
   const hid=borr||{};
-  const list=(Array.isArray(repo)?repo:[]).filter(j=>!hid[j.id]).map(j=>({id:j.id,titulo:j.titulo,fecha:j.fecha,src:"./Pizarra/"+id+"/"+j.video}));
+  const list=(Array.isArray(repo)?repo:[]).filter(j=>!hid[j.id]).map(j=>({id:j.id,titulo:j.titulo,autor:j.autor,fecha:j.fecha,src:"./Pizarra/"+id+"/"+j.video}));
   const ids=new Set(list.map(j=>j.id));
-  Object.keys(vivo||{}).forEach(k=>{if(!ids.has(k)&&!hid[k])list.push({id:k,titulo:vivo[k].titulo,fecha:vivo[k].ts,mime:vivo[k].mime,fb:true})});
+  Object.keys(vivo||{}).forEach(k=>{if(!ids.has(k)&&!hid[k])list.push({id:k,titulo:vivo[k].titulo,autor:vivo[k].autor,fecha:vivo[k].ts,mime:vivo[k].mime,fb:true})});
   if(!list.length){
     out.className="";out.innerHTML=`<div class="empty"><b>Todavía no hay jugadas en ${esc(CATS.find(c=>c[0]===id)[1])}</b>Tu entrenador las irá publicando aquí.</div>`;return;
   }
   list.sort((a,b)=>String(b.fecha).localeCompare(String(a.fecha)));
   out.className="grid";
-  out.innerHTML=list.map(j=>`<article class="it"><video controls preload="metadata" playsinline ${j.fb?'data-fb="'+esc(j.id)+'" data-mime="'+esc(j.mime||"")+'"':'src="'+esc(j.src)+'"'}></video><div class="b"><h2>${esc(j.titulo)}</h2><small>${esc(fecha(j.fecha))}${j.fb?" · nueva":""}</small></div></article>`).join("");
+  out.innerHTML=list.map(j=>`<article class="it"><video controls preload="metadata" playsinline ${j.fb?'data-fb="'+esc(j.id)+'" data-mime="'+esc(j.mime||"")+'"':'src="'+esc(j.src)+'"'}></video><div class="b"><h2>${esc(j.titulo)}</h2><small>${esc(fecha(j.fecha))}${j.autor?" · "+esc(j.autor):""}${j.fb?" · nueva":""}</small></div></article>`).join("");
   out.querySelectorAll("video[data-fb]").forEach(async v=>{
     const b64=await fj("pizarra_cola/"+mine+"/"+v.dataset.fb+"/video");
     if(b64&&mine===cat)v.src=aBlob(b64,v.dataset.mime);

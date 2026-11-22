@@ -147,15 +147,15 @@ button.btn{font:inherit;font-weight:700;cursor:pointer}
 @keyframes catIn{from{opacity:0;transform:translateY(16px) scale(.96)}}
 
 /* PRÓXIMOS PARTIDOS */
-#partidos{overflow-x:clip}
+#partidos,#partidos-local{overflow-x:clip}
 .chips{display:flex;flex-direction:column;align-items:center;gap:8px;margin:0 0 20px}
 .cr{display:flex;flex-wrap:wrap;justify-content:center;gap:8px}
 .chip{padding:7px 14px;border:2px solid rgba(255,255,255,.85);border-radius:999px;color:#fff;background:rgba(8,18,53,.35);font-size:.9rem;font-weight:700;text-shadow:var(--sh);cursor:pointer;transition:background-color .2s,color .2s}
 .chip.on{border-color:var(--ye);color:#0a0f1e;background:var(--ye);text-shadow:none}
 .chip:focus-visible{outline:3px solid #fff;outline-offset:2px}
 .car{position:relative;--g:2px}
-#matches{display:flex;gap:14px;padding:8px var(--g) 16px;overflow-x:auto;justify-content:safe center;scroll-snap-type:x mandatory;scroll-padding:0 var(--g);scrollbar-width:none;-webkit-overflow-scrolling:touch;overscroll-behavior-x:contain}
-#matches::-webkit-scrollbar{display:none}
+#matches,#lMatches{display:flex;gap:14px;padding:8px var(--g) 16px;overflow-x:auto;justify-content:safe center;scroll-snap-type:x mandatory;scroll-padding:0 var(--g);scrollbar-width:none;-webkit-overflow-scrolling:touch;overscroll-behavior-x:contain}
+#matches::-webkit-scrollbar,#lMatches::-webkit-scrollbar{display:none}
 .ms{flex:0 0 calc((100% - 28px)/3);display:flex;flex-direction:column;gap:10px;min-width:0;scroll-snap-align:start}
 .mi{flex:1;display:flex;flex-direction:column;gap:4px;padding:12px 14px;border-radius:14px;background:var(--card);box-shadow:0 4px 18px rgba(8,18,53,.25)}
 .mi .w{display:flex;align-items:center;justify-content:space-between;gap:8px}
@@ -194,7 +194,7 @@ button.fch:focus-visible{outline:3px solid var(--ye);outline-offset:3px}
 .cartel .eq2{top:37.9%;left:67.1%}
 .cartel .eq i{color:#0f2a78;font:italic 800 8cqw/1 "Barlow Condensed",sans-serif;font-style:normal}
 .cartel .eq img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;background:#fff}
-.cartel .nm{top:62%;display:flex;align-items:flex-start;justify-content:center;width:31%;height:6.2%;overflow:hidden;color:#fff;font-size:min(3.7cqw,calc(130cqw / var(--k)));text-shadow:0 .3cqw .8cqw rgba(0,0,0,.6);-webkit-text-stroke:.7cqw #0f2a78}
+.cartel .nm{top:62%;display:flex;align-items:flex-start;justify-content:center;width:31%;height:6.2%;overflow:hidden;color:#fff;font-size:min(3.7cqw,calc(47cqw / var(--k)));white-space:nowrap;text-shadow:0 .3cqw .8cqw rgba(0,0,0,.6);-webkit-text-stroke:.7cqw #0f2a78}
 .cartel .nm1{left:5.3%}
 .cartel .nm2{left:63.8%}
 .cartel .res{top:41%;left:37.5%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.6cqw;width:27%;height:23%;border:.9cqw solid #fff;border-radius:5cqw;background:linear-gradient(160deg,#1e4fd8,#0b1f66);box-shadow:0 0 0 .9cqw var(--ye),0 2cqw 5cqw rgba(0,0,0,.55)}
@@ -386,6 +386,21 @@ footer a{color:var(--ye);font-weight:700}
         <button class="ar r" id="mNext" type="button" aria-label="Más partidos">›</button>
       </div>
       <p class="sub" id="mVacio" style="margin:0" hidden>Los próximos partidos o jornadaa actual que aparecerán aquí en cuanto se publiquen la jornadas.</p>
+    </div>
+  </section>
+
+  <!-- PARTIDOS DE LA COMPETICIÓN LOCAL -->
+  <section id="partidos-local">
+    <div class="wrap">
+      <h2 class="rv">Local · <span>jornada actual</span></h2>
+      <p class="sub rv">Los partidos de Infantil, Alevín, Benjamín y Prebenjamín de la competición local de Torrejón de Ardoz, con el resultado en cuanto se publica. Se mantienen hasta el domingo a las 23:50.</p>
+      <div class="chips" id="lFilt" role="group" aria-label="Filtrar por categoría local"></div>
+      <div class="car" id="lCar">
+        <button class="ar l" id="lPrev" type="button" aria-label="Partidos anteriores">‹</button>
+        <div id="lMatches" tabindex="0" aria-label="Partidos de la competición local, desliza para ver más"></div>
+        <button class="ar r" id="lNext" type="button" aria-label="Más partidos">›</button>
+      </div>
+      <p class="sub" id="lVacio" style="margin:0" hidden>Los partidos de la competición local aparecerán aquí en cuanto se publique la jornada.</p>
     </div>
   </section>
 
@@ -692,8 +707,8 @@ function cartel(p) {
   return `<div class="cartel" role="img" aria-label="${esc(desc)}">
     <div class="c-t" style="--n:${Math.max(cat.length, 1)}">${esc(cat)}</div>
     <div class="c-l" style="--m:${Math.max(liga.length, 1)}">${esc(liga)}</div>
-    <span class="eq eq1">${escudoEq(loc, p.codLocal, p.casa)}</span>
-    <span class="eq eq2">${escudoEq(vis, p.codVisitante, !p.casa)}</span>
+    <span class="eq eq1">${escudoEq(loc, p.codLocal, p.mioL ?? p.casa)}</span>
+    <span class="eq eq2">${escudoEq(vis, p.codVisitante, p.mioV ?? !p.casa)}</span>
     <div class="nm nm1" style="--k:${Math.max(loc.length, 1)}">${esc(loc)}</div>
     <div class="nm nm2" style="--k:${Math.max(vis.length, 1)}">${esc(vis)}</div>
     ${p.resultado ? `<div class="res" aria-hidden="true"><b>${esc(String(p.resultado.gl))} - ${esc(String(p.resultado.gv))}</b><span>Final</span></div>` : ""}
@@ -768,8 +783,8 @@ function closeMatch() {
   document.body.style.overflow = "";
 }
 
-function openMatch(i) {
-  const p = MATCHES[i];
+function openMatch(i, lista = MATCHES) {
+  const p = lista[i];
   if (!p) return;
   closeMatch();
   const ov = document.createElement("div");
@@ -823,6 +838,76 @@ async function loadMatches() {
 loadMatches();
 setInterval(loadMatches, 5 * 60 * 1000);
 document.addEventListener("visibilitychange", () => { if (!document.hidden) loadMatches(); });
+
+/* COMPETICIÓN LOCAL · JORNADA ACTUAL (Infantil, Alevín, Benjamín y Prebenjamín; equipos Torrejón Juncal, también "A"/"B") */
+const LOCAL_CATS = [["infantil", "Infantil"], ["alevin", "Alevín"], ["benjamin", "Benjamín"], ["prebenjamin", "Prebenjamín"]];
+const esJuncalLocal = n => /juncal/i.test(n || "");
+let LMATCHES = [], lFiltro = "";
+
+function corteDomingo() {
+  const c = new Date(); c.setHours(23, 50, 0, 0); c.setDate(c.getDate() - c.getDay());
+  if (c > new Date()) c.setDate(c.getDate() - 7);
+  return c;
+}
+
+/* De cada categoría: la primera jornada con algún partido del Juncal posterior al último domingo 23:50 (todos los partidos del Juncal de esa jornada) */
+function partidosLocal(d, id, nombre, corte) {
+  const jj = (d.jornadas || []).slice().sort((a, b) => a.n - b.n);
+  for (const j of jj) {
+    const mios = (j.partidos || []).filter(p => p.fecha && (esJuncalLocal(p.local) || esJuncalLocal(p.visitante)));
+    if (!mios.some(p => new Date(p.fecha + "T" + (/^\d{1,2}:\d{2}$/.test(p.hora || "") ? p.hora.padStart(5, "0") : "23:59")) > corte)) continue;
+    return mios.map(p => ({
+      id, categoria: nombre, liga: "Competición local", jornada: j.n, fecha: p.fecha, hora: /^\d{1,2}:\d{2}$/.test(p.hora || "") ? p.hora.padStart(5, "0") : "",
+      local: p.local, visitante: p.visitante, casa: esJuncalLocal(p.local), mioL: esJuncalLocal(p.local), mioV: esJuncalLocal(p.visitante),
+      campo: p.campo || "", temporada: CONFIG.SEASON,
+      ...(Number.isInteger(p.ga) && Number.isInteger(p.gb) ? { resultado: { gl: p.ga, gv: p.gb } } : {})
+    }));
+  }
+  return [];
+}
+
+function renderLocal() {
+  const grid = $("#lMatches");
+  $("#lCar").hidden = !LMATCHES.length;
+  $("#lVacio").hidden = !!LMATCHES.length;
+  if (!LMATCHES.length) { $("#lFilt").style.display = "none"; grid.innerHTML = ""; return; }
+  const cats = LOCAL_CATS.map(c => c[1]).filter(n => LMATCHES.some(p => p.categoria === n));
+  if (lFiltro && !cats.includes(lFiltro)) lFiltro = "";
+  const box = $("#lFilt");
+  box.style.display = cats.length > 1 ? "" : "none";
+  const chip = c => `<button type="button" class="chip${c === lFiltro ? " on" : ""}" data-c="${esc(c)}" aria-pressed="${c === lFiltro}">${c ? esc(c) : "Todos"}</button>`;
+  box.innerHTML = `<div class="cr">${["", ...cats].map(chip).join("")}</div>`;
+  grid.innerHTML = LMATCHES.map((p, i) => ({ p, i })).filter(x => !lFiltro || x.p.categoria === lFiltro)
+    .map(({ p, i }) => `<article class="ms"><button type="button" class="fch" data-i="${i}" aria-label="${esc(p.categoria)}: ver el cartel ampliado">${cartel(p)}</button>${info(p)}</article>`).join("");
+  grid.scrollLeft = 0;
+  flechasLocal();
+}
+function flechasLocal() {
+  const g = $("#lMatches");
+  $("#lPrev").disabled = g.scrollLeft <= 2;
+  $("#lNext").disabled = g.scrollLeft >= g.scrollWidth - g.clientWidth - 2;
+}
+$("#lFilt").addEventListener("click", e => { const c = e.target.closest(".chip"); if (c) { lFiltro = c.dataset.c; renderLocal(); } });
+$("#lMatches").addEventListener("scroll", flechasLocal, { passive: true });
+$("#lPrev").onclick = () => $("#lMatches").scrollBy({ left: -$("#lMatches").clientWidth * .8, behavior: "smooth" });
+$("#lNext").onclick = () => $("#lMatches").scrollBy({ left: $("#lMatches").clientWidth * .8, behavior: "smooth" });
+addEventListener("resize", flechasLocal);
+$("#lMatches").addEventListener("click", e => { const c = e.target.closest(".fch"); if (c) openMatch(Number(c.dataset.i), LMATCHES); });
+
+async function loadLocal() {
+  const corte = corteDomingo();
+  let lista = [];
+  try {
+    const res = await Promise.all(LOCAL_CATS.map(([id, n]) => fetch(`datos-local/${id}.json?` + Math.floor(Date.now() / 6e5), { cache: "no-store" })
+      .then(r => r.ok ? r.json() : null).then(d => d ? partidosLocal(d, id, n, corte) : []).catch(() => [])));
+    lista = res.flat().sort((a, b) => (a.fecha + (a.hora || "99:99")).localeCompare(b.fecha + (b.hora || "99:99")));
+    LMATCHES = lista;
+  } catch (e) {}
+  renderLocal();
+}
+loadLocal();
+setInterval(loadLocal, 10 * 60 * 1000);
+document.addEventListener("visibilitychange", () => { if (!document.hidden) loadLocal(); });
 
 /* EQUIPOS (siempre desplegados) */
 const catCard = (c, i) => {

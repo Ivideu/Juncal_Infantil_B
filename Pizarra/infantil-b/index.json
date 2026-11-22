@@ -18,6 +18,7 @@
   {
     "id": "20261115-192835-salida-de-balon",
     "titulo": "Salida de Balón",
+    "autor": "Iván",
     "fecha": "2026-11-15T18:28:35.864Z",
     "video": "20261115-192835-salida-de-balon.webm",
     "sesion": "20261115-192835-salida-de-balon.json"
@@ -25,6 +26,7 @@
   {
     "id": "20261113-142402-saque-banda-izquierdo",
     "titulo": "Saque Banda Izquierdo",
+    "autor": "Iván",
     "fecha": "2026-11-13T13:24:02.049Z",
     "video": "20261113-142402-saque-banda-izquierdo.webm",
     "sesion": "20261113-142402-saque-banda-izquierdo.json"
@@ -32,20 +34,23 @@
   {
     "id": "20261113-141724-saque-banda",
     "titulo": "Saque banda",
+    "autor": "Iván",
     "fecha": "2026-11-13T13:17:24.246Z",
     "video": "20261113-141724-saque-banda.webm",
     "sesion": "20261113-141724-saque-banda.json"
   },
   {
     "id": "20261113-141241-pisada-balon-por-banda",
-    "titulo": "Pisada balón por banda",
+    "titulo": "Pisada balón por banda - Entreno",
+    "autor": "Iván",
     "fecha": "2026-11-13T13:12:41.576Z",
     "video": "20261113-141241-pisada-balon-por-banda.webm",
     "sesion": "20261113-141241-pisada-balon-por-banda.json"
   },
   {
     "id": "20261113-140808-pared-banda",
-    "titulo": "Pared Banda",
+    "titulo": "Pared Banda - Entreno",
+    "autor": "Iván",
     "fecha": "2026-11-13T13:08:08.623Z",
     "video": "20261113-140808-pared-banda.webm",
     "sesion": "20261113-140808-pared-banda.json"

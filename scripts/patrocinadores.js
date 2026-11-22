@@ -13,19 +13,19 @@
   const VERSION = "5";             // súbelo si cambias los logos, para que el navegador no use la versión antigua
 
   const SPONSORS = [
-    { name: "Ayuntamiento de Torrejón de Ardoz", img: "ayuntamiento.png", w: 744, h: 200, logoH: 38, url: "https://www.ayto-torrejon.es/" },
-    { name: "Asiem Servicios Jurídicos",         img: "asiem.png",        w: 616, h: 360, logoH: 46, url: "https://www.administracionfincastorrejon.es/" },
-    { name: "Inmobiliaria Provan",               img: "provan.png",       w: 440, h: 360, logoH: 46, url: "https://www.provan.info/" },
-    { name: "Hurtado, S.L.",                     img: "hurtado.png",      w: 520, h: 296, logoH: 44, url: "https://www.hurtadosl.es/" },
-    { name: "Gor2Bar",                           img: "gor2bar.png",      w: 512, h: 208, logoH: 38, url: "https://www.instagram.com/gor2bartorrejon/" },
-    { name: "Lasercor",                          img: "lasercor.png",     w: 568, h: 192, logoH: 36, url: "https://www.lasercor.com/" },
-    { name: "Cedecar",                           img: "cedecar.png",      w: 512, h: 176, logoH: 34, url: "https://cedecar.com/" },
-    { name: "delaoliva",                         img: "delaoliva.png",    w: 496, h: 136, logoH: 30, url: "https://delaoliva.com/" },
-    { name: "BBVA",                              img: "BBVA.png",         w: 496, h: 136, logoH: 30, url: "https://www.bbva.com/" },
-    { name: "Cosmos Telecomunicaciones",         img: "cosmos.png",       w: 504, h: 184, logoH: 38, url: "https://www.cosmos.tel/" }
+    { name: "Ayuntamiento de Torrejón de Ardoz",      img: "ayuntamiento.png", w: 744, h: 200, logoH: 38, url: "https://www.ayto-torrejon.es/" },
+    { name: "Asiem, asesoría, gestión, comunidades",  img: "asiem.png",        w: 616, h: 360, logoH: 46, url: "https://www.asiem.es/" },
+    { name: "Inmobiliaria Provan",                    img: "provan.png",       w: 440, h: 360, logoH: 46, url: "https://www.provan.info/" },
+    { name: "Hurtado, S.L.",                          img: "hurtado.png",      w: 520, h: 296, logoH: 44, url: "https://embalajeshurtado.com/" },
+    { name: "Gor2Bar",                                img: "gor2bar.png",      w: 512, h: 208, logoH: 38, url: "https://www.instagram.com/gor2bartorrejon/" },
+    { name: "Lasercor",                               img: "lasercor.png",     w: 568, h: 192, logoH: 36, url: "https://www.lasercor.com/" },
+    { name: "Cedecar",                                img: "cedecar.png",      w: 512, h: 176, logoH: 34, url: "https://cedecar.com/" },
+    { name: "delaoliva",                              img: "delaoliva.png",    w: 496, h: 136, logoH: 30, url: "https://delaoliva.com/" },
+    { name: "BBVA",                                   img: "BBVA.png",         w: 496, h: 136, logoH: 30, url: "https://www.bbva.com/" },
+    { name: "Cosmos Telecomunicaciones",              img: "cosmos.png",       w: 504, h: 184, logoH: 38, url: "https://www.cosmos.tel/" }
   ];
 
-  const esc = t => String(t || "").replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+  const esc = t => String(t || "").replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"": "&quot;" }[c]));
 
   function item(s, copia) {
     const img = `<img src="${RUTA + esc(s.img)}?v=${VERSION}" alt="${copia ? "" : esc(s.name)}" width="${s.w}" height="${s.h}" decoding="async" draggable="false" style="--h:${s.logoH}px">`;

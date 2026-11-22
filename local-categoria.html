@@ -302,7 +302,7 @@ function vistaJuncal() {
 }
 
 function pintar() {
-  const tabs = [["jor", "Jornadas"], ["cla", "Clasificación"]];
+  const tabs = ID === "prebenjamin" ? [["jor", "Jornadas"]] : [["jor", "Jornadas"], ["cla", "Clasificación"]];   // Prebenjamín: sin clasificación (no se publica)
   // Pestaña "Torrejón Juncal" desactivada por ahora (vistaJuncal se conserva para reactivarla)
   if (!tabs.some(t => t[0] === tab)) tab = "jor";
   $("#tabs").innerHTML = tabs.map(([k, l]) => `<button type="button" class="tb" role="tab" aria-selected="${k === tab}" data-t="${k}">${l}</button>`).join("");

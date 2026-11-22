@@ -393,7 +393,7 @@ footer a{color:var(--ye);font-weight:700}
   <section id="partidos-local">
     <div class="wrap">
       <h2 class="rv">Local · <span>jornada actual</span></h2>
-      <p class="sub rv">Los partidos de Infantil, Alevín, Benjamín y Prebenjamín de la competición local de Torrejón de Ardoz, con el resultado en cuanto se publica. Se mantienen hasta el domingo a las 23:50.</p>
+      <p class="sub rv">Los partidos de Cadete, Infantil, Alevín, Benjamín y Prebenjamín de la competición local de Torrejón de Ardoz, con el resultado en cuanto se publica. Se mantienen hasta el domingo a las 23:50.</p>
       <div class="chips" id="lFilt" role="group" aria-label="Filtrar por categoría local"></div>
       <div class="car" id="lCar">
         <button class="ar l" id="lPrev" type="button" aria-label="Partidos anteriores">‹</button>
@@ -713,13 +713,13 @@ function cartel(p) {
     <div class="c-t" style="--n:${Math.max(cat.length, 1)}">${esc(cat)}</div>
     <div class="c-l" style="--m:${Math.max(liga.length, 1)}">${esc(liga)}</div>
     <span class="eq eq1">${escudoEq(loc, p.codLocal, p.mioL ?? p.casa)}</span>
-    <span class="eq eq2">${escudoEq(vis, p.codVisitante, p.mioV ?? !p.casa)}</span>
+    <span class="eq eq2">${p.descansa ? "<i>🌙</i>" : escudoEq(vis, p.codVisitante, p.mioV ?? !p.casa)}</span>
     <div class="nm nm1" style="--k:${Math.max(loc.length, 1)}">${esc(loc)}</div>
     <div class="nm nm2" style="--k:${Math.max(vis.length, 1)}">${esc(vis)}</div>
     ${p.resultado ? `<div class="res" aria-hidden="true"><b>${esc(String(p.resultado.gl))} - ${esc(String(p.resultado.gv))}</b><span>Final</span></div>` : ""}
     <div class="dia">${dia}</div><div class="fec">${fecha}</div>
-    <div class="hor${p.hora ? "" : " s"}">${esc(hora)}</div>
-    <div class="lug">${esc(lug)}</div><div class="cf">${p.casa ? "Casa" : "Fuera"}</div>
+    <div class="hor${p.hora ? "" : " s"}">${esc(p.descansa ? "Descansa" : hora)}</div>
+    <div class="lug">${esc(p.descansa ? "Esta jornada no juega" : lug)}</div><div class="cf">${p.descansa ? "😴" : p.casa ? "Casa" : "Fuera"}</div>
     <div class="jor">Jornada ${esc(String(p.jornada))} • Temporada ${esc(p.temporada || CONFIG.SEASON)}</div>
   </div>`;
 }
@@ -734,6 +734,7 @@ function info(p) {
   const near = p.fecha === isoDe(hoy) || p.fecha === isoDe(man);
   const dia = p.fecha === isoDe(hoy) ? "Hoy" : p.fecha === isoDe(man) ? "Mañana" : DIAS[f.getDay()];
   const txt = `${dia} ${f.getDate()} ${MESES[f.getMonth()].slice(0, 3)}`;
+  if (p.descansa) return `<div class="mi"><div class="w"><span class="d${near ? " hoy" : ""}">${esc(txt)}</span><span class="b c">😴</span></div><div class="h">Descansa</div><div class="r">Le toca descansar esta jornada</div></div>`;
   const rival = p.casa ? p.visitante : p.local;
   const lug = p.campo ? campoTxt(p.campo) : "Pabellón por confirmar";
   const lugar = p.campo
@@ -844,8 +845,8 @@ loadMatches();
 setInterval(loadMatches, 5 * 60 * 1000);
 document.addEventListener("visibilitychange", () => { if (!document.hidden) loadMatches(); });
 
-/* COMPETICIÓN LOCAL · JORNADA ACTUAL (Infantil, Alevín, Benjamín y Prebenjamín; equipos Torrejón Juncal, también "A"/"B") */
-const LOCAL_CATS = [["infantil", "Infantil"], ["alevin", "Alevín"], ["benjamin", "Benjamín"], ["prebenjamin", "Prebenjamín"]];
+/* COMPETICIÓN LOCAL · JORNADA ACTUAL (Cadete, Infantil, Alevín, Benjamín y Prebenjamín; equipos Torrejón Juncal, también "A"/"B") */
+const LOCAL_CATS = [["cadete", "Cadete"], ["infantil", "Infantil"], ["alevin", "Alevín"], ["benjamin", "Benjamín"], ["prebenjamin", "Prebenjamín"]];
 const esJuncalLocal = n => /jun?cal/i.test(n || "");   // incluye la errata «Jucal» del Ayuntamiento
 let LMATCHES = [], lFiltro = "";
 
@@ -860,6 +861,11 @@ function partidosLocal(d, id, nombre, corte) {
   const jj = (d.jornadas || []).slice().sort((a, b) => a.n - b.n);
   for (const j of jj) {
     const mios = (j.partidos || []).filter(p => p.fecha && (esJuncalLocal(p.local) || esJuncalLocal(p.visitante)));
+    const desc = esJuncalLocal(j.descansa) && (j.partidos || []).some(p => p.fecha) ? j.partidos.find(p => p.fecha).fecha : "";   // el Juncal descansa esta jornada
+    if (desc && !mios.length) {
+      if (new Date(desc + "T23:59") > corte) return [{ id, categoria: nombre, liga: "Competición local", jornada: j.n, fecha: desc, hora: "", local: j.descansa, visitante: "DESCANSA", casa: true, mioL: true, mioV: false, campo: "", temporada: CONFIG.SEASON, descansa: true }];
+      continue;
+    }
     if (!mios.some(p => new Date(p.fecha + "T" + (/^\d{1,2}:\d{2}$/.test(p.hora || "") ? p.hora.padStart(5, "0") : "23:59")) > corte)) continue;
     return mios.map(p => ({
       id, categoria: nombre, liga: "Competición local", jornada: j.n, fecha: p.fecha, hora: /^\d{1,2}:\d{2}$/.test(p.hora || "") ? p.hora.padStart(5, "0") : "",

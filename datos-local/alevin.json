@@ -21,7 +21,9 @@
      "campo": "NURIA FDEZ 1",
      "fecha": "2026-10-18",
      "dia": "D",
-     "hora": "10:00"
+     "hora": "10:00",
+     "ga": 4,
+     "gb": 2
     },
     {
      "local": "Torrejon Juncal",
@@ -29,7 +31,9 @@
      "campo": "NURIA FDEZ 1",
      "fecha": "2026-10-18",
      "dia": "D",
-     "hora": "12:00"
+     "hora": "12:00",
+     "ga": 2,
+     "gb": 3
     },
     {
      "local": "Humanitas",
@@ -37,7 +41,9 @@
      "campo": "NURIA FDEZ 1",
      "fecha": "2026-10-18",
      "dia": "D",
-     "hora": "13:00"
+     "hora": "13:00",
+     "ga": 10,
+     "gb": 3
     },
     {
      "local": "Ciudad de Torrejon",
@@ -45,7 +51,9 @@
      "campo": "NURIA FDEZ 1",
      "fecha": "2026-10-18",
      "dia": "D",
-     "hora": "11:00"
+     "hora": "11:00",
+     "ga": 4,
+     "gb": 3
     }
    ]
   },
@@ -59,7 +67,9 @@
      "campo": "",
      "fecha": "2026-10-24",
      "dia": "S",
-     "hora": ""
+     "hora": "",
+     "ga": 4,
+     "gb": 1
     },
     {
      "local": "Severo T.Rojo",
@@ -67,7 +77,9 @@
      "campo": "",
      "fecha": "2026-10-24",
      "dia": "S",
-     "hora": ""
+     "hora": "",
+     "ga": 2,
+     "gb": 0
     },
     {
      "local": "Severo T.Amarillo",
@@ -75,7 +87,9 @@
      "campo": "",
      "fecha": "2026-10-24",
      "dia": "S",
-     "hora": ""
+     "hora": "",
+     "ga": 5,
+     "gb": 3
     },
     {
      "local": "Torrejon Sala",
@@ -83,7 +97,55 @@
      "campo": "",
      "fecha": "2026-10-24",
      "dia": "S",
-     "hora": ""
+     "hora": "",
+     "ga": 5,
+     "gb": 3
+    }
+   ]
+  },
+  {
+   "n": 3,
+   "descansa": "Severo T.Rojo",
+   "partidos": [
+    {
+     "local": "Rivillos Limones 5 \"A\"",
+     "visitante": "Rivillos Limones 5 \"B\"",
+     "campo": "",
+     "fecha": "2026-11-07",
+     "dia": "S",
+     "hora": "",
+     "ga": 9,
+     "gb": 0
+    },
+    {
+     "local": "Zarzuela T.Juncal",
+     "visitante": "Severo T.Amarillo",
+     "campo": "",
+     "fecha": "2026-11-07",
+     "dia": "S",
+     "hora": "",
+     "ga": 2,
+     "gb": 3
+    },
+    {
+     "local": "Torrejon Juncal",
+     "visitante": "Torrejon Sala",
+     "campo": "",
+     "fecha": "2026-11-07",
+     "dia": "S",
+     "hora": "",
+     "ga": 1,
+     "gb": 8
+    },
+    {
+     "local": "Ciudad de Torrejon",
+     "visitante": "Humanitas",
+     "campo": "",
+     "fecha": "2026-11-07",
+     "dia": "S",
+     "hora": "",
+     "ga": 2,
+     "gb": 3
     }
    ]
   },
@@ -400,6 +462,44 @@
    ]
   },
   {
+   "n": 12,
+   "descansa": "Severo T.Rojo",
+   "partidos": [
+    {
+     "local": "Rivillos Limones 5 \"B\"",
+     "visitante": "Rivillos Limones 5 \"A\"",
+     "campo": "",
+     "fecha": "2027-02-06",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Severo T.Amarillo",
+     "visitante": "Zarzuela T.Juncal",
+     "campo": "",
+     "fecha": "2027-02-06",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Torrejon Sala",
+     "visitante": "Torrejon Juncal",
+     "campo": "",
+     "fecha": "2027-02-06",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Humanitas",
+     "visitante": "Ciudad de Torrejon",
+     "campo": "",
+     "fecha": "2027-02-06",
+     "dia": "S",
+     "hora": ""
+    }
+   ]
+  },
+  {
    "n": 13,
    "descansa": "Severo T.Amarillo",
    "partidos": [
@@ -476,6 +576,44 @@
    ]
   },
   {
+   "n": 15,
+   "descansa": "Humanitas",
+   "partidos": [
+    {
+     "local": "Ciudad de Torrejon",
+     "visitante": "Severo T.Rojo",
+     "campo": "",
+     "fecha": "2027-03-06",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Rivillos Limones 5 \"B\"",
+     "visitante": "Severo T.Amarillo",
+     "campo": "",
+     "fecha": "2027-03-06",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Rivillos Limones 5 \"A\"",
+     "visitante": "Torrejon Sala",
+     "campo": "",
+     "fecha": "2027-03-06",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Zarzuela T.Juncal",
+     "visitante": "Torrejon Juncal",
+     "campo": "",
+     "fecha": "2027-03-06",
+     "dia": "S",
+     "hora": ""
+    }
+   ]
+  },
+  {
    "n": 16,
    "descansa": "Torrejon Juncal",
    "partidos": [
@@ -508,6 +646,44 @@
      "visitante": "Ciudad de Torrejon",
      "campo": "",
      "fecha": "2027-03-13",
+     "dia": "S",
+     "hora": ""
+    }
+   ]
+  },
+  {
+   "n": 17,
+   "descansa": "Zarzuela T.Juncal",
+   "partidos": [
+    {
+     "local": "Ciudad de Torrejon",
+     "visitante": "Severo T.Amarillo",
+     "campo": "",
+     "fecha": "2027-04-03",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Severo T.Rojo",
+     "visitante": "Torrejon Sala",
+     "campo": "",
+     "fecha": "2027-04-03",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Rivillos Limones 5 \"B\"",
+     "visitante": "Humanitas",
+     "campo": "",
+     "fecha": "2027-04-03",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Rivillos Limones 5 \"A\"",
+     "visitante": "Torrejon Juncal",
+     "campo": "",
+     "fecha": "2027-04-03",
      "dia": "S",
      "hora": ""
     }

@@ -108,7 +108,7 @@ def elegir(enlaces, palabras):
 
 
 # ---------------------------------------------------------------- calendario
-RE_PARTIDO = re.compile(r"^\s*\d+\s+(.*?)\s+(\d{2})-(\d{2})-(\d{2})\s+([SD])(?:\s+(\d{1,2}:\d{2}))?\s*$")
+RE_PARTIDO = re.compile(r"^\s*\d+\s+(.*?)\s+(\d{1,2})-(\d{2})-(\d{2})\s+([SD])(?:\s+(\d{1,2}:\d{2}))?\s*$")
 RE_JORNADA = re.compile(r"Jornada\s*N[ºo°.]*\s*(\d+)", re.I)
 
 
@@ -131,7 +131,7 @@ def parse_calendario(texto):
         m = RE_PARTIDO.match(l)
         if m:
             buffer.append(m)
-        elif l.strip() and re.search(r"\d{2}-\d{2}-\d{2}", l):
+        elif l.strip() and re.search(r"\d{1,2}-\d{2}-\d{2}", l):
             avisos.append("Línea de calendario sin entender: " + l.strip()[:120])
     if buffer:
         bloques.append((n_sig if not cabecera_despues else (bloques[-1][0] + 1 if bloques else 1), buffer))
@@ -142,7 +142,7 @@ def parse_calendario(texto):
         for m in ms:
             cuerpo, dd, mm, aa, dia, hora = m.groups()
             partes = [p for p in re.split(r"\s{2,}", cuerpo.strip()) if p]
-            fecha = f"20{aa}-{mm}-{dd}"
+            fecha = f"20{aa}-{mm}-{int(dd):02d}"
             if any(fold(p) == "DESCANSA" for p in partes):
                 otro = next((p for p in partes if fold(p) != "DESCANSA"), "")
                 if not otro:   # «DESCANSA EQUIPO» separado por un solo espacio

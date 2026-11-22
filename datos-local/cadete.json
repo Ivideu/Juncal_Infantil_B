@@ -21,7 +21,9 @@
      "campo": "NURIA FDEZ 1",
      "fecha": "2026-10-17",
      "dia": "S",
-     "hora": "9:00"
+     "hora": "9:00",
+     "ga": 11,
+     "gb": 0
     },
     {
      "local": "Torrejon Juncal",
@@ -29,7 +31,9 @@
      "campo": "NURIA FDEZ 2",
      "fecha": "2026-10-17",
      "dia": "S",
-     "hora": "9:00"
+     "hora": "9:00",
+     "ga": 1,
+     "gb": 4
     },
     {
      "local": "Ciud.Torrejon \"B\"",
@@ -37,7 +41,9 @@
      "campo": "NURIA FDEZ 3",
      "fecha": "2026-10-17",
      "dia": "S",
-     "hora": "9:00"
+     "hora": "9:00",
+     "ga": 4,
+     "gb": 2
     }
    ]
   },
@@ -51,7 +57,9 @@
      "campo": "",
      "fecha": "2026-10-24",
      "dia": "S",
-     "hora": ""
+     "hora": "",
+     "ga": 1,
+     "gb": 1
     },
     {
      "local": "Severo Torrejon",
@@ -59,7 +67,9 @@
      "campo": "",
      "fecha": "2026-10-24",
      "dia": "S",
-     "hora": ""
+     "hora": "",
+     "ga": 4,
+     "gb": 5
     },
     {
      "local": "Ciud.Torrejon \"A\"",
@@ -67,7 +77,45 @@
      "campo": "",
      "fecha": "2026-10-24",
      "dia": "S",
-     "hora": ""
+     "hora": "",
+     "ga": 6,
+     "gb": 1
+    }
+   ]
+  },
+  {
+   "n": 3,
+   "descansa": "Severo Torrejon",
+   "partidos": [
+    {
+     "local": "Rivillos Limones 5 \"A\"",
+     "visitante": "Rivillos Limones 5 \"B\"",
+     "campo": "",
+     "fecha": "2026-11-07",
+     "dia": "S",
+     "hora": "",
+     "ga": 7,
+     "gb": 0
+    },
+    {
+     "local": "Leon Felipe",
+     "visitante": "Ciud.Torrejon \"A\"",
+     "campo": "",
+     "fecha": "2026-11-07",
+     "dia": "S",
+     "hora": "",
+     "ga": 4,
+     "gb": 0
+    },
+    {
+     "local": "Ciud.Torrejon \"B\"",
+     "visitante": "Torrejon Juncal",
+     "campo": "",
+     "fecha": "2026-11-07",
+     "dia": "S",
+     "hora": "",
+     "ga": 7,
+     "gb": 2
     }
    ]
   },

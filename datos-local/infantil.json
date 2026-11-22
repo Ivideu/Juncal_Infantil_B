@@ -21,7 +21,9 @@
      "campo": "J.GARBAJOSA",
      "fecha": "2026-10-17",
      "dia": "S",
-     "hora": "9:00"
+     "hora": "9:00",
+     "ga": 3,
+     "gb": 1
     },
     {
      "local": "Leon Felipe",
@@ -29,7 +31,9 @@
      "campo": "NURIA FDEZ 3",
      "fecha": "2026-10-17",
      "dia": "S",
-     "hora": "13:00"
+     "hora": "13:00",
+     "ga": 0,
+     "gb": 0
     },
     {
      "local": "Torrejon Juncal \"B\"",
@@ -37,7 +41,9 @@
      "campo": "J.A.PARAISO",
      "fecha": "2026-10-17",
      "dia": "S",
-     "hora": "15:00"
+     "hora": "15:00",
+     "ga": 2,
+     "gb": 7
     },
     {
      "local": "Torrejon Juncal \"A\"",
@@ -45,7 +51,9 @@
      "campo": "NURIA FDEZ 3",
      "fecha": "2026-10-17",
      "dia": "S",
-     "hora": "14:00"
+     "hora": "14:00",
+     "ga": 1,
+     "gb": 3
     },
     {
      "local": "Ciud.Torrejon \"B\"",
@@ -53,7 +61,9 @@
      "campo": "NURIA FDEZ 1",
      "fecha": "2026-10-17",
      "dia": "S",
-     "hora": "14:00"
+     "hora": "14:00",
+     "ga": 2,
+     "gb": 5
     }
    ]
   },
@@ -67,7 +77,9 @@
      "campo": "",
      "fecha": "2026-10-24",
      "dia": "S",
-     "hora": ""
+     "hora": "",
+     "ga": 2,
+     "gb": 1
     },
     {
      "local": "Rivillos Limones 5 \"B\"",
@@ -75,7 +87,9 @@
      "campo": "",
      "fecha": "2026-10-24",
      "dia": "S",
-     "hora": ""
+     "hora": "",
+     "ga": 2,
+     "gb": 15
     },
     {
      "local": "Severo Torrejon",
@@ -83,7 +97,9 @@
      "campo": "",
      "fecha": "2026-10-24",
      "dia": "S",
-     "hora": ""
+     "hora": "",
+     "ga": 7,
+     "gb": 4
     },
     {
      "local": "Torrejon Sala",
@@ -91,7 +107,9 @@
      "campo": "",
      "fecha": "2026-10-24",
      "dia": "S",
-     "hora": ""
+     "hora": "",
+     "ga": 4,
+     "gb": 3
     },
     {
      "local": "Ciud.Torrejon \"A\"",
@@ -99,7 +117,65 @@
      "campo": "",
      "fecha": "2026-10-24",
      "dia": "S",
-     "hora": ""
+     "hora": "",
+     "ga": 5,
+     "gb": 0
+    }
+   ]
+  },
+  {
+   "n": 3,
+   "descansa": "Rivillos Limones 5 \"B\"",
+   "partidos": [
+    {
+     "local": "Torrijas FC",
+     "visitante": "Rivillos Limones 5 \"A\"",
+     "campo": "",
+     "fecha": "2026-11-07",
+     "dia": "S",
+     "hora": "",
+     "ga": 2,
+     "gb": 2
+    },
+    {
+     "local": "Veredillas",
+     "visitante": "Severo Torrejon",
+     "campo": "",
+     "fecha": "2026-11-07",
+     "dia": "S",
+     "hora": "",
+     "ga": 6,
+     "gb": 3
+    },
+    {
+     "local": "Leon Felipe",
+     "visitante": "Torrejon Sala",
+     "campo": "",
+     "fecha": "2026-11-07",
+     "dia": "S",
+     "hora": "",
+     "ga": 4,
+     "gb": 0
+    },
+    {
+     "local": "Torrejon Juncal \"B\"",
+     "visitante": "Ciud.Torrejon \"A\"",
+     "campo": "",
+     "fecha": "2026-11-07",
+     "dia": "S",
+     "hora": "",
+     "ga": 2,
+     "gb": 4
+    },
+    {
+     "local": "Ciud.Torrejon \"B\"",
+     "visitante": "Torrejon Juncal \"A\"",
+     "campo": "",
+     "fecha": "2026-11-07",
+     "dia": "S",
+     "hora": "",
+     "ga": 5,
+     "gb": 3
     }
    ]
   },
@@ -482,6 +558,52 @@
    ]
   },
   {
+   "n": 12,
+   "descansa": "Torrijas FC",
+   "partidos": [
+    {
+     "local": "Rivillos Limones 5 \"A\"",
+     "visitante": "Veredillas",
+     "campo": "",
+     "fecha": "2027-02-06",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Rivillos Limones 5 \"B\"",
+     "visitante": "Leon Felipe",
+     "campo": "",
+     "fecha": "2027-02-06",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Severo Torrejon",
+     "visitante": "Torrejon Juncal \"B\"",
+     "campo": "",
+     "fecha": "2027-02-06",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Torrejon Sala",
+     "visitante": "Torrejon Juncal \"A\"",
+     "campo": "",
+     "fecha": "2027-02-06",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Ciud.Torrejon \"A\"",
+     "visitante": "Ciud.Torrejon \"B\"",
+     "campo": "",
+     "fecha": "2027-02-06",
+     "dia": "S",
+     "hora": ""
+    }
+   ]
+  },
+  {
    "n": 13,
    "descansa": "Rivillos Limones 5 \"A\"",
    "partidos": [
@@ -574,6 +696,52 @@
    ]
   },
   {
+   "n": 15,
+   "descansa": "Severo Torrejon",
+   "partidos": [
+    {
+     "local": "Ciud.Torrejon \"B\"",
+     "visitante": "Rivillos Limones 5 \"A\"",
+     "campo": "",
+     "fecha": "2027-03-06",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Torrijas FC",
+     "visitante": "Rivillos Limones 5 \"B\"",
+     "campo": "",
+     "fecha": "2027-03-06",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Veredillas",
+     "visitante": "Torrejon Sala",
+     "campo": "",
+     "fecha": "2027-03-06",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Leon Felipe",
+     "visitante": "Ciud.Torrejon \"A\"",
+     "campo": "",
+     "fecha": "2027-03-06",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Torrejon Juncal \"B\"",
+     "visitante": "Torrejon Juncal \"A\"",
+     "campo": "",
+     "fecha": "2027-03-06",
+     "dia": "S",
+     "hora": ""
+    }
+   ]
+  },
+  {
    "n": 16,
    "descansa": "Torrejon Sala",
    "partidos": [
@@ -614,6 +782,52 @@
      "visitante": "Ciud.Torrejon \"B\"",
      "campo": "",
      "fecha": "2027-03-13",
+     "dia": "S",
+     "hora": ""
+    }
+   ]
+  },
+  {
+   "n": 17,
+   "descansa": "Ciud.Torrejon \"A\"",
+   "partidos": [
+    {
+     "local": "Ciud.Torrejon \"B\"",
+     "visitante": "Rivillos Limones 5 \"B\"",
+     "campo": "",
+     "fecha": "2027-04-03",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Rivillos Limones 5 \"A\"",
+     "visitante": "Severo Torrejon",
+     "campo": "",
+     "fecha": "2027-04-03",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Torrijas FC",
+     "visitante": "Torrejon Sala",
+     "campo": "",
+     "fecha": "2027-04-03",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Veredillas",
+     "visitante": "Torrejon Juncal \"A\"",
+     "campo": "",
+     "fecha": "2027-04-03",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Leon Felipe",
+     "visitante": "Torrejon Juncal \"B\"",
+     "campo": "",
+     "fecha": "2027-04-03",
      "dia": "S",
      "hora": ""
     }
@@ -752,6 +966,52 @@
      "visitante": "Ciud.Torrejon \"B\"",
      "campo": "",
      "fecha": "2027-04-24",
+     "dia": "S",
+     "hora": ""
+    }
+   ]
+  },
+  {
+   "n": 21,
+   "descansa": "Veredillas",
+   "partidos": [
+    {
+     "local": "Ciud.Torrejon \"B\"",
+     "visitante": "Torrejon Sala",
+     "campo": "",
+     "fecha": "2027-05-08",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Severo Torrejon",
+     "visitante": "Ciud.Torrejon \"A\"",
+     "campo": "",
+     "fecha": "2027-05-08",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Rivillos Limones 5 \"B\"",
+     "visitante": "Torrejon Juncal \"A\"",
+     "campo": "",
+     "fecha": "2027-05-08",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Rivillos Limones 5 \"A\"",
+     "visitante": "Torrejon Juncal \"B\"",
+     "campo": "",
+     "fecha": "2027-05-08",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Torrijas FC",
+     "visitante": "Leon Felipe",
+     "campo": "",
+     "fecha": "2027-05-08",
      "dia": "S",
      "hora": ""
     }

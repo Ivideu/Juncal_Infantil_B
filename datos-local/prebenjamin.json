@@ -88,6 +88,44 @@
    ]
   },
   {
+   "n": 3,
+   "descansa": "Torrejon Sala \"A\"",
+   "partidos": [
+    {
+     "local": "Rivillos Limones 5",
+     "visitante": "Cfs Barrio Del",
+     "campo": "",
+     "fecha": "2026-11-07",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "T.Juncal Jaime Vera",
+     "visitante": "Torrejon Sala \"B\"",
+     "campo": "",
+     "fecha": "2026-11-07",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Torr.Jucal Zarzuela",
+     "visitante": "Ciudad de Torrejon",
+     "campo": "",
+     "fecha": "2026-11-07",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Humanitas",
+     "visitante": "Torr.Juncal Severo",
+     "campo": "",
+     "fecha": "2026-11-07",
+     "dia": "S",
+     "hora": ""
+    }
+   ]
+  },
+  {
    "n": 4,
    "descansa": "Torrejon Sala \"B\"",
    "partidos": [
@@ -392,6 +430,44 @@
    ]
   },
   {
+   "n": 12,
+   "descansa": "Torrejon Sala \"A\"",
+   "partidos": [
+    {
+     "local": "Cfs Barrio Del",
+     "visitante": "Rivillos Limones 5",
+     "campo": "",
+     "fecha": "2027-02-06",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Torrejon Sala \"B\"",
+     "visitante": "T.Juncal Jaime Vera",
+     "campo": "",
+     "fecha": "2027-02-06",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Ciudad de Torrejon",
+     "visitante": "Torr.Jucal Zarzuela",
+     "campo": "",
+     "fecha": "2027-02-06",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Torr.Juncal Severo",
+     "visitante": "Humanitas",
+     "campo": "",
+     "fecha": "2027-02-06",
+     "dia": "S",
+     "hora": ""
+    }
+   ]
+  },
+  {
    "n": 13,
    "descansa": "Torrejon Sala \"B\"",
    "partidos": [
@@ -468,6 +544,44 @@
    ]
   },
   {
+   "n": 15,
+   "descansa": "Torr.Juncal Severo",
+   "partidos": [
+    {
+     "local": "Humanitas",
+     "visitante": "Torrejon Sala \"A\"",
+     "campo": "",
+     "fecha": "2027-03-06",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Cfs Barrio Del",
+     "visitante": "Torrejon Sala \"B\"",
+     "campo": "",
+     "fecha": "2027-03-06",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Rivillos Limones 5",
+     "visitante": "Ciudad de Torrejon",
+     "campo": "",
+     "fecha": "2027-03-06",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "T.Juncal Jaime Vera",
+     "visitante": "Torr.Jucal Zarzuela",
+     "campo": "",
+     "fecha": "2027-03-06",
+     "dia": "S",
+     "hora": ""
+    }
+   ]
+  },
+  {
    "n": 16,
    "descansa": "Torr.Jucal Zarzuela",
    "partidos": [
@@ -500,6 +614,44 @@
      "visitante": "Humanitas",
      "campo": "",
      "fecha": "2027-03-13",
+     "dia": "S",
+     "hora": ""
+    }
+   ]
+  },
+  {
+   "n": 17,
+   "descansa": "T.Juncal Jaime Vera",
+   "partidos": [
+    {
+     "local": "Humanitas",
+     "visitante": "Torrejon Sala \"B\"",
+     "campo": "",
+     "fecha": "2027-04-03",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Torrejon Sala \"A\"",
+     "visitante": "Ciudad de Torrejon",
+     "campo": "",
+     "fecha": "2027-04-03",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Cfs Barrio Del",
+     "visitante": "Torr.Juncal Severo",
+     "campo": "",
+     "fecha": "2027-04-03",
+     "dia": "S",
+     "hora": ""
+    },
+    {
+     "local": "Rivillos Limones 5",
+     "visitante": "Torr.Jucal Zarzuela",
+     "campo": "",
+     "fecha": "2027-04-03",
      "dia": "S",
      "hora": ""
     }

@@ -10,7 +10,7 @@
   const VELOCIDAD = 55;            // píxeles por segundo (ordenador)
   const VELOCIDAD_MOVIL = 24;      // píxeles por segundo (móvil, hasta 600px de ancho)
   const RUTA = "Images/patrocinadores/";
-  const VERSION = "4";             // súbelo si cambias los logos, para que el navegador no use la versión antigua
+  const VERSION = "5";             // súbelo si cambias los logos, para que el navegador no use la versión antigua
 
   const SPONSORS = [
     { name: "Ayuntamiento de Torrejón de Ardoz", img: "ayuntamiento.png", w: 744, h: 200, logoH: 38, url: "https://www.ayto-torrejon.es/" },

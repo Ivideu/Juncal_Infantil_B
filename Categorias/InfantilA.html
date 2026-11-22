@@ -819,7 +819,7 @@ function waTitulo(c,y,t,sub){
  if(sub){c.font=waF(44,700);c.fillStyle="#fff";c.fillText(sub,540,y+62)}}
 async function waSpons(c){
  const y=1110,h=210;c.fillStyle="#fff";waRR(c,40,y,1000,h,28);c.fill();
- const L=(await Promise.all(WA_SP.map(s=>waImg(BASE+"Images/patrocinadores/"+s+".png?v=4")))).filter(Boolean);
+ const L=(await Promise.all(WA_SP.map(s=>waImg(BASE+"Images/patrocinadores/"+s+".png?v=5")))).filter(Boolean);
  if(!L.length)return;
  const per=Math.ceil(L.length/2),cw=940/per,ch=(h-40)/2;
  [L.slice(0,per),L.slice(per)].forEach((r,ri)=>r.forEach((im,ci)=>{

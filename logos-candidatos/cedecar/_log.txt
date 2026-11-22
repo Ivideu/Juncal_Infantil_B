@@ -1,9 +1,0 @@
-https://cedecar.com/ -> 200 https://cedecar.com/ (149199 bytes)
-  1-icon.jpg 13679B https://cedecar.com/wp-content/uploads/2025/04/cropped-cedecar-favicon-32x32.jpg
-  2-icon.jpg 18927B https://cedecar.com/wp-content/uploads/2025/04/cropped-cedecar-favicon-192x192.jpg
-  3-icon.jpg 18428B https://cedecar.com/wp-content/uploads/2025/04/cropped-cedecar-favicon-180x180.jpg
-  4-img-logo.png 25030B https://cedecar.com/wp-content/uploads/2026/05/LogoTranparente_HELI.png
-  5-img-logo.png 8609B https://cedecar.com/wp-content/uploads/2025/04/ep-logo.png
-  6-img-logo.png 5255B https://cedecar.com/wp-content/uploads/2025/04/Noblelift-logo.png
-  7-img-logo.png 4004B https://cedecar.com/wp-content/uploads/elementor/thumbs/Cedecar-logo-r6dulr8n6qjwtmis7eo3w2aleg1vwautrw90tobchs.png
-  x 404 https://cedecar.com/wp-content/uploads/2024/02/logo-cedecar.jpg

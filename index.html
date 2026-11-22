@@ -695,9 +695,24 @@ let MATCHES = [], matchesOpen = false;
 
 const iniciales = nom => String(nom || "").split(/\s+/).filter(w => w.length > 1 && /^[A-Za-zÁÉÍÓÚÜÑáéíóúüñ]/.test(w)).map(w => w[0]).join("").slice(0, 2).toUpperCase();
 
+/* Escudo genérico para equipos sin escudo (locales): color propio por equipo + iniciales (y la letra A/B si la lleva) */
+const ESC_COL = [["#e11d48", "#7f1d3a"], ["#16a34a", "#14532d"], ["#7c3aed", "#3b1d7a"], ["#ea580c", "#7c2d12"], ["#0891b2", "#134e5e"], ["#be185d", "#5b1030"], ["#65a30d", "#365314"], ["#0f766e", "#0b3b38"], ["#b45309", "#5a2d0c"], ["#475569", "#1e293b"]];
+function escudoGenerico(nom) {
+  const n = String(nom || ""), k = n.toUpperCase().replace(/[^A-Z0-9"]/g, "");
+  let h = 0; for (const ch of k) h = (h * 31 + ch.charCodeAt(0)) >>> 0;
+  const [c1, c2] = ESC_COL[h % ESC_COL.length], suf = (n.match(/"?\b([AB])"?\s*$/) || [])[1] || "";
+  const id = "eg" + h;
+  return `<svg viewBox="0 0 100 100" aria-hidden="true" style="position:absolute;inset:0;width:100%;height:100%"><defs><linearGradient id="${id}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${c1}"/><stop offset="1" stop-color="${c2}"/></linearGradient></defs>` +
+    `<path d="M50 9 L83 20 V48 C83 69 68 82 50 91 C32 82 17 69 17 48 V20 Z" fill="url(#${id})" stroke="#ffd23f" stroke-width="4" stroke-linejoin="round"/>` +
+    `<path d="M50 14 L78 23 V34 C62 30 38 30 22 34 V23 Z" fill="#fff" opacity=".18"/>` +
+    `<text x="50" y="${suf ? 56 : 62}" text-anchor="middle" font-family="'Barlow Condensed',sans-serif" font-weight="800" font-style="italic" font-size="38" fill="#fff" stroke="rgba(0,0,0,.35)" stroke-width="1" paint-order="stroke">${esc(iniciales(n.replace(/\./g, " ")))}</text>` +
+    (suf ? `<text x="50" y="76" text-anchor="middle" font-family="'Barlow Condensed',sans-serif" font-weight="800" font-size="20" fill="#ffd23f">${suf}</text>` : "") + `</svg>`;
+}
+
 const escudoEq = (nom, cod, mio) => {
   const src = mio ? "./Images/escudo.png" : cod ? `Escudos/${encodeURIComponent(cod)}.png` : "";
-  return `<i>${esc(iniciales(nom))}</i>${src ? `<img src="${src}" alt="" onerror="this.remove()">` : ""}`;
+  if (!src) return escudoGenerico(nom);
+  return `<i>${esc(iniciales(nom))}</i><img src="${src}" alt="" onerror="this.remove()">`;
 };
 
 function cartel(p) {

@@ -1006,7 +1006,7 @@ const nv=document.getElementById("nav");nv.style.setProperty("--c",Math.ceil(tab
  if(tab=="cop")h=renderCopa();
  if(tab=="cro")h=renderJug();
  if(tab=="jug")h=renderPlays();
- const pzw=document.getElementById("pizW"),sp=E()&&tab=="piz";pzw.hidden=!sp;if(sp)ensurePiz();if(!sp&&PFS)setPzFS(false);
+ if(tab!="piz"&&!pzQ)EDIT=null;const pzw=document.getElementById("pizW"),sp=E()&&tab=="piz";pzw.hidden=!sp;if(sp)ensurePiz();if(!sp&&PFS)setPzFS(false);
  document.getElementById("app").innerHTML=h;setTb()}
 
 /* ===== Copa: torneo aparte (no puntúa en la clasificación; sus goles sí suman en Goleadores) ===== */
@@ -1274,7 +1274,7 @@ async function fbApi(p,m,b){const t=await fbTok();const r=await fetch(FB+"/"+p+"
 const fileB64=blob=>new Promise((res,rej)=>{const f=new FileReader();f.onload=()=>res(String(f.result).split(",")[1]||"");f.onerror=()=>rej(new Error("No se pudo leer el vídeo"));f.readAsDataURL(blob)});
 function b64Blob(s,mime){const bin=atob(s),u=new Uint8Array(bin.length);for(let i=0;i<bin.length;i++)u[i]=bin.charCodeAt(i);return new Blob([u],{type:mime||"video/webm"})}
 
-let PL=null,PLloading=false;
+let PL=null,PLloading=false,EDIT=null; // EDIT: jugada que se está editando (al publicar se reemplaza)
 const ALLC=window.CATS_PIZ||[[CATK,CAT_NAME]],catN=id=>(ALLC.find(c=>c[0]===id)||[id,id])[1];
 async function loadPlays(){
  PLloading=true;const out=[];
@@ -1307,19 +1307,19 @@ $q("#app").addEventListener("error",e=>{
 
 /* Visor (jugadas recién publicadas, que aún están en Firebase) */
 let ver=null;
-function openVer(t,info,url,ses){closeVer();ver={url,ses,t};$q("#vT").textContent=t;$q("#vI").textContent=info;const v=$q("#vV");v.src=url;$q("#vEd").hidden=!E();$q("#mVer").hidden=false;const p=v.play();if(p&&p.catch)p.catch(()=>{})}
+function openVer(t,info,url,ses,j){closeVer();ver={url,ses,t,j};$q("#vT").textContent=t;$q("#vI").textContent=info;const v=$q("#vV");v.src=url;$q("#vEd").hidden=!E();$q("#mVer").hidden=false;const p=v.play();if(p&&p.catch)p.catch(()=>{})}
 function closeVer(){const v=$q("#vV");v.pause();v.removeAttribute("src");v.load();if(ver&&ver.url)URL.revokeObjectURL(ver.url);ver=null;$q("#mVer").hidden=true}
 $q("#vCl").onclick=closeVer;
 $q("#mVer").addEventListener("click",e=>{if(e.target.id==="mVer")closeVer()});
 $q("#vV").addEventListener("error",()=>{if(ver)toast("No se pudo reproducir el vídeo. Si aún se está archivando, prueba en unos minutos.")});
-$q("#vEd").onclick=()=>{if(!ver||!ver.ses){toast("No se pudo abrir esa jugada");return}const s=ver.ses,t=ver.t;closeVer();toPiz(s,t)};
+$q("#vEd").onclick=()=>{if(!ver||!ver.ses){toast("No se pudo abrir esa jugada");return}const s=ver.ses,t=ver.t,j=ver.j;closeVer();toPiz(s,t,j)};
 async function verPend(i){
  const j=PL[i];if(!j)return;toast("Cargando vídeo…");
  try{
   const d=await fbGet("pizarra_cola/"+j.c+"/"+j.id);
   if(!d||!d.video)throw new Error("nv");
   let ses=null;try{ses=JSON.parse(d.sesion)}catch(e){}
-  openVer(j.t,catN(j.c)+(j.a?" · "+j.a:"")+" · "+fch(j.d),URL.createObjectURL(b64Blob(d.video,d.mime)),ses)
+  openVer(j.t,catN(j.c)+(j.a?" · "+j.a:"")+" · "+fch(j.d),URL.createObjectURL(b64Blob(d.video,d.mime)),ses,j)
  }catch(e){toast(e.message==="nv"?"Esta jugada ya se archivó: vuelve a entrar en Jugadas.":"No se pudo cargar el vídeo")}}
 async function editPl(i){
  const j=PL[i];if(!j)return;
@@ -1327,7 +1327,7 @@ async function editPl(i){
   let ses;
   if(j.f){const r=await fetch(BASE+"Pizarra/"+j.c+"/"+j.f.sesion+"?"+Date.now());if(!r.ok)throw 0;ses=await r.json()}
   else{const d=await fbGet("pizarra_cola/"+j.c+"/"+j.id);ses=JSON.parse(d.sesion)}
-  toPiz(ses,j.t)
+  toPiz(ses,j.t,j)
  }catch(e){toast("No se pudo abrir esa jugada")}}
 async function delPl(i){
  const j=PL[i];if(!j||!puedeBorrar(j))return;
@@ -1391,11 +1391,15 @@ function setPSt(t){document.querySelector("#pst").textContent=t;document.querySe
  let g="";try{g=localStorage.getItem("pzAut")||""}catch(e){}
  ["#paut","#paut2"].forEach(i=>{const e=document.querySelector(i);e.innerHTML=h;if(L.includes(g))e.value=g});
  const sy=v=>{document.querySelector("#paut").value=v;document.querySelector("#paut2").value=v;try{localStorage.setItem("pzAut",v)}catch(e){}};
- document.querySelector("#paut2").onchange=e=>sy(e.target.value)})();
+ document.querySelector("#paut2").onchange=e=>sy(e.target.value);window.setAut=v=>{if(L.includes(v))sy(v)}})();
 document.querySelector("#ptit2").oninput=e=>{document.querySelector("#ptit").value=e.target.value};
 document.querySelector("#pbtn2").onclick=()=>{if(document.querySelector("#pbtn").disabled)return;document.querySelector("#ptit").value=document.querySelector("#ptit2").value;document.querySelector("#pbtn").onclick()};
-function toPiz(ses,titulo){pzQ={ses,titulo};tab="piz";render();flushPz()}
-function flushPz(){const z=PZ();if(pzQ&&z){z.loadSession(pzQ.ses);$q("#ptit").value=pzQ.titulo;setPSt("Jugada cargada. Cámbiala y publícala como nueva; después puedes borrar la antigua.");pzQ=null}}
+function toPiz(ses,titulo,j){pzQ={ses,titulo,j:j||null};tab="piz";render();flushPz()}
+function flushPz(){const z=PZ();if(pzQ&&z){z.loadSession(pzQ.ses);$q("#ptit").value=pzQ.titulo;
+ const j=pzQ.j;EDIT=j&&puedeBorrar(j)?j:null;
+ if(j&&j.a&&window.setAut)window.setAut(j.a);
+ setPSt(EDIT?"Editando «"+j.t+"»: cambia lo que quieras y pulsa Grabar y publicar; reemplaza a la jugada actual.":"Jugada de otra categoría cargada: se publicará como nueva en "+CAT_NAME+".");
+ pzQ=null}}
 
 /* Grabar, previsualizar y publicar */
 let rec=null;
@@ -1425,14 +1429,14 @@ $q("#mPub").onclick=async()=>{
  try{
   const data=await fileB64(rec.blob);
   if(data.length>MAXB64)throw new Error("El vídeo es demasiado largo ("+(rec.blob.size/1048576).toFixed(1)+" MB). Reduce los pasos o usa la velocidad rápida.");
-  const d=new Date(),id=d.getFullYear()+pad(d.getMonth()+1)+pad(d.getDate())+"-"+pad(d.getHours())+pad(d.getMinutes())+pad(d.getSeconds())+"-"+slug(rec.titulo);
+  const d=new Date(),ed=EDIT,cat=ed?ed.c:CATK,id=ed?ed.id:d.getFullYear()+pad(d.getMonth()+1)+pad(d.getDate())+"-"+pad(d.getHours())+pad(d.getMinutes())+pad(d.getSeconds())+"-"+slug(rec.titulo);
   const sesion=JSON.stringify(PZ().getSession());
   setPSt("Enviando…");
-  await fbApi("pizarra_cola/"+CATK+"/"+id,"PUT",{id,titulo:rec.titulo,autor:rec.autor,fecha:d.toISOString(),ext:rec.ext,mime:rec.mime,video:data,sesion});
-  await fbApi("pizarra_meta/"+CATK+"/"+id,"PUT",{titulo:rec.titulo,autor:rec.autor,ts:d.toISOString(),ext:rec.ext,mime:rec.mime});
-  $q("#mPrev").hidden=true;$q("#mV").pause();rec=null;$q("#ptit").value="";PL=null;
-  setPSt("✔ Publicada. Los jugadores ya la ven en la pestaña Jugadas; se archiva en el repositorio en unos minutos.");
-  toast("Jugada publicada en "+CAT_NAME)
+  await fbApi("pizarra_cola/"+cat+"/"+id,"PUT",{id,titulo:rec.titulo,autor:rec.autor,fecha:ed&&!isNaN(Date.parse(ed.d))?new Date(ed.d).toISOString():d.toISOString(),ext:rec.ext,mime:rec.mime,video:data,sesion});
+  await fbApi("pizarra_meta/"+cat+"/"+id,"PUT",{titulo:rec.titulo,autor:rec.autor,ts:ed&&!isNaN(Date.parse(ed.d))?new Date(ed.d).toISOString():d.toISOString(),ext:rec.ext,mime:rec.mime});
+  $q("#mPrev").hidden=true;$q("#mV").pause();rec=null;EDIT=null;$q("#ptit").value="";PL=null;
+  setPSt(ed?"✔ Jugada actualizada. El cambio se verá en la pestaña Jugadas en unos minutos (hasta entonces puede verse la versión anterior).":"✔ Publicada. Los jugadores ya la ven en la pestaña Jugadas; se archiva en el repositorio en unos minutos.");
+  toast(ed?"Jugada actualizada":"Jugada publicada en "+CAT_NAME)
  }catch(e){
   btn.disabled=false;
   const m=e===0?"La sesión ha caducado. Sal y vuelve a entrar.":(e&&(e.message==="401"||e.message==="403"))?"Sin permiso para publicar. Revisa las reglas de Firebase.":(e&&e.message)||"No se pudo publicar";

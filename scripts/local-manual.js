@@ -30,18 +30,28 @@
       const d = await r.json();
       if (!d.idToken) return false;
       LM.tok = d.idToken; LM.exp = Date.now() + (+d.expiresIn - 120) * 1000; LM.email = email;
+      ss.set("lm_mail", email); ss.set("lm_rt", d.refreshToken || "");
+      return true;
+    },
+    async _refresh() {
+      const rt = ss.get("lm_rt"), em = ss.get("lm_mail");
+      if (!rt || !em) return false;
+      const r = await fetch("https://securetoken.googleapis.com/v1/token?key=" + KEY, { method: "POST", headers: { "Content-Type": "application/x-www-form-urlencoded" }, body: "grant_type=refresh_token&refresh_token=" + encodeURIComponent(rt) });
+      const d = await r.json();
+      if (!d.id_token) return false;
+      LM.tok = d.id_token; LM.exp = Date.now() + (+d.expires_in - 120) * 1000; LM.email = em;
+      if (d.refresh_token) ss.set("lm_rt", d.refresh_token);
       return true;
     },
     async _token() {
       if (LM.tok && Date.now() < LM.exp) return LM.tok;
-      const pw = ss.get("lm_pw"), em = ss.get("lm_mail");
-      if (pw && em && await LM._signIn(em, pw)) return LM.tok;
+      if (await LM._refresh()) return LM.tok;
       throw new Error("sesión");
     },
-    /* Al entrar en la página NO hay sesión: hay que pulsar «Entrenadores» e identificarse (no se aprovecha el acceso de las páginas de categoría).
-       Solo se mantiene mientras no se pulse «Salir» y la pestaña siga abierta, para no repetir la contraseña al cambiar de jornada. */
-    async restore() { return false; },
-    logout() { LM.tok = ""; LM.email = ""; ss.del("lm_mail"); ss.del("lm_pw"); if (LM.onchange) LM.onchange(); },
+    /* Al entrar en la página (pestaña nueva) NO hay sesión: hay que pulsar «Entrenadores». Una vez dentro, la sesión se mantiene
+       al recargar o cambiar de categoría local mientras la pestaña siga abierta o no se pulse «Salir». No se guarda la contraseña, solo un permiso renovable. */
+    async restore() { try { return await LM._refresh(); } catch (e) { return false; } },
+    logout() { LM.tok = ""; LM.email = ""; ss.del("lm_mail"); ss.del("lm_rt"); if (LM.onchange) LM.onchange(); },
     async save(cat, n, l, v, ga, gb) {
       const tok = await LM._token(), k = LM.key(n, l, v), url = `${FB}/local_res/${encodeURIComponent(cat)}/${k}.json?auth=${tok}`;
       const borrar = ga === null || gb === null;
@@ -70,7 +80,7 @@
         const em = q("#lmEq").value || q("#lmE").value.trim(), pw = q("#lmP").value.trim(), err = q("#lmErr");
         let ok = false; try { ok = await LM._signIn(em, pw); } catch (e) {}
         if (!ok) { err.textContent = "Contraseña incorrecta o sin conexión."; err.hidden = false; return; }
-        ss.set("lm_mail", em); ss.set("lm_pw", pw); close(); if (LM.onchange) LM.onchange();
+        close(); if (LM.onchange) LM.onchange();
       };
       q("#lmP").focus();
     }

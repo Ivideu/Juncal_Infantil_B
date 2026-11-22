@@ -1,7 +1,16 @@
 [
   {
+    "id": "20261122-123409-salida-por-medio-con-pivot",
+    "titulo": "Salida por medio con pivot",
+    "autor": "Iván",
+    "fecha": "2026-11-22T11:34:09.033Z",
+    "video": "20261122-123409-salida-por-medio-con-pivot.webm",
+    "sesion": "20261122-123409-salida-por-medio-con-pivot.json"
+  },
+  {
     "id": "20261116-012834-salida-por-bandas",
     "titulo": "Salida por bandas",
+    "autor": "Iván",
     "fecha": "2026-11-16T00:28:34.301Z",
     "video": "20261116-012834-salida-por-bandas.webm",
     "sesion": "20261116-012834-salida-por-bandas.json"

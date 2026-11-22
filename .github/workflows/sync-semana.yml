@@ -1,9 +1,8 @@
 name: Sincronizar semana
 
-# Sincronización de TODAS las categorías (Infantil B incluido, con el mismo script que el resto): jornada anterior (hasta 36 h tras su fin), actual y siguiente.
-# Tarda ~1-2 minutos. Calendario (hora de Madrid):
-#   · sábado 9:00 → martes 23:00: cada hora
-#   · miércoles, jueves y viernes: una sola ejecución al día, a las 9:00
+# Un solo workflow para todo: sincroniza las categorías (sync-categorias.mjs) y actualiza
+# los próximos partidos (proximos.mjs). Sin schedule: lo lanza el cron-job externo
+# vía workflow_dispatch.
 # Manual: marca «completa» para leer TODAS las jornadas (tarda ~25 min con las 10 categorías).
 on:
   workflow_dispatch:
@@ -15,16 +14,14 @@ on:
       solo:
         description: "Id de una sola categoría (opcional, ej. cadete-a o infantil-b)"
         required: false
-  schedule:
-    # UTC. Sáb-dom-lun-mar, cada hora al minuto 5 (los scripts filtran por hora de Madrid: sáb desde las 9:00, mar hasta las 23:30)
-    - cron: "5 * * * 6,0,1,2"
-    # Mié-jue-vie: 7:05 y 8:05 UTC (= 9:05 en verano / en invierno); el script solo deja pasar la que cae a las 9 en Madrid
-    - cron: "5 7,8 * * 3,4,5"
+
 concurrency:
   group: sync-semana
   cancel-in-progress: false
+
 permissions:
   contents: read
+
 jobs:
   sync:
     runs-on: ubuntu-latest
@@ -39,15 +36,23 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 20
-      - name: Todas las categorías (Infantil B incluido)
-        id: resto
+
+      - name: Sincronizar categorías
+        id: categorias
         continue-on-error: true
         env:
           SOLO: ${{ github.event.inputs.solo }}
-          FCM_SERVICE_ACCOUNT: ${{ secrets.FCM_SERVICE_ACCOUNT }}   # avisos push por categoría (tema juncal-<id>)
+          FCM_SERVICE_ACCOUNT: ${{ secrets.FCM_SERVICE_ACCOUNT }}   # avisos push (tema juncal-<id>)
         run: node scripts/sync-categorias.mjs
+
+      - name: Próximos partidos
+        id: proximos
+        if: ${{ github.event.inputs.solo == '' }}   # si pruebas una sola categoría, se omite
+        continue-on-error: true
+        run: node scripts/proximos.mjs
+
       - name: Comprobar resultado
-        if: ${{ steps.resto.outcome == 'failure' }}
+        if: ${{ steps.categorias.outcome == 'failure' || steps.proximos.outcome == 'failure' }}
         run: |
-          echo "::error::Fallo al sincronizar las categorías: ${{ steps.resto.outcome }}"
+          echo "::error::categorías: ${{ steps.categorias.outcome }} · próximos partidos: ${{ steps.proximos.outcome }}"
           exit 1

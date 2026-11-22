@@ -5,7 +5,7 @@
   const FB = "https://juncal-f0b64-default-rtdb.europe-west1.firebasedatabase.app", KEY = "AIzaSyDXqBUkie30z_Cmyj__ayhzGYyYxZMrB3Q";
   const nrm = t => String(t || "").normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase().replace(/[^a-z0-9]/g, "");
   const ss = { get: k => { try { return sessionStorage.getItem(k) || ""; } catch (e) { return ""; } }, set: (k, v) => { try { sessionStorage.setItem(k, v); } catch (e) {} }, del: k => { try { sessionStorage.removeItem(k); } catch (e) {} } };
-  const EQUIPOS = (window.CATS_PIZ || [["infantil-a", "Infantil A"], ["infantil-b", "Infantil B"], ["alevin-a", "Alevín A"], ["alevin-b", "Alevín B"]]);
+  const EQUIPOS = [["local", "Entrenador de local"], ...(window.CATS_PIZ || [])];
   const LM = window.LM = {
     data: null, tok: "", exp: 0, email: "", onchange: null,
     key: (n, l, v) => n + "_" + nrm(l) + "_" + nrm(v),
@@ -38,13 +38,9 @@
       if (pw && em && await LM._signIn(em, pw)) return LM.tok;
       throw new Error("sesión");
     },
-    /* Recupera la sesión si ya se entró como entrenador en esta pestaña (en una página de categoría o aquí) */
-    async restore() {
-      let em = ss.get("lm_mail"), pw = ss.get("lm_pw");
-      if (!em || !pw) { if (ss.get("adm") && ss.get("pw") && ss.get("mail")) { em = ss.get("mail"); pw = ss.get("pw"); } }
-      if (em && pw && await LM._signIn(em, pw)) { ss.set("lm_mail", em); ss.set("lm_pw", pw); }
-      return LM.canEdit();
-    },
+    /* Al entrar en la página NO hay sesión: hay que pulsar «Entrenadores» e identificarse (no se aprovecha el acceso de las páginas de categoría).
+       Solo se mantiene mientras no se pulse «Salir» y la pestaña siga abierta, para no repetir la contraseña al cambiar de jornada. */
+    async restore() { return false; },
     logout() { LM.tok = ""; LM.email = ""; ss.del("lm_mail"); ss.del("lm_pw"); if (LM.onchange) LM.onchange(); },
     async save(cat, n, l, v, ga, gb) {
       const tok = await LM._token(), k = LM.key(n, l, v), url = `${FB}/local_res/${encodeURIComponent(cat)}/${k}.json?auth=${tok}`;

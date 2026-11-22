@@ -16,7 +16,7 @@
     { name: "Ayuntamiento de Torrejón de Ardoz",      img: "ayuntamiento.png", w: 744, h: 200, logoH: 38, url: "https://www.ayto-torrejon.es/" },
     { name: "Asiem, asesoría, gestión, comunidades",  img: "asiem.png",        w: 616, h: 360, logoH: 46, url: "https://www.asiem.es/" },
     { name: "Inmobiliaria Provan",                    img: "provan.png",       w: 440, h: 360, logoH: 46, url: "https://www.provan.info/" },
-    { name: "Hurtado, S.L.",                          img: "hurtado.png",      w: 520, h: 296, logoH: 44, url: "https://embalajeshurtado.com/" },
+    { name: "Embalajes Hurtado, S.L.",                img: "hurtado.png",      w: 520, h: 296, logoH: 44, url: "https://embalajeshurtado.com/" },
     { name: "Gor2Bar",                                img: "gor2bar.png",      w: 512, h: 208, logoH: 38, url: "https://www.instagram.com/gor2bartorrejon/" },
     { name: "Lasercor",                               img: "lasercor.png",     w: 568, h: 192, logoH: 36, url: "https://www.lasercor.com/" },
     { name: "Cedecar",                                img: "cedecar.png",      w: 512, h: 176, logoH: 34, url: "https://cedecar.com/" },

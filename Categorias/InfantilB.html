@@ -989,9 +989,9 @@ function render(){
  if(jnAuto)jn=wkJ();
  const tabs=E()?[["comp","📊 Competición"],["cop","🥇 Copa"],["cro","🎽 Jugadores"],["jug","🎬 Jugadas"],["piz","📋 Pizarra"],["pla","👥 Plantilla"],["ent","🏃 Entrenos"]]
   :[["jor","🗓 Jornadas"],["cal","📅 Mi calendario"],["cla","🏆 Clasificación"],["cop","🥇 Copa"],["gol","👟 Goleadores"],["cro","🎽 Jugadores"]].filter(t=>t[0]!="cop"||COPA);
- tabs.push(E()?["out","🔓 Salir"]:["log","🔒 Login"]);
+ tabs.push(E()?["out","🔓 Salir"]:["log","🔒 Entrenadores"]);
  if(!E())tabs.push(["back","🏠 Inicio"]);
- const SH={jor:"Jornadas",cal:"Calendario",cla:"Clasif.",cop:"Copa",gol:"Goleadores",cro:"Jugadores",jug:"Jugadas",comp:"Competición",piz:"Pizarra",hor:"Horarios",pla:"Plantilla",ent:"Entrenos",log:"Login",out:"Salir",back:E()?"Salir e inicio":"Inicio"};
+ const SH={jor:"Jornadas",cal:"Calendario",cla:"Clasif.",cop:"Copa",gol:"Goleadores",cro:"Jugadores",jug:"Jugadas",comp:"Competición",piz:"Pizarra",hor:"Horarios",pla:"Plantilla",ent:"Entrenos",log:"Entrenadores",out:"Salir",back:E()?"Salir e inicio":"Inicio"};
 const nv=document.getElementById("nav");nv.style.setProperty("--c",Math.ceil(tabs.length/2));
  nv.innerHTML=tabs.map(([k,l])=>{const ic=l.split(" ")[0],oc=k=="comp"?"subOpen=!subOpen;render()":k=="log"?"unlock()":k=="out"?"setEdit(false)":k=="back"?"volverTop()":`tab='${k}';if(tab=='jor')jnAuto=true;if(tab=='ent')entD='';if(tab=='jug')PL=null;render()`;return`<button class="${(k=="comp"?GRP.some(g=>g[0]==tab):tab==k)?'on':''}${k=="comp"?' grp':''}${k=='out'?' out':''}${k=='back'?' back':''}" onclick="${oc}"${k=='back'?` title="${E()?"Cerrar sesión de entrenador e ir al inicio":"Ir al inicio"}"`:""}><span>${ic}</span><span>${SH[k]}</span></button>`}).join("");
  subNav();
@@ -1006,7 +1006,7 @@ const nv=document.getElementById("nav");nv.style.setProperty("--c",Math.ceil(tab
  if(tab=="cop")h=renderCopa();
  if(tab=="cro")h=renderJug();
  if(tab=="jug")h=renderPlays();
- if(tab!="piz"&&!pzQ)EDIT=null;const pzw=document.getElementById("pizW"),sp=E()&&tab=="piz";pzw.hidden=!sp;if(sp)ensurePiz();if(!sp&&PFS)setPzFS(false);
+ if(tab!="piz"&&!pzQ)EDITJ=null;const pzw=document.getElementById("pizW"),sp=E()&&tab=="piz";pzw.hidden=!sp;if(sp)ensurePiz();if(!sp&&PFS)setPzFS(false);
  document.getElementById("app").innerHTML=h;setTb()}
 
 /* ===== Copa: torneo aparte (no puntúa en la clasificación; sus goles sí suman en Goleadores) ===== */
@@ -1275,7 +1275,7 @@ async function fbApi(p,m,b){const t=await fbTok();const r=await fetch(FB+"/"+p+"
 const fileB64=blob=>new Promise((res,rej)=>{const f=new FileReader();f.onload=()=>res(String(f.result).split(",")[1]||"");f.onerror=()=>rej(new Error("No se pudo leer el vídeo"));f.readAsDataURL(blob)});
 function b64Blob(s,mime){const bin=atob(s),u=new Uint8Array(bin.length);for(let i=0;i<bin.length;i++)u[i]=bin.charCodeAt(i);return new Blob([u],{type:mime||"video/webm"})}
 
-let PL=null,PLloading=false,EDIT=null; // EDIT: jugada que se está editando (al publicar se reemplaza)
+let PL=null,PLloading=false,EDITJ=null; // EDITJ: jugada que se está editando (al publicar se reemplaza)
 const ALLC=window.CATS_PIZ||[[CATK,CAT_NAME]],catN=id=>(ALLC.find(c=>c[0]===id)||[id,id])[1];
 async function loadPlays(){
  PLloading=true;const out=[];
@@ -1299,8 +1299,8 @@ function renderPlays(){
 $q("#app").addEventListener("click",e=>{
  const b=e.target.closest("[data-pv],[data-pe],[data-pb]");if(!b)return;
  if(b.dataset.pv!==undefined)verPend(+b.dataset.pv);
- else if(b.dataset.pe!==undefined)editPl(+b.dataset.pe);
- else delPl(+b.dataset.pb)});
+ else if(b.dataset.pe!==undefined)editJug(+b.dataset.pe);
+ else delJug(+b.dataset.pb)});
 /* Si un vídeo archivado no carga, se avisa en vez de dejar un recuadro negro */
 $q("#app").addEventListener("error",e=>{
  const v=e.target;if(!v||v.tagName!=="VIDEO")return;
@@ -1322,7 +1322,7 @@ async function verPend(i){
   let ses=null;try{ses=JSON.parse(d.sesion)}catch(e){}
   openVer(j.t,catN(j.c)+(j.a?" · "+j.a:"")+" · "+fch(j.d),URL.createObjectURL(b64Blob(d.video,d.mime)),ses,j)
  }catch(e){toast(e.message==="nv"?"Esta jugada ya se archivó: vuelve a entrar en Jugadas.":"No se pudo cargar el vídeo")}}
-async function editPl(i){
+async function editJug(i){
  const j=PL[i];if(!j)return;
  try{
   let ses;
@@ -1330,7 +1330,7 @@ async function editPl(i){
   else{const d=await fbGet("pizarra_cola/"+j.c+"/"+j.id);ses=JSON.parse(d.sesion)}
   toPiz(ses,j.t,j)
  }catch(e){toast("No se pudo abrir esa jugada")}}
-async function delPl(i){
+async function delJug(i){
  const j=PL[i];if(!j||!puedeBorrar(j))return;
  if(!confirm("¿Borrar la jugada «"+j.t+"»? Los jugadores dejarán de verla."))return;
  try{
@@ -1397,9 +1397,9 @@ document.querySelector("#ptit2").oninput=e=>{document.querySelector("#ptit").val
 document.querySelector("#pbtn2").onclick=()=>{if(document.querySelector("#pbtn").disabled)return;document.querySelector("#ptit").value=document.querySelector("#ptit2").value;document.querySelector("#pbtn").onclick()};
 function toPiz(ses,titulo,j){pzQ={ses,titulo,j:j||null};tab="piz";render();flushPz()}
 function flushPz(){const z=PZ();if(pzQ&&z){z.loadSession(pzQ.ses);$q("#ptit").value=pzQ.titulo;
- const j=pzQ.j;EDIT=j&&puedeBorrar(j)?j:null;
+ const j=pzQ.j;EDITJ=j&&puedeBorrar(j)?j:null;
  if(j&&j.a&&window.setAut)window.setAut(j.a);
- setPSt(EDIT?"Editando «"+j.t+"»: cambia lo que quieras y pulsa Grabar y publicar; reemplaza a la jugada actual.":"Jugada de otra categoría cargada: se publicará como nueva en "+CAT_NAME+".");
+ setPSt(EDITJ?"Editando «"+j.t+"»: cambia lo que quieras y pulsa Grabar y publicar; reemplaza a la jugada actual.":"Jugada de otra categoría cargada: se publicará como nueva en "+CAT_NAME+".");
  pzQ=null}}
 
 /* Grabar, previsualizar y publicar */
@@ -1430,12 +1430,12 @@ $q("#mPub").onclick=async()=>{
  try{
   const data=await fileB64(rec.blob);
   if(data.length>MAXB64)throw new Error("El vídeo es demasiado largo ("+(rec.blob.size/1048576).toFixed(1)+" MB). Reduce los pasos o usa la velocidad rápida.");
-  const d=new Date(),ed=EDIT,cat=ed?ed.c:CATK,id=ed?ed.id:d.getFullYear()+pad(d.getMonth()+1)+pad(d.getDate())+"-"+pad(d.getHours())+pad(d.getMinutes())+pad(d.getSeconds())+"-"+slug(rec.titulo);
+  const d=new Date(),ed=EDITJ,cat=ed?ed.c:CATK,id=ed?ed.id:d.getFullYear()+pad(d.getMonth()+1)+pad(d.getDate())+"-"+pad(d.getHours())+pad(d.getMinutes())+pad(d.getSeconds())+"-"+slug(rec.titulo);
   const sesion=JSON.stringify(PZ().getSession());
   setPSt("Enviando…");
   await fbApi("pizarra_cola/"+cat+"/"+id,"PUT",{id,titulo:rec.titulo,autor:rec.autor,fecha:ed&&!isNaN(Date.parse(ed.d))?new Date(ed.d).toISOString():d.toISOString(),ext:rec.ext,mime:rec.mime,video:data,sesion});
   await fbApi("pizarra_meta/"+cat+"/"+id,"PUT",{titulo:rec.titulo,autor:rec.autor,ts:ed&&!isNaN(Date.parse(ed.d))?new Date(ed.d).toISOString():d.toISOString(),ext:rec.ext,mime:rec.mime});
-  $q("#mPrev").hidden=true;$q("#mV").pause();rec=null;EDIT=null;$q("#ptit").value="";PL=null;
+  $q("#mPrev").hidden=true;$q("#mV").pause();rec=null;EDITJ=null;$q("#ptit").value="";PL=null;
   setPSt(ed?"✔ Jugada actualizada. El cambio se verá en la pestaña Jugadas en unos minutos (hasta entonces puede verse la versión anterior).":"✔ Publicada. Los jugadores ya la ven en la pestaña Jugadas; se archiva en el repositorio en unos minutos.");
   toast(ed?"Jugada actualizada":"Jugada publicada en "+CAT_NAME)
  }catch(e){

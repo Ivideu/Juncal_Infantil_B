@@ -223,6 +223,10 @@ footer a{color:var(--ye);font-weight:700}
 <script>
 const $ = s => document.querySelector(s);
 const esc = t => String(t || "").replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+const NURIA_MAPS = "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent("TORREJON DE ARDOZ - P.M. NURIA FERNANDEZ");
+const esNuria = c => /nuria/i.test(c || "");
+const campoTxt = c => { const m = String(c || "").match(/nuria[^\d]*(\d)/i); return esNuria(c) ? "Nuria Fernández" + (m ? " · Pab. " + m[1] : "") : String(c || ""); };
+const campoUrl = c => esNuria(c) ? NURIA_MAPS : "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(c);
 $("#yr").textContent = new Date().getFullYear();
 
 /* MENÚ MÓVIL */
@@ -259,7 +263,7 @@ function editor(p, n) {
 function partido(p, n) {
   const marca = p.ga != null ? `<span class="mk">${p.ga} - ${p.gb}</span>` : `<span class="mk vs">VS</span>`;
   const hora = p.hora ? `<span>🕒 <b>${esc(p.hora)}</b> h</span>` : `<span>🕒 Hora por confirmar</span>`;
-  const campo = p.campo ? `<span>📍 <b>${esc(p.campo)}</b></span>` : "";
+  const campo = p.campo ? `<span>📍 <b><a href="${campoUrl(p.campo)}" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline dotted">${esc(campoTxt(p.campo))}</a></b></span>` : "";
   return `<article class="pt${esJuncal(p.local) || esJuncal(p.visitante) ? " jc" : ""}"><span class="eq">${esc(p.local)}</span>${marca}<span class="eq">${esc(p.visitante)}</span>` +
     `<div class="dt"><span>📅 <b>${esc(fmtFecha(p.fecha))}</b></span>${hora}${campo}${n ? `<span>Jornada ${n}</span>` : ""}${p.man ? `<span title="Resultado anotado por el club; se sustituye por el oficial cuando el Ayuntamiento lo publique">✍️ Anotado por el club</span>` : ""}</div>${editor(p, n)}</article>`;
 }

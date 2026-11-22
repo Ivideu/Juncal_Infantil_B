@@ -530,6 +530,10 @@ const CONFIG = {
 const $ = s => document.querySelector(s);
 const bg = url => url ? `style="background-image:url('${url}')"` : "";
 const esc = t => String(t || "").replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+const NURIA_MAPS = "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent("TORREJON DE ARDOZ - P.M. NURIA FERNANDEZ");
+const esNuria = c => /nuria/i.test(c || "");
+const campoTxt = c => { const m = String(c || "").match(/nuria[^\d]*(\d)/i); return esNuria(c) ? "Nuria Fernández" + (m ? " · Pab. " + m[1] : "") : String(c || ""); };
+const campoUrl = c => esNuria(c) ? NURIA_MAPS : "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(c);
 
 $("#yr").textContent = new Date().getFullYear();
 $("#mapsBtn").href = CONFIG.MAPS_URL;
@@ -703,7 +707,7 @@ function cartel(p) {
   const cat = String(p.categoria || "").toUpperCase();
   const liga = String(p.liga || "").toUpperCase();
   const loc = String(p.local || ""), vis = String(p.visitante || "");
-  const hora = p.hora || "Por confirmar", lug = p.campo || "Pabellón por confirmar";
+  const hora = p.hora || "Por confirmar", lug = p.campo ? campoTxt(p.campo) : "Pabellón por confirmar";
   const desc = p.resultado ? `${p.categoria}, ${dia} ${fecha}: ${loc} ${p.resultado.gl}, ${vis} ${p.resultado.gv}, final del partido` : `${p.categoria}, ${dia} ${fecha}: ${loc} contra ${vis}, ${hora}, ${lug}`;
   return `<div class="cartel" role="img" aria-label="${esc(desc)}">
     <div class="c-t" style="--n:${Math.max(cat.length, 1)}">${esc(cat)}</div>
@@ -731,9 +735,9 @@ function info(p) {
   const dia = p.fecha === isoDe(hoy) ? "Hoy" : p.fecha === isoDe(man) ? "Mañana" : DIAS[f.getDay()];
   const txt = `${dia} ${f.getDate()} ${MESES[f.getMonth()].slice(0, 3)}`;
   const rival = p.casa ? p.visitante : p.local;
-  const lug = p.campo || "Pabellón por confirmar";
+  const lug = p.campo ? campoTxt(p.campo) : "Pabellón por confirmar";
   const lugar = p.campo
-    ? `<a class="l" href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(p.campo)}" target="_blank" rel="noopener">📍 ${esc(lug)}</a>`
+    ? `<a class="l" href="${campoUrl(p.campo)}" target="_blank" rel="noopener">📍 ${esc(lug)}</a>`
     : `<span class="l">📍 ${esc(lug)}</span>`;
   return `<div class="mi"><div class="w"><span class="d${near ? " hoy" : ""}">${esc(txt)}</span><span class="b ${p.casa ? "c" : "f"}">${p.casa ? "Casa" : "Fuera"}</span></div><div class="h${p.hora || p.resultado ? "" : " s"}">${p.resultado ? "Final · " + esc(String(p.resultado.gl)) + " - " + esc(String(p.resultado.gv)) : esc(p.hora || "Hora por confirmar")}</div><div class="r">vs ${esc(rival)}</div>${lugar}</div>`;
 }

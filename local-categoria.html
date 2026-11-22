@@ -143,6 +143,12 @@ footer a{color:var(--ye);font-weight:700}
   .menu.o{display:flex}
 }
 @media(max-width:600px){.soon{flex-direction:column;align-items:flex-start}}
+.edr{margin-top:8px}.edb{padding:7px 12px;border:2px solid var(--ac);border-radius:999px;background:#fff;color:var(--navy);font:700 .85rem Barlow,sans-serif;cursor:pointer}.edb:hover{background:var(--ye)}
+.edf{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin-top:8px;font-size:.85rem;font-weight:700;color:var(--navy)}
+.edf input{width:58px;padding:7px;border:2px solid var(--ac);border-radius:10px;text-align:center;font:800 1.1rem Barlow,sans-serif;color:var(--navy)}
+.edf button{padding:7px 12px;border:2px solid var(--line);border-radius:999px;background:#fff;color:var(--navy);font:700 .85rem Barlow,sans-serif;cursor:pointer}
+.edf .g{border-color:var(--navy);background:var(--ye)}
+.edf .er{flex:1 1 100%;color:#b91c1c;font-style:normal;font-weight:600}
 </style>
 <link rel="stylesheet" href="css/menu-equipos.css">
 <link rel="stylesheet" href="css/patrocinadores.css">
@@ -244,12 +250,17 @@ let D = null, tab = "jor", jn = 1;
 $("#chips").innerHTML = CATS.map(([id, n]) => `<a href="local-categoria.html?c=${esc(id)}"${id === ID ? ' aria-current="page"' : ""}>${esc(n)}</a>`).join("") + '<a class="todas" href="local.html">Todas</a>';
 { const a = document.querySelector("#chips [aria-current]"); if (a && a.scrollIntoView) a.scrollIntoView({ inline: "center", block: "nearest" }); }
 
+function editor(p, n) {
+  if (!n || !window.LM || !LM.canEdit() || !(esJuncal(p.local) || esJuncal(p.visitante))) return "";
+  return `<div class="edr"><button type="button" class="edb" data-n="${n}" data-l="${esc(p.local)}" data-v="${esc(p.visitante)}" data-a="${p.ga != null ? p.ga : ""}" data-b="${p.gb != null ? p.gb : ""}">✎ ${p.ga != null ? "Corregir" : "Anotar"} resultado</button></div>`;
+}
+
 function partido(p, n) {
   const marca = p.ga != null ? `<span class="mk">${p.ga} - ${p.gb}</span>` : `<span class="mk vs">VS</span>`;
   const hora = p.hora ? `<span>🕒 <b>${esc(p.hora)}</b> h</span>` : `<span>🕒 Hora por confirmar</span>`;
   const campo = p.campo ? `<span>📍 <b>${esc(p.campo)}</b></span>` : "";
   return `<article class="pt${esJuncal(p.local) || esJuncal(p.visitante) ? " jc" : ""}"><span class="eq">${esc(p.local)}</span>${marca}<span class="eq">${esc(p.visitante)}</span>` +
-    `<div class="dt"><span>📅 <b>${esc(fmtFecha(p.fecha))}</b></span>${hora}${campo}${n ? `<span>Jornada ${n}</span>` : ""}</div></article>`;
+    `<div class="dt"><span>📅 <b>${esc(fmtFecha(p.fecha))}</b></span>${hora}${campo}${n ? `<span>Jornada ${n}</span>` : ""}${p.man ? `<span title="Resultado anotado por el club; se sustituye por el oficial cuando el Ayuntamiento lo publique">✍️ Anotado por el club</span>` : ""}</div>${editor(p, n)}</article>`;
 }
 
 function vistaJornadas() {
@@ -260,7 +271,7 @@ function vistaJornadas() {
     `<select id="js" aria-label="Elegir jornada">${J.map(x => `<option value="${x.n}"${x.n === j.n ? " selected" : ""}>Jornada ${x.n}${x.partidos[0] ? " · " + esc(fmtFecha(x.partidos[0].fecha)) : ""}</option>`).join("")}</select>` +
     `<button type="button" id="jn" aria-label="Jornada siguiente"${k === J.length - 1 ? " disabled" : ""}>→</button></div>`;
   const ps = [...j.partidos].sort((a, b) => (esJuncal(b.local + b.visitante) - esJuncal(a.local + a.visitante)) || (a.fecha + (a.hora || "99")).localeCompare(b.fecha + (b.hora || "99")));
-  return sel + ps.map(p => partido(p)).join("") + (j.descansa ? `<p class="jdesc">😴 Descansa: ${esc(j.descansa)}</p>` : "");
+  return sel + ps.map(p => partido(p, j.n)).join("") + (j.descansa ? `<p class="jdesc">😴 Descansa: ${esc(j.descansa)}</p>` : "");
 }
 
 function vistaClasificacion() {
@@ -281,6 +292,7 @@ function pintar() {
   if (!tabs.some(t => t[0] === tab)) tab = "jor";
   $("#tabs").innerHTML = tabs.map(([k, l]) => `<button type="button" class="tb" role="tab" aria-selected="${k === tab}" data-t="${k}">${l}</button>`).join("");
   $("#vista").innerHTML = tab === "jor" ? vistaJornadas() : tab === "cla" ? vistaClasificacion() : vistaJornadas();
+  pieEntrenador();
   document.querySelectorAll(".tb").forEach(b => b.onclick = () => { tab = b.dataset.t; pintar(); });
   const js = $("#js");
   if (js) {
@@ -290,6 +302,33 @@ function pintar() {
     $("#jn").onclick = () => { jn = J[Math.min(J.length - 1, k + 1)].n; pintar(); };
   }
 }
+
+function pieEntrenador() {
+  const f = $("#fuente"); if (!f || !window.LM) return;
+  const a = document.getElementById("lmAcc") || f.appendChild(Object.assign(document.createElement("div"), { id: "lmAcc", style: "margin-top:6px" }));
+  a.innerHTML = LM.canEdit()
+    ? `✅ Modo entrenador: puedes anotar resultados. <a href="#" id="lmOut" style="color:var(--ye);font-weight:700">Salir</a>`
+    : `<a href="#" id="lmIn" style="color:var(--ye);font-weight:700">🔒 Entrenadores</a>`;
+  const i = $("#lmIn"), o = $("#lmOut");
+  if (i) i.onclick = e => { e.preventDefault(); LM.login(); };
+  if (o) o.onclick = e => { e.preventDefault(); LM.logout(); };
+}
+
+$("#vista").addEventListener("click", e => {
+  const b = e.target.closest(".edb"); if (!b) return;
+  const r = b.parentElement;
+  r.innerHTML = `<form class="edf"><span>${esc(b.dataset.l)}</span><input type="number" min="0" max="99" inputmode="numeric" required value="${esc(b.dataset.a)}" aria-label="Goles local"><b>-</b><input type="number" min="0" max="99" inputmode="numeric" required value="${esc(b.dataset.b)}" aria-label="Goles visitante"><span>${esc(b.dataset.v)}</span>` +
+    `<button type="submit" class="g">Guardar</button>${b.dataset.a !== "" ? '<button type="button" class="q">Quitar</button>' : ""}<button type="button" class="c">✕</button><em class="er" hidden></em></form>`;
+  const f = r.querySelector("form"), er = r.querySelector(".er"), ins = f.querySelectorAll("input");
+  ins[0].focus();
+  const guardar = async (ga, gb) => {
+    try { await LM.save(ID, +b.dataset.n, b.dataset.l, b.dataset.v, ga, gb); LM.apply(ID, D.jornadas); pintar(); }
+    catch (x) { er.hidden = false; er.textContent = x.message === "permiso" ? "No se pudo guardar: falta publicar las reglas de Firebase o la cuenta no tiene permiso." : x.message === "sesión" ? "La sesión ha caducado: vuelve a entrar." : "No se pudo guardar. Revisa la conexión."; }
+  };
+  f.onsubmit = ev => { ev.preventDefault(); guardar(parseInt(ins[0].value, 10), parseInt(ins[1].value, 10)); };
+  const q = f.querySelector(".q"); if (q) q.onclick = () => guardar(null, null);
+  f.querySelector(".c").onclick = () => pintar();
+});
 
 function sinDatos(msg) {
   $("#cSub").textContent = msg;
@@ -306,6 +345,9 @@ if (!NOMBRE) {
   $("#cSub").textContent = "Fútbol sala · Competición local de Torrejón de Ardoz";
   fetch("datos-local/" + encodeURIComponent(ID) + ".json", { cache: "no-cache" }).then(r => { if (!r.ok) throw 0; return r.json(); }).then(d => {
     D = d;
+    LM.load().then(() => { LM.apply(ID, D.jornadas); pintar(); });
+    LM.onchange = () => { pintar(); };
+    LM.restore().then(() => pintar());
     const t = hoy();
     const prox = d.jornadas.find(j => j.partidos.some(p => p.fecha >= t));
     jn = (prox || d.jornadas[d.jornadas.length - 1] || { n: 1 }).n;
@@ -315,6 +357,8 @@ if (!NOMBRE) {
 }
 /* @@/JSLOCAL */
 </script>
+<script src="scripts/entrenadores-lista.js"></script>
+<script src="scripts/local-manual.js"></script>
 <script src="scripts/menu-equipos.js"></script>
 <script src="scripts/patrocinadores.js"></script>
 </body>

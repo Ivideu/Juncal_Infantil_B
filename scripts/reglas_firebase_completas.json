@@ -91,6 +91,15 @@
         ".read": true,
         ".write": "auth != null && (auth.token.email == $eq + '@torrejonjuncal.es' || auth.token.email == 'publicador@torrejonjuncal.es' || auth.token.email == 'ivanblasco81@hotmail.com')"
       }
+    },
+    "local_res": {
+      ".read": true,
+      "$cat": {
+        "$k": {
+          ".write": "auth != null && (auth.token.email.matches(/.*@torrejonjuncal\\.es$/) || auth.token.email == 'ivanblasco81@hotmail.com')",
+          ".validate": "newData.hasChildren(['ga','gb']) && newData.child('ga').isNumber() && newData.child('gb').isNumber() && newData.child('ga').val() >= 0 && newData.child('ga').val() <= 99 && newData.child('gb').val() >= 0 && newData.child('gb').val() <= 99"
+        }
+      }
     }
   }
 }

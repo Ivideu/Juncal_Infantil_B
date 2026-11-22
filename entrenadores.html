@@ -201,6 +201,7 @@ function vistaLogin(msg){
   $("#vPanel").hidden=true;$("#vLogin").hidden=false;$("#out").hidden=true;
   const e=$("#lerr");e.hidden=!msg;e.textContent=msg||"";
 }
+function saFlag(){try{fr.contentDocument.body.classList.toggle("sa",!!(ses&&ses.admin))}catch(e){}}
 function vistaPanel(){
   $("#vLogin").hidden=true;$("#vPanel").hidden=false;$("#out").hidden=false;
   const sel=$("#catSel");
@@ -211,7 +212,7 @@ function vistaPanel(){
   }else{
     cat=ses.eq;$("#catSel").hidden=true;$("#catFija").hidden=false;$("#catFija").textContent=catName(cat);
   }
-  setCat();
+  setCat();saFlag();
 }
 function setCat(){
   $("#lnkCat").href="./Categorias/"+catFile(cat)+".html";
@@ -277,6 +278,7 @@ function ajusta(){
 }
 fr.addEventListener("load",()=>{
   ajusta();
+  saFlag()
   try{new ResizeObserver(ajusta).observe(fr.contentDocument.body)}catch(e){}
 });
 

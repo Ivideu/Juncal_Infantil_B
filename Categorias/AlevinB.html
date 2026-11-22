@@ -468,6 +468,9 @@ header.site-banner .dl {
 #pst{margin-top:8px;font-size:.9rem;min-height:18px}
 .pjg{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px}
 .pjg .card{margin:0;padding:10px}
+.pjf{padding:12px}.pjfr{display:flex;flex-wrap:wrap;gap:8px}.pjfr input,.pjfr select{flex:1 1 170px;min-width:0;padding:9px 12px;min-height:40px;border:2px solid #7aa9ff;border-radius:10px;background:#fff;color:#0b2a6f;font:600 .95rem Barlow,system-ui,sans-serif}.pjfr button{flex:0 0 auto}
+.pjmore{display:flex;justify-content:center;margin:14px 0}
+@media(max-width:600px){.pjg{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.pjg .card{padding:6px}.pj h3{font-size:.9rem}.pjv{font-size:2rem}.pj .ctl button{padding:6px 8px;font-size:.8rem}}
 .pj video,.pjv,.pjn{width:100%;aspect-ratio:43.2/23.2;border-radius:10px;display:block}
 .pj video{background:#000}
 .pjv{border:0;color:#fff;font-size:3rem;cursor:pointer;background:linear-gradient(160deg,#1d3a8a,#0a1a4d)}
@@ -1006,7 +1009,7 @@ const nv=document.getElementById("nav");nv.style.setProperty("--c",Math.ceil(tab
  if(tab=="cop")h=renderCopa();
  if(tab=="cro")h=renderJug();
  if(tab=="jug")h=renderPlays();
- if(tab!="piz"&&!pzQ)EDITJ=null;const pzw=document.getElementById("pizW"),sp=E()&&tab=="piz";pzw.hidden=!sp;if(sp)ensurePiz();if(!sp&&PFS)setPzFS(false);
+ if(tab!="piz"&&!pzQ)EDITJ=null;const pzw=document.getElementById("pizW"),sp=E()&&tab=="piz";pzw.hidden=!sp;if(sp){ensurePiz();pzSA()}if(!sp&&PFS)setPzFS(false);
  document.getElementById("app").innerHTML=h;setTb()}
 
 /* ===== Copa: torneo aparte (no puntúa en la clasificación; sus goles sí suman en Goleadores) ===== */
@@ -1291,13 +1294,39 @@ async function loadPlays(){
  PL=out;PLloading=false;
  if(tab=="jug")render()}
 const puedeBorrar=j=>j.c===CATK||ACC===FBMAIL;
+const JF={q:"",c:"",a:"",n:12};
+const JPAG=12;
+function jfList(){
+ const q=JF.q.trim().toLowerCase();
+ return PL.map((j,i)=>({j,i})).filter(({j})=>(!JF.c||j.c===JF.c)&&(!JF.a||(JF.a==="__none"?!j.a:j.a===JF.a))&&(!q||(j.t||"").toLowerCase().includes(q)))}
+function jfCard({j,i},ed){
+ return`<div class="card pj">${j.f?`<button class="pjv" data-pa="${i}" aria-label="Reproducir ${esc(j.t)}">▶</button>`:`<button class="pjv" data-pv="${i}" aria-label="Ver ${esc(j.t)}">▶</button>`}<h3>${esc(j.t)}</h3><small class="gap">${esc(fch(j.d))}${j.a?` · <span class="au">${esc(j.a)}</span>`:""} · ${esc(catN(j.c))}</small>${ed?`<div class="ctl" style="justify-content:flex-start"><button data-pe="${i}">✎ Editar</button>${puedeBorrar(j)?`<button data-pb="${i}">🗑 Borrar</button>`:""}</div>`:""}</div>`}
+function pjDraw(){
+ const box=document.getElementById("pjList");if(!box||!PL)return;
+ const L=jfList(),ed=E(),sh=L.slice(0,JF.n);
+ box.innerHTML=sh.length?sh.map(x=>jfCard(x,ed)).join(""):`<div class="empty" style="grid-column:1/-1">No hay jugadas con estos filtros.</div>`;
+ const n=document.getElementById("jfn");if(n)n.textContent=L.length===PL.length?PL.length+" jugadas":L.length+" de "+PL.length+" jugadas";
+ const m=document.getElementById("pjMore");if(m)m.innerHTML=L.length>sh.length?`<button type="button" class="on" data-more="1">Ver más (${L.length-sh.length} restantes)</button>`:""}
 function renderPlays(){
  if(PL===null){if(!PLloading)loadPlays();return`<div class="empty">Cargando jugadas…</div>`}
- const ed=E(),head=`<div class="card"><h2 style="font-size:1.6rem;color:#0f2a6b;line-height:1.1">🎬 Jugadas</h2><div class="cvsub">Las jugadas de todos los entrenadores del club, de todas las categorías.</div></div>`;
+ const head=`<div class="card"><h2 style="font-size:1.6rem;color:#0f2a6b;line-height:1.1">🎬 Jugadas</h2><div class="cvsub">Las jugadas de todos los entrenadores del club, de todas las categorías.</div></div>`;
  if(!PL.length)return head+`<div class="empty">🎬 Todavía no hay jugadas publicadas.</div>`;
- return head+`<div class="pjg">`+PL.map((j,i)=>`<div class="card pj">${j.f?`<video controls preload="metadata" playsinline src="${BASE}Pizarra/${esc(j.c)}/${esc(j.f.video)}#t=0.1"></video>`:`<button class="pjv" data-pv="${i}" aria-label="Ver ${esc(j.t)}">▶</button>`}<h3>${esc(j.t)}</h3><small class="gap">${esc(fch(j.d))}${j.a?` · <span class="au">${esc(j.a)}</span>`:""} · ${esc(catN(j.c))}</small>${ed?`<div class="ctl" style="justify-content:flex-start"><button data-pe="${i}">✎ Editar</button>${puedeBorrar(j)?`<button data-pb="${i}">🗑 Borrar</button>`:""}</div>`:""}</div>`).join("")+`</div>`}
+ const aut=[...new Set([...(window.ENTRENADORES||[]),...PL.map(j=>j.a).filter(Boolean)])];
+ const cnt=k=>PL.filter(j=>j.c===k).length;
+ const f=`<div class="card pjf"><div class="pjfr">
+  <input id="jfq" type="search" placeholder="🔍 Buscar jugada…" value="${esc(JF.q)}" aria-label="Buscar jugada">
+  <select id="jfc" aria-label="Categoría"><option value="">Todas las categorías</option>${ALLC.map(([k,n])=>`<option value="${k}"${JF.c===k?" selected":""}>${esc(n)} (${cnt(k)})</option>`).join("")}</select>
+  <select id="jfa" aria-label="Entrenador"><option value="">Todos los entrenadores</option>${aut.map(n=>`<option${JF.a===n?" selected":""}>${esc(n)}</option>`).join("")}<option value="__none"${JF.a==="__none"?" selected":""}>Sin entrenador</option></select>
+  <button type="button" id="jfx">✕ Limpiar</button></div><div class="cvsub" id="jfn"></div></div>`;
+ setTimeout(pjDraw,0);
+ return head+f+`<div class="pjg" id="pjList"></div><div id="pjMore" class="pjmore"></div>`}
+$q("#app").addEventListener("input",e=>{if(e.target.id==="jfq"){JF.q=e.target.value;JF.n=JPAG;pjDraw()}});
+$q("#app").addEventListener("change",e=>{if(e.target.id==="jfc"){JF.c=e.target.value;JF.n=JPAG;pjDraw()}else if(e.target.id==="jfa"){JF.a=e.target.value;JF.n=JPAG;pjDraw()}});
 $q("#app").addEventListener("click",e=>{
- const b=e.target.closest("[data-pv],[data-pe],[data-pb]");if(!b)return;
+ const b=e.target.closest("[data-pv],[data-pe],[data-pb],[data-pa],[data-more],#jfx");if(!b)return;
+ if(b.id==="jfx"){JF.q="";JF.c="";JF.a="";JF.n=JPAG;render();return}
+ if(b.dataset.more){JF.n+=JPAG;pjDraw();return}
+ if(b.dataset.pa!==undefined){const j=PL[+b.dataset.pa];if(!j||!j.f)return;const v=document.createElement("video");v.controls=true;v.autoplay=true;v.playsInline=true;v.src=BASE+"Pizarra/"+j.c+"/"+j.f.video;b.replaceWith(v);return}
  if(b.dataset.pv!==undefined)verPend(+b.dataset.pv);
  else if(b.dataset.pe!==undefined)editJug(+b.dataset.pe);
  else delJug(+b.dataset.pb)});
@@ -1344,7 +1373,8 @@ let pzFr=null,pzQ=null,PFS=false;
 const PZ=()=>{try{return(pzFr&&pzFr.contentWindow&&pzFr.contentWindow.PZ)||null}catch(e){return null}};
 function ajusta(){try{if(PFS)return;const d=pzFr.contentDocument;if(d&&d.body)pzFr.style.height=Math.ceil(d.documentElement.scrollHeight)+"px"}catch(e){}}
 /* Orden de la pizarra: 1) Colocar + pantalla completa, 2) Añadir, 3) Pasos y Animación, 4) Herramienta, 5) pista. Sin texto de ayuda */
-function pzStyle(){try{const d=pzFr.contentDocument;if(!d||d.getElementById("pzord"))return;
+function pzSA(){try{const d=pzFr&&pzFr.contentDocument;if(d&&d.body)d.body.classList.toggle("sa",!!(E()&&ACC===FBMAIL))}catch(e){}}
+function pzStyle(){pzSA();try{const d=pzFr.contentDocument;if(!d||d.getElementById("pzord"))return;
  const st=d.createElement("style");st.id="pzord";
  st.textContent=".app>.bar:nth-child(1){flex-direction:column;flex-wrap:nowrap;align-items:stretch;order:1}.app>.bar:nth-child(1)>.grp.colg{order:-1}.app>.bar:nth-child(4){order:2}.app>.bar:nth-child(2){order:3}.app>.cvw{order:4}.hint{display:none!important}";
  d.head.appendChild(st);

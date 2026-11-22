@@ -40,6 +40,8 @@ label.chk{display:flex;align-items:center;gap:6px;cursor:pointer}
 label.chk input{min-height:0;width:16px;height:16px;padding:0}
 @media(max-width:640px){body{padding:6px}.bar{padding:6px 8px}button,select,input{padding:6px 8px;font-size:13px}}
 
+/* La IA (Gemini) solo la ve el Super Admin: la página que incrusta la pizarra pone body.sa */
+details.ia{display:none}body.sa details.ia{display:block}
 details.ia{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:8px 10px}
 details.ia>summary{cursor:pointer;font-weight:700;list-style:none}
 details.ia>summary::-webkit-details-marker{display:none}

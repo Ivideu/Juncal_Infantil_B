@@ -1,7 +1,7 @@
 {
  "id": "infantil",
  "nombre": "Infantil",
- "actualizado": "2026-11-21T11:58:58Z",
+ "actualizado": "2026-11-22T21:33:13Z",
  "fuente": {
   "calendario": [
    "https://deportes.ayto-torrejon.es/sites/default/files/users/user355/CALENDARIO%20INFANTI%20LIGA%20DE%20CAMPE%C3%93N%202627.pdf"
@@ -1163,7 +1163,7 @@
   },
   {
    "pos": 9,
-   "equipo": "Rivillos Limones",
+   "equipo": "Rivillos Limones 5 \"A\"",
    "pj": 3,
    "g": 0,
    "e": 1,
@@ -1175,7 +1175,7 @@
   },
   {
    "pos": 10,
-   "equipo": "Rivillos Limones",
+   "equipo": "Rivillos Limones 5 \"B\"",
    "pj": 3,
    "g": 0,
    "e": 1,
@@ -1198,9 +1198,7 @@
    "pts": 0
   }
  ],
- "avisos": [
-  "Clasificación: no puedo distinguir entre Rivillos Limones 5 \"A\", Rivillos Limones 5 \"B\" con los resultados conocidos"
- ],
+ "avisos": [],
  "equipos": [
   "Ciud.Torrejon \"A\"",
   "Ciud.Torrejon \"B\"",

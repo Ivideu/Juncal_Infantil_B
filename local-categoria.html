@@ -239,8 +239,7 @@ $("#menu").onclick = e => {
 
 /* @@JSLOCAL */
 /* COMPETICIÓN LOCAL: detalle de una categoría. Lee datos-local/<id>.json (lo genera scripts/sync_local.py) */
-const CATS = [["senior-superliga", "Senior Superliga"], ["senior-preferente", "Senior Preferente"], ["senior-primera", "Senior Primera"], ["senior-segunda", "Senior Segunda"], ["senior-tercera", "Senior Tercera"],
-  ["juvenil", "Juvenil"], ["cadete", "Cadete"], ["infantil", "Infantil"], ["alevin", "Alevín"], ["benjamin", "Benjamín"], ["prebenjamin", "Prebenjamín"]];
+const CATS = [["cadete", "Cadete"], ["infantil", "Infantil"], ["alevin", "Alevín"], ["benjamin", "Benjamín"], ["prebenjamin", "Prebenjamín"]];
 const ID = new URLSearchParams(location.search).get("c") || "";
 const NOMBRE = (CATS.find(c => c[0] === ID) || [])[1];
 const esJuncal = n => /jun?cal/i.test(n || "");   // incluye la errata «Jucal» del Ayuntamiento

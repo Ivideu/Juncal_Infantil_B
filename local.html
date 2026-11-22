@@ -185,10 +185,9 @@ $("#menu").onclick = e => {
 };
 
 /* @@JSLOCAL */
-/* COMPETICIÓN LOCAL: 11 categorías de fútbol sala. Los datos los genera scripts/sync_local.py (PDF del Ayuntamiento) */
+/* COMPETICIÓN LOCAL: 5 categorías de fútbol sala. Los datos los genera scripts/sync_local.py (PDF del Ayuntamiento) */
 const GRUPOS = [
-  { t: "Senior", cls: "c5", c: [["senior-superliga", "Superliga"], ["senior-preferente", "Preferente"], ["senior-primera", "Primera"], ["senior-segunda", "Segunda"], ["senior-tercera", "Tercera"]] },
-  { t: "Base", cls: "c6", c: [["juvenil", "Juvenil"], ["cadete", "Cadete"], ["infantil", "Infantil"], ["alevin", "Alevín"], ["benjamin", "Benjamín"], ["prebenjamin", "Prebenjamín"]] }
+  { t: "Base", cls: "c6", c: [["cadete", "Cadete"], ["infantil", "Infantil"], ["alevin", "Alevín"], ["benjamin", "Benjamín"], ["prebenjamin", "Prebenjamín"]] }
 ];
 function pintar(idx) {
   let i = 0;

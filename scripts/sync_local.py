@@ -20,12 +20,6 @@ SALIDA = os.path.join(RAIZ, "datos-local")
 
 # id, nombre, palabra que lleva el PDF en su nombre (sin acentos, en mayúsculas)
 CATEGORIAS = [
-    ("senior-superliga", "Senior Superliga", ["SUPERLIGA"]),
-    ("senior-preferente", "Senior Preferente", ["PREFERENTE"]),
-    ("senior-primera", "Senior Primera", ["PRIMERA"]),
-    ("senior-segunda", "Senior Segunda", ["SEGUNDA"]),
-    ("senior-tercera", "Senior Tercera", ["TERCERA"]),
-    ("juvenil", "Juvenil", ["JUVENIL"]),
     ("cadete", "Cadete", ["CADETE"]),
     ("infantil", "Infantil", ["INFANTI"]),
     ("alevin", "Alevín", ["ALEVIN"]),

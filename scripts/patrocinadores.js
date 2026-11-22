@@ -25,54 +25,105 @@
     { name: "Cosmos Telecomunicaciones",              img: "cosmos.png",       w: 504, h: 184, logoH: 38, url: "https://www.cosmos.tel/" }
   ];
 
-  const esc = t => String(t || "").replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"": "&quot;" }[c]));
+  const esc = t => String(t || "").replace(/[&<>"]/g, c => ({
+    "&": "&amp;",
+    "<": "&lt;",
+    ">": "&gt;",
+    '"': "&quot;"
+  }[c]));
 
   function item(s, copia) {
-    const img = `<img src="${RUTA + esc(s.img)}?v=${VERSION}" alt="${copia ? "" : esc(s.name)}" width="${s.w}" height="${s.h}" decoding="async" draggable="false" style="--h:${s.logoH}px">`;
-    if (!s.url) return `<span class="sp-it" title="${esc(s.name)}"${copia ? ' aria-hidden="true"' : ""}>${img}</span>`;
-    return `<a class="sp-it" href="${esc(s.url)}" target="_blank" rel="noopener sponsored" title="${esc(s.name)}" aria-label="${esc(s.name)} (se abre en una pestaña nueva)"${copia ? ' aria-hidden="true" tabindex="-1"' : ""}>${img}</a>`;
+    const src = RUTA + esc(s.img) + "?v=" + encodeURIComponent(VERSION);
+    const w = Math.max(1, Number(s.w) || 100);
+    const h = Math.max(1, Number(s.h) || 40);
+    const logoH = Math.max(12, Number(s.logoH) || 36);
+    const alt = copia ? "" : esc(s.name);
+    const img = `<img src="${src}" alt="${alt}" width="${w}" height="${h}" decoding="async" draggable="false" style="--h:${logoH}px">`;
+
+    if (!s.url) {
+      return `<span class="sp-it"${copia ? ' aria-hidden="true"' : ` title="${esc(s.name)}"`}>${img}</span>`;
+    }
+
+    const extraAttrs = copia ? ' aria-hidden="true" tabindex="-1"' : ` title="${esc(s.name)}" aria-label="${esc(s.name)} (se abre en una pestaña nueva)"`;
+    return `<a class="sp-it" href="${esc(s.url)}" target="_blank" rel="noopener sponsored"${extraAttrs}>${img}</a>`;
   }
 
   const grupo = copia => `<div class="sp-grp">${SPONSORS.map(s => item(s, copia)).join("")}</div>`;
 
-  const barra = document.createElement("aside");
-  barra.id = "spons";
-  barra.setAttribute("aria-label", "Patrocinadores");
-  if (DIRECCION === "derecha") barra.classList.add("sp-der");
-  barra.innerHTML = '<div class="sp-tag">Patrocinadores</div><div class="sp-view"><div class="sp-track" id="spTrack"></div></div>';
-  document.body.appendChild(barra);
-  document.body.classList.add("has-spons");
+  function iniciar() {
+    if (!document.body || document.getElementById("spons")) return;
 
-  const pista = barra.querySelector("#spTrack");
-  const vista = barra.querySelector(".sp-view");
+    const barra = document.createElement("aside");
+    barra.id = "spons";
+    barra.setAttribute("aria-label", "Patrocinadores");
+    if (DIRECCION === "derecha") barra.classList.add("sp-der");
+    barra.innerHTML = '<div class="sp-tag">Patrocinadores</div><div class="sp-view"><div class="sp-track" id="spTrack"></div></div>';
 
-  /* Repite el grupo las veces necesarias para que una mitad cubra todo el ancho: el bucle no deja huecos */
-  function montar() {
-    const prueba = document.createElement("div");
-    prueba.className = "sp-half";
-    prueba.style.visibility = "hidden";
-    prueba.innerHTML = grupo(true);
-    pista.innerHTML = "";
-    pista.appendChild(prueba);
-    const ancho = prueba.offsetWidth || 1200;
-    const n = Math.max(1, Math.ceil((vista.clientWidth || innerWidth) / ancho));
-    /* Primera mitad: accesible (el primer grupo es el real). Segunda mitad: copia oculta a lectores y teclado */
-    const mitad = copia => `<div class="sp-half"${copia ? ' aria-hidden="true"' : ""}>${grupo(copia)}${Array.from({ length: n - 1 }, () => grupo(true)).join("")}</div>`;
-    pista.innerHTML = mitad(false) + mitad(true);
-    const v = matchMedia("(max-width:600px)").matches ? VELOCIDAD_MOVIL : VELOCIDAD;
-    pista.style.setProperty("--dur", Math.max(12, Math.round((ancho * n) / v)) + "s");
+    document.body.appendChild(barra);
+    document.body.classList.add("has-spons");
+
+    const pista = barra.querySelector("#spTrack");
+    const vista = barra.querySelector(".sp-view");
+    if (!pista || !vista) return;
+
+    /* Repite el grupo las veces necesarias para que una mitad cubra todo el ancho: el bucle no deja huecos */
+    function montar() {
+      const prueba = document.createElement("div");
+      prueba.className = "sp-half";
+      prueba.style.visibility = "hidden";
+      prueba.style.position = "absolute";
+      prueba.style.pointerEvents = "none";
+      prueba.innerHTML = grupo(true);
+
+      pista.innerHTML = "";
+      pista.appendChild(prueba);
+
+      const anchoGrupo = prueba.getBoundingClientRect().width || prueba.offsetWidth || 1200;
+      const anchoVisible = vista.clientWidth || window.innerWidth || 1200;
+      const n = Math.max(1, Math.ceil(anchoVisible / anchoGrupo));
+
+      const primeraMitad = `<div class="sp-half">${grupo(false)}${Array.from({ length: n - 1 }, () => grupo(true)).join("")}</div>`;
+      const segundaMitad = `<div class="sp-half" aria-hidden="true">${Array.from({ length: n }, () => grupo(true)).join("")}</div>`;
+
+      pista.innerHTML = primeraMitad + segundaMitad;
+
+      const vel = window.matchMedia("(max-width: 600px)").matches ? VELOCIDAD_MOVIL : VELOCIDAD;
+      const duracion = Math.max(12, Math.round((anchoGrupo * n) / vel));
+      pista.style.setProperty("--dur", `${duracion}s`);
+
+      /* Recalcula cuando terminen de cargar las imágenes para evitar anchos provisionales */
+      pista.querySelectorAll("img").forEach(img => {
+        if (!img.complete) {
+          img.addEventListener("load", montar, { once: true });
+          img.addEventListener("error", montar, { once: true });
+        }
+      });
+    }
+
+    montar();
+
+    let timerResize;
+    window.addEventListener("resize", () => {
+      clearTimeout(timerResize);
+      timerResize = setTimeout(montar, 200);
+    });
+
+    if (document.fonts && document.fonts.ready) {
+      document.fonts.ready.then(montar).catch(() => {});
+    }
+
+    /* Al volver con el botón "atrás" el navegador puede restaurar la página con la animación congelada: se reinicia */
+    window.addEventListener("pageshow", e => {
+      if (!e.persisted) return;
+      pista.style.animation = "none";
+      void pista.offsetWidth;
+      pista.style.animation = "";
+    });
   }
 
-  montar();
-  let t;
-  addEventListener("resize", () => { clearTimeout(t); t = setTimeout(montar, 200); });
-  if (document.fonts && document.fonts.ready) document.fonts.ready.then(montar);
-
-  /* Al volver con el botón "atrás" el navegador puede restaurar la página con la animación congelada: se reinicia */
-  addEventListener("pageshow", e => {
-    if (!e.persisted) return;
-    pista.style.animation = "none";
-    void pista.offsetWidth;
-    pista.style.animation = "";
-  });
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", iniciar, { once: true });
+  } else {
+    iniciar();
+  }
 })();

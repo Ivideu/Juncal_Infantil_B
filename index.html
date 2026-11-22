@@ -907,7 +907,8 @@ async function loadLocal() {
   renderLocal();
 }
 loadLocal();
-setInterval(loadLocal, 10 * 60 * 1000);
+setInterval(loadLocal, 2 * 60 * 1000);
+addEventListener("focus", loadLocal);
 document.addEventListener("visibilitychange", () => { if (!document.hidden) loadLocal(); });
 
 /* EQUIPOS (siempre desplegados) */

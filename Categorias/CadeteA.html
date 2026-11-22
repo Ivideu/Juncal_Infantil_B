@@ -853,7 +853,7 @@ async function waPartido(x){
  return new Promise(r=>cv.toBlob(r,"image/png"))}
 async function waConv(x){
  const m=M(x.r.n,x.h),d=m.d||x.r.d,f=waFecha(d),{cv,c}=await waLienzo(),
-  con=jugList().filter(k=>cEst(k)==="convocado").map(k=>k.name.toUpperCase());
+  con=jugList().filter(k=>cEst(k)==="convocado").map(k=>k.name.toUpperCase()+(k.pos==="portero"?" (POR)":""));
  waTitulo(c,285,CAT.corto.toUpperCase());
  c.fillStyle="#fff";c.font=waF(78,700);c.fillText("CONVOCATORIA",540,372);
  c.fillStyle="#ffd23f";c.fillRect(190,395,700,5);
@@ -873,7 +873,7 @@ function shareTxt(x){
    `📅 ${fmt(d)}`,
    `⏰ ${m.t?m.t+" h":"Hora por confirmar"}`];
  if(v)L.push(`📍 ${v}`,`🗺 https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(v)}`);
- if(con.length)L.push("",`📋 *Convocados (${con.length}):*`,...con.map(c=>`${c.num?c.num+" · ":""}${c.name}`));
+ if(con.length)L.push("",`📋 *Convocados (${con.length}):*`,...con.map(c=>`${c.num?c.num+" · ":""}${c.name}${c.pos==="portero"?" (POR)":""}`));
  L.push("","💛💙 ¡Vamos Juncal!");
  return L.join("\n")}
 let WAF=[],WAU=[];
@@ -887,12 +887,15 @@ async function shareWA(j,h){
   const B=await Promise.all([waPartido(x),waConv(x)]);
   if(B.some(b=>!b))throw 0;
   WAU=B.map(b=>URL.createObjectURL(b));
-  WAF=B.map((b,i)=>new File([b],"juncal-"+(i?"convocatoria":"partido")+"-j"+x.r.n+".png",{type:"image/png"}));
+  const NOM=["juncal-partido-j"+x.r.n+".png","juncal-alineacion-j"+x.r.n+".png"],ETQ=["Hora y pabellón","Alineación"];
+  WAF=B.map((b,i)=>new File([b],NOM[i],{type:"image/png"}));
   const can=!!(navigator.canShare&&navigator.canShare({files:WAF}));
-  waModal('<h2 style="font-size:1.5rem;color:#0f2a6b">'+esc(lab(x.r))+'</h2><div class="waim">'+WAU.map(u=>'<img src="'+u+'" alt="Cartel para compartir">').join("")+'</div><div class="ctl">'+(can?'<button class="wa" id="waS">📲 Compartir imágenes</button>':"")+'<button id="waD">⬇ Descargar</button><button id="waT">💬 Solo texto</button><button id="waX">Cerrar</button></div>'+(can?"":'<p class="gap" style="margin-top:10px">Este navegador no permite compartir imágenes directamente: descárgalas y envíalas desde WhatsApp.</p>'));
-  const q=i=>document.getElementById(i);
-  if(q("waS"))q("waS").onclick=async()=>{try{await navigator.share({files:WAF})}catch(e){if(e&&e.name!=="AbortError")toast("No se pudo compartir. Usa Descargar")}};
-  q("waD").onclick=()=>WAF.forEach((f,i)=>setTimeout(()=>{const a=document.createElement("a");a.href=WAU[i];a.download=f.name;document.body.appendChild(a);a.click();a.remove()},i*400));
+  waModal('<h2 style="font-size:1.5rem;color:#0f2a6b">'+esc(lab(x.r))+'</h2><p class="gap" style="margin:6px 0 0">Elige qué imágenes quieres enviar:</p><div class="waim">'+WAU.map((u,i)=>'<label style="display:block;cursor:pointer;text-align:center"><img src="'+u+'" alt="'+ETQ[i]+'"><span style="display:flex;gap:6px;justify-content:center;align-items:center;margin-top:6px;font-weight:700"><input type="checkbox" class="waK" data-i="'+i+'" checked> '+ETQ[i]+'</span></label>').join("")+'</div><div class="ctl">'+(can?'<button class="wa" id="waS">📲 Compartir seleccionadas</button>':"")+'<button id="waD">⬇ Descargar seleccionadas</button><button id="waT">💬 Solo texto</button><button id="waX">Cerrar</button></div>'+(can?"":'<p class="gap" style="margin-top:10px">Este navegador no permite compartir imágenes directamente: descárgalas y envíalas desde WhatsApp.</p>')+'<p class="gap" style="margin-top:8px">Se envían siempre en este orden: primero hora y pabellón, luego alineación.</p>');
+  const q=i=>document.getElementById(i),SEL=()=>[...document.querySelectorAll("#mWA .waK")].filter(k=>k.checked).map(k=>+k.dataset.i);
+  const upd=()=>{const n=SEL().length;["waS","waD"].forEach(i=>{const b=q(i);if(b)b.disabled=!n})};
+  document.querySelectorAll("#mWA .waK").forEach(k=>k.onchange=upd);
+  if(q("waS"))q("waS").onclick=async()=>{const s=SEL();if(!s.length)return;try{await navigator.share({files:s.map(i=>WAF[i])})}catch(e){if(e&&e.name!=="AbortError")toast("No se pudo compartir. Usa Descargar")}};
+  q("waD").onclick=()=>SEL().forEach((i,n)=>setTimeout(()=>{const a=document.createElement("a");a.href=WAU[i];a.download=WAF[i].name;document.body.appendChild(a);a.click();a.remove()},n*400));
   q("waT").onclick=()=>window.open("https://wa.me/?text="+encodeURIComponent(shareTxt(x)),"_blank","noopener");
   q("waX").onclick=waClose;
  }catch(e){waClose();toast("No se pudieron crear las imágenes")}}

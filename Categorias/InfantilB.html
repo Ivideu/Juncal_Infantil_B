@@ -1285,8 +1285,9 @@ async function loadPlays(){
   try{bo=await fbGet("pizarra_borrar/"+k)||{}}catch(e){}
   try{me=await fbGet("pizarra_meta/"+k)||{}}catch(e){}
   const ids=new Set(arch.map(j=>j.id));
-  arch.filter(j=>!bo[j.id]).forEach(j=>out.push({id:j.id,c:k,t:j.titulo,d:j.fecha,a:j.autor||"",f:j}));
-  Object.keys(me).filter(x=>!ids.has(x)&&!bo[x]).forEach(x=>out.push({id:x,c:k,t:me[x].titulo,d:me[x].ts,a:me[x].autor||"",p:1}))}));
+  // Si la jugada tiene una versión recién publicada en Firebase (nueva o editada), esa manda hasta que se archive
+  arch.filter(j=>!bo[j.id]&&!me[j.id]).forEach(j=>out.push({id:j.id,c:k,t:j.titulo,d:j.fecha,a:j.autor||"",f:j}));
+  Object.keys(me).filter(x=>!bo[x]).forEach(x=>out.push({id:x,c:k,t:me[x].titulo,d:me[x].ts,a:me[x].autor||"",p:1}))}));
  out.sort((a,b)=>String(b.d).localeCompare(String(a.d)));
  PL=out;PLloading=false;
  if(tab=="jug")render()}

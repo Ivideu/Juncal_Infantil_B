@@ -906,7 +906,8 @@ async function loadLocal() {
   } catch (e) {}
   renderLocal();
 }
-loadLocal();
+/* local-manual.js se carga después de este script: se espera a que la página esté completa */
+if (document.readyState === "complete") loadLocal(); else addEventListener("load", loadLocal);
 setInterval(loadLocal, 2 * 60 * 1000);
 addEventListener("focus", loadLocal);
 document.addEventListener("visibilitychange", () => { if (!document.hidden) loadLocal(); });

@@ -105,6 +105,7 @@ footer a{color:var(--ye);font-weight:700}
   .jsel button{width:42px;height:42px}
   .jsel select{height:42px;padding:0 32px 0 12px;font-size:.88rem;background-position:right 12px center,0 0}
 }
+.pt.rest{opacity:.92}.pt.rest .zzz{display:flex;flex-direction:column;align-items:center;justify-content:center;min-width:64px;color:#ffd23f}.pt.rest .zzz small{font-weight:800;letter-spacing:.08em;font-size:.7rem}.pt.rest .eq.rd{font-size:1.1rem;color:#fff;opacity:.95}
 .jdesc{margin:0 0 14px;color:#fff;font-weight:600;text-shadow:var(--sh)}
 .pt{position:relative;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:12px;margin:0 0 12px;padding:16px 18px;overflow:hidden;border:2px solid rgba(255,255,255,.9);border-radius:16px;color:#fff;background:linear-gradient(225deg,#ffd23f 0%,#f2b705 7%,#4f86ee 34%,#1e4fd8 62%,#0b1f66 100%);box-shadow:0 6px 18px rgba(8,18,53,.35)}
 .pt.jc{border-color:var(--ye);box-shadow:0 0 0 3px rgba(255,210,63,.6),0 6px 18px rgba(8,18,53,.35)}
@@ -268,6 +269,15 @@ function partido(p, n) {
     `<div class="dt"><span>📅 <b>${esc(fmtFecha(p.fecha))}</b></span>${hora}${campo}${n ? `<span>Jornada ${n}</span>` : ""}${p.man ? `<span title="Resultado anotado por el club; se sustituye por el oficial cuando el Ayuntamiento lo publique">✍️ Anotado por el club</span>` : ""}</div>${editor(p, n)}</article>`;
 }
 
+function descansoCard(j) {
+  if (!j.descansa) return "";
+  const f = j.partidos[0] ? fmtFecha(j.partidos[0].fecha) : "";
+  return `<article class="pt rest${esJuncal(j.descansa) ? " jc" : ""}"><span class="eq">${esc(j.descansa)}</span>` +
+    `<span class="zzz" aria-hidden="true"><svg viewBox="0 0 24 24" width="34" height="34" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"/></svg><small>Zzz</small></span>` +
+    `<span class="eq rd">😴 DESCANSA esta jornada</span>` +
+    `<div class="dt">${f ? `<span>📅 <b>${esc(f)}</b></span>` : ""}<span>Jornada ${j.n}</span></div></article>`;
+}
+
 function vistaJornadas() {
   const J = D.jornadas;
   if (!J.length) return `<div class="msg">Todavía no hay jornadas publicadas para esta categoría.</div>`;
@@ -276,7 +286,7 @@ function vistaJornadas() {
     `<select id="js" aria-label="Elegir jornada">${J.map(x => `<option value="${x.n}"${x.n === j.n ? " selected" : ""}>Jornada ${x.n}${x.partidos[0] ? " · " + esc(fmtFecha(x.partidos[0].fecha)) : ""}</option>`).join("")}</select>` +
     `<button type="button" id="jn" aria-label="Jornada siguiente"${k === J.length - 1 ? " disabled" : ""}>→</button></div>`;
   const ps = [...j.partidos].sort((a, b) => (esJuncal(b.local + b.visitante) - esJuncal(a.local + a.visitante)) || (a.fecha + (a.hora || "99")).localeCompare(b.fecha + (b.hora || "99")));
-  return sel + ps.map(p => partido(p, j.n)).join("") + (j.descansa ? `<p class="jdesc">😴 Descansa: ${esc(j.descansa)}</p>` : "");
+  return sel + ps.map(p => partido(p, j.n)).join("") + descansoCard(j);
 }
 
 function vistaClasificacion() {

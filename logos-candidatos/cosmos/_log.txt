@@ -1,0 +1,3 @@
+https://www.cosmos.tel/ -> 200 https://www.cosmos.tel/ (21747 bytes)
+  1-icon.ico 260894B https://www.cosmos.tel/imagenes/favicon.ico
+  2-img-logo.png 31809B https://www.cosmos.tel/imagenes/logo%20cosmos%20servicios%20de%20telefonia.png

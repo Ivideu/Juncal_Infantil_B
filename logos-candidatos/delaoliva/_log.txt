@@ -1,0 +1,7 @@
+https://delaoliva.com/ -> 200 https://delaoliva.com/ (302728 bytes)
+  1-og.jpg 2086981B https://delaoliva.com/wp-content/uploads/2026/11/delaoliva-sillas-home-001.jpg
+  2-icon.svg 976B https://delaoliva.com/wp-content/uploads/2025/02/logo-main-dlo-thick.svg
+  3-img-logo.svg 3180B https://delaoliva.com/wp-content/uploads/2025/02/logo-delaoliva-002.svg
+  4-img-logo.svg 3217B https://delaoliva.com/wp-content/uploads/2025/02/delaoliva_logo.svg
+  5-ref-logo.svg 3217B https://delaoliva.com//wp-content//uploads//2025//02//delaoliva_logo.svg
+  x 404 https://delaoliva.com/wp-content/uploads/logo.png

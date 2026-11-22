@@ -70,6 +70,17 @@ async function rffm(grupo, n) {
 const esLocal = (c, p) => c.equipo ? String(p.CodEquipo_local) === String(c.equipo) : /JUNCAL/.test(norm(p.Nombre_equipo_local));
 const esVisit = (c, p) => c.equipo ? String(p.CodEquipo_visitante) === String(c.equipo) : /JUNCAL/.test(norm(p.Nombre_equipo_visitante));
 
+// Los partidos de la semana en curso se mantienen hasta el domingo a las 23:50 (hora de Madrid), ya jugados o no:
+// CORTE = el último domingo 23:50 ya pasado. Lo que empezó antes de ese momento ya no cuenta como "este fin de semana".
+const isoMadrid = ms => new Intl.DateTimeFormat("sv-SE", { timeZone: "Europe/Madrid" }).format(ms);
+const CORTE = (() => {
+  for (let k = 0; k <= 8; k++) {
+    const f = isoMadrid(AHORA - k * 864e5);
+    if (new Date(f + "T12:00:00Z").getUTCDay() === 0 && madrid(f, "23:50") <= AHORA) return madrid(f, "23:50");
+  }
+  return 0;
+})();
+
 // Siguiente partido del club en esa categoría. Devuelve {partido}, null (no quedan partidos) o {error:true} (RFFM no responde)
 async function siguiente(c, previo) {
   // Se empieza una jornada antes de la más baja que aún tenía partido pendiente (un partido aplazado puede estar en una jornada anterior)
@@ -88,30 +99,32 @@ async function siguiente(c, previo) {
     const fecha = iso(p.fecha), hora = (p.hora || "").slice(0, 5);
     if (!fecha) { await sleep(1200); continue; }
     // Último partido ya jugado (para el marcador de la app): acta cerrada o resultado provisional
+    let res = null;
     {
       const prov = String(p.ResultadoProvisional || "").match(/^\s*(\d+)\s*[-:]\s*(\d+)\s*$/);
       const gl = ent(p.Goles_casa) ?? (prov ? +prov[1] : null), gv = ent(p.Goles_visitante) ?? (prov ? +prov[2] : null);
       const cerrada = p.acta_cerrada === "1" || p.acta_cerrada === 1;
       if (gl !== null && gv !== null && p.partido_en_juego !== "1" && (cerrada || prov || madrid(fecha, hora || "23:59") + 3 * 36e5 < AHORA)) {
         const cs = esLocal(c, p);
+        res = { gl, gv };
         ult = { jornada: r, fecha, gl, gv, casa: cs,
           local: cs && c.nombreEquipo ? c.nombreEquipo : p.Nombre_equipo_local,
           visitante: !cs && c.nombreEquipo ? c.nombreEquipo : p.Nombre_equipo_visitante };
       }
     }
     const cuando = madrid(fecha, hora || "23:59");
-    if (cuando + 3 * 36e5 < AHORA) { await sleep(1200); continue; }
+    if (cuando <= CORTE) { await sleep(1200); continue; }
     // Partido pendiente. Se elige el MÁS PRÓXIMO EN EL TIEMPO (no el de jornada más baja): un partido aplazado
     // puede tener una fecha muy posterior a la de las jornadas siguientes.
     if (!pj) pj = r;
-    if (!mejor || cuando < mejor.cuando) mejor = { cuando, r, p, fecha, hora };
+    if (!mejor || cuando < mejor.cuando) mejor = { cuando, r, p, fecha, hora, res };
     // Si la jornada que se acaba de leer ya es posterior al mejor candidato, no puede haber nada más próximo
     const fechas = d.partidos.map(q => iso(q.fecha)).filter(Boolean).sort();
     if (fechas.length && fechas[0] > mejor.fecha) break;
     await sleep(1200);
   }
   if (!mejor) return null;
-  const { r, p, fecha, hora } = mejor, casa = esLocal(c, p);
+  const { r, p, fecha, hora, res } = mejor, casa = esLocal(c, p);
   console.log(`  ${c.nombre}: jornada ${r}, ${p.Nombre_equipo_local} - ${p.Nombre_equipo_visitante}, ${fecha} ${hora}`);
   return { partido: {
     id: c.id, categoria: c.nombre, liga: limpiaLiga(c.liga), jornada: r, fecha, hora,
@@ -119,6 +132,7 @@ async function siguiente(c, previo) {
     visitante: !casa && c.nombreEquipo ? c.nombreEquipo : p.Nombre_equipo_visitante,
     codLocal: String(p.CodEquipo_local), codVisitante: String(p.CodEquipo_visitante),
     casa, campo: limpiaCampo(p.campojuego), ultimo: ult || previo?.ultimo || null,
+    ...(res ? { resultado: res } : {}),
     ...(pj && pj < r ? { pj } : {}) } };
 }
 

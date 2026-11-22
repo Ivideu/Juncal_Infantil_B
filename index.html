@@ -197,6 +197,9 @@ button.fch:focus-visible{outline:3px solid var(--ye);outline-offset:3px}
 .cartel .nm{top:62%;display:flex;align-items:flex-start;justify-content:center;width:31%;height:6.2%;overflow:hidden;color:#fff;font-size:min(3.7cqw,calc(130cqw / var(--k)));text-shadow:0 .3cqw .8cqw rgba(0,0,0,.6);-webkit-text-stroke:.7cqw #0f2a78}
 .cartel .nm1{left:5.3%}
 .cartel .nm2{left:63.8%}
+.cartel .res{top:41%;left:37.5%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.6cqw;width:27%;height:23%;border:.9cqw solid #fff;border-radius:5cqw;background:linear-gradient(160deg,#1e4fd8,#0b1f66);box-shadow:0 0 0 .9cqw var(--ye),0 2cqw 5cqw rgba(0,0,0,.55)}
+.cartel .res b{color:#fff;font:italic 800 10cqw/1 "Barlow Condensed",sans-serif;text-shadow:0 .5cqw 1cqw rgba(0,0,0,.5);white-space:nowrap}
+.cartel .res span{color:var(--ye);font:800 3.2cqw/1 Barlow,sans-serif;letter-spacing:.2em;text-transform:uppercase}
 .cartel .dia,.cartel .fec,.cartel .hor,.cartel .lug,.cartel .cf{font-family:Barlow,sans-serif;line-height:1;text-align:left;text-shadow:0 .3cqw .8cqw rgba(0,0,0,.55);white-space:nowrap}
 .cartel .dia{top:66.6%;left:21.7%;font-size:4.7cqw;font-weight:700}
 .cartel .fec{top:71.6%;left:21.7%;font-size:2.9cqw;font-weight:700}
@@ -685,7 +688,7 @@ function cartel(p) {
   const liga = String(p.liga || "").toUpperCase();
   const loc = String(p.local || ""), vis = String(p.visitante || "");
   const hora = p.hora || "Por confirmar", lug = p.campo || "Pabellón por confirmar";
-  const desc = `${p.categoria}, ${dia} ${fecha}: ${loc} contra ${vis}, ${hora}, ${lug}`;
+  const desc = p.resultado ? `${p.categoria}, ${dia} ${fecha}: ${loc} ${p.resultado.gl}, ${vis} ${p.resultado.gv}, final del partido` : `${p.categoria}, ${dia} ${fecha}: ${loc} contra ${vis}, ${hora}, ${lug}`;
   return `<div class="cartel" role="img" aria-label="${esc(desc)}">
     <div class="c-t" style="--n:${Math.max(cat.length, 1)}">${esc(cat)}</div>
     <div class="c-l" style="--m:${Math.max(liga.length, 1)}">${esc(liga)}</div>
@@ -693,6 +696,7 @@ function cartel(p) {
     <span class="eq eq2">${escudoEq(vis, p.codVisitante, !p.casa)}</span>
     <div class="nm nm1" style="--k:${Math.max(loc.length, 1)}">${esc(loc)}</div>
     <div class="nm nm2" style="--k:${Math.max(vis.length, 1)}">${esc(vis)}</div>
+    ${p.resultado ? `<div class="res" aria-hidden="true"><b>${esc(String(p.resultado.gl))} - ${esc(String(p.resultado.gv))}</b><span>Final</span></div>` : ""}
     <div class="dia">${dia}</div><div class="fec">${fecha}</div>
     <div class="hor${p.hora ? "" : " s"}">${esc(hora)}</div>
     <div class="lug">${esc(lug)}</div><div class="cf">${p.casa ? "Casa" : "Fuera"}</div>
@@ -715,7 +719,7 @@ function info(p) {
   const lugar = p.campo
     ? `<a class="l" href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(p.campo)}" target="_blank" rel="noopener">📍 ${esc(lug)}</a>`
     : `<span class="l">📍 ${esc(lug)}</span>`;
-  return `<div class="mi"><div class="w"><span class="d${near ? " hoy" : ""}">${esc(txt)}</span><span class="b ${p.casa ? "c" : "f"}">${p.casa ? "Casa" : "Fuera"}</span></div><div class="h${p.hora ? "" : " s"}">${esc(p.hora || "Hora por confirmar")}</div><div class="r">vs ${esc(rival)}</div>${lugar}</div>`;
+  return `<div class="mi"><div class="w"><span class="d${near ? " hoy" : ""}">${esc(txt)}</span><span class="b ${p.casa ? "c" : "f"}">${p.casa ? "Casa" : "Fuera"}</span></div><div class="h${p.hora || p.resultado ? "" : " s"}">${p.resultado ? "Final · " + esc(String(p.resultado.gl)) + " - " + esc(String(p.resultado.gv)) : esc(p.hora || "Hora por confirmar")}</div><div class="r">vs ${esc(rival)}</div>${lugar}</div>`;
 }
 
 function renderChips() {
@@ -799,9 +803,12 @@ async function loadMatches() {
     const res = await fetch(CONFIG.FB_URL + "/juncal.json", { cache: "no-store" });
     const raw = await res.json();
     const datos = typeof raw === "string" ? JSON.parse(raw) : (raw || {});
-    const px = datos.px || {}, ahora = Date.now();
+    const px = datos.px || {};
+    /* Los partidos de la semana en curso se mantienen hasta el domingo a las 23:50, ya jugados o no */
+    const corte = new Date(); corte.setHours(23, 50, 0, 0); corte.setDate(corte.getDate() - corte.getDay());
+    if (corte > new Date()) corte.setDate(corte.getDate() - 7);
     lista = (px.partidos || [])
-      .filter(p => p && p.fecha && Date.parse(p.fecha + "T" + (p.hora || "23:59")) + 3 * 36e5 > ahora)
+      .filter(p => p && p.fecha && new Date(p.fecha + "T" + (p.hora || "23:59")) > corte)
       .map(p => ({ ...p, temporada: p.temporada || px.temporada }))
       /* ORDEN: primero por equipo (Aficionado A → Alevín B), después por fecha y hora */
       .sort((a, b) => (ordCat(a) - ordCat(b)) || (a.fecha + (a.hora || "99:99")).localeCompare(b.fecha + (b.hora || "99:99")));

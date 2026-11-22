@@ -3,7 +3,9 @@ on:
   workflow_dispatch:
   schedule:
     - cron: "*/30 6-20 * * 1,2"    # lunes y martes: cada 30 min (salen los horarios)
-    - cron: "10 6-20 * * 0,3-6"    # resto de días: cada hora
+    - cron: "10 6-20 * * 3-6"      # miércoles a sábado: cada hora
+    - cron: "*/30 6-22 * * 0"      # domingo: cada 30 min (salen los resultados)
+    - cron: "5 23 * * 0"           # tras el domingo 23:50: pasa a la jornada siguiente
 concurrency:
   group: proximos-rffm
   cancel-in-progress: false

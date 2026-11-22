@@ -863,10 +863,10 @@ function partidosLocal(d, id, nombre, corte) {
     const mios = (j.partidos || []).filter(p => p.fecha && (esJuncalLocal(p.local) || esJuncalLocal(p.visitante)));
     const desc = esJuncalLocal(j.descansa) && (j.partidos || []).some(p => p.fecha) ? j.partidos.find(p => p.fecha).fecha : "";   // el Juncal descansa esta jornada
     if (desc && !mios.length) {
-      if (new Date(desc + "T23:59") > corte) return [{ id, categoria: nombre, liga: "Competición local", jornada: j.n, fecha: desc, hora: "", local: j.descansa, visitante: "DESCANSA", casa: true, mioL: true, mioV: false, campo: "", temporada: CONFIG.SEASON, descansa: true }];
+      if (new Date(desc + "T12:00") > corte) return [{ id, categoria: nombre, liga: "Competición local", jornada: j.n, fecha: desc, hora: "", local: j.descansa, visitante: "DESCANSA", casa: true, mioL: true, mioV: false, campo: "", temporada: CONFIG.SEASON, descansa: true }];
       continue;
     }
-    if (!mios.some(p => new Date(p.fecha + "T" + (/^\d{1,2}:\d{2}$/.test(p.hora || "") ? p.hora.padStart(5, "0") : "23:59")) > corte)) continue;
+    if (!mios.some(p => new Date(p.fecha + "T" + (/^\d{1,2}:\d{2}$/.test(p.hora || "") ? p.hora.padStart(5, "0") : "12:00")) > corte)) continue;
     return mios.map(p => ({
       id, categoria: nombre, liga: "Competición local", jornada: j.n, fecha: p.fecha, hora: /^\d{1,2}:\d{2}$/.test(p.hora || "") ? p.hora.padStart(5, "0") : "",
       local: p.local, visitante: p.visitante, casa: esJuncalLocal(p.local), mioL: esJuncalLocal(p.local), mioV: esJuncalLocal(p.visitante),

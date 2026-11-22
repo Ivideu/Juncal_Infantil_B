@@ -841,7 +841,7 @@ document.addEventListener("visibilitychange", () => { if (!document.hidden) load
 
 /* COMPETICIÓN LOCAL · JORNADA ACTUAL (Infantil, Alevín, Benjamín y Prebenjamín; equipos Torrejón Juncal, también "A"/"B") */
 const LOCAL_CATS = [["infantil", "Infantil"], ["alevin", "Alevín"], ["benjamin", "Benjamín"], ["prebenjamin", "Prebenjamín"]];
-const esJuncalLocal = n => /juncal/i.test(n || "");
+const esJuncalLocal = n => /jun?cal/i.test(n || "");   // incluye la errata «Jucal» del Ayuntamiento
 let LMATCHES = [], lFiltro = "";
 
 function corteDomingo() {

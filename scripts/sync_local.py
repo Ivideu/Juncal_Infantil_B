@@ -445,7 +445,7 @@ def main():
         out["equipos"] = equipos
         guardar(os.path.join(SALIDA, cid + ".json"), out)
         indice.append({"id": cid, "nombre": nombre, "equipos": len(equipos), "jornadas": len(out["jornadas"]), "partidos": n_part,
-                       "jugados": jug, "juncal": any("JUNCAL" in fold(e) for e in equipos), "avisos": len(out["avisos"]), "actualizado": ahora})
+                       "jugados": jug, "juncal": any(("JUNCAL" in fold(e) or "JUCAL" in fold(e)) for e in equipos), "avisos": len(out["avisos"]), "actualizado": ahora})
         print(f"{nombre:18} equipos={len(equipos):2} jornadas={len(out['jornadas']):2} partidos={n_part:3} con_resultado={jug:3} "
               f"clasif={len(out['clasificacion']):2} avisos={len(out['avisos'])}")
     if not solo:

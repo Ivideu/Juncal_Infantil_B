@@ -242,7 +242,7 @@ const CATS = [["senior-superliga", "Senior Superliga"], ["senior-preferente", "S
   ["juvenil", "Juvenil"], ["cadete", "Cadete"], ["infantil", "Infantil"], ["alevin", "Alevín"], ["benjamin", "Benjamín"], ["prebenjamin", "Prebenjamín"]];
 const ID = new URLSearchParams(location.search).get("c") || "";
 const NOMBRE = (CATS.find(c => c[0] === ID) || [])[1];
-const esJuncal = n => /juncal/i.test(n || "");
+const esJuncal = n => /jun?cal/i.test(n || "");   // incluye la errata «Jucal» del Ayuntamiento
 const fmtFecha = f => new Date(f + "T12:00:00").toLocaleDateString("es-ES", { weekday: "short", day: "numeric", month: "short" }).replace(".", "");
 const hoy = () => new Intl.DateTimeFormat("sv-SE", { timeZone: "Europe/Madrid" }).format(new Date());
 let D = null, tab = "jor", jn = 1;

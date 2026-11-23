@@ -74,9 +74,9 @@ main{max-width:720px;margin:auto;padding:14px 16px}
 .ft{text-align:center;margin-top:8px;text-shadow:0 1px 4px rgba(8,18,53,.75),0 0 14px rgba(8,18,53,.45)}
 .ft a{color:#fff;font-weight:700;text-decoration:underline;text-underline-offset:4px}
 .web{display:flex;align-items:center;gap:14px;position:relative;overflow:hidden;
-  margin-bottom:14px;padding:14px 16px;border-radius:20px;text-decoration:none;
+  margin-bottom:12px;padding:14px;border-radius:18px;text-decoration:none;
   color:#0a1f55;background:linear-gradient(135deg,#ffe27a,#ffd23f 45%,#ffb800);
-  border:2px solid #fff;box-shadow:0 8px 24px rgba(8,18,53,.45),inset 0 -3px 0 rgba(0,0,0,.12);
+  border:1px solid var(--line);box-shadow:0 4px 18px rgba(8,18,53,.25),inset 0 -3px 0 rgba(0,0,0,.12);
   transition:transform .15s}
 .web:active{transform:scale(.97)}
 .web img{width:50px;height:50px;border-radius:50%;background:#fff;padding:3px;flex:none;
@@ -107,6 +107,11 @@ main{max-width:720px;margin:auto;padding:14px 16px}
 
   <nav class="tabs" id="tabs" aria-label="Competición"><button data-t="fed" class="on">🏆 Federados</button><button data-t="loc">⚽ Local</button></nav>
   <div id="lista"></div>
+  <a class="web" href="index.html">
+  <img src="Images/escudo.png" alt="">
+  <span class="t">Visita la web del club<small>Noticias, fotos, horarios y más</small></span>
+  <span class="go" aria-hidden="true">➜</span>
+</a>
 </main>
 
 <div class="sheet" id="sh"><div>
@@ -117,11 +122,6 @@ main{max-width:720px;margin:auto;padding:14px 16px}
   <div class="btns"><button id="bCerrar" style="background:var(--ye);color:#1b2440;border:0">Listo</button></div>
 </div></div>
 <div id="msg" role="status"></div>
-  <a class="web" href="index.html">
-  <img src="Images/escudo.png" alt="">
-  <span class="t">Visita la web del club<small>Noticias, fotos, horarios y más</small></span>
-  <span class="go" aria-hidden="true">➜</span>
-</a>
 <script>
 const FB="https://juncal-f0b64-default-rtdb.europe-west1.firebasedatabase.app";
 const CATS=[

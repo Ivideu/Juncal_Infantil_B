@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /Backup/
+Disallow: /acceso.html
+Disallow: /entrenadores.html
+Sitemap: https://torrejonjuncal.es/sitemap.xml

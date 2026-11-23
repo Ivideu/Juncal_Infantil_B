@@ -31,6 +31,11 @@ jobs:
         run: sudo apt-get update -qq && sudo apt-get install -y -qq poppler-utils tesseract-ocr tesseract-ocr-spa && pip install -q pymupdf pillow
       - name: Leer los PDF del Ayuntamiento
         run: python3 scripts/sync_local.py "${{ github.event.inputs.solo }}"
+      - name: Avisos push de la competición local
+        continue-on-error: true
+        env:
+          FCM_SERVICE_ACCOUNT: ${{ secrets.FCM_SERVICE_ACCOUNT }}
+        run: node scripts/avisos-local.mjs
       - name: Guardar los datos
         run: |
           git config user.name "github-actions[bot]"

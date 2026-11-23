@@ -46,6 +46,18 @@ main{max-width:720px;margin:auto;padding:14px 16px}
 .row{display:flex;gap:8px;margin-top:12px}
 .row a{flex:1;text-align:center;text-decoration:none;background:var(--bg);color:var(--tx);border:1px solid var(--line);border-radius:12px;padding:8px;font-weight:600}
 .row a.p{background:var(--nv);color:#fff;border-color:var(--nv)}
+.tabs{display:flex;gap:6px;background:rgba(255,255,255,.92);border:1px solid var(--line);border-radius:999px;padding:4px;margin-bottom:12px;box-shadow:0 4px 18px rgba(8,18,53,.25)}
+.tabs button{flex:1;background:transparent;color:var(--mu);padding:9px 8px;font-family:'Barlow Condensed',sans-serif;font-size:1.15rem;letter-spacing:.03em}
+.tabs button.on{background:var(--nv);color:#fff}
+.tabs button .n{display:inline-block;min-width:18px;padding:0 5px;margin-left:4px;border-radius:99px;background:var(--ye);color:#1b2440;font:800 .75rem Barlow,sans-serif}
+.card.loc2{border-left:6px solid var(--ye)}
+.tag{display:inline-block;border-radius:999px;padding:1px 9px;font-weight:700;font-size:.74rem;background:var(--ye);color:#1b2440;margin-left:6px;vertical-align:middle}
+.pend{text-align:center;margin-top:10px;background:#fff7d6;border:1px dashed #e0b400;border-radius:12px;padding:8px 10px;font-weight:600;color:#6b5600}
+.pend small{display:block;font-weight:500;opacity:.85}
+.rest2{text-align:center;padding:12px 0;font-weight:700}
+.rest2 span{display:block;font-size:2.2rem}
+.sgen{width:54px;height:54px;display:block;margin:auto}
+.grp{font:800 .8rem Barlow,sans-serif;letter-spacing:.08em;text-transform:uppercase;color:var(--mu);margin:12px 0 2px}
 .empty{color:var(--mu);text-align:center;padding:8px 0}
 .sheet{position:fixed;inset:0;background:#0009;display:none;align-items:flex-end;z-index:20}
 .sheet.on{display:flex}
@@ -92,12 +104,13 @@ main{max-width:720px;margin:auto;padding:14px 16px}
 <main>
   <div id="inf" class="note" hidden></div>
 
+  <nav class="tabs" id="tabs" aria-label="Competición"><button data-t="fed" class="on">🏆 Federados</button><button data-t="loc">⚽ Local</button></nav>
   <div id="lista"></div>
 </main>
 
 <div class="sheet" id="sh"><div>
   <h2>🔔 Avisos de equipos</h2>
-  <p>Recibirás una notificación cuando haya hora de partido, cambie el día o la hora, y al terminar el partido. Elige uno, varios o todos.</p>
+  <p>Recibirás una notificación cuando haya día, hora y pabellón del partido, cuando cambie, y al publicarse el resultado. Elige uno, varios o todos.</p>
   <div class="btns"><button id="bTodos">Todos</button><button id="bNing">Ninguno</button></div>
   <div id="ops"></div>
   <div class="btns"><button id="bCerrar" style="background:var(--ye);color:#1b2440;border:0">Listo</button></div>
@@ -116,6 +129,12 @@ const CATS=[
  ["cadete-a","Cadete A","CadeteA"],["cadete-b","Cadete B","CadeteB"],
  ["infantil-a","Infantil A","InfantilA"],["infantil-b","Infantil B","InfantilB"],
  ["alevin-a","Alevín A","AlevinA"],["alevin-b","Alevín B","AlevinB"]];
+// Competición local (Ayuntamiento de Torrejón): una ficha por equipo del Juncal. Tema de avisos: juncal-local-<cat>
+const LCATS=[["cadete","Cadete"],["infantil","Infantil"],["alevin","Alevín"],["benjamin","Benjamín"],["prebenjamin","Prebenjamín"]];
+let LOCAL=[];   // un elemento por equipo del Juncal: [id, categoría, cat, equipo]; id = local-<cat>-<equipo> (tema de avisos juncal-<id>)
+const ESJ=n=>/jun?cal/i.test(n||"");
+const nrm=t=>String(t||"").normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase().replace(/[^a-z0-9]/g,"");
+let LD={},LR={},tab="fed";try{tab=localStorage.getItem("jb_tab")||"fed"}catch(e){}
 const $=s=>document.querySelector(s);
 const esc=s=>String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 const LS={get(k){try{return localStorage.getItem(k)}catch(e){return null}},set(k,v){try{localStorage.setItem(k,v)}catch(e){}}};
@@ -130,6 +149,53 @@ const escudo=(cod,own)=>`<img class="sh" alt="" src="${own?"Images/escudo.png":"
 // Enlace a Google Maps con la ruta hasta el campo ("Cómo llegar" desde la ubicación actual)
 const mapa=c=>"https://www.google.com/maps/dir/?api=1&destination="+encodeURIComponent(c);
 
+
+// Escudo genérico (equipos locales sin escudo): color propio + iniciales
+const COL=[["#e11d48","#7f1d3a"],["#16a34a","#14532d"],["#7c3aed","#3b1d7a"],["#ea580c","#7c2d12"],["#0891b2","#134e5e"],["#be185d","#5b1030"],["#65a30d","#365314"],["#0f766e","#0b3b38"],["#b45309","#5a2d0c"],["#475569","#1e293b"]];
+function sgen(n){
+  n=String(n||"");let h=0;for(const ch of n.toUpperCase().replace(/[^A-Z0-9"]/g,""))h=(h*31+ch.charCodeAt(0))>>>0;
+  const [c1,c2]=COL[h%COL.length],suf=(n.match(/"?\b([AB])"?\s*$/)||[])[1]||"",id="g"+h;
+  const ini=n.replace(/\./g," ").split(/\s+/).filter(w=>/^[A-Za-zÁÉÍÓÚÑáéíóúñ]/.test(w)&&w.length>1).slice(0,2).map(w=>w[0].toUpperCase()).join("")||"?";
+  return `<svg class="sgen" viewBox="0 0 100 100" aria-hidden="true"><defs><linearGradient id="${id}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${c1}"/><stop offset="1" stop-color="${c2}"/></linearGradient></defs><path d="M50 9 L83 20 V48 C83 69 68 82 50 91 C32 82 17 69 17 48 V20 Z" fill="url(#${id})" stroke="#ffd23f" stroke-width="4" stroke-linejoin="round"/><text x="50" y="${suf?56:62}" text-anchor="middle" font-family="Barlow Condensed,sans-serif" font-weight="800" font-style="italic" font-size="38" fill="#fff">${esc(ini)}</text>${suf?`<text x="50" y="76" text-anchor="middle" font-family="Barlow Condensed,sans-serif" font-weight="800" font-size="20" fill="#ffd23f">${suf}</text>`:""}</svg>`;
+}
+const escL=(n)=>ESJ(n)?`<img class="sh" alt="" src="Images/escudo.png">`:sgen(n);
+const campoTxt=c=>{const m=String(c||"").match(/nuria[^\d]*(\d)/i);return /nuria/i.test(c||"")?"Nuria Fernández"+(m?" · Pab. "+m[1]:""):String(c||"")};
+const campoUrl=c=>/nuria/i.test(c||"")?mapa("TORREJON DE ARDOZ - P.M. NURIA FERNANDEZ"):mapa(c);
+const hoyISO=()=>new Date().toLocaleDateString("sv-SE",{timeZone:"Europe/Madrid"});
+// Resultado manual de entrenadores (solo si el Ayuntamiento no lo ha publicado)
+function jornadasL(cat){
+  const d=LD[cat];if(!d)return null;const m=LR[cat]||{};
+  return (d.jornadas||[]).map(j=>({...j,partidos:(j.partidos||[]).map(p=>{
+    if(p.ga==null&&p.gb==null){const r=m[j.n+"_"+nrm(p.local)+"_"+nrm(p.visitante)];if(r&&Number.isInteger(r.ga)&&Number.isInteger(r.gb))return {...p,ga:r.ga,gb:r.gb,man:1}}
+    return p})}));
+}
+function cardL(c){
+  const [id,nombre,cat,eq]=c,on=av.includes(id),js=jornadasL(cat),EQ=n=>n===eq;
+  let body="";
+  if(!js)body=`<p class="empty">Cargando…</p>`;
+  else{
+    const hoy=hoyISO();
+    // partidos del Juncal con fecha; el siguiente = primero cuya fecha es hoy o futura y aún sin resultado; el último = último con resultado
+    const mios=[];js.forEach(j=>(j.partidos||[]).forEach(p=>{if(EQ(p.local)||EQ(p.visitante))mios.push({...p,n:j.n})}));
+    const jug=mios.filter(p=>p.ga!=null),prox=mios.filter(p=>p.ga==null&&p.fecha&&p.fecha>=hoy).sort((a,b)=>(a.fecha+(a.hora||"99")).localeCompare(b.fecha+(b.hora||"99")))[0];
+    const desc=js.find(j=>EQ(j.descansa)&&(j.partidos||[]).some(p=>p.fecha>=hoy)&&(!prox||j.partidos.find(p=>p.fecha).fecha<=prox.fecha));
+    if(desc&&(!prox||desc.partidos.find(p=>p.fecha).fecha<prox.fecha))
+      body=`<div class="rest2"><span>😴</span>${esc(eq)} descansa en la jornada ${desc.n}<div class="loc">${esc(fecha(desc.partidos.find(p=>p.fecha).fecha,""))}</div></div>`;
+    else if(prox){
+      const lleno=prox.hora&&prox.campo;
+      body=`<div class="vs"><div>${escL(prox.local)}<div class="cn">${esc(prox.local)}</div></div><div class="mid">VS</div><div>${escL(prox.visitante)}<div class="cn">${esc(prox.visitante)}</div></div></div>
+      <div class="when"><span>${esc(fecha(prox.fecha,prox.hora))}</span></div>
+      <div class="loc">Jornada ${prox.n}${prox.campo?` · <a href="${campoUrl(prox.campo)}" target="_blank" rel="noopener">📍 ${esc(campoTxt(prox.campo))}</a>`:""}</div>`
+      +(lleno?"":`<div class="pend">⏳ Pendiente de ${!prox.hora&&!prox.campo?"hora y pabellón":!prox.hora?"hora":"pabellón"}<small>Te avisaremos en cuanto el Ayuntamiento lo publique</small></div>`);
+    }else body=`<p class="empty">Sin próximos partidos por ahora</p>`;
+    const u=jug.sort((a,b)=>b.n-a.n)[0];
+    if(u){const juncalL=EQ(u.local),mio=juncalL?u.ga:u.gb,rv=juncalL?u.gb:u.ga,k=mio>rv?"w":mio<rv?"l":"d";
+      body+=`<div class="last"><span class="pill ${k}">${k==="w"?"Victoria":k==="l"?"Derrota":"Empate"}</span><span class="r">J${u.n}: ${esc(u.local)} <b>${u.ga} - ${u.gb}</b> ${esc(u.visitante)}${u.man?' <small>(anotado por el club)</small>':""}</span></div>`}
+  }
+  return `<section class="card loc2"><div class="ch"><h2>${esc(nombre)}<small>${esc(eq)} · Competición local</small></h2>
+   <button class="bell ${on?"on":""}" data-id="${id}" aria-label="Avisos de ${esc(nombre)} local, ${esc(eq)}" aria-pressed="${on}">${on?"🔔":"🔕"}</button></div>${body}
+   <div class="row"><a class="p" href="local-categoria.html?c=${cat}">Jornadas y clasificación</a></div></section>`;
+}
 function card(c){
   const [id,nombre,file]=c,p=px.find(x=>x.id===id),on=av.includes(id);
   let body;
@@ -152,8 +218,11 @@ function card(c){
 function pinta(){
   // primero los equipos con avisos activados
   const o=CATS.slice().sort((a,b)=>(av.includes(b[0])-av.includes(a[0])));
-  $("#lista").innerHTML=o.map(card).join("");
-  $("#ops").innerHTML=CATS.map(c=>`<label class="opt"><input type="checkbox" data-id="${c[0]}" ${av.includes(c[0])?"checked":""}> ${esc(c[1])}</label>`).join("");
+  const nF=CATS.filter(c=>av.includes(c[0])).length,nL=LOCAL.filter(c=>av.includes(c[0])).length;
+  $("#tabs").innerHTML=`<button data-t="fed" class="${tab==="fed"?"on":""}">🏆 Federados${nF?`<span class="n">${nF}</span>`:""}</button><button data-t="loc" class="${tab==="loc"?"on":""}">⚽ Local${nL?`<span class="n">${nL}</span>`:""}</button>`;
+  $("#lista").innerHTML=tab==="fed"?o.map(card).join(""):(LOCAL.length?LOCAL.slice().sort((a,b)=>(av.includes(b[0])-av.includes(a[0]))).map(cardL).join(""):`<p class="empty" style="color:#fff">Cargando competición local…</p>`);
+  const opt=c=>`<label class="opt"><input type="checkbox" data-id="${c[0]}" ${av.includes(c[0])?"checked":""}> ${esc(c[1])}</label>`;
+  $("#ops").innerHTML=`<div class="grp">Federados</div>`+CATS.map(opt).join("")+`<div class="grp">Competición local</div>`+LOCAL.map(c=>opt([c[0],c[1]+" · "+c[3]])).join("");
 }
 async function aviso(id,on){
   const f=FM();
@@ -178,8 +247,10 @@ $("#ops").addEventListener("change",async e=>{const i=e.target;if(i.dataset.id){
 $("#bAv").onclick=()=>$("#sh").classList.add("on");
 $("#bCerrar").onclick=()=>$("#sh").classList.remove("on");
 $("#sh").addEventListener("click",e=>{if(e.target.id==="sh")$("#sh").classList.remove("on")});
-$("#bTodos").onclick=()=>cambiar(CATS.map(c=>c[0]),true);
-$("#bNing").onclick=()=>cambiar(CATS.map(c=>c[0]),false);
+const TODOS=()=>[...CATS,...LOCAL].map(c=>c[0]);
+$("#bTodos").onclick=()=>cambiar(TODOS(),true);
+$("#bNing").onclick=()=>cambiar(TODOS(),false);
+$("#tabs").addEventListener("click",e=>{const b=e.target.closest("button[data-t]");if(!b)return;tab=b.dataset.t;LS.set("jb_tab",tab);pinta();scrollTo({top:0})});
 
 async function carga(){
   let d=null;
@@ -195,10 +266,24 @@ async function carga(){
   if(!FM()){const n=$("#inf");n.hidden=false;n.innerHTML="Estás viendo la web. Los <b>avisos</b> solo llegan si usas la <b>app de Android</b>."}
   pinta();
 }
+function armaLocal(){
+  LOCAL=[];LCATS.forEach(([cat,nom])=>{const d=LD[cat];if(!d)return;const eqs=new Set();
+    (d.jornadas||[]).forEach(j=>{(j.partidos||[]).forEach(p=>{[p.local,p.visitante].forEach(n=>{if(ESJ(n))eqs.add(n)})});if(ESJ(j.descansa))eqs.add(j.descansa)});
+    [...eqs].sort().forEach(n=>LOCAL.push(["local-"+cat+"-"+nrm(n),nom,cat,n]))});
+}
+async function cargaLocal(){
+  try{
+    const fr=await Promise.all(LCATS.map(c=>fetch("datos-local/"+c[0]+".json",{cache:"no-store"}).then(r=>r.ok?r.json():Promise.reject()).catch(()=>fetch("https://torrejonjuncal.es/datos-local/"+c[0]+".json",{cache:"no-store"}).then(r=>r.json()))));
+    LCATS.forEach((c,i)=>{LD[c[0]]=fr[i];LS.set("jb_loc_"+c[0],JSON.stringify(fr[i]))});
+  }catch(e){LCATS.forEach(c=>{if(!LD[c[0]]){try{const x=JSON.parse(LS.get("jb_loc_"+c[0])||"null");if(x)LD[c[0]]=x}catch(_){}}})}
+  armaLocal();
+  try{const r=await fetch(FB+"/local_res.json",{cache:"no-store"});LR=(await r.json())||{}}catch(e){}
+  pinta();
+}
 // Si la app ya tenía avisos elegidos, se reafirman las suscripciones (por si el móvil las perdió al reinstalar)
 (async()=>{const f=FM();if(!f||!av.length)return;try{const p=await f.checkPermissions();if(p.receive==="granted")for(const id of av)await f.subscribeToTopic({topic:"juncal-"+id})}catch(e){}})();
-carga();
-setInterval(carga,5*60*1000);
+carga();cargaLocal();
+setInterval(carga,5*60*1000);setInterval(cargaLocal,10*60*1000);
 </script>
 </body>
 </html>

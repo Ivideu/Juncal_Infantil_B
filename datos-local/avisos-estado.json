@@ -1,0 +1,752 @@
+{
+ "cadete|1|torrejonjuncal|severotorrejon": {
+  "f": "2026-10-17|9:00|NURIA FDEZ 2",
+  "r": "1-4",
+  "c": true
+ },
+ "cadete|2|ciudtorrejona|torrejonjuncal": {
+  "f": "2026-10-24||",
+  "r": "6-1",
+  "c": false
+ },
+ "cadete|3|ciudtorrejonb|torrejonjuncal": {
+  "f": "2026-11-07||",
+  "r": "7-2",
+  "c": false
+ },
+ "cadete|4|torrejonjuncal|leonfelipe": {
+  "f": "2026-11-15|13:00|NURIA FDEZ 2",
+  "r": "2-6",
+  "c": true
+ },
+ "cadete|6|torrejonjuncal|rivilloslimones5a": {
+  "f": "2026-11-28||",
+  "r": "",
+  "c": false
+ },
+ "cadete|7|rivilloslimones5b|torrejonjuncal": {
+  "f": "2026-12-12||",
+  "r": "",
+  "c": false
+ },
+ "infantil|1|torrejonjuncalb|severotorrejon": {
+  "f": "2026-10-17|15:00|J.A.PARAISO",
+  "r": "2-7",
+  "c": true
+ },
+ "infantil|1|torrejonjuncala|torrejonsala": {
+  "f": "2026-10-17|14:00|NURIA FDEZ 3",
+  "r": "1-3",
+  "c": true
+ },
+ "infantil|2|torrejonsala|torrejonjuncalb": {
+  "f": "2026-10-24||",
+  "r": "4-3",
+  "c": false
+ },
+ "infantil|2|ciudtorrejona|torrejonjuncala": {
+  "f": "2026-10-24||",
+  "r": "5-0",
+  "c": false
+ },
+ "infantil|3|torrejonjuncalb|ciudtorrejona": {
+  "f": "2026-11-07||",
+  "r": "2-4",
+  "c": false
+ },
+ "infantil|3|ciudtorrejonb|torrejonjuncala": {
+  "f": "2026-11-07||",
+  "r": "5-3",
+  "c": false
+ },
+ "infantil|4|torrejonjuncala|torrejonjuncalb": {
+  "f": "2026-11-14|15:00|NURIA FDEZ 1",
+  "r": "5-3",
+  "c": true
+ },
+ "infantil|5|leonfelipe|torrejonjuncala": {
+  "f": "2026-11-22|15:00|NURIA FDEZ 1",
+  "r": "7-2",
+  "c": true
+ },
+ "infantil|5|ciudtorrejonb|torrejonjuncalb": {
+  "f": "2026-11-22|9:00|J.GARBAJOSA",
+  "r": "3-2",
+  "c": true
+ },
+ "infantil|6|torrejonjuncala|veredillas": {
+  "f": "2026-11-28||",
+  "r": "",
+  "c": false
+ },
+ "infantil|6|torrejonjuncalb|leonfelipe": {
+  "f": "2026-11-28||",
+  "r": "",
+  "c": false
+ },
+ "infantil|7|veredillas|torrejonjuncalb": {
+  "f": "2026-12-12||",
+  "r": "",
+  "c": false
+ },
+ "infantil|8|torrejonjuncala|torrijasfc": {
+  "f": "2026-12-19||",
+  "r": "",
+  "c": false
+ },
+ "infantil|9|rivilloslimones5a|torrejonjuncala": {
+  "f": "2027-01-16||",
+  "r": "",
+  "c": false
+ },
+ "infantil|9|torrijasfc|torrejonjuncalb": {
+  "f": "2027-01-16||",
+  "r": "",
+  "c": false
+ },
+ "infantil|10|torrejonjuncala|rivilloslimones5b": {
+  "f": "2027-01-23||",
+  "r": "",
+  "c": false
+ },
+ "infantil|10|torrejonjuncalb|rivilloslimones5a": {
+  "f": "2027-01-23||",
+  "r": "",
+  "c": false
+ },
+ "infantil|11|severotorrejon|torrejonjuncala": {
+  "f": "2027-01-30||",
+  "r": "",
+  "c": false
+ },
+ "infantil|11|rivilloslimones5b|torrejonjuncalb": {
+  "f": "2027-01-30||",
+  "r": "",
+  "c": false
+ },
+ "infantil|12|severotorrejon|torrejonjuncalb": {
+  "f": "2027-02-06||",
+  "r": "",
+  "c": false
+ },
+ "infantil|12|torrejonsala|torrejonjuncala": {
+  "f": "2027-02-06||",
+  "r": "",
+  "c": false
+ },
+ "infantil|13|torrejonjuncalb|torrejonsala": {
+  "f": "2027-02-20||",
+  "r": "",
+  "c": false
+ },
+ "infantil|13|torrejonjuncala|ciudtorrejona": {
+  "f": "2027-02-20||",
+  "r": "",
+  "c": false
+ },
+ "infantil|14|ciudtorrejona|torrejonjuncalb": {
+  "f": "2027-02-27||",
+  "r": "",
+  "c": false
+ },
+ "infantil|14|torrejonjuncala|ciudtorrejonb": {
+  "f": "2027-02-27||",
+  "r": "",
+  "c": false
+ },
+ "infantil|15|torrejonjuncalb|torrejonjuncala": {
+  "f": "2027-03-06||",
+  "r": "",
+  "c": false
+ },
+ "infantil|16|torrejonjuncala|leonfelipe": {
+  "f": "2027-03-13||",
+  "r": "",
+  "c": false
+ },
+ "infantil|16|torrejonjuncalb|ciudtorrejonb": {
+  "f": "2027-03-13||",
+  "r": "",
+  "c": false
+ },
+ "infantil|17|veredillas|torrejonjuncala": {
+  "f": "2027-04-03||",
+  "r": "",
+  "c": false
+ },
+ "infantil|17|leonfelipe|torrejonjuncalb": {
+  "f": "2027-04-03||",
+  "r": "",
+  "c": false
+ },
+ "infantil|18|torrejonjuncalb|veredillas": {
+  "f": "2027-04-10||",
+  "r": "",
+  "c": false
+ },
+ "infantil|19|torrijasfc|torrejonjuncala": {
+  "f": "2027-04-17||",
+  "r": "",
+  "c": false
+ },
+ "infantil|20|torrejonjuncala|rivilloslimones5a": {
+  "f": "2027-04-24||",
+  "r": "",
+  "c": false
+ },
+ "infantil|20|torrejonjuncalb|torrijasfc": {
+  "f": "2027-04-24||",
+  "r": "",
+  "c": false
+ },
+ "infantil|21|rivilloslimones5b|torrejonjuncala": {
+  "f": "2027-05-08||",
+  "r": "",
+  "c": false
+ },
+ "infantil|21|rivilloslimones5a|torrejonjuncalb": {
+  "f": "2027-05-08||",
+  "r": "",
+  "c": false
+ },
+ "infantil|22|torrejonjuncala|severotorrejon": {
+  "f": "2027-05-22||",
+  "r": "",
+  "c": false
+ },
+ "infantil|22|torrejonjuncalb|rivilloslimones5b": {
+  "f": "2027-05-22||",
+  "r": "",
+  "c": false
+ },
+ "alevin|1|zarzuelatjuncal|rivilloslimones5b": {
+  "f": "2026-10-18|10:00|NURIA FDEZ 1",
+  "r": "4-2",
+  "c": true
+ },
+ "alevin|1|torrejonjuncal|severotrojo": {
+  "f": "2026-10-18|12:00|NURIA FDEZ 1",
+  "r": "2-3",
+  "c": true
+ },
+ "alevin|2|severotrojo|zarzuelatjuncal": {
+  "f": "2026-10-24||",
+  "r": "2-0",
+  "c": false
+ },
+ "alevin|2|severotamarillo|torrejonjuncal": {
+  "f": "2026-10-24||",
+  "r": "5-3",
+  "c": false
+ },
+ "alevin|3|zarzuelatjuncal|severotamarillo": {
+  "f": "2026-11-07||",
+  "r": "2-3",
+  "c": false
+ },
+ "alevin|3|torrejonjuncal|torrejonsala": {
+  "f": "2026-11-07||",
+  "r": "1-8",
+  "c": false
+ },
+ "alevin|4|torrejonsala|zarzuelatjuncal": {
+  "f": "2026-11-14|9:00|NURIA FDEZ 2",
+  "r": "7-5",
+  "c": true
+ },
+ "alevin|4|humanitas|torrejonjuncal": {
+  "f": "2026-11-14|16:00|J.A.PARAISO",
+  "r": "4-3",
+  "c": true
+ },
+ "alevin|5|zarzuelatjuncal|humanitas": {
+  "f": "2026-11-21|9:00|NURIA FDEZ 3",
+  "r": "3-2",
+  "c": true
+ },
+ "alevin|5|ciudaddetorrejon|torrejonjuncal": {
+  "f": "2026-11-21|9:00|J.GARBAJOSA",
+  "r": "",
+  "c": true
+ },
+ "alevin|6|torrejonjuncal|zarzuelatjuncal": {
+  "f": "2026-11-28||",
+  "r": "",
+  "c": false
+ },
+ "alevin|7|ciudaddetorrejon|zarzuelatjuncal": {
+  "f": "2026-12-12||",
+  "r": "",
+  "c": false
+ },
+ "alevin|8|torrejonjuncal|rivilloslimones5a": {
+  "f": "2026-12-19||",
+  "r": "",
+  "c": false
+ },
+ "alevin|9|rivilloslimones5b|torrejonjuncal": {
+  "f": "2027-01-16||",
+  "r": "",
+  "c": false
+ },
+ "alevin|9|rivilloslimones5a|zarzuelatjuncal": {
+  "f": "2027-01-16||",
+  "r": "",
+  "c": false
+ },
+ "alevin|10|rivilloslimones5b|zarzuelatjuncal": {
+  "f": "2027-01-23||",
+  "r": "",
+  "c": false
+ },
+ "alevin|10|severotrojo|torrejonjuncal": {
+  "f": "2027-01-23||",
+  "r": "",
+  "c": false
+ },
+ "alevin|11|zarzuelatjuncal|severotrojo": {
+  "f": "2027-01-30||",
+  "r": "",
+  "c": false
+ },
+ "alevin|11|torrejonjuncal|severotamarillo": {
+  "f": "2027-01-30||",
+  "r": "",
+  "c": false
+ },
+ "alevin|12|severotamarillo|zarzuelatjuncal": {
+  "f": "2027-02-06||",
+  "r": "",
+  "c": false
+ },
+ "alevin|12|torrejonsala|torrejonjuncal": {
+  "f": "2027-02-06||",
+  "r": "",
+  "c": false
+ },
+ "alevin|13|zarzuelatjuncal|torrejonsala": {
+  "f": "2027-02-20||",
+  "r": "",
+  "c": false
+ },
+ "alevin|13|torrejonjuncal|humanitas": {
+  "f": "2027-02-20||",
+  "r": "",
+  "c": false
+ },
+ "alevin|14|humanitas|zarzuelatjuncal": {
+  "f": "2027-02-27||",
+  "r": "",
+  "c": false
+ },
+ "alevin|14|torrejonjuncal|ciudaddetorrejon": {
+  "f": "2027-02-27||",
+  "r": "",
+  "c": false
+ },
+ "alevin|15|zarzuelatjuncal|torrejonjuncal": {
+  "f": "2027-03-06||",
+  "r": "",
+  "c": false
+ },
+ "alevin|16|zarzuelatjuncal|ciudaddetorrejon": {
+  "f": "2027-03-13||",
+  "r": "",
+  "c": false
+ },
+ "alevin|17|rivilloslimones5a|torrejonjuncal": {
+  "f": "2027-04-03||",
+  "r": "",
+  "c": false
+ },
+ "alevin|18|torrejonjuncal|rivilloslimones5b": {
+  "f": "2027-04-10||",
+  "r": "",
+  "c": false
+ },
+ "alevin|18|zarzuelatjuncal|rivilloslimones5a": {
+  "f": "2027-04-10||",
+  "r": "",
+  "c": false
+ },
+ "benjamin|1|zarzuelatjuncal|rivilloslimones5a": {
+  "f": "2026-10-17|10:00|NURIA FDEZ 1",
+  "r": "6-0",
+  "c": true
+ },
+ "benjamin|1|torrejonjuncal|rivilloslimones5b": {
+  "f": "2026-10-17|10:00|NURIA FDEZ 2",
+  "r": "2-1",
+  "c": true
+ },
+ "benjamin|2|rivilloslimones5b|zarzuelatjuncal": {
+  "f": "2026-10-24||",
+  "r": "1-10",
+  "c": false
+ },
+ "benjamin|2|severotorrejon|torrejonjuncal": {
+  "f": "2026-10-24||",
+  "r": "2-2",
+  "c": false
+ },
+ "benjamin|3|zarzuelatjuncal|severotorrejon": {
+  "f": "2026-11-07||",
+  "r": "10-1",
+  "c": false
+ },
+ "benjamin|3|torrejonjuncal|torrejonsalaa": {
+  "f": "2026-11-07||",
+  "r": "1-10",
+  "c": false
+ },
+ "benjamin|4|torrejonsalaa|zarzuelatjuncal": {
+  "f": "2026-11-14|13:00|NURIA FDEZ 1",
+  "r": "2-6",
+  "c": true
+ },
+ "benjamin|4|torrejonsalab|torrejonjuncal": {
+  "f": "2026-11-14|10:00|NURIA FDEZ 2",
+  "r": "0-8",
+  "c": true
+ },
+ "benjamin|5|zarzuelatjuncal|torrejonsalab": {
+  "f": "2026-11-22|11:00|NURIA FDEZ 2",
+  "r": "14-0",
+  "c": true
+ },
+ "benjamin|5|torrejonjuncal|ciudtorrejonb": {
+  "f": "2026-11-22|13:00|NURIA FDEZ 2",
+  "r": "",
+  "c": true
+ },
+ "benjamin|6|ciudtorrejonb|zarzuelatjuncal": {
+  "f": "2026-11-28||",
+  "r": "",
+  "c": false
+ },
+ "benjamin|6|humanitas|torrejonjuncal": {
+  "f": "2026-11-28||",
+  "r": "",
+  "c": false
+ },
+ "benjamin|7|zarzuelatjuncal|humanitas": {
+  "f": "2026-12-12||",
+  "r": "",
+  "c": false
+ },
+ "benjamin|7|ciudtorrejona|torrejonjuncal": {
+  "f": "2026-12-12||",
+  "r": "",
+  "c": false
+ },
+ "benjamin|8|torrejonjuncal|zarzuelatjuncal": {
+  "f": "2026-12-19||",
+  "r": "",
+  "c": false
+ },
+ "benjamin|9|rivilloslimones5a|torrejonjuncal": {
+  "f": "2027-01-16||",
+  "r": "",
+  "c": false
+ },
+ "benjamin|9|ciudtorrejona|zarzuelatjuncal": {
+  "f": "2027-01-16||",
+  "r": "",
+  "c": false
+ },
+ "benjamin|10|rivilloslimones5a|zarzuelatjuncal": {
+  "f": "2027-01-23||",
+  "r": "",
+  "c": false
+ },
+ "benjamin|10|rivilloslimones5b|torrejonjuncal": {
+  "f": "2027-01-23||",
+  "r": "",
+  "c": false
+ },
+ "benjamin|11|zarzuelatjuncal|rivilloslimones5b": {
+  "f": "2027-01-30||",
+  "r": "",
+  "c": false
+ },
+ "benjamin|11|torrejonjuncal|severotorrejon": {
+  "f": "2027-01-30||",
+  "r": "",
+  "c": false
+ },
+ "benjamin|12|severotorrejon|zarzuelatjuncal": {
+  "f": "2027-02-06||",
+  "r": "",
+  "c": false
+ },
+ "benjamin|12|torrejonsalaa|torrejonjuncal": {
+  "f": "2027-02-06||",
+  "r": "",
+  "c": false
+ },
+ "benjamin|13|zarzuelatjuncal|torrejonsalaa": {
+  "f": "2027-02-20||",
+  "r": "",
+  "c": false
+ },
+ "benjamin|13|torrejonjuncal|torrejonsalab": {
+  "f": "2027-02-20||",
+  "r": "",
+  "c": false
+ },
+ "benjamin|14|torrejonsalab|zarzuelatjuncal": {
+  "f": "2027-02-27||",
+  "r": "",
+  "c": false
+ },
+ "benjamin|14|ciudtorrejonb|torrejonjuncal": {
+  "f": "2027-02-27||",
+  "r": "",
+  "c": false
+ },
+ "benjamin|15|zarzuelatjuncal|ciudtorrejonb": {
+  "f": "2027-03-06||",
+  "r": "",
+  "c": false
+ },
+ "benjamin|15|torrejonjuncal|humanitas": {
+  "f": "2027-03-06||",
+  "r": "",
+  "c": false
+ },
+ "benjamin|16|humanitas|zarzuelatjuncal": {
+  "f": "2027-03-13||",
+  "r": "",
+  "c": false
+ },
+ "benjamin|16|torrejonjuncal|ciudtorrejona": {
+  "f": "2027-03-13||",
+  "r": "",
+  "c": false
+ },
+ "benjamin|17|zarzuelatjuncal|torrejonjuncal": {
+  "f": "2027-04-03||",
+  "r": "",
+  "c": false
+ },
+ "benjamin|18|torrejonjuncal|rivilloslimones5a": {
+  "f": "2027-04-10||",
+  "r": "",
+  "c": false
+ },
+ "benjamin|18|zarzuelatjuncal|ciudtorrejona": {
+  "f": "2027-04-10||",
+  "r": "",
+  "c": false
+ },
+ "prebenjamin|1|tjuncaljaimevera|cfsbarriodel": {
+  "f": "2026-10-17|10:00|J.GARBAJOSA",
+  "r": "",
+  "c": true
+ },
+ "prebenjamin|1|torrjucalzarzuela|torrejonsalaa": {
+  "f": "2026-10-17|11:00|NURIA FDEZ 3",
+  "r": "",
+  "c": true
+ },
+ "prebenjamin|1|torrjuncalsevero|torrejonsalab": {
+  "f": "2026-10-17|11:00|J.GARBAJOSA",
+  "r": "",
+  "c": true
+ },
+ "prebenjamin|2|torrejonsalaa|tjuncaljaimevera": {
+  "f": "2026-10-24||",
+  "r": "",
+  "c": false
+ },
+ "prebenjamin|2|torrejonsalab|torrjucalzarzuela": {
+  "f": "2026-10-24||",
+  "r": "",
+  "c": false
+ },
+ "prebenjamin|2|ciudaddetorrejon|torrjuncalsevero": {
+  "f": "2026-10-24||",
+  "r": "",
+  "c": false
+ },
+ "prebenjamin|3|tjuncaljaimevera|torrejonsalab": {
+  "f": "2026-11-07||",
+  "r": "",
+  "c": false
+ },
+ "prebenjamin|3|torrjucalzarzuela|ciudaddetorrejon": {
+  "f": "2026-11-07||",
+  "r": "",
+  "c": false
+ },
+ "prebenjamin|3|humanitas|torrjuncalsevero": {
+  "f": "2026-11-07||",
+  "r": "",
+  "c": false
+ },
+ "prebenjamin|4|ciudaddetorrejon|tjuncaljaimevera": {
+  "f": "2026-11-14||",
+  "r": "",
+  "c": false
+ },
+ "prebenjamin|4|torrjuncalsevero|torrjucalzarzuela": {
+  "f": "2026-11-14||",
+  "r": "",
+  "c": false
+ },
+ "prebenjamin|5|tjuncaljaimevera|torrjuncalsevero": {
+  "f": "2026-11-21|14:00|NURIA FDEZ 1",
+  "r": "0-12",
+  "c": true
+ },
+ "prebenjamin|5|humanitas|torrjucalzarzuela": {
+  "f": "2026-11-21|10:00|NURIA FDEZ 3",
+  "r": "4-8",
+  "c": true
+ },
+ "prebenjamin|6|torrjucalzarzuela|tjuncaljaimevera": {
+  "f": "2026-11-28||",
+  "r": "",
+  "c": false
+ },
+ "prebenjamin|7|rivilloslimones5|torrjuncalsevero": {
+  "f": "2026-12-12||",
+  "r": "",
+  "c": false
+ },
+ "prebenjamin|7|humanitas|tjuncaljaimevera": {
+  "f": "2026-12-12||",
+  "r": "",
+  "c": false
+ },
+ "prebenjamin|8|torrjuncalsevero|cfsbarriodel": {
+  "f": "2026-12-19||",
+  "r": "",
+  "c": false
+ },
+ "prebenjamin|8|torrjucalzarzuela|rivilloslimones5": {
+  "f": "2026-12-19||",
+  "r": "",
+  "c": false
+ },
+ "prebenjamin|9|torrejonsalaa|torrjuncalsevero": {
+  "f": "2027-01-16||",
+  "r": "",
+  "c": false
+ },
+ "prebenjamin|9|cfsbarriodel|torrjucalzarzuela": {
+  "f": "2027-01-16||",
+  "r": "",
+  "c": false
+ },
+ "prebenjamin|9|rivilloslimones5|tjuncaljaimevera": {
+  "f": "2027-01-16||",
+  "r": "",
+  "c": false
+ },
+ "prebenjamin|10|cfsbarriodel|tjuncaljaimevera": {
+  "f": "2027-01-23||",
+  "r": "",
+  "c": false
+ },
+ "prebenjamin|10|torrejonsalaa|torrjucalzarzuela": {
+  "f": "2027-01-23||",
+  "r": "",
+  "c": false
+ },
+ "prebenjamin|10|torrejonsalab|torrjuncalsevero": {
+  "f": "2027-01-23||",
+  "r": "",
+  "c": false
+ },
+ "prebenjamin|11|tjuncaljaimevera|torrejonsalaa": {
+  "f": "2027-01-30||",
+  "r": "",
+  "c": false
+ },
+ "prebenjamin|11|torrjucalzarzuela|torrejonsalab": {
+  "f": "2027-01-30||",
+  "r": "",
+  "c": false
+ },
+ "prebenjamin|11|torrjuncalsevero|ciudaddetorrejon": {
+  "f": "2027-01-30||",
+  "r": "",
+  "c": false
+ },
+ "prebenjamin|12|torrejonsalab|tjuncaljaimevera": {
+  "f": "2027-02-06||",
+  "r": "",
+  "c": false
+ },
+ "prebenjamin|12|ciudaddetorrejon|torrjucalzarzuela": {
+  "f": "2027-02-06||",
+  "r": "",
+  "c": false
+ },
+ "prebenjamin|12|torrjuncalsevero|humanitas": {
+  "f": "2027-02-06||",
+  "r": "",
+  "c": false
+ },
+ "prebenjamin|13|tjuncaljaimevera|ciudaddetorrejon": {
+  "f": "2027-02-20||",
+  "r": "",
+  "c": false
+ },
+ "prebenjamin|13|torrjucalzarzuela|torrjuncalsevero": {
+  "f": "2027-02-20||",
+  "r": "",
+  "c": false
+ },
+ "prebenjamin|14|torrjuncalsevero|tjuncaljaimevera": {
+  "f": "2027-02-27||",
+  "r": "",
+  "c": false
+ },
+ "prebenjamin|14|torrjucalzarzuela|humanitas": {
+  "f": "2027-02-27||",
+  "r": "",
+  "c": false
+ },
+ "prebenjamin|15|tjuncaljaimevera|torrjucalzarzuela": {
+  "f": "2027-03-06||",
+  "r": "",
+  "c": false
+ },
+ "prebenjamin|16|torrjuncalsevero|rivilloslimones5": {
+  "f": "2027-03-13||",
+  "r": "",
+  "c": false
+ },
+ "prebenjamin|16|tjuncaljaimevera|humanitas": {
+  "f": "2027-03-13||",
+  "r": "",
+  "c": false
+ },
+ "prebenjamin|17|cfsbarriodel|torrjuncalsevero": {
+  "f": "2027-04-03||",
+  "r": "",
+  "c": false
+ },
+ "prebenjamin|17|rivilloslimones5|torrjucalzarzuela": {
+  "f": "2027-04-03||",
+  "r": "",
+  "c": false
+ },
+ "prebenjamin|18|torrjuncalsevero|torrejonsalaa": {
+  "f": "2027-04-10||",
+  "r": "",
+  "c": false
+ },
+ "prebenjamin|18|torrjucalzarzuela|cfsbarriodel": {
+  "f": "2027-04-10||",
+  "r": "",
+  "c": false
+ },
+ "prebenjamin|18|tjuncaljaimevera|rivilloslimones5": {
+  "f": "2027-04-10||",
+  "r": "",
+  "c": false
+ }
+}

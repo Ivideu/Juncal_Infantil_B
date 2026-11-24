@@ -964,7 +964,8 @@ async function loadLocal() {
     if (window.LM) await LM.load();
     const res = await Promise.all(LOCAL_CATS.map(([id, n]) => fetch(`datos-local/${id}.json?` + Math.floor(Date.now() / 6e5), { cache: "no-store" })
       .then(r => r.ok ? r.json() : null).then(d => { if (d && window.LM) LM.apply(id, d.jornadas); return d ? partidosLocal(d, id, n, corte) : []; }).catch(() => [])));
-    lista = res.flat().sort((a, b) => (a.fecha + (a.hora || "99:99")).localeCompare(b.fecha + (b.hora || "99:99")));
+    const orden = n => LOCAL_CATS.findIndex(c => c[1] === n);   // por categoría (Cadete → Prebenjamín); dentro de cada una, por día y hora y el descanso al final
+    lista = res.flat().sort((a, b) => (orden(a.categoria) - orden(b.categoria)) || ((a.descansa ? 1 : 0) - (b.descansa ? 1 : 0)) || (a.fecha + (a.hora || "99:99")).localeCompare(b.fecha + (b.hora || "99:99")));
     LMATCHES = lista;
   } catch (e) {}
   renderLocal();

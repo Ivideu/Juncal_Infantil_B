@@ -23,7 +23,8 @@
      "dia": "S",
      "hora": "9:00",
      "ga": 3,
-     "gb": 1
+     "gb": 1,
+     "ini": true
     },
     {
      "local": "Leon Felipe",
@@ -33,7 +34,8 @@
      "dia": "S",
      "hora": "13:00",
      "ga": 0,
-     "gb": 0
+     "gb": 0,
+     "ini": true
     },
     {
      "local": "Torrejon Juncal \"B\"",
@@ -43,7 +45,8 @@
      "dia": "S",
      "hora": "15:00",
      "ga": 2,
-     "gb": 7
+     "gb": 7,
+     "ini": true
     },
     {
      "local": "Torrejon Juncal \"A\"",
@@ -53,7 +56,8 @@
      "dia": "S",
      "hora": "14:00",
      "ga": 1,
-     "gb": 3
+     "gb": 3,
+     "ini": true
     },
     {
      "local": "Ciud.Torrejon \"B\"",
@@ -63,7 +67,8 @@
      "dia": "S",
      "hora": "14:00",
      "ga": 2,
-     "gb": 5
+     "gb": 5,
+     "ini": true
     }
    ]
   },
@@ -79,7 +84,8 @@
      "dia": "S",
      "hora": "",
      "ga": 2,
-     "gb": 1
+     "gb": 1,
+     "ini": true
     },
     {
      "local": "Rivillos Limones 5 \"B\"",
@@ -89,7 +95,8 @@
      "dia": "S",
      "hora": "",
      "ga": 2,
-     "gb": 15
+     "gb": 15,
+     "ini": true
     },
     {
      "local": "Severo Torrejon",
@@ -99,7 +106,8 @@
      "dia": "S",
      "hora": "",
      "ga": 7,
-     "gb": 4
+     "gb": 4,
+     "ini": true
     },
     {
      "local": "Torrejon Sala",
@@ -109,7 +117,8 @@
      "dia": "S",
      "hora": "",
      "ga": 4,
-     "gb": 3
+     "gb": 3,
+     "ini": true
     },
     {
      "local": "Ciud.Torrejon \"A\"",
@@ -119,7 +128,8 @@
      "dia": "S",
      "hora": "",
      "ga": 5,
-     "gb": 0
+     "gb": 0,
+     "ini": true
     }
    ]
   },
@@ -135,7 +145,8 @@
      "dia": "S",
      "hora": "",
      "ga": 2,
-     "gb": 2
+     "gb": 2,
+     "ini": true
     },
     {
      "local": "Veredillas",
@@ -145,7 +156,8 @@
      "dia": "S",
      "hora": "",
      "ga": 6,
-     "gb": 3
+     "gb": 3,
+     "ini": true
     },
     {
      "local": "Leon Felipe",
@@ -155,7 +167,8 @@
      "dia": "S",
      "hora": "",
      "ga": 4,
-     "gb": 0
+     "gb": 0,
+     "ini": true
     },
     {
      "local": "Torrejon Juncal \"B\"",
@@ -165,7 +178,8 @@
      "dia": "S",
      "hora": "",
      "ga": 2,
-     "gb": 4
+     "gb": 4,
+     "ini": true
     },
     {
      "local": "Ciud.Torrejon \"B\"",
@@ -175,7 +189,8 @@
      "dia": "S",
      "hora": "",
      "ga": 5,
-     "gb": 3
+     "gb": 3,
+     "ini": true
     }
    ]
   },

@@ -257,7 +257,7 @@ $("#chips").innerHTML = CATS.map(([id, n]) => `<a href="local-categoria.html?c=$
 
 function editor(p, n) {
   if (!n || !window.LM || !LM.canEdit() || !(esJuncal(p.local) || esJuncal(p.visitante))) return "";
-  if (p.ga != null && !p.man) return "";   // resultado oficial del Ayuntamiento: no se toca
+  if (p.ga != null && !p.man && !p.ini) return "";   // resultado oficial del Ayuntamiento: no se toca
   return `<div class="edr"><button type="button" class="edb" data-n="${n}" data-l="${esc(p.local)}" data-v="${esc(p.visitante)}" data-a="${p.ga != null ? p.ga : ""}" data-b="${p.gb != null ? p.gb : ""}">✎ ${p.ga != null ? "Corregir" : "Anotar"} resultado</button></div>`;
 }
 

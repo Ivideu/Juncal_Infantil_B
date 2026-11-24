@@ -23,7 +23,8 @@
      "dia": "S",
      "hora": "9:00",
      "ga": 11,
-     "gb": 0
+     "gb": 0,
+     "ini": true
     },
     {
      "local": "Torrejon Juncal",
@@ -33,7 +34,8 @@
      "dia": "S",
      "hora": "9:00",
      "ga": 1,
-     "gb": 4
+     "gb": 4,
+     "ini": true
     },
     {
      "local": "Ciud.Torrejon \"B\"",
@@ -43,7 +45,8 @@
      "dia": "S",
      "hora": "9:00",
      "ga": 4,
-     "gb": 2
+     "gb": 2,
+     "ini": true
     }
    ]
   },
@@ -59,7 +62,8 @@
      "dia": "S",
      "hora": "",
      "ga": 1,
-     "gb": 1
+     "gb": 1,
+     "ini": true
     },
     {
      "local": "Severo Torrejon",
@@ -69,7 +73,8 @@
      "dia": "S",
      "hora": "",
      "ga": 4,
-     "gb": 5
+     "gb": 5,
+     "ini": true
     },
     {
      "local": "Ciud.Torrejon \"A\"",
@@ -79,7 +84,8 @@
      "dia": "S",
      "hora": "",
      "ga": 6,
-     "gb": 1
+     "gb": 1,
+     "ini": true
     }
    ]
   },
@@ -95,7 +101,8 @@
      "dia": "S",
      "hora": "",
      "ga": 7,
-     "gb": 0
+     "gb": 0,
+     "ini": true
     },
     {
      "local": "Leon Felipe",
@@ -105,7 +112,8 @@
      "dia": "S",
      "hora": "",
      "ga": 4,
-     "gb": 0
+     "gb": 0,
+     "ini": true
     },
     {
      "local": "Ciud.Torrejon \"B\"",
@@ -115,7 +123,8 @@
      "dia": "S",
      "hora": "",
      "ga": 7,
-     "gb": 2
+     "gb": 2,
+     "ini": true
     }
    ]
   },

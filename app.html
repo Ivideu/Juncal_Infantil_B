@@ -167,7 +167,7 @@ const hoyISO=()=>new Date().toLocaleDateString("sv-SE",{timeZone:"Europe/Madrid"
 function jornadasL(cat){
   const d=LD[cat];if(!d)return null;const m=LR[cat]||{};
   return (d.jornadas||[]).map(j=>({...j,partidos:(j.partidos||[]).map(p=>{
-    if(p.ga==null&&p.gb==null){const r=m[j.n+"_"+nrm(p.local)+"_"+nrm(p.visitante)];if(r&&Number.isInteger(r.ga)&&Number.isInteger(r.gb))return {...p,ga:r.ga,gb:r.gb,man:1}}
+    if((p.ga==null&&p.gb==null)||p.ini){const r=m[j.n+"_"+nrm(p.local)+"_"+nrm(p.visitante)];if(r&&Number.isInteger(r.ga)&&Number.isInteger(r.gb))return {...p,ga:r.ga,gb:r.gb,man:1}}
     return p})}));
 }
 function cardL(c){

@@ -23,7 +23,8 @@
      "dia": "D",
      "hora": "10:00",
      "ga": 4,
-     "gb": 2
+     "gb": 2,
+     "ini": true
     },
     {
      "local": "Torrejon Juncal",
@@ -33,7 +34,8 @@
      "dia": "D",
      "hora": "12:00",
      "ga": 2,
-     "gb": 3
+     "gb": 3,
+     "ini": true
     },
     {
      "local": "Humanitas",
@@ -43,7 +45,8 @@
      "dia": "D",
      "hora": "13:00",
      "ga": 10,
-     "gb": 3
+     "gb": 3,
+     "ini": true
     },
     {
      "local": "Ciudad de Torrejon",
@@ -53,7 +56,8 @@
      "dia": "D",
      "hora": "11:00",
      "ga": 4,
-     "gb": 3
+     "gb": 3,
+     "ini": true
     }
    ]
   },
@@ -69,7 +73,8 @@
      "dia": "S",
      "hora": "",
      "ga": 4,
-     "gb": 1
+     "gb": 1,
+     "ini": true
     },
     {
      "local": "Severo T.Rojo",
@@ -79,7 +84,8 @@
      "dia": "S",
      "hora": "",
      "ga": 2,
-     "gb": 0
+     "gb": 0,
+     "ini": true
     },
     {
      "local": "Severo T.Amarillo",
@@ -89,7 +95,8 @@
      "dia": "S",
      "hora": "",
      "ga": 5,
-     "gb": 3
+     "gb": 3,
+     "ini": true
     },
     {
      "local": "Torrejon Sala",
@@ -99,7 +106,8 @@
      "dia": "S",
      "hora": "",
      "ga": 5,
-     "gb": 3
+     "gb": 3,
+     "ini": true
     }
    ]
   },
@@ -115,7 +123,8 @@
      "dia": "S",
      "hora": "",
      "ga": 9,
-     "gb": 0
+     "gb": 0,
+     "ini": true
     },
     {
      "local": "Zarzuela T.Juncal",
@@ -125,7 +134,8 @@
      "dia": "S",
      "hora": "",
      "ga": 2,
-     "gb": 3
+     "gb": 3,
+     "ini": true
     },
     {
      "local": "Torrejon Juncal",
@@ -135,7 +145,8 @@
      "dia": "S",
      "hora": "",
      "ga": 1,
-     "gb": 8
+     "gb": 8,
+     "ini": true
     },
     {
      "local": "Ciudad de Torrejon",
@@ -145,7 +156,8 @@
      "dia": "S",
      "hora": "",
      "ga": 2,
-     "gb": 3
+     "gb": 3,
+     "ini": true
     }
    ]
   },

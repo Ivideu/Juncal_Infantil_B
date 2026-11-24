@@ -301,11 +301,13 @@ def conservar_resultados(jornadas, anterior):
     for j in anterior.get("jornadas", []):
         for p in j["partidos"]:
             if "ga" in p:
-                viejos[(j["n"], p["local"], p["visitante"])] = (p["ga"], p["gb"])
+                viejos[(j["n"], p["local"], p["visitante"])] = (p["ga"], p["gb"], bool(p.get("ini")))
     for j in jornadas:
         for p in j["partidos"]:
             if "ga" not in p and (j["n"], p["local"], p["visitante"]) in viejos:
-                p["ga"], p["gb"] = viejos[(j["n"], p["local"], p["visitante"])]
+                p["ga"], p["gb"], ini = viejos[(j["n"], p["local"], p["visitante"])]
+                if ini:
+                    p["ini"] = True   # resultado cargado a mano desde los PDF de horarios: un entrenador lo puede corregir; el oficial lo sustituye
 
 
 def completar_nombres(clasif, jornadas, avisos):

@@ -17,10 +17,10 @@
     apply(cat, jornadas) {
       const m = (LM.data || {})[cat] || {};
       (jornadas || []).forEach(j => (j.partidos || []).forEach(p => {
-        if (p.man) { delete p.ga; delete p.gb; delete p.man; }
-        if (p.ga == null && p.gb == null) {
+        if (p.man) { if (p.ig) { p.ga = p.ig[0]; p.gb = p.ig[1]; delete p.ig; } else { delete p.ga; delete p.gb; } delete p.man; }
+        if ((p.ga == null && p.gb == null) || p.ini) {   // p.ini: resultado inicial cargado por el club; un resultado manual lo sustituye
           const r = m[LM.key(j.n, p.local, p.visitante)];
-          if (r && Number.isInteger(r.ga) && Number.isInteger(r.gb)) { p.ga = r.ga; p.gb = r.gb; p.man = 1; }
+          if (r && Number.isInteger(r.ga) && Number.isInteger(r.gb)) { if (p.ga != null) p.ig = [p.ga, p.gb]; p.ga = r.ga; p.gb = r.gb; p.man = 1; }
         }
       }));
     },

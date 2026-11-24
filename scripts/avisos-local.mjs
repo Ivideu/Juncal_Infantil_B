@@ -27,7 +27,8 @@ for (const [cat, nombreCat] of CATS) {
     const eqs = [p.local, p.visitante].filter(ESJ); if (!eqs.length) continue;
     const k = [cat, j.n, nrm(p.local), nrm(p.visitante)].join("|");
     const man = (manual[cat] || {})[j.n + "_" + nrm(p.local) + "_" + nrm(p.visitante)];
-    const ga = p.ga ?? (man && Number.isInteger(man.ga) ? man.ga : null), gb = p.gb ?? (man && Number.isInteger(man.gb) ? man.gb : null);
+    const usaMan = man && Number.isInteger(man.ga) && Number.isInteger(man.gb) && (p.ga == null || p.ini);
+    const ga = usaMan ? man.ga : (p.ga ?? null), gb = usaMan ? man.gb : (p.gb ?? null);
     const completo = !!(p.fecha && p.hora && p.campo);
     const f = p.fecha ? [p.fecha, p.hora || "", p.campo || ""].join("|") : "", r = ga != null && gb != null ? `${ga}-${gb}` : "";
     const a = prev[k] || { f: "", r: "", c: false };

@@ -1,13 +1,13 @@
 {
  "id": "prebenjamin",
  "nombre": "Prebenjamín",
- "actualizado": "2026-11-21T11:58:58Z",
+ "actualizado": "2026-11-24T13:45:51Z",
  "fuente": {
   "calendario": [
    "https://deportes.ayto-torrejon.es/sites/default/files/users/user355/CALENDARIO%20PREBENJAMIN%20%201%C2%AA%20FASE%202627.pdf"
   ],
   "jornada": [
-   "https://deportes.ayto-torrejon.es/sites/default/files/users/user355/HORARIOS%20PREBENJAMIN%20%2021NOVIEMBRE%20(1).pdf"
+   "https://deportes.ayto-torrejon.es/sites/default/files/users/user355/HORARIOS%20PREBENJAMIN%2029%20DE%20NOVIEMBRE.pdf"
   ]
  },
  "jornadas": [
@@ -170,34 +170,34 @@
     {
      "local": "Cfs Barrio Del",
      "visitante": "Torrejon Sala \"A\"",
-     "campo": "NURIA FDEZ 1",
+     "campo": "",
      "fecha": "2026-11-21",
      "dia": "S",
-     "hora": "10:00"
+     "hora": ""
     },
     {
      "local": "Rivillos Limones 5",
      "visitante": "Torrejon Sala \"B\"",
-     "campo": "NURIA FDEZ 3",
+     "campo": "",
      "fecha": "2026-11-21",
      "dia": "S",
-     "hora": "11:00"
+     "hora": ""
     },
     {
      "local": "T.Juncal Jaime Vera",
      "visitante": "Torr.Juncal Severo",
-     "campo": "NURIA FDEZ 1",
+     "campo": "",
      "fecha": "2026-11-21",
      "dia": "S",
-     "hora": "14:00"
+     "hora": ""
     },
     {
      "local": "Humanitas",
      "visitante": "Torr.Jucal Zarzuela",
-     "campo": "NURIA FDEZ 3",
+     "campo": "",
      "fecha": "2026-11-21",
      "dia": "S",
-     "hora": "10:00"
+     "hora": ""
     }
    ]
   },
@@ -208,34 +208,34 @@
     {
      "local": "Torrejon Sala \"A\"",
      "visitante": "Humanitas",
-     "campo": "",
-     "fecha": "2026-11-28",
-     "dia": "S",
-     "hora": ""
+     "campo": "NURIA FDEZ 1",
+     "fecha": "2026-11-29",
+     "dia": "D",
+     "hora": "13:00"
     },
     {
      "local": "Torrejon Sala \"B\"",
      "visitante": "Cfs Barrio Del",
-     "campo": "",
-     "fecha": "2026-11-28",
-     "dia": "S",
-     "hora": ""
+     "campo": "NURIA FDEZ 1",
+     "fecha": "2026-11-29",
+     "dia": "D",
+     "hora": "10:00"
     },
     {
      "local": "Ciudad de Torrejon",
      "visitante": "Rivillos Limones 5",
-     "campo": "",
-     "fecha": "2026-11-28",
-     "dia": "S",
-     "hora": ""
+     "campo": "NURIA FDEZ 2",
+     "fecha": "2026-11-29",
+     "dia": "D",
+     "hora": "13:00"
     },
     {
      "local": "Torr.Jucal Zarzuela",
      "visitante": "T.Juncal Jaime Vera",
-     "campo": "",
-     "fecha": "2026-11-28",
-     "dia": "S",
-     "hora": ""
+     "campo": "NURIA FDEZ 2",
+     "fecha": "2026-11-29",
+     "dia": "D",
+     "hora": "10:00"
     }
    ]
   },

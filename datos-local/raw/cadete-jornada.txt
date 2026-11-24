@@ -1,11 +1,11 @@
                                             CAMPEONATO:
                                  1ª FASE CAMPEÓN DE INVIERNO CADETE
-                                                Jornada Nº 4
+                                                Jornada Nº 5
                   Equipos                        Día/Mes        Campo        Hora                      Árbitros
-                                                    15/11
-                                                    15/11     NURIA FDEZ 2    10:00
-                                                    15/11     NURIA FDEZ 2    13:00
-                                                    15/11     NURIA FDEZ 1    14:00
+                                                    22/11
+                                                    22/11     NURIA FDEZ 2    10:00
+                                                    22/11     NURIA FDEZ 2    14:00
+                                                    22/11     NURIA FDEZ 1    14:00
                       CLASIFICACIÓN
 
 
@@ -15,13 +15,13 @@
 
 
   Nombre                 J   G    E    P GF GC DG
-1 LEON FELIPE           4    4    0   0 26  6 20         12
-2 CIUD.TORREJON "B"     4    3    1   0 16  5 11         10
-3 SEVERO TORREJON       3    2    0   1 10  7   3         6
-4 RIVILLOS LIMONES      3    1    1   1  9  3   6         4
-5 CIUD.TORREJON "A"     3    1    0   2  8  9 -1          3
+1 CIUD.TORREJON "B"     5    4    1   0 18  6 12         13
+2 LEON FELIPE           5    4    0   1 27  8 19         12
+3 SEVERO TORREJON       4    3    0   1 13  9   4         9
+4 CIUD.TORREJON "A"     4    2    0   2  9  9   0         6
+5 RIVILLOS LIMONES      4    1    1   2  9  4   5         4
 6 TORREJON JUNCAL       4    0    0   4  6 23 -17         0
-7 RIVILLOS LIMONES      3    0    0   3  0 22 -22         0
+7 RIVILLOS LIMONES      4    0    0   4  2 25 -23         0
 
 
 
@@ -31,9 +31,9 @@
 
 
 
-                                       Enfrentamientos de la jornada 5
-                                                    22/11 D
-                                                    22/11 D   NURIA FDEZ 2    10:00
-                                                    22/11 D   NURIA FDEZ 2    14:00
-                                                    22/11 D   NURIA FDEZ 1    14:00
+                                       Enfrentamientos de la jornada 6
+                                                    29/11 D
+                                                    29/11 D   JAVI LIMONES     9:00
+                                                    29/11 D   NURIA FDEZ 1     9:00
+                                                    29/11 D   NURIA FDEZ 2     9:00
 

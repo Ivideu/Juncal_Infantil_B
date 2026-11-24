@@ -1,5 +1,5 @@
 {
- "actualizado": "2026-11-22T21:33:13Z",
+ "actualizado": "2026-11-24T13:45:51Z",
  "categorias": [
   {
    "id": "cadete",
@@ -7,10 +7,10 @@
    "equipos": 7,
    "jornadas": 7,
    "partidos": 21,
-   "jugados": 12,
+   "jugados": 15,
    "juncal": true,
    "avisos": 0,
-   "actualizado": "2026-11-22T21:33:13Z"
+   "actualizado": "2026-11-24T13:45:51Z"
   },
   {
    "id": "infantil",
@@ -18,10 +18,10 @@
    "equipos": 11,
    "jornadas": 22,
    "partidos": 110,
-   "jugados": 20,
+   "jugados": 24,
    "juncal": true,
-   "avisos": 0,
-   "actualizado": "2026-11-22T21:33:13Z"
+   "avisos": 2,
+   "actualizado": "2026-11-24T13:45:51Z"
   },
   {
    "id": "alevin",
@@ -29,10 +29,10 @@
    "equipos": 9,
    "jornadas": 18,
    "partidos": 72,
-   "jugados": 16,
+   "jugados": 20,
    "juncal": true,
    "avisos": 0,
-   "actualizado": "2026-11-22T21:33:13Z"
+   "actualizado": "2026-11-24T13:45:51Z"
   },
   {
    "id": "benjamin",
@@ -40,10 +40,10 @@
    "equipos": 10,
    "jornadas": 18,
    "partidos": 90,
-   "jugados": 20,
+   "jugados": 25,
    "juncal": true,
    "avisos": 0,
-   "actualizado": "2026-11-22T21:33:13Z"
+   "actualizado": "2026-11-24T13:45:51Z"
   },
   {
    "id": "prebenjamin",
@@ -54,7 +54,7 @@
    "jugados": 0,
    "juncal": true,
    "avisos": 0,
-   "actualizado": "2026-11-22T21:33:13Z"
+   "actualizado": "2026-11-24T13:45:51Z"
   }
  ]
 }

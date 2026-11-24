@@ -1,13 +1,13 @@
 {
  "id": "alevin",
  "nombre": "Alevín",
- "actualizado": "2026-11-21T11:58:58Z",
+ "actualizado": "2026-11-24T13:45:51Z",
  "fuente": {
   "calendario": [
    "https://deportes.ayto-torrejon.es/sites/default/files/users/user355/CALENDARIO%20FASE%20DE%20CAMPE%C3%93N%20ALEVIN%20.2627.pdf"
   ],
   "jornada": [
-   "https://deportes.ayto-torrejon.es/sites/default/files/users/user355/HORARIOS%20ALEVIN%20%2021NOVIEMBRE%20(3).pdf"
+   "https://deportes.ayto-torrejon.es/sites/default/files/users/user355/HORARIOS%20ALEVIN%2028%20%20DE%20NOVIEMBRE.pdf"
   ]
  },
  "jornadas": [
@@ -156,40 +156,40 @@
     {
      "local": "Rivillos Limones 5 \"B\"",
      "visitante": "Ciudad de Torrejon",
-     "campo": "NURIA FDEZ 1",
+     "campo": "",
      "fecha": "2026-11-14",
      "dia": "S",
-     "hora": "9:00",
+     "hora": "",
      "ga": 1,
      "gb": 9
     },
     {
      "local": "Severo T.Rojo",
      "visitante": "Rivillos Limones 5 \"A\"",
-     "campo": "J.A.PARAISO",
+     "campo": "",
      "fecha": "2026-11-14",
      "dia": "S",
-     "hora": "15:00",
+     "hora": "",
      "ga": 1,
      "gb": 2
     },
     {
      "local": "Torrejon Sala",
      "visitante": "Zarzuela T.Juncal",
-     "campo": "NURIA FDEZ 2",
+     "campo": "",
      "fecha": "2026-11-14",
      "dia": "S",
-     "hora": "9:00",
+     "hora": "",
      "ga": 7,
      "gb": 5
     },
     {
      "local": "Humanitas",
      "visitante": "Torrejon Juncal",
-     "campo": "J.A.PARAISO",
+     "campo": "",
      "fecha": "2026-11-14",
      "dia": "S",
-     "hora": "16:00",
+     "hora": "",
      "ga": 4,
      "gb": 3
     }
@@ -205,7 +205,9 @@
      "campo": "NURIA FDEZ 1",
      "fecha": "2026-11-21",
      "dia": "S",
-     "hora": "9:00"
+     "hora": "9:00",
+     "ga": 1,
+     "gb": 3
     },
     {
      "local": "Rivillos Limones 5 \"A\"",
@@ -213,7 +215,9 @@
      "campo": "NURIA FDEZ 2",
      "fecha": "2026-11-21",
      "dia": "S",
-     "hora": "9:00"
+     "hora": "9:00",
+     "ga": 9,
+     "gb": 1
     },
     {
      "local": "Zarzuela T.Juncal",
@@ -221,7 +225,9 @@
      "campo": "NURIA FDEZ 3",
      "fecha": "2026-11-21",
      "dia": "S",
-     "hora": "9:00"
+     "hora": "9:00",
+     "ga": 3,
+     "gb": 2
     },
     {
      "local": "Ciudad de Torrejon",
@@ -229,7 +235,9 @@
      "campo": "J.GARBAJOSA",
      "fecha": "2026-11-21",
      "dia": "S",
-     "hora": "9:00"
+     "hora": "9:00",
+     "ga": 7,
+     "gb": 1
     }
    ]
   },
@@ -240,34 +248,34 @@
     {
      "local": "Severo T.Rojo",
      "visitante": "Ciudad de Torrejon",
-     "campo": "",
+     "campo": "NURIA FDEZ 1",
      "fecha": "2026-11-28",
      "dia": "S",
-     "hora": ""
+     "hora": "10:00"
     },
     {
      "local": "Severo T.Amarillo",
      "visitante": "Rivillos Limones 5 \"B\"",
-     "campo": "",
+     "campo": "NURIA FDEZ 2",
      "fecha": "2026-11-28",
      "dia": "S",
-     "hora": ""
+     "hora": "13:00"
     },
     {
      "local": "Torrejon Sala",
      "visitante": "Rivillos Limones 5 \"A\"",
-     "campo": "",
+     "campo": "NURIA FDEZ 2",
      "fecha": "2026-11-28",
      "dia": "S",
-     "hora": ""
+     "hora": "10:00"
     },
     {
      "local": "Torrejon Juncal",
      "visitante": "Zarzuela T.Juncal",
-     "campo": "",
+     "campo": "NURIA FDEZ 1",
      "fecha": "2026-11-28",
      "dia": "S",
-     "hora": ""
+     "hora": "11:00"
     }
    ]
   },
@@ -731,6 +739,18 @@
  "clasificacion": [
   {
    "pos": 1,
+   "equipo": "Rivillos Limones 5 \"A\"",
+   "pj": 4,
+   "g": 4,
+   "e": 0,
+   "p": 0,
+   "gf": 24,
+   "gc": 3,
+   "dg": 21,
+   "pts": 12
+  },
+  {
+   "pos": 2,
    "equipo": "Torrejon Sala",
    "pj": 4,
    "g": 3,
@@ -742,99 +762,87 @@
    "pts": 9
   },
   {
-   "pos": 2,
-   "equipo": "Humanitas",
-   "pj": 4,
-   "g": 3,
-   "e": 0,
-   "p": 1,
-   "gf": 20,
-   "gc": 13,
-   "dg": 7,
-   "pts": 9
-  },
-  {
    "pos": 3,
-   "equipo": "Rivillos Limones 5 \"A\"",
-   "pj": 3,
+   "equipo": "Ciudad de Torrejon",
+   "pj": 5,
    "g": 3,
    "e": 0,
-   "p": 0,
-   "gf": 15,
-   "gc": 2,
-   "dg": 13,
+   "p": 2,
+   "gf": 23,
+   "gc": 12,
+   "dg": 11,
    "pts": 9
   },
   {
    "pos": 4,
-   "equipo": "Ciudad de Torrejon",
-   "pj": 4,
-   "g": 2,
+   "equipo": "Humanitas",
+   "pj": 5,
+   "g": 3,
    "e": 0,
    "p": 2,
-   "gf": 16,
-   "gc": 11,
-   "dg": 5,
-   "pts": 6
+   "gf": 22,
+   "gc": 16,
+   "dg": 6,
+   "pts": 9
   },
   {
    "pos": 5,
    "equipo": "Severo T.Rojo",
-   "pj": 3,
-   "g": 2,
+   "pj": 4,
+   "g": 3,
    "e": 0,
    "p": 1,
-   "gf": 6,
-   "gc": 4,
-   "dg": 2,
-   "pts": 6
+   "gf": 9,
+   "gc": 5,
+   "dg": 4,
+   "pts": 9
   },
   {
    "pos": 6,
    "equipo": "Severo T.Amarillo",
-   "pj": 3,
+   "pj": 4,
    "g": 2,
    "e": 0,
-   "p": 1,
-   "gf": 11,
-   "gc": 15,
-   "dg": -4,
+   "p": 2,
+   "gf": 12,
+   "gc": 24,
+   "dg": -12,
    "pts": 6
   },
   {
    "pos": 7,
    "equipo": "Zarzuela T.Juncal",
-   "pj": 4,
-   "g": 1,
+   "pj": 5,
+   "g": 2,
    "e": 0,
    "p": 3,
-   "gf": 11,
-   "gc": 14,
-   "dg": -3,
-   "pts": 3
+   "gf": 14,
+   "gc": 16,
+   "dg": -2,
+   "pts": 6
   },
   {
    "pos": 8,
    "equipo": "Torrejon Juncal",
-   "pj": 4,
+   "pj": 5,
    "g": 0,
    "e": 0,
-   "p": 4,
-   "gf": 9,
-   "gc": 20,
-   "dg": -11,
+   "p": 5,
+   "gf": 10,
+   "gc": 27,
+   "dg": -17,
    "pts": 0
   },
   {
    "pos": 9,
    "equipo": "Rivillos Limones 5 \"B\"",
-   "pj": 3,
+   "pj": 4,
    "g": 0,
    "e": 0,
-   "p": 3,
-   "gf": 3,
-   "gc": 22,
-   "dg": -19,
+   "p": 4,
+   "gf": 4,
+   "gc": 25,
+   "dg": -21,
    "pts": 0
   }
  ],

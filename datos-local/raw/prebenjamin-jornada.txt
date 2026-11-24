@@ -3,12 +3,12 @@ Deporte: Futbol Sala
 Categoría: PREBENJAMIN
 Competición: 1ª FASE PREBENJAMIN
 
-      Jornada Nº5                                        Campo        Fecha        Hora
- 1       CFS BARRIO DEL          TORREJON SALA "A"     NURIA FDEZ 1   21-11-26 S 10:00
- 1    RIVILLOS LIMONES 5         TORREJON SALA "B"     NURIA FDEZ 3   21-11-26 S 11:00
- 1            DESCANSA           CIUDAD DE TORREJON                   21-11-26 S
- 1   T.JUNCAL JAIME VERA         TORR.JUNCAL SEVERO    NURIA FDEZ 1   21-11-26 S 14:00
- 1           HUMANITAS           TORR.JUCAL ZARZUELA   NURIA FDEZ 3   21-11-26 S 10:00
+       Jornada Nº6                                       Campo        Fecha        Hora
+ 1     TORREJON SALA "A"         HUMANITAS             NURIA FDEZ 1   29-11-26 D 13:00
+ 1     TORREJON SALA "B"         CFS BARRIO DEL        NURIA FDEZ 1   29-11-26 D 10:00
+ 1   CIUDAD DE TORREJON          RIVILLOS LIMONES 5    NURIA FDEZ 2   29-11-26 D 13:00
+ 1   TORR.JUNCAL SEVERO          DESCANSA                             29-11-26 D
+ 1   TORR.JUCAL ZARZUELA         T.JUNCAL JAIME VERA   NURIA FDEZ 2   29-11-26 D 10:00
 
 
 

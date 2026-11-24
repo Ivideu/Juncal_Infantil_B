@@ -1,45 +1,44 @@
                                               CAMPEONATO:
                                        FASE LIGA CAMPEÓN INFANTIL
-                                                   Jornada Nº 4
-                   Equipos                         Día/Mes         Campo        Hora                      Árbitros
-                                                       14/11
-                                                       14/11     NURIA FDEZ 1    14:00
-                                                       14/11     NURIA FDEZ 2    14:00
-                                                       14/11     NURIA FDEZ 2    15:00
-                                                       14/11     NURIA FDEZ 1    15:00
-                                                       15/11     NURIA FDEZ 2    14:00
+                                                  Jornada Nº 5
+                   Equipos                        Día/Mes           Campo        Hora                      Árbitros
+                                                      22/11
+                                                      22/11       NURIA FDEZ 1     9:00
+                                                      22/11       JAVI LIMONES     9:00
+                                                      22/11       J.GARBAJOSA      9:00
+                                                      22/11       NURIA FDEZ 1    15:00
                        CLASIFICACIÓN
 
 
 
 
-                                                        Sc PT      Goleadores   Porteros   Deportividad       Texto   Nada
+                                                       Sc PT        Goleadores   Porteros   Deportividad       Texto   Nada
 
 
-  Nombre                  J   G   E    P    GF GC DG
- 1 VEREDILLAS            4    4   0   0    27  7 20         12
- 2 CIUD.TORREJON "A"     4    3   0   1    14  8   6         9
- 3 TORRIJAS FC           3    2   1   0    11  4   7         7
- 4 LEON FELIPE           4    2   1   1    12  7   5         7
- 5 CIUD.TORREJON "B"     4    2   0   2    19 11   8         6
- 6 SEVERO TORREJON       3    2   0   1    17 12   5         6
- 7 TORREJON SALA         4    2   0   2     8 11 -3          6
- 8 TORREJON JUNCAL       4    1   0   3     9 16 -7          3
- 9 RIVILLOS LIMONES      3    0   1   2     4 16 -12         1
-10 RIVILLOS LIMONES      3    0   1   2     3 22 -19         1
-11 TORREJON JUNCAL       4    0   0   4    10 20 -10         0
+  Nombre                  J   G   E    P   GF GC DG
+ 1 VEREDILLAS            1    1   0   0    3  1   2           3
+ 2 TORREJON SALA         1    1   0   0    3  1   2           3
+ 3 SEVERO TORREJON       1    1   0   0    7  2   5           3
+ 4 CIUD.TORREJON "A"     1    1   0   0    5  2   3           3
+ 5 RIVILLOS LIMONES      1    0   1   0    0  0   0           1
+ 6 LEON FELIPE           1    0   1   0    0  0   0           1
+ 7 CIUD.TORREJON "B"     1    0   0   1    2  5 -3            0
+ 8 TORRIJAS FC           0    0   0   0    0  0   0           0
+ 9 TORREJON JUNCAL       1    0   0   1    1  3 -2            0
+10 RIVILLOS LIMONES      1    0   0   1    1  3 -2            0
+11 TORREJON JUNCAL       1    0   0   1    2  7 -5            0
 
 
-                                                                   Goleadores   Porteros   Deportividad       Texto   Nada
+                                                                    Goleadores   Porteros   Deportividad       Texto   Nada
 
 
 
 
-                                       Enfrentamientos de la jornada 5
-                                                       22/11 D
-                                                       22/11 D   NURIA FDEZ 1     9:00
-                                                       22/11 D   NURIA FDEZ 2     9:00
-                                                       22/11 D   JAVI LIMONES     9:00
-                                                       22/11 D   J.GARBAJOSA      9:00
-                                                       22/11 D   NURIA FDEZ 1    15:00
+                                       Enfrentamientos de la jornada 6
+                                                      28/11 S
+                                                      28/11 S     NURIA FDEZ 1     9:00
+                                                      28/11 S     J.GARBAJOSA      9:00
+                                                      28/11 S     NURIA FDEZ 2     9:00
+                                                      28/11 S     J.A.PARAISO      9:00
+                                                      28/11 S     NURIA FDEZ 2    14:00
 

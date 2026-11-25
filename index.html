@@ -230,6 +230,8 @@ button.fch:focus-visible{outline:3px solid var(--ye);outline-offset:3px}
 .cartel .eq i{color:#0f2a78;font:italic 800 8cqw/1 "Barlow Condensed",sans-serif;font-style:normal}
 .cartel .eq img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;background:#fff}
 .cartel .nm{top:62%;display:flex;align-items:flex-start;justify-content:center;width:39%;height:7%;overflow:hidden;color:#fff;font-size:min(4cqw,calc(55cqw / var(--k)));white-space:nowrap;text-shadow:0 .3cqw .8cqw rgba(0,0,0,.6);-webkit-text-stroke:.7cqw #0f2a78}
+.cartel .nm.w{height:6.6%;white-space:normal;text-wrap:balance;line-height:.95;text-align:center;font-size:min(3.2cqw,calc(125cqw / var(--k)))}
+.cartel.dl .dia{top:67.6%}.cartel.dl .fec{top:72.6%}.cartel.dl .hor{top:75.3%}.cartel.dl .hor.s{top:76%}.cartel.dl .lug{top:70%}.cartel.dl .cf{top:75.4%}
 .cartel .nm1{left:1.3%}
 .cartel .nm2{left:59.8%}
 .cartel .res{top:41%;left:37.5%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.6cqw;width:27%;height:23%;border:.9cqw solid #fff;border-radius:5cqw;background:linear-gradient(160deg,#1e4fd8,#0b1f66);box-shadow:0 0 0 .9cqw var(--ye),0 2cqw 5cqw rgba(0,0,0,.55)}
@@ -763,13 +765,14 @@ function cartel(p) {
   const loc = String(p.local || ""), vis = String(p.visitante || "");
   const hora = p.hora || "Por confirmar", lug = p.campo ? campoTxt(p.campo) : "Pabellón por confirmar";
   const desc = p.resultado ? `${p.categoria}, ${dia} ${fecha}: ${loc} ${p.resultado.gl}, ${vis} ${p.resultado.gv}, final del partido` : `${p.categoria}, ${dia} ${fecha}: ${loc} contra ${vis}, ${hora}, ${lug}`;
-  return `<div class="cartel" role="img" aria-label="${esc(desc)}">
+  const larg = Math.max(loc.length, vis.length) > 18;   // nombre largo: se parte en dos líneas y se baja un poco el bloque de día y hora
+  return `<div class="cartel${larg ? " dl" : ""}" role="img" aria-label="${esc(desc)}">
     <div class="c-t" style="--n:${Math.max(cat.length, 1)}">${esc(cat)}</div>
     <div class="c-l" style="--m:${Math.max(liga.length, 1)}">${esc(liga)}</div>
     <span class="eq eq1">${escudoEq(loc, p.codLocal, p.mioL ?? p.casa)}</span>
     <span class="eq eq2">${p.descansa ? "<i>🌙</i>" : escudoEq(vis, p.codVisitante, p.mioV ?? !p.casa)}</span>
-    <div class="nm nm1" style="--k:${Math.max(loc.length, 1)}">${esc(loc)}</div>
-    <div class="nm nm2" style="--k:${Math.max(vis.length, 1)}">${esc(vis)}</div>
+    <div class="nm nm1${loc.length > 18 ? " w" : ""}" style="--k:${Math.max(loc.length, 1)}">${esc(loc)}</div>
+    <div class="nm nm2${vis.length > 18 ? " w" : ""}" style="--k:${Math.max(vis.length, 1)}">${esc(vis)}</div>
     ${p.resultado ? `<div class="res" aria-hidden="true"><b>${esc(String(p.resultado.gl))} - ${esc(String(p.resultado.gv))}</b><span>Final</span></div>` : ""}
     <div class="dia">${dia}</div><div class="fec">${fecha}</div>
     <div class="hor${p.hora ? "" : " s"}">${esc(p.descansa ? "Descansa" : hora)}</div>

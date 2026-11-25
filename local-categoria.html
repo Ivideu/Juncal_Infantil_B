@@ -358,11 +358,15 @@ if (!NOMBRE) {
   document.title = NOMBRE + " · Competición local · Torrejón Juncal";
   $("#cTit").innerHTML = esc(NOMBRE) + " <span>local</span>";
   $("#cSub").textContent = "Fútbol sala · Competición local de Torrejón de Ardoz";
-  fetch("datos-local/" + encodeURIComponent(ID) + ".json", { cache: "no-cache" }).then(r => { if (!r.ok) throw 0; return r.json(); }).then(d => {
+  // local-manual.js se carga al final de la página: se espera a que esté todo cargado (si no, en la primera visita fallaba por llegar antes los datos)
+  const listo = new Promise(r => document.readyState === "complete" ? r() : addEventListener("load", r, { once: true }));
+  fetch("datos-local/" + encodeURIComponent(ID) + ".json", { cache: "no-cache" }).then(r => { if (!r.ok) throw 0; return r.json(); }).then(d => listo.then(() => d)).then(d => {
     D = d;
-    LM.load().then(() => { LM.apply(ID, D.jornadas); pintar(); });
-    LM.onchange = () => { pintar(); };
-    LM.restore().then(() => pintar());
+    try {
+      LM.load().then(() => { LM.apply(ID, D.jornadas); pintar(); }).catch(() => {});
+      LM.onchange = () => { pintar(); };
+      LM.restore().then(() => pintar()).catch(() => {});
+    } catch (e) { /* sin resultados manuales: se muestran los oficiales */ }
     const t = hoy();
     const prox = d.jornadas.find(j => j.partidos.some(p => p.fecha >= t));
     jn = (prox || d.jornadas[d.jornadas.length - 1] || { n: 1 }).n;

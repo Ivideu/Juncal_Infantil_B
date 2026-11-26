@@ -1007,6 +1007,33 @@ function route() {
 addEventListener("hashchange", route);
 route();
 
+/* ANCLA ESTABLE: al ir a una sección (entrando con #seccion o pulsando el menú) lo de arriba aún está cargando imágenes y datos y empuja
+   la sección hacia abajo, y el desplazamiento se quedaba corto. Durante unos segundos se recoloca en la sección pedida,
+   salvo que la persona ya haya movido la página. */
+let anclaFin = () => {};
+function ancla(id) {
+  anclaFin();
+  if (!id || id === "categorias") return;
+  let activo = true;
+  const ro = new ResizeObserver(() => ajusta());
+  const fin = () => { activo = false; ro.disconnect(); ["wheel", "touchstart", "keydown", "mousedown"].forEach(e => removeEventListener(e, fin)); };
+  anclaFin = fin;
+  function ajusta() {
+    const el = document.getElementById(id);
+    if (!activo || !el) return;
+    const top = el.getBoundingClientRect().top - 76;
+    if (Math.abs(top) > 6) scrollBy({ top, behavior: "instant" });
+  }
+  ro.observe(document.body);
+  setTimeout(() => { addEventListener("wheel", fin, { passive: true }); addEventListener("touchstart", fin, { passive: true }); addEventListener("keydown", fin); addEventListener("mousedown", fin); }, 900);   // deja pasar el propio clic y el desplazamiento suave
+  setTimeout(fin, 9000);
+}
+ancla(location.hash.slice(1));
+document.addEventListener("click", e => {
+  const a = e.target.closest('a[href^="#"]');
+  if (a && a.getAttribute("href").length > 1) ancla(a.getAttribute("href").slice(1));
+});
+
 /* CONTADORES Y ANIMACIONES */
 const contar = el => {
   const num = Number(el.dataset.n), ini = performance.now(), dur = 1800;
